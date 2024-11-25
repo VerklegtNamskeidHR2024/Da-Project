@@ -1,3 +1,4 @@
 # Da-Project
 pa-verkefni
-hreiimur er super awsome
+Jon er osom
+Jon Please Work
