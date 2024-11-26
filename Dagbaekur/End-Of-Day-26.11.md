@@ -11,7 +11,9 @@ Yeabsire:\
 
 Kormákur:\
 
-Jón:\
+Jón:\ 
+I started the day by working on use cases and fixing some requierments from our list and later started drawing up some drafts for the wire frame to plan out the use cases better. 
+\
 
 
 
