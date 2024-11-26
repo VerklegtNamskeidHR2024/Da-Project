@@ -7,7 +7,8 @@ Tumi:\
 
 Daníela:\
 
-Yeabsire:\
+Yeabsira:\
+I wokred on functionalrequiremnts, use cases and wireframe(happy path)\
 
 Kormákur:\
 
