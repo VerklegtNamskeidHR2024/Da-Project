@@ -2,13 +2,16 @@
 
 ### What we did through the day 
 Hreimur: \
-I finished the github handbook for the group and started working on a custom ruleset on github
+I finished the github handbook for the group and started working on a custom ruleset on github/
+
 Tumi:\
 
 Daníela:\
 We finished fixing the requirements list, started the use cases and started on the wireframe\
+
 Yeabsire:\
 I wokred on functionalrequiremnts, use cases and wireframe(happy path)\
+
 Kormakur \
 I finished working out the requirements list along side the others, afterwards started working on Use Case. 
 
