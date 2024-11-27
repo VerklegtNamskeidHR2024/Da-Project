@@ -11,6 +11,7 @@ Daníela: \
 
 
 Yeabsire: \
+I worked fully today on use cases. we are halfway use cases.\
 
 
 Kormakur \
