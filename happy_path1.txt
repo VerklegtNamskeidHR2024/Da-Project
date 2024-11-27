@@ -1,0 +1,145 @@
+NaN Air - Property and Location System					
+_______________________________________________
+Log in as: 
+1. Manager
+2. Employee
+3. Contractor
+
+Universal Commands: 
+	> Go Back; b, B, back, Back
+	> Go to Home Page; h, H, home, Home 
+	> Go to Login Page; lp, LP log, Login
+	> Quit System; q, Q, quit, Quit
+
+Select an option: 1
+----------------------------------------------
+
+
+Enter Location: Reykjavík
+|
+Manager - Home Page
+______________________________________________
+1. Properties
+2. Locations
+3. Work Requests 
+4. Employees
+5. Contractors
+6. Maintenance Reports
+
+Option selected: 1
+----------------------------------------------
+
+
+Properties 
+______________________________________________
+Property: Location, ID...
+
+1. Search
+2. Edit Property 
+3. Add Property 
+
+Option selected: Search
+|
+Property to Find
+Search Filters: 
+	> ID
+	Enter: 456ER3
+--------------------------------------------
+
+
+Property Name Information
+____________________________________________
+Address: 
+Location:
+ID: 
+…
+
+1. View or 2. Edit
+Enter: 1
+
+View Attached:
+	> 1. Work Requests 
+	> 2. Maintenance Reports
+	> 3. Employees
+	> 4. Contractors
+	Enter: 1
+---------------------------------------------
+
+
+Property Name - Work Requests
+_____________________________________________
+1. Current or 2. Completed
+Enter: 1
+|
+Current:
+- Work Request 1 
+	> Issued: 24.12.24
+	> Employees: Jón, Karl..
+	> Maintenance Report: Pending
+- Work Request 2
+	> Issued: 18.12.24
+	> Employees: Klara, Jón...
+	> Maintenance Report: Approved 
+
+For further information or to edit
+Select a Work Request: back
+----------------------------------------------
+
+
+Property Name - Work Requests
+______________________________________________
+1. Current or 2. Completed
+Enter: home
+----------------------------------------------
+
+
+Manager - Home Page
+______________________________________________
+1. Properties
+2. Locations
+3. Work Requests 
+4. Employees
+5. Contractors
+6. Maintenance Reports
+
+Option selected: 4
+----------------------------------------------
+
+
+Employees 
+______________________________________________
+Jón Karl...; ID; SSN....
+… 
+
+1. Search
+2. Edit Employee
+3. Add Employee 
+
+Option selected: 3
+|
+New Employee - Enter Information:
+	> Name: Vigus John 
+	> Address: Harrisburg
+	> Email: vigus@gmail.com
+	> ID: 49DF9L
+	> SSN: 7949444040
+	Enter S to Save: 
+
+Employee Vigus John has been added!
+-----------------------------------------------
+
+
+Employees 
+______________________________________________
+1. Search
+2. Edit Employee
+3. Add Employee 
+
+Option selected: q
+
+… 
+Departing from NaN Air!
+
+    --|--
+---@-(")-@---
+   !  !  !
