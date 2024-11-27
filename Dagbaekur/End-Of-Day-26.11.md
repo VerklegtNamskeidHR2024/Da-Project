@@ -10,9 +10,12 @@ Daníela:\
 Yeabsira:\
 I wokred on functionalrequiremnts, use cases and wireframe(happy path)\
 
-Kormákur:\
+Kormakur \
+I finished working out the requirements list along side the others, afterwards started working on Use Case. 
 
-Jón:\
+Jón:\ 
+I started the day by working on use cases and fixing some requierments from our list and later started drawing up some drafts for the wire frame to plan out the use cases better. 
+\
 
 
 
