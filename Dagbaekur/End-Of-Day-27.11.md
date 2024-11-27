@@ -2,7 +2,7 @@
 
 ### What we did through the day 
 Hreimur: \
-
+I worked on use cases for a bit then started work on the wireframe
 
 Tumi: \
 
@@ -23,3 +23,4 @@ Jón: \
 
 
 ## Progress of the day
+All of us showed up around 10 and we left around 18
