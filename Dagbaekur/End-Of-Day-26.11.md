@@ -21,3 +21,4 @@ I started the day by working on use cases and fixing some requierments from our 
 
 
 ## Progress of the day
+
