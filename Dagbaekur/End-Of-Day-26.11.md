@@ -9,6 +9,7 @@ Daníela:\
 
 Yeabsire:\
 
+Kormakur \
 I finished working out the requirements list along side the others, afterwards started working on Use Case. 
 
 Jón:\ 
