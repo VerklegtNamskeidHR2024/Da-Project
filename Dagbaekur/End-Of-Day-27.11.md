@@ -7,7 +7,8 @@ I worked on use cases for a bit then started work on the wireframe.
 Tumi: \
 
 
-Daníela: \
+Daníela: \ 
+I worked on the use cases, fixed the requirements list and we decided how the interface should be.\
 
 
 Yeabsire: \
