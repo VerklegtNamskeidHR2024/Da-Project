@@ -5,7 +5,7 @@ Hreimur: \
 I worked on use cases for a bit then started work on the wireframe.
 
 Tumi: \
-
+I worked more on the class diagram and the state diagram helped with how the interface should be.
 
 Daníela: \ 
 I worked on the use cases, fixed the requirements list and we decided how the interface should be.\
