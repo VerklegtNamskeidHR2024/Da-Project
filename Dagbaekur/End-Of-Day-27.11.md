@@ -15,7 +15,9 @@ Yeabsire: \
 I worked fully today on use cases. we are halfway use cases.\
 
 
-Kormakur \
+Kormakur: \
+I worked on use cases and requirements list.\
+
 
 
 Jón: \ Today we started doing a draft of the wirefram to get an idea on how the use cases would work. When the idea was finished I did some use cases and in the later part of the day I started working on the wireframe with Hreimur.\
