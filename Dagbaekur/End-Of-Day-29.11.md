@@ -3,13 +3,15 @@
 ### What we did through the day 
 \
 Hreimur: \
-I worked on finishing the wireframes and moving them into the report.
+I worked on finishing the wireframes and moving them into the report. \
+I left around 21:30
 
 Tumi: \
 I spent all day working on the class diagrams then at around 1 I talked to Gylfi and learned i had been doing it wrong and started working again on it with kormakur, jon and yeabsire.
 
 Daníela: \
-I worked on the report and helped Hreimur with the wireframes.
+I worked on the report and helped Hreimur with the wireframes. \
+I left around 21:30
 
 Yeabsire: \
 I continued improving the use cases and wireframes and fixing any errors in them. In the latter half I worked on the class diagrams. 
