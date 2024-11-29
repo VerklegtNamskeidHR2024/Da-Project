@@ -6,6 +6,7 @@ Hreimur: \
 I worked on finishing the wireframes and moving them into the report.
 
 Tumi: \
+I spent all day working on the class diagrams then at around 1 I talked to Gylfi and learned i had been doing it wrong and started working again on it with kormakur, jon and yeabsire.
 
 Daníela: \
 I worked on the report and helped Hreimur with the wireframes.
