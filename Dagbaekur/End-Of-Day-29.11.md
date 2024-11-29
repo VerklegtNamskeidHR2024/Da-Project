@@ -16,7 +16,7 @@ I continued improving the use cases and wireframes and fixing any errors in them
 Kormakur: \
 I worked on making the use cases, requirements list and wireframes all coherent to eachother. At the end of the day I worked on the class diagrams. 
 
-Jón: \ 
+Jón: \ Today I worked on some finishing touches on the wirefrae and started matching them with the use cases. After that we went and had a long talk with Gylfi about the project. After that we started working on the class diagram.\
 
 ## Progress of the day
 2 of us finished the wireframes and worked on fixing the inconsitencies between Use cases and requirement list. While the rest the group worked on finishing the class diagram
