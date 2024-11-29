@@ -23,4 +23,4 @@ I started the day by working on use cases and fixing some requierments from our 
 
 ## Progress of the day
 Daníela, Jón, Kormákur and Yeabsira finished the requirement list, and started on the use cases. Tumi worked on the class diagram, and Hreimur finished the github diagrams
-Hreimur and Jón started working at 7:30 and went home around 15:30, Kormákur was here at 11 and went home around 15 because he had a docters appointment, Daníela started at 8:30 and went home at 16, Tumi was here at 10 and went home at 19.
+Hreimur and Jón started working at 7:30 and went home around 15:30, Kormákur was here at 11 and went home around 15 because he had a docters appointment, Daníela started at 8:30 and went home at 16, Tumi and yeabsira was here at 10 and went home at 19.
