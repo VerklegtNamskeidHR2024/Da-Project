@@ -1,8 +1,12 @@
 class Property:
-    def __init__(self, name: str, location: str, total_price_to_fix: float):
-        self.name = name
+    def __init__(self, property_id: str, name: str, location: str, total_price_to_fix: float):
+        self.property_id = property_id
         self.location = location
+        self.name = name
         self.total_price_to_fix = total_price_to_fix
+        
+    def set_property_id(self, property_id):
+        self.property_id = property
 
     def set_name(self, name):
         self.name = name
@@ -12,6 +16,9 @@ class Property:
 
     def set_total_price_to_fix(self, total_price_to_fix):
         self.total_price_to_fix = total_price_to_fix
+
+    def get_property_id(self):
+        return self.property_id
 
     def get_name(self):
         return self.name

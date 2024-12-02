@@ -1,13 +1,12 @@
 class Location:
     def __init__(self, country: str, location: str, airport: str, phone_number: str, branch_manager: str, 
-                opening_hours: str, amenities_list: list):
+                opening_hours: str):
         self.country = country
         self.location = location
         self.airport = airport
         self.phone_number = phone_number
-        self.branch_manager = branch_manager
         self.opening_hours = opening_hours
-        self.amenities_list = amenities_list
+        self.branch_manager = branch_manager
 
     def set_country(self, country):
         self.country = country
@@ -26,9 +25,6 @@ class Location:
 
     def set_opening_hours(self, opening_hours):
         self.opening_hours = opening_hours
-
-    def set_amenities_list(self, amenities_list):
-        self.amenities_list = amenities_list
     
     def get_country(self):
         return self.country
@@ -47,6 +43,3 @@ class Location:
     
     def get_opening_hours(self):
         return self.opening_hours
-    
-    def get_amenities_list(self):
-        return self.amenities_list
