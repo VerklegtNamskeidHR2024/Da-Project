@@ -8,6 +8,7 @@ Tumi:\
 Daníela:\
 
 Yeabsire:\
+I worked on fixing the use cases\
 
 Kormákur:\
 
