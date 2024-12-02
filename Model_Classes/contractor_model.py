@@ -1,6 +1,6 @@
 class Contractor:
-    def __init__(self, contractor_id: str, company_name: str, contact_name: str, 
-                opening_hours: str, previous_job_reports: list):
+    def __init__(self, contractor_id:str="", company_name:str="", contact_name:str="", 
+                opening_hours:str="", previous_job_reports:list=[]):
         self.contractor_id = contractor_id
         self.company_name = company_name
         self.contact_name = contact_name

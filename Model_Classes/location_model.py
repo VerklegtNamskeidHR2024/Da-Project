@@ -1,6 +1,6 @@
 class Location:
-    def __init__(self, country: str, location: str, airport: str, phone_number: str, branch_manager: str, 
-                opening_hours: str):
+    def __init__(self, country:str="", location:str="", airport:str="", phone_number:str="", branch_manager:str="", 
+                opening_hours:str=""):
         self.country = country
         self.location = location
         self.airport = airport

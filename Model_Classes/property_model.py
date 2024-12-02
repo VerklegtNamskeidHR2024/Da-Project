@@ -1,5 +1,5 @@
 class Property:
-    def __init__(self, property_id: str, name: str, location: str, total_price_to_fix: float):
+    def __init__(self, property_id:str="", name:str="", location:str="", total_price_to_fix:float=0.0):
         self.property_id = property_id
         self.location = location
         self.name = name

@@ -1,6 +1,6 @@
 class Human:
-    def __init__(self,name: str, social_security_number: int, phone_number: int, location: str,
-                system_permissions: str, email: str):
+    def __init__(self,name:str="", social_security_number:int=0, phone_number:int=0, location:str="",
+                system_permissions:str="", email:str=""):
         self.name = name
         self.social_security_number = social_security_number
         self.phone_number = phone_number

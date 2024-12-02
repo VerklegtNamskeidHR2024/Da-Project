@@ -1,7 +1,7 @@
 class WorkRequest:
-    def __init__(self, work_request_id: str, staff_id: str, property_id: str, date_of_creation: str, repetitive_work: bool,
-                reopen_interval: int, priority: str, maintenance_report: str, work_request_status: bool, 
-                need_contractor: bool, contractor_id: str, mark_as_done: bool):
+    def __init__(self, work_request_id:str="", staff_id:str="", property_id:str="", date_of_creation:str="", 
+                repetitive_work:bool=False, reopen_interval:int=0, priority:str="", maintenance_report:str="",
+                work_request_status:str="", need_contractor:bool=False, contractor_id:str="", mark_as_done:bool=False):
         self.work_request_id = work_request_id
         self.staff_id = staff_id
         self.property_id = property_id

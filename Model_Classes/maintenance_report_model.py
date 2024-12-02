@@ -1,7 +1,7 @@
 class MaintenanceReport:
-    def __init__(self, report_id: str, report_name: str, location: str, property_id: str, staff_id: str, 
-                regular_maintenance: bool, maintenance_description: str, report_status: bool, price: float,
-                mark_as_done: bool, contractor_id: str, work_request_id: str):
+    def __init__(self, report_id:str="", report_name:str="", location:str="", property_id:str="", staff_id:str="",
+                regular_maintenance:bool=False, maintenance_description:str="", report_status:str="", price:float=0.0,
+                mark_as_done:bool=False, contractor_id:str="", work_request_id:str=""):
         self.report_id = report_id
         self.report_name = report_name
         self.location = location
