@@ -1,7 +1,7 @@
 class StartMenu:
     def __init__(self, role: str, location_choice: str):
         self.role = role
-        self.location_choice = location_choice    
+        self.location = location_choice    
 
     def show_ascii_nan_hq_monstrosity(self):
             print("{:>61}".format("==================="))
