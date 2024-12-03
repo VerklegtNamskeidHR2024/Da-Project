@@ -27,12 +27,18 @@ class main_menu:
         self.display_menu_items()
 
     def select_user_for_system(self):
-        # select a user for the system to use
+        ## select a user for the system to use
+        # print admin, manager and user 
+        # user selects user to use
         pass
+        return
 
     def select_location_for_system(self):
-        # select location for system to use 
+        ## select location for system to use 
+        # print all locations 
+        # user selects location to use
         pass
+        return 
 
     def display_menu_items(self):
         print(" Manager - Home Page")
@@ -49,7 +55,7 @@ class main_menu:
         self.user_chooice_select(user_action)
 
     def user_chooice_select(self, user_action):
-        # calls the sub menus
+        # calls the diffrent UI layer classes
         match user_action:
             case "1":
                 self.property_UI_menu()
