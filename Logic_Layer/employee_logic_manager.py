@@ -8,9 +8,9 @@ class employee_logic_manager:
 
         return
 
-    def fetch_all_employee_in_storage(self,):
+    def fetch_all_employee_in_storage(self,location):
         #needs to add read json
-        return self.employee_list
+        return self.Storage_Layer_Wrapper.get_all_employee()
 
     def sanity_check_employee(employee, display):
         pass

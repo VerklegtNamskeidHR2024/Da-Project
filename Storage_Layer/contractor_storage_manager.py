@@ -10,7 +10,7 @@ class contractor_storage:
     def add_contractor(self):
         pass
 
-    def get_all_contractor():
+    def get_all_contractor(self):
         with open('Data/contractor_storage.json', 'r') as contractor_file:
             contractors_data = json.load(contractor_file)
         contractors_list = [Contractor(**data) for data in contractors_data]

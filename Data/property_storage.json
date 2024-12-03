@@ -1,5 +1,4 @@
-{
-    "Reykjavik": [
+[
         {
             "property_id": "h001",
             "name": "suite",
@@ -39,9 +38,7 @@
             "condition": "excellent",
             "total_price_to_fix": 1500.0,
             "property_price": 30000000000
-        }
-    ],
-    "Nuuk": [
+        },
         {
             "property_id": "h006",
             "name": "suite",
@@ -81,9 +78,7 @@
             "condition": "fair",
             "total_price_to_fix": 1200.0,
             "property_price": 30000000000
-        }
-    ],
-    "Kulusuk": [
+        },
         {
             "property_id": "h011",
             "name": "suite",
@@ -123,9 +118,7 @@
             "condition": "excellent",
             "total_price_to_fix": 1500.0,
             "property_price": 30000000000
-        }
-    ],
-    "Thorshofn": [
+        },
         {
             "property_id": "h016",
             "name": "suite",
@@ -173,9 +166,7 @@
             "condition": "fair",
             "total_price_to_fix": 1200.0,
             "property_price": 300000000
-        }
-    ],
-    "Tingwall": [
+        },
         {
             "property_id": "h022",
             "name": "suite",
@@ -215,9 +206,7 @@
             "condition": "fair",
             "total_price_to_fix": 1200.0,
             "property_price": 30000000000
-        }
-    ],
-    "Longyearbyen": [
+        },
         {
             "property_id": "h027",
             "name": "suite",
@@ -251,4 +240,3 @@
             "property_price": 30000000
         }
     ]
-}

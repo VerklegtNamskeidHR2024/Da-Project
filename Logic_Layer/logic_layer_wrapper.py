@@ -47,35 +47,40 @@ class Logic_Layer_Wrapper:
 
     def get_contractor_by_id(self, location, contractor_id) -> Contractor:
         return self.contractor_logic_manager.get_contractor_by_id(location,contractor_id)
+    
+    def sanity_check_contractor(self, location, contractor):
+        return self.contractor_logic_manager.sanity_check_contractor(location, contractor)
+    
     ########################################################################################################
     ### PROPERTIES #########################################################################################
-    def get_all_properities(self):
+    def get_all_properities(self, location):
         # dummy stuff
-        prop1 = Property("1", "hremmi diddy cave", "rvk", "96")
+        """ prop1 = Property("1", "hremmi diddy cave", "rvk", "96")
         prop2 = Property("2", "Johun plage", "rvk", "swag")
         prop3 = Property("3", "kormakur aka irl jon jones on a bad day cave", "rvk", "19")
         prop4 = Property("4", "Langhals vegur", "rvk", "112")
-        property_list = [prop1,prop2,prop3,prop4]
-        return property_list
+        property_list = [prop1,prop2,prop3,prop4] """
+        return self.property_logic_manager.fetch_all_properties_in_storage(location)
 
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################
-    def get_all_employees(self):
-        pass
+    def get_all_employees(self, location):
+        return self.employee_logic_manager.fetch_all_employee_in_storage(location)
 
     ########################################################################################################
     ### MAINTENANCE_REPORTS ################################################################################
-    def get_all_maintenance_reports(self):
-        pass
+    def get_all_maintenance_reports(self, location):
+        return self.maintenance_report_logic_manager.fetch_all_maintencance_reports(location)
 
     ########################################################################################################
     ### WORK_REQUESTS ######################################################################################
-    def get_all_work_requests(self): 
-        pass
+    def get_all_work_requests(self, location): 
+        return self.work_request_logic_manager.fetch_all_work_requests_in_storage(location)
+    
     ########################################################################################################
     ### LOCATION ###########################################################################################
-    def fetch_all_locations_in_storage(self ,Location) -> list:
-        return self.location_logic_manager.fetch_all_locations_in_storage()
+    def get_all_locations(self ,Location) -> list:
+        return self.location_logic_manager.fetch_all_locations_in_storage(Location)
 
     def fetch_all_amenities_for_location_in_storage(self ,location) -> list:
         return self.location_logic_manager.fetch_all_amenities_for_location_in_storage()

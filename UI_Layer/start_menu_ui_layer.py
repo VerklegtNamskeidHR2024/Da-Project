@@ -102,6 +102,9 @@ class Main_Menu:
         user_action = input("Select an Option:  ")
         self.user_chooice_select(user_action)
 
+        # used to get a loop may want to change
+        self.display_menu_items()
+
     def user_chooice_select(self, user_action):
         # calls the sub menus
         match user_action:
@@ -118,9 +121,48 @@ class Main_Menu:
             case "6" if self.rank != "Employee":
                 # only allowed if admin or manager
                 self.location_UI_menu()
+            case "7":
+                self.test_some_stuff()
             case "Q":
                 # quit program
                 pass
             case _:
                 print("wrong input")
                 self.display_menu_items()
+                
+        return
+    
+    def test_some_stuff(self):
+        """just some tesing with getting data from storage""" 
+        contractor_list = self.logic_wrapper.get_all_contractors(self.location)
+        for item in contractor_list:
+            print(f"{item.contractor_id:<10}|{item.location:<20}")
+        print("-" * 40)
+
+        employees_list = self.logic_wrapper.get_all_employees(self.location)
+        for item in employees_list:
+            print(f"{item.staff_id:<10}|{item.location:<20}")
+        print("-" * 40)
+
+        # this needs to be looked at
+        # works but look at property_storage_manager for more info
+        properties_list = self.logic_wrapper.get_all_properities(self.location)
+        for item in properties_list:
+            print(f"{item.property_id:<10}|{item.location:<20}")
+        print("-" * 40)
+
+        report_list = self.logic_wrapper.get_all_maintenance_reports(self.location)
+        for item in report_list:
+            print(f"{item.report_id:<10}|{item.location:<20}")
+        print("-" * 40)
+
+        # this needs to be looked at
+        """ work_list = self.logic_wrapper.get_all_work_requests(self.location)
+        for item in work_list:
+            print(f"{item.work_request_id:<10}|{item.location:<20}")
+        print("-" * 40) """
+
+        location_list = self.logic_wrapper.get_all_locations(self.location)
+        for item in location_list:
+            print(f"{item.location:<20}")
+        print("-" * 40)

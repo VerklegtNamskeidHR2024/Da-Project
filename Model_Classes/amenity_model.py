@@ -1,4 +1,4 @@
-from property_model import Property
+from Model_Classes.property_model import Property
 
 class Amenity(Property):
     def __init__(self, property_id:str="", name:str="", location:str="", condition:str="", total_price_to_fix:float=0.0, amenity_description:str=""):
