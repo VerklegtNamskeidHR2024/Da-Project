@@ -1,10 +1,13 @@
 
 class contractor_UI_menu():
-    def __init__(self, logic_wrapper):
+    def __init__(self, logic_wrapper, rank, location):
         self.logic_wrapper = logic_wrapper
+        self.rank = rank
+        self.location = location
 
     def display_contractor_menu(self):
         # temp stuff with dummy data in wrapper
+        print(self.rank)
         contract_list = self.logic_wrapper.get_all_contractors()
         for item in contract_list:
             print(item)
@@ -21,6 +24,9 @@ class contractor_UI_menu():
                 self.display_add_contractor_form()
             case "2":
                 self.select_contractor()
+            case "q":
+                # quit back to main menu
+                pass
             case _:
                 print("wrong input")
     def display_add_contractor_form(self):
