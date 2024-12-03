@@ -14,6 +14,7 @@ Yeabsire:\
 I worked on adding methods for all storage menu then i worked on maintenance report menu in UI layer. i came to school at 8 and left at 6.\
 
 Kormákur:\
+I worked on the UI for the start menu and work requests. I arrived at 10:00 and left at 18:30 
 
 
 Jón:\ I worked on seeting up the functions for the UI layer and later in the day I started programming the UI for the location options. I arrived at 8:00 and left at 17:45.\
