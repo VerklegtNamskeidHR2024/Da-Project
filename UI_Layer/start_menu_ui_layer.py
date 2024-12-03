@@ -108,16 +108,21 @@ class Main_Menu:
             case _:
                 print("No Location Found, Please Try Again.")
                 self.select_location_for_system()
-        
+
     def display_menu_items(self):
-        print(" Manager - Home Page")
+        # admin manager
+        print(self.rank)
+        print(self.location)
+        print(f" {self.rank} - Home Page")
         print("-" * 70)
         print("1. Properties")
-        print("2. Locations")
-        print("3. Work Requests")
-        print("4. Employees")
-        print("5. Contractors")
-        print("6. Maintenance Reports")
+        print("2. Work Requests")
+        print("3. Employees")
+        print("4. Contractors")
+        print("5. Maintenance Reports")
+        if self.rank != "Employee":
+            print("6. Locations")
+
         print("-" * 70)
 
         user_action = input("Select an Option:  ")
@@ -129,15 +134,20 @@ class Main_Menu:
             case "1":
                 self.property_UI_menu()
             case "2":
-                self.location_UI_menu()
-            case "3":
                 self.work_request_UI_menu()
-            case "4":
+            case "3":
                 self.employee_UI_menu()
-            case "5":
+            case "4":
                 self.contractor_UI_menu.display_contractor_menu()
-            case "6":
+            case "5":
                 self.maintenance_report_UI_menu()
+            case "6" if self.rank != "Employee":
+                # only allowed if admin or manager
+                self.location_UI_menu()
+            case "Q":
+                # quit program
+                pass
             case _:
                 print("wrong input")
+                self.display_menu_items()
 
