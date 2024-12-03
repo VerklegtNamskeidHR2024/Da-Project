@@ -1,4 +1,3 @@
-
 class work_request_UI_menu:
     def __init__(self, Logic_Wrapper, rank, location):
         self.logic_wrapper = Logic_Wrapper
@@ -6,15 +5,20 @@ class work_request_UI_menu:
         self.location = location
     
     def start_point(self):
-        self.display_all_open_work_requests()
-        self.display_work_request_menu_options()
-        self.display_selected_work_request_information()
-        self.select_work_request_by_id()
-        self.create_work_request_form()
-        self.edit_work_request_form()
+        self.display_work_requests_menu_items()
+        # self.display_selected_work_request_information()
+        # self.select_work_request_by_id()
+        # self.create_work_request_form()
+        # self.edit_work_request_form()
+        # self.display_my_work_requests()
+        # self.display_new_work_requests_to_accept() 
+        # self.display_pending_work_requests_printed() 
+        # self.display_closed_work_requests_printed() 
 
-    def display_all_open_work_requests(self):
-        """Prints out all open work requests with their ID, Name and Description """
+    def display_work_requests_menu_items(self):
+        """Prints out all open work requests with their ID, Name and Description. Displays the 
+        menu options depending if the user logged in is an admin/manager or an employee.
+        It then calls the correct function based on what the user chose. """
         
         print()
         print("Work Request Menu")
@@ -31,10 +35,6 @@ class work_request_UI_menu:
                 "|", work_request_list["description"]
                 ))
 
-    def display_work_request_menu_options(self):
-        """Displays the menu options depending if the user logged in is an admin/manager or an employee.
-        It then returns what the user chose. """
-
         if self.rank == "Admin" or self.rank == "Manager":
             print("-" * 70)
             print("{:0}{:>3}{:>8}{:>7}{:>11}".format("1. Select Request", "|", "2. Add Request", "|", "3. Closed Requests"))
@@ -42,11 +42,11 @@ class work_request_UI_menu:
             user_choice = input("Select an Option: ")
             match user_choice:
                 case "1": 
-                    return "Select Request"
+                    self.select_work_request_by_id()
                 case "2":
-                    return "Add Request"
+                    self.create_work_request_form
                 case "3": 
-                    return "Closed Requests"
+                    self.display_closed_work_requests_printed()
                 case "q":
                     print("Departing from NaN Air, Thank you for Visiting!")
                     pass
@@ -55,20 +55,20 @@ class work_request_UI_menu:
                     pass
                 case _:
                     print("Invalid Input, Please Try Again.")
-                    self.display_work_request_menu_options()
+                    self.start_point()
         
         if self.rank == "Employee":
             print("-" * 70)
-            print("{:0}{:>2}{:>15}{:>2}{:>19}".format("1. Select Request", "|", "2. Add Request", "|", "3. Closed Requests"))
+            print("{:0}{:>2}{:>15}{:>2}{:>19}".format("1. New Requests", "|", "2. Pending Requests", "|", "3. My Requests"))
             print("-" * 70)
             user_choice = input("Select an Option: ")    
             match user_choice:
                 case "1": 
-                    self.select_work_request_by_id()
+                    self.display_new_work_requests_to_accept()
                 case "2":
-                    self.create_work_request_form()
+                    self.display_pending_work_requests_printed()
                 case "3": 
-                    return "Closed Requests"
+                    self.display_my_work_requests()
                 case "q":
                     print("Departing from NaN Air, Thank you for Visiting!")
                     pass
@@ -77,14 +77,14 @@ class work_request_UI_menu:
                     pass
                 case _:
                     print("Invalid Input, Please Try Again.")
-                    self.display_work_request_menu_options()
+                    self.start_point()
                 
 
     def select_work_request_by_id(self):
         work_request_selection = input("Enter Request ID: ")
  
 
-    def display_selected_work_request_information(self): 
+    def display_selected_work_request_information(self):     
 
 
     def create_work_request_form(self):
@@ -97,8 +97,8 @@ class work_request_UI_menu:
     def display_my_work_requests(self):
      
 
-    def display_new_work_requests_to_accept(): 
+    def display_new_work_requests_to_accept(self): 
     
-    def display_pending_work_requests_printed(): 
+    def display_pending_work_requests_printed(self): 
 
-    def display_closed_work_requests_printed(): 
+    def display_closed_work_requests_printed(self): 
