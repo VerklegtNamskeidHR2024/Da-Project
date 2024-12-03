@@ -28,11 +28,8 @@ class Storage_Layer_Wrapper:
 
     def get_all_contractor(self):
         print("in storage wrapper")
-        contractor1 = Contractor('C0001', 'Daniela and Daughters', 'Daniela', '8-16', 1234567, 'Reykjavik', [])
-        contractor2 = Contractor('C0002', 'Daniela and Daughters', 'jon', '8-16', 1234567, 'Nuuk', [])
-        contractor3 = Contractor('C0003', 'Daniela and Daughters', 'tumi', '8-16', 1234567, 'Nuuk', [])
-        dummy_contractor_list = [contractor1,contractor2,contractor3]
-        return dummy_contractor_list
+        all_contractors = contractor_storage.get_all_contractor()
+        return all_contractors
         #return self.contractor_storage_manager.get_all_contractor()
     
     def get_contractor(self):
