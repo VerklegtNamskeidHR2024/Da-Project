@@ -1,4 +1,4 @@
-from human_model import Human
+from Model_Classes.human_model import Human
 
 class Employee(Human):
     def __init__(self, name:str="", social_security_number:int=0, phone_number:int=0, location:str="", system_permissions:str="",

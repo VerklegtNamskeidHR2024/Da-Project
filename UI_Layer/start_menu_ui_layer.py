@@ -1,4 +1,4 @@
-from Logic_Layer.logic_layer_wrapper import LogicLayerWrapper
+from Logic_Layer.logic_layer_wrapper import Logic_Layer_Wrapper
 
 from UI_Layer.employee_ui_layer import employee_UI_menu
 from UI_Layer.location_ui_layer import location_UI_layer
@@ -9,7 +9,7 @@ from UI_Layer.property_ui_layer import property_UI_menu
 
 class main_menu:
     def __init__(self, rank, location):
-        self.logic_wrapper = LogicLayerWrapper()
+        self.logic_wrapper = Logic_Layer_Wrapper()
 
         self.employee_UI_menu = employee_UI_menu(self.logic_wrapper)
         self.location_UI_menu = location_UI_layer(self.logic_wrapper)
@@ -20,6 +20,19 @@ class main_menu:
 
         self.rank = rank
         self.location = location
+
+    def start_point(self):
+        self.select_user_for_system()
+        self.select_location_for_system()
+        self.display_menu_items()
+
+    def select_user_for_system(self):
+        # select a user for the system to use
+        pass
+
+    def select_location_for_system(self):
+        # select location for system to use 
+        pass
 
     def display_menu_items(self):
         print(" Manager - Home Page")
@@ -53,6 +66,3 @@ class main_menu:
             case _:
                 print("wrong input")
 
-def main():
-    main = main_menu(1,"rvk")
-    main.display_menu_items()
