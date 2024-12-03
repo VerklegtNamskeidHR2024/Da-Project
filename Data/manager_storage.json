@@ -1,0 +1,27 @@
+{
+    "Manager1": {
+        "Name": "Jan Jacobsen",
+        "email": "jan.jacobsen@nanair.is",
+        "Location": "Longyearbyen",
+        "Address": "Vei 230 12, Longyearbyen, Svalbard",
+        "Phone": "+47 92 09 77 00",
+        "GSM": "+354 777 1337"
+      },
+    "Manager2": {
+        "Name": "Minik Wallace",
+        "email": "minik.wallace@nanair.is",
+        "Location": "Nuuk",
+        "Address": "Isaajap Aqqutaa 1, 3900, Nuuk, Greenland",
+        "Phone": "+299 34 24 67",
+        "GSM": "+354 777 1361"
+    },
+    "Manager3": {
+        "Name": "Annette Djurhuus",
+        "email": "annette.djurhuus@nanair.is",
+        "Location": "Tórshavn",
+        "Address": "Tjarnardeild 8, 100, Tórshavn, Faroe Islands",
+        "Phone": "+298 772000",
+        "GSM": "+354 777 1381"
+          }
+      }
+
