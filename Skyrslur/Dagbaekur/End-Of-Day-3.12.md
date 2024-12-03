@@ -16,6 +16,6 @@ I worked on adding methods for all storage menu then i worked on maintenance rep
 Kormákur:\
 
 
-Jón:\ 
+Jón:\ I worked on seeting up the functions for the UI layer and later in the day I started programming the UI for the location options. I arrived at 8:00 and left at 17:45.\
 
 ## Progress of the day
