@@ -1,5 +1,7 @@
+# Importing the logic layer wrapper
 from Logic_Layer.logic_layer_wrapper import Logic_Layer_Wrapper
 
+# Importing all UI layers 
 from UI_Layer.employee_ui_layer import employee_UI_menu
 from UI_Layer.location_ui_layer import location_UI_layer
 from UI_Layer.contractor_ui_layer import contractor_UI_menu
@@ -7,81 +9,105 @@ from UI_Layer.maintenance_report_ui_layer import maintenance_report_UI_menu
 from UI_Layer.work_request_ui_layer import work_request_UI_menu 
 from UI_Layer.property_ui_layer import property_UI_menu
 
+# Creating the class for the log in page and main menu's of each user
 class Main_Menu:
     def __init__(self, rank, location):
         self.logic_wrapper = Logic_Layer_Wrapper()
 
-        # calls the select function for what user you want to see the system as and, then - 
-        # calls the location select function
-        self.rank = self.select_user_for_system()
-        self.location = self.select_location_for_system()
+        # Creating the UI classes for 
+        self.employee_UI_menu = employee_UI_menu(self.logic_wrapper)
+        self.location_UI_menu = location_UI_layer(self.logic_wrapper)
+        self.contractor_UI_menu = contractor_UI_menu(self.logic_wrapper)
+        self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper)
+        self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper)
+        self.property_UI_menu = property_UI_menu(self.logic_wrapper)
 
-        self.employee_UI_menu = employee_UI_menu(self.logic_wrapper) # , self.rank, self.location
-        self.location_UI_menu = location_UI_layer(self.logic_wrapper) # , self.rank, self.location
-        # so its like this one when the class contrstructor is set up in the class correctly
-        self.contractor_UI_menu = contractor_UI_menu(self.logic_wrapper, self.rank, self.location) 
-        self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper) # , self.rank, self.location
-        self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
-        self.property_UI_menu = property_UI_menu(self.logic_wrapper) # , self.rank, self.location
-
-        # these may need to be sent into each UI class
-        #self.rank = rank
-        #self.location = location
+        self.rank = rank
+        self.location = location 
 
     def start_point(self):
-        #self.select_user_for_system()
-        #self.select_location_for_system()
+        """"Sets the start point when calling the other classes """
+        self.select_user_for_system()
+        self.select_location_for_system()
         self.display_menu_items()
+    
+    def show_ascii_art_hq(self):
+        print("{:>61}".format("==================="))
+        print("{:>44}{:>13}{:>3}".format("|", "NaN Air HQ", "|"))
+        print("{:>14}{:>7}{:>15}{:>8}{:>10}{:>6}".format("___________", ".", ": : : :", "|", "_____","|"))
+        print("{:>13}{:>12}{:>11}{:>5}{:>3}{:>10}{:>6}{:>4}".format("_\_(*)_/_", "___(*)___", ": : : :", "o o", "|", "| | |", "|", "_ ,"))
+        print("{:0}{:>1}{:>31}".format("_______|-|_________/-\__________", ":", "_____|_|__|_____| | |_____| o-o"))
 
     def select_user_for_system(self):
-        # select a user for the system to use
-        return_user = ""
-        while return_user == "":
-            print("select user to see system as")
-            print("1) Admin")
-            print("2) Manager")
-            print("3) Employee")
-            user_action = input("what user would you like: ")
-            match user_action:
-                case "1":
-                    return_user = "Admin"
-                case "2":
-                    return_user = "Manager"
-                case "3":
-                    return_user = "Employee"
-                case _:
-                    print("No User Found, Please Try Again.")
-        return return_user
-    
+        """Prints out the system title, ascii-art, profile log in options, the two 
+        universal commands and asks the user to select a user to log in as; returns 
+        then the rank for each profile based on what was selected. """
+        
+        print()
+        print("Welcome to the NaN Air Properties and Staff System!")
+        print("-" * 70)
+        self.show_ascii_art_hq()
+        print("-" * 70)
+        print("Log in as?")
+        print("1. Admin")
+        print("2. Manager")
+        print("3. Employee")
+        print()
+        print("Universal Commands:")
+        print("{:>24}{:>5}".format(">Go to Home Page:", "home, Home"))
+        print("{:>20}{:>5}".format(">Quit System:", "q, Q"))
+        print("-" * 70)
+        selected_user_login_choice = input("Select an Option: ")
+        match selected_user_login_choice:
+            case "1":
+                return "Admin"
+            case "2":
+                return "Manager"
+            case "3":
+                return "Employee"
+            case "q": 
+                print("Departing from NaN Air, Thank you for Visiting!")
+                pass
+            case "Q":
+                print("Departing from NaN Air, Thank you for Visiting!")
+                pass
+            case _:
+                print("No User Found, Please Try Again.")
+                self.select_user_for_system()
+
     def select_location_for_system(self):
-        # select location for system to use 
-        return_location = ""
-        while return_location == "":
-            print("select a location to see system as")
-            print("1) Reykjavik")
-            print("2) Nuuk")
-            print("3) Kulusuk")
-            print("4) Torshavn")
-            print("5) Tingwall")
-            print("6) Longyearbyen") 
-            user_action = input("what location would you like: ")
-            match user_action:
-                case "1":
-                    return_location = "Reykjavik"
-                case "2":
-                    return_location = "Nuuk"
-                case "3":
-                    return_location = "Kulusuk"
-                case "4":
-                    return_location = "Torshavn"
-                case "5":
-                    return_location = "Tingwall"
-                case "6":
-                    return_location = "Longyearbyen"
-                case _:
-                    print("No Location Found, Please Try Again.")
-        return return_location
-                    
+        """Prints out the 6 different locations that can selected and then asks the
+        user to select a location to access it's data; returns then the location name 
+        based on what was selected. """
+        
+        print()
+        print("{:0}{:>3}{:>8}{:>7}{:>11}".format("1. Reykjavik", "|", "2. Nuuk", "|", "3. Kulusuk"))
+        print()
+        print("{:0}{:>4}{:>12}{:>3}{:>16}".format("4. Torshavn", "|", "5. Tingwall", "|", "6. Longyearbyen"))
+        print()
+        selected_location_choice = input("Select a Location: ")
+        match selected_location_choice:
+            case "1":
+                return "Reykjavik"
+            case "2":
+                return "Nuuk"
+            case "3":
+                return "Kulusuk"
+            case "4":
+                return "Torshavn"
+            case "5":
+                return "Tingwall"
+            case "6":
+                return "Longyearbyen"
+            case "q": 
+                print("Departing from NaN Air, Thank you for Visiting!")
+                pass
+            case "Q":
+                print("Departing from NaN Air, Thank you for Visiting!")
+                pass
+            case _:
+                print("No Location Found, Please Try Again.")
+                self.select_location_for_system()
 
     def display_menu_items(self):
         # admin manager
@@ -124,3 +150,4 @@ class Main_Menu:
             case _:
                 print("wrong input")
                 self.display_menu_items()
+
