@@ -7,7 +7,7 @@ class Property:
         self.total_price_to_fix = total_price_to_fix
         
     def set_property_id(self, property_id):
-        self.property_id = property
+        self.property_id = property_id
 
     def set_name(self, name):
         self.name = name
