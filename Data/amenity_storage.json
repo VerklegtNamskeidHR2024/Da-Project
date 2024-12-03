@@ -1,0 +1,26 @@
+[
+    {
+        "property_id": "A0001",
+        "name": "pool",
+        "location": "Reykjavik",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "amenity_description": "is a pool"
+    },
+    {
+        "property_id": "A0002",
+        "name": "pool",
+        "location": "Tingwall",
+        "condition": "fair",
+        "total_price_to_fix": 1200.0,
+        "amenity_description": "is a pool"
+    },
+    {
+        "property_id": "A0003",
+        "name": "hot tub",
+        "location": "Nuuk",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "amenity_description": "is a hot tub"
+    }
+]

@@ -1,6 +1,7 @@
 class work_request_logic_manager:
-    def __init__(self):
-        pass
+
+    def __init__(self, Storage_Layer_Wrapper):
+        self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
     def sanity_check_work_request(Work_request):
         pass
     def add_work_request(Work_request):

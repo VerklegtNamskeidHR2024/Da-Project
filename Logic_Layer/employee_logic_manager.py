@@ -1,10 +1,9 @@
 #from employee_storage_manager import employee_storage
 class employee_logic_manager:
-    def __init__(self, employee, SSN, work_request_ID, maintenance_report_ID, employee_list):
-        self.employee = employee
-        self.SSN = SSN
-        self.work_request_ID = work_request_ID
-        self.maintenance_report_ID = maintenance_report_ID
+    
+    def __init__(self, Storage_Layer_Wrapper):
+        self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
+
         #self.employee_list = fetch_employees #needs more information from employee storage
 
         return

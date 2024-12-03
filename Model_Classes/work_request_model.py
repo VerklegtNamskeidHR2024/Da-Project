@@ -1,9 +1,10 @@
 class WorkRequest:
-    def __init__(self, work_request_id:str="", staff_id:str="", property_id:str="", date_of_creation:str="", 
+    def __init__(self, work_request_id:str="", staff_id:str="", location:str="", property_id:str="", date_of_creation:str="", 
                 repetitive_work:bool=False, reopen_interval:int=0, priority:str="", maintenance_report:str="",
                 work_request_status:str="", need_contractor:bool=False, contractor_id:str="", mark_as_done:bool=False):
         self.work_request_id = work_request_id
         self.staff_id = staff_id
+        self.location = location
         self.property_id = property_id
         self.date_of_creation = date_of_creation
         self.repetitive_work = repetitive_work
@@ -20,6 +21,9 @@ class WorkRequest:
 
     def set_staff_id(self, staff_id):
         self.staff_id = staff_id
+
+    def set_location_id(self, location):
+        self.location = location
 
     def set_property_id(self, property_id):
         self.property_id = property_id
@@ -56,6 +60,9 @@ class WorkRequest:
 
     def get_staff_id(self):
         return self.staff_id
+    
+    def get_location(self):
+        return self.location
 
     def get_property_id(self):
         return self.property_id
@@ -86,3 +93,20 @@ class WorkRequest:
 
     def get_mark_as_done(self):
         return self.mark_as_done
+    
+    def to_dict(self):
+        return {
+            'work_request_id': self.work_request_id,
+            'staff_id': self.staff_id,
+            'location': self.location,
+            'property_id': self.property_id,
+            'date_of_creation': self.date_of_creation,
+            'repetitive_work': self.repetitive_work,
+            'reopen_interval': self.reopen_interval,
+            'priority': self.priority,
+            'maintenance_report': self.maintenance_report,
+            'work_request_status': self.work_request_status,
+            'need_contractor': self.need_contractor,
+            'contractor_id': self.contractor_id,
+            'mark_as_done': self.mark_as_done
+        }

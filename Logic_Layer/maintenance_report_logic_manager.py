@@ -1,6 +1,6 @@
 class maintenance_report_logic_manager:
-    def __init__(self):
-        pass
+    def __init__(self, Storage_Layer_Wrapper):
+        self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
     def sanity_check_maintencance_report(maintencance_report):
         pass
     def add_maintencance_report_to_storage(maintencance_report):
@@ -21,3 +21,4 @@ class maintenance_report_logic_manager:
         pass
     def fetch_all_incomplete_maintenance_reports(maintencance_report_ID) -> list:
         pass
+

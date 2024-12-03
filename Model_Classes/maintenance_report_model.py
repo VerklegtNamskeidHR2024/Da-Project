@@ -86,3 +86,19 @@ class MaintenanceReport:
 
     def get_work_request_id(self):
         return self.work_request_id
+    
+    def to_dict(self):
+        return {
+            'report_id': self.report_id,
+            'report_name': self.report_name,
+            'location': self.location,
+            'property_id': self.property_id,
+            'staff_id': self.staff_id,
+            'regular_maintenance': self.regular_maintenance,
+            'maintenance_description': self.maintenance_description,
+            'report_status': self.report_status,
+            'price': self.price,
+            'mark_as_done': self.mark_as_done,
+            'contractor_id': self.contractor_id,
+            'work_request_id': self.work_request_id
+        }

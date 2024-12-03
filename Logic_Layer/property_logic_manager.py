@@ -1,9 +1,9 @@
 #from storage_layer_wrapper import get_all_properties
 
 class property_logic_manager:
-    def __init__(self, property, property_ID, work_request_ID, maintenance_report_ID, employee_ID, contractor_ID):
-        self.property = property
-        self.property_ID = property_ID
+
+    def __init__(self, Storage_Layer_Wrapper):
+        self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
         
 
     def fetch_all_properties_in_storage(self, property_ID) -> list:
@@ -30,3 +30,4 @@ class property_logic_manager:
         pass
     def fetch_all_contractors_in_stoarge(contractor_ID) -> list:
         pass
+
