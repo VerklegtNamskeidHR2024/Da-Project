@@ -36,3 +36,7 @@ class Contractor:
 
     def get_previous_job_reports(self):
         return self.previous_job_reports
+    
+    def __str__(self):
+        return_string = self.contractor_id +" "+ self.contact_name+ " " + self.company_name
+        return return_string

@@ -1,0 +1,26 @@
+{
+    "Employee1": {
+        "Name": "Jacob Yxa",
+        "email": "jacob.yxa@nanair.is",
+        "Location": "Longyearbyen",
+        "Address": "Vei 224 3B, Longyearbyen, Svalbard",
+        "Phone": "+47 92 09 77 01",
+        "GSM": "+354 777 1338"
+      },
+    "Employee2": {
+        "Name": "Nanna Daema",
+        "email": "nanna.daema@nanair.is",
+        "Location": "Longyearbyen",
+        "Address": "Ivan Starostin st. 109, Barantsburg, Svalbard",
+        "Phone": "+47 92 09 77 02",
+        "GSM": "+354 777 1339"
+    },
+    "Employee3": {
+        "Name": "Aqqaluk Lynge",
+        "email": "aqqaluk.lynge@nanair.is",
+        "Location": "Nuuk",
+        "Address": "Qattaaq 44, 3905, Nuuk, Greenland",
+        "Phone": "+299 35 24 66",
+        "GSM": "+354 777 1362"
+          }
+      }
