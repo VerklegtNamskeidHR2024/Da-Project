@@ -167,15 +167,16 @@ class work_request_UI_menu:
         
     def display_my_work_requests_printed(self):
     #     self.display_all_work_requests()
-
+        pass
 
     def display_all_new_work_requests_to_accept_printed(self): 
     #     self.display_all_work_requests()
-
+        pass
     
     def display_all_pending_work_requests_printed(self): 
     #     self.display_all_work_requests()
-
+        pass
 
     def display_closed_work_requests_printed(self): 
     #     self.display_all_work_requests()
+        pass
