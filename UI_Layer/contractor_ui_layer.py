@@ -5,6 +5,8 @@ class contractor_UI_menu():
         self.logic_wrapper = logic_wrapper
         self.rank = rank
         self.location = location
+        pass
+        
 
     def display_contractor_menu(self):
         
@@ -37,6 +39,7 @@ class contractor_UI_menu():
                 pass
             case _:
                 print("wrong input")
+        pass
 
     def display_add_contractor_form(self):
         """create contractor"""
