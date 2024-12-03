@@ -9,4 +9,3 @@ class admin_storage:
         pass
     def set_id_and_add_to_storage(self):
         pass
-

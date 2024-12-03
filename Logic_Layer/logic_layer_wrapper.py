@@ -4,6 +4,7 @@ from Model_Classes.property_model import Property
 from Model_Classes.maintenance_report_model import MaintenanceReport
 from Model_Classes.work_request_model import WorkRequest
 from Model_Classes.location_model import Location
+from Model_Classes.human_model import Human
 # not sure if model classes are in here 
 
 from Storage_Layer.storage_layer_wrapper import Storage_Layer_Wrapper
