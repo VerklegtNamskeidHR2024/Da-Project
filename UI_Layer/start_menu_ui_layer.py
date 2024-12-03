@@ -9,8 +9,9 @@ class StartMenu:
         print("{:>14}{:>7}{:>15}{:>8}{:>10}{:>6}".format("___________", ".", ": : : :", "|", "_____","|"))
         print("{:>13}{:>12}{:>11}{:>5}{:>3}{:>10}{:>6}{:>4}".format("_\_(*)_/_", "___(*)___", ": : : :", "o o", "|", "| | |", "|", "_ ,"))
         print("{:0}{:>1}{:>31}".format("_______|-|_________/-\__________", ":", "_____|_|__|_____| | |_____| o-o"))
+        pass
 
-    def show_role_options():
+    def show_role_options(self):
         print()
         print("Welcome to the NaN Air Properties and Staff System!")
         print("-" * 70)
@@ -26,12 +27,13 @@ class StartMenu:
         print("{:>20}{:>5}".format(">Quit System:", "q, Q"))
         print("-" * 70)
             
-    def show_location_options():
+    def show_location_options(self):
         print()
         print("{:0}{:>3}{:>8}{:>7}{:>11}".format("1. Reykjavík", "|", "2. Nuuk", "|", "3. Kulusuk"))
         print()
         print("{:0}{:>4}{:>12}{:>3}{:>16}".format("4. Þórshöfn", "|", "5. Tingwall", "|", "6. Longyearbyen"))
         print()
+        pass
 
     def set_role(self, role: str=""): 
         self.role = role
@@ -43,18 +45,31 @@ class StartMenu:
          return self.role
         
     def get_location(self):
+        pass
         return self.location
 
-        
-
-         
-login_choice = StartMenu()
+login_choice = ""         
+login_menu = StartMenu()
 while (login_choice != "q" and login_choice != "Q"):
+    login_menu.show_role_options()
+    login_menu.show_ascii_art_hq()
     login_choice = input("Select an Option: ")
+    login_menu.set_role(login_choice)
 
     if login_choice == "1" or login_choice == "admin" or login_choice == "Admin":
+        login_menu.show_location_options()
         location_choice = input("Select a location: ")
+        login_menu.set_location(location_choice)
 
-    elif login_choice == "2" or login_choice == "manager" or login_choice == "Manager":
-    elif login_choice == "3" or login_choice == "employee" or login_choice == "Employee":
-
+    elif (login_choice == "2" or 
+          login_choice == "manager" or 
+          login_choice == "Manager" or 
+          login_choice == "3" or 
+          login_choice == "employee" or 
+          login_choice == "Employee"):
+        login_menu.set_role(login_choice)
+    else:
+        print("Please Try Again.")
+        continue
+login_menu.get_role()
+login_menu.get_location()
