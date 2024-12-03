@@ -21,18 +21,16 @@ class work_request_UI_menu:
         print("-" * 70)
         work_request_list = self.logic_wrapper.get_all_work_requests()
         for item in work_request_list:
-            print("{:0}{:>3}{:>10}{:>4}{:>51}".format(
-                item.work_request_id, "|", item.name, "|", item.description
-                ))
+            print("{:0}{:>3}{:>10}{:>4}{:>51}".format(item.work_request_id, "|", item.name, "|", item.description))
         print("-" * 70)
         
     def display_selected_work_request_information(self):
         print("-" * 70)     
         work_request_list = self.logic_wrapper.get_all_work_requests()
         for item in work_request_list:
-            print("{:0}{:>3}{:>10}".format("Work Request ID", "|", work_request_list["work_request_id"])) 
-            print("{:0}{:>3}{:>10}".format("Name", "|", work_request_list["name"]))
-            print("{:0}{:>3}{:>10}".format("Description", "|", work_request_list["description"]))
+            print("{:0}{:>3}{:>10}".format("Work Request ID", "|", item.work_request_id)) 
+            print("{:0}{:>3}{:>10}".format("Name", "|", item.name))
+            print("{:0}{:>3}{:>10}".format("Description", "|", item.description))
         print("-" * 70)
 
     def display_work_requests_menu_items(self):
