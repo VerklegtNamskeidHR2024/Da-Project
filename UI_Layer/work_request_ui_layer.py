@@ -24,10 +24,10 @@ class work_request_UI_menu:
             print("{:0}{:>3}{:>10}{:>4}{:>51}".format({item.work_request_id}, "|", {item.name}, "|", {item.description}))
         print("-" * 70)
         
-    def display_selected_work_request_information(self):
+    def display_selected_work_request_information(self, work_request_id):
         print("{:0}{:>14}{:<10}".format("Categories", "|", "Details"))
         print("-" * 35)     
-        work_request_list = self.logic_wrapper.get_all_work_requests()
+        work_request_list = self.logic_wrapper.get_work_request_by_id(self.rank, self.location, work_request_id)
         for item in work_request_list:
             print("{:0}{:>9}{:<10}".format("Work Request ID", "|", {item.work_request_id})) 
             print("{:0}{:>20}{:<10}".format("Name", "|", {item.name}))
@@ -65,8 +65,7 @@ class work_request_UI_menu:
             user_choice = input("Select an Option: ")
             match user_choice:
                 case "1": 
-                    pass
-                    # self.select_work_request_by_id()
+                    self.select_work_request_by_id()
                 case "2":
                     pass
                     # self.create_work_request_form
@@ -112,7 +111,9 @@ class work_request_UI_menu:
                 
 
     def select_work_request_by_id(self):
-        work_request_selection = input("Enter Request ID: ")
+        work_request_selected_by_id = input("Enter Request ID: ")
+        self.display_selected_work_request_information(self.rank, self.location, work_request_selected_by_id)
+        
 
     # def create_work_request_form(self):
 
