@@ -15,16 +15,8 @@ class work_request_UI_menu:
         # self.display_pending_work_requests_printed() 
         # self.display_closed_work_requests_printed() 
 
-    def display_work_requests_menu_items(self):
-        """Prints out all open work requests with their ID, Name and Description. Displays the 
-        menu options depending if the user logged in is an admin/manager or an employee.
-        It then calls the correct function based on what the user chose. """
-        
-        print()
-        print("Work Request Menu")
-        print("-" * 70)
-        print("{:>50}".format("[ Open and Upcoming Work Requests ]"))
-        print()
+    def display_all_work_requests(self):
+        """Prints out all open work requests with their ID, Name and Description. """
         print("{:0}{:>3}{:>5}{:>9}{:>12}".format("ID", "|", "Name", "|", "Description"))
         print("-" * 70)
         work_request_list = self.logic_wrapper.get_all_work_requests()
@@ -34,9 +26,27 @@ class work_request_UI_menu:
                 "|", work_request_list["name"], 
                 "|", work_request_list["description"]
                 ))
+        print("-" * 70)
+        
+    def display_selected_work_request_information(self):
+        print("-" * 70)     
+        work_request_list = self.logic_wrapper.get_all_work_requests()
+        for item in work_request_list:
+            print("{:0}{:>3}{:>10}".format("Work Request ID", "|", work_request_list["work_request_id"])) 
+            print("{:0}{:>3}{:>10}".format("Name", "|", work_request_list["name"]))
+            print("{:0}{:>3}{:>10}".format("Description", "|", work_request_list["description"]))
+        print("-" * 70)
 
+    def display_work_requests_menu_items(self):
+        """Displays the menu options depending if the user logged in is an admin/manager or
+        an employee. It then calls the correct function based on what the user chose. """
+        print()
+        print("Work Request Menu")
+        print("-" * 70)
+        print("{:>50}".format("[ Open and Upcoming Work Requests ]"))
+        print()
+        self.display_all_work_requests()
         if self.rank == "Admin" or self.rank == "Manager":
-            print("-" * 70)
             print("{:0}{:>3}{:>8}{:>7}{:>11}".format("1. Select Request", "|", "2. Add Request", "|", "3. Closed Requests"))
             print("-" * 70)
             user_choice = input("Select an Option: ")
@@ -82,10 +92,6 @@ class work_request_UI_menu:
 
     def select_work_request_by_id(self):
         work_request_selection = input("Enter Request ID: ")
- 
-
-    def display_selected_work_request_information(self):     
-
 
     def create_work_request_form(self):
 
@@ -93,12 +99,17 @@ class work_request_UI_menu:
     def edit_work_request_form(self):
 
         
-    
     def display_my_work_requests(self):
-     
+        self.display_all_work_requests()
+
 
     def display_new_work_requests_to_accept(self): 
+        self.display_all_work_requests()
+
     
     def display_pending_work_requests_printed(self): 
+        self.display_all_work_requests()
+
 
     def display_closed_work_requests_printed(self): 
+        self.display_all_work_requests()
