@@ -15,6 +15,6 @@ I worked on fixing t he use cases\
 Kormákur:\
 
 
-Jón:\ 
+Jón:\ I worked on seeting up the functions for the UI layer and later in the day I started programming the UI for the location options. I arrived at 8:00 and left at 17:45.\
 
 ## Progress of the day
