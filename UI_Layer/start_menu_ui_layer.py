@@ -26,39 +26,47 @@ class MainMenu:
         print("{:>24}{:>5}".format(">Go to Home Page:", "home, Home"))
         print("{:>20}{:>5}".format(">Quit System:", "q, Q"))
         print("-" * 70)
-        self.selected_user_login_choice = input("Select an Option: ")
-        self.log_in_choice(self.selected_user_login_choice)
+        selected_user_login_choice = input("Select an Option: ")
+        self.log_in_choice(selected_user_login_choice)
 
     def select_location_for_system(self):
         print()
         print("{:0}{:>3}{:>8}{:>7}{:>11}".format("1. Reykjavik", "|", "2. Nuuk", "|", "3. Kulusuk"))
         print()
-        print("{:0}{:>4}{:>12}{:>3}{:>16}".format("4. Tórshavn", "|", "5. Tingwall", "|", "6. Longyearbyen"))
+        print("{:0}{:>4}{:>12}{:>3}{:>16}".format("4. Torshavn", "|", "5. Tingwall", "|", "6. Longyearbyen"))
         print()
-        self.selected_location_choice = input("Select a Location: ")
-        self.location_choice(self.selected_location_choice)
+        selected_location_choice = input("Select a Location: ")
+        self.location_choice(selected_location_choice)
     
-    def log_in_choice(self):
-        match self.selected_user_login_choice:
+    def log_in_choice(self, selected_user_login_choice):
+        match selected_user_login_choice:
             case "1":
-                self.show_admin_menu()
+                self.rank = "Admin"
             case "2":
-                self.show_manager_menu()
+                self.rank = "Manager"
             case "3":
-                self.show_employee_menu()
-            else:
-                print("Please Try Again.")
+                self.rank = "Employee"
+            case _:
+                print("No User Found, Please Try Again.")
+                self.select_user_for_system()
         
-    def location_choice(self):
-        match self.selected_location_choice:
+    def location_choice(self, selected_location_choice):
+        match selected_location_choice:
             case "1":
+                self.location = "Reykjavik"
             case "2":
+                self.location = "Nuuk"
             case "3":
+                self.location = "Kulusuk"
             case "4":
+                self.location = "Torshavn"
             case "5":
+                self.location = "Tingwall"
             case "6":
-            else:
-                print("Please Try Again.")
+                self.location = "Longyearbyen"
+            case _:
+                print("No Location Found, Please Try Again.")
+                self.select_location_for_system()
     
 
 
