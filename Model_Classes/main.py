@@ -11,7 +11,7 @@ from work_request_model import WorkRequest
 from admin_model import Admin
 
 # Reykjavík Nuuk Kulusuk Þórshöfn Tingwall Longyearbyen
-admin1 = Admin('Hreimur', 12334546789, 5551234, 'Reykjavik', 'Manager', 'hreimur24@ru.is', 'M1234')
+admin1 = Admin('Hreimur', 12334546789, 5551234, 'Reykjavik', 'Admin', 'hreimur24@ru.is', 'A1234')
 
 manager1 = Manager('Hreimur', 12334546789, 5551234, 'Reykjavik', 'Manager', 'hreimur24@ru.is', 'M1234')
 manager2 = Manager('Hreimur', 12334546789, 5551234, 'Nuuk', 'Manager', 'hreimur24@ru.is', 'M1234')
@@ -131,18 +131,16 @@ with open('Data/amenity_storage.json', 'w') as file:
     json.dump(amenity_dict, file, indent=4)
 
 with open('Data/property_storage.json', 'w') as file:
+    json.dump(property_dict, file, indent=4)
 
+with open('Data/location_storage.json', 'w') as file:
+    json.dump(location_dict, file, indent=4)
 
+with open('Data/contractor_storage.json', 'w') as file:
+    json.dump(contractor_dict, file, indent=4)
 
-'''with open('Data/employee_storage.json', 'w') as file:
-    json.dump(person_dict, file, indent=4)'''
+'''with open('Data/work_request_storage.json', 'w') as file:
+    json.dump(work_request_dict, file, indent=4)'''
 
-'''with open('Data/employee_storage.json', 'r') as file:
-    persons = json.load(file)
-
-
-search = input('Enter staff ID to search for: ')
-for person in persons:
-    if person['staff_id'] == search:
-        print(person)
-        break'''
+with open('Data/maintenance_report_storage.json', 'w') as file:
+    json.dump(maintenance_report_dict, file, indent=4)

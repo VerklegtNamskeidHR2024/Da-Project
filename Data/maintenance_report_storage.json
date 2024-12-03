@@ -1,0 +1,16 @@
+[
+    {
+        "report_id": "MR0001",
+        "report_name": "Fix the roof",
+        "location": "Reykjavik",
+        "property_id": "h004",
+        "staff_id": "E1234",
+        "regular_maintenance": false,
+        "maintenance_description": "roof is leaking",
+        "report_status": "Pending",
+        "price": "1234",
+        "mark_as_done": true,
+        "contractor_id": "C0001",
+        "work_request_id": "WR0003"
+    }
+]
