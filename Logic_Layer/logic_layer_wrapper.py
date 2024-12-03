@@ -32,6 +32,8 @@ class Logic_Layer_Wrapper:
         self.property_logic_manager = property_logic_manager(self.storage_layer_wrapper)
         self.work_request_logic_manager = work_request_logic_manager(self.storage_layer_wrapper)
 
+    ########################################################################################################
+    ### CONTRACTOR #########################################################################################
     def get_all_contractors(self):
         # her mynd það kalla í sama fall inn í contractors logic manager 
         # er núna bara með dummy gögn
@@ -41,6 +43,8 @@ class Logic_Layer_Wrapper:
         contractor_list = [con1,con2,con3]
         return contractor_list
     
+    ########################################################################################################
+    ### PROPERTIES #########################################################################################
     def get_all_properities(self):
         # dummy stuff
         prop1 = ("1", "hremmi diddy cave", "rvk", "96")
@@ -50,15 +54,23 @@ class Logic_Layer_Wrapper:
         property_list = [prop1,prop2,prop3,prop4]
         return property_list
 
+    ########################################################################################################
+    ### EMPLOYEES ##########################################################################################
     def get_all_employees(self):
         pass
 
+    ########################################################################################################
+    ### MAINTENANCE_REPORTS ################################################################################
     def get_all_maintenance_reports(self):
         pass
 
+    ########################################################################################################
+    ### WORK_REQUESTS ######################################################################################
     def get_all_work_requests(self):
         pass
 
+    ########################################################################################################
+    ### LOCATION ###########################################################################################
     def get_all_locations(self):
         pass
     
