@@ -10,7 +10,7 @@ Daníela:\
 
 
 Yeabsire:\
-I worked on fixing t he use cases\
+I worked on adding methods for all storage menu then i worked on maintenance report menu in UI layer. i came to school at 8 and left at 6.\
 
 Kormákur:\
 
