@@ -54,5 +54,5 @@ class main_menu:
                 print("wrong input")
 
 def main():
-    main = main_menu(1,"rvk") 
+    main = main_menu(1,"rvk")
     main.display_menu_items()

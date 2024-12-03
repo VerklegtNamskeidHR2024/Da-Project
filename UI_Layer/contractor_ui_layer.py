@@ -18,13 +18,17 @@ class contractor_UI_menu():
         user_action = input("Select an Option:  ")
         match user_action:
             case "1":
-                pass
+                self.display_add_contractor_form()
             case "2":
-                pass
+                self.select_contractor()
             case _:
                 print("wrong input")
+    def display_add_contractor_form(self):
+        pass
+    
+    def select_contractor(self):
+        pass
 
-        
     def print_contractor(self):
         # Maybe just one function for printing contractors even if it is more than one 
         pass
