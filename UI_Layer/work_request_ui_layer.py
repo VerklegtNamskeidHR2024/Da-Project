@@ -21,16 +21,33 @@ class work_request_UI_menu:
         print("-" * 70)
         work_request_list = self.logic_wrapper.get_all_work_requests()
         for item in work_request_list:
-            print("{:0}{:>3}{:>10}{:>4}{:>51}".format(item.work_request_id, "|", item.name, "|", item.description))
+            print("{:0}{:>3}{:>10}{:>4}{:>51}".format({item.work_request_id}, "|", {item.name}, "|", {item.description}))
         print("-" * 70)
         
     def display_selected_work_request_information(self):
-        print("-" * 70)     
+        print("{:0}{:>14}{:<10}".format("Categories", "|", "Details"))
+        print("-" * 35)     
         work_request_list = self.logic_wrapper.get_all_work_requests()
         for item in work_request_list:
-            print("{:0}{:>3}{:>10}".format("Work Request ID", "|", item.work_request_id)) 
-            print("{:0}{:>3}{:>10}".format("Name", "|", item.name))
-            print("{:0}{:>3}{:>10}".format("Description", "|", item.description))
+            print("{:0}{:>9}{:<10}".format("Work Request ID", "|", {item.work_request_id})) 
+            print("{:0}{:>20}{:<10}".format("Name", "|", {item.name}))
+            print("{:0}{:>13}{:<10}".format("Description", "|", {item.description}))
+            print("{:0}{:>16}{:<10}".format("Location", "|", {item.location})) 
+            print("-" * 35)
+            print("{:0}{:>3}{:>10}".format("Maintenance Report ID", "|", {item.maintenance_report_id}))
+            print("{:0}{:>16}{:<10}".format("Staff ID", "|", {item.staff_id}))
+            print("{:0}{:>13}{:<10}".format("Property ID", "|", {item.property})) 
+            print("{:0}{:>11}{:<10}".format("Contractor ID", "|", {item.contractor_id}))
+            print("-" * 35)
+            print("{:0}{:>14}{:>10}".format("Start Date", "|", {item.start_date}))
+            print("{:0}{:>7}{:>10}".format("Completition Date", "|", {item.completition_date})) 
+            print("{:0}{:>9}{:>10}".format("Repititive Work", "|", {item.repetitive_work}))
+            print("{:0}{:>3}{:>10}".format("Re-Open Interval Days", "|", {item.re_open_Interval_Days})) 
+            print("-" * 35)
+            print("{:0}{:>16}{:>10}".format("Priority", "|", {item.priority}))
+            print("{:0}{:>7}{:>10}".format("Mark as Completed", "|", {item.mark_as_completed}))
+            print("{:0}{:>11}{:>10}".format("Mark as Ready", "|", {item.mark_as_ready}))
+            print("{:0}{:>4}{:>10}".format("Accepted by Employee", "|", {item.accepted_by_employee}))
         print("-" * 70)
 
     def display_work_requests_menu_items(self):
@@ -94,8 +111,8 @@ class work_request_UI_menu:
                     self.start_point()
                 
 
-    # def select_work_request_by_id(self):
-    #     work_request_selection = input("Enter Request ID: ")
+    def select_work_request_by_id(self):
+        work_request_selection = input("Enter Request ID: ")
 
     # def create_work_request_form(self):
 
