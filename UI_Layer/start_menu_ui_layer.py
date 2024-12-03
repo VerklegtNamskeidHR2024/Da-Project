@@ -16,13 +16,13 @@ class Main_Menu:
         self.rank = self.select_user_for_system()
         self.location = self.select_location_for_system()
 
-        self.employee_UI_menu = employee_UI_menu(self.logic_wrapper) # , self.rank, self.location
+        self.employee_UI_menu = employee_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
         self.location_UI_menu = location_UI_layer(self.logic_wrapper) # , self.rank, self.location
         # so its like this one when the class contrstructor is set up in the class correctly
         self.contractor_UI_menu = contractor_UI_menu(self.logic_wrapper, self.rank, self.location) 
         self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper) # , self.rank, self.location
-        self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
-        self.property_UI_menu = property_UI_menu(self.logic_wrapper) # , self.rank, self.location
+        self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper) # , self.rank, self.location
+        self.property_UI_menu = property_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
 
         # these may need to be sent into each UI class
         #self.rank = rank
