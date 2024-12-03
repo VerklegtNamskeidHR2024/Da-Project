@@ -1,8 +1,7 @@
-from Logic_Layer.logic_layer_wrapper import Logic_Layer_Wrapper
 
 class work_request_UI_menu:
-    def __init__(self, rank, location):
-        self.logic_wrapper = Logic_Layer_Wrapper()
+    def __init__(self, Logic_Wrapper, rank, location):
+        self.logic_wrapper = Logic_Wrapper
         self.rank = rank
         self.location = location
     
