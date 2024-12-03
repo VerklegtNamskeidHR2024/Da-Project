@@ -35,9 +35,8 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### CONTRACTOR #########################################################################################
-    def get_all_contractors(self):
-        print("in logic layer")
-        return self.contractor_logic_manager.get_all_contractors()
+    def get_all_contractors(self, location):
+        return self.contractor_logic_manager.get_all_contractors(location)
         # her mynd það kalla í sama fall inn í contractors logic manager 
         # er núna bara með dummy gögn
         """ con1 = Contractor("1","alverk","tumi","8-19",["meow"])
@@ -45,15 +44,16 @@ class Logic_Layer_Wrapper:
         con3 = Contractor("3","alverk","jon","8-19",["meow"])
         contractor_list = [con1,con2,con3]
         return contractor_list """
-    
+    def get_contractor_by_id(self, location, contractor_id) -> Contractor:
+        return self.contractor_logic_manager.get_contractor_by_id(location,contractor_id)
     ########################################################################################################
     ### PROPERTIES #########################################################################################
     def get_all_properities(self):
         # dummy stuff
-        prop1 = ("1", "hremmi diddy cave", "rvk", "96")
-        prop2 = ("2", "Johun plage", "rvk", "swag")
-        prop3 = ("3", "kormakur aka irl jon jones on a bad day cave", "rvk", "19")
-        prop4 = ("4", "Langhals vegur", "rvk", "112")
+        prop1 = Property("1", "hremmi diddy cave", "rvk", "96")
+        prop2 = Property("2", "Johun plage", "rvk", "swag")
+        prop3 = Property("3", "kormakur aka irl jon jones on a bad day cave", "rvk", "19")
+        prop4 = Property("4", "Langhals vegur", "rvk", "112")
         property_list = [prop1,prop2,prop3,prop4]
         return property_list
 
@@ -69,7 +69,7 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### WORK_REQUESTS ######################################################################################
-    def get_all_work_requests(self):
+    def get_all_work_requests(self): 
         pass
 
     ########################################################################################################
