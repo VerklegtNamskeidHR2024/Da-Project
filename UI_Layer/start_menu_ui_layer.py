@@ -1,5 +1,7 @@
+# Importing the logic layer wrapper
 from Logic_Layer.logic_layer_wrapper import Logic_Layer_Wrapper
 
+# Importing all UI layers 
 from UI_Layer.employee_ui_layer import employee_UI_menu
 from UI_Layer.location_ui_layer import location_UI_layer
 from UI_Layer.contractor_ui_layer import contractor_UI_menu
@@ -7,10 +9,12 @@ from UI_Layer.maintenance_report_ui_layer import maintenance_report_UI_menu
 from UI_Layer.work_request_ui_layer import work_request_UI_menu 
 from UI_Layer.property_ui_layer import property_UI_menu
 
+# Creating the class for the log in page and main menu's of each user
 class Main_Menu:
     def __init__(self, rank, location):
         self.logic_wrapper = Logic_Layer_Wrapper()
 
+        # Creating the UI classes for 
         self.employee_UI_menu = employee_UI_menu(self.logic_wrapper)
         self.location_UI_menu = location_UI_layer(self.logic_wrapper)
         self.contractor_UI_menu = contractor_UI_menu(self.logic_wrapper)
@@ -19,9 +23,10 @@ class Main_Menu:
         self.property_UI_menu = property_UI_menu(self.logic_wrapper)
 
         self.rank = rank
-        self.location = location
+        self.location = location 
 
     def start_point(self):
+        """"Sets the start point when calling the other classes """
         self.select_user_for_system()
         self.select_location_for_system()
         self.display_menu_items()
@@ -34,6 +39,10 @@ class Main_Menu:
         print("{:0}{:>1}{:>31}".format("_______|-|_________/-\__________", ":", "_____|_|__|_____| | |_____| o-o"))
 
     def select_user_for_system(self):
+        """Prints out the system title, ascii-art, profile log in options, the two 
+        universal commands and asks the user to select a user to log in as; returns 
+        then the rank for each profile based on what was selected. """
+        
         print()
         print("Welcome to the NaN Air Properties and Staff System!")
         print("-" * 70)
@@ -67,6 +76,10 @@ class Main_Menu:
                 self.select_user_for_system()
 
     def select_location_for_system(self):
+        """Prints out the 6 different locations that can selected and then asks the
+        user to select a location to access it's data; returns then the location name 
+        based on what was selected. """
+        
         print()
         print("{:0}{:>3}{:>8}{:>7}{:>11}".format("1. Reykjavik", "|", "2. Nuuk", "|", "3. Kulusuk"))
         print()
