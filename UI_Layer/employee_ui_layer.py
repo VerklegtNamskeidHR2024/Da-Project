@@ -3,5 +3,3 @@ class employee_UI_menu:
         self.logic_wrapper = logic_wrapper
         self.rank = rank
         self.location = location
-    
-    def display_
