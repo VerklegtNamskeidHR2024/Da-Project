@@ -1,8 +1,8 @@
-from human_model import Human
+from Model_Classes.human_model import Human
 
 class Employee(Human):
-    def __init__(self, name:str="", social_security_number:int=0, phone_number:int=0, location:str="", system_permissions:str="",
-                email:str="", staff_id:str=""):
+    def __init__(self, name:str="", social_security_number:int=0, phone_number:int=0,
+                location:str="", system_permissions:str="Employee", email:str="", staff_id:str=""):
         super().__init__(name, social_security_number, phone_number, location, system_permissions, email)
         self.staff_id = staff_id
 

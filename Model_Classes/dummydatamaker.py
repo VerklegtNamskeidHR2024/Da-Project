@@ -144,3 +144,6 @@ with open('Data/contractor_storage.json', 'w') as file:
 
 with open('Data/maintenance_report_storage.json', 'w') as file:
     json.dump(maintenance_report_dict, file, indent=4)
+
+with open('Data/employee_storage.json', 'r') as file:
+    persons = json.load(file)
