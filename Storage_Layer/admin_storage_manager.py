@@ -1,13 +1,12 @@
-class AdminStorage:
-    def __init__(self, admin, storage):
-        self.admin = admin
-        self.storage = storage 
-
-    def add_user(self, user_id, user_data):
-        #add a user to storage
+class admin_storage:
+    def __init__(self):
         pass
-
-    def get_user(self, user_id):
-        #get a user from storage
+    def add_admin(self):
+        pass
+    def get_admin(self):
+        pass
+    def get_all_admin(self):
+        pass
+    def set_id_and_add_to_storage(self):
         pass
 
