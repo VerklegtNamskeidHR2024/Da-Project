@@ -26,38 +26,39 @@ class MainMenu:
         print("{:>24}{:>5}".format(">Go to Home Page:", "home, Home"))
         print("{:>20}{:>5}".format(">Quit System:", "q, Q"))
         print("-" * 70)
-        selected_user_choice = input("Select an Option: ")
-            
+        self.selected_user_login_choice = input("Select an Option: ")
+        self.log_in_choice(self.selected_user_login_choice)
+
     def select_location_for_system(self):
         print()
-        print("{:0}{:>3}{:>8}{:>7}{:>11}".format("1. Reykjavík", "|", "2. Nuuk", "|", "3. Kulusuk"))
+        print("{:0}{:>3}{:>8}{:>7}{:>11}".format("1. Reykjavik", "|", "2. Nuuk", "|", "3. Kulusuk"))
         print()
-        print("{:0}{:>4}{:>12}{:>3}{:>16}".format("4. Þórshöfn", "|", "5. Tingwall", "|", "6. Longyearbyen"))
+        print("{:0}{:>4}{:>12}{:>3}{:>16}".format("4. Tórshavn", "|", "5. Tingwall", "|", "6. Longyearbyen"))
         print()
-        selected_location_choice = input("Select a Location: ")
+        self.selected_location_choice = input("Select a Location: ")
+        self.location_choice(self.selected_location_choice)
+    
+    def log_in_choice(self):
+        match self.selected_user_login_choice:
+            case "1":
+                self.show_admin_menu()
+            case "2":
+                self.show_manager_menu()
+            case "3":
+                self.show_employee_menu()
+            else:
+                print("Please Try Again.")
+        
+    def location_choice(self):
+        match self.selected_location_choice:
+            case "1":
+            case "2":
+            case "3":
+            case "4":
+            case "5":
+            case "6":
+            else:
+                print("Please Try Again.")
+    
 
-    def log         
-login_menu = MainMenu()
-while (login_choice != "q" and login_choice != "Q"):
-    login_menu.show_role_options()
-    login_menu.show_ascii_art_hq()
-    login_choice = input("Select an Option: ")
-    login_menu.set_role(login_choice)
 
-    if login_choice == "1" or login_choice == "admin" or login_choice == "Admin":
-        login_menu.show_location_options()
-        location_choice = input("Select a location: ")
-        login_menu.set_location(location_choice)
-
-    elif (login_choice == "2" or 
-          login_choice == "manager" or 
-          login_choice == "Manager" or 
-          login_choice == "3" or 
-          login_choice == "employee" or 
-          login_choice == "Employee"):
-        login_menu.set_role(login_choice)
-    else:
-        print("Please Try Again.")
-        continue
-login_menu.get_role()
-login_menu.get_location()
