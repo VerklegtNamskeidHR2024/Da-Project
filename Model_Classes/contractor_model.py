@@ -36,3 +36,12 @@ class Contractor:
 
     def get_previous_job_reports(self):
         return self.previous_job_reports
+    
+    def to_dict(self):
+        return {
+            'contractor_id': self.contractor_id,
+            'company_name': self.company_name,
+            'contact_name': self.contact_name,
+            'opening_hours': self.opening_hours,
+            'previous_job_reports': self.previous_job_reports
+        }

@@ -10,3 +10,12 @@ class Amenity(Property):
 
     def get_amenity_description(self):
         return self.amenity_description
+    
+    def to_dict(self):
+        return {
+            'property_id': self.property_id,
+            'name': self.name,
+            'location': self.location,
+            'total_price_to_fix': self.total_price_to_fix,
+            'amenity_description': self.amenity_description
+        }

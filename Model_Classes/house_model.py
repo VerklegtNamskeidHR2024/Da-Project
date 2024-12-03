@@ -10,3 +10,12 @@ class House(Property):
 
     def get_property_price(self):
         return self.property_price
+    
+    def to_dict(self):
+        return {
+            'property_id': self.property_id,
+            'name': self.name,
+            'location': self.location,
+            'total_price_to_fix': self.total_price_to_fix,
+            'property_price': self.property_price
+        }
