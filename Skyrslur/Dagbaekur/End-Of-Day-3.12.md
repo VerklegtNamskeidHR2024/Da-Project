@@ -7,6 +7,7 @@ I added dummy data to the json files, then i worked on reading from the json fil
 Tumi:\
 
 Daníela:\
+I worked on the ui for propertys and employees. I arrived at 8:30 and left at 18.
 
 
 Yeabsire:\
