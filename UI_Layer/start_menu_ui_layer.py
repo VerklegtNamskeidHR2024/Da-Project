@@ -21,7 +21,7 @@ class Main_Menu:
         # so its like this one when the class contrstructor is set up in the class correctly
         self.contractor_UI_menu = contractor_UI_menu(self.logic_wrapper, self.rank, self.location) 
         self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper) # , self.rank, self.location
-        self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper) # , self.rank, self.location
+        self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
         self.property_UI_menu = property_UI_menu(self.logic_wrapper) # , self.rank, self.location
 
         # these may need to be sent into each UI class
@@ -124,4 +124,3 @@ class Main_Menu:
             case _:
                 print("wrong input")
                 self.display_menu_items()
-

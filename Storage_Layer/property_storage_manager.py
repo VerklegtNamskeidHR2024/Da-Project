@@ -9,3 +9,4 @@ class property_storage:
         pass
     def property_set_ID_and_add_to_storage(self):
         pass
+    

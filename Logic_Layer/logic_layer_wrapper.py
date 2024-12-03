@@ -4,6 +4,7 @@ from Model_Classes.property_model import Property
 from Model_Classes.maintenance_report_model import MaintenanceReport
 from Model_Classes.work_request_model import WorkRequest
 from Model_Classes.location_model import Location
+from Model_Classes.human_model import Human
 # not sure if model classes are in here 
 
 from Storage_Layer.storage_layer_wrapper import Storage_Layer_Wrapper
@@ -35,13 +36,15 @@ class Logic_Layer_Wrapper:
     ########################################################################################################
     ### CONTRACTOR #########################################################################################
     def get_all_contractors(self):
+        print("in logic layer")
+        return self.contractor_logic_manager.get_all_contractors()
         # her mynd það kalla í sama fall inn í contractors logic manager 
         # er núna bara með dummy gögn
-        con1 = Contractor("1","alverk","tumi","8-19",["meow"])
+        """ con1 = Contractor("1","alverk","tumi","8-19",["meow"])
         con2 = Contractor("2","alverk","gabbi","8-19",["meow"])
         con3 = Contractor("3","alverk","jon","8-19",["meow"])
         contractor_list = [con1,con2,con3]
-        return contractor_list
+        return contractor_list """
     
     ########################################################################################################
     ### PROPERTIES #########################################################################################
