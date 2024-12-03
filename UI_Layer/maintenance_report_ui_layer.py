@@ -1,7 +1,8 @@
 class maintenance_report_UI_menu:
-    def __init__(self,logic_wrapper, rank):
+    def __init__(self, logic_wrapper, rank, location):
         self.logic_wrapper = logic_wrapper
         self.rank = rank
+        self.location = location
     
     def display_maintenance_report(self):
      if self.rank == "admin" or "manager":
@@ -23,6 +24,7 @@ class maintenance_report_UI_menu:
               print("invaild number")
         elif user_choice == "2":
             #list of all closed reports here
+            pass
         else:
            print("invaild choice")
            
@@ -51,14 +53,15 @@ class maintenance_report_UI_menu:
             if edit_maintenance == "1":
                print("pending maintenance reports")
                print("edit maintenance report 2")
-                """Property ID: (1503) 
-                    Staff ID: (26)
-                    Contractor ID: (x)
-                    Scheduled: yes
-                    Work done: Clean windows
-                    Status: pending
-                    Price: 20.000kr 
-                    Report ID: (2)"""
+
+"""Property ID: (1503) 
+Staff ID: (26)
+Contractor ID: (x)
+Scheduled: yes
+Work done: Clean windows
+Status: pending
+Price: 0kr 
+Report ID: (2)"""
 
                 
                

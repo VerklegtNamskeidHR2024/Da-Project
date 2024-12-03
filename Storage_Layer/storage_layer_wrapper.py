@@ -22,7 +22,10 @@ class Storage_Layer_Wrapper:
         self.property_storage_manager = property_storage()
         self.work_request_storage_manager = work_reques_storage()
 
-    ### contractor
+
+    # maybe need to add edit to each?
+    ########################################################################################################
+    ### CONTRACTOR #########################################################################################
     def add_contractor(self):
         pass
 
@@ -36,8 +39,9 @@ class Storage_Layer_Wrapper:
 
     def contractor_set_ID_and_add_to_storage(self):
         pass
-    ## end contractor 
-
+   
+    ########################################################################################################
+    ### PROPERTIES #########################################################################################
     def add_property(self):
         pass
     def get_property(self):
@@ -47,6 +51,8 @@ class Storage_Layer_Wrapper:
     def property_set_ID_and_add_to_storage(self):
         pass
 
+    ########################################################################################################
+    ### EMPLOYEES ##########################################################################################
     def add_employee(self):
         pass
     def get_employee(self):
@@ -56,6 +62,8 @@ class Storage_Layer_Wrapper:
     def employee_set_ID_and_add_to_storage(self):
         pass
     
+    ########################################################################################################
+    ### MAINTENANCE_REPORTS ################################################################################
     def maintenance_report_set_ID_and_too_storage(self):
         pass
     def add_maintenance_report(self):
@@ -65,6 +73,8 @@ class Storage_Layer_Wrapper:
     def get_all_maintenance_report(self):
         pass
 
+    ########################################################################################################
+    ### WORK_REQUESTS ######################################################################################
     def add_work_request(self):
         pass
     def get_work_request(self):
@@ -73,7 +83,9 @@ class Storage_Layer_Wrapper:
         pass
     def work_request_set_ID_and_add_to_storage():
         pass
-
+    
+    ########################################################################################################
+    ### LOCATION ###########################################################################################
     def add_location(self):
         pass
     def get_location(self):
@@ -83,6 +95,8 @@ class Storage_Layer_Wrapper:
     def location_set_ID_and_add_to_storage(self):
         pass
     
+
+    # not sure what this is for
     def add_admin(self):
         pass
     def get_admin(self):

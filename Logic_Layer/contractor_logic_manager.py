@@ -16,9 +16,11 @@ class contractor_logic_manager:
     
     def get_contractor_by_id(self, location, contractor_id) -> object:
         """Find a contracor by contractor_id"""
-        all_contractors = self.get_all_contractors(location)
+        
+        # reuse get_all_contractors
+        location_sorted_contractors = self.get_all_contractors(location)
 
-        for contractor in all_contractors:
+        for contractor in location_sorted_contractors:
             if contractor.contractor_id == contractor_id:
                 return contractor 
         return
