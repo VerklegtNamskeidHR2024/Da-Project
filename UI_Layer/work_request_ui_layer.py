@@ -19,7 +19,7 @@ class work_request_UI_menu:
         """Prints out all open work requests with their ID, Name and Description. """
         print("{:0}{:>3}{:>5}{:>9}{:>12}".format("ID", "|", "Name", "|", "Description"))
         print("-" * 70)
-        work_request_list = self.logic_wrapper.get_all_work_requests()
+        work_request_list = self.logic_wrapper.get_all_work_requests(self.rank, self.location)
         for item in work_request_list:
             print("{:0}{:>3}{:>10}{:>4}{:>51}".format({item.work_request_id}, "|", {item.name}, "|", {item.description}))
         print("-" * 70)
@@ -61,8 +61,9 @@ class work_request_UI_menu:
         self.display_all_work_requests()
         if self.rank == "Admin" or self.rank == "Manager":
             print("{:0}{:>3}{:>8}{:>7}{:>11}".format("1. Select Request", "|", "2. Add Request", "|", "3. Closed Requests"))
-            print("-" * 70)
+            print()
             user_choice = input("Select an Option: ")
+            print("-" * 70)
             match user_choice:
                 case "1": 
                     self.select_work_request_by_id()
@@ -84,10 +85,10 @@ class work_request_UI_menu:
                     self.start_point()
         
         if self.rank == "Employee":
-            print("-" * 70)
             print("{:0}{:>2}{:>15}{:>2}{:>19}".format("1. New Requests", "|", "2. Pending Requests", "|", "3. My Requests"))
-            print("-" * 70)
-            user_choice = input("Select an Option: ")    
+            print()
+            user_choice = input("Select an Option: ")
+            print("-" * 70)    
             match user_choice:
                 case "1": 
                     pass
@@ -111,9 +112,13 @@ class work_request_UI_menu:
                 
 
     def select_work_request_by_id(self):
-        work_request_selected_by_id = input("Enter Request ID: ")
-        self.display_selected_work_request_information(self.rank, self.location, work_request_selected_by_id)
-        
+        try:
+            work_request_selected_by_id = input("Enter Request ID: ")
+            self.display_selected_work_request_information(self.rank, self.location, work_request_selected_by_id)
+            print(f"Work Request {work_request_selected_by_id} Found!")
+        except:
+            print("Work Request not Found, Please Try Again.")
+            self.select_work_request_by_id()
 
     # def create_work_request_form(self):
 
