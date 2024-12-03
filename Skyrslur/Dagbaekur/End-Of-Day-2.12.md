@@ -2,6 +2,7 @@
 
 ### What we did through the day 
 Hreimur:\
+I Worked on setting up the file structure on the github and set up the model classes that we will be using, i arrived at 7:15 and left at around 16 
 
 Tumi:\
 
