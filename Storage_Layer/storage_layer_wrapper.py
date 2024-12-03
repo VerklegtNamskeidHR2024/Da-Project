@@ -27,7 +27,6 @@ class Storage_Layer_Wrapper:
         pass
 
     def get_all_contractor(self):
-        print("in storage wrapper")
         all_contractors = contractor_storage.get_all_contractor()
         return all_contractors
         #return self.contractor_storage_manager.get_all_contractor()
