@@ -10,7 +10,7 @@ class contractor_UI_menu():
         print(self.rank)
         contract_list = self.logic_wrapper.get_all_contractors()
         for item in contract_list:
-            print(item)
+            print(f"ID: {item.contractor_id}| Name: {item.contact_name}")
         # end temp
 
         print("Manager - Contractors Page")
