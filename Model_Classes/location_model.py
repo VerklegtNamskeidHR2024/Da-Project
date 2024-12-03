@@ -43,3 +43,13 @@ class Location:
     
     def get_opening_hours(self):
         return self.opening_hours
+    
+    def to_dict(self):
+        return {
+            'country': self.country,
+            'location': self.location,
+            'airport': self.airport,
+            'phone_number': self.phone_number,
+            'branch_manager': self.branch_manager,
+            'opening_hours': self.opening_hours
+        }
