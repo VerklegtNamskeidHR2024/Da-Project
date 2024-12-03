@@ -1,26 +1,92 @@
-{
-    "Employee1": {
-        "Name": "Jacob Yxa",
-        "email": "jacob.yxa@nanair.is",
-        "Location": "Longyearbyen",
-        "Address": "Vei 224 3B, Longyearbyen, Svalbard",
-        "Phone": "+47 92 09 77 01",
-        "GSM": "+354 777 1338"
-      },
-    "Employee2": {
-        "Name": "Nanna Daema",
-        "email": "nanna.daema@nanair.is",
-        "Location": "Longyearbyen",
-        "Address": "Ivan Starostin st. 109, Barantsburg, Svalbard",
-        "Phone": "+47 92 09 77 02",
-        "GSM": "+354 777 1339"
+[
+    {
+        "name": "Hreimur",
+        "social_security_number": 123456789,
+        "phone_number": 1234567,
+        "location": "Reykjavik",
+        "system_permissions": "Employee",
+        "email": "hreimur69@gmail.com",
+        "staff_id": "E1234"
     },
-    "Employee3": {
-        "Name": "Aqqaluk Lynge",
-        "email": "aqqaluk.lynge@nanair.is",
-        "Location": "Nuuk",
-        "Address": "Qattaaq 44, 3905, Nuuk, Greenland",
-        "Phone": "+299 35 24 66",
-        "GSM": "+354 777 1362"
-          }
-      }
+    {
+        "name": "John Doe",
+        "social_security_number": 987654321,
+        "phone_number": 7654321,
+        "location": "Reykjavik",
+        "system_permissions": "Employee",
+        "email": "johndoe@example.com",
+        "staff_id": "E5678"
+    },
+    {
+        "name": "Jane Smith",
+        "social_security_number": 192837465,
+        "phone_number": 5647382,
+        "location": "Nuuk",
+        "system_permissions": "Employee",
+        "email": "janesmith@example.com",
+        "staff_id": "E9101"
+    },
+    {
+        "name": "Jokla Himiko",
+        "social_security_number": 102938475,
+        "phone_number": 3847562,
+        "location": "Nuuk",
+        "system_permissions": "Employee",
+        "email": "joklahimiko@example.com",
+        "staff_id": "E1121"
+    },
+    {
+        "name": "Bob Brown",
+        "social_security_number": 564738291,
+        "phone_number": 9182736,
+        "location": "Kulusuk",
+        "system_permissions": "Employee",
+        "email": "bobbrown@example.com",
+        "staff_id": "E3141"
+    },
+    {
+        "name": "Charlie Davis",
+        "social_security_number": 837465192,
+        "phone_number": 2736451,
+        "location": "Thorshofn",
+        "system_permissions": "Employee",
+        "email": "charliedavis@example.com",
+        "staff_id": "E5161"
+    },
+    {
+        "name": "Diana Evans",
+        "social_security_number": 475839201,
+        "phone_number": 6473829,
+        "location": "Thorshofn",
+        "system_permissions": "Employee",
+        "email": "dianaevans@example.com",
+        "staff_id": "E7181"
+    },
+    {
+        "name": "Eve Foster",
+        "social_security_number": 293847561,
+        "phone_number": 9182734,
+        "location": "Tingwall",
+        "system_permissions": "Employee",
+        "email": "evefoster@example.com",
+        "staff_id": "E9202"
+    },
+    {
+        "name": "Frank Green",
+        "social_security_number": 564738291,
+        "phone_number": 3847562,
+        "location": "Tingwall",
+        "system_permissions": "Employee",
+        "email": "frankgreen@example.com",
+        "staff_id": "E1223"
+    },
+    {
+        "name": "Grace Harris",
+        "social_security_number": 918273645,
+        "phone_number": 2736451,
+        "location": "Longyearbyen",
+        "system_permissions": "Employee",
+        "email": "graceharris@example.com",
+        "staff_id": "E3243"
+    }
+]
