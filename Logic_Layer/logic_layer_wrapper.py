@@ -44,6 +44,7 @@ class Logic_Layer_Wrapper:
         con3 = Contractor("3","alverk","jon","8-19",["meow"])
         contractor_list = [con1,con2,con3]
         return contractor_list """
+
     def get_contractor_by_id(self, location, contractor_id) -> Contractor:
         return self.contractor_logic_manager.get_contractor_by_id(location,contractor_id)
     ########################################################################################################
@@ -73,6 +74,19 @@ class Logic_Layer_Wrapper:
         pass
     ########################################################################################################
     ### LOCATION ###########################################################################################
-    def get_all_locations(self):
-        pass
+    def fetch_all_locations_in_storage(self ,Location) -> list:
+        return self.location_logic_manager.fetch_all_locations_in_storage()
+
+    def fetch_all_amenities_for_location_in_storage(self ,location) -> list:
+        return self.location_logic_manager.fetch_all_amenities_for_location_in_storage()
+    
+    def fetch_location_from_storage(self ,Location_ID):
+        return self.location_logic_manager.fetch_location_from_storage()
+
+    def sanity_check_location(self ,Location):
+        return self.location_logic_manager.sanity_check_location()
+
+    def add_new_location_to_storage(self ,Location):
+        return self.location_logic_manager.add_new_location_to_storage()
+
     

@@ -1,7 +1,7 @@
 from Logic_Layer.logic_layer_wrapper import Logic_Layer_Wrapper
 
 from UI_Layer.employee_ui_layer import employee_UI_menu
-from UI_Layer.location_ui_layer import location_UI_layer
+from UI_Layer.location_ui_layer import location_UI_menu
 from UI_Layer.contractor_ui_layer import contractor_UI_menu
 from UI_Layer.maintenance_report_ui_layer import maintenance_report_UI_menu
 from UI_Layer.work_request_ui_layer import work_request_UI_menu
@@ -17,10 +17,10 @@ class Main_Menu:
         self.location = self.select_location_for_system()
 
         self.employee_UI_menu = employee_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
-        self.location_UI_menu = location_UI_layer(self.logic_wrapper) # , self.rank, self.location
+        self.location_UI_menu = location_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
         # so its like this one when the class contrstructor is set up in the class correctly
         self.contractor_UI_menu = contractor_UI_menu(self.logic_wrapper, self.rank, self.location) 
-        self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper) # , self.rank, self.location
+        self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
         self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
         self.property_UI_menu = property_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
 

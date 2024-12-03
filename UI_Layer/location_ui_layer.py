@@ -1,9 +1,10 @@
-'''class location_ui:
-    def __init__(self, role: str, location_choice: str):
-        self.role = role
-        self.location = location_choice    
+class location_UI_menu:
+    def __init__(self, logic_wrapper, rank, location):
+        self.logic_wrapper = logic_wrapper
+        self.rank = rank
+        self.location = location  
 
-def location_information(self):
+""" def location_information(self):
     print()
     print(current_location)
     print("-" * 70)
@@ -74,4 +75,4 @@ def display_editing_form(self):
             edited_location_phone = input("Enter a New Location Phone: ")
 	    self.logic_layer_wrapper.function()
 	    print(…)
-        case _:'''
+        case _: """
