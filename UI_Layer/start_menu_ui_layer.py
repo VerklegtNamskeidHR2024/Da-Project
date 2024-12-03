@@ -1,6 +1,6 @@
-class StartMenu:
-    def __init__(self, role: str="", location: str=""):
-        self.role = role
+class MainMenu:
+    def __init__(self, rank: str="", location: str=""):
+        self.rank = rank
         self.location = location    
 
     def show_ascii_art_hq():
@@ -11,7 +11,7 @@ class StartMenu:
         print("{:0}{:>1}{:>31}".format("_______|-|_________/-\__________", ":", "_____|_|__|_____| | |_____| o-o"))
         pass
 
-    def show_role_options(self):
+    def select_user_for_system(self):
         print()
         print("Welcome to the NaN Air Properties and Staff System!")
         print("-" * 70)
@@ -26,30 +26,18 @@ class StartMenu:
         print("{:>24}{:>5}".format(">Go to Home Page:", "home, Home"))
         print("{:>20}{:>5}".format(">Quit System:", "q, Q"))
         print("-" * 70)
+        selected_user_choice = input("Select an Option: ")
             
-    def show_location_options(self):
+    def select_location_for_system(self):
         print()
         print("{:0}{:>3}{:>8}{:>7}{:>11}".format("1. Reykjavík", "|", "2. Nuuk", "|", "3. Kulusuk"))
         print()
         print("{:0}{:>4}{:>12}{:>3}{:>16}".format("4. Þórshöfn", "|", "5. Tingwall", "|", "6. Longyearbyen"))
         print()
-        pass
+        selected_location_choice = input("Select a Location: ")
 
-    def set_role(self, role: str=""): 
-        self.role = role
-        
-    def set_location(self, location: str=""):
-        self.location = location
-
-    def get_role(self):
-         return self.role
-        
-    def get_location(self):
-        pass
-        return self.location
-
-login_choice = ""         
-login_menu = StartMenu()
+    def log         
+login_menu = MainMenu()
 while (login_choice != "q" and login_choice != "Q"):
     login_menu.show_role_options()
     login_menu.show_ascii_art_hq()
