@@ -24,3 +24,7 @@ class contractor_logic_manager:
             if contractor.contractor_id == contractor_id:
                 return contractor 
         return
+    
+    def sanity_check_contractor():
+        """check if all info in a contractor object"""
+        return
