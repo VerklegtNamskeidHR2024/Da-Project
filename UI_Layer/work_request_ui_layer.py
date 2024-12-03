@@ -22,9 +22,7 @@ class work_request_UI_menu:
         work_request_list = self.logic_wrapper.get_all_work_requests()
         for item in work_request_list:
             print("{:0}{:>3}{:>10}{:>4}{:>51}".format(
-                work_request_list["work_request_id"], 
-                "|", work_request_list["name"], 
-                "|", work_request_list["description"]
+                item.work_request_id, "|", item.name, "|", item.description
                 ))
         print("-" * 70)
         
@@ -52,12 +50,16 @@ class work_request_UI_menu:
             user_choice = input("Select an Option: ")
             match user_choice:
                 case "1": 
-                    self.select_work_request_by_id()
+                    pass
+                    # self.select_work_request_by_id()
                 case "2":
-                    self.create_work_request_form
-                case "3": 
-                    self.display_closed_work_requests_printed()
+                    pass
+                    # self.create_work_request_form
+                case "3":
+                    pass
+                    # self.display_closed_work_requests_printed()
                 case "q":
+                    pass
                     print("Departing from NaN Air, Thank you for Visiting!")
                     pass
                 case "Q":
@@ -74,12 +76,16 @@ class work_request_UI_menu:
             user_choice = input("Select an Option: ")    
             match user_choice:
                 case "1": 
-                    self.display_new_work_requests_to_accept()
+                    pass
+                    # self.display_new_work_requests_to_accept()
                 case "2":
-                    self.display_pending_work_requests_printed()
+                    pass
+                    # self.display_pending_work_requests_printed()
                 case "3": 
-                    self.display_my_work_requests()
+                    pass
+                    # self.display_my_work_requests()
                 case "q":
+                    pass
                     print("Departing from NaN Air, Thank you for Visiting!")
                     pass
                 case "Q":
@@ -90,26 +96,26 @@ class work_request_UI_menu:
                     self.start_point()
                 
 
-    def select_work_request_by_id(self):
-        work_request_selection = input("Enter Request ID: ")
+    # def select_work_request_by_id(self):
+    #     work_request_selection = input("Enter Request ID: ")
 
-    def create_work_request_form(self):
+    # def create_work_request_form(self):
 
 
-    def edit_work_request_form(self):
+    # def edit_work_request_form(self):
 
         
-    def display_my_work_requests(self):
-        self.display_all_work_requests()
+    # def display_my_work_requests(self):
+    #     self.display_all_work_requests()
 
 
-    def display_new_work_requests_to_accept(self): 
-        self.display_all_work_requests()
+    # def display_new_work_requests_to_accept(self): 
+    #     self.display_all_work_requests()
 
     
-    def display_pending_work_requests_printed(self): 
-        self.display_all_work_requests()
+    # def display_pending_work_requests_printed(self): 
+    #     self.display_all_work_requests()
 
 
-    def display_closed_work_requests_printed(self): 
-        self.display_all_work_requests()
+    # def display_closed_work_requests_printed(self): 
+    #     self.display_all_work_requests()
