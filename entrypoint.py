@@ -7,8 +7,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-    opening = int(input)
-    closing = int(input)
-    print (opening, "-", closing)
