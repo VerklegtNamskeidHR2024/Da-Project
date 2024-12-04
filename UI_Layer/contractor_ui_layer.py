@@ -51,7 +51,8 @@ class contractor_UI_menu():
             case _:
                 print("wrong input")
 
-        print("we going back")
+        # test print
+        print("we going back to main menu in UI layer")
         return 
 
     def display_add_contractor_form(self):

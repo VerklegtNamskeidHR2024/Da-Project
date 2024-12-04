@@ -84,6 +84,8 @@ class Main_Menu:
                     
 
     def display_menu_items(self):
+        # maybe have while for loop
+        # and add a quit opition
         # admin manager
         print(self.rank)
         print(self.location)
