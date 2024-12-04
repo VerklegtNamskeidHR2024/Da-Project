@@ -5,6 +5,7 @@ Hreimur:\
 I added dummy data to the json files, then i worked on reading from the json files and sending that with the wrappers to the ui. Then someone had pushed all of the pycache files onto our dev branch and i had to clean that up. I got here at 7:15 and left at around 18
 
 Tumi:\
+Worked on setting up the structure of the program so others could work in there own classes inn the layers, also worked on the contractor Ui, Logic and storage layer so that others could use that as a rough guide to how other classes will work.
 
 Daníela:\
 I worked on the ui for propertys and employees. I arrived at 8:30 and left at 18.
