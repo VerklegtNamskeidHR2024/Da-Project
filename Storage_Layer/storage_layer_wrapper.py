@@ -44,6 +44,12 @@ class Storage_Layer_Wrapper:
     def get_contractor(self):
         pass
 
+
+
+    def write_to_file(self, list_of_contractors):
+        write_to_file = self.contractor_storage_manager.write_to_file(list_of_contractors)
+
+
     def contractor_set_ID_and_add_to_storage(self):
         pass
    

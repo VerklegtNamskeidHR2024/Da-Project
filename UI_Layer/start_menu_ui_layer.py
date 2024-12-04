@@ -160,10 +160,10 @@ class Main_Menu:
         print("-" * 40)
 
         # this needs to be looked at
-        """ work_list = self.logic_wrapper.get_all_work_requests(self.location)
+        '''work_list = self.logic_wrapper.get_all_work_requests(self.location)
         for item in work_list:
             print(f"{item.work_request_id:<10}|{item.location:<20}")
-        print("-" * 40) """
+        print("-" * 40)'''
 
         location_list = self.logic_wrapper.get_all_locations(self.location)
         for item in location_list:
