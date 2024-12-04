@@ -175,5 +175,5 @@ class property_UI_menu:
         print(f"{'ID':<10}|{'Property Name':<25}|{'Location':<20}|{'Condition':<20}")
         print("-" * 78)
         for item in property_list:
-            print(f"{item.property_id:<10}|{item.property_name:<25}|{item.property_location:<20}|{item.property_condition:<20}")
+            print(f"{item.property_id:<10}|{item.name:<25}|{item.location:<20}|{item.condition:<20}")
         print("-" * 78)
