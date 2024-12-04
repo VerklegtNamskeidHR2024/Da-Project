@@ -79,7 +79,7 @@ class work_request_UI_menu:
         an employee. It then calls the correct function based on what the user chose. """
 
         print()
-        print("Work Request Menu")
+        print(f"{self.rank} - Work Request Menu")
         print("-" * 70)
         print("{:>50}".format("[ Open and Upcoming Work Requests ]"))
         print()
