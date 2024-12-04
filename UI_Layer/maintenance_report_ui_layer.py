@@ -112,11 +112,14 @@ class maintenance_report_UI_menu:
         report_id = input("Enter report ID to edit: ")
         print("1. Edit maintenance report")
         edit_choice = input("Choose: ")
-
-        if edit_choice == "1":
-            self.edit_report_details(report_id)
-        else:
-            print("Invalid choice.")
+        match edit_choice:
+            case "1":
+                self.edit_report_details(report_id)
+            case "q":
+                #quit back to mainmenu
+                pass
+            case _:
+                print("wrong input")
 
     def edit_report_details(self, report_id):
         """Edit the details of a maintenance report"""

@@ -53,7 +53,7 @@ class Logic_Layer_Wrapper:
     
     ########################################################################################################
     ### PROPERTIES #########################################################################################
-    def get_all_properities(self, location):
+    def get_all_properties(self, location):
         # dummy stuff
         """ prop1 = Property("1", "hremmi diddy cave", "rvk", "96")
         prop2 = Property("2", "Johun plage", "rvk", "swag")
