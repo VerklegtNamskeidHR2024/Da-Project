@@ -12,7 +12,7 @@ class admin_storage:
         admin_list = [Admin(**data) for data in admin_data]
         return admin_list
     
-    def write_to_file(self, list_of_admins):
+    def write_to_file_admin(self, list_of_admins):
         dict_of_admins = [admin.to_dict() for admin in list_of_admins]
         with open('Data/admin_storage.json', 'w') as admin_file:
             json.dump(dict_of_admins, admin_file, indent=4)

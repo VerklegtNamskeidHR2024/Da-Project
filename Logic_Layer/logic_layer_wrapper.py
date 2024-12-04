@@ -45,8 +45,21 @@ class Logic_Layer_Wrapper:
         contractor_list = [con1,con2,con3]
         return contractor_list """
 
+    print('we in da wrapper bro')
+    con1 = Contractor("1","alverk","tumi","8-19",["meow"])
+    con2 = Contractor("2","alverk","gabbi","8-19",["meow"])
+    con3 = Contractor("3","alverk","jon","8-19",["meow"])
+    contractor_list = [con1,con2,con3]
+
     def get_contractor_by_id(self, location, contractor_id) -> Contractor:
         return self.contractor_logic_manager.get_contractor_by_id(location,contractor_id)
+    
+    def write_to_file(self, list_of_contractors):
+        '''con1 = Contractor("1","alverk","tumi","8-19",["meow"])
+        con2 = Contractor("2","alverk","gabbi","8-19",["meow"])
+        con3 = Contractor("3","alverk","jon","8-19",["meow"])
+        contractor_list = [con1,con2,con3]'''
+        return self.storage_layer_wrapper.write_to_file(list_of_contractors)
     
     def sanity_check_contractor(self, location, contractor):
         return self.contractor_logic_manager.sanity_check_contractor(location, contractor)

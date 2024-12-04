@@ -9,36 +9,18 @@
         "previous_job_reports": []
     },
     {
-        "contractor_id": "C0002",
+        "contractor_id": "C0001",
         "company_name": "Daniela and Daughters",
-        "contact_name": "Tumi",
+        "contact_name": "Daniela",
         "opening_hours": "8-16",
         "phone_number": 1234567,
         "location": "Nuuk",
         "previous_job_reports": []
     },
     {
-        "contractor_id": "C0003",
+        "contractor_id": "C0001",
         "company_name": "Daniela and Daughters",
-        "contact_name": "Jon",
-        "opening_hours": "8-16",
-        "phone_number": 1234567,
-        "location": "Tingwall",
-        "previous_job_reports": []
-    },
-    {
-        "contractor_id": "C0004",
-        "company_name": "Daniela and Daughters",
-        "contact_name": "gabbi",
-        "opening_hours": "8-16",
-        "phone_number": 1234567,
-        "location": "Reykjavik",
-        "previous_job_reports": []
-    },
-    {
-        "contractor_id": "C0005",
-        "company_name": "Daniela and Daughters",
-        "contact_name": "uga",
+        "contact_name": "Daniela",
         "opening_hours": "8-16",
         "phone_number": 1234567,
         "location": "Tingwall",
