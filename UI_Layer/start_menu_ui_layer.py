@@ -109,18 +109,18 @@ class Main_Menu:
         # calls the sub menus
         match user_action:
             case "1":
-                self.property_UI_menu()
+                self.property_UI_menu.start_point_property_UI()
             case "2":
-                self.work_request_UI_menu()
+                self.work_request_UI_menu.start_point_work_requests_UI()
             case "3":
-                self.employee_UI_menu()
+                self.employee_UI_menu.start_point_employee_UI()
             case "4":
                 self.contractor_UI_menu.display_contractor_menu()
             case "5":
-                self.maintenance_report_UI_menu()
+                self.maintenance_report_UI_menu.start_point_maintenance_reports_UI()
             case "6" if self.rank != "Employee":
                 # only allowed if admin or manager
-                self.location_UI_menu()
+                self.location_UI_menu.start_point_location_UI()
             case "7":
                 self.test_some_stuff()
             case "Q":
@@ -129,11 +129,12 @@ class Main_Menu:
             case _:
                 print("wrong input")
                 self.display_menu_items()
-                
+
         return
     
     def test_some_stuff(self):
         """just some tesing with getting data from storage""" 
+        
         contractor_list = self.logic_wrapper.get_all_contractors(self.location)
         for item in contractor_list:
             print(f"{item.contractor_id:<10}|{item.location:<20}")

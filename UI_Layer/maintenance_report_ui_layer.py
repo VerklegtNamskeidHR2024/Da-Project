@@ -3,6 +3,11 @@ class maintenance_report_UI_menu:
         self.logic_wrapper = logic_wrapper
         self.rank = rank
         self.location = location
+
+    def start_point_maintenance_reports_UI(self):
+       # when this class is called it starts here
+       # call other functions in class from here
+       pass
     
     def display_maintenance_report(self):
      if self.rank == "admin" or "manager":

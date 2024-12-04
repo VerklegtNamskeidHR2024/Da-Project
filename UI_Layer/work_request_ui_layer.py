@@ -4,7 +4,10 @@ class work_request_UI_menu:
         self.rank = rank
         self.location = location
     
-    def start_point(self):
+    def start_point_work_requests_UI(self):
+        # when this class is called it starts here
+        # call other functions in class from here
+
         self.display_work_requests_menu_items()
         # self.display_selected_work_request_information()
         # self.select_work_request_by_id()
@@ -19,7 +22,7 @@ class work_request_UI_menu:
         """Prints out all open work requests with their ID, Name and Description. """
         print("{:0}{:>3}{:>5}{:>9}{:>12}".format("ID", "|", "Name", "|", "Description"))
         print("-" * 70)
-        work_request_list = self.logic_wrapper.get_all_work_requests(self.rank, self.location)
+        work_request_list = self.logic_wrapper.get_all_work_requests(self.location)
         for item in work_request_list:
             print("{:0}{:>3}{:>10}{:>4}{:>51}".format({item.work_request_id}, "|", {item.name}, "|", {item.description}))
         print("-" * 70)
@@ -58,7 +61,7 @@ class work_request_UI_menu:
         print("-" * 70)
         print("{:>50}".format("[ Open and Upcoming Work Requests ]"))
         print()
-        self.display_all_work_requests()
+        self.display_all_work_requests_printed()
         if self.rank == "Admin" or self.rank == "Manager":
             print("{:0}{:>3}{:>8}{:>7}{:>11}".format("1. Select Request", "|", "2. Add Request", "|", "3. Closed Requests"))
             print()
