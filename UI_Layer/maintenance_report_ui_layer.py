@@ -57,18 +57,24 @@ class maintenance_report_UI_menu:
             edit_maintenance = int(input("1. Edit maintenance report: "))
             if edit_maintenance == "1":
                print("pending maintenance reports")
-               print("edit maintenance report 2")
-
-"""Property ID: (1503) 
-Staff ID: (26)
-Contractor ID: (x)
-Scheduled: yes
-Work done: Clean windows
-Status: pending
-Price: 0kr 
-Report ID: (2)"""
-
-                
+               print("maintenance report 2")
+               print("""Property ID: (1503) 
+                     Staff ID: (26)
+                     Contractor ID: (x)
+                     Scheduled: yes
+                     Work done: Clean windows
+                     Status: pending
+                     Price: 0kr 
+                     Report ID: (2)""")
+               user_input = input("1. mark as ready: ")
+               user_input = input("2. edit report details: ")
+               if user_input == "1":
+                  # maybe a code/function that let know the report ready 
+                  print("report has been marked ready")
+               elif user_input == "2":
+                  pass
+                  
+                  
                
             
 
