@@ -1,242 +1,242 @@
 [
-        {
-            "property_id": "h001",
-            "name": "suite",
-            "location": "Reykjavik",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 30230000000
-        },
-        {
-            "property_id": "h002",
-            "name": "suite",
-            "location": "Reykjavik",
-            "condition": "fair",
-            "total_price_to_fix": 1200.0,
-            "property_price": 300000000
-        },
-        {
-            "property_id": "h003",
-            "name": "suite",
-            "location": "Reykjavik",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 30000000000
-        },
-        {
-            "property_id": "h004",
-            "name": "suite",
-            "location": "Reykjavik",
-            "condition": "fair",
-            "total_price_to_fix": 1200.0,
-            "property_price": 30000000
-        },
-        {
-            "property_id": "h005",
-            "name": "suite",
-            "location": "Reykjavik",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 30000000000
-        },
-        {
-            "property_id": "h006",
-            "name": "suite",
-            "location": "Nuuk",
-            "condition": "fair",
-            "total_price_to_fix": 1200.0,
-            "property_price": 300000000
-        },
-        {
-            "property_id": "h007",
-            "name": "suite",
-            "location": "Nuuk",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 300000000
-        },
-        {
-            "property_id": "h008",
-            "name": "suite",
-            "location": "Nuuk",
-            "condition": "fair",
-            "total_price_to_fix": 1200.0,
-            "property_price": 30000000
-        },
-        {
-            "property_id": "h009",
-            "name": "suite",
-            "location": "Nuuk",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 300000000
-        },
-        {
-            "property_id": "h010",
-            "name": "suite",
-            "location": "Nuuk",
-            "condition": "fair",
-            "total_price_to_fix": 1200.0,
-            "property_price": 30000000000
-        },
-        {
-            "property_id": "h011",
-            "name": "suite",
-            "location": "Kulusuk",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 30000000
-        },
-        {
-            "property_id": "h012",
-            "name": "suite",
-            "location": "Kulusuk",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 300000000
-        },
-        {
-            "property_id": "h013",
-            "name": "suite",
-            "location": "Kulusuk",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 3000000
-        },
-        {
-            "property_id": "h014",
-            "name": "suite",
-            "location": "Kulusuk",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 30000000000
-        },
-        {
-            "property_id": "h015",
-            "name": "suite",
-            "location": "Kulusuk",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 30000000000
-        },
-        {
-            "property_id": "h016",
-            "name": "suite",
-            "location": "Thorshofn",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 30000000
-        },
-        {
-            "property_id": "h017",
-            "name": "suite",
-            "location": "Thorshofn",
-            "condition": "fair",
-            "total_price_to_fix": 1200.0,
-            "property_price": 300000000
-        },
-        {
-            "property_id": "h018",
-            "name": "suite",
-            "location": "Thorshofn",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 30000000000
-        },
-        {
-            "property_id": "h019",
-            "name": "suite",
-            "location": "Thorshofn",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 30000000
-        },
-        {
-            "property_id": "h020",
-            "name": "suite",
-            "location": "Thorshofn",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 300000000
-        },
-        {
-            "property_id": "h021",
-            "name": "suite",
-            "location": "Thorshofn",
-            "condition": "fair",
-            "total_price_to_fix": 1200.0,
-            "property_price": 300000000
-        },
-        {
-            "property_id": "h022",
-            "name": "suite",
-            "location": "Tingwall",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 300000000
-        },
-        {
-            "property_id": "h023",
-            "name": "suite",
-            "location": "Tingwall",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 300000000
-        },
-        {
-            "property_id": "h024",
-            "name": "suite",
-            "location": "Tingwall",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 3000000
-        },
-        {
-            "property_id": "h025",
-            "name": "suite",
-            "location": "Tingwall",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 30000000
-        },
-        {
-            "property_id": "h026",
-            "name": "suite",
-            "location": "Tingwall",
-            "condition": "fair",
-            "total_price_to_fix": 1200.0,
-            "property_price": 30000000000
-        },
-        {
-            "property_id": "h027",
-            "name": "suite",
-            "location": "Longyearbyen",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 300000000
-        },
-        {
-            "property_id": "h028",
-            "name": "suite",
-            "location": "Longyearbyen",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 30000000
-        },
-        {
-            "property_id": "h029",
-            "name": "suite",
-            "location": "Longyearbyen",
-            "condition": "excellent",
-            "total_price_to_fix": 1500.0,
-            "property_price": 30000000
-        },
-        {
-            "property_id": "h030",
-            "name": "suite",
-            "location": "Longyearbyen",
-            "condition": "fair",
-            "total_price_to_fix": 1200.0,
-            "property_price": 30000000
-        }
-    ]
+    {
+        "property_id": "H0001",
+        "name": "suite",
+        "location": "Reykjavik",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 30230000000
+    },
+    {
+        "property_id": "H0002",
+        "name": "suite",
+        "location": "Reykjavik",
+        "condition": "fair",
+        "total_price_to_fix": 1200.0,
+        "property_price": 300000000
+    },
+    {
+        "property_id": "H0003",
+        "name": "suite",
+        "location": "Reykjavik",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 30000000000
+    },
+    {
+        "property_id": "H0004",
+        "name": "suite",
+        "location": "Reykjavik",
+        "condition": "fair",
+        "total_price_to_fix": 1200.0,
+        "property_price": 30000000
+    },
+    {
+        "property_id": "H0005",
+        "name": "suite",
+        "location": "Reykjavik",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 30000000000
+    },
+    {
+        "property_id": "H0006",
+        "name": "suite",
+        "location": "Nuuk",
+        "condition": "fair",
+        "total_price_to_fix": 1200.0,
+        "property_price": 300000000
+    },
+    {
+        "property_id": "H0007",
+        "name": "suite",
+        "location": "Nuuk",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 300000000
+    },
+    {
+        "property_id": "H0008",
+        "name": "suite",
+        "location": "Nuuk",
+        "condition": "fair",
+        "total_price_to_fix": 1200.0,
+        "property_price": 30000000
+    },
+    {
+        "property_id": "H0009",
+        "name": "suite",
+        "location": "Nuuk",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 300000000
+    },
+    {
+        "property_id": "H0010",
+        "name": "suite",
+        "location": "Nuuk",
+        "condition": "fair",
+        "total_price_to_fix": 1200.0,
+        "property_price": 30000000000
+    },
+    {
+        "property_id": "H0011",
+        "name": "suite",
+        "location": "Kulusuk",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 30000000
+    },
+    {
+        "property_id": "H0012",
+        "name": "suite",
+        "location": "Kulusuk",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 300000000
+    },
+    {
+        "property_id": "H0013",
+        "name": "suite",
+        "location": "Kulusuk",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 3000000
+    },
+    {
+        "property_id": "H0014",
+        "name": "suite",
+        "location": "Kulusuk",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 30000000000
+    },
+    {
+        "property_id": "H0015",
+        "name": "suite",
+        "location": "Kulusuk",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 30000000000
+    },
+    {
+        "property_id": "H0016",
+        "name": "suite",
+        "location": "Thorshofn",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 30000000
+    },
+    {
+        "property_id": "H0017",
+        "name": "suite",
+        "location": "Thorshofn",
+        "condition": "fair",
+        "total_price_to_fix": 1200.0,
+        "property_price": 300000000
+    },
+    {
+        "property_id": "H0018",
+        "name": "suite",
+        "location": "Thorshofn",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 30000000000
+    },
+    {
+        "property_id": "H0019",
+        "name": "suite",
+        "location": "Thorshofn",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 30000000
+    },
+    {
+        "property_id": "H0020",
+        "name": "suite",
+        "location": "Thorshofn",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 300000000
+    },
+    {
+        "property_id": "H0021",
+        "name": "suite",
+        "location": "Thorshofn",
+        "condition": "fair",
+        "total_price_to_fix": 1200.0,
+        "property_price": 300000000
+    },
+    {
+        "property_id": "H0022",
+        "name": "suite",
+        "location": "Tingwall",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 300000000
+    },
+    {
+        "property_id": "H0023",
+        "name": "suite",
+        "location": "Tingwall",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 300000000
+    },
+    {
+        "property_id": "H0024",
+        "name": "suite",
+        "location": "Tingwall",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 3000000
+    },
+    {
+        "property_id": "H0025",
+        "name": "suite",
+        "location": "Tingwall",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 30000000
+    },
+    {
+        "property_id": "H0026",
+        "name": "suite",
+        "location": "Tingwall",
+        "condition": "fair",
+        "total_price_to_fix": 1200.0,
+        "property_price": 30000000000
+    },
+    {
+        "property_id": "H0027",
+        "name": "suite",
+        "location": "Longyearbyen",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 300000000
+    },
+    {
+        "property_id": "H0028",
+        "name": "suite",
+        "location": "Longyearbyen",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 30000000
+    },
+    {
+        "property_id": "H0029",
+        "name": "suite",
+        "location": "Longyearbyen",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 30000000
+    },
+    {
+        "property_id": "H0030",
+        "name": "suite",
+        "location": "Longyearbyen",
+        "condition": "fair",
+        "total_price_to_fix": 1200.0,
+        "property_price": 30000000
+    }
+]

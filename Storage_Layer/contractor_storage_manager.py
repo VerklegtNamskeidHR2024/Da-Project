@@ -2,8 +2,6 @@ import json
 from Model_Classes.contractor_model import Contractor
 
 class contractor_storage:
-    contractors_list = []
-
     def __init__(self):
         pass
 
@@ -17,8 +15,9 @@ class contractor_storage:
         return contractors_list
 
     def write_to_file(self, list_of_contractors):
+        print('we writing')
         dict_of_contractors = [contractor.to_dict() for contractor in list_of_contractors]
-        with open('Data/admin_storage.json', 'w') as contractor_file:
+        with open('Data/contractor_storage.json', 'w') as contractor_file:
             json.dump(dict_of_contractors, contractor_file, indent=4)
 
     def contractor_set_ID_and_add_to_storage(self):
