@@ -25,6 +25,12 @@ class WorkRequest:
     def set_work_request_id(self, work_request_id):
         self.work_request_id = work_request_id
 
+    def set_name(self, name):
+        self.name = name
+
+    def set_description(self, description):
+        self.description = description
+
     def set_staff_id(self, staff_id):
         self.staff_id = staff_id
 
@@ -63,6 +69,12 @@ class WorkRequest:
 
     def get_work_request_id(self):
         return self.work_request_id
+    
+    def get_name(self):
+        return self.name
+    
+    def get_description(self):
+        return self.description
 
     def get_staff_id(self):
         return self.staff_id
