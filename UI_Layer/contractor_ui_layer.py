@@ -1,12 +1,22 @@
 from Model_Classes.contractor_model import Contractor
 
+# missing list
+# diffrent option based on what user you are
+# add new contractor
+# edit contractor 
+
 class contractor_UI_menu():
     def __init__(self, logic_wrapper, rank, location):
         self.logic_wrapper = logic_wrapper
         self.rank = rank
         self.location = location
         pass
-        
+    
+    def start_point_contractor_UI(self):
+        # when this class is called it starts here
+        # call other functions in class from here
+        self.display_contractor_menu()
+        return
 
     def display_contractor_menu(self):
         
@@ -68,8 +78,14 @@ class contractor_UI_menu():
     def display_edit_contracor_menu(self):
         """edit contractor menu"""
         # find contracotor from id
-        contractor_to_use = self.select_contractor_by_id()
-        self.print_single_contractors(contractor_to_use )
+        try:
+            contractor_to_use = self.select_contractor_by_id()
+            if contractor_to_use == None:
+                return
+        except:
+            print("something went wrong")
+
+        self.print_single_contractors(contractor_to_use)
 
         # then show dis
         print("1) Change Contact Name")
@@ -90,9 +106,11 @@ class contractor_UI_menu():
 
 
     def select_contractor_by_id(self):
-        id_to_find = input("enter ID to search for:")
+        id_to_find = input("enter ID to select contractor:")
         try:
             contractor_from_id = self.logic_wrapper.get_contractor_by_id(self.location, id_to_find)
+            if contractor_from_id == None:
+                print("No contractor with that ID found")
             return contractor_from_id
         except:
             print("something went wrong")

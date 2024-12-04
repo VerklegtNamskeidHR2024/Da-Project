@@ -4,6 +4,11 @@ class location_UI_menu:
         self.rank = rank
         self.location = location  
 
+    def start_point_location_UI(self):
+        # when this class is called it starts here
+        # call other functions in class from here
+        pass
+
 """ def location_information(self):
     print()
     print(current_location)
