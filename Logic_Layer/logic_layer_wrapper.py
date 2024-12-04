@@ -48,8 +48,15 @@ class Logic_Layer_Wrapper:
     def get_contractor_by_id(self, location, contractor_id) -> Contractor:
         return self.contractor_logic_manager.get_contractor_by_id(location,contractor_id)
     
-    def sanity_check_contractor(self, location, contractor):
-        return self.contractor_logic_manager.sanity_check_contractor(location, contractor)
+    def sanity_check_contractor(self, contractor):
+        """check if all info in a contractor object"""
+        return self.contractor_logic_manager.sanity_check_contractor(contractor)
+    
+    def add_new_contractor(self, contractor):
+        return self.contractor_logic_manager.add_new_contractor(contractor)
+    
+    def write_to_file_checker(self, new_list):
+        return self.contractor_logic_manager.write_to_file_checker(new_list)
     
     ########################################################################################################
     ### PROPERTIES #########################################################################################
