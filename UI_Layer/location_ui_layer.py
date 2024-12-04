@@ -9,6 +9,8 @@ location_phone = "112"
 location_manager = "Santa"
 amenity_list = ["Dungeon", "Jet Pack"]
 opening_hours = "10-11"
+location_list = ["Nuk", "Kef", "SVL", "TOR"]
+
 class location_UI_menu:
     def __init__(self, logic_wrapper, rank, location):
         '''Class builder'''
@@ -74,44 +76,50 @@ class location_UI_menu:
                 case "1":
                     self.display_editing_form()
                 case "2":
-                    self.display_create_location_form()
+                    pass
+                    #self.display_create_location_form()
                 case "3":
-                    self.display_all_locations()
+                    pass
+                    #self.display_all_locations()
         else:
             user_choice = input("Enter a command: ")
                 
 
-    def display_editing_form(self, location_list):
+    def display_editing_form(self):
         '''Shows location information along with an option to 
         change phone number, manager, amenities and opening hours'''
+        
         self.location_information()
-        print("-" * 70)
+
+
+
         print("1. Phone Number")
         print("2. Manager")
         print("3. Amenities")
         print("4. Opening Hours")
-        user_choice = input("Enter Editing Option: ")
-        '''match user_choice:
+        print("-" * 70)
+        edit_user_action = input("Enter Editing Option: ")
+        match edit_user_action:
             case "1":
                 edited_location_phone = input("Enter a New Location Phone: ")
-                Self.logic_layer_wrapper.function()
+                self.logic_layer_wrapper.function()
                 print("")
             case "2":
-                edited_manager = input("Enter a New Manager: ")
+                edited_manager = input("Enter a New Amenity: ")
                 self.logic_layer_wrapper.function()
                 print()
             case "3":
-                edited_amenities = input("Enter a New Location Phone: ")
+                edited_amenities = input("Enter a Phone: ")
                 self.logic_layer_wrapper.function()
             case "4":
                 edited_location_phone = input("Enter a New Location Phone: ")
-                self.logic_layer_wrapper.function()'''
+                self.logic_layer_wrapper.function()
 
     def display_all_locations(self, location_list):
         print("-"*78)
         print(f"{"ID":<10}|{"Company name":<25}|{"Name":<20}|{"location":<20}")
         print("-"*78)
-        for item in location_list:
+        for item in self.location_list:
             print(f"{item.contractor_id:<10}|{item.company_name:<25}|{item.contact_name:<20}|{item.location:<20}")
             
         print("-"*78)   
