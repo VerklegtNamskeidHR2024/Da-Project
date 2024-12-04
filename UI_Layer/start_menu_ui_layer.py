@@ -84,28 +84,32 @@ class Main_Menu:
                     
 
     def display_menu_items(self):
-        # maybe have while for loop
-        # and add a quit opition
-        # admin manager
-        print(self.rank)
-        print(self.location)
-        print(f" {self.rank} - Home Page")
-        print("-" * 70)
-        print("1. Properties")
-        print("2. Work Requests")
-        print("3. Employees")
-        print("4. Contractors")
-        print("5. Maintenance Reports")
-        if self.rank != "Employee":
-            print("6. Locations")
+        user_action = ""
+        while user_action.lower() != "q":
+            # maybe have while for loop
+            # and add a quit opition
+            # admin manager
+            print(self.rank)
+            print(self.location)
+            print(f" {self.rank} - Home Page")
+            print("-" * 70)
+            print("1. Properties")
+            print("2. Work Requests")
+            print("3. Employees")
+            print("4. Contractors")
+            print("5. Maintenance Reports")
+            if self.rank != "Employee":
+                print("6. Locations")
+            print("q. Quit")
 
-        print("-" * 70)
+            print("-" * 70)
 
-        user_action = input("Select an Option:  ")
-        self.user_chooice_select(user_action)
+            user_action = input("Select an Option:  ")
+            self.user_chooice_select(user_action.lower())
 
-        # used to get a loop may want to change
-        self.display_menu_items()
+            # used to get a loop may want to change
+            #self.display_menu_items()
+        return
 
     def user_chooice_select(self, user_action):
         # calls the sub menus
@@ -125,12 +129,10 @@ class Main_Menu:
                 self.location_UI_menu.start_point_location_UI()
             case "7":
                 self.test_some_stuff()
-            case "Q":
-                # quit program
-                pass
+            case "q":
+                return
             case _:
                 print("wrong input")
-                self.display_menu_items()
 
         return
     
