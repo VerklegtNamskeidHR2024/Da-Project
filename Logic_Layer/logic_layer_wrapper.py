@@ -93,7 +93,7 @@ class Logic_Layer_Wrapper:
     def get_work_request_by_id(self, rank, location, work_request_id) -> WorkRequest:
         return self.work_request_logic_manager.fetch_work_request_by_id(rank, location, work_request_id)
     
-    def get_all_new_work_reqeusts(self, rank, location) -> list:
+    def get_all_new_work_requests(self, rank, location) -> list:
         return self.work_request_logic_manager.fetch_all_new_work_requests_in_storage(rank, location)
     
     def get_all_open_work_requests(self, rank, location) -> list:
