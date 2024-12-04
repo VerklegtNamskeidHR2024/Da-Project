@@ -30,110 +30,95 @@ class Storage_Layer_Wrapper:
 
 
     # maybe need to add edit to each?
+    # No we dont do it in logic and send the list down to to re write it
     ########################################################################################################
     ### CONTRACTOR #########################################################################################
-    def add_contractor(self):
-        pass
-
+    
     def get_all_contractor(self):
         all_contractors = self.contractor_storage_manager.get_all_contractor()
         #all_contractors = contractor_storage.get_all_contractor()
         return all_contractors
         #return self.contractor_storage_manager.get_all_contractor()
     
-    def get_contractor(self):
-        pass
-
-
-
-    def write_to_file(self, list_of_contractors):
-        write_to_file = self.contractor_storage_manager.write_to_file(list_of_contractors)
-
-
-    def contractor_set_ID_and_add_to_storage(self):
-        pass
+    def write_to_file_contractor(self, list_of_contractors):
+        write_to_file_contractor = self.contractor_storage_manager.write_to_file_contractor(list_of_contractors)
    
     ########################################################################################################
     ### PROPERTIES #########################################################################################
-    def add_property(self):
-        pass
-    def get_property(self):
-        pass
+    
     def get_all_properties(self):
-        return self.property_storage_manager.get_all_properties()
-    def property_set_ID_and_add_to_storage(self):
-        pass
+        all_properties = self.property_storage_manager.get_all_properties()
+        return all_properties
+    
+    def write_to_file_property(self, list_of_properties):
+        write_to_file_property = self.property_storage_manager.write_to_file_property(list_of_properties)
 
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################
-    def add_employee(self):
-        pass
-    def get_employee(self):
-        pass
+    
     def get_all_employee(self):
-        return self.employee_storage_manager.get_all_employee()
-    def employee_set_ID_and_add_to_storage(self):
-        pass
+        all_employees = self.employee_storage_manager.get_all_employee()
+        return all_employees
+    
+    def write_to_file_employee(self, list_of_employees):
+        write_to_file_employee = self.employee_storage_manager.write_to_file_employee(list_of_employees)
     
     ########################################################################################################
     ### MAINTENANCE_REPORTS ################################################################################
-    def maintenance_report_set_ID_and_too_storage(self):
-        pass
-    def add_maintenance_report(self):
-        pass
-    def get_maintenance_report(self):
-        pass
+    
     def get_all_maintenance_report(self):
-        return self.maintenance_report_storage_manager.get_all_maintenance_report()
+        all_maintenance_reports = self.maintenance_report_storage_manager.get_all_maintenance_report()
+        return all_maintenance_reports
+    
+    def write_to_file_maintenance_reports(self, list_of_maintenance_reports):
+        write_to_file_maintenance_reports = self.maintenance_report_storage_manager.write_to_file_maintenance_report(list_of_maintenance_reports)
 
     ########################################################################################################
     ### WORK_REQUESTS ######################################################################################
-    def add_work_request(self):
-        pass
-    def get_work_request(self):
-        pass
+    
     def get_all_work_requests(self):
-        return self.work_request_storage_manager.get_all_work_requests()
-    def work_request_set_ID_and_add_to_storage():
-        pass
+        all_work_requests = self.work_request_storage_manager.get_all_work_requests()
+        return all_work_requests
+    
+    def write_to_file_work_requests(self, list_of_work_requests):
+        write_to_file_work_requests = self.work_request_storage_manager.write_to_file_work_requests(list_of_work_requests)
     
     ########################################################################################################
     ### LOCATION ###########################################################################################
-    def add_location(self):
-        pass
-    def get_location(self):
-        pass
-    def get_all_locations(self):
-        return self.location_storage_manager.get_all_locations()
-    def location_set_ID_and_add_to_storage(self):
-        pass
     
-
+    def get_all_locations(self):
+        all_locations = self.location_storage_manager.get_all_locations()
+        return all_locations
+    
+    def write_to_file_locations(self, list_of_locations):
+        write_to_file_locations = self.location_storage_manager.write_to_file_location(list_of_locations)
+    
     ########################################################################################################
     ### ADMIN ##############################################################################################
-    def add_admin(self):
-        pass
-    def get_admin(self):
-        pass
+    
     def get_all_admin(self):
-        return self.manager_storage_manager.get_all_managers()
-    def set_id_and_add_to_storage(self):
-        pass
-
+        all_admins = self.admin_storage_manager.get_all_admin()
+        return all_admins
+    
+    def write_to_file_admin(self, list_of_admins):
+        write_to_file_admin = self.admin_storage_manager.write_to_file_admin(list_of_admins)
+    
     ########################################################################################################
     ### MANAGER ############################################################################################
-    def add_manager(self):
-        pass
-    def get_manager(self):
-        pass
+    
     def get_all_managers(self):
-        return self.manager_storage_manager.get_all_managers()
-    def manager_set_ID_and_to_storage(self):
-        pass
-
+        all_managers = self.manager_storage_manager.get_all_managers()
+        return all_managers
+    
+    def write_to_file_managers(self, list_of_managers):
+        write_to_file_manager = self.manager_storage_manager.write_to_file_managers(list_of_managers)
+    
     ########################################################################################################
     ### AMENITY ############################################################################################
-    def get_amenity(self):
-        pass
+    
     def get_all_amenities(self):
-        return self.amenity_storage_manager.get_all_amenities()
+        all_amenities = self.amenity_storage_manager.get_all_amenities()
+        return all_amenities
+    
+    def write_to_file_amenities(self, list_of_amenities):
+        write_to_file_amenities = self.amenity_storage_manager.write_to_file_amenities(list_of_amenities)
