@@ -25,15 +25,26 @@ class work_request_UI_menu:
 
     def display_all_work_requests_printed(self, work_request_list):
         """Prints out all open work requests with their ID, Name and Description. """
+        
+        prioritized_work_request_list = []
+        for item in work_request_list:
+            if item.priority == "High":
+                prioritized_work_request_list.append(item)
+            if item.priority == "Medium":
+                prioritized_work_request_list.append(item)
+            if item.priority == "Low": 
+                prioritized_work_request_list.append(item)
 
         print("{:0}{:>3}{:>5}{:>9}{:>12}".format("ID", "|", "Name", "|", "Description"))
         print("-" * 70)
-        for item in work_request_list:
-            print("{:0}{:>3}{:>10}{:>4}{:>51}".format({item.work_request_id}, "|", {item.name}, "|", {item.description}))
+        for item in prioritized_work_request_list:
+            print("{:0}{:>3}{:>10}{:>4}{:>51}".format({item.work_request_id}, "|", {item.name}, "|", {item.description})) 
         print("-" * 70)
         
 
     def display_selected_work_request_information_printed(self, work_request):
+        """Prints out a selected work requests and all it's information. """
+
         print("{:0}{:>14}{:<10}".format("Categories", "|", "Details"))
         print("-" * 35)     
         print("{:0}{:>9}{:<10}".format("Work Request ID", "|", {work_request.get_work_request_id})) 
@@ -114,13 +125,13 @@ class work_request_UI_menu:
                     self.start_point_work_requests_UI()
                 
 
-    def select_work_request_by_id(self):
+    def select_work_request_by_id(self, valid_select_conditition=True):
         """System asks user for the ID of the work request they wish to find, where it then prints out 
         all it's information """
 
         try:
             work_request_selected_by_id = input("Enter Request ID: ")
-            work_request_model = self.logic_wrapper.get_work_request_by_id(self.rank, self.location, work_request_selected_by_id)
+            work_request_model = self.logic_wrapper.get_work_request_by_id(self.rank, self.location, work_request_selected_by_id, valid_select_conditition)
             if work_request_model != None:
                 self.display_selected_work_request_information_printed(work_request_model)
                 if self.rank != "Employee" :
@@ -163,15 +174,15 @@ class work_request_UI_menu:
                 print("New Work Request Has Been Created!")
                 back_to_work_request_menu = input("Enter B to Go Back to Work Request Menu: ")
                 if back_to_work_request_menu == "b" or back_to_work_request_menu == "B":
-                self.start_point_work_requests_UI()
+                    self.start_point_work_requests_UI()
                 else:
                   self.start_point_work_requests_UI
         except: 
             print("Something Went Wrong When Creating the Work Request, Please Try Again.")
         
+        
     def employee_edit_work_request_form(self, work_request):
-        for 
-        if :
+        if work_request.mark_as_completed == False:
             print()
             print("-" * 70)
             mark_as_completed = input("Mark as Completed (Yes or No): ")
@@ -179,7 +190,8 @@ class work_request_UI_menu:
             if is_input_for_mark_completed_valid == True:
                 updated_work_request = work_request.set_mark_as_done(is_input_for_mark_completed_valid)
                 self.logic_wrapper.edit_work_requests(updated_work_request)
-        elif :
+        
+        if work_request.acceptance_status == False:
             print()
             print("-" * 70)
             accept_work_request = input("Aceept (Yes or No): ")
@@ -247,10 +259,11 @@ class work_request_UI_menu:
     def display_my_work_requests_printed(self):
         my_work_request_list = self.logic_wrapper.get_my_work_requests(self.rank, self.location)
         self.display_all_work_requests_printed(my_work_request_list)
-        
+        employee_id = "W1"
+
         selected_work_request = input("Enter 1 to Select a Work Request or B to Go Back: ")
         if selected_work_request == "1":
-            self.select_work_request_by_id()
+            self.select_work_request_by_id(employee_id)
         elif selected_work_request == "b" or selected_work_request == "B":
             self.start_point_work_requests_UI()
         else: 
@@ -259,10 +272,11 @@ class work_request_UI_menu:
     def display_all_new_work_requests_to_accept_printed(self): 
         new_work_request_list = self.logic_wrapper.get_all_new_work_requests(self.rank, self.location)
         self.display_all_work_requests_printed(new_work_request_list)
-        
+        is_accepted = False
+
         selected_work_request = input("Enter 1 to Select a Work Request or B to Go Back: ")
         if selected_work_request == "1":
-            self.select_work_request_by_id()
+            self.select_work_request_by_id(is_accepted)
         elif selected_work_request == "b" or selected_work_request == "B":
             self.start_point_work_requests_UI()
         else: 
@@ -272,10 +286,11 @@ class work_request_UI_menu:
     def display_all_pending_work_requests_printed(self): 
         pending_work_request_list = self.logic_wrapper.get_all_pending_work_requests(self.rank, self.location)
         self.display_all_work_requests_printed(pending_work_request_list)
-        
+        is_pending = True
+
         selected_work_request = input("Enter 1 to Select a Work Request or B to Go Back: ")
         if selected_work_request == "1":
-            self.select_work_request_by_id()
+            self.select_work_request_by_id(is_pending)
         elif selected_work_request == "b" or selected_work_request == "B":
             self.start_point_work_requests_UI()
         else: 
@@ -285,10 +300,11 @@ class work_request_UI_menu:
     def display_closed_work_requests_printed(self): 
         closed_work_request_list = self.logic_wrapper.get_all_closed_work_requests(self.rank, self.location)
         self.display_all_work_requests_printed(closed_work_request_list)
+        is_closed = True
         
         selected_work_request = input("Enter 1 to Select a Work Request or B to Go Back: ")
         if selected_work_request == "1":
-            self.select_work_request_by_id()
+            self.select_work_request_by_id(is_closed)
         elif selected_work_request == "b" or selected_work_request == "B":
             self.start_point_work_requests_UI()
         else: 
