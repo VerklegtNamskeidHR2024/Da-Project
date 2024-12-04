@@ -2,14 +2,21 @@ import json
 from Model_Classes.house_model import House
 
 class property_storage:
-    property_list = []
-
     def __init__(self):
         pass
-    def add_property(self):
-        pass
-    def get_all_properties(self):
-        # virkar held eg ekki utaf hvering þu ert með property data stored, dæmi
+
+    def get_all_properties(self) -> list[House]:
+        with open('Data/property_storage.json','r') as property_file:
+            properties_data = json.load(property_file)
+        properties_list = [House(**data) for data in properties_data]
+        return properties_list
+    
+    def write_to_file_property(self, list_of_properties: list[House]):
+        dict_of_properties = [property.to_dict() for property in list_of_properties]
+        with open('Data/property_storage.json','w') as property_file:
+            json.dump(dict_of_properties, property_file, indent=4)
+
+# virkar held eg ekki utaf hvering þu ert með property data stored, dæmi
         # held það veit ekki hvað það a að gera utaf það er Reykjavik svo property
         # ætla breyta þvi i json en er með copy a discord dw dw hremmi baby
         """ "Reykjavik": [
@@ -29,12 +36,3 @@ class property_storage:
             "total_price_to_fix": 1200.0,
             "property_price": 300000000
         }, """
-
-        with open('Data/property_storage.json','r') as property_file:
-            properties_data = json.load(property_file)
-        properties_list = [House(**data) for data in properties_data]
-        return properties_list
-    
-    def property_set_ID_and_add_to_storage(self):
-        pass
-    
