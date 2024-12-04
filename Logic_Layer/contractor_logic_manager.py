@@ -23,8 +23,8 @@ class contractor_logic_manager:
         for contractor in location_sorted_contractors:
             if contractor.contractor_id == contractor_id:
                 return contractor 
-        print("no contractor with this ID")
-        return
+            
+        return 
     
     def sanity_check_contractor():
         """check if all info in a contractor object"""
