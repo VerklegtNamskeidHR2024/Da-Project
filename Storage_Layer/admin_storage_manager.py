@@ -2,7 +2,6 @@ import json
 from Model_Classes.admin_model import Admin
 
 class admin_storage:
-    admin_list = []
     def __init__(self):
         pass
     def add_admin(self):
@@ -12,5 +11,11 @@ class admin_storage:
             admin_data = json.load(admin_file)
         admin_list = [Admin(**data) for data in admin_data]
         return admin_list
+    
+    def write_to_file(self, list_of_admins):
+        dict_of_admins = [admin.to_dict() for admin in list_of_admins]
+        with open('Data/admin_storage.json', 'w') as admin_file:
+            json.dump(dict_of_admins, admin_file, indent=4)
+
     def set_id_and_add_to_storage(self):
         pass

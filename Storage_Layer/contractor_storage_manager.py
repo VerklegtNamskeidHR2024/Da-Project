@@ -16,5 +16,10 @@ class contractor_storage:
         contractors_list = [Contractor(**data) for data in contractors_data]
         return contractors_list
 
+    def write_to_file(self, list_of_contractors):
+        dict_of_contractors = [contractor.to_dict() for contractor in list_of_contractors]
+        with open('Data/admin_storage.json', 'w') as contractor_file:
+            json.dump(dict_of_contractors, contractor_file, indent=4)
+
     def contractor_set_ID_and_add_to_storage(self):
         pass
