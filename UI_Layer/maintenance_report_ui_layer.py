@@ -67,10 +67,10 @@ class maintenance_report_UI_menu:
         user_action = input("Select an Option:  ")
         match user_action:
             case "1":
-                # create contractor
+                # create maintenance reports 
                 self.display_create_maintenance_report_form()
             case "2":
-                # edit contractor
+                # view incomplete reports
                  self.view_incomplete_reports()
             case "q":
                 # quit back to main menu
@@ -123,7 +123,7 @@ class maintenance_report_UI_menu:
                 print("wrong input")
 
     def edit_report_details(self, report_id):
-        """Edit the details of a maintenance report"""
+        #Edit the details of a maintenance report
         #Editing report {report_id} (details to be implemented)"
         print("""Property ID: (1503)
 Staff ID: (26)

@@ -102,7 +102,7 @@ class property_UI_menu:
                 print("Invalid input. Please try again.")
 
     def display_edit_property_details(self, selected_property):
-        #Allows editing of property details.
+        #allows editing of property details.
         print(f"Editing details for Property ID: {selected_property.property_id}")
         print("1. Change Property Name")
         print("2. Change Property Location")
