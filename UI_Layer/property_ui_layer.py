@@ -4,6 +4,10 @@ class property_UI_menu:
         self.rank = rank
         self.location = location
 
+    def start_point_property_UI(self):
+        # when this class is called it starts here
+        # call other functions in class from here
+        pass
 
 
     def display_all_properties():

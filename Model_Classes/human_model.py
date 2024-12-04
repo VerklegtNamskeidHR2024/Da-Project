@@ -1,12 +1,13 @@
 class Human:
     def __init__(self,name:str="", social_security_number:int=0, phone_number:int=0, location:str="",
-                system_permissions:str="", email:str=""):
+                system_permissions:str="", email:str="", staff_id:str=""):
         self.name = name
         self.social_security_number = social_security_number
         self.phone_number = phone_number
         self.location = location
         self.system_permissions = system_permissions
         self.email = email
+        self.staff_id = staff_id
 
     def set_name(self, name):
         self.name = name
@@ -25,6 +26,9 @@ class Human:
     
     def set_email(self, email):
         self.email = email
+
+    def set_staff_id(self, staff_id):
+        self.staff_id = staff_id
     
     def get_name(self):
         return self.name
@@ -43,3 +47,6 @@ class Human:
     
     def get_email(self):
         return self.email
+    
+    def get_staff_id(self):
+        return self.staff_id

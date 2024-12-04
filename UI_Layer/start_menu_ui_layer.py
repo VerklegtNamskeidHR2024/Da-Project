@@ -1,7 +1,7 @@
 from Logic_Layer.logic_layer_wrapper import Logic_Layer_Wrapper
 
 from UI_Layer.employee_ui_layer import employee_UI_menu
-from UI_Layer.location_ui_layer import location_UI_layer
+from UI_Layer.location_ui_layer import location_UI_menu
 from UI_Layer.contractor_ui_layer import contractor_UI_menu
 from UI_Layer.maintenance_report_ui_layer import maintenance_report_UI_menu
 from UI_Layer.work_request_ui_layer import work_request_UI_menu
@@ -17,10 +17,10 @@ class Main_Menu:
         self.location = self.select_location_for_system()
 
         self.employee_UI_menu = employee_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
-        self.location_UI_menu = location_UI_layer(self.logic_wrapper) # , self.rank, self.location
+        self.location_UI_menu = location_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
         # so its like this one when the class contrstructor is set up in the class correctly
         self.contractor_UI_menu = contractor_UI_menu(self.logic_wrapper, self.rank, self.location) 
-        self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper) # , self.rank, self.location
+        self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
         self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
         self.property_UI_menu = property_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
 
@@ -84,43 +84,90 @@ class Main_Menu:
                     
 
     def display_menu_items(self):
-        # admin manager
-        print(self.rank)
-        print(self.location)
-        print(f" {self.rank} - Home Page")
-        print("-" * 70)
-        print("1. Properties")
-        print("2. Work Requests")
-        print("3. Employees")
-        print("4. Contractors")
-        print("5. Maintenance Reports")
-        if self.rank != "Employee":
-            print("6. Locations")
+        user_action = ""
+        while user_action.lower() != "q":
+            # maybe have while for loop
+            # and add a quit opition
+            # admin manager
+            print(self.rank)
+            print(self.location)
+            print(f" {self.rank} - Home Page")
+            print("-" * 70)
+            print("1. Properties")
+            print("2. Work Requests")
+            print("3. Employees")
+            print("4. Contractors")
+            print("5. Maintenance Reports")
+            if self.rank != "Employee":
+                print("6. Locations")
+            print("q. Quit")
 
-        print("-" * 70)
+            print("-" * 70)
 
-        user_action = input("Select an Option:  ")
-        self.user_chooice_select(user_action)
+            user_action = input("Select an Option:  ")
+            self.user_chooice_select(user_action.lower())
+
+            # used to get a loop may want to change
+            #self.display_menu_items()
+        return
 
     def user_chooice_select(self, user_action):
         # calls the diffrent UI layer classes
         match user_action:
             case "1":
-                self.property_UI_menu()
+                self.property_UI_menu.start_point_property_UI()
             case "2":
-                self.work_request_UI_menu()
+                self.work_request_UI_menu.start_point_work_requests_UI()
             case "3":
-                self.employee_UI_menu()
+                self.employee_UI_menu.start_point_employee_UI()
             case "4":
                 self.contractor_UI_menu.display_contractor_menu()
             case "5":
-                self.maintenance_report_UI_menu()
+                self.maintenance_report_UI_menu.start_point_maintenance_reports_UI()
             case "6" if self.rank != "Employee":
                 # only allowed if admin or manager
-                self.location_UI_menu()
-            case "Q":
-                # quit program
-                pass
+                self.location_UI_menu.start_point_location_UI()
+            case "7":
+                self.test_some_stuff()
+            case "q":
+                return
             case _:
                 print("wrong input")
-                self.display_menu_items()
+
+        return
+    
+    def test_some_stuff(self):
+        """just some tesing with getting data from storage""" 
+        
+        contractor_list = self.logic_wrapper.get_all_contractors(self.location)
+        for item in contractor_list:
+            print(f"{item.contractor_id:<10}|{item.location:<20}")
+        print("-" * 40)
+
+        employees_list = self.logic_wrapper.get_all_employees(self.location)
+        for item in employees_list:
+            print(f"{item.staff_id:<10}|{item.location:<20}")
+        print("-" * 40)
+
+        # this needs to be looked at
+        # works but look at property_storage_manager for more info
+        properties_list = self.logic_wrapper.get_all_properities(self.location)
+        for item in properties_list:
+            print(f"{item.property_id:<10}|{item.location:<20}")
+        print("-" * 40)
+
+        report_list = self.logic_wrapper.get_all_maintenance_reports(self.location)
+        for item in report_list:
+            print(f"{item.report_id:<10}|{item.location:<20}")
+        print("-" * 40)
+
+        # this needs to be looked at
+        '''work_list = self.logic_wrapper.get_all_work_requests(self.location)
+        for item in work_list:
+            print(f"{item.work_request_id:<10}|{item.location:<20}")
+        print("-" * 40)'''
+
+        location_list = self.logic_wrapper.get_all_locations(self.location)
+        for item in location_list:
+            print(f"{item.location:<20}")
+        print("-" * 40)
