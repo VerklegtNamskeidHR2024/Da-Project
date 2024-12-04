@@ -7,15 +7,13 @@ class property_UI_menu:
         self.location = location
 
     def start_point_property_UI(self):
-        """Entry point for the property UI."""
+        
+        #Entry point for the property UI.
         self.display_all_properties()
 
     def display_all_properties(self):
-        """Displays the list of all properties and provides options."""
+        #Displays the list of all properties and provides options
         print(f"{self.rank} - Properties Page")
-        print("-" * 70)
-        print(f"{'Nr':<5}|{'Address':<25}|{'Name':<20}|{'ID':<10}")
-        print("-" * 70)
 
         # Fetch and print all properties
         property_list = self.logic_wrapper.get_all_properties(self.location)
