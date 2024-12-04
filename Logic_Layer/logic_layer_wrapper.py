@@ -35,7 +35,7 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### CONTRACTOR #########################################################################################
-    def get_all_contractors(self, location):
+    def get_all_contractors(self, rank, location):
         return self.contractor_logic_manager.get_all_contractors(location)
         # her mynd það kalla í sama fall inn í contractors logic manager 
         # er núna bara með dummy gögn
@@ -51,7 +51,7 @@ class Logic_Layer_Wrapper:
     con3 = Contractor("3","alverk","jon","8-19",["meow"])
     contractor_list = [con1,con2,con3]
 
-    def get_contractor_by_id(self, location, contractor_id) -> Contractor:
+    def get_contractor_by_id(self, rank, location, contractor_id) -> Contractor:
         return self.contractor_logic_manager.get_contractor_by_id(location,contractor_id)
    
     def sanity_check_contractor(self, contractor):
@@ -87,8 +87,35 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### WORK_REQUESTS ######################################################################################
-    def get_all_work_requests(self, location): 
-        return self.work_request_logic_manager.fetch_all_work_requests_in_storage(location)
+    def get_all_work_requests(self, rank, location) -> list: 
+        return self.work_request_logic_manager.fetch_all_work_requests_in_storage(rank, location)
+
+    def get_work_request_by_id(self, rank, location, work_request_id) -> WorkRequest:
+        return self.work_request_logic_manager.fetch_work_request_by_id(rank, location, work_request_id)
+    
+    def get_all_new_work_reqeusts(self, rank, location) -> list:
+        return self.work_request_logic_manager.fetch_all_new_work_requests_in_storage(rank, location)
+    
+    def get_all_open_work_requests(self, rank, location) -> list:
+        return self.work_request_logic_manager.fetch_all_open_work_requests_in_storage(rank, location)
+    
+    def get_all_closed_work_requests(self, rank, location) -> list: 
+        return self.work_request_logic_manager.fetch_all_closed_work_requests_in_storage(rank, location)
+    
+    def get_all_pending_work_requests(self, rank, location) -> list:
+        return self.work_request_logic_manager.fetch_all_pending_work_requests_in_storage(rank, location)
+    
+    def get_my_work_requests(self, rank, location) -> list:
+        return self.work_request_logic_manager.fetch_my_work_request(rank, location)
+    
+    def edit_work_request(self, rank, location, WorkRequest) -> bool:
+        return self.work_request_logic_manager.edit_work_request(rank, location, WorkRequest)
+    
+    def add_work_request(self, rank, location, WorkRequest) -> bool:
+        return self.work_request_logic_manager.add_work_request(rank, location, WorkRequest)
+    
+    def sanity_check_work_request(self, rank, location, WorkRequest) -> bool: 
+        return self.work_request_logic_manager.sanity_check_work_request(rank, location, WorkRequest)
     
     ########################################################################################################
     ### LOCATION ###########################################################################################

@@ -15,6 +15,9 @@ class work_request_logic_manager:
     def fetch_my_work_request(Employee_ID) -> list:
         pass
 
+    def fetch_work_request_by_id(self, Work_request_ID):
+        return self.Storage_Layer_Wrapper.get_work_request_by_id()
+
     def fetch_all_work_requests_in_storage(self, location) -> list:
         return self.Storage_Layer_Wrapper.get_all_work_requests()
     

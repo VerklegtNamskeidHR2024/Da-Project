@@ -147,16 +147,12 @@ class work_request_UI_menu:
 
         print("-" * 70)
         print("New Work Request Has Been Created!")
+        back_to_work_request_menu = input("Enter B to Go Back to Work Request Menu: ")
+        if back_to_work_request_menu == "b" or back_to_work_request_menu == "B":
+            self.start_point_work_requests_UI()
+        else:
         self.start_point_work_requests_UI
-        # back_to_menu_or_create_new_work_request_choice = ""
-        # while back_to_menu_or_create_new_work_request_choice != 
-        #     back_to_menu_or_create_new_work_request_choice = input("Enter 1 to Create Another Work Request or B to Go Back to Work Request Menu: ")
-        #     if back_to_menu_or_create_new_work_request_choice == "1":
-        #         self.display_create_work_request_form()
-        #     if back_to_menu_or_create_new_work_request_choice == "b" or back_to_menu_or_create_new_work_request_choice == "B":
-        #         self.start_point_work_requests_UI
-        #     else:
-
+        
     def edit_work_request_form(self):
         if self.rank == "Employee" and :
             print()
