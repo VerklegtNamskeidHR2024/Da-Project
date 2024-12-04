@@ -97,6 +97,7 @@ class maintenance_report_UI_menu:
         new_maintenance_report.set_price = input("Enter a price: ")
         new_maintenance_report.set_work_request_id = input("Enter the ID of the work request in progress: ")
         # can add contractor also if it applies 
+
         print(new_maintenance_report.report_name)
         print(new_maintenance_report.property_id)
         print(new_maintenance_report.employee_id)
@@ -143,3 +144,5 @@ Report ID: (2)""")
             #Editing report details (functionality to be implemented)
         else:
             print("Invalid choice.")
+
+    
