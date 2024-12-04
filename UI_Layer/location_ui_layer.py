@@ -141,15 +141,26 @@ class location_UI_menu:
         print(f"Opening Hours | {new_location.opening_hours}") #Needs to fetch the information from data storage
         print("-" * 70) 
         
+        def display_location_menu():
 
 
         
-    def display_all_locations(self, location_list):
-        print("-"*78)
-        print(f"{"ID":<10}|{"Company name":<25}|{"Name":<20}|{"location":<20}")
-        print("-"*78)
-        for item in self.location_list:
-            print(f"{item.contractor_id:<10}|{item.company_name:<25}|{item.contact_name:<20}|{item.location:<20}")
-            
-        print("-"*78)   
-        return
+            """ def display_all_locations(self):
+
+            #Displays the list of all locations
+            print(f"{self.rank} - Properties Page")
+            print("-"*78)
+
+            # Fetch and print all properties
+            location_list = self.logic_wrapper.get_all_locations(location_list)
+            self.print_locations_from_list(location_list)"""
+
+
+            """def print_locations_from_list(self, location_list):
+            #Prints all properties from a list.
+            print("-" * 78)
+            print(f"{'ID':<10}|{'Location Name':<25}|{'Location':<20}|{'Condition':<20}")
+            print("-" * 78)
+            for item in location_list:
+                print(f"{item.location_ID:<10}|{item.name:<25}|{item.location:<20}|{item.condition:<20}")
+            print("-" * 78)"""
