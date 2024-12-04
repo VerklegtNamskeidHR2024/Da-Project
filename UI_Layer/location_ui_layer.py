@@ -30,8 +30,8 @@ class location_UI_menu:
         '''location_list = self.logic_wrapper.get_all_locations(self)
         self.print_location_from_list(self.location_list)'''
         print()
-        print(current_location)
         print("-" * 70)
+        print(current_location)
         print("-" * 70)
         print(f"Location ID   | {location_ID}")
         print(f"Country       | {current_country}")
@@ -42,10 +42,7 @@ class location_UI_menu:
         print(f"Amenities     | {amenity_list}")
         print(f"Opening Hours | {opening_hours}") #Needs to fetch the information from data storage
         print("-" * 70) 
-        print("{:>24}{:>5}".format(">Go to Home Page:", "home, Home"))
-        print("{:>20}{:>5}".format(">Quit System:", "q, Q"))
-        print("-" * 70)
-        print("-" * 70)
+
 
     def show_ascii_nan_hq_monstrosity(self):
             '''Shows ascii art of NaN Air HQ with the neme of the current airport'''
@@ -62,11 +59,12 @@ class location_UI_menu:
         If the user is an admin It allows them to edit, add and show other locations'''
         self.location_information()
         
-            
+        print("{:>24}{:>5}".format(">Go to Home Page:", "home, Home"))
+        print("{:>20}{:>5}".format(">Quit System:", "q, Q"))
+
 
         self.show_ascii_nan_hq_monstrosity() #Needs to fetch data from storage to import as location_ID, current_country...
         
-        print("-" * 70)
         if self.rank == "Admin":
             print("1. Edit location details")
             print("2. Add location")
@@ -76,8 +74,7 @@ class location_UI_menu:
                 case "1":
                     self.display_editing_form()
                 case "2":
-                    pass
-                    #self.display_create_location_form()
+                    self.display_create_loaction_form()
                 case "3":
                     pass
                     #self.display_all_locations()
@@ -105,19 +102,51 @@ class location_UI_menu:
                 self.logic_layer_wrapper.function()
                 print("")
             case "2":
-                edited_manager = input("Enter a New Amenity: ")
+                edited_manager = input("Enter a New Manager: ")
                 self.logic_layer_wrapper.function()
                 print()
             case "3":
-                edited_amenities = input("Enter a Phone: ")
+                edited_amenities = input("Enter a New Amenity: ")
                 self.logic_layer_wrapper.function()
             case "4":
                 edited_location_phone = input("Enter a New Location Phone: ")
                 self.logic_layer_wrapper.function()
 
+    def display_create_loaction_form(self):
+        """create contractor"""
+        new_location = Location()
+        # system will do this itself
+        # needs set ID
+
+        print(new_location.country)
+        print("-" * 70)
+
+        new_location.set_country(input("Enter Country Name: "))
+        new_location.set_location(input("Enter Location Name: "))
+        new_location.set_airport(input("Enter Airport Name: "))
+        new_location.set_phone_number(int(input("Enter Phone Number: ")))
+        new_location.set_branch_manager(input("Enter Branch Manager Name: "))
+        new_location.set_opening_hours(input("Enter Opening hours: "))
+
+        
+        print("-" * 70)
+        print("New Location")
+        print("-" * 70)
+        print(f"Location ID   | New Location ID")
+        print(f"Country       | {new_location.country}")
+        print(f"Location      | {new_location.location}")
+        print(f"Airport       | {new_location.airport}")
+        print(f"Phone Number  | {new_location.phone_number}")
+        print(f"Manager       | {new_location.branch_manager}")
+        print(f"Opening Hours | {new_location.opening_hours}") #Needs to fetch the information from data storage
+        print("-" * 70) 
+        
+
+
+        
     def display_all_locations(self, location_list):
         print("-"*78)
-        print(f"{"ID":<10}|{"Company name":<25}|{"Name":<20}|{"location":<20}")
+        print(f"{'ID':<10}|{'Company name':<25}|{'Name':<20}|{'Location':<20}")
         print("-"*78)
         for item in self.location_list:
             print(f"{item.contractor_id:<10}|{item.company_name:<25}|{item.contact_name:<20}|{item.location:<20}")

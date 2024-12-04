@@ -158,18 +158,16 @@ class work_request_UI_menu:
                 if is_valid == True:
                     self.logic_wrapper.add_work_request(new_work_request)
                 # else:
-                #     print("Something Went Wrong When Creating the Work Request, Please Try Again.")
+                #     print("Something Went Wrong When Creating the Work Request, Please Try Again.
                 print("-" * 70)
                 print("New Work Request Has Been Created!")
+                back_to_work_request_menu = input("Enter B to Go Back to Work Request Menu: ")
+                if back_to_work_request_menu == "b" or back_to_work_request_menu == "B":
                 self.start_point_work_requests_UI()
-                # back_to_work_request_menu = input("Enter B to Go Back to Work Request Menu: ")
-                # if back_to_work_request_menu == "b" or back_to_work_request_menu == "B":
-                #     self.start_point_work_requests_UI()
-                # else:
-                #     self.start_point_work_requests_UI
+                else:
+                  self.start_point_work_requests_UI
         except: 
             print("Something Went Wrong When Creating the Work Request, Please Try Again.")
-
         
     def employee_edit_work_request_form(self, work_request):
         for 
@@ -244,8 +242,8 @@ class work_request_UI_menu:
                         self.logic_wrapper.edit_work_requests(updated_work_request)
 
             updated_work_request_confirmation_confirmation = input("Enter 1 to Confirm: ")
-
-        
+            
+            
     def display_my_work_requests_printed(self):
         my_work_request_list = self.logic_wrapper.get_my_work_requests(self.rank, self.location)
         self.display_all_work_requests_printed(my_work_request_list)
