@@ -117,7 +117,7 @@ class location_UI_menu:
 
     def display_all_locations(self, location_list):
         print("-"*78)
-        print(f"{"ID":<10}|{"Company name":<25}|{"Name":<20}|{"location":<20}")
+        print(f"{'ID':<10}|{'Company name':<25}|{'Name':<20}|{'Location':<20}")
         print("-"*78)
         for item in self.location_list:
             print(f"{item.contractor_id:<10}|{item.company_name:<25}|{item.contact_name:<20}|{item.location:<20}")
