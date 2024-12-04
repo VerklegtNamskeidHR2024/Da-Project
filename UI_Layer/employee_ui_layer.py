@@ -41,11 +41,13 @@ class employee_UI_menu:
         """The function displays a table with all employees at a location and their basic information"""
         employee_list = self.logic_wrapper.get_all_employees(self.location)
         print("-" * 70)
-        print(f"{"Name" :> 15}|{"Phone Number" :> 10}|{"Email" :> 10}|{"Location" :> 15}")
+        # print(f"{"Name":> 15}|{"Phone Number" :> 10}|{"Email" :> 10}|{"Location" :> 15}")
+        print("{:>15}{:>10}{:>15}".format("Name", "Phone", "Location"))
         print("-" * 70)
 
         for item in employee_list:
-            print(f"{item.name :> 15}|{item.phone_number :> 10}|{item.email :> 10}|{self.location :> 15}")
+            print("{:>15}{:>10}{:>15}".format(item.name, item.phone, item.location))
+            # print(f"{item.name :> 15}|{item.phone_number :> 10}|{item.email :> 10}|{self.location :> 15}")
 
         print("-" * 70)
 
@@ -72,12 +74,19 @@ class employee_UI_menu:
         
         print()
         print("-" * 70)
-        print(f"{"Employee Name" :< 15}| {employee.name}")
-        print(f"{"Social Security Number" :< 15}| {employee.social_security_number}")
-        print(f"{"Phone Number" :< 15}| {employee.phone_number}")
-        print(f"{"Location"}| {employee.location}")
-        print(f"{"Email":< 15}| {employee.email}")
-        print(f"{"Staff ID"}| {employee.staff_id}")
+        print("{:<15}{:<10}{:<15}".format("Employee Name", "|", employee.name))
+        print("{:<15}{:<10}{:<15}".format("Social Security Number", "|", employee.social_security_number))
+        print("{:<15}{:<10}{:<15}".format("Phone Number", "|", employee.phone_number))
+        print("{:<15}{:<10}{:<15}".format("Location", "|", employee.location))
+        print("{:<15}{:<10}{:<15}".format("Email", "|", employee.email))
+        print("{:<15}{:<10}{:<15}".format("Employee ID", "|", employee.staff_id))
+
+        # print(f"{"Employee Name" :< 15}| {employee.name}")
+        # print(f"{"Social Security Number" :< 15}| {employee.social_security_number}")
+        # print(f"{"Phone Number" :< 15}| {employee.phone_number}")
+        # print(f"{"Location"}| {employee.location}")
+        # print(f"{"Email":< 15}| {employee.email}")
+        # print(f"{"Staff ID"}| {employee.staff_id}")
         print("-" * 70)
 
     def employee_options(self):

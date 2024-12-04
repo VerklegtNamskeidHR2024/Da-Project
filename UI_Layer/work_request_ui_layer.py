@@ -1,8 +1,8 @@
 from Model_Classes.work_request_model import WorkRequest
 
 class work_request_UI_menu:
-    def __init__(self, Logic_Wrapper, rank, location):
-        self.logic_wrapper = Logic_Wrapper
+    def __init__(self, logic_wrapper, rank, location):
+        self.logic_wrapper = logic_wrapper
         self.rank = rank
         self.location = location
 
@@ -23,23 +23,27 @@ class work_request_UI_menu:
         # self.display_closed_work_requests_printed() 
 
 
-    def display_all_work_requests_printed(self, work_request_list):
+    def display_all_work_requests_printed(self, work_request_list=[]):
         """Prints out all open work requests with their ID, Name and Description. """
-        
-        prioritized_work_request_list = []
-        for item in work_request_list:
-            if item.priority == "High":
-                prioritized_work_request_list.append(item)
-            if item.priority == "Medium":
-                prioritized_work_request_list.append(item)
-            if item.priority == "Low": 
-                prioritized_work_request_list.append(item)
-
+        # try:
+            # prioritized_work_request_list = []
+            # for item in work_request_list:
+            #     if item.priority == "High":
+            #         prioritized_work_request_list.append(item)
+            # for item in work_request_list:
+            #     if item.priority == "Medium":
+            #         prioritized_work_request_list.append(item)
+            # for item in work_request_list:
+            #     if item.priority == "Low": 
+            #         prioritized_work_request_list.append(item)
+        work_request_list = self.logic_wrapper.get_all_work_requests(self.rank, self.location)
         print("{:0}{:>3}{:>5}{:>9}{:>12}".format("ID", "|", "Name", "|", "Description"))
         print("-" * 70)
-        for item in prioritized_work_request_list:
-            print("{:0}{:>3}{:>10}{:>4}{:>51}".format({item.work_request_id}, "|", {item.name}, "|", {item.description})) 
+        for item in sorted(work_request_list):
+            print("{:0}{:>3}{:>10}{:>4}{:>51}".format(item.work_request_id, "|", item.name, "|", item.description)) 
         print("-" * 70)
+        # except TypeError:
+        print("Something Went Wrong, Please Try Again") 
         
 
     def display_selected_work_request_information_printed(self, work_request):
@@ -47,26 +51,27 @@ class work_request_UI_menu:
 
         print("{:0}{:>14}{:<10}".format("Categories", "|", "Details"))
         print("-" * 35)     
-        print("{:0}{:>9}{:<10}".format("Work Request ID", "|", {work_request.get_work_request_id})) 
-        print("{:0}{:>20}{:<10}".format("Name", "|", {work_request.get_name}))
-        print("{:0}{:>13}{:<10}".format("Description", "|", {work_request.get_description}))
-        print("{:0}{:>16}{:<10}".format("Location", "|", {work_request.get_location})) 
+        print("{:0}{:>9}{:<10}".format("Work Request ID", "|", work_request.get_work_request_id)) 
+        print("{:0}{:>20}{:<10}".format("Name", "|", work_request.get_name))
+        print("{:0}{:>13}{:<10}".format("Description", "|", work_request.get_description))
+        print("{:0}{:>16}{:<10}".format("Location", "|", work_request.get_location)) 
         print("-" * 35)
-        print("{:0}{:>3}{:>10}".format("Maintenance Report ID", "|", {work_request.get_maintenance_report}))
-        print("{:0}{:>16}{:<10}".format("Employee ID", "|", {work_request.get_staff_id}))
-        print("{:0}{:>13}{:<10}".format("Property ID", "|", {work_request.get_property_id})) 
-        print("{:0}{:>11}{:<10}".format("Contractor ID", "|", {work_request.get_contractor_id}))
+        print("{:0}{:>3}{:>10}".format("Maintenance Report ID", "|", work_request.get_maintenance_report))
+        print("{:0}{:>16}{:<10}".format("Employee ID", "|", work_request.get_staff_id))
+        print("{:0}{:>13}{:<10}".format("Property ID", "|", work_request.get_property_id)) 
+        print("{:0}{:>11}{:<10}".format("Contractor ID", "|", work_request.get_contractor_id))
         print("-" * 35)
-        print("{:0}{:>14}{:<10}".format("Start Date", "|", {work_request.get_date_of_creation}))
-        print("{:0}{:>7}{:<10}".format("Completition Date", "|", {work_request.get_date_of_completition})) 
-        print("{:0}{:>9}{:<10}".format("Repititive Work", "|", {work_request.get_repetitive_work}))
-        print("{:0}{:>3}{:<10}".format("Re-Open Interval Days", "|", {work_request.get_reopen_interval})) 
+        print("{:0}{:>14}{:<10}".format("Start Date", "|", work_request.get_date_of_creation))
+        # print("{:0}{:>7}{:<10}".format("Completition Date", "|", {work_request.get_date_of_completition})) 
+        print("{:0}{:>9}{:<10}".format("Repititive Work", "|", work_request.get_repetitive_work))
+        print("{:0}{:>3}{:<10}".format("Re-Open Interval Days", "|", work_request.get_reopen_interval)) 
         print("-" * 35)
-        print("{:0}{:>16}{:<10}".format("Priority", "|", {work_request.get_priority}))
-        print("{:0}{:>7}{:<10}".format("Status", "|", {work_request.get_work_request_status}))
-        print("{:0}{:>11}{:<10}".format("Completed", "|", {work_request.get_mark_as_completed}))
-        print("{:0}{:>4}{:<10}".format("Accepted by Employee", "|", {work_request.get_acceptance_status}))
-        print("-" * 70)
+        print("{:0}{:>16}{:<10}".format("Priority", "|", work_request.get_priority))
+        print("{:0}{:>7}{:<10}".format("Status", "|", work_request.get_work_request_status))
+        print("{:0}{:>7}{:<10}".format("Status", "|", work_request.get_need_contractor))
+        # print("{:0}{:>11}{:<10}".format("Completed", "|", {work_request.get_mark_as_completed}))
+        # print("{:0}{:>4}{:<10}".format("Accepted by Employee", "|", {work_request.get_acceptance_status}))
+        # print("-" * 70)
 
 
     def display_work_requests_menu_items(self):
@@ -80,7 +85,7 @@ class work_request_UI_menu:
         print()
         self.display_all_work_requests_printed()
         if self.rank != "Employee":
-            print("{:0}{:>3}{:>8}{:>7}{:>11}".format("1. Select Request", "|", "2. Add Request", "|", "3. Closed Requests"))
+            print("{:0}{:>3}{:>15}{:>3}{:>19}".format("1. Select Request", "|", "2. Add Request", "|", "3. Closed Requests"))
             print()
             user_choice = input("Select an Option: ")
             print("-" * 70)
@@ -103,7 +108,7 @@ class work_request_UI_menu:
                     self.start_point_work_requests_UI()
         
         else:
-            print("{:0}{:>2}{:>15}{:>2}{:>19}".format("1. New Requests", "|", "2. Pending Requests", "|", "3. My Requests"))
+            print("{:0}{:>3}{:>20}{:>3}{:>15}".format("1. New Requests", "|", "2. Pending Requests", "|", "3. My Requests"))
             print()
             user_choice = input("Select an Option: ")
             print("-" * 70)    
@@ -205,11 +210,11 @@ class work_request_UI_menu:
             print()
             print("Choose a Category To Edit")
             print("-" * 70)
-            print("{:>15}".format("> 1. Employee ID"))
+            print("{:>18}".format("> 1. Employee ID"))
             print("{:>18}".format("> 2. Property ID"))
             print("{:>24}".format("> 3. Repititive Ticket"))
             print("{:>15}".format("> 4. Priority"))
-            print("{:>20}".format("> 5. Request Status"))
+            print("{:>21}".format("> 5. Request Status"))
             print("-" * 70)
             category_to_edit = input("Choose a Category to Edit: ")
             match category_to_edit:

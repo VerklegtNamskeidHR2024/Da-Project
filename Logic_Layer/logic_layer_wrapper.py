@@ -88,10 +88,20 @@ class Logic_Layer_Wrapper:
     ########################################################################################################
     ### WORK_REQUESTS ######################################################################################
     def get_all_work_requests(self, rank, location) -> list: 
-        return self.work_request_logic_manager.fetch_all_work_requests_in_storage(rank, location)
+        # return self.work_request_logic_manager.fetch_all_work_requests_in_storage(rank, location)
+        wr1 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234")
+        wr2 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234")
+        wr3 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234")
+        work_request_list1 = [wr1,wr2,wr3]
+        return work_request_list1
 
     def get_work_request_by_id(self, rank, location, work_request_id) -> WorkRequest:
-        return self.work_request_logic_manager.fetch_work_request_by_id(rank, location, work_request_id)
+        # return self.work_request_logic_manager.fetch_work_request_by_id(rank, location, work_request_id)
+        wr1 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234")
+        wr2 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234")
+        wr3 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234")
+        work_request_list1 = [wr1,wr2,wr3]
+        return work_request_list1
     
     def get_all_new_work_requests(self, rank, location) -> list:
         return self.work_request_logic_manager.fetch_all_new_work_requests_in_storage(rank, location)

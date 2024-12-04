@@ -1,3 +1,5 @@
+# from Storage_Layer.work_request_storage_manager import work_reques_storage
+
 class work_request_logic_manager:
 
     def __init__(self, Storage_Layer_Wrapper):
@@ -15,11 +17,11 @@ class work_request_logic_manager:
     def fetch_my_work_request(Employee_ID) -> list:
         pass
 
-    def fetch_work_request_by_id(self, Work_request_ID):
-        return self.Storage_Layer_Wrapper.get_work_request_by_id()
+    def fetch_work_request_by_id(self, rank, location, work_request_id):
+        return self.Storage_Layer_Wrapper.get_work_request_by_id(rank, location, work_request_id)
 
-    def fetch_all_work_requests_in_storage(self, location) -> list:
-        return self.Storage_Layer_Wrapper.get_all_work_requests()
+    def fetch_all_work_requests_in_storage(self, rank, location) -> list:
+        return self.Storage_Layer_Wrapper.get_all_work_requests(rank, location)
     
     def fetch_all_open_work_requests_in_storage(self, Work_request_ID) -> list:
         pass
