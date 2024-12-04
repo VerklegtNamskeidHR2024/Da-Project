@@ -1,14 +1,14 @@
 import json
-from amenity_model import Amenity
-from contractor_model import Contractor
-from employee_model import Employee
-from location_model import Location
-from house_model import House
-from location_model import Location
-from maintenance_report_model import MaintenanceReport
-from manager_model import Manager
-from work_request_model import WorkRequest
-from admin_model import Admin
+from Model_Classes.amenity_model import Amenity
+from Model_Classes.contractor_model import Contractor
+from Model_Classes.employee_model import Employee
+from Model_Classes.location_model import Location
+from Model_Classes.house_model import House
+from Model_Classes.location_model import Location
+from Model_Classes.maintenance_report_model import MaintenanceReport
+from Model_Classes.manager_model import Manager
+from Model_Classes.work_request_model import WorkRequest
+from Model_Classes.admin_model import Admin
 
 # Reykjavík Nuuk Kulusuk Þórshöfn Tingwall Longyearbyen
 admin1 = Admin('Hreimur', 12334546789, 5551234, 'Reykjavik', 'Admin', 'hreimur24@ru.is', 'A1234')
@@ -31,36 +31,36 @@ employee8 = Employee('Eve Foster', 293847561, 9182734, 'Tingwall', 'Employee', '
 employee9 = Employee('Frank Green', 564738291, 3847562, 'Tingwall', 'Employee', 'frankgreen@example.com', 'E1223')
 employee10 = Employee('Grace Harris', 918273645, 2736451, 'Longyearbyen', 'Employee', 'graceharris@example.com', 'E3243')
 
-property1 = House('h001', 'suite', 'Reykjavik', 'excellent', 1500.0, 30230000000)
-property2 = House('h002', 'suite', 'Reykjavik', 'fair', 1200.0, 300000000)
-property3 = House('h003', 'suite', 'Reykjavik', 'excellent', 1500.0, 30000000000)
-property4 = House('h004', 'suite', 'Reykjavik', 'fair', 1200.0, 30000000)
-property5 = House('h005', 'suite', 'Reykjavik', 'excellent', 1500.0, 30000000000)
-property6 = House('h006', 'suite', 'Nuuk', 'fair', 1200.0, 300000000)
-property7 = House('h007', 'suite', 'Nuuk', 'excellent', 1500.0, 300000000)
-property8 = House('h008', 'suite', 'Nuuk', 'fair', 1200.0, 30000000)
-property9 = House('h009', 'suite', 'Nuuk', 'excellent', 1500.0, 300000000)
-property10 = House('h010', 'suite', 'Nuuk', 'fair', 1200.0, 30000000000)
-property11 = House('h011', 'suite', 'Kulusuk', 'excellent', 1500.0, 30000000)
-property12 = House('h012', 'suite', 'Kulusuk', 'excellent', 1500.0, 300000000)
-property13 = House('h013', 'suite', 'Kulusuk', 'excellent', 1500.0, 3000000)
-property14 = House('h014', 'suite', 'Kulusuk', 'excellent', 1500.0, 30000000000)
-property15 = House('h015', 'suite', 'Kulusuk', 'excellent', 1500.0, 30000000000)
-property16 = House('h016', 'suite', 'Thorshofn', 'excellent', 1500.0, 30000000)
-property17 = House('h017', 'suite', 'Thorshofn', 'fair', 1200.0, 300000000)
-property18 = House('h018', 'suite', 'Thorshofn', 'excellent', 1500.0, 30000000000)
-property19 = House('h019', 'suite', 'Thorshofn', 'excellent', 1500.0, 30000000)
-property20 = House('h020', 'suite', 'Thorshofn', 'excellent', 1500.0, 300000000)
-property21 = House('h021', 'suite', 'Thorshofn', 'fair', 1200.0, 300000000)
-property22 = House('h022', 'suite', 'Tingwall', 'excellent', 1500.0, 300000000)
-property23 = House('h023', 'suite', 'Tingwall', 'excellent', 1500.0, 300000000)
-property24 = House('h024', 'suite', 'Tingwall', 'excellent', 1500.0, 3000000)
-property25 = House('h025', 'suite', 'Tingwall', 'excellent', 1500.0, 30000000)
-property26 = House('h026', 'suite', 'Tingwall', 'fair', 1200.0, 30000000000)
-property27 = House('h027', 'suite', 'Longyearbyen', 'excellent', 1500.0, 300000000)
-property28 = House('h028', 'suite', 'Longyearbyen', 'excellent', 1500.0, 30000000)
-property29 = House('h029', 'suite', 'Longyearbyen', 'excellent', 1500.0, 30000000)
-property30 = House('h030', 'suite', 'Longyearbyen', 'fair', 1200.0, 30000000)
+property1 = House('H0001', 'suite', 'Reykjavik', 'excellent', 1500.0, 30230000000)
+property2 = House('H0002', 'suite', 'Reykjavik', 'fair', 1200.0, 300000000)
+property3 = House('H0003', 'suite', 'Reykjavik', 'excellent', 1500.0, 30000000000)
+property4 = House('H0004', 'suite', 'Reykjavik', 'fair', 1200.0, 30000000)
+property5 = House('H0005', 'suite', 'Reykjavik', 'excellent', 1500.0, 30000000000)
+property6 = House('H0006', 'suite', 'Nuuk', 'fair', 1200.0, 300000000)
+property7 = House('H0007', 'suite', 'Nuuk', 'excellent', 1500.0, 300000000)
+property8 = House('H0008', 'suite', 'Nuuk', 'fair', 1200.0, 30000000)
+property9 = House('H0009', 'suite', 'Nuuk', 'excellent', 1500.0, 300000000)
+property10 = House('H0010', 'suite', 'Nuuk', 'fair', 1200.0, 30000000000)
+property11 = House('H0011', 'suite', 'Kulusuk', 'excellent', 1500.0, 30000000)
+property12 = House('H0012', 'suite', 'Kulusuk', 'excellent', 1500.0, 300000000)
+property13 = House('H0013', 'suite', 'Kulusuk', 'excellent', 1500.0, 3000000)
+property14 = House('H0014', 'suite', 'Kulusuk', 'excellent', 1500.0, 30000000000)
+property15 = House('H0015', 'suite', 'Kulusuk', 'excellent', 1500.0, 30000000000)
+property16 = House('H0016', 'suite', 'Thorshofn', 'excellent', 1500.0, 30000000)
+property17 = House('H0017', 'suite', 'Thorshofn', 'fair', 1200.0, 300000000)
+property18 = House('H0018', 'suite', 'Thorshofn', 'excellent', 1500.0, 30000000000)
+property19 = House('H0019', 'suite', 'Thorshofn', 'excellent', 1500.0, 30000000)
+property20 = House('H0020', 'suite', 'Thorshofn', 'excellent', 1500.0, 300000000)
+property21 = House('H0021', 'suite', 'Thorshofn', 'fair', 1200.0, 300000000)
+property22 = House('H0022', 'suite', 'Tingwall', 'excellent', 1500.0, 300000000)
+property23 = House('H0023', 'suite', 'Tingwall', 'excellent', 1500.0, 300000000)
+property24 = House('H0024', 'suite', 'Tingwall', 'excellent', 1500.0, 3000000)
+property25 = House('H0025', 'suite', 'Tingwall', 'excellent', 1500.0, 30000000)
+property26 = House('H0026', 'suite', 'Tingwall', 'fair', 1200.0, 30000000000)
+property27 = House('H0027', 'suite', 'Longyearbyen', 'excellent', 1500.0, 300000000)
+property28 = House('H0028', 'suite', 'Longyearbyen', 'excellent', 1500.0, 30000000)
+property29 = House('H0029', 'suite', 'Longyearbyen', 'excellent', 1500.0, 30000000)
+property30 = House('H0030', 'suite', 'Longyearbyen', 'fair', 1200.0, 30000000)
 
 location1 = Location('Iceland', 'Reykjavik', 'KEF', '5551234', 'Tumi Krist', '8-16')
 location2 = Location('Greenland', 'Nuuk', 'NUK', '5551234', 'Tumi Krist', '8-16')
@@ -77,11 +77,10 @@ amenity1 = Amenity('A0001', 'pool', 'Reykjavik', 'excellent', 1500.0, 'is a pool
 amenity2 = Amenity('A0002', 'pool', 'Tingwall', 'fair', 1200.0, 'is a pool')
 amenity3 = Amenity('A0003', 'hot tub', 'Nuuk', 'excellent', 1500.0, 'is a hot tub')
 
-work_request1 = WorkRequest('WR0001', 'E1234', 'Reykjavik', 'h004', '03.12.2024', False, 0, 'High', 'MR0001', 'Pending', False, '', False)
-work_request2 = WorkRequest('WR0002', 'E1234', 'Reykjavik', 'h004', '02.12.2024', False, 0, 'High', 'MR0001', 'Pending', True, 'C0001', False)
-work_request3 = WorkRequest('WR0003', 'E1234', 'Reykjavik', 'h004', '02.12.2024', False, 0, 'High', 'MR0001', 'Pending', True, 'C0001', True)
+work_request1 = WorkRequest('WR0001', 'Fix HotTub', 'Hot tub was leaking ketchup for some odd reason?', 'MR002', 'E1234', 'Reykjavik', 'H0001','01-01-24','',False,0,'High','MR0002','Pending',False,'',False)
+work_request2 = WorkRequest('WR0001', 'Fix roof', 'roof had giant hole in it', 'MR001', 'E1234', 'Reykjavik', 'H001','01-01-24','',False,0,'High','MR0002','Pending',False,'',False)
 
-maintenance_report1 = MaintenanceReport('MR0001', 'Fix the roof', 'Reykjavik', 'h004', 'E1234', False, 'roof is leaking', 'Pending', '1234', True, 'C0001', 'WR0003')
+maintenance_report1 = MaintenanceReport('MR0001', 'Fix the roof', 'Reykjavik', 'H0004', 'E5678', False, 'roof is leaking', 'Pending', '1234', True, 'C0001', 'WR0003')
 
 admins = [admin1]
 admin_dict = [admin.to_dict() for admin in admins]
@@ -98,12 +97,7 @@ amenity_dict = [amenity.to_dict() for amenity in amenities]
 properties = [property1, property2, property3, property4, property5, property6, property7, property8, property9, property10,
                 property11, property12, property13, property14, property15, property16, property17, property18, property19, property20,
                 property21, property22, property23, property24, property25, property26, property27, property28, property29, property30]
-property_dict = {}
-for property in properties:
-    if property.location not in property_dict:
-        property_dict[property.location] = []
-    property_dict[property.location].append(property.to_dict())
-
+property_dict = [property.to_dict() for property in properties]
 
 
 locations = [location1, location2, location3, location4, location5, location6]
@@ -112,7 +106,7 @@ location_dict = [location.to_dict() for location in locations]
 contractors = [contractor1, contractor2, contractor3]
 contractor_dict = [contractor.to_dict() for contractor in contractors]
 
-work_requests = [work_request1, work_request2, work_request3]
+work_requests = [work_request1, work_request2]
 work_request_dict = [work_request.to_dict() for work_request in work_requests]
 
 maintenance_reports = [maintenance_report1]
@@ -139,8 +133,8 @@ with open('Data/location_storage.json', 'w') as file:
 with open('Data/contractor_storage.json', 'w') as file:
     json.dump(contractor_dict, file, indent=4)
 
-'''with open('Data/work_request_storage.json', 'w') as file:
-    json.dump(work_request_dict, file, indent=4)'''
+with open('Data/work_request_storage.json', 'w') as file:
+    json.dump(work_request_dict, file, indent=4)
 
 with open('Data/maintenance_report_storage.json', 'w') as file:
     json.dump(maintenance_report_dict, file, indent=4)

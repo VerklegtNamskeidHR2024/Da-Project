@@ -25,6 +25,12 @@ class WorkRequest:
     def set_work_request_id(self, work_request_id):
         self.work_request_id = work_request_id
 
+    def set_name(self, name):
+        self.name = name
+
+    def set_description(self, description):
+        self.description = description
+
     def set_staff_id(self, staff_id):
         self.staff_id = staff_id
 
@@ -63,6 +69,12 @@ class WorkRequest:
 
     def get_work_request_id(self):
         return self.work_request_id
+    
+    def get_name(self):
+        return self.name
+    
+    def get_description(self):
+        return self.description
 
     def get_staff_id(self):
         return self.staff_id
@@ -103,10 +115,14 @@ class WorkRequest:
     def to_dict(self):
         return {
             'work_request_id': self.work_request_id,
+            'name': self.name,
+            'description': self.description,
+            'maintenance_report_id': self.maintenance_report_id,
             'staff_id': self.staff_id,
             'location': self.location,
             'property_id': self.property_id,
-            'date_of_creation': self.date_of_creation,
+            'start_date': self.start_date,
+            'completition_date': self.completition_date,
             'repetitive_work': self.repetitive_work,
             'reopen_interval': self.reopen_interval,
             'priority': self.priority,
@@ -114,5 +130,5 @@ class WorkRequest:
             'work_request_status': self.work_request_status,
             'need_contractor': self.need_contractor,
             'contractor_id': self.contractor_id,
-            'mark_as_done': self.mark_as_done
+            'mark_as_completed': self.mark_as_completed
         }

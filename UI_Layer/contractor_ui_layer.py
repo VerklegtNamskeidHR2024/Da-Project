@@ -46,6 +46,9 @@ class contractor_UI_menu():
                 # c requirement
                 pass
                 #self.display_edit_contracor_menu
+
+            case "5":
+                self.logic_wrapper.write_to_file(list_of_contractors = [])
             case "q":
                 # quit back to main menu
                 pass

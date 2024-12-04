@@ -1,3 +1,5 @@
+from Model_Classes.work_request_model import WorkRequest
+
 class work_request_UI_menu:
     def __init__(self, Logic_Wrapper, rank, location):
         self.logic_wrapper = Logic_Wrapper
@@ -22,7 +24,7 @@ class work_request_UI_menu:
         """Prints out all open work requests with their ID, Name and Description. """
         print("{:0}{:>3}{:>5}{:>9}{:>12}".format("ID", "|", "Name", "|", "Description"))
         print("-" * 70)
-        work_request_list = self.logic_wrapper.get_all_work_requests(self.location)
+        work_request_list = self.logic_wrapper.get_all_work_requests(self.rank, self.location)
         for item in work_request_list:
             print("{:0}{:>3}{:>10}{:>4}{:>51}".format({item.work_request_id}, "|", {item.name}, "|", {item.description}))
         print("-" * 70)
@@ -38,7 +40,7 @@ class work_request_UI_menu:
             print("{:0}{:>16}{:<10}".format("Location", "|", {item.location})) 
             print("-" * 35)
             print("{:0}{:>3}{:>10}".format("Maintenance Report ID", "|", {item.maintenance_report_id}))
-            print("{:0}{:>16}{:<10}".format("Staff ID", "|", {item.staff_id}))
+            print("{:0}{:>16}{:<10}".format("Employee ID", "|", {item.staff_id}))
             print("{:0}{:>13}{:<10}".format("Property ID", "|", {item.property})) 
             print("{:0}{:>11}{:<10}".format("Contractor ID", "|", {item.contractor_id}))
             print("-" * 35)
@@ -71,11 +73,9 @@ class work_request_UI_menu:
                 case "1": 
                     self.select_work_request_by_id()
                 case "2":
-                    pass
-                    self.create_work_request_form()
+                    self.display_create_work_request_form()
                 case "3":
-                    pass
-                    # self.display_closed_work_requests_printed()
+                    self.display_closed_work_requests_printed()
                 case "q":
                     pass
                     print("Departing from NaN Air, Thank you for Visiting!")
@@ -85,7 +85,7 @@ class work_request_UI_menu:
                     pass
                 case _:
                     print("Invalid Input, Please Try Again.")
-                    self.start_point()
+                    self.start_point_work_requests_UI()
         
         if self.rank == "Employee":
             print("{:0}{:>2}{:>15}{:>2}{:>19}".format("1. New Requests", "|", "2. Pending Requests", "|", "3. My Requests"))
@@ -94,14 +94,12 @@ class work_request_UI_menu:
             print("-" * 70)    
             match user_choice:
                 case "1": 
-                    pass
-                    # self.display_new_work_requests_to_accept()
+                    self.display_all_new_work_requests_to_accept_printed()
                 case "2":
-                    pass
-                    # self.display_pending_work_requests_printed()
+                    self.display_all_pending_work_requests_printed()
                 case "3": 
                     pass
-                    # self.display_my_work_requests()
+                    self.display_my_work_requests_printed()
                 case "q":
                     pass
                     print("Departing from NaN Air, Thank you for Visiting!")
@@ -111,7 +109,7 @@ class work_request_UI_menu:
                     pass
                 case _:
                     print("Invalid Input, Please Try Again.")
-                    self.start_point()
+                    self.start_point_work_requests_UI	()
                 
 
     def select_work_request_by_id(self):
@@ -126,60 +124,86 @@ class work_request_UI_menu:
             print("Work Request not Found, Please Try Again.")
             self.select_work_request_by_id()
 
-    def create_work_request_form(self):
-            print()
-            print("[ New Work Request Form ]")
-            print("-" * 70)
-            name_new_work_request = input("Request Name: ")
-            description_new_work_request = input("Request Descrptition: ")
-            # ?staff_id_new_work_request =  
-            property_id_for_new_work_request = input("Request for Property ID:  ")
-            start_date_new_work_request = input("Start Date: ")
-            completition_date_new_work_request = input("Completition Date: ")
-            is_new_work_request_repititive = input("Mark Repititive? (Yes or No): ")
-            interval_days_new_work_request = input("Interval of Days Until Request Re-Opens: ")
-            
-            new_work_request_confirmation = input("Press 1 to Confirm: ")
-            print("-" * 70)
-            print("New Work Request Has Been Created!")
+    def display_create_work_request_form(self):
+        is_new_work_request_valid = False
+        new_work_request = WorkRequest()
+        print()
+        print("[ New Work Request Form ]")
+        print("-" * 70)
+        new_work_request.set_work_request_name(input("Request Name: "))
+        new_work_request.set_work_request_description(input("Request Descrptition: "))  
+        new_work_request.set_property_id(input("Request for Property ID: "))
+        new_work_request.set_date_of_creation(input("Start Date: "))
+        new_work_request.set_mark_as_done(input("Completition Date: "))
+        new_work_request.set_repetitive_work(input("Mark Repititive? (Yes or No): "))
+        new_work_request.set_reopen_interval(input("Interval of Days Until Request Re-Opens: "))
+        new_work_request.set_priority(input("Request Priority (High, Medium or Low):  "))
+        if self.rank != "Admin": 
+            new_work_request.set_location_id(input(self.location))
+        else:
+            new_work_request.set_location_id(input("Set Location for Work Request: "))
+        print("-" * 70)
+        print()
+        new_work_request_confirmation = input("Press 1 to Confirm: ")
+        if new_work_request == "1": 
+            is_valid = self.logic_wrapper.sanity_check_work_request(new_work_request)
 
-
+        print("-" * 70)
+        print("New Work Request Has Been Created!")
+        back_to_work_request_menu = input("Enter B to Go Back to Work Request Menu: ")
+        if back_to_work_request_menu == "b" or back_to_work_request_menu == "B":
+            self.start_point_work_requests_UI
+        else:
 
     def edit_work_request_form(self):
+        # work_request_to_edit = self.select_work_request_by_id()
+        # if work_request_to_edit == None:
+        #     return
+        # self.display_selected_work_request_information_printed(work_request_to_edit)
         print()
         print("Choose a Category To Edit")
         print("-" * 70)
-        print("{:>15}".format("> 1. Staff ID"))
+        print("{:>15}".format("> 1. Employee ID"))
         print("{:>18}".format("> 2. Property ID"))
         print("{:>24}".format("> 3. Repititive Ticket"))
         print("{:>15}".format("> 4. Priority"))
         print("{:>20}".format("> 5. Ticket Status"))
         print("-" * 70)
         category_to_edit = input("Category to Edit: ")
-        new_staff_id_for_request = input("Enter New Staff ID: ")
-        new_property_id_for_request = input("Enter New Property ID: ")
-        update_is_request_repitive = input("Is Repitive? (Yes or No): ")
-        new_priority_for_request = input("Enter New Priority for Request: ")
-        update_request_status = input("Mark as Completed? (Yes or No): ")
+        match category_to_edit:
+            case "1":
+                new_staff_id_for_request = input("Enter New Employee ID: ")
+                self.logic_wrapper.edit_work_request
+            case "2": 
+                new_property_id_for_request = input("Enter New Property ID: ")
+            case "3":
+                update_is_request_repitive = input("Is Repitive? (Yes or No): ")
+            case "4":
+                new_priority_for_request = input("Enter New Priority for Request: ")
+            case "5":
+                update_request_status = input("Mark as Completed? (Yes or No): ")
 
         updated_work_request_confirmation_confirmation = input("Press 1 to Confirm: ")
 
-
-
-
         
     def display_my_work_requests_printed(self):
-    #     self.display_all_work_requests()
-        pass
+        self.display_all_work_requests_printed(self.rank)
+        selected_work_request = input("Enter 1 to Select a Work Request or B to Go Back: ")
+        if selected_work_request == "1":
+            self.select_work_request_by_id()
+        elif selected_work_request == "b" or selected_work_request == "B":
+            self.start_point_work_requests_UI()
+        else: 
+            self.display_my_work_requests_printed()
 
     def display_all_new_work_requests_to_accept_printed(self): 
-    #     self.display_all_work_requests()
-        pass
+        self.display_all_work_requests_printed()
+        
     
     def display_all_pending_work_requests_printed(self): 
-    #     self.display_all_work_requests()
+        self.display_all_work_requests_printed()
         pass
 
     def display_closed_work_requests_printed(self): 
-    #     self.display_all_work_requests()
+        self.display_all_work_requests_printed()
         pass
