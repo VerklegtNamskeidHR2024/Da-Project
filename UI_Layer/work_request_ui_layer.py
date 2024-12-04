@@ -151,9 +151,9 @@ class work_request_UI_menu:
         if back_to_work_request_menu == "b" or back_to_work_request_menu == "B":
             self.start_point_work_requests_UI()
         else:
-        self.start_point_work_requests_UI
+            self.start_point_work_requests_UI
         
-    def edit_work_request_form(self):
+    '''def edit_work_request_form(self):
         if self.rank == "Employee" and :
             print()
             mark_as_done_to_edit input(("Mark as Done (Yes or No): "))
@@ -186,7 +186,7 @@ class work_request_UI_menu:
                     new_priority_for_request = input("Enter New Priority for Request: ")
                 case "5":
                     update_request_status = input("Mark as Completed? (Yes or No): ")
-        updated_work_request_confirmation_confirmation = input("Enter 1 to Confirm: ")
+        updated_work_request_confirmation_confirmation = input("Enter 1 to Confirm: ")'''
 
         
     def display_my_work_requests_printed(self):
