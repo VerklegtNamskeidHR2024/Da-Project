@@ -8,6 +8,7 @@ Tumi:\
 
 
 Daníela:\
+I worked on the employee ui. I arrived at 10 and left at 18.
 
 
 Yeabsire:\
