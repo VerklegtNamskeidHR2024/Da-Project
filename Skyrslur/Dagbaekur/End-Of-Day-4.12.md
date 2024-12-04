@@ -2,7 +2,7 @@
 
 ### What we did through the day 
 Hreimur:\
-I finished work on the data layer and storage wrapper so we can fetch and write data into all of the json files and fixed some errors in code and helped the rest of the group with some merge conflicts. I then started on some of the logic layer functions to link that with the storage layer
+I finished work on the data layer and storage wrapper so we can fetch and write data into all of the json files and fixed some errors in code and helped the rest of the group with some merge conflicts. I then started on some of the logic layer functions to link that with the storage layer. I arrived at 10 and went home at around 18
 
 Tumi:\
 
