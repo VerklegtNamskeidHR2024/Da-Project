@@ -18,7 +18,8 @@ Kormákur:\
 
 
 
-Jón:\ 
+Jón:\
+I continued making the location UI layer and have completed mostly everything UI related with the location menu. I arrived at 10:30 and left at 14:30 and worked from home for about 2 hours\
 
 
 ## Progress of the day
