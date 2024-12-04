@@ -90,18 +90,25 @@ class Logic_Layer_Wrapper:
     def get_all_work_requests(self, rank, location) -> list: 
         # return self.work_request_logic_manager.fetch_all_work_requests_in_storage(rank, location)
         wr1 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234")
-        wr2 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234")
-        wr3 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234")
-        work_request_list1 = [wr1,wr2,wr3]
+        wr2 = WorkRequest("WR0002","Fix roof","roof had giant hole in it","MR001", "E1234")
+        wr3 = WorkRequest("WR0003","Fix roof","roof had giant hole in it","MR001", "E1234")
+        wr4 = WorkRequest("WR0004","Fix roof","roof had giant hole in it","MR001", "E1234")
+        wr5 = WorkRequest("WR0005","Fix roof","roof had giant hole in it","MR001", "E1234")
+        wr6 = WorkRequest("WR0006","Fix roof","roof had giant hole in it","MR001", "E1234")
+        work_request_list1 = [wr1, wr2, wr3, wr4, wr5, wr6]
         return work_request_list1
 
-    def get_work_request_by_id(self, rank, location, work_request_id) -> WorkRequest:
+    def get_work_request_by_id(self, rank, location, Work_request_id) -> WorkRequest:
         # return self.work_request_logic_manager.fetch_work_request_by_id(rank, location, work_request_id)
         wr1 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234")
-        wr2 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234")
-        wr3 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234")
-        work_request_list1 = [wr1,wr2,wr3]
-        return work_request_list1
+        # wr2 = WorkRequest("WR0002","Fix roof","roof had giant hole in it","MR001", "E1234")
+        # wr3 = WorkRequest("WR0003","Fix roof","roof had giant hole in it","MR001", "E1234")
+        # wr4 = WorkRequest("WR0004","Fix roof","roof had giant hole in it","MR001", "E1234")
+        # wr5 = WorkRequest("WR0005","Fix roof","roof had giant hole in it","MR001", "E1234")
+        # wr6 = WorkRequest("WR0006","Fix roof","roof had giant hole in it","MR001", "E1234")
+        # work_request_list2 = [wr1, wr2, wr3, wr4, wr5,wr6]
+        if wr1.work_request_id == Work_request_id:     
+            return wr1
     
     def get_all_new_work_requests(self, rank, location) -> list:
         return self.work_request_logic_manager.fetch_all_new_work_requests_in_storage(rank, location)

@@ -43,7 +43,7 @@ class work_request_UI_menu:
             print("{:0}{:>3}{:>10}{:>4}{:>51}".format(item.work_request_id, "|", item.name, "|", item.description)) 
         print("-" * 70)
         # except TypeError:
-        print("Something Went Wrong, Please Try Again") 
+        # print("Something Went Wrong, Please Try Again") 
         
 
     def display_selected_work_request_information_printed(self, work_request):
@@ -134,18 +134,20 @@ class work_request_UI_menu:
         """System asks user for the ID of the work request they wish to find, where it then prints out 
         all it's information """
 
-        try:
-            work_request_selected_by_id = input("Enter Request ID: ")
-            work_request_model = self.logic_wrapper.get_work_request_by_id(self.rank, self.location, work_request_selected_by_id, valid_select_conditition)
-            if work_request_model != None:
-                self.display_selected_work_request_information_printed(work_request_model)
-                if self.rank != "Employee" :
-                    self.general_edit_work_request_form(work_request_model)
-                else:
-                    self.employee_edit_work_request_form(work_request_model)
-        except:
-            print("Work Request not Found, Please Try Again.")
-            self.select_work_request_by_id()
+        # try:
+        work_request_selected_by_id = input("Enter Request ID: ")
+        work_request_object = self.logic_wrapper.get_work_request_by_id(self.rank, self.location, work_request_selected_by_id) # valid_select_conditition
+        self.display_selected_work_request_information_printed(work_request_object)
+            
+            # if work_request_model != None:
+            #     self.display_selected_work_request_information_printed(work_request_model)
+            #     if self.rank != "Employee" :
+            #         self.general_edit_work_request_form(work_request_model)
+            #     else:
+            #         self.employee_edit_work_request_form(work_request_model)
+        # except:
+        print("Work Request not Found, Please Try Again.")
+        self.select_work_request_by_id()
 
 
     def display_create_work_request_form(self):
