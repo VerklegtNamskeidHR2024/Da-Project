@@ -163,30 +163,30 @@ class work_request_UI_menu:
                 print("New Work Request Has Been Created!")
                 back_to_work_request_menu = input("Enter B to Go Back to Work Request Menu: ")
                 if back_to_work_request_menu == "b" or back_to_work_request_menu == "B":
-                self.start_point_work_requests_UI()
+                    self.start_point_work_requests_UI()
                 else:
                   self.start_point_work_requests_UI
         except: 
             print("Something Went Wrong When Creating the Work Request, Please Try Again.")
         
     def employee_edit_work_request_form(self, work_request):
-        for 
-        if :
-            print()
-            print("-" * 70)
-            mark_as_completed = input("Mark as Completed (Yes or No): ")
-            is_input_for_mark_completed_valid = self.logic_wrapper.sanity_check_work_request(mark_as_completed)
-            if is_input_for_mark_completed_valid == True:
-                updated_work_request = work_request.set_mark_as_done(is_input_for_mark_completed_valid)
-                self.logic_wrapper.edit_work_requests(updated_work_request)
-        elif :
-            print()
-            print("-" * 70)
-            accept_work_request = input("Aceept (Yes or No): ")
-            is_input_for_accepted_valid = self.logic_wrapper.sanity_check_work_request(accept_work_request)
-            if is_input_for_accepted_valid == True:
-                updated_work_request = work_request.set_mark_as_done(is_input_for_accepted_valid)
-                self.logic_wrapper.edit_work_requests(updated_work_request)
+        '''for:
+            if:
+                print()
+                print("-" * 70)
+                mark_as_completed = input("Mark as Completed (Yes or No): ")
+                is_input_for_mark_completed_valid = self.logic_wrapper.sanity_check_work_request(mark_as_completed)
+                if is_input_for_mark_completed_valid == True:
+                    updated_work_request = work_request.set_mark_as_done(is_input_for_mark_completed_valid)
+                    self.logic_wrapper.edit_work_requests(updated_work_request)
+            elif:
+                print()
+                print("-" * 70)
+                accept_work_request = input("Aceept (Yes or No): ")
+                is_input_for_accepted_valid = self.logic_wrapper.sanity_check_work_request(accept_work_request)
+                if is_input_for_accepted_valid == True:
+                    updated_work_request = work_request.set_mark_as_done(is_input_for_accepted_valid)
+                    self.logic_wrapper.edit_work_requests(updated_work_request)'''
     
     
     def general_edit_work_request_form(self, work_request):
