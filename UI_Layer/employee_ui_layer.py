@@ -46,7 +46,7 @@ class employee_UI_menu:
         print("-" * 70)
 
         for item in employee_list:
-            print("{:>15}{:>10}{:>15}".format({item.name}, {item.phone}, {item.location}))
+            print("{:>15}{:>10}{:>15}".format(item.name, item.phone, item.location))
             # print(f"{item.name :> 15}|{item.phone_number :> 10}|{item.email :> 10}|{self.location :> 15}")
 
         print("-" * 70)
@@ -74,12 +74,12 @@ class employee_UI_menu:
         
         print()
         print("-" * 70)
-        print("{:<15}{:<10}{:<15}".format("Employee Name", "|", {employee.name}))
-        print("{:<15}{:<10}{:<15}".format("Social Security Number", "|", {employee.social_security_number}))
-        print("{:<15}{:<10}{:<15}".format("Phone Number", "|", {employee.phone_number}))
-        print("{:<15}{:<10}{:<15}".format("Location", "|", {employee.location}))
-        print("{:<15}{:<10}{:<15}".format("Email", "|", {employee.email}))
-        print("{:<15}{:<10}{:<15}".format("Employee ID", "|", {employee.staff_id}))
+        print("{:<15}{:<10}{:<15}".format("Employee Name", "|", employee.name))
+        print("{:<15}{:<10}{:<15}".format("Social Security Number", "|", employee.social_security_number))
+        print("{:<15}{:<10}{:<15}".format("Phone Number", "|", employee.phone_number))
+        print("{:<15}{:<10}{:<15}".format("Location", "|", employee.location))
+        print("{:<15}{:<10}{:<15}".format("Email", "|", employee.email))
+        print("{:<15}{:<10}{:<15}".format("Employee ID", "|", employee.staff_id))
 
         # print(f"{"Employee Name" :< 15}| {employee.name}")
         # print(f"{"Social Security Number" :< 15}| {employee.social_security_number}")
