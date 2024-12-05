@@ -1,6 +1,6 @@
 class WorkRequest:
     def __init__(self, work_request_id:str="", name:str="", description:str="", maintenance_report_id:str="", staff_id:str="", location:str="", property_id:str="", start_date:str="", completition_date:str="", 
-                repetitive_work:bool=False, reopen_interval:int=0, priority:str="", maintenance_report:str="",
+                repetitive_work:bool=False, reopen_interval:int=0, priority:str="",
                 work_request_status:str="", need_contractor:bool=False, contractor_id:str="", mark_as_completed:bool=False):
         self.work_request_id = work_request_id
         self.name = name
@@ -14,7 +14,6 @@ class WorkRequest:
         self.repetitive_work = repetitive_work
         self.reopen_interval = reopen_interval
         self.priority = priority
-        self.maintenance_report = maintenance_report
         self.work_request_status = work_request_status
         self.need_contractor = need_contractor
         self.contractor_id = contractor_id
