@@ -14,7 +14,6 @@ class WorkRequest:
         self.repetitive_work = repetitive_work
         self.reopen_interval = reopen_interval
         self.priority = priority
-        self.maintenance_report = maintenance_report
         self.work_request_status = work_request_status
         self.need_contractor = need_contractor
         self.contractor_id = contractor_id

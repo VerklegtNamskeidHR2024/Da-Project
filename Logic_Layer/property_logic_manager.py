@@ -6,9 +6,17 @@ class property_logic_manager:
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
         
 
-    def fetch_all_properties_in_storage(self, location) -> list:
-        '''Returns the property list'''
-        return self.Storage_Layer_Wrapper.get_all_properties()
+    def get_all_properties_at_location(self, location) -> list:
+        '''Gets all properties at specific location'''
+        properties_sorted_list = []
+
+        all_properties = self.Storage_Layer_Wrapper.get_all_properties()
+
+        for property in all_properties:
+            if property.location == location:
+                properties_sorted_list.append(property)
+
+        return properties_sorted_list
     
     def sanity_check_properties(property):
         pass

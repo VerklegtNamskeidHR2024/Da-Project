@@ -26,16 +26,17 @@ class work_request_logic_manager:
 
         return 
     
-    def fetch_all_work_requests_in_storage(self, rank, location) -> list:
-            location_sorted_list = []
+    def get_all_work_requests_at_location(self, rank, location) -> list:
+            '''Gets all work requests at specific location'''
+            work_request_sorted_list = []
 
             all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
 
             for work_request in all_work_requests:
                 if work_request.location == location:
-                    location_sorted_list.append(work_request)
+                    work_request_sorted_list.append(work_request)
             
-            return location_sorted_list 
+            return work_request_sorted_list 
 
     def fetch_all_open_work_requests_in_storage(self, Work_request_ID) -> list:
         pass
