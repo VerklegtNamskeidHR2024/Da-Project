@@ -71,6 +71,8 @@ class maintenance_report_UI_menu:
 
     def employee_menu(self):
         #Menu for employee role
+        print(f"{self.rank} - maintenance report Page")
+
         print("------------------------------------------------")
         print("1. Create maintenance report")
         print("2. Incomplete maintenance reports")
