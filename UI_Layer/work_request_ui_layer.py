@@ -68,7 +68,7 @@ class work_request_UI_menu:
         """Displays the menu options depending if the user logged in is an admin/manager or
         an employee. It then calls the correct function based on what the user chose. """
 
-        work_request_list = self.logic_wrapper.get_all_work_requests(self.rank, self.location)
+        work_request_list = self.logic_wrapper.get_all_work_requests_at_location(self.rank, self.location)
         print()
         print(f"{self.rank} - Work Request Menu")
         print("-" * 70)

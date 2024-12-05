@@ -6,22 +6,25 @@ class maintenance_report_UI_menu:
         self.location = location
 
     def start_point_maintenance_reports_UI(self):
-        """Entry point for the maintenance reports UI"""
+        #Entry point for the maintenance reports UI
         self.display_maintenance_report()
         return
 
     def display_maintenance_report(self):
+        # if the choice is admin or mangers it goes to the admin_or_manager_menu
         if self.rank in ["Admin", "Manager"]:
             self.admin_or_manager_menu()
+        #if the choice is employee it goes to employee menu 
         elif self.rank == "Employee":
             self.employee_menu()
         else:
             print("Invalid rank. Access denied.")
 
     def admin_or_manager_menu(self):
-        """Menu for admin or manager roles"""
+        #Menu for admin or manager roles
         print(f"{self.rank} - maintenance report Page")
         print("------------------------------------------------")
+        # choice between 2 choices 
         print("1. Pending reports")
         print("2. Closed reports")
         print("------------------------------------------------")
@@ -38,7 +41,8 @@ class maintenance_report_UI_menu:
         #Display a list of pending reports
         print(f"{self.rank} - maintenance report Page")
 
-        print("List of pending reports (to be implemented)")
+        """List of pending reports (to be implemented)"""
+        self.get_pending_reports()
         print("------------------------------------------------")
         report_id = input("Enter report ID to manage: ")
         print("------------------------------------------------")
@@ -54,8 +58,15 @@ class maintenance_report_UI_menu:
         else:
             print("Invalid choice.")
 
+    def get_pending_reports(self):
+            pending_report_list = self.logic_wrapper.get_all_pending_maintenance_reports(self.location)
+            print(pending_report_list)
+            for report in pending_report_list:
+                print(report)
+
     def list_closed_reports(self):
         #Display a list of closed reports
+        """need the closed report list here"""
         print("List of closed reports (to be implemented)")
 
     def employee_menu(self):
@@ -73,7 +84,7 @@ class maintenance_report_UI_menu:
                 # view incomplete reports
                  self.view_incomplete_reports()
             case "q":
-                # quit back to main menu
+                """quit back to main menu"""
                 pass
             case _:
                 print("wrong input")
@@ -85,9 +96,10 @@ class maintenance_report_UI_menu:
         
 
     def display_create_maintenance_report_form(self):
-        """Create a new maintenance report"""
+        #Create a new maintenance report
         new_maintenance_report = MaintenanceReport()
         print("Creating a new maintenance report")
+        #the details that need to be filled out
         new_maintenance_report.set_report_name = input("Enter a name for the report: ")
         new_maintenance_report.set_property_id = input("Enter property ID: ")
         new_maintenance_report.set_employee_id = int(input("Enter employee ID: "))
@@ -97,6 +109,13 @@ class maintenance_report_UI_menu:
         new_maintenance_report.set_price = input("Enter a price: ")
         new_maintenance_report.set_work_request_id = input("Enter the ID of the work request in progress: ")
         # can add contractor also if it applies 
+        try:
+            new_maintenance_report_added = self.logic_wrapper.add_new_maintenance_report(new_maintenance_report)
+            if new_maintenance_report_added == True:
+                print("maintenance report has been added")
+            
+        except:
+            print("something went wrong with making new maintenance report")
 
         print(new_maintenance_report.report_name)
         print(new_maintenance_report.property_id)
@@ -108,8 +127,8 @@ class maintenance_report_UI_menu:
         print(new_maintenance_report.work.request_id)
 
     def view_incomplete_reports(self):
-        """View and edit incomplete maintenance reports"""
-        #list of incomplete maintenance report
+        # View and edit incomplete maintenance reports"""
+        """need here list of incomplete maintenance report"""
         report_id = input("Enter report ID to edit: ")
         print("1. Edit maintenance report")
         edit_choice = input("Choose: ")
@@ -124,25 +143,91 @@ class maintenance_report_UI_menu:
 
     def edit_report_details(self, report_id):
         #Edit the details of a maintenance report
-        #Editing report {report_id} (details to be implemented)"
-        print("""Property ID: (1503)
-Staff ID: (26)
-Contractor ID: (x)
-Scheduled: yes
-Work done: Clean windows
-Status: pending
-Price: 0kr
-Report ID: (2)""")
+        """Editing report {report_id} (details to be implemented)"""
+       
+        try:
+            maintenance_report_to_use = self.selected_maintenance_report_by_id()
+            if maintenance_report_to_use == None:
+                return
+        except:
+            print("something went wrong")
+
+        # print the maintenance report  info
+        self.print_single_maintenance_report(maintenance_report_to_use)
+
         print("1. Mark as ready")
         print("2. Edit report details")
         user_input = input("Choose: ")
 
-        if user_input == "1":
-            print(f"Report {report_id} has been marked as ready.")
-        elif user_input == "2":
-            pass
-            #Editing report details (functionality to be implemented)
-        else:
-            print("Invalid choice.")
+        match user_input:
+            case"1":
+                print(f"Report {report_id} has been marked as ready.")
+            case "2":
+                pass
+                display_edit_maintenance_report_details()
+            case _:
+                print("Invalid choice.")
 
     
+    def display_edit_maintenance_report_details(self, selected_maintenance_report):
+        """
+        Allows editing of maintenance report details.
+        """
+        print(f"Editing details for maintenance report ID: {selected_maintenance_report.report_id}")
+        print("1. Change Property ID")
+        print("2. Change Staff ID")
+        print("3. Change Contractor ID")
+        print("4. Change Scheduled Date")
+        print("5. Change Work Done")
+        print("6. Change Status")
+        print("7. Change Price")
+        print("-" * 70)
+
+        edit_choice = input("Select an option to edit: ")
+
+        match edit_choice:
+            case "1":
+                new_property_id = input("Enter new Property ID: ")
+                selected_maintenance_report.property_id = new_property_id
+                print("Property ID updated successfully.")
+            case "2":
+                new_staff_id = input("Enter new Staff ID: ")
+                selected_maintenance_report.staff_id = new_staff_id
+                print("Staff ID updated successfully.")
+            case "3":
+                new_contractor_id = input("Enter new Contractor ID: ")
+                selected_maintenance_report.contractor_id = new_contractor_id
+                print("Contractor ID updated successfully.")
+            case "4":
+                new_scheduled_date = input("Enter new Scheduled Date: ")
+                selected_maintenance_report.scheduled_date = new_scheduled_date
+                print("Scheduled Date updated successfully.")
+            case "5":
+                new_work_done = input("Enter new Work Done description: ")
+                selected_maintenance_report.work_done = new_work_done
+                print("Work Done updated successfully.")
+            case "6":
+                new_status = input("Enter new Status: ")
+                selected_maintenance_report.status = new_status
+                print("Status updated successfully.")
+            case "7":
+                try:
+                    new_price = float(input("Enter new Price: "))
+                    selected_maintenance_report.price = new_price
+                    print("Price updated successfully.")
+                except ValueError:
+                    print("Invalid input.")
+            case _:
+                print("Invalid input")
+        print("Maintenance report details updated successfully!")
+
+    def print_single_maintenance_report(self, maintenance_report):
+            print("-"*30)
+            print(f"{'Property ID':<15}: {maintenance_report.property_id}")
+            print(f"{'Staff ID':<15}: {maintenance_report.property_name}")
+            print(f"{'Contractor ID':<15}: {maintenance_report.contractor_id}")
+            print(f"{'Scheduled date':<15}: {maintenance_report.scheduled_date}")
+            print(f"{'Work done':<15}: {maintenance_report.work_done}")
+            print(f"{'Status':<15}: {maintenance_report.status}")
+            print(f"{'Price':<15}: {maintenance_report.price}")
+            print("-"*30)

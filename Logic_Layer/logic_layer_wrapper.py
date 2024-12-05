@@ -35,8 +35,8 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### CONTRACTOR #########################################################################################
-    def get_all_contractors(self, location):
-        return self.contractor_logic_manager.get_all_contractors(location)
+    def get_all_contractors_at_location(self, location):
+        return self.contractor_logic_manager.get_all_contractors_at_location(location)
         # her mynd það kalla í sama fall inn í contractors logic manager 
         # er núna bara með dummy gögn
         """ con1 = Contractor("1","alverk","tumi","8-19",["meow"])
@@ -66,29 +66,62 @@ class Logic_Layer_Wrapper:
     
     ########################################################################################################
     ### PROPERTIES #########################################################################################
-    def get_all_properties(self, location):
+    def get_all_properties_at_location(self, location):
         # dummy stuff
-        """ prop1 = Property("1", "hremmi diddy cave", "rvk", "96")
+        """prop1 = Property("1", "hremmi diddy cave", "rvk", "96")
         prop2 = Property("2", "Johun plage", "rvk", "swag")
         prop3 = Property("3", "kormakur aka irl jon jones on a bad day cave", "rvk", "19")
         prop4 = Property("4", "Langhals vegur", "rvk", "112")
         property_list = [prop1,prop2,prop3,prop4] """
-        return self.property_logic_manager.fetch_all_properties_in_storage(location)
+        return self.property_logic_manager.get_all_properties_at_location(location)
+    def get_property_by_id(self, location, property_id):
+        """
+        Retrieve a property by its ID.
+        """
+        try:
+            properties = self.get_all_properties(location)
+            for property in properties:
+                if property.property_id == property_id:
+                    return property
+            return None  # Property not found
+        except Exception:
+            print("Error retrieving property by ID")
+            return None
+    def add_property(self, new_property):
+        """
+        Add a new property to the storage.
+        """
+        
+        try:
+            # Validate the new property before adding.
+            if not new_property.property_id or not new_property.property_name:
+                raise ValueError("Property ID and Name are required.")
+
+            # Save the property using the storage manager.
+            self.storage_manager.save_property(new_property)
+            print("Property with ID {new_property.property_id} added successfully.")
+        except Exception:
+            print("Error adding property")
 
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################
-    def get_all_employees(self, location):
-        return self.employee_logic_manager.fetch_all_employee_in_storage(location)
+    def get_all_employees_at_location(self, location):
+        return self.employee_logic_manager.get_all_employees_at_location(location)
 
     ########################################################################################################
     ### MAINTENANCE_REPORTS ################################################################################
-    def get_all_maintenance_reports(self, location):
-        return self.maintenance_report_logic_manager.fetch_all_maintencance_reports(location)
+    def get_all_maintenance_reports_at_location(self, location):
+        return self.maintenance_report_logic_manager.get_all_maintencance_reports_at_location(location)
+    
+    def get_all_pending_maintenance_reports(self, location) -> list[MaintenanceReport]:
+        #Debug
+        print('in logic layer')
+        return self.maintenance_report_logic_manager.fetch_all_pending_maintencance_reports(location)
 
     ########################################################################################################
     ### WORK_REQUESTS ######################################################################################
-    def get_all_work_requests(self, rank, location) -> list: 
-        return self.work_request_logic_manager.fetch_all_work_requests_in_storage(rank, location)
+    def get_all_work_requests_at_location(self, rank, location) -> list: 
+        return self.work_request_logic_manager.get_all_work_requests_at_location(rank, location)
         # dummy data
         """wr1 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234", "Reykjavik", "H001", "01-01-24", "11-01-24", False, 0, "Low", "MR0002", "Pending", False, "", False)
 
