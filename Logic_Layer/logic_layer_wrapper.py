@@ -73,7 +73,7 @@ class Logic_Layer_Wrapper:
         prop3 = Property("3", "kormakur aka irl jon jones on a bad day cave", "rvk", "19")
         prop4 = Property("4", "Langhals vegur", "rvk", "112")
         property_list = [prop1,prop2,prop3,prop4] """
-        return self.property_logic_manager.fetch_all_properties_in_storage(location)
+        return self.property_logic_manager.get_all_properties_at_location(location)
     def get_property_by_id(self, location, property_id):
         """
         Retrieve a property by its ID.
