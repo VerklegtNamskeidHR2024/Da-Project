@@ -12,7 +12,7 @@ class Property:
     def set_name(self, name):
         self.name = name
 
-    def set_contition(self, condition):
+    def set_condition(self, condition):
         self.condition = condition
 
     def set_location(self, location):
@@ -27,7 +27,7 @@ class Property:
     def get_name(self):
         return self.name
     
-    def get_contition(self):
+    def get_condition(self):
         return self.condition
 
     def get_location(self):
