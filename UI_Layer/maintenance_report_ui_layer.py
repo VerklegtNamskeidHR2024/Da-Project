@@ -86,7 +86,6 @@ class maintenance_report_UI_menu:
         print("------------------------------------------------")
         print("1. Create maintenance report")
         print("2. Incomplete maintenance reports")
-        print('3. Create new reports')
         print("------------------------------------------------")
         user_action = input("Select an Option:  ")
         match user_action:
@@ -121,28 +120,10 @@ class maintenance_report_UI_menu:
         price = input("Enter a price: ")
         contractor_id = input('Enter contractor ID (leave empty if no contractor)')
         work_request_id = input("Enter the ID of the work request in progress: ")
-        new_maintenance_report = MaintenanceReport('', report_name, location, property_id, staff_id, regular_maintenance,
+        new_maintenance_report = MaintenanceReport('', report_name, location, property_id, staff_id, False,
         maintenance_description,'' ,price, False, contractor_id, work_request_id)
-        # can add contractor also if it applies 
-        try:
-            new_maintenance_report_added = self.logic_wrapper.add_new_maintenance_report(self.location, new_maintenance_report)
-            if new_maintenance_report_added == True:
-                print("maintenance report has been added")
-            
-        except:
-            print("something went wrong with making new maintenance report")
-            print(new_maintenance_report.report_id)
-            print(new_maintenance_report.report_name)
-            print(new_maintenance_report.location)
-            print(new_maintenance_report.property_id)
-            print(new_maintenance_report.staff_id)
-            print(new_maintenance_report.regular_maintenance)
-            print(new_maintenance_report.maintenance_description)
-            print(new_maintenance_report.report_status)
-            print(new_maintenance_report.price)
-            print(new_maintenance_report.mark_as_done)
-            print(new_maintenance_report.contractor_id)
-            print(new_maintenance_report.work_request_id)
+
+        new_maintenance_report_added = self.logic_wrapper.add_new_maintenance_report_to_storage(self.location, new_maintenance_report, regular_maintenance)
 
     def view_incomplete_reports(self):
         # View and edit incomplete maintenance reports"""
@@ -182,7 +163,7 @@ class maintenance_report_UI_menu:
                 print(f"Report {report_id} has been marked as ready.")
             case "2":
                 pass
-                display_edit_maintenance_report_details()
+                display_edit_maintenance_report_details(maintenance_report_to_use)
             case _:
                 print("Invalid choice.")
 

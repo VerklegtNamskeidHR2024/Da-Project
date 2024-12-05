@@ -5,19 +5,35 @@ class maintenance_report_logic_manager:
     def sanity_check_maintencance_report(maintencance_report):
         pass
 
-    def add_maintencance_report_to_storage(self, location, maintenance_report):
-        highestID = 0
+    def get_highest_ID(self, location):
+        highestID = -1
         list_of_all_reports = self.get_all_maintencance_reports_at_location(location)
         for report in list_of_all_reports:
             stripped_ID = report.report_id[2:]
             if int(stripped_ID) > highestID:
                 highestID = int(stripped_ID)
-                highestID += 1
-        new_report_id = 'MR' + highestID
-        print(new_report_id)
+        highestID += 1
+
+        new_report_id = 'MR' + str(highestID)
+        return new_report_id
+
+    def add_maintencance_report_to_storage(self, location, maintenance_report, is_regular):
+        highestID = -1
+        list_of_all_reports = self.get_all_maintencance_reports_at_location(location)
+        for report in list_of_all_reports:
+            stripped_ID = report.report_id[2:]
+            if int(stripped_ID) > highestID:
+                highestID = int(stripped_ID)
+        highestID += 1
+
+        new_report_id = self.get_highest_ID(location)
+        if is_regular == 'yes' or is_regular == 'Yes' or is_regular == 'YES':
+            maintenance_report.set_regular_maintenance(True)
+        elif is_regular == 'no' or is_regular == 'No' or is_regular == 'NO':
+            maintenance_report.set_regular_maintenance(False)
         maintenance_report.set_report_id(new_report_id)
+        maintenance_report.set_report_status('Pending')
         list_of_all_reports.append(maintenance_report)
-        print('Write this shit')
         self.Storage_Layer_Wrapper.write_to_file_maintenance_reports(list_of_all_reports)
 
     def edit_maintencance_report(maintencance_report):
@@ -33,9 +49,6 @@ class maintenance_report_logic_manager:
                 maintenance_report_sorted_list.append(maintenance_report)
 
         return maintenance_report_sorted_list
-
-    def mark_report_as_ready(maintencance_report_ID):
-        pass
 
     def deny_or_accept_maintencance_report_for_admin(maintencance_report_ID): 
         pass
@@ -63,7 +76,3 @@ class maintenance_report_logic_manager:
             return 'No closed reports'
         else:
             return closed_reports
-
-    def fetch_all_incomplete_maintenance_reports(maintencance_report_ID) -> list:
-        pass
-
