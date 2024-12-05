@@ -1,3 +1,5 @@
+from Model_Classes.work_request_model import WorkRequest
+
 class work_request_UI_menu:
     def __init__(self, logic_wrapper, rank, location):
         self.logic_wrapper = logic_wrapper
@@ -21,32 +23,20 @@ class work_request_UI_menu:
         # self.display_closed_work_requests_printed() 
 
 
-    def display_all_work_requests_printed(self, work_request_list: list) -> print: 
+    def display_all_work_requests_printed(self, work_request_list: list=None) -> print: 
         """Prints out all open work requests with their ID, Name and Description. """
-        # try:
-            # prioritized_work_request_list = []
-            # for item in work_request_list:
-            #     if item.priority == "High":
-            #         prioritized_work_request_list.append(item)
-            # for item in work_request_list:
-            #     if item.priority == "Medium":
-            #         prioritized_work_request_list.append(item)
-            # for item in work_request_list:
-            #     if item.priority == "Low": 
-            #         prioritized_work_request_list.append(item)
-
-        # work_request_list = self.logic_wrapper.get_all_work_requests(self.rank, self.location)
-        
-        print("{:0}{:>6}{:>5}{:>9}{:>12}".format("ID", "|", "Name", "|", "Description"))
-        print("-" * 70)
-        for item in sorted(work_request_list):
-            print("{:0}{:>3}{:>10}{:>4}{:>51}".format(item.work_request_id, "|", item.name, "|", item.description)) 
-        print("-" * 70)
-        # except TypeError:
-        # print("Something Went Wrong, Please Try Again") 
+        try:
+            print("{:0}{:>6}{:>5}{:>9}{:>12}".format("ID", "|", "Name", "|", "Description"))
+            print("-" * 70)
+            for item in sorted(work_request_list):
+                print("{:0}{:>3}{:>10}{:>4}{:>51}".format(item.work_request_id, "|", item.name, "|", item.description)) 
+            print("-" * 70)
+        except TypeError:
+            print()
+            print("{:>50}".format("No Work Requests To Display")) 
         
 
-    def display_selected_work_request_information(self, work_request: object) -> print:
+    def display_selected_work_request_information(self, work_request: object=None) -> print:
         """Prints out a selected work requests and all it's information for user to read. """
 
         print("{:0}{:>14}{:<10}".format("Categories", "|", "Details"))
@@ -90,8 +80,8 @@ class work_request_UI_menu:
             print()
             user_choice = input("Select an Option: ")
             print("-" * 70)
-            match user_choice:
-                case "1": 
+            match (user_choice , self.rank):
+                case ("1", self.rank): 
                     self.select_work_request_by_id()
                 case "2":
                     self.display_create_work_request_form()
@@ -121,9 +111,9 @@ class work_request_UI_menu:
                     print("Departing from NaN Air, Thank you for Visiting!")
                 case "Q":
                     print("Departing from NaN Air, Thank you for Visiting!")
-                case _:
+                case "b":
                     print("Invalid Input, Please Try Again.")
-                    self.start_point_work_requests_UI()
+                    return
                 
 
     def select_work_request_by_id(self) -> print:
@@ -145,10 +135,10 @@ class work_request_UI_menu:
                     self.employee_edit_work_request_form(work_request_object)
         except AttributeError:
             print()
-            print("Work Request not Found, Please Try Again.")
+            print("No Work Request With That ID Was Found, Please Try Again.")
             print()
             self.select_work_request_by_id
-        
+    
 
     def display_create_work_request_form(self):
         """Creates a new work request object and asks for different information details that are passed to, and set
@@ -156,7 +146,7 @@ class work_request_UI_menu:
         created but otherwise it returns the user to the main menu. """
 
         # try:
-        new_work_request = self.logic_wrapper.WorkRequest
+        new_work_request = WorkRequest()
         print()
         print("[ New Work Request Form ]")
         print("-" * 70)
@@ -165,13 +155,21 @@ class work_request_UI_menu:
         new_work_request.set_property_id(input("Property ID: "))
         new_work_request.set_date_of_creation(input("Start Date: "))
         new_work_request.set_mark_as_completed(input("Completition Date: "))
-        new_work_request.set_repetitive_work(input("Mark Repititive? (Yes or No): "))
+
+        repetitive_work = input("Mark Repititive? (Yes or No): ")
+        if repetitive_work == "yes" or repetitive_work == "Yes":
+            repetitive_work == True
+        elif repetitive_work == "no" or repetitive_work == "No":
+            repetitive_work == False
+        else:
+
+        new_work_request.set_repetitive_work(repetitive_work)
         new_work_request.set_reopen_interval(input("Interval of Days Until Request Re-Opens: "))
         new_work_request.set_priority(input("Request Priority (High, Medium or Low):  "))
-        # if self.rank != "Admin": 
-        new_work_request.set_location(self.location)
-        # else:
-        #     new_work_request.set_location(input("Set Location for Work Request: "))
+        if self.rank != "Admin": 
+            new_work_request.set_location(self.location)
+        else:
+            new_work_request.set_location(input("Set Location for Work Request: "))
         print("-" * 70)
         print()
         work_request_list = self.logic_wrapper.add_work_request(self.rank, self.location, new_work_request)
@@ -179,19 +177,19 @@ class work_request_UI_menu:
             print(object)
         print()
         print("Work Request Has Been Created")
-            # new_work_request_confirmation = input("Enter 1 to Confirm: ")
-            # if new_work_request_confirmation == "1": 
-                # is_valid = self.logic_wrapper.sanity_check_work_request(new_work_request)
-                # if is_valid == True:
+            new_work_request_confirmation = input("Enter 1 to Confirm: ")
+            if new_work_request_confirmation == "1": 
+                is_valid = self.logic_wrapper.sanity_check_work_request(new_work_request)
+                if is_valid == True:
                 
-                # else:
-                #     print("Something Went Wrong When Creating the Work Request, Please Try Again.")
-                #     return
-                # print("-" * 70)
-                # print("New Work Request Has Been Created!")
-                # self.start_point_work_requests_UI
-        # except: 
-        #     print("Something Went Wrong When Creating the Work Request, Please Try Again.")
+                else:
+                    print("Something Went Wrong When Creating the Work Request, Please Try Again.")
+                    return
+                print("-" * 70)
+                print("New Work Request Has Been Created!")
+                self.start_point_work_requests_UI
+        except: 
+            print("Something Went Wrong When Creating the Work Request, Please Try Again.")
         
         
     def employee_edit_work_request_form(self, work_request):
