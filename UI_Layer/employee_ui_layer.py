@@ -37,7 +37,7 @@ class employee_UI_menu:
 
     def display_all_employees(self):
         """The function displays a table with all employees at a location and their basic information"""
-        employee_list = self.logic_wrapper.get_all_employees(self.location)
+        employee_list = self.logic_wrapper.get_all_employees_at_location(self.location)
         print("-" * 75)
         print("{:>15}{:>10}{:>15}".format("Name", "Phone", "Location"))
         print("-" * 75)

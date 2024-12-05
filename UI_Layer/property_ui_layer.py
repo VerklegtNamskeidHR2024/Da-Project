@@ -11,14 +11,21 @@ class property_UI_menu:
         #Entry point for the property UI.
         self.display_all_properties()
 
-    def display_all_properties(self):
+    def display_all_properties(self):   
+
+        # NEEDS to be changed to match with other UI files!!!!
         #Displays the list of all properties and provides options
         print(f"{self.rank} - Properties Page")
+        property_list = self.logic_wrapper.get_all_properties_at_location(self.location)
+        print("-" * 75)
+        print("{:>15}{:>10}{:>15}".format("Name", "Phone", "Location"))
+        print("-" * 75)
 
-        # Fetch and print all properties
-        property_list = self.logic_wrapper.get_all_properties(self.location)
-        self.print_properties_from_list(property_list)
-        #gives the option to add or select property 
+        for item in property_list:
+            print("{:>15}{:>10}{:>15}".format(item.property_id,item.name, item.location))
+            # print(f"{item.name :> 15}|{item.phone_number :> 10}|{item.email :> 10}|{self.location :> 15}")
+        print("-" * 75)
+
         print("1. Select Property")
         print("2. Add Property")
         print("-" * 70)
@@ -186,13 +193,3 @@ class property_UI_menu:
         print(f"{'Price to Fix':<20}: {property.total_price_to_fix}")
         print(f"{'Price':<20}: {property.property_price}")
         print("-" * 30)
-
-    def print_properties_from_list(self, property_list):
-        #Prints all properties from a list.
-        print("-" * 111)
-        print(f"{'ID':<10}|{'Property Name':<25}|{'Location':<20}|{'Condition':<20}|{'Total price to fix':<20}|{'Price':<20}")
-        print("-" * 111)
-        #takes the item from the property list 
-        for item in property_list:
-            print(f"{item.property_id:<10}|{item.name:<25}|{item.location:<20}|{item.condition:<20}|{item.total_price_to_fix:<20}|{item.property_price:<20}")
-        print("-" * 111)

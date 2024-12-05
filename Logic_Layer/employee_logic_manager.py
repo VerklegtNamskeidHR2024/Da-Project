@@ -8,10 +8,17 @@ class employee_logic_manager:
 
         return
 
-    def fetch_all_employee_in_storage(self,location):
-        #needs to add read json
-        return self.Storage_Layer_Wrapper.get_all_employee()
+    def get_all_employees_at_location(self, location) -> list:
+        employees_sorted_list = []
 
+        all_employees = self.Storage_Layer_Wrapper.get_all_employee()
+
+        for employee in all_employees:
+            if employee.location == location:
+                employees_sorted_list.append(employee)
+
+        return employees_sorted_list
+    
     def sanity_check_employee(employee, display):
         pass
         
