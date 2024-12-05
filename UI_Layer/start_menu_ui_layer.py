@@ -116,8 +116,9 @@ class Main_Menu:
             # maybe have while for loop
             # and add a quit opition
             # admin manager
-            print(self.rank)
-            print(self.location)
+            # print("Welcome ", self.rank)
+            # print(f'{"Current Location - {self.location}"}')
+            print()
             print(f" {self.rank} - Home Page")
             print("-" * 70)
             print("1. Properties")
@@ -128,17 +129,17 @@ class Main_Menu:
             if self.rank != "Employee":
                 print("6. Locations")
             print("q. Quit")
-
             print("-" * 70)
 
             user_action = input("Select an Option:  ")
-            self.user_chooice_select(user_action.lower())
+            self.user_choice_select(user_action.lower())
 
             # used to get a loop may want to change
             #self.display_menu_items()
         return
 
-    def user_chooice_select(self, user_action):
+    def user_choice_select(self, user_action):
+
         # calls the diffrent UI layer classes
         match user_action:
             case "1":

@@ -16,7 +16,7 @@ I was working today on maintenance report ui and property ui. we are halfway thr
 
 
 Kormákur:\
-
+I finished writing the bulk of the code for the work request UI class and began testing it to the errors that came up. Far from perfect and many things need to be refined. Also worked a bit on the work request section in the logic wrapper and logic manager. Came at 11:30 and left at 21:30. Contined working on it until 00:50
 
 
 Jón:\

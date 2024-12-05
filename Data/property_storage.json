@@ -1,86 +1,86 @@
 [
     {
-        "property_id": "H0001",
+        "property_id": "P1",
         "name": "suite",
         "location": "Reykjavik",
         "condition": "excellent",
         "total_price_to_fix": 1500.0,
-        "property_price": 30230000000
+        "property_price": 30230
     },
     {
-        "property_id": "H0002",
+        "property_id": "P2",
         "name": "suite",
         "location": "Reykjavik",
         "condition": "fair",
         "total_price_to_fix": 1200.0,
-        "property_price": 300000000
+        "property_price": 300
     },
     {
-        "property_id": "H0003",
+        "property_id": "P3",
         "name": "suite",
         "location": "Reykjavik",
         "condition": "excellent",
         "total_price_to_fix": 1500.0,
+        "property_price": 30
+    },
+    {
+        "property_id": "P4",
+        "name": "suite",
+        "location": "Reykjavik",
+        "condition": "fair",
+        "total_price_to_fix": 1200.0,
+        "property_price": 30
+    },
+    {
+        "property_id": "P5",
+        "name": "suite",
+        "location": "Reykjavik",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 30
+    },
+    {
+        "property_id": "P6",
+        "name": "suite",
+        "location": "Nuuk",
+        "condition": "fair",
+        "total_price_to_fix": 1200.0,
+        "property_price": 300
+    },
+    {
+        "property_id": "P7",
+        "name": "suite",
+        "location": "Nuuk",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 300
+    },
+    {
+        "property_id": "P8",
+        "name": "suite",
+        "location": "Nuuk",
+        "condition": "fair",
+        "total_price_to_fix": 1200.0,
+        "property_price": 30
+    },
+    {
+        "property_id": "P9",
+        "name": "suite",
+        "location": "Nuuk",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 300000000
+    },
+    {
+        "property_id": "P10",
+        "name": "suite",
+        "location": "Nuuk",
+        "condition": "fair",
+        "total_price_to_fix": 1200.0,
         "property_price": 30000000000
     },
     {
-        "property_id": "H0004",
-        "name": "suite",
-        "location": "Reykjavik",
-        "condition": "fair",
-        "total_price_to_fix": 1200.0,
-        "property_price": 30000000
-    },
-    {
-        "property_id": "H0005",
-        "name": "suite",
-        "location": "Reykjavik",
-        "condition": "excellent",
-        "total_price_to_fix": 1500.0,
-        "property_price": 30000000000
-    },
-    {
-        "property_id": "H0006",
-        "name": "suite",
-        "location": "Nuuk",
-        "condition": "fair",
-        "total_price_to_fix": 1200.0,
-        "property_price": 300000000
-    },
-    {
-        "property_id": "H0007",
-        "name": "suite",
-        "location": "Nuuk",
-        "condition": "excellent",
-        "total_price_to_fix": 1500.0,
-        "property_price": 300000000
-    },
-    {
-        "property_id": "H0008",
-        "name": "suite",
-        "location": "Nuuk",
-        "condition": "fair",
-        "total_price_to_fix": 1200.0,
-        "property_price": 30000000
-    },
-    {
-        "property_id": "H0009",
-        "name": "suite",
-        "location": "Nuuk",
-        "condition": "excellent",
-        "total_price_to_fix": 1500.0,
-        "property_price": 300000000
-    },
-    {
-        "property_id": "H0010",
-        "name": "suite",
-        "location": "Nuuk",
-        "condition": "fair",
-        "total_price_to_fix": 1200.0,
-        "property_price": 30000000000
-    },
-    {
-        "property_id": "H0011",
+        "property_id": "P11",
         "name": "suite",
         "location": "Kulusuk",
         "condition": "excellent",
@@ -88,7 +88,7 @@
         "property_price": 30000000
     },
     {
-        "property_id": "H0012",
+        "property_id": "P12",
         "name": "suite",
         "location": "Kulusuk",
         "condition": "excellent",
@@ -96,7 +96,7 @@
         "property_price": 300000000
     },
     {
-        "property_id": "H0013",
+        "property_id": "P13",
         "name": "suite",
         "location": "Kulusuk",
         "condition": "excellent",
@@ -104,7 +104,7 @@
         "property_price": 3000000
     },
     {
-        "property_id": "H0014",
+        "property_id": "P14",
         "name": "suite",
         "location": "Kulusuk",
         "condition": "excellent",
@@ -112,7 +112,7 @@
         "property_price": 30000000000
     },
     {
-        "property_id": "H0015",
+        "property_id": "P15",
         "name": "suite",
         "location": "Kulusuk",
         "condition": "excellent",
@@ -120,7 +120,7 @@
         "property_price": 30000000000
     },
     {
-        "property_id": "H0016",
+        "property_id": "P16",
         "name": "suite",
         "location": "Thorshofn",
         "condition": "excellent",
@@ -128,7 +128,7 @@
         "property_price": 30000000
     },
     {
-        "property_id": "H0017",
+        "property_id": "P17",
         "name": "suite",
         "location": "Thorshofn",
         "condition": "fair",
@@ -136,7 +136,7 @@
         "property_price": 300000000
     },
     {
-        "property_id": "H0018",
+        "property_id": "P18",
         "name": "suite",
         "location": "Thorshofn",
         "condition": "excellent",
@@ -144,7 +144,7 @@
         "property_price": 30000000000
     },
     {
-        "property_id": "H0019",
+        "property_id": "P19",
         "name": "suite",
         "location": "Thorshofn",
         "condition": "excellent",
@@ -152,7 +152,7 @@
         "property_price": 30000000
     },
     {
-        "property_id": "H0020",
+        "property_id": "P20",
         "name": "suite",
         "location": "Thorshofn",
         "condition": "excellent",
@@ -160,7 +160,7 @@
         "property_price": 300000000
     },
     {
-        "property_id": "H0021",
+        "property_id": "P21",
         "name": "suite",
         "location": "Thorshofn",
         "condition": "fair",
@@ -168,7 +168,7 @@
         "property_price": 300000000
     },
     {
-        "property_id": "H0022",
+        "property_id": "P22",
         "name": "suite",
         "location": "Tingwall",
         "condition": "excellent",
@@ -176,7 +176,7 @@
         "property_price": 300000000
     },
     {
-        "property_id": "H0023",
+        "property_id": "P23",
         "name": "suite",
         "location": "Tingwall",
         "condition": "excellent",
@@ -184,7 +184,7 @@
         "property_price": 300000000
     },
     {
-        "property_id": "H0024",
+        "property_id": "P24",
         "name": "suite",
         "location": "Tingwall",
         "condition": "excellent",
@@ -192,7 +192,7 @@
         "property_price": 3000000
     },
     {
-        "property_id": "H0025",
+        "property_id": "P25",
         "name": "suite",
         "location": "Tingwall",
         "condition": "excellent",
@@ -200,7 +200,7 @@
         "property_price": 30000000
     },
     {
-        "property_id": "H0026",
+        "property_id": "P26",
         "name": "suite",
         "location": "Tingwall",
         "condition": "fair",
@@ -208,7 +208,7 @@
         "property_price": 30000000000
     },
     {
-        "property_id": "H0027",
+        "property_id": "P27",
         "name": "suite",
         "location": "Longyearbyen",
         "condition": "excellent",
@@ -216,7 +216,7 @@
         "property_price": 300000000
     },
     {
-        "property_id": "H0028",
+        "property_id": "P28",
         "name": "suite",
         "location": "Longyearbyen",
         "condition": "excellent",
@@ -224,7 +224,7 @@
         "property_price": 30000000
     },
     {
-        "property_id": "H0029",
+        "property_id": "P29",
         "name": "suite",
         "location": "Longyearbyen",
         "condition": "excellent",
@@ -232,7 +232,7 @@
         "property_price": 30000000
     },
     {
-        "property_id": "H0030",
+        "property_id": "P30",
         "name": "suite",
         "location": "Longyearbyen",
         "condition": "fair",

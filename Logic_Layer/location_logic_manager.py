@@ -3,8 +3,16 @@ class location_logic_manager:
     def __init__(self, Storage_Layer_Wrapper):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
 
-    def fetch_all_locations_in_storage(self, Location) -> list:
-        return self.Storage_Layer_Wrapper.get_all_locations()
+    def get_all_locations(self, Location) -> list:
+        location_sorted_list = []
+
+        all_locations = self.Storage_Layer_Wrapper.get_all_locations()
+
+        for location in all_locations:
+            if location.location == location:
+                location_sorted_list.append(location)
+
+        return location_sorted_list
 
     def fetch_all_amenities_for_location_in_storage(self, location) -> list:
         pass
