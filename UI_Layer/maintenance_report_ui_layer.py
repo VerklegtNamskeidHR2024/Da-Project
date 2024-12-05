@@ -42,6 +42,7 @@ class maintenance_report_UI_menu:
         print(f"{self.rank} - maintenance report Page")
 
         """List of pending reports (to be implemented)"""
+        
         print("------------------------------------------------")
         report_id = input("Enter report ID to manage: ")
         print("------------------------------------------------")
