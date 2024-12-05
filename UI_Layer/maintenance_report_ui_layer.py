@@ -42,6 +42,7 @@ class maintenance_report_UI_menu:
         print(f"{self.rank} - maintenance report Page")
 
         """List of pending reports (to be implemented)"""
+        self.get_pending_reports()
         print("------------------------------------------------")
         report_id = input("Enter report ID to manage: ")
         print("------------------------------------------------")
@@ -56,6 +57,12 @@ class maintenance_report_UI_menu:
             print(f"Report {report_id} has been denied.")
         else:
             print("Invalid choice.")
+
+    def get_pending_reports(self):
+            pending_report_list = self.logic_wrapper.get_all_pending_maintenance_reports(self.location)
+            print(pending_report_list)
+            for report in pending_report_list:
+                print(report)
 
     def list_closed_reports(self):
         #Display a list of closed reports
