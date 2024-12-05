@@ -6,11 +6,12 @@ class maintenance_report_UI_menu:
         self.location = location
 
     def start_point_maintenance_reports_UI(self):
-        """Entry point for the maintenance reports UI"""
+        #Entry point for the maintenance reports UI
         self.display_maintenance_report()
         return
 
     def display_maintenance_report(self):
+        # if the choice is admin or mangers it goes to the admin_or_manager_menu
         if self.rank in ["Admin", "Manager"]:
             self.admin_or_manager_menu()
         elif self.rank == "Employee":
@@ -19,7 +20,7 @@ class maintenance_report_UI_menu:
             print("Invalid rank. Access denied.")
 
     def admin_or_manager_menu(self):
-        """Menu for admin or manager roles"""
+        #Menu for admin or manager roles
         print(f"{self.rank} - maintenance report Page")
         print("------------------------------------------------")
         print("1. Pending reports")
@@ -38,7 +39,7 @@ class maintenance_report_UI_menu:
         #Display a list of pending reports
         print(f"{self.rank} - maintenance report Page")
 
-        print("List of pending reports (to be implemented)")
+        """List of pending reports (to be implemented)"""
         print("------------------------------------------------")
         report_id = input("Enter report ID to manage: ")
         print("------------------------------------------------")
@@ -56,6 +57,7 @@ class maintenance_report_UI_menu:
 
     def list_closed_reports(self):
         #Display a list of closed reports
+        """need the closed report list here"""
         print("List of closed reports (to be implemented)")
 
     def employee_menu(self):
@@ -73,7 +75,7 @@ class maintenance_report_UI_menu:
                 # view incomplete reports
                  self.view_incomplete_reports()
             case "q":
-                # quit back to main menu
+                """quit back to main menu"""
                 pass
             case _:
                 print("wrong input")
@@ -85,9 +87,10 @@ class maintenance_report_UI_menu:
         
 
     def display_create_maintenance_report_form(self):
-        """Create a new maintenance report"""
+        #Create a new maintenance report
         new_maintenance_report = MaintenanceReport()
         print("Creating a new maintenance report")
+        #the details that need to be filled out
         new_maintenance_report.set_report_name = input("Enter a name for the report: ")
         new_maintenance_report.set_property_id = input("Enter property ID: ")
         new_maintenance_report.set_employee_id = int(input("Enter employee ID: "))
@@ -108,8 +111,8 @@ class maintenance_report_UI_menu:
         print(new_maintenance_report.work.request_id)
 
     def view_incomplete_reports(self):
-        """View and edit incomplete maintenance reports"""
-        #list of incomplete maintenance report
+        # View and edit incomplete maintenance reports"""
+        """need here list of incomplete maintenance report"""
         report_id = input("Enter report ID to edit: ")
         print("1. Edit maintenance report")
         edit_choice = input("Choose: ")
@@ -124,7 +127,7 @@ class maintenance_report_UI_menu:
 
     def edit_report_details(self, report_id):
         #Edit the details of a maintenance report
-        #Editing report {report_id} (details to be implemented)"
+        """Editing report {report_id} (details to be implemented)"""
         print("""Property ID: (1503)
 Staff ID: (26)
 Contractor ID: (x)
@@ -141,7 +144,7 @@ Report ID: (2)""")
             print(f"Report {report_id} has been marked as ready.")
         elif user_input == "2":
             pass
-            #Editing report details (functionality to be implemented)
+            """Editing report details (functionality to be implemented)"""
         else:
             print("Invalid choice.")
 
