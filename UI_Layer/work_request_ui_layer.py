@@ -76,45 +76,36 @@ class work_request_UI_menu:
         print()
         self.display_all_work_requests_printed(work_request_list)
         if self.rank != "Employee":
-            print("{:0}{:>3}{:>15}{:>3}{:>19}".format("1. Select Request", "|", "2. Add Request", "|", "3. Closed Requests"))
+            print("{:0}{:>3}{:>15}{:>3}{:>19}".format("1. Select Request", "|", "2. New Requests", "|", "3. Pending Requests"))
+            print("{:0}{:>3}{:>20}{:>3}{:>19}".format("4. My Requests", "|", "5. Closed Requests", "|", "6. Add Request" ))
             print()
-            user_choice = input("Select an Option: ")
-            print("-" * 70)
-            match (user_choice , self.rank):
-                case ("1", self.rank): 
-                    self.select_work_request_by_id()
-                case "2":
-                    self.display_create_work_request_form()
-                case "3":
-                    self.display_closed_work_requests_printed()
-                case "q":
-                    print("Departing from NaN Air, Thank you for Visiting!")
-                case "Q":
-                    print("Departing from NaN Air, Thank you for Visiting!")
-                case _:
-                    print("Invalid Input, Please Try Again.")
-                    self.start_point_work_requests_UI()
-        
         else:
-            print("{:0}{:>3}{:>20}{:>3}{:>15}".format("1. New Requests", "|", "2. Pending Requests", "|", "3. My Requests"))
+            print("{:0}{:>3}{:>20}".format("1. Select Request", "|", "2. New Requests"))
+            print("{:0}{:>3}{:>20}".format("3. Pending Requests", "|", "4. My Requests"))
             print()
-            user_choice = input("Select an Option: ")
-            print("-" * 70)    
-            match user_choice:
-                case "1": 
-                    self.display_all_new_work_requests_to_accept_printed()
-                case "2":
-                    self.display_all_pending_work_requests_printed()
-                case "3": 
-                    self.display_my_work_requests_printed()
-                case "q":
-                    print("Departing from NaN Air, Thank you for Visiting!")
-                case "Q":
-                    print("Departing from NaN Air, Thank you for Visiting!")
-                case "b":
-                    print("Invalid Input, Please Try Again.")
-                    return
-                
+        user_choice = input("Select an Option: ")
+        print("-" * 70)
+        match (user_choice , self.rank):
+            case ("1", self.rank): 
+                self.select_work_request_by_id()
+            case ("2", self.rank):
+                self.display_all_new_work_requests_printed()
+            case ("3", self.rank):
+                self.display_all_pending_work_requests_printed()
+            case ("4", self.rank):
+                self.display_my_work_requests_printed()
+            case ("5", "Admin") | ("5", "Manager"):
+                self.display_closed_work_requests_printed()
+            case ("6", "Admin") | ("6", "Manager"): 
+                self.display_create_work_request_form()
+            case "q":
+                print("Departing from NaN Air, Thank you for Visiting!")
+            case "Q":
+                print("Departing from NaN Air, Thank you for Visiting!")
+            case _:
+                print("Invalid Input, Please Try Again.")
+                self.start_point_work_requests_UI()
+
 
     def select_work_request_by_id(self) -> print:
         """System asks user for the ID of the work request they wish to find and prints out 
@@ -294,7 +285,7 @@ class work_request_UI_menu:
         pass
 
 
-    def display_all_new_work_requests_to_accept_printed(self): 
+    def display_all_new_work_requests_printed(self): 
         new_work_request_list = self.logic_wrapper.get_all_new_work_requests(self.rank, self.location)
         self.display_all_work_requests_printed(new_work_request_list)
         is_accepted = False
