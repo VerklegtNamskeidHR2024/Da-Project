@@ -152,7 +152,6 @@ class work_request_UI_menu:
             repetitive_work == True
         elif repetitive_work == "no" or repetitive_work == "No":
             repetitive_work == False
-   
 
         new_work_request.set_repetitive_work(repetitive_work)
         new_work_request.set_reopen_interval(input("Interval of Days Until Request Re-Opens: "))
@@ -161,25 +160,16 @@ class work_request_UI_menu:
             new_work_request.set_location(self.location)
         else:
             new_work_request.set_location(input("Set Location for Work Request: "))
-        print("-" * 70)
-        print()
-        work_request_list = self.logic_wrapper.add_work_request(self.rank, self.location, new_work_request)
-        for object in work_request_list:
-            print(object)
-        print()
-        print("Work Request Has Been Created")
         try:
             new_work_request_confirmation = input("Enter 1 to Confirm: ")
             if new_work_request_confirmation == "1": 
-                is_valid = self.logic_wrapper.sanity_check_work_request(new_work_request)
-                if is_valid == True:
-                
-                    print("Something Went Wrong When Creating the Work Request, Please Try Again.")
+                new_work_request = self.logic_wrapper.add_work_request(self.rank, self.location, new_work_request)
+                if new_work_request == True:
+                    print("-" * 70)
+                    print()
+                    print("Work Request Has Been Created")
                     return
-                print("-" * 70)
-                print("New Work Request Has Been Created!")
-                self.start_point_work_requests_UI
-        except: 
+        except : 
             print("Something Went Wrong When Creating the Work Request, Please Try Again.")
         pass
         

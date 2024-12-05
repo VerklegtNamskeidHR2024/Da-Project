@@ -3,16 +3,34 @@ class work_request_logic_manager:
     def __init__(self, Storage_Layer_Wrapper):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
 
-    def sanity_check_work_request(self, Work_request: object) -> bool:
+    def sanity_check_work_request(self, Work_request: object=None) -> bool:
+        # try:
+        #     if (len(Work_request.work_request_id) != 5 and len(Work):
+
+        # except AttributeError:
+        #     return False
         pass
+    
+    def set_new_work_request(self, rank, location, Work_request: object=None) -> str:
+        highest_ID = 0
+        all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
+        for work_request in all_work_requests:
+            work_request.work_request_id[:2]
+        return new_work_request_id
 
-    def add_work_request(self, rank, location, Work_request: object) -> None:
-        all_works_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
-        all_works_requests.append(Work_request)
-        self.Storage_Layer_Wrapper.write_to_file_work_requests(all_works_requests)
-        return "its alive"
 
-    def edit_work_request(self, Work_request: object) -> None:
+    def add_work_request(self, rank, location, Work_request: object=None) -> bool:
+        is_valid = self.sanity_check_work_request(Work_request)
+        if is_valid == True: 
+            Work_request.
+            all_works_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
+            all_works_requests.append(Work_request)
+            self.Storage_Layer_Wrapper.write_to_file_work_requests(all_works_requests)
+            return True
+        else: 
+            return False 
+
+    def edit_work_request(self, Work_request: object) -> bool:
         pass
 
     def fetch_my_work_request(self, employee_id: str="") -> list:
