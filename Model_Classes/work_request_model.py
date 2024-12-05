@@ -1,7 +1,7 @@
 class WorkRequest:
     def __init__(self, work_request_id:str="", name:str="", description:str="", maintenance_report_id:str="", staff_id:str="", location:str="", property_id:str="", start_date:str="", completition_date:str="", 
-                repetitive_work:bool=False, reopen_interval:int=0, priority:str="", maintenance_report:str="",
-                work_request_status:str="", need_contractor:bool=False, contractor_id:str="", mark_as_completed:bool=False, accepted_by_employeee: bool=False):
+                repetitive_work:bool=False, reopen_interval:int=0, priority:str="",
+                work_request_status:str="", need_contractor:bool=False, contractor_id:str="", mark_as_completed:bool=False, accepted_by_employee: bool=False):
         self.work_request_id = work_request_id
         self.name = name
         self.description = description
@@ -18,7 +18,7 @@ class WorkRequest:
         self.need_contractor = need_contractor
         self.contractor_id = contractor_id
         self.mark_as_completed = mark_as_completed
-        self.accepted_by_employee = accepted_by_employeee 
+        self.accepted_by_employee = accepted_by_employee
         ## this and the data in work_request storage does not have the same format
 
     def set_work_request_id(self, work_request_id):
@@ -51,8 +51,8 @@ class WorkRequest:
     def set_priority(self, priority):
         self.priority = priority
 
-    def set_maintenance_report(self, maintenance_report):
-        self.maintenance_report = maintenance_report
+    def set_maintenance_report_id(self, maintenance_report_id):
+        self.maintenance_report_id = maintenance_report_id
 
     def set_work_request_status(self, work_request_status):
         self.work_request_status = work_request_status
@@ -99,8 +99,8 @@ class WorkRequest:
     def get_priority(self):
         return self.priority
 
-    def get_maintenance_report(self):
-        return self.maintenance_report
+    def get_maintenance_report_id(self):
+        return self.maintenance_report_id
 
     def get_work_request_status(self):
         return self.work_request_status
@@ -131,12 +131,11 @@ class WorkRequest:
             'repetitive_work': self.repetitive_work,
             'reopen_interval': self.reopen_interval,
             'priority': self.priority,
-            'maintenance_report': self.maintenance_report,
             'work_request_status': self.work_request_status,
             'need_contractor': self.need_contractor,
             'contractor_id': self.contractor_id,
             'mark_as_completed': self.mark_as_completed,
-            'accepted_by_employee': self.mark_as_completed
+            'accepted_by_employee': self.accepted_by_employee
         }
     
     # Gylfi Made 

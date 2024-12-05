@@ -12,7 +12,6 @@
         "repetitive_work": false,
         "reopen_interval": 0,
         "priority": "High",
-        "maintenance_report": "MR0001",
         "work_request_status": "Pending",
         "need_contractor": false,
         "contractor_id": "",
@@ -32,7 +31,6 @@
         "repetitive_work": false,
         "reopen_interval": 0,
         "priority": "High",
-        "maintenance_report": "MR0002",
         "work_request_status": "Pending",
         "need_contractor": false,
         "contractor_id": "",
@@ -52,7 +50,6 @@
         "repetitive_work": false,
         "reopen_interval": 0,
         "priority": "High",
-        "maintenance_report": "MR0002",
         "work_request_status": "Pending",
         "need_contractor": false,
         "contractor_id": "",
@@ -72,11 +69,11 @@
         "repetitive_work": false,
         "reopen_interval": 0,
         "priority": "High",
-        "maintenance_report": "MR0002",
         "work_request_status": "Pending",
         "need_contractor": false,
         "contractor_id": "",
         "mark_as_completed": false,
         "accepted_by_employee": false
     }
+
 ]

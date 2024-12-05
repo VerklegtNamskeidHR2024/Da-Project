@@ -14,6 +14,7 @@ class maintenance_report_UI_menu:
         # if the choice is admin or mangers it goes to the admin_or_manager_menu
         if self.rank == "Admin" or self.rank == "Manager":
             self.admin_or_manager_menu()
+
         #if the choice is employee it goes to employee menu 
         elif self.rank == "Employee":
             self.employee_menu()
@@ -22,7 +23,7 @@ class maintenance_report_UI_menu:
 
     def admin_or_manager_menu(self):
         #Menu for admin or manager roles
-        print(f"{self.rank} - maintenance report Page")
+        print(f"{self.rank} - Maintenance Report Menu")
         print("------------------------------------------------")
         # choice between 2 choices 
         print("1. Pending reports")
@@ -39,7 +40,7 @@ class maintenance_report_UI_menu:
 
     def list_pending_reports(self):
         #Display a list of pending reports
-        print(f"{self.rank} - maintenance report Page")
+        print(f"{self.rank} - Maintenance Report Menu")
 
         """List of pending reports (to be implemented)"""
         self.get_pending_reports()
@@ -71,8 +72,7 @@ class maintenance_report_UI_menu:
 
     def employee_menu(self):
         #Menu for employee role
-        print(f"{self.rank} - maintenance report Page")
-
+        print(f"{self.rank} - Maintenance Report Menu")
         print("------------------------------------------------")
         print("1. Create maintenance report")
         print("2. Incomplete maintenance reports")

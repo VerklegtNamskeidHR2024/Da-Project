@@ -132,13 +132,13 @@ class Main_Menu:
             print("-" * 70)
 
             user_action = input("Select an Option:  ")
-            self.user_chooice_select(user_action.lower())
+            self.user_choice_select(user_action.lower())
 
             # used to get a loop may want to change
             #self.display_menu_items()
         return
 
-    def user_chooice_select(self, user_action):
+    def user_choice_select(self, user_action):
         # calls the sub menus
         match user_action:
             case "1":
