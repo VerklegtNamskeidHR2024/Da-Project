@@ -67,8 +67,6 @@ class Storage_Layer_Wrapper:
     ### MAINTENANCE_REPORTS ################################################################################
     
     def get_all_maintenance_report(self):
-        #debug
-        print('u in da storage wraper to get all maintenance reports bro')
         all_maintenance_reports = self.maintenance_report_storage_manager.get_all_maintenance_report()
         return all_maintenance_reports
     

@@ -63,18 +63,19 @@ class maintenance_report_UI_menu:
     def get_pending_reports(self):
         '''displays all pending report'''
         pending_report_list = self.logic_wrapper.get_all_pending_maintenance_reports(self.location)
-        print(pending_report_list)
         for report in pending_report_list:
-            print(f'{report.report_id:<10}{report.report_name:<10}{report.property_id:<10}')
+            print(f'{report.report_id:<10}{report.report_name:<10}{report.property_id:>10}')
 
     def list_closed_reports(self):
         #Display a list of closed reports
         """need the closed report list here"""
         print("List of closed reports (to be implemented)")
-        closed_report_list = self.logic_wrapper.get_all_pending_maintenance_reports(self.location)
-        for report in closed_report_list:
-            print(f'{report.report_id:<10}')
-
+        closed_report_list = self.logic_wrapper.get_all_closed_maintenance_reports(self.location)
+        if closed_report_list == 'No closed reports':
+            print('No Closed Reports!')
+        else:
+            for report in closed_report_list:
+                print(f'{report.report_id:<10}{report.report_name:<10}{report.property_id:>10}')
     def employee_menu(self):
         #Menu for employee role
         print(f"{self.rank} - Maintenance Report Menu")
