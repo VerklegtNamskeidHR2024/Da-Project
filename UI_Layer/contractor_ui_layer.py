@@ -182,7 +182,7 @@ class contractor_UI_menu():
     # print contractors from list
     def print_contractors_from_list(self, contractor_list):
         print("-"*78)
-        #print(f"{"ID":<10}|{"Company name":<25}|{"Name":<20}|{"location":<20}")
+        print(f"{'ID':<10}|{'Company name':<25}|{'Name':<20}|{'location':<20}")
         print("-"*78)
         for item in contractor_list:
             print(f"{item.contractor_id:<10}|{item.company_name:<25}|{item.contact_name:<20}|{item.location:<20}")

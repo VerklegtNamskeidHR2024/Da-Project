@@ -68,7 +68,7 @@ class Logic_Layer_Wrapper:
     ### PROPERTIES #########################################################################################
     def get_all_properties(self, location):
         # dummy stuff
-        """ prop1 = Property("1", "hremmi diddy cave", "rvk", "96")
+        """prop1 = Property("1", "hremmi diddy cave", "rvk", "96")
         prop2 = Property("2", "Johun plage", "rvk", "swag")
         prop3 = Property("3", "kormakur aka irl jon jones on a bad day cave", "rvk", "19")
         prop4 = Property("4", "Langhals vegur", "rvk", "112")
@@ -91,6 +91,7 @@ class Logic_Layer_Wrapper:
         """
         Add a new property to the storage.
         """
+        
         try:
             # Validate the new property before adding.
             if not new_property.property_id or not new_property.property_name:
