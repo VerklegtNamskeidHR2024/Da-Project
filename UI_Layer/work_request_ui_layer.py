@@ -46,7 +46,7 @@ class work_request_UI_menu:
         print("{:0}{:>13}{:<10}".format("Description", "|", work_request.description))
         print("{:0}{:>16}{:<10}".format("Location", "|", work_request.location)) 
         print("-" * 35)
-        print("{:0}{:>3}{:>10}".format("Maintenance Report ID", "|", work_request.maintenance_report))
+        print("{:0}{:>3}{:>10}".format("Maintenance Report ID", "|", work_request.maintenance_report_id))
         print("{:0}{:>16}{:<10}".format("Employee ID", "|", work_request.staff_id))
         print("{:0}{:>13}{:<10}".format("Property ID", "|", work_request.property_id)) 
         print("{:0}{:>11}{:<10}".format("Contractor ID", "|", work_request.contractor_id))
@@ -60,7 +60,7 @@ class work_request_UI_menu:
         print("{:0}{:>7}{:<10}".format("Status", "|", work_request.work_request_status))
         print("{:0}{:>7}{:<10}".format("Needs Contractor", "|", work_request.need_contractor))
         print("{:0}{:>11}{:<10}".format("Completed", "|", work_request.mark_as_completed))
-        print("{:0}{:>4}{:<10}".format("Accepted by Employee", "|", work_request.accepted_by_employee))
+        print("{:0}{:>4}{:<10}".format("Accepted by Employee", "|", work_request.accepted_by_employee)) 
         print("-" * 70)
 
 
@@ -161,7 +161,7 @@ class work_request_UI_menu:
             repetitive_work == True
         elif repetitive_work == "no" or repetitive_work == "No":
             repetitive_work == False
-        else:
+   
 
         new_work_request.set_repetitive_work(repetitive_work)
         new_work_request.set_reopen_interval(input("Interval of Days Until Request Re-Opens: "))
@@ -177,12 +177,12 @@ class work_request_UI_menu:
             print(object)
         print()
         print("Work Request Has Been Created")
+        try:
             new_work_request_confirmation = input("Enter 1 to Confirm: ")
             if new_work_request_confirmation == "1": 
                 is_valid = self.logic_wrapper.sanity_check_work_request(new_work_request)
                 if is_valid == True:
                 
-                else:
                     print("Something Went Wrong When Creating the Work Request, Please Try Again.")
                     return
                 print("-" * 70)
@@ -190,6 +190,7 @@ class work_request_UI_menu:
                 self.start_point_work_requests_UI
         except: 
             print("Something Went Wrong When Creating the Work Request, Please Try Again.")
+        pass
         
         
     def employee_edit_work_request_form(self, work_request):
