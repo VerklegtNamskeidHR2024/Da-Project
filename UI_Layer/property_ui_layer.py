@@ -16,7 +16,7 @@ class property_UI_menu:
         print(f"{self.rank} - Properties Page")
 
         # Fetch and print all properties
-        property_list = self.logic_wrapper.get_all_properties(self.location)
+        property_list = self.logic_wrapper.get_all_properties_at_location(self.location)
         self.print_properties_from_list(property_list)
 
         print("1. Select Property")
@@ -173,5 +173,6 @@ class property_UI_menu:
         print(f"{'ID':<10}|{'Property Name':<25}|{'Location':<20}|{'Condition':<20}")
         print("-" * 78)
         for item in property_list:
-            print(f"{item.property_id:<10}|{item.name:<25}|{item.location:<20}|{item.condition:<20}")
+            #print(f"{item.property_id:<10}'|{item.name:<25}|{item.location:<20}|{item.condition:<20}'")
+            print(f"{item.property_id:<10}|{item.location:<20}")
         print("-" * 78)

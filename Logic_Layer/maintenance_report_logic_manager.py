@@ -13,8 +13,16 @@ class maintenance_report_logic_manager:
     def fetch_maintencance_report_from_storage(maintencance_report_ID):
         pass
 
-    def fetch_all_maintencance_reports(self, location) -> list:
-        return self.Storage_Layer_Wrapper.get_all_maintenance_report()
+    def get_all_maintencance_reports_at_location(self, location) -> list:
+        maintenance_report_sorted_list = []
+
+        all_maintenance_reports = self.Storage_Layer_Wrapper.get_all_maintenance_report()
+
+        for maintenance_report in all_maintenance_reports:
+            if maintenance_report.location == location:
+                maintenance_report_sorted_list.append(maintenance_report)
+
+        return maintenance_report_sorted_list
 
     def mark_report_as_ready(maintencance_report_ID):
         pass
