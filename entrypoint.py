@@ -2,7 +2,7 @@
 from UI_Layer.start_menu_ui_layer import Main_Menu
 
 def main():
-    main = Main_Menu("Admin","Tingwall")
+    main = Main_Menu("Admin","Reykjavik")
     main.start_point()
 
 if __name__ == "__main__":

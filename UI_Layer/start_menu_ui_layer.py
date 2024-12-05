@@ -10,23 +10,31 @@ from UI_Layer.property_ui_layer import property_UI_menu
 class Main_Menu:
     def __init__(self, rank, location):
         self.logic_wrapper = Logic_Layer_Wrapper()
-
         # calls the select function for what user you want to see the system as and, then - 
         # calls the location select function
         self.rank = self.select_user_for_system()
         self.location = self.select_location_for_system()
 
-        self.employee_UI_menu = employee_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
-        self.location_UI_menu = location_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
-        # so its like this one when the class contrstructor is set up in the class correctly
-        self.contractor_UI_menu = contractor_UI_menu(self.logic_wrapper, self.rank, self.location) 
-        self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
-        self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
-        self.property_UI_menu = property_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
+        # sendir ekki inn self.blahblah útaf það er gert í þessum klasa, vilt bara senda inn location og rank
+        # annars er sent inn vitlaust location - Kv Hreimur
+        self.employee_UI_menu = employee_UI_menu(self.logic_wrapper, rank, location) # , self.rank, self.location
+        self.location_UI_menu = location_UI_menu(self.logic_wrapper, rank, location) # , self.rank, self.location
+        self.contractor_UI_menu = contractor_UI_menu(self.logic_wrapper, rank, location) 
+        self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper, rank, location) # , self.rank, self.location
+        self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper, rank, location) # , self.rank, self.location
+        self.property_UI_menu = property_UI_menu(self.logic_wrapper, rank, location) # , self.rank, self.location
 
         # these may need to be sent into each UI class
         #self.rank = rank
         #self.location = location
+
+    # Needs to be implemented in all of the ui menus so we can acctually select the locations
+    
+    def set_location(self, new_location):
+        self.location = new_location
+
+    def get_location(self):
+        return self.location
 
     def start_point(self):
         #self.select_user_for_system()
