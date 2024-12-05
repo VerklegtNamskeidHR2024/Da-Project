@@ -91,7 +91,9 @@ class property_UI_menu:
             new_property.property_price = int(input("Enter Property Price: "))
             new_property.location = self.location
             # adds the property
-            self.logic_wrapper.add_property(new_property)
+            property_list = self.logic_wrapper.add_new_property_to_storage(self.rank, self.location, new_property)
+            for object in property_list:
+                print(object)
             print("New property has been added successfully!")
         except ValueError:
             #if it you put an invaild input

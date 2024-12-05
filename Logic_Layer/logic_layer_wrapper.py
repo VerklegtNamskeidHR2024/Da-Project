@@ -87,7 +87,7 @@ class Logic_Layer_Wrapper:
         except Exception:
             print("Error retrieving property by ID")
             return None
-    def add_property(self, new_property):
+    def add_new_property_to_storage(self, rank, location, new_property):
         """
         Add a new property to the storage.
         """

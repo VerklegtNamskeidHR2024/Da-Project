@@ -21,8 +21,11 @@ class property_logic_manager:
     def sanity_check_properties(property):
         pass
 
-    def add_new_property_to_storage(property): 
-        pass
+    def add_new_property_to_storage(self,new_property: object) -> None: 
+        all_new_property_ = self.Storage_Layer_Wrapper.get_all_properties()
+        all_new_property_.append(new_property)
+        self.Storage_Layer_Wrapper.write_to_file_work_requests(new_property)
+        return 
 
     def edit_existing_property_in_storage(property):
         pass
