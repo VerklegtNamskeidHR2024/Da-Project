@@ -52,7 +52,7 @@ class property_UI_menu:
             #if there is not property with the slected id you will get a message 
             if not selected_property:
                 print("No property found with the provided ID.")
-                #adn it returns to the start point
+                #and it returns to the start point
                 return
             # print for single selected property 
             self.print_single_property(selected_property)
@@ -74,8 +74,8 @@ class property_UI_menu:
                 case _:
                     #if you put an invaild input
                     print("Invalid input. Please try again.")
-        except Exception as e:
-            print(f"An error occurred: {e}")
+        except Exception:
+            print("An error occurred")
 
     def display_add_property(self):
         #Handles adding a new property.
@@ -95,10 +95,7 @@ class property_UI_menu:
             print("New property has been added successfully!")
         except ValueError:
             #if it you put an invaild input
-            print("Invalid input. Please enter numeric values for prices.")
-        except Exception as e:
-            #if it occurs an exception error
-            print(f"An error occurred: {e}")
+            print("Invalid input. ")
 
     def display_view_attached_options(self):
         #Displays attached options for a property.
