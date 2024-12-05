@@ -118,6 +118,8 @@ class Logic_Layer_Wrapper:
     
     def get_all_closed_maintenance_reports(self, location) -> list[MaintenanceReport]:
         return self.maintenance_report_logic_manager.fetch_all_closed_maintencance_reports(location)
+    
+    def add_new_maintenance_report
 
 
     ########################################################################################################

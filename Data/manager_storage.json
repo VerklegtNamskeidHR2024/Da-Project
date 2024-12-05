@@ -6,7 +6,7 @@
         "location": "Reykjavik",
         "system_permissions": "Manager",
         "email": "hreimur24@ru.is",
-        "staff_id": "M1234"
+        "staff_id": "M1"
     },
     {
         "name": "Hreimur",
@@ -15,7 +15,7 @@
         "location": "Nuuk",
         "system_permissions": "Manager",
         "email": "hreimur24@ru.is",
-        "staff_id": "M1235"
+        "staff_id": "M2"
     },
     {
         "name": "Hreimur",
@@ -24,7 +24,7 @@
         "location": "Kulusuk",
         "system_permissions": "Manager",
         "email": "hreimur24@ru.is",
-        "staff_id": "M1236"
+        "staff_id": "M3"
     },
     {
         "name": "Hreimur",
@@ -33,7 +33,7 @@
         "location": "Thorshofn",
         "system_permissions": "Manager",
         "email": "hreimur24@ru.is",
-        "staff_id": "M1237"
+        "staff_id": "M4"
     },
     {
         "name": "Hreimur",
@@ -42,7 +42,7 @@
         "location": "Tingwall",
         "system_permissions": "Manager",
         "email": "hreimur24@ru.is",
-        "staff_id": "M1238"
+        "staff_id": "M5"
     },
     {
         "name": "Hreimur",
@@ -51,6 +51,6 @@
         "location": "Longyearbyen",
         "system_permissions": "Manager",
         "email": "hreimur24@ru.is",
-        "staff_id": "M1239"
+        "staff_id": "M6"
     }
 ]

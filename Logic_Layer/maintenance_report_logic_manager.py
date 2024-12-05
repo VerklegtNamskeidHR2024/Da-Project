@@ -1,16 +1,26 @@
 class maintenance_report_logic_manager:
     def __init__(self, Storage_Layer_Wrapper):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
+
     def sanity_check_maintencance_report(maintencance_report):
         pass
 
-    def add_maintencance_report_to_storage(maintencance_report):
-        pass
+    def add_maintencance_report_to_storage(self, location, maintenance_report):
+        highestID = 0
+        list_of_all_reports = self.get_all_maintencance_reports_at_location(location)
+        for report in list_of_all_reports:
+            stripped_ID = report.report_id[2:]
+            if int(stripped_ID) > highestID:
+                highestID = int(stripped_ID)
+                highestID += 1
+        new_report_id = 'MR' + highestID
+        print(new_report_id)
+        maintenance_report.set_report_id(new_report_id)
+        list_of_all_reports.append(maintenance_report)
+        print('Write this shit')
+        self.Storage_Layer_Wrapper.write_to_file_maintenance_reports(list_of_all_reports)
 
     def edit_maintencance_report(maintencance_report):
-        pass
-
-    def fetch_maintencance_report_from_storage(maintencance_report_ID):
         pass
 
     def get_all_maintencance_reports_at_location(self, location) -> list:

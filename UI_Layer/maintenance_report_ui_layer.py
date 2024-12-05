@@ -29,6 +29,7 @@ class maintenance_report_UI_menu:
         # choice between 2 choices 
         print("1. Pending reports")
         print("2. Closed reports")
+        print('3. Create new reports')
         print("------------------------------------------------")
         user_choice = input("Choose: ")
 
@@ -36,6 +37,8 @@ class maintenance_report_UI_menu:
             self.list_pending_reports()
         elif user_choice == "2":
             self.list_closed_reports()
+        elif user_choice == '3':
+            self.display_create_maintenance_report_form()
         else:
             print("Invalid choice.")
 
@@ -62,6 +65,7 @@ class maintenance_report_UI_menu:
 
     def get_pending_reports(self):
         '''displays all pending report'''
+        print('List of pending reports\n')
         pending_report_list = self.logic_wrapper.get_all_pending_maintenance_reports(self.location)
         for report in pending_report_list:
             print(f'{report.report_id:<10}{report.report_name:<10}{report.property_id:>10}')
@@ -69,7 +73,7 @@ class maintenance_report_UI_menu:
     def list_closed_reports(self):
         #Display a list of closed reports
         """need the closed report list here"""
-        print("List of closed reports (to be implemented)")
+        print("List of closed reports\n")
         closed_report_list = self.logic_wrapper.get_all_closed_maintenance_reports(self.location)
         if closed_report_list == 'No closed reports':
             print('No Closed Reports!')
@@ -82,6 +86,7 @@ class maintenance_report_UI_menu:
         print("------------------------------------------------")
         print("1. Create maintenance report")
         print("2. Incomplete maintenance reports")
+        print('3. Create new reports')
         print("------------------------------------------------")
         user_action = input("Select an Option:  ")
         match user_action:
@@ -105,34 +110,39 @@ class maintenance_report_UI_menu:
 
     def display_create_maintenance_report_form(self):
         #Create a new maintenance report
-        new_maintenance_report = MaintenanceReport()
         print("Creating a new maintenance report")
         #the details that need to be filled out
-        new_maintenance_report.set_report_name = input("Enter a name for the report: ")
-        new_maintenance_report.set_property_id = input("Enter property ID: ")
-        new_maintenance_report.set_employee_id = int(input("Enter employee ID: "))
-        new_maintenance_report.set_scheduled = input("Is it scheduled? (yes/no): ")
-        new_maintenance_report.set_work_done = input("What maintenance was done: ")
-        new_maintenance_report.set_report_status = input("Report status (pending/finished): ")
-        new_maintenance_report.set_price = input("Enter a price: ")
-        new_maintenance_report.set_work_request_id = input("Enter the ID of the work request in progress: ")
+        report_name = input("Enter a name for the report: ")
+        location = input('Enter location name:')
+        property_id = input("Enter property ID: ")
+        staff_id = input("Enter employee ID: ")
+        regular_maintenance = bool(input("Is it scheduled? (yes/no): "))
+        maintenance_description = input('Enter maintenance description')
+        price = input("Enter a price: ")
+        contractor_id = input('Enter contractor ID (leave empty if no contractor)')
+        work_request_id = input("Enter the ID of the work request in progress: ")
+        new_maintenance_report = MaintenanceReport('', report_name, location, property_id, staff_id, regular_maintenance,
+        maintenance_description,'' ,price, False, contractor_id, work_request_id)
         # can add contractor also if it applies 
         try:
-            new_maintenance_report_added = self.logic_wrapper.add_new_maintenance_report(new_maintenance_report)
+            new_maintenance_report_added = self.logic_wrapper.add_new_maintenance_report(self.location, new_maintenance_report)
             if new_maintenance_report_added == True:
                 print("maintenance report has been added")
             
         except:
             print("something went wrong with making new maintenance report")
-
-        print(new_maintenance_report.report_name)
-        print(new_maintenance_report.property_id)
-        print(new_maintenance_report.employee_id)
-        print(new_maintenance_report.scheduled)
-        print(new_maintenance_report.work_done)
-        print(new_maintenance_report.report_status)
-        print(new_maintenance_report.price)
-        print(new_maintenance_report.work.request_id)
+            print(new_maintenance_report.report_id)
+            print(new_maintenance_report.report_name)
+            print(new_maintenance_report.location)
+            print(new_maintenance_report.property_id)
+            print(new_maintenance_report.staff_id)
+            print(new_maintenance_report.regular_maintenance)
+            print(new_maintenance_report.maintenance_description)
+            print(new_maintenance_report.report_status)
+            print(new_maintenance_report.price)
+            print(new_maintenance_report.mark_as_done)
+            print(new_maintenance_report.contractor_id)
+            print(new_maintenance_report.work_request_id)
 
     def view_incomplete_reports(self):
         # View and edit incomplete maintenance reports"""

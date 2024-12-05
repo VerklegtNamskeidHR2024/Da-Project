@@ -1,6 +1,6 @@
 [
     {
-        "property_id": "A0001",
+        "property_id": "A1",
         "name": "pool",
         "location": "Reykjavik",
         "condition": "excellent",
@@ -8,7 +8,7 @@
         "amenity_description": "is a pool"
     },
     {
-        "property_id": "A0002",
+        "property_id": "A2",
         "name": "pool",
         "location": "Tingwall",
         "condition": "fair",
@@ -16,7 +16,7 @@
         "amenity_description": "is a pool"
     },
     {
-        "property_id": "A0003",
+        "property_id": "A3",
         "name": "hot tub",
         "location": "Nuuk",
         "condition": "excellent",
