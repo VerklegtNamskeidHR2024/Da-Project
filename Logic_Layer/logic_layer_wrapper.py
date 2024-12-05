@@ -46,12 +46,12 @@ class Logic_Layer_Wrapper:
         return contractor_list """
 
     print('we in da wrapper bro')
-    con1 = Contractor("1","alverk","tumi","8-19",["meow"])
+    '''con1 = Contractor("1","alverk","tumi","8-19",["meow"])
     con2 = Contractor("2","alverk","gabbi","8-19",["meow"])
     con3 = Contractor("3","alverk","jon","8-19",["meow"])
-    contractor_list = [con1,con2,con3]
+    contractor_list = [con1,con2,con3]'''
 
-    def get_contractor_by_id(self, location, contractor_id) -> Contractor:
+    def get_contractor_by_id(self, rank, location, contractor_id) -> Contractor:
         return self.contractor_logic_manager.get_contractor_by_id(location,contractor_id)
    
     def sanity_check_contractor(self, contractor):
@@ -66,7 +66,7 @@ class Logic_Layer_Wrapper:
     
     ########################################################################################################
     ### PROPERTIES #########################################################################################
-    def get_all_properities(self, location):
+    def get_all_properties(self, location):
         # dummy stuff
         """ prop1 = Property("1", "hremmi diddy cave", "rvk", "96")
         prop2 = Property("2", "Johun plage", "rvk", "swag")
@@ -87,8 +87,45 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### WORK_REQUESTS ######################################################################################
-    def get_all_work_requests(self, location): 
-        return self.work_request_logic_manager.fetch_all_work_requests_in_storage(location)
+    def get_all_work_requests(self, rank, location) -> list: 
+        # return self.work_request_logic_manager.fetch_all_work_requests_in_storage(rank, location)
+        wr1 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234")
+        wr2 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234")
+        wr3 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234")
+        work_request_list1 = [wr1,wr2,wr3]
+        return work_request_list1
+
+    def get_work_request_by_id(self, rank, location, work_request_id) -> WorkRequest:
+        # return self.work_request_logic_manager.fetch_work_request_by_id(rank, location, work_request_id)
+        wr1 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234")
+        wr2 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234")
+        wr3 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234")
+        work_request_list1 = [wr1,wr2,wr3]
+        return work_request_list1
+    
+    def get_all_new_work_requests(self, rank, location) -> list:
+        return self.work_request_logic_manager.fetch_all_new_work_requests_in_storage(rank, location)
+    
+    def get_all_open_work_requests(self, rank, location) -> list:
+        return self.work_request_logic_manager.fetch_all_open_work_requests_in_storage(rank, location)
+    
+    def get_all_closed_work_requests(self, rank, location) -> list: 
+        return self.work_request_logic_manager.fetch_all_closed_work_requests_in_storage(rank, location)
+    
+    def get_all_pending_work_requests(self, rank, location) -> list:
+        return self.work_request_logic_manager.fetch_all_pending_work_requests_in_storage(rank, location)
+    
+    def get_my_work_requests(self, rank, location) -> list:
+        return self.work_request_logic_manager.fetch_my_work_request(rank, location)
+    
+    def edit_work_request(self, rank, location, WorkRequest) -> bool:
+        return self.work_request_logic_manager.edit_work_request(rank, location, WorkRequest)
+    
+    def add_work_request(self, rank, location, WorkRequest) -> bool:
+        return self.work_request_logic_manager.add_work_request(rank, location, WorkRequest)
+    
+    def sanity_check_work_request(self, rank, location, WorkRequest) -> bool: 
+        return self.work_request_logic_manager.sanity_check_work_request(rank, location, WorkRequest)
     
     ########################################################################################################
     ### LOCATION ###########################################################################################

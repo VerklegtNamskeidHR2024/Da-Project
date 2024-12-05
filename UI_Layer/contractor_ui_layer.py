@@ -10,22 +10,33 @@ class contractor_UI_menu():
         self.logic_wrapper = logic_wrapper
         self.rank = rank
         self.location = location
-        pass
     
     def start_point_contractor_UI(self):
         # when this class is called it starts here
         # call other functions in class from here
         self.display_contractor_menu()
         return
+    def display_all_contractors(self):
+        """Function to display all contractors at the selected locations"""
+        contractor_list = self.logic_wrapper.get_all_contractors(self.location)
+        print('-' * 75)
+        print(f'{'ID':<6}|{'Company Name':>25}|{'Contact Name':>20}|{'Location':>20}')
+        print("-" * 75)
+
+        for item in contractor_list:
+            print(f"{item.contractor_id:<6}|{item.company_name:>25}|{item.contact_name:>20}|{item.location:>20}")
+        print('-' * 75)
 
     # display contractor menu
     def display_contractor_menu(self):
-        
         print(f"{self.rank} - Contractors Page")
-
         # create list for printing all contractors for first menu in contractors
+        #Can Remove this added the other function to have same code with other files - Kv Hreimur
+        '''print('old contractor list')
         contractor_list = self.logic_wrapper.get_all_contractors(self.location)
-        self.print_contractors_from_list(contractor_list)
+        self.print_contractors_from_list(contractor_list)'''
+        print('New print statement')
+        self.display_all_contractors()
 
         print("------------------------------------------------")
         print("1) Add contractor")
@@ -167,10 +178,11 @@ class contractor_UI_menu():
         print(f"{'Phone Number':<15}: {contractor.phone_number}")
         print("-"*30)
 
+    # CAN REMOVE THIS
     # print contractors from list
     def print_contractors_from_list(self, contractor_list):
         print("-"*78)
-        print(f"{"ID":<10}|{"Company name":<25}|{"Name":<20}|{"location":<20}")
+        #print(f"{"ID":<10}|{"Company name":<25}|{"Name":<20}|{"location":<20}")
         print("-"*78)
         for item in contractor_list:
             print(f"{item.contractor_id:<10}|{item.company_name:<25}|{item.contact_name:<20}|{item.location:<20}")
