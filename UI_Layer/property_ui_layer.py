@@ -148,7 +148,7 @@ class property_UI_menu:
                     #updates the property price to fix
                     selected_property.price_to_fix = new_price_to_fix
                 except ValueError:
-                    print("Invalid input. Please enter a numeric value.")
+                    print("Invalid input.")
             case "5":
                 try:
                     new_price = int(input("Enter new property price: "))
@@ -156,9 +156,9 @@ class property_UI_menu:
                     selected_property.property_price = new_price
                 except ValueError:
                     #occurs value error if you put a non numeric value
-                    print("Invalid input. Please enter a numeric value.")
+                    print("Invalid input.")
             case _:
-                print("Invalid input. No changes were made.")
+                print("Invalid input.")
         print("Property details updated successfully!")
 
     def display_property_work_requests(self):

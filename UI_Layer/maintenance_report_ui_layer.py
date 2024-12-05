@@ -12,7 +12,7 @@ class maintenance_report_UI_menu:
 
     def display_maintenance_report(self):
         # if the choice is admin or mangers it goes to the admin_or_manager_menu
-        if self.rank in ["Admin", "Manager"]:
+        if self.rank == "Admin" or self.rank == "Manager":
             self.admin_or_manager_menu()
         #if the choice is employee it goes to employee menu 
         elif self.rank == "Employee":
@@ -145,7 +145,6 @@ class maintenance_report_UI_menu:
 
     def edit_report_details(self, report_id):
         #Edit the details of a maintenance report
-        """Editing report {report_id} (details to be implemented)"""
        
         try:
             maintenance_report_to_use = self.selected_maintenance_report_by_id()
