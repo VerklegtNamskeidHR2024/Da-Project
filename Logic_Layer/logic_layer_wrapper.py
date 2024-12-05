@@ -74,6 +74,33 @@ class Logic_Layer_Wrapper:
         prop4 = Property("4", "Langhals vegur", "rvk", "112")
         property_list = [prop1,prop2,prop3,prop4] """
         return self.property_logic_manager.fetch_all_properties_in_storage(location)
+    def get_property_by_id(self, location, property_id):
+        """
+        Retrieve a property by its ID.
+        """
+        try:
+            properties = self.get_all_properties(location)
+            for property in properties:
+                if property.property_id == property_id:
+                    return property
+            return None  # Property not found
+        except Exception:
+            print("Error retrieving property by ID")
+            return None
+    def add_property(self, new_property):
+        """
+        Add a new property to the storage.
+        """
+        try:
+            # Validate the new property before adding.
+            if not new_property.property_id or not new_property.property_name:
+                raise ValueError("Property ID and Name are required.")
+
+            # Save the property using the storage manager.
+            self.storage_manager.save_property(new_property)
+            print("Property with ID {new_property.property_id} added successfully.")
+        except Exception:
+            print("Error adding property")
 
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################

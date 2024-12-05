@@ -180,19 +180,19 @@ class property_UI_menu:
         #Prints details of a single property
         print("-" * 30)
         print(f"{'Property ID':<20}: {property.property_id}")
-        print(f"{'Name':<20}: {property.property_name}")
-        print(f"{'Location':<20}: {property.property_location}")
-        print(f"{'Condition':<20}: {property.property_condition}")
-        print(f"{'Price to Fix':<20}: {property.price_to_fix}")
+        print(f"{'Name':<20}: {property.name}")
+        print(f"{'Location':<20}: {property.location}")
+        print(f"{'Condition':<20}: {property.condition}")
+        print(f"{'Price to Fix':<20}: {property.total_price_to_fix}")
         print(f"{'Price':<20}: {property.property_price}")
         print("-" * 30)
 
     def print_properties_from_list(self, property_list):
         #Prints all properties from a list.
-        print("-" * 78)
-        print(f"{'ID':<10}|{'Property Name':<25}|{'Location':<20}|{'Condition':<20}")
-        print("-" * 78)
+        print("-" * 111)
+        print(f"{'ID':<10}|{'Property Name':<25}|{'Location':<20}|{'Condition':<20}|{'Total price to fix':<20}|{'Price':<20}")
+        print("-" * 111)
         #takes the item from the property list 
         for item in property_list:
-            print(f"{item.property_id:<10}|{item.name:<25}|{item.location:<20}|{item.condition:<20}")
-        print("-" * 78)
+            print(f"{item.property_id:<10}|{item.name:<25}|{item.location:<20}|{item.condition:<20}|{item.total_price_to_fix:<20}|{item.property_price:<20}")
+        print("-" * 111)
