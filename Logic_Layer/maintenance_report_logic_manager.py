@@ -30,8 +30,20 @@ class maintenance_report_logic_manager:
     def deny_or_accept_maintencance_report_for_admin(maintencance_report_ID): 
         pass
 
-    def fetch_all_pending_maintencance_reports(maintencance_report_ID) -> list:
-        pass
+    def fetch_all_pending_maintencance_reports(self, location) -> list:
+        # debug
+        print('in get_all_pending_m_r function brodi')
+        pending_reports = []
+        list_of_all_reports = self.Storage_Layer_Wrapper.get_all_maintenance_report()
+        print('list_of_all_reports')
+        print(list_of_all_reports)
+        for report in list_of_all_reports:
+            if report.report_status == 'Pending':
+                pending_reports.append(report)
+        if not pending_reports:
+            return('No pending Reports')
+        else:
+            return pending_reports
 
     def fetch_all_closed_maintencance_reports(maintencance_report_ID) -> list:
         pass

@@ -35,7 +35,6 @@ class contractor_UI_menu():
         '''print('old contractor list')
         contractor_list = self.logic_wrapper.get_all_contractors(self.location)
         self.print_contractors_from_list(contractor_list)'''
-        print('New print statement')
         self.display_all_contractors()
 
         print("------------------------------------------------")
