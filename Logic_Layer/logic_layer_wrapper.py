@@ -121,7 +121,12 @@ class Logic_Layer_Wrapper:
     
     def add_new_maintenance_report_to_storage(self,location, new_report, is_regular):
         return self.maintenance_report_logic_manager.add_maintencance_report_to_storage(location, new_report, is_regular)
-
+    
+    def check_if_report_in_system(self, maintenance_report_id, location):
+        return self.maintenance_report_logic_manager.check_if_report_in_system(maintenance_report_id, location)
+    
+    def deny_or_accept_maintencance_report_for_admin(self, maintencance_report_ID, location, accept_or_deny): 
+        return self.maintenance_report_logic_manager.deny_or_accept_maintencance_report_for_admin(maintencance_report_ID, location, accept_or_deny)
 
     ########################################################################################################
     ### WORK_REQUESTS ######################################################################################

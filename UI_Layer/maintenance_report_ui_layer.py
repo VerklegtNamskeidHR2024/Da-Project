@@ -30,6 +30,7 @@ class maintenance_report_UI_menu:
         print("1. Pending reports")
         print("2. Closed reports")
         print('3. Create new reports')
+        print('4. Edit report')
         print("------------------------------------------------")
         user_choice = input("Choose: ")
 
@@ -39,9 +40,12 @@ class maintenance_report_UI_menu:
             self.list_closed_reports()
         elif user_choice == '3':
             self.display_create_maintenance_report_form()
+        elif user_choice == '4':
+            self.edit_report_details()
         else:
             print("Invalid choice.")
 
+    #Completed - And Accepting/Denying Reports
     def list_pending_reports(self):
         #Display a list of pending reports
         print(f"{self.rank} - Maintenance Report Menu")
@@ -50,19 +54,33 @@ class maintenance_report_UI_menu:
         self.get_pending_reports()
         print("------------------------------------------------")
         report_id = input("Enter report ID to manage: ")
-        print("------------------------------------------------")
-        print("1. Accept")
-        print("2. Deny")
-        print("------------------------------------------------")
-        choice = input("Choose: ")
-
-        if choice == "1":
-            print(f"Report {report_id} has been accepted.")
-        elif choice == "2":
-            print(f"Report {report_id} has been denied.")
+        report_in_system = self.logic_wrapper.check_if_report_in_system(report_id, self.location)
+        if report_in_system == True:
+            print("------------------------------------------------")
+            print("1. Accept")
+            print("2. Deny")
+            print("------------------------------------------------")
+            valid_choice = False
+            accept_or_deny = ''
+            while valid_choice == False:
+                choice = input("Choose: ")
+                if choice == "1":
+                    valid_choice = True
+                    accept_or_deny = 'Accept'
+                    self.logic_wrapper.deny_or_accept_maintencance_report_for_admin(report_id, self.location, accept_or_deny)
+                    print(f"Report {report_id} has been accepted.")
+                elif choice == "2":
+                    valid_choice = True
+                    accept_or_deny = 'Deny'
+                    self.logic_wrapper.deny_or_accept_maintencance_report_for_admin(report_id, self.location, accept_or_deny)
+                    print(f"Report {report_id} has been denied.")
+                else:
+                    print("Invalid choice.")
         else:
-            print("Invalid choice.")
-
+            print('Report ID not found in system please try again')
+            self.list_pending_reports()
+    
+    #Completed
     def get_pending_reports(self):
         '''displays all pending report'''
         print('List of pending reports\n')
@@ -70,6 +88,7 @@ class maintenance_report_UI_menu:
         for report in pending_report_list:
             print(f'{report.report_id:<10}{report.report_name:<10}{report.property_id:>10}')
 
+    #Completed
     def list_closed_reports(self):
         #Display a list of closed reports
         """need the closed report list here"""
@@ -80,12 +99,13 @@ class maintenance_report_UI_menu:
         else:
             for report in closed_report_list:
                 print(f'{report.report_id:<10}{report.report_name:<10}{report.property_id:>10}')
+    
     def employee_menu(self):
         #Menu for employee role
         print(f"{self.rank} - Maintenance Report Menu")
         print("------------------------------------------------")
+        
         print("1. Create maintenance report")
-        print("2. Incomplete maintenance reports")
         print("------------------------------------------------")
         user_action = input("Select an Option:  ")
         match user_action:
@@ -104,57 +124,40 @@ class maintenance_report_UI_menu:
         # test print
         print("we going back to main menu in UI layer")
         return 
-
-        
-
+ 
+    #Completed - But needs to do sanity check!
     def display_create_maintenance_report_form(self):
         #Create a new maintenance report
         print("Creating a new maintenance report")
         #the details that need to be filled out
         report_name = input("Enter a name for the report: ")
-        location = input('Enter location name:')
+        location = input('Enter location name: ')
         property_id = input("Enter property ID: ")
         staff_id = input("Enter employee ID: ")
         regular_maintenance = bool(input("Is it scheduled? (yes/no): "))
-        maintenance_description = input('Enter maintenance description')
+        maintenance_description = input('Enter maintenance description: ')
         price = input("Enter a price: ")
-        contractor_id = input('Enter contractor ID (leave empty if no contractor)')
+        contractor_id = input('Enter contractor ID (leave empty if no contractor): ')
         work_request_id = input("Enter the ID of the work request in progress: ")
         new_maintenance_report = MaintenanceReport('', report_name, location, property_id, staff_id, False,
         maintenance_description,'' ,price, False, contractor_id, work_request_id)
 
         new_maintenance_report_added = self.logic_wrapper.add_new_maintenance_report_to_storage(self.location, new_maintenance_report, regular_maintenance)
 
-    def view_incomplete_reports(self):
-        # View and edit incomplete maintenance reports"""
-        """need here list of incomplete maintenance report"""
-        report_id = input("Enter report ID to edit: ")
-        print("1. Edit maintenance report")
-        edit_choice = input("Choose: ")
-        match edit_choice:
-            case "1":
-                self.edit_report_details(report_id)
-            case "q":
-                #quit back to mainmenu
-                pass
-            case _:
-                print("wrong input")
-
-    def edit_report_details(self, report_id):
-        #Edit the details of a maintenance report
+    #WIP
+    def edit_report_details(self):
         """Editing report {report_id} (details to be implemented)"""
-       
-        try:
-            maintenance_report_to_use = self.selected_maintenance_report_by_id()
-            if maintenance_report_to_use == None:
-                return
-        except:
-            print("something went wrong")
+        all_report_list = self.logic_wrapper.get_all_maintenance_reports_at_location(self.location)
+        for report in all_report_list:
+            print(f'{report.report_id:<10}{report.report_name:<10}')
+        print("-" * 70)
+        selected_work_request = input('Please type in work request id: ')
 
         # print the maintenance report  info
-        self.print_single_maintenance_report(maintenance_report_to_use)
+        # self.print_single_maintenance_report(maintenance_report_to_use)
 
-        print("1. Mark as ready")
+        # Dont see a use for this - Hreimur
+        '''print("1. Mark as ready")
         print("2. Edit report details")
         user_input = input("Choose: ")
 
@@ -162,16 +165,13 @@ class maintenance_report_UI_menu:
             case"1":
                 print(f"Report {report_id} has been marked as ready.")
             case "2":
-                pass
-                display_edit_maintenance_report_details(maintenance_report_to_use)
+                self.display_edit_maintenance_report_details(maintenance_report_to_use)
             case _:
-                print("Invalid choice.")
+                print("Invalid choice.")'''
 
-    
+
     def display_edit_maintenance_report_details(self, selected_maintenance_report):
-        """
-        Allows editing of maintenance report details.
-        """
+        """ Allows editing of maintenance report details. """
         print(f"Editing details for maintenance report ID: {selected_maintenance_report.report_id}")
         print("1. Change Property ID")
         print("2. Change Staff ID")

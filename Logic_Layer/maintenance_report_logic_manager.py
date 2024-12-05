@@ -36,7 +36,14 @@ class maintenance_report_logic_manager:
         list_of_all_reports.append(maintenance_report)
         self.Storage_Layer_Wrapper.write_to_file_maintenance_reports(list_of_all_reports)
 
-    def edit_maintencance_report(maintencance_report):
+    def check_if_report_in_system(self, maintenance_report_id, location) -> bool:
+        list_of_reports = self.get_all_maintencance_reports_at_location(location)
+        for report in list_of_reports:
+            if report.report_id == maintenance_report_id:
+                return True
+        return False
+
+    def edit_maintencance_report(maintenance_report):
         pass
 
     def get_all_maintencance_reports_at_location(self, location) -> list:
@@ -50,8 +57,17 @@ class maintenance_report_logic_manager:
 
         return maintenance_report_sorted_list
 
-    def deny_or_accept_maintencance_report_for_admin(maintencance_report_ID): 
-        pass
+    def deny_or_accept_maintencance_report_for_admin(self, maintencance_report_ID, location, accept_or_deny): 
+        list_of_reports = self.get_all_maintencance_reports_at_location(location)
+
+        for report in list_of_reports:
+            if report.report_id == maintencance_report_ID:
+                if accept_or_deny == 'Accept':
+                    report.set_mark_as_done(True)
+                elif accept_or_deny == 'Deny':
+                    report.set_mark_as_done(False)
+
+        self.Storage_Layer_Wrapper.write_to_file_maintenance_reports(list_of_reports)
 
     def fetch_all_pending_maintencance_reports(self, location) -> list:
         pending_reports = []
