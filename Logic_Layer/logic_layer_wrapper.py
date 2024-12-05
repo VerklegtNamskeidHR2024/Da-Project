@@ -89,6 +89,7 @@ class Logic_Layer_Wrapper:
     ### WORK_REQUESTS ######################################################################################
     def get_all_work_requests(self, rank, location) -> list: 
         return self.work_request_logic_manager.fetch_all_work_requests_in_storage(rank, location)
+        # dummy data
         """wr1 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234", "Reykjavik", "H001", "01-01-24", "11-01-24", False, 0, "Low", "MR0002", "Pending", False, "", False)
 
         wr2 = WorkRequest("WR0002","Toilet cleaning","clean the damn toilets","MR002", "E1342", "Nuuk", "H002", "01-03-24", "15-03-24", True, 5, "High", "Open", False, "", False)
@@ -98,9 +99,10 @@ class Logic_Layer_Wrapper:
         work_request_list1 = [wr1, wr2, wr3]
         return work_request_list1"""
 
-    def get_work_request_by_id(self, rank, location, Work_request_id) -> object:
-        # return self.work_request_logic_manager.fetch_work_request_by_id(rank, location, work_request_id)
-        wr1 = WorkRequest("WR0001", "Fix roof", "roof had giant hole in it", "MR001", "E1234", "Reykjavik", "H001", "01-01-24", "11-01-24", False, 0, "Low", "MR0002", "Pending", False, "", False)
+    def get_work_request_by_id(self, rank, location, work_request_id) -> object:
+        return self.work_request_logic_manager.fetch_work_request_by_id(rank, location, work_request_id)
+        # dummy data 
+        """wr1 = WorkRequest("WR0001", "Fix roof", "roof had giant hole in it", "MR001", "E1234", "Reykjavik", "H001", "01-01-24", "11-01-24", False, 0, "Low", "MR0002", "Pending", False, "", False)
 
         wr2 = WorkRequest("WR0002","Toilet cleaning","clean the damn toilets","MR002", "E1342", "Nuuk", "H002", "01-03-24", "15-03-24", True, 5, "High", "Open", False, "", False)
 
@@ -111,7 +113,7 @@ class Logic_Layer_Wrapper:
             if object.work_request_id == Work_request_id:
                 return object
             else: 
-                return 
+                return """
     
     def get_all_new_work_requests(self, rank, location) -> list:
         return self.work_request_logic_manager.fetch_all_new_work_requests_in_storage(rank, location)

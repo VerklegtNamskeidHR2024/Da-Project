@@ -128,7 +128,7 @@ class work_request_UI_menu:
                     self.start_point_work_requests_UI()
                 
 
-    def select_work_request_by_id(self, valid_select_conditition=True):
+    def select_work_request_by_id(self):
         """System asks user for the ID of the work request they wish to find and prints out 
         all it's information if it's found, otherwise it gives an error message. """
 
