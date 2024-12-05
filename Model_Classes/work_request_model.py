@@ -1,7 +1,7 @@
 class WorkRequest:
     def __init__(self, work_request_id:str="", name:str="", description:str="", maintenance_report_id:str="", staff_id:str="", location:str="", property_id:str="", start_date:str="", completition_date:str="", 
                 repetitive_work:bool=False, reopen_interval:int=0, priority:str="", maintenance_report:str="",
-                work_request_status:str="", need_contractor:bool=False, contractor_id:str="", mark_as_completed:bool=False):
+                work_request_status:str="", need_contractor:bool=False, contractor_id:str="", mark_as_completed:bool=False, accepted_by_employeee: bool=False):
         self.work_request_id = work_request_id
         self.name = name
         self.description = description
@@ -19,7 +19,7 @@ class WorkRequest:
         self.need_contractor = need_contractor
         self.contractor_id = contractor_id
         self.mark_as_completed = mark_as_completed
-
+        self.accepted_by_employee = accepted_by_employeee 
         ## this and the data in work_request storage does not have the same format
 
     def set_work_request_id(self, work_request_id):
@@ -64,8 +64,11 @@ class WorkRequest:
     def set_contractor_id(self, contractor_id):
         self.contractor_id = contractor_id
 
-    def set_mark_as_done(self, mark_as_done):
-        self.mark_as_done = mark_as_done
+    def set_mark_as_completed(self, mark_as_completed):
+        self.mark_as_completed = mark_as_completed
+
+    def set_accepted_by_employee(self, accepted_by_employee):
+        self.accepted_by_employee = accepted_by_employee 
 
     def get_work_request_id(self):
         return self.work_request_id
@@ -109,9 +112,12 @@ class WorkRequest:
     def get_contractor_id(self):
         return self.contractor_id
 
-    def get_mark_as_done(self):
-        return self.mark_as_done
+    def get_mark_as_completed(self):
+        return self.mark_as_completed
     
+    def get_accepted_by_employee(self):
+        return self.accepted_by_employee
+
     def to_dict(self):
         return {
             'work_request_id': self.work_request_id,
@@ -130,7 +136,8 @@ class WorkRequest:
             'work_request_status': self.work_request_status,
             'need_contractor': self.need_contractor,
             'contractor_id': self.contractor_id,
-            'mark_as_completed': self.mark_as_completed
+            'mark_as_completed': self.mark_as_completed,
+            'accepted_by_employee': self.mark_as_completed
         }
     
     # Gylfi Made 

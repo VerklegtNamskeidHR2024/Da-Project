@@ -70,7 +70,7 @@ class work_request_UI_menu:
         print("-" * 35)
         print("{:0}{:>16}{:<10}".format("Priority", "|", work_request.priority))
         print("{:0}{:>7}{:<10}".format("Status", "|", work_request.work_request_status))
-        print("{:0}{:>7}{:<10}".format("", "|", work_request.need_contractor))
+        print("{:0}{:>7}{:<10}".format("Needs Contractor", "|", work_request.need_contractor))
         print("{:0}{:>11}{:<10}".format("Completed", "|", {work_request.mark_as_completed}))
         print("{:0}{:>4}{:<10}".format("Accepted by Employee", "|", {work_request.accepted_by_employee}))
         print("-" * 70)
