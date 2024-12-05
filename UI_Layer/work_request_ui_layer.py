@@ -1,5 +1,3 @@
-from Model_Classes.work_request_model import WorkRequest
-
 class work_request_UI_menu:
     def __init__(self, logic_wrapper, rank, location):
         self.logic_wrapper = logic_wrapper
@@ -23,7 +21,7 @@ class work_request_UI_menu:
         # self.display_closed_work_requests_printed() 
 
 
-    def display_all_work_requests_printed(self, work_request_list: list) -> str: 
+    def display_all_work_requests_printed(self, work_request_list: list) -> print: 
         """Prints out all open work requests with their ID, Name and Description. """
         # try:
             # prioritized_work_request_list = []
@@ -48,7 +46,7 @@ class work_request_UI_menu:
         # print("Something Went Wrong, Please Try Again") 
         
 
-    def display_selected_work_request_information(self, work_request: object) -> str:
+    def display_selected_work_request_information(self, work_request: object) -> print:
         """Prints out a selected work requests and all it's information for user to read. """
 
         print("{:0}{:>14}{:<10}".format("Categories", "|", "Details"))
@@ -64,19 +62,19 @@ class work_request_UI_menu:
         print("{:0}{:>11}{:<10}".format("Contractor ID", "|", work_request.contractor_id))
         print("-" * 35)
         print("{:0}{:>14}{:<10}".format("Start Date", "|", work_request.start_date))
-        print("{:0}{:>7}{:<10}".format("Completition Date", "|", {work_request.completition_date})) 
+        print("{:0}{:>7}{:<10}".format("Completition Date", "|", work_request.completition_date)) 
         print("{:0}{:>9}{:<10}".format("Repititive Work", "|", work_request.repetitive_work))
         print("{:0}{:>3}{:<10}".format("Re-Open Interval Days", "|", work_request.reopen_interval)) 
         print("-" * 35)
         print("{:0}{:>16}{:<10}".format("Priority", "|", work_request.priority))
         print("{:0}{:>7}{:<10}".format("Status", "|", work_request.work_request_status))
         print("{:0}{:>7}{:<10}".format("Needs Contractor", "|", work_request.need_contractor))
-        print("{:0}{:>11}{:<10}".format("Completed", "|", {work_request.mark_as_completed}))
-        print("{:0}{:>4}{:<10}".format("Accepted by Employee", "|", {work_request.accepted_by_employee}))
+        print("{:0}{:>11}{:<10}".format("Completed", "|", work_request.mark_as_completed))
+        print("{:0}{:>4}{:<10}".format("Accepted by Employee", "|", work_request.accepted_by_employee))
         print("-" * 70)
 
 
-    def display_work_requests_menu_items(self) -> str:
+    def display_work_requests_menu_items(self) -> print:
         """Displays the menu options depending if the user logged in is an admin/manager or
         an employee. It then calls the correct function based on what the user chose. """
 
@@ -128,63 +126,72 @@ class work_request_UI_menu:
                     self.start_point_work_requests_UI()
                 
 
-    def select_work_request_by_id(self):
+    def select_work_request_by_id(self) -> print:
         """System asks user for the ID of the work request they wish to find and prints out 
         all it's information if it's found, otherwise it gives an error message. """
-
         try:
             work_request_selected_by_id = input("Enter Request ID: ")
+        # if work_request_selected_by_id == "b" or work_request_selected_by_id == "B":
+        #     self.display_work_requests_menu_items()
+        # elif work_request_selected_by_id == "1":
+            
+            # is_valid = self.logic_wrapper.sanity_check_work_requests(work_request_selected_by_id) 
             work_request_object = self.logic_wrapper.get_work_request_by_id(self.rank, self.location, work_request_selected_by_id) # valid_select_conditition
             self.display_selected_work_request_information(work_request_object)
-            
             if work_request_object != None:
-                self.display_selected_work_request_information(work_request_object)
-                if self.rank != "Employee" :
+                if self.rank != "Employee":
                     self.general_edit_work_request_form(work_request_object)
                 else:
                     self.employee_edit_work_request_form(work_request_object)
-        except:
+        except AttributeError:
+            print()
             print("Work Request not Found, Please Try Again.")
-            self.select_work_request_by_id()
-
+            print()
+            self.select_work_request_by_id
+        
 
     def display_create_work_request_form(self):
         """Creates a new work request object and asks for different information details that are passed to, and set
         for the class model. Once completed the validity of the request object is verified: if it returns True it's
         created but otherwise it returns the user to the main menu. """
 
-        try:
-            new_work_request = WorkRequest()
-            print()
-            print("[ New Work Request Form ]")
-            print("-" * 70)
-            new_work_request.set_name(input("Request Name: "))
-            new_work_request.set_description(input("Request Descrptition: "))  
-            new_work_request.set_property_id(input("Request for Property ID: "))
-            new_work_request.set_date_of_creation(input("Start Date: "))
-            new_work_request.set_mark_as_done(input("Completition Date: "))
-            new_work_request.set_repetitive_work(input("Mark Repititive? (Yes or No): "))
-            new_work_request.set_reopen_interval(input("Interval of Days Until Request Re-Opens: "))
-            new_work_request.set_priority(input("Request Priority (High, Medium or Low):  "))
-            if self.rank != "Admin": 
-                new_work_request.set_location_id(self.location)
-            else:
-                new_work_request.set_location_id(input("Set Location for Work Request: "))
-            print("-" * 70)
-            print()
-            new_work_request_confirmation = input("Enter 1 to Confirm: ")
-            if new_work_request_confirmation == "1": 
-                is_valid = self.logic_wrapper.sanity_check_work_request(new_work_request)
-                if is_valid == True:
-                    self.logic_wrapper.add_work_request(new_work_request)
-                else:
-                    print("Something Went Wrong When Creating the Work Request, Please Try Again.")
-                    return
-                print("-" * 70)
-                print("New Work Request Has Been Created!")
-                self.start_point_work_requests_UI
-        except: 
-            print("Something Went Wrong When Creating the Work Request, Please Try Again.")
+        # try:
+        new_work_request = self.logic_wrapper.WorkRequest
+        print()
+        print("[ New Work Request Form ]")
+        print("-" * 70)
+        new_work_request.set_name(input("Request Name: "))
+        new_work_request.set_description(input("Request Descrptition: "))  
+        new_work_request.set_property_id(input("Property ID: "))
+        new_work_request.set_date_of_creation(input("Start Date: "))
+        new_work_request.set_mark_as_completed(input("Completition Date: "))
+        new_work_request.set_repetitive_work(input("Mark Repititive? (Yes or No): "))
+        new_work_request.set_reopen_interval(input("Interval of Days Until Request Re-Opens: "))
+        new_work_request.set_priority(input("Request Priority (High, Medium or Low):  "))
+        # if self.rank != "Admin": 
+        new_work_request.set_location(self.location)
+        # else:
+        #     new_work_request.set_location(input("Set Location for Work Request: "))
+        print("-" * 70)
+        print()
+        work_request_list = self.logic_wrapper.add_work_request(self.rank, self.location, new_work_request)
+        for object in work_request_list:
+            print(object)
+        print()
+        print("Work Request Has Been Created")
+            # new_work_request_confirmation = input("Enter 1 to Confirm: ")
+            # if new_work_request_confirmation == "1": 
+                # is_valid = self.logic_wrapper.sanity_check_work_request(new_work_request)
+                # if is_valid == True:
+                
+                # else:
+                #     print("Something Went Wrong When Creating the Work Request, Please Try Again.")
+                #     return
+                # print("-" * 70)
+                # print("New Work Request Has Been Created!")
+                # self.start_point_work_requests_UI
+        # except: 
+        #     print("Something Went Wrong When Creating the Work Request, Please Try Again.")
         
         
     def employee_edit_work_request_form(self, work_request):

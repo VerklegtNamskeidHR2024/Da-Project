@@ -34,7 +34,7 @@ class WorkRequest:
     def set_staff_id(self, staff_id):
         self.staff_id = staff_id
 
-    def set_location_id(self, location):
+    def set_location(self, location):
         self.location = location
 
     def set_property_id(self, property_id):

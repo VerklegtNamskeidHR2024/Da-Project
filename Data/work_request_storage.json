@@ -16,7 +16,8 @@
         "work_request_status": "Pending",
         "need_contractor": false,
         "contractor_id": "",
-        "mark_as_completed": false
+        "mark_as_completed": false,
+        "accepted_by_employee": false
     },
     {
         "work_request_id": "WR0002",
@@ -35,7 +36,8 @@
         "work_request_status": "Pending",
         "need_contractor": false,
         "contractor_id": "",
-        "mark_as_completed": false
+        "mark_as_completed": false,
+        "accepted_by_employee": false
     },
     {
         "work_request_id": "WR0003",
@@ -54,7 +56,8 @@
         "work_request_status": "Pending",
         "need_contractor": false,
         "contractor_id": "",
-        "mark_as_completed": false
+        "mark_as_completed": false,
+        "accepted_by_employee": false
     },
     {
         "work_request_id": "WR0004",
@@ -73,6 +76,7 @@
         "work_request_status": "Pending",
         "need_contractor": false,
         "contractor_id": "",
-        "mark_as_completed": false
+        "mark_as_completed": false,
+        "accepted_by_employee": false
     }
 ]
