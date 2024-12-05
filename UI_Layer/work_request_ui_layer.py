@@ -22,7 +22,7 @@ class work_request_UI_menu:
         # self.display_pending_work_requests_printed() 
         # self.display_closed_work_requests_printed() 
 
-
+    # Completed, can be beautified.
     def display_all_work_requests_printed(self, work_request_list: list=None) -> print: 
         """Prints out all open work requests with their ID, Name and Description. """
         try:
@@ -35,7 +35,7 @@ class work_request_UI_menu:
             print()
             print("{:>50}".format("No Work Requests To Display")) 
         
-
+    # Completed, can be beautified.
     def display_selected_work_request_information(self, work_request: object=None) -> print:
         """Prints out a selected work requests and all it's information for user to read. """
 
@@ -63,7 +63,7 @@ class work_request_UI_menu:
         print("{:0}{:>4}{:<10}".format("Accepted by Employee", "|", work_request.accepted_by_employee)) 
         print("-" * 70)
 
-
+    # Completed, can be beautified.
     def display_work_requests_menu_items(self) -> print:
         """Displays the menu options depending if the user logged in is an admin/manager or
         an employee. It then calls the correct function based on what the user chose. """
@@ -106,7 +106,7 @@ class work_request_UI_menu:
                 print("Invalid Input, Please Try Again.")
                 self.start_point_work_requests_UI()
 
-
+    # Works, but lacks verification on user input. Also can be beautified
     def select_work_request_by_id(self) -> print:
         """System asks user for the ID of the work request they wish to find and prints out 
         all it's information if it's found, otherwise it gives an error message. """
@@ -130,7 +130,7 @@ class work_request_UI_menu:
             print()
             self.select_work_request_by_id
     
-
+    # Works, but needs verification for user input. Also can be beautified.
     def display_create_work_request_form(self):
         """Creates a new work request object and asks for different information details that are passed to, and set
         for the class model. Once completed the validity of the request object is verified: if it returns True it's
@@ -143,19 +143,31 @@ class work_request_UI_menu:
         print("-" * 70)
         new_work_request.set_name(input("Request Name: "))
         new_work_request.set_description(input("Request Descrptition: "))  
-        new_work_request.set_property_id(input("Property ID: "))
+
+        while (property_id := input("Enter Request Name: ") != ""):
+            is_property_id_valid = self.logic_wrapper.sanity_check_new_work_request_property_id(property_id)
+            if is_property_id_valid == True:
+                property_id == ""
+            else:
+                print("Something Went Wrong, Please Try Again.")
+        new_work_request.set_property_id(property_id)
+        
         new_work_request.set_date_of_creation(input("Start Date: "))
         new_work_request.set_mark_as_completed(input("Completition Date: "))
 
-        repetitive_work = input("Mark Repititive? (Yes or No): ")
-        if repetitive_work == "yes" or repetitive_work == "Yes":
-            repetitive_work == True
-        elif repetitive_work == "no" or repetitive_work == "No":
-            repetitive_work == False
+        while (repetitive_work := input("Mark Repititive? (Yes or No): ") != ""):
+            is_repetitive_valid = self.logic_wrapper.sanity_check_repetitive_work_request(property_id)
+            if is_repetitive_valid == True:
+                repetitive_work == ""
+            else:
+                print("Something Went Wrong, Please Try Again.")
+        new_work_request.set_repetitive_work(repetitive_work)
+        
 
         new_work_request.set_repetitive_work(repetitive_work)
         new_work_request.set_reopen_interval(input("Interval of Days Until Request Re-Opens: "))
         new_work_request.set_priority(input("Request Priority (High, Medium or Low):  "))
+        new_work_request.set_need_contractor(input("Request Needs Contractor (Yes or No): "))
         if self.rank != "Admin": 
             new_work_request.set_location(self.location)
         else:
@@ -173,7 +185,7 @@ class work_request_UI_menu:
             print("Something Went Wrong When Creating the Work Request, Please Try Again.")
         pass
         
-        
+    # Displays options, not been tested enough to verify it's functionality. 
     def employee_edit_work_request_form(self, work_request):
         if work_request.mark_as_completed == False:
             print()
@@ -198,14 +210,14 @@ class work_request_UI_menu:
                 self.display_work_requests_menu_items()
         pass
     
-    
+    # Displays options, not been tested enough to verify it's functionality.
     def general_edit_work_request_form(self, work_request):
         print()
         print("Choose a Category To Edit")
         print("-" * 70)
         print("{:>18}".format("> 1. Employee ID"))
         print("{:>18}".format("> 2. Property ID"))
-        print("{:>24}".format("> 3. Repititive Ticket"))
+        print("{:>24}".format("> 3. Repitition"))
         print("{:>15}".format("> 4. Priority"))
         print("{:>21}".format("> 5. Request Status"))
         print("-" * 70)
