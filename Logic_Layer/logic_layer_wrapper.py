@@ -35,7 +35,7 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### CONTRACTOR #########################################################################################
-    def get_all_contractors(self, rank, location):
+    def get_all_contractors(self, location):
         return self.contractor_logic_manager.get_all_contractors(location)
         # her mynd það kalla í sama fall inn í contractors logic manager 
         # er núna bara með dummy gögn
@@ -46,10 +46,10 @@ class Logic_Layer_Wrapper:
         return contractor_list """
 
     print('we in da wrapper bro')
-    con1 = Contractor("1","alverk","tumi","8-19",["meow"])
+    '''con1 = Contractor("1","alverk","tumi","8-19",["meow"])
     con2 = Contractor("2","alverk","gabbi","8-19",["meow"])
     con3 = Contractor("3","alverk","jon","8-19",["meow"])
-    contractor_list = [con1,con2,con3]
+    contractor_list = [con1,con2,con3]'''
 
     def get_contractor_by_id(self, rank, location, contractor_id) -> Contractor:
         return self.contractor_logic_manager.get_contractor_by_id(location,contractor_id)
@@ -89,9 +89,29 @@ class Logic_Layer_Wrapper:
     ### WORK_REQUESTS ######################################################################################
     def get_all_work_requests(self, rank, location) -> list: 
         return self.work_request_logic_manager.fetch_all_work_requests_in_storage(rank, location)
+        """wr1 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234", "Reykjavik", "H001", "01-01-24", "11-01-24", False, 0, "Low", "MR0002", "Pending", False, "", False)
 
-    def get_work_request_by_id(self, rank, location, work_request_id) -> WorkRequest:
-        return self.work_request_logic_manager.fetch_work_request_by_id(rank, location, work_request_id)
+        wr2 = WorkRequest("WR0002","Toilet cleaning","clean the damn toilets","MR002", "E1342", "Nuuk", "H002", "01-03-24", "15-03-24", True, 5, "High", "Open", False, "", False)
+
+        wr3 = WorkRequest("WR0003","Decorate Doors","doors are ulg as shit","MR003", "E4312", "Torshavn", "H003", "21-12-24", "25-12-24", False, 1, "Medium", "Open", False, "", False)
+
+        work_request_list1 = [wr1, wr2, wr3]
+        return work_request_list1"""
+
+    def get_work_request_by_id(self, rank, location, Work_request_id) -> object:
+        # return self.work_request_logic_manager.fetch_work_request_by_id(rank, location, work_request_id)
+        wr1 = WorkRequest("WR0001", "Fix roof", "roof had giant hole in it", "MR001", "E1234", "Reykjavik", "H001", "01-01-24", "11-01-24", False, 0, "Low", "MR0002", "Pending", False, "", False)
+
+        wr2 = WorkRequest("WR0002","Toilet cleaning","clean the damn toilets","MR002", "E1342", "Nuuk", "H002", "01-03-24", "15-03-24", True, 5, "High", "Open", False, "", False)
+
+        wr3 = WorkRequest("WR0003","Decorate Doors","doors are ulg as shit","MR003", "E4312", "Torshavn", "H003", "21-12-24", "25-12-24", False, 1, "Medium", "Open", False, "", False)
+
+        work_request_list2 = [wr1, wr2, wr3]
+        for object in work_request_list2:
+            if object.work_request_id == Work_request_id:
+                return object
+            else: 
+                return 
     
     def get_all_new_work_requests(self, rank, location) -> list:
         return self.work_request_logic_manager.fetch_all_new_work_requests_in_storage(rank, location)

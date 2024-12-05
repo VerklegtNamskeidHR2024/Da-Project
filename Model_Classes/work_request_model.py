@@ -132,3 +132,28 @@ class WorkRequest:
             'contractor_id': self.contractor_id,
             'mark_as_completed': self.mark_as_completed
         }
+    
+    # Gylfi Made 
+    def __eq__(self, value: object) -> bool:
+        if isinstance(value, WorkRequest):
+            value.priority == self.priority
+            return True
+        return False
+
+    def __lt__(self, value: object) -> bool:
+        if isinstance(value, WorkRequest):
+            match self.priority:
+                case "High":
+                    return False
+                case "Medium":
+                    if value.priority == "High":
+                        return True
+                    return False
+                case "Low":
+                    if value.priority == "Low":
+                        return False
+                    return True
+    
+    def __gt__(self, value: object) -> bool:
+        if isinstance(value, WorkRequest):
+            return value < self

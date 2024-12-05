@@ -14,11 +14,11 @@ from Model_Classes.admin_model import Admin
 admin1 = Admin('Hreimur', 12334546789, 5551234, 'Reykjavik', 'Admin', 'hreimur24@ru.is', 'A1234')
 
 manager1 = Manager('Hreimur', 12334546789, 5551234, 'Reykjavik', 'Manager', 'hreimur24@ru.is', 'M1234')
-manager2 = Manager('Hreimur', 12334546789, 5551234, 'Nuuk', 'Manager', 'hreimur24@ru.is', 'M1234')
-manager3 = Manager('Hreimur', 12334546789, 5551234, 'Kulusuk', 'Manager', 'hreimur24@ru.is', 'M1234')
-manager4 = Manager('Hreimur', 12334546789, 5551234, 'Thorshofn', 'Manager', 'hreimur24@ru.is', 'M1234')
-manager5 = Manager('Hreimur', 12334546789, 5551234, 'Tingwall', 'Manager', 'hreimur24@ru.is', 'M1234')
-manager6 = Manager('Hreimur', 12334546789, 5551234, 'Longyearbyen', 'Manager', 'hreimur24@ru.is', 'M1234')
+manager2 = Manager('Hreimur', 12334546789, 5551234, 'Nuuk', 'Manager', 'hreimur24@ru.is', 'M1235')
+manager3 = Manager('Hreimur', 12334546789, 5551234, 'Kulusuk', 'Manager', 'hreimur24@ru.is', 'M1236')
+manager4 = Manager('Hreimur', 12334546789, 5551234, 'Thorshofn', 'Manager', 'hreimur24@ru.is', 'M1237')
+manager5 = Manager('Hreimur', 12334546789, 5551234, 'Tingwall', 'Manager', 'hreimur24@ru.is', 'M1238')
+manager6 = Manager('Hreimur', 12334546789, 5551234, 'Longyearbyen', 'Manager', 'hreimur24@ru.is', 'M1239')
 
 employee1 = Employee('Hreimur', 123456789, 1234567, 'Reykjavik', 'Employee', 'hreimur69@gmail.com', 'E1234')
 employee2 = Employee('John Doe', 987654321, 7654321, 'Reykjavik', 'Employee', 'johndoe@example.com', 'E5678')
@@ -70,8 +70,9 @@ location5 = Location('Hjaltlandseyjar', 'Tingwall', 'SVB', '5551234', 'Tumi Kris
 location6 = Location('Svalbard', 'Longyearbyen', 'SVB', '5551234', 'Tumi Krist', '8-16')
 
 contractor1 = Contractor('C0001', 'Daniela and Daughters', 'Daniela', '8-16', 1234567, 'Reykjavik', [])
-contractor2 = Contractor('C0001', 'Daniela and Daughters', 'Daniela', '8-16', 1234567, 'Nuuk', [])
-contractor3 = Contractor('C0001', 'Daniela and Daughters', 'Daniela', '8-16', 1234567, 'Tingwall', [])
+contractor2 = Contractor('C0002', 'Daniela and Daughters', 'Daniela', '8-16', 1234567, 'Nuuk', [])
+contractor3 = Contractor('C0003', 'Daniela and Daughters', 'Daniela', '8-16', 1234567, 'Tingwall', [])
+contractor4 = Contractor('C6969', 'Juicy Hreimur Construction', 'Hreimur', '8-16', 1234567, 'Reykjavik', [])
 
 amenity1 = Amenity('A0001', 'pool', 'Reykjavik', 'excellent', 1500.0, 'is a pool')
 amenity2 = Amenity('A0002', 'pool', 'Tingwall', 'fair', 1200.0, 'is a pool')
