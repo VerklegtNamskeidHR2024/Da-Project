@@ -35,21 +35,17 @@ class employee_UI_menu:
             else:
                 print("Somthing wrong")
 
-       
-
     def display_all_employees(self):
         """The function displays a table with all employees at a location and their basic information"""
         employee_list = self.logic_wrapper.get_all_employees(self.location)
-        print("-" * 70)
-        # print(f"{"Name":> 15}|{"Phone Number" :> 10}|{"Email" :> 10}|{"Location" :> 15}")
+        print("-" * 75)
         print("{:>15}{:>10}{:>15}".format("Name", "Phone", "Location"))
-        print("-" * 70)
+        print("-" * 75)
 
         for item in employee_list:
-            print("{:>15}{:>10}{:>15}".format(item.name, item.phone, item.location))
+            print("{:>15}{:>10}{:>15}".format(item.name, item.phone_number, item.location))
             # print(f"{item.name :> 15}|{item.phone_number :> 10}|{item.email :> 10}|{self.location :> 15}")
-
-        print("-" * 70)
+        print("-" * 75)
 
     def action_choice(self):
         """The function is asking the user if they want to search or add an employee"""

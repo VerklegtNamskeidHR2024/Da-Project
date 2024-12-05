@@ -9,7 +9,7 @@
         "previous_job_reports": []
     },
     {
-        "contractor_id": "C0001",
+        "contractor_id": "C0002",
         "company_name": "Daniela and Daughters",
         "contact_name": "Daniela",
         "opening_hours": "8-16",
@@ -18,12 +18,22 @@
         "previous_job_reports": []
     },
     {
-        "contractor_id": "C0001",
+        "contractor_id": "C0003",
         "company_name": "Daniela and Daughters",
         "contact_name": "Daniela",
         "opening_hours": "8-16",
         "phone_number": 1234567,
         "location": "Tingwall",
+        "previous_job_reports": []
+    }
+    ,
+    {
+        "contractor_id": "C0004",
+        "company_name": "Hreimur Construction",
+        "contact_name": "Hreimur",
+        "opening_hours": "8-16",
+        "phone_number": 1234567,
+        "location": "Reykjavik",
         "previous_job_reports": []
     }
 ]
