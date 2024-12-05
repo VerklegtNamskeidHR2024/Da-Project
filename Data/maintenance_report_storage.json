@@ -9,6 +9,20 @@
         "maintenance_description": "roof is leaking",
         "report_status": "Pending",
         "price": "1234",
+        "mark_as_done": false,
+        "contractor_id": "C0001",
+        "work_request_id": "WR0003"
+    },
+    {
+        "report_id": "MR0002",
+        "report_name": "Fix the roof",
+        "location": "Reykjavik",
+        "property_id": "H0004",
+        "staff_id": "E5678",
+        "regular_maintenance": false,
+        "maintenance_description": "roof is leaking",
+        "report_status": "Closed",
+        "price": "1234",
         "mark_as_done": true,
         "contractor_id": "C0001",
         "work_request_id": "WR0003"

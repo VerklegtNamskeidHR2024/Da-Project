@@ -67,12 +67,11 @@ class Storage_Layer_Wrapper:
     ### MAINTENANCE_REPORTS ################################################################################
     
     def get_all_maintenance_report(self):
-        #debug
-        print('u in da storage wraper to get all maintenance reports bro')
         all_maintenance_reports = self.maintenance_report_storage_manager.get_all_maintenance_report()
         return all_maintenance_reports
     
     def write_to_file_maintenance_reports(self, list_of_maintenance_reports):
+        print('In Storage to write brodi')
         write_to_file_maintenance_reports = self.maintenance_report_storage_manager.write_to_file_maintenance_report(list_of_maintenance_reports)
 
     ########################################################################################################
