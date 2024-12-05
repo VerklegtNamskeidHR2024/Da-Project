@@ -17,14 +17,14 @@ class property_UI_menu:
         #Displays the list of all properties and provides options
         print(f"{self.rank} - Properties Page")
         property_list = self.logic_wrapper.get_all_properties_at_location(self.location)
-        print("-" * 75)
-        print("{:>15}{:>10}{:>15}".format("Name", "Phone", "Location"))
-        print("-" * 75)
+        print("-" * 85)
+        print("{:>15}{:>10}{:>15}{:>10}{:>15}{:>15}".format("Id", "Name", "Location", "Condtion", "Price to fix", "Price"))
+        print("-" * 85)
 
         for item in property_list:
-            print("{:>15}{:>10}{:>15}".format(item.property_id,item.name, item.location))
+            print("{:>15}{:>10}{:>15}{:>10}{:>15}{:>15}".format(item.property_id,item.name, item.location, item.condition, item.total_price_to_fix, item.property_price))
             # print(f"{item.name :> 15}|{item.phone_number :> 10}|{item.email :> 10}|{self.location :> 15}")
-        print("-" * 75)
+        print("-" * 85)
 
         print("1. Select Property")
         print("2. Add Property")
@@ -193,3 +193,5 @@ class property_UI_menu:
         print(f"{'Price to Fix':<20}: {property.total_price_to_fix}")
         print(f"{'Price':<20}: {property.property_price}")
         print("-" * 30)
+
+    
