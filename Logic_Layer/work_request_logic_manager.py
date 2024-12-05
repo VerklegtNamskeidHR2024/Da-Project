@@ -11,7 +11,7 @@ class work_request_logic_manager:
     def fetch_all_work_requests_in_storage(self, rank, location) -> list:
         location_sorted_list = []
 
-        all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests(rank, location)
+        all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
 
         for work_request in all_work_requests:
             if work_request.location == location:
@@ -29,7 +29,7 @@ class work_request_logic_manager:
         pass
 
     def fetch_work_request_by_id(self, rank, location, work_request_id):
-        return self.Storage_Layer_Wrapper.get_work_request_by_id(rank, location, work_request_id)
+        return self.Storage_Layer_Wrapper.get_work_request_by_id()
     
     def fetch_all_open_work_requests_in_storage(self, Work_request_ID) -> list:
         pass

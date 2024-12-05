@@ -116,8 +116,9 @@ class Main_Menu:
             # maybe have while for loop
             # and add a quit opition
             # admin manager
-            print(self.rank)
-            print(self.location)
+            # print("Welcome ", self.rank)
+            # print(f'{"Current Location - {self.location}"}')
+            print()
             print(f" {self.rank} - Home Page")
             print("-" * 70)
             print("1. Properties")
@@ -128,7 +129,6 @@ class Main_Menu:
             if self.rank != "Employee":
                 print("6. Locations")
             print("q. Quit")
-
             print("-" * 70)
 
             user_action = input("Select an Option:  ")
