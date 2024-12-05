@@ -46,7 +46,7 @@ class Storage_Layer_Wrapper:
     ########################################################################################################
     ### PROPERTIES #########################################################################################
     
-    def get_all_properties(self):
+    def get_all_properties_at_location(self):
         all_properties = self.property_storage_manager.get_all_properties()
         return all_properties
     

@@ -83,12 +83,16 @@ class property_UI_menu:
             #new property
             new_property = Property()
             #the details you can add for the property
-            new_property.property_id = input("Enter Property ID: ")
-            new_property.property_name = input("Enter Property Name: ")
-            new_property.property_location = input("Enter Property Location: ")
+            new_property.set_property_id(input("Enter Property ID: "))
+            new_property.set_name(input("Enter Property Name: "))
+            
             new_property.property_condition = input("Enter Property Condition: ")
             new_property.price_to_fix = int(input("Enter Price to Fix: "))
             new_property.property_price = int(input("Enter Property Price: "))
+            if self.rank != "Admin":
+                new_property.set_location(self.location)
+            else:
+                new_property.set_location(input("Enter Property Location: "))
             new_property.location = self.location
             # adds the property
             property_list = self.logic_wrapper.add_new_property_to_storage(self.rank, self.location, new_property)

@@ -10,7 +10,7 @@ class property_logic_manager:
         '''Gets all properties at specific location'''
         properties_sorted_list = []
 
-        all_properties = self.Storage_Layer_Wrapper.get_all_properties()
+        all_properties = self.Storage_Layer_Wrapper.get_all_properties_at_location()
 
         for property in all_properties:
             if property.location == location:
