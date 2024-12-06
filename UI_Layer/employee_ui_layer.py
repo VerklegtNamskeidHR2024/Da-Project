@@ -47,7 +47,7 @@ class employee_UI_menu:
             # print(f"{item.name :> 15}|{item.phone_number :> 10}|{item.email :> 10}|{self.location :> 15}")
         print("-" * 75)
 
-    def action_choice(self):
+    def action_choice(self) -> int:
         """The function is asking the user if they want to search or add an employee"""
         
         print()
@@ -58,11 +58,12 @@ class employee_UI_menu:
         return search_or_add 
         
 
-    def search_employee(self):
+    def search_employee(self) -> int:
         """The Function Is Searching For An Employee by SSN""" 
 
         print()
         employee_ssn = int(input("Enter Employee Social Security Number: "))
+        return employee_ssn
 
 
     def display_employee(self, employee):
@@ -85,7 +86,7 @@ class employee_UI_menu:
         # print(f"{"Staff ID"}| {employee.staff_id}")
         print("-" * 70)
 
-    def employee_options(self):
+    def employee_options(self) -> int:
         print()
         print("1. Edit Employee Details")
         print("2. View Work Requests")
@@ -105,7 +106,7 @@ class employee_UI_menu:
         new_employee.set_email(input("Enter Email: "))
 
 
-    def display_edit_options(self):
+    def display_edit_options(self) -> int:
         """The Function displays and asks for the edit option"""
         print()
         print("1. Change Phone Number: ")

@@ -8,6 +8,8 @@ class employee_logic_manager:
 
         return
 
+    
+
     def get_all_employees_at_location(self, location) -> list:
         employees_sorted_list = []
 
@@ -19,11 +21,25 @@ class employee_logic_manager:
 
         return employees_sorted_list
     
+
+    
+    def get_highest_ID(self) -> str:
+        highestID = -1
+        list_of_all_employees = self.get_all_employees()
+        for employee in list_of_all_employees:
+            stripped_ID = employee.employee_id[1:]
+            if int(stripped_ID) > highestID:
+                highestID = int(stripped_ID)
+        highestID += 1
+
+        new_employee_id = 'E' + str(highestID)
+        return new_employee_id    
+
     def sanity_check_employee(employee, display):
         pass
         
     def add_new_employee_to_storage(self,employee): 
-        pass
+        new_report_id = self.get_highest_ID()
 
     def edit_existing_employee_in_storage(employee):
         pass
