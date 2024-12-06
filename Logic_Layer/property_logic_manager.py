@@ -5,9 +5,18 @@ class property_logic_manager:
     def __init__(self, Storage_Layer_Wrapper):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
 
+    def get_all_properties(self, location) -> list:
+        property_list = []
+
+        all_properties = self.Storage_Layer_Wrapper.get_all_properties_at_location()
+
+        for property in all_properties:
+            property_list.append(property)
+
+        return property_list  
     def get_highest_ID(self, location):
         highestID = -1
-        list_of_all_properties = self.get_all_properties_at_location(location)
+        list_of_all_properties = self.get_all_properties(location)
         for property in list_of_all_properties:
             stripped_ID = property.property_id[2:]
             if int(stripped_ID) > highestID:
