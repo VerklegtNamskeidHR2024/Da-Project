@@ -140,7 +140,7 @@ class Main_Menu:
 
     def user_choice_select(self, user_action):
 
-        # calls the diffrent UI layer classes
+        # calls the sub menus
         match user_action:
             case "1":
                 self.property_UI_menu.start_point_property_UI()
