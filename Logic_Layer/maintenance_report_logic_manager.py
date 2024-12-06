@@ -28,7 +28,7 @@ class maintenance_report_logic_manager:
         return maintenance_report_list
 
     def add_maintencance_report_to_storage(self, location, maintenance_report, is_regular):
-        list_of_all_reports = self.get_all_maintencance_reports_at_location(location)
+        list_of_all_reports = self.get_all_maintencance_reports(location)
         new_report_id = self.get_highest_ID(location)
         if is_regular == 'yes' or is_regular == 'Yes' or is_regular == 'YES':
             maintenance_report.set_regular_maintenance(True)
@@ -47,7 +47,25 @@ class maintenance_report_logic_manager:
         return False
 
     def edit_maintencance_report(self, maintenance_report, location, edit_choice, new_value):
-        pass
+        list_of_reports = self.get_all_maintencance_reports_at_location(location)
+        for report in list_of_reports:
+            if report.report_id == maintenance_report.report_id:
+                if edit_choice == 'Report Name':
+                    report.set_report_name(new_value)
+                elif edit_choice == 'Staff ID':
+                    report.set_staff_id(new_value)
+                elif edit_choice == 'Description':
+                    report.set_maintenance_description(new_value)
+                elif edit_choice == 'Cost':
+                    report.set_price(new_value)
+                elif edit_choice == 'Regular':
+                    if new_value == 'Yes' or new_value == 'yes':
+                        report.set_regular_maintenance(True)
+                    elif new_value == 'No' or new_value == 'no':
+                        report.set_regular_maintenance(False)
+                elif edit_choice == 'Contractor ID':
+                    report.set_contractor_id(new_value)
+        self.Storage_Layer_Wrapper.write_to_file_maintenance_reports(list_of_reports)
 
     def get_all_maintencance_reports_at_location(self, location) -> list:
         maintenance_report_sorted_list = []

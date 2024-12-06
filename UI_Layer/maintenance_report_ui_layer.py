@@ -40,7 +40,7 @@ class maintenance_report_UI_menu:
         elif user_choice == '3':
             self.display_create_maintenance_report_form()
         elif user_choice == '4':
-            self.edit_report_details()
+            self.edit_report_details(self.location)
         else:
             print("Invalid choice.")
 
@@ -136,7 +136,7 @@ class maintenance_report_UI_menu:
         contractor_id = input('Enter contractor ID (leave empty if no contractor): ')
         work_request_id = input("Enter the ID of the work request in progress: ")
         new_maintenance_report = MaintenanceReport('', report_name, location, property_id, staff_id, False,
-        maintenance_description,'' ,price, False, contractor_id, work_request_id)
+        maintenance_description,'',price, False, contractor_id, work_request_id)
 
         new_maintenance_report_added = self.logic_wrapper.add_new_maintenance_report_to_storage(self.location, new_maintenance_report, regular_maintenance)
 
@@ -150,8 +150,11 @@ class maintenance_report_UI_menu:
         selected_work_request = input('Please type in work request id: ')
         report_in_system = self.logic_wrapper.check_if_report_in_system(selected_work_request, self.location)
         if report_in_system == True:
-            self.print_single_maintenance_report(selected_work_request)
-            self.display_edit_maintenance_report_details(selected_work_request)
+            for report in all_report_list:
+                if report.report_id == selected_work_request:
+                    maintenance_report_to_use = report
+            self.print_single_maintenance_report(maintenance_report_to_use)
+            self.display_edit_maintenance_report_details(maintenance_report_to_use)
         elif report_in_system == False:
             print(f'{selected_work_request} not found in the system please try again!')
             self.edit_report_details()
@@ -173,6 +176,8 @@ class maintenance_report_UI_menu:
                 case _:
                     print("Invalid choice.")'''
 
+    #Completed - But needs to do sanity check! - And also find incomplete reports
+    # need to implement so user can stop making a report mid way through and that would give the report an incomplete status
     def display_edit_maintenance_report_details(self, selected_maintenance_report):
         """ Allows editing of maintenance report details. """
         print(f"Editing details for maintenance report ID: {selected_maintenance_report.report_id}")
@@ -182,6 +187,7 @@ class maintenance_report_UI_menu:
         print('4. Change Maintenance Description')
         print('5. Change Cost')
         print('6. Change Contractor ID')
+        print('7. Go back')
         print("-" * 70)
 
         edit_choice = input("Select an option to edit: ")
@@ -189,32 +195,44 @@ class maintenance_report_UI_menu:
         match edit_choice:
             case "1":
                 new_report_name = input('Enter new report name: ')
+                self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Report Name', new_report_name)
             case '2':
                 new_staff_id = input('Enter new staff ID: ')
+                self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Staff ID', new_staff_id)
             case '3':
                 regular_maintenance = input('Regular Maintenance (yes/no)')
+                self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Regular', regular_maintenance)
             case '4':
                 new_report_description = input('Enter new description')
+                self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Description', new_report_description)
             case '5':
                 try:
                     new_report_cost = float(input('Enter New Cost'))
+                    self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Cost', new_report_cost)
                 except ValueError:
                     print('Needs to be a number')
             case '6':
                 new_contractor_id = input('Enter new contractor ID')
-
+                self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Contractor ID', new_contractor_id)
+            case '7':
+                self.admin_or_manager_menu()
             case _:
                 print("Invalid input")
 
         print("Maintenance report details updated successfully!")
+        self.display_edit_maintenance_report_details(selected_maintenance_report)
 
     def print_single_maintenance_report(self, maintenance_report):
             print("-"*30)
+            print(f"{'Report ID':<15}: {maintenance_report.report_id}")
+            print(f"{'Report Name':<15}: {maintenance_report.report_name}")
+            print(f"{'Maintenance Description':<15}: {maintenance_report.maintenance_description}")
+            print(f"{'Location':<15}: {maintenance_report.location}")
             print(f"{'Property ID':<15}: {maintenance_report.property_id}")
-            print(f"{'Staff ID':<15}: {maintenance_report.property_name}")
-            print(f"{'Contractor ID':<15}: {maintenance_report.contractor_id}")
-            print(f"{'Scheduled date':<15}: {maintenance_report.scheduled_date}")
-            print(f"{'Work done':<15}: {maintenance_report.work_done}")
-            print(f"{'Status':<15}: {maintenance_report.status}")
+            print(f"{'Staff ID':<15}: {maintenance_report.staff_id}")
+            print(f"{'Regular Maintenance':<15}: {maintenance_report.regular_maintenance}")
             print(f"{'Price':<15}: {maintenance_report.price}")
+            print(f"{'Completed':<15}: {maintenance_report.mark_as_done}")
+            print(f"{'Contractor ID':<15}: {maintenance_report.contractor_id}")
+            print(f"{'Work Request ID':<15}: {maintenance_report.work_request_id}")
             print("-"*30)
