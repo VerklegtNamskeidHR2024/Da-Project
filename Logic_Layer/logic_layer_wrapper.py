@@ -66,15 +66,15 @@ class Logic_Layer_Wrapper:
     
     ########################################################################################################
     ### PROPERTIES #########################################################################################
-    def get_all_properties_at_location(self, location):
-        return self.property_logic_manager.get_all_properties_at_location(location)
-    
+
     def get_all_properties_at_location(self, location):
         return self.property_logic_manager.get_all_properties_at_location(location)
 
     def add_new_property_to_storage(self, rank, location, new_property):
         return self.property_logic_manager.add_new_property_to_storage(rank, location, new_property)
     
+    def get_property_by_id(self,property_id):
+        return self.property_logic_manager.get_property_by_id(property_id)
 
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################

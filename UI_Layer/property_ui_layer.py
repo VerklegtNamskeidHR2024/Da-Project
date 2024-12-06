@@ -1,5 +1,5 @@
+
 from Model_Classes.house_model import House
- 
 class property_UI_menu:
     def __init__(self, logic_wrapper, rank, location):
         self.logic_wrapper = logic_wrapper
@@ -43,20 +43,21 @@ class property_UI_menu:
             case _:
                 print("Invalid input.Please try again.")
 
-    def display_select_property(self):
+    def display_select_property(self) -> print:
         #Displays options for a selected property.
         try:
             #you choose the property id for the properrty you looking for
             property_id = input("Enter the Property ID to select: ")
             # gets property by id
-            selected_property = self.logic_wrapper.get_property_by_id(self.location, property_id)
+            selected_property = self.logic_wrapper.get_property_by_id(self.location, self.rank, property_id)
+            self.print_single_property(selected_property)
             #if there is not property with the slected id you will get a message 
             if not selected_property:
                 print("No property found with the provided ID.")
                 #and it returns to the start point
                 return
-            # print for single selected property 
-            self.print_single_property(selected_property)
+            
+            #if there is a property with the selected id you will get the following options
             print("1. View Attached Items")
             print("2. Edit Property Details")
             # let you choose from the above 2.
@@ -67,7 +68,7 @@ class property_UI_menu:
                     self.display_view_attached_options()
                     #displays the attched options
                 case "2":
-                    self.display_edit_property_details(selected_property)
+                    self.display_edit_property_details()
                     #lets you edit property details
                 case "q":
                     #if you want to quit and return to the property list
@@ -76,7 +77,7 @@ class property_UI_menu:
                     #if you put an invaild input
                     print("Invalid input. Please try again.")
         except Exception:
-            print("An error occurred")
+            print("An error occurred1")
 
     def display_add_property(self):
     # Handles adding a new property.
@@ -84,11 +85,11 @@ class property_UI_menu:
             # New property
             new_property = House()
             # The details you can add for the property
-            new_property.set_property_id(input("Enter Property ID: "))
+            #new_property.set_property_id(input("Enter Property ID: "))
             new_property.set_name(input("Enter Property Name: "))
             new_property.set_condition(input("Enter Property Condition: "))
             new_property.set_total_price_to_fix(int(input("Enter Price to Fix: ")))
-            # new_property.set_property_price(int(input("Enter Property Price: ")))
+            new_property.set_property_price(int(input("Enter Property Price: ")))
             if self.rank != "Admin":
                 new_property.set_location(self.location)
             else:
@@ -173,27 +174,10 @@ class property_UI_menu:
                 print("Invalid input.")
         print("Property details updated successfully!")
 
-    def display_property_work_requests(self):
-        #Displays work requests for a property.
-        #need da code  for the work requests in here 
-        print("Work Requests for the selected property.")
-
-    def display_property_maintenance_reports(self):
-        #Displays maintenance reports for a property.
-        #need da code in here too gang 
-        print("Maintenance Reports for the selected property.")
-
-    def display_property_employees(self):
-        #Displays employees assigned to a property.
-        #code...
-        print("Employees assigned to the selected property.")
-
-    def display_property_contractors(self):
-        """Displays contractors assigned to a property."""
-        print("Contractors assigned to the selected property.")
+    
 
     def print_single_property(self, property):
-        #Prints details of a single property
+        # Prints details of a single property
         print("-" * 30)
         print(f"{'Property ID':<20}: {property.property_id}")
         print(f"{'Name':<20}: {property.name}")
@@ -203,4 +187,41 @@ class property_UI_menu:
         print(f"{'Price':<20}: {property.property_price}")
         print("-" * 30)
 
-    
+    def display_property_work_requests(self, property):
+        # Displays work requests for the selected property
+        work_requests = self.logic_wrapper.get_work_requests_for_property(property.property_id)
+        if work_requests:
+            print("Work Requests for Property:")
+            for request in work_requests:
+                print(f"- {request}")
+        else:
+            print("No work requests found for this property.")
+
+    def display_property_maintenance_report(self, property):
+        # Displays maintenance report for the selected property
+        maintenance_report = self.logic_wrapper.get_maintenance_report_for_property(property.property_id)
+        if maintenance_report:
+            print("Maintenance Report for Property:")
+            print(maintenance_report)
+        else:
+            print("No maintenance report found for this property.")
+
+    def display_property_employees(self, property):
+        # Displays employees assigned to the selected property
+        employees = self.logic_wrapper.get_employees_for_property(property.property_id)
+        if employees:
+            print("Employees assigned to the selected property:")
+            for employee in employees:
+                print(f"- {employee}")
+        else:
+            print("No employees assigned to this property.")
+
+    def display_property_contractors(self, property):
+        # Displays contractors assigned to the selected property
+        contractors = self.logic_wrapper.get_contractors_for_property(property.property_id)
+        if contractors:
+            print("Contractors assigned to the selected property:")
+            for contractor in contractors:
+                print(f"- {contractor}")
+        else:
+            print("No contractors assigned to this property.")

@@ -48,17 +48,23 @@ class property_logic_manager:
             stripped_ID = property.property_id[2:]
             if int(stripped_ID) > highestID:
                 highestID = int(stripped_ID)
+        highestID += 1
+        new_property_id = 'P' + str(highestID)
+        property.property_id = new_property_id
+        # Add logic to save the new property to storage
+        self.Storage_Layer_Wrapper.add_property(property)
 
     def edit_existing_property_in_storage(property):
         pass
 
-    def fetch_property_from_storage(self, property_ID):
+    def get_property_by_id(self, location, rank , property_id) -> object:
         '''property ID = input, if the property ID is in the property list it returns that property'''
-        for prop in "get_all_properties":
-            if property_ID in prop:
-                return prop
-            
-        return #error message property ID is not in the system 
+        all_properties = self.Storage_Layer_Wrapper.get_all_properties()
+        for property in all_properties:
+            if property.location == location and property.property_id == property_id:
+                return property
+        return 
+
     def fetch_all_work_request_in_storage(work_request_ID):
         pass
 
