@@ -95,16 +95,17 @@ class employee_UI_menu:
         option = int(input("Enter Choice: "))
         return option
 
-    def add_employee(self):
+    def add_new_employee_to_storage(self):
         """The function asks for all the information needed for regestering an employee"""
-        new_employee = Employee()
+        print("Creating a new employee")
 
-        new_employee.set_name(input("Enter Employee Name: "))
-        new_employee.set_social_security_number(int(input("Enter Employee Social Security: ")))
-        new_employee.set_phone_number(int(input("Enter Employee Phone Number: ")))
-        new_employee.set_location(input("Enter Employee Location: "))
-        new_employee.set_email(input("Enter Email: "))
-
+        employee_name = input("Enter Employee Name: ")
+        employee_social_security_number = int(input("Enter Employee Social Security: "))
+        employee_phone_number = int(input("Enter Employee Phone Number: "))
+        #employee_location = input("Enter Employee Location: ")
+        employee_email = input("Enter Email: ")
+        new_employee = Employee(employee_name, employee_social_security_number, employee_phone_number, employee_location, "Employee", employee_email, "")
+        new_employee_added = self.logic_wrapper.add_new_employee_to_storage()
 
     def display_edit_options(self) -> int:
         """The Function displays and asks for the edit option"""
@@ -144,7 +145,7 @@ class employee_UI_menu:
             print("Somthing Went Wrong")
 
     def display_employee_work_requests():
-        pass
+        
 
     def display_employee_maintenance_report():
         pass
