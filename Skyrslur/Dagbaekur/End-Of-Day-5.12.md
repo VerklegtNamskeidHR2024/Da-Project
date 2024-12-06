@@ -12,7 +12,7 @@ Daníela:\
 
 
 Yeabsire:\
-
+I worked on the maintenance report section first then i worked then on property logic and ui layer. I came at 9 and left at 7:30.
 
 
 Kormákur:\
