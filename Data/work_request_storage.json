@@ -36,5 +36,24 @@
         "contractor_id": false,
         "mark_as_completed": "",
         "accepted_by_employee": false
+    },
+    {
+        "work_request_id": "WR3",
+        "name": "1",
+        "description": "1",
+        "maintenance_report_id": "",
+        "staff_id": "",
+        "location": "Nuuk",
+        "property_id": "P1",
+        "start_date": "10-10-10",
+        "completition_date": "",
+        "repetitive_work": "Yes",
+        "reopen_interval": 1,
+        "priority": "Low",
+        "work_request_status": "",
+        "need_contractor": "Yes",
+        "contractor_id": "",
+        "mark_as_completed": false,
+        "accepted_by_employee": false
     }
 ]

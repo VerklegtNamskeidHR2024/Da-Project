@@ -5,21 +5,24 @@ class work_request_logic_manager:
 
     def sanity_check_work_request_id(self, work_request_id: str) -> bool:
         work_request_id_list = list(work_request_id)
+        if len(work_request_id) < 3:
+            raise IndexError("Please Try Again")
         is_number = (work_request_id_list[2]).isalpha()
         if (len(work_request_id_list) == 3 and work_request_id_list[0] == "W" and 
-            work_request_id_list[1] == "R" and is_number == False) == True:
+            work_request_id_list[1] == "R" and is_number == False):
             return True
-        else:
-            return print("whut")  
+        return False
 
-    def sanity_check_new_work_request_property_id(self, property_id: str) -> bool:
-        property_id_listed = list(property_id)
-        is_number = (property_id_listed[1]).isalpha()
-        if (len(property_id_listed) == 2 and property_id_listed[0] == "P" and is_number == False) == True:
-            return True
-        else:
-            return print("lol") 
-    
+    def sanity_check_new_work_request_property_id(self, property_id: str) -> bool: 
+        try:
+            property_id_listed = list(property_id)
+            is_number = (property_id_listed[1]).isalpha()
+            if (len(property_id_listed) == 2 and property_id_listed[0] == "P" and is_number == False):
+                return True    
+            return False 
+        except IndexError:
+            return False
+                
     def sanity_check_boolean_input_work_requests(self, yes_or_no: str) -> bool:
         match yes_or_no:
             case "yes" | "Yes":
@@ -27,8 +30,8 @@ class work_request_logic_manager:
             case "no" | "No":
                 return True
             case _:
-                return print("Try Again.")
-
+                return False
+            
     def sanity_check_priority_for_request(self, priority: str) -> bool:
         match priority:
             case "high" | "High":
@@ -38,14 +41,18 @@ class work_request_logic_manager:
             case "low" | "Low":
                 return True
             case _ :
-                return print("Invalid dumb dumb")
-
+                return False
+            
     def sanity_check_location_for_request(self, set_location: str) -> bool:
         valid_locations = ["Reykjavik", "Nuuk", "Kulusuk", "Longyearbyen", "Torshavn", "Tingwall"]
         for location in valid_locations:
             if location == set_location:
                 return True
-        return print("Try Again Pookie.")
+        return False
+    
+    # def sanity_check_edit_employee_id_request(self, staff_id: str) -> bool:
+    
+    # def sanity_check_edit_request_status(self, status: str) -> bool:
 
     def set_new_work_request_id(self, Work_request: object) -> str:
         highest_id = 0
