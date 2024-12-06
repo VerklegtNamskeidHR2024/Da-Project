@@ -41,7 +41,7 @@ class property_logic_manager:
     def sanity_check_properties(property):
         pass
 
-    def add_new_property_to_storage(self, rank, location, property):
+    def add_new_property_to_storage(self, location, property):
         highestID = -1
         list_of_all_properties = self.get_all_properties_at_location(location)
         for property in list_of_all_properties:
@@ -51,13 +51,13 @@ class property_logic_manager:
         highestID += 1
         new_property_id = 'P' + str(highestID)
         property.property_id = new_property_id
-        # Add logic to save the new property to storage
+        list_of_all_properties.append(property)
         self.Storage_Layer_Wrapper.add_property(property)
 
     def edit_existing_property_in_storage(property):
         pass
 
-    def get_property_by_id(self, location, rank , property_id) -> object:
+    def get_property_by_id(self, location, property_id) -> object:
         '''property ID = input, if the property ID is in the property list it returns that property'''
         all_properties = self.Storage_Layer_Wrapper.get_all_properties()
         for property in all_properties:

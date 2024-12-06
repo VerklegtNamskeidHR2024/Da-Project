@@ -40,6 +40,7 @@ class property_UI_menu:
                 self.display_add_property()
             case "q":
                 print("Returning to the main menu...")
+                #code need to be implemeneted in hegr to return to the main menu
             case _:
                 print("Invalid input.Please try again.")
 
@@ -85,7 +86,7 @@ class property_UI_menu:
             # New property
         
             # The details you can add for the property
-            #new_property.set_property_id(input("Enter Property ID: "))
+            #property_id = (input("Enter Property ID: "))
             name = (input("Enter Property Name: "))
             condition = (input("Enter Property Condition: "))
             total_price_to_fix = (int(input("Enter Price to Fix: ")))
@@ -95,18 +96,14 @@ class property_UI_menu:
             else:
                 location = (input("Enter Property Location: "))
             new_property.location = self.location
-            new_property = House('', name, location, condition, total_price_to_fix, False, property_price, False)
+            new_property = House(" ", name, condition, location, total_price_to_fix = 0,  property_price = 0,)
         
             
             # Adds the property
-            property_list = self.logic_wrapper.add_new_property_to_storage(self.rank, self.location, new_property)
+            property_list = self.logic_wrapper.add_new_property_to_storage(self.location, new_property)
+    
             
-            if property_list is not None:
-                for obj in property_list:
-                    print(obj)
-                print("New property has been added successfully!")
-            else:
-                print("Failed to add new property.")
+            print("Property added successfully!")
         except:
             # If you put an invalid input
             print("Invalid input.")
