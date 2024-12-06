@@ -144,9 +144,10 @@ class employee_UI_menu:
         except:
             print("Somthing Went Wrong")
 
-    def display_employee_work_requests():
+    def display_employee_work_requests(self, social_security_number):
+        """The function displays all work requests by an employee"""
         
 
-    def display_employee_maintenance_report():
+    def display_employee_maintenance_report(self, social_security_number):
         pass
 
