@@ -128,48 +128,26 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### WORK_REQUESTS ######################################################################################
-    def get_all_work_requests_at_location(self, rank, location) -> list: 
-        return self.work_request_logic_manager.get_all_work_requests_at_location(rank, location)
-        # dummy data
-        """wr1 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234", "Reykjavik", "H001", "01-01-24", "11-01-24", False, 0, "Low", "MR0002", "Pending", False, "", False)
+    def get_all_work_requests_at_location(self, rank:str , location: str, status: str, is_accepted: bool) -> list: 
+        return self.work_request_logic_manager.get_all_work_requests_at_location(rank, location, status, is_accepted)
 
-        wr2 = WorkRequest("WR0002","Toilet cleaning","clean the damn toilets","MR002", "E1342", "Nuuk", "H002", "01-03-24", "15-03-24", True, 5, "High", "Open", False, "", False)
-
-        wr3 = WorkRequest("WR0003","Decorate Doors","doors are ulg as shit","MR003", "E4312", "Torshavn", "H003", "21-12-24", "25-12-24", False, 1, "Medium", "Open", False, "", False)
-
-        work_request_list1 = [wr1, wr2, wr3]
-        return work_request_list1"""
-
-    def get_work_request_by_id(self, rank: str, location: str, work_request_id: str) -> object:
-        return self.work_request_logic_manager.fetch_work_request_by_id(rank, location, work_request_id)
-        # dummy data 
-        """wr1 = WorkRequest("WR0001", "Fix roof", "roof had giant hole in it", "MR001", "E1234", "Reykjavik", "H001", "01-01-24", "11-01-24", False, 0, "Low", "MR0002", "Pending", False, "", False)
-
-        wr2 = WorkRequest("WR0002","Toilet cleaning","clean the damn toilets","MR002", "E1342", "Nuuk", "H002", "01-03-24", "15-03-24", True, 5, "High", "Open", False, "", False)
-
-        wr3 = WorkRequest("WR0003","Decorate Doors","doors are ulg as shit","MR003", "E4312", "Torshavn", "H003", "21-12-24", "25-12-24", False, 1, "Medium", "Open", False, "", False)
-
-        work_request_list2 = [wr1, wr2, wr3]
-        for object in work_request_list2:
-            if object.work_request_id == Work_request_id:
-                return object
-            else: 
-                return """
+    def get_work_request_by_id(self, rank: str, location: str, work_request_id: str, status: str, is_accepted: bool) -> object:
+        return self.work_request_logic_manager.get_work_request_by_id(rank, location, work_request_id, status, is_accepted)
     
-    def get_all_new_work_requests(self, rank, location) -> list:
-        return self.work_request_logic_manager.fetch_all_new_work_requests_in_storage(rank, location)
+    def get_all_new_work_requests(self, rank: str, location: str, status: str, is_accepted: bool) -> list:
+        return self.work_request_logic_manager.get_all_new_work_requests_in_storage(rank, location, status, is_accepted)
+
+    def get_all_open_work_requests(self, rank: str, location: str, status: str, is_accepted: bool) -> list:
+        return self.work_request_logic_manager.get_all_open_work_requests_in_storage(rank, location, status, is_accepted)
     
-    def get_all_open_work_requests(self, rank, location) -> list:
-        return self.work_request_logic_manager.fetch_all_open_work_requests_in_storage(rank, location)
+    def get_all_closed_work_requests(self, rank: str, location: str, status: str, is_accepted: bool) -> list: 
+        return self.work_request_logic_manager.get_all_closed_work_requests_in_storage(rank, location, status, is_accepted)
     
-    def get_all_closed_work_requests(self, rank, location) -> list: 
-        return self.work_request_logic_manager.fetch_all_closed_work_requests_in_storage(rank, location)
+    def get_all_pending_work_requests(self, rank: str, location: str, status: str, is_accepted: bool) -> list:
+        return self.work_request_logic_manager.get_all_pending_work_requests_in_storage(rank, location, status, is_accepted)
     
-    def get_all_pending_work_requests(self, rank, location) -> list:
-        return self.work_request_logic_manager.fetch_all_pending_work_requests_in_storage(rank, location)
-    
-    def get_my_work_requests(self, rank, location) -> list:
-        return self.work_request_logic_manager.fetch_my_work_request(rank, location)
+    def get_my_work_requests(self, rank: str, location: str, status: str, is_accepted: bool) -> list:
+        return self.work_request_logic_manager.get_my_work_request(rank, location, status, is_accepted)
     
     def edit_work_request(self, rank, location, WorkRequest) -> bool:
         return self.work_request_logic_manager.edit_work_request(rank, location, WorkRequest)
