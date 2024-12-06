@@ -112,9 +112,6 @@ class maintenance_report_UI_menu:
             case "1":
                 # create maintenance reports 
                 self.display_create_maintenance_report_form()
-            case "2":
-                # view incomplete reports
-                 self.view_incomplete_reports()
             case "q":
                 """quit back to main menu"""
                 pass
@@ -145,13 +142,20 @@ class maintenance_report_UI_menu:
         new_maintenance_report_added = self.logic_wrapper.add_new_maintenance_report_to_storage(self.location, new_maintenance_report, regular_maintenance)
 
     #WIP
-    def edit_report_details(self):
+    def edit_report_details(self, location):
         """Editing report {report_id} (details to be implemented)"""
         all_report_list = self.logic_wrapper.get_all_maintenance_reports_at_location(self.location)
         for report in all_report_list:
             print(f'{report.report_id:<10}{report.report_name:<10}')
         print("-" * 70)
         selected_work_request = input('Please type in work request id: ')
+        report_in_system = self.logic_wrapper.check_if_report_in_system(selected_work_request, self.location)
+        if report_in_system == True:
+            self.print_single_maintenance_report(selected_work_request)
+            self.display_edit_maintenance_report_details(selected_work_request)
+        elif report_in_system == False:
+            print(f'{selected_work_request} not found in the system please try again!')
+            self.edit_report_details()
 
         # print the maintenance report  info
         # self.print_single_maintenance_report(maintenance_report_to_use)
@@ -173,13 +177,14 @@ class maintenance_report_UI_menu:
     def display_edit_maintenance_report_details(self, selected_maintenance_report):
         """ Allows editing of maintenance report details. """
         print(f"Editing details for maintenance report ID: {selected_maintenance_report.report_id}")
-        print("1. Change Property ID")
-        print("2. Change Staff ID")
-        print("3. Change Contractor ID")
-        print("4. Change Scheduled Date")
-        print("5. Change Work Done")
-        print("6. Change Status")
-        print("7. Change Price")
+        print('1. Change Report Name')
+        print('2. Change Location')
+        print('3. Change Property ID')
+        print('4. Change Staff ID ')
+        print('')
+        print('')
+        print('')
+        print('')
         print("-" * 70)
 
         edit_choice = input("Select an option to edit: ")
@@ -188,6 +193,7 @@ class maintenance_report_UI_menu:
             case "1":
                 new_property_id = input("Enter new Property ID: ")
                 selected_maintenance_report.property_id = new_property_id
+                
                 print("Property ID updated successfully.")
             case "2":
                 new_staff_id = input("Enter new Staff ID: ")

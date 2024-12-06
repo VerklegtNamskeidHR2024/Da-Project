@@ -14,7 +14,6 @@ Daníela:\
 Yeabsire:\
 
 
-
 Kormákur:\
  
 
