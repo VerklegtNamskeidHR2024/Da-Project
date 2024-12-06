@@ -4,7 +4,18 @@ class property_logic_manager:
 
     def __init__(self, Storage_Layer_Wrapper):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
-        
+
+    def get_highest_ID(self, location):
+        highestID = -1
+        list_of_all_properties = self.get_all_properties_at_location(location)
+        for property in list_of_all_properties:
+            stripped_ID = property.property_id[2:]
+            if int(stripped_ID) > highestID:
+                highestID = int(stripped_ID)
+        highestID += 1
+
+        new_property_id = 'P' + str(highestID)
+        return new_property_id
 
     def get_all_properties_at_location(self, location) -> list:
         '''Gets all properties at specific location'''
@@ -21,11 +32,13 @@ class property_logic_manager:
     def sanity_check_properties(property):
         pass
 
-    def add_new_property_to_storage(self,new_property: object) -> None: 
-        all_new_property_ = self.Storage_Layer_Wrapper.get_all_properties()
-        all_new_property_.append(new_property)
-        self.Storage_Layer_Wrapper.write_to_file_work_requests(new_property)
-        return 
+    def add_new_property_to_storage(self, rank, location, property):
+        highestID = -1
+        list_of_all_properties = self.get_all_properties_at_location(location)
+        for property in list_of_all_properties:
+            stripped_ID = property.property_id[2:]
+            if int(stripped_ID) > highestID:
+                highestID = int(stripped_ID)
 
     def edit_existing_property_in_storage(property):
         pass
@@ -48,4 +61,3 @@ class property_logic_manager:
 
     def fetch_all_contractors_in_stoarge(contractor_ID) -> list:
         pass
-
