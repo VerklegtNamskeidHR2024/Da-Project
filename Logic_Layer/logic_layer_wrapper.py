@@ -67,46 +67,37 @@ class Logic_Layer_Wrapper:
     ########################################################################################################
     ### PROPERTIES #########################################################################################
     def get_all_properties_at_location(self, location):
-        # dummy stuff
-        """prop1 = Property("1", "hremmi diddy cave", "rvk", "96")
-        prop2 = Property("2", "Johun plage", "rvk", "swag")
-        prop3 = Property("3", "kormakur aka irl jon jones on a bad day cave", "rvk", "19")
-        prop4 = Property("4", "Langhals vegur", "rvk", "112")
-        property_list = [prop1,prop2,prop3,prop4] """
         return self.property_logic_manager.get_all_properties_at_location(location)
-    def get_property_by_id(self, location, property_id):
-        """
-        Retrieve a property by its ID.
-        """
-        try:
-            properties = self.get_all_properties(location)
-            for property in properties:
-                if property.property_id == property_id:
-                    return property
-            return None  # Property not found
-        except Exception:
-            print("Error retrieving property by ID")
-            return None
-    def add_property(self, new_property):
-        """
-        Add a new property to the storage.
-        """
-        
-        try:
-            # Validate the new property before adding.
-            if not new_property.property_id or not new_property.property_name:
-                raise ValueError("Property ID and Name are required.")
+    
+    def get_all_properties_at_location(self, location):
+        return self.property_logic_manager.get_all_properties_at_location(location)
 
-            # Save the property using the storage manager.
-            self.storage_manager.save_property(new_property)
-            print("Property with ID {new_property.property_id} added successfully.")
-        except Exception:
-            print("Error adding property")
+    def add_new_property_to_storage(self, rank, location, new_property):
+        return self.property_logic_manager.add_new_property_to_storage(rank, location, new_property)
+    
 
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################
     def get_all_employees_at_location(self, location):
         return self.employee_logic_manager.get_all_employees_at_location(location)
+    
+    def get_all_employees(self):
+        return self.employee_logic_manager.get_all_employees() 
+    
+    def add_new_employee_to_storage(self, location, new_employee):
+        return self.employee_logic_manager.add_new_employee_to_storage(location, new_employee)
+
+    def edit_existing_employee_in_storage(self):
+        return self.employee_logic_manager.edit_existing_employee_in_storage()
+    
+    def fetch_employee_from_storage(self, social_security_number):
+        return self.employee_logic_manager.fetch_employee_from_storage(social_security_number)
+
+    def fetch_all_work_request_for_employee(self, social_security_number):
+        return self.employee_logic_manager.fetch_all_work_request_for_employee(social_security_number)
+
+    def fetch_all_maintenance_reports_for_employee(self, social_security_number):
+        return self.employee_logic_manager.fetch_all_maintenance_reports_for_employee(social_security_number)    
 
     ########################################################################################################
     ### MAINTENANCE_REPORTS ################################################################################
@@ -127,73 +118,58 @@ class Logic_Layer_Wrapper:
     
     def deny_or_accept_maintencance_report_for_admin(self, maintencance_report_ID, location, accept_or_deny): 
         return self.maintenance_report_logic_manager.deny_or_accept_maintencance_report_for_admin(maintencance_report_ID, location, accept_or_deny)
+    
+    def edit_maintencance_report(self, maintenance_report, location, edit_choice, new_value):
+        return self.maintenance_report_logic_manager.edit_maintencance_report(maintenance_report, location, edit_choice, new_value)
+    
+    def sanity_check_maintencance_report(self, what_to_check, new_value, location):
+        location_list = self.get_all_locations()
+        return self.maintenance_report_logic_manager.sanity_check_maintencance_report(what_to_check, new_value, location, )
 
     ########################################################################################################
     ### WORK_REQUESTS ######################################################################################
-    def get_all_work_requests_at_location(self, rank, location) -> list: 
-        return self.work_request_logic_manager.get_all_work_requests_at_location(rank, location)
-        # dummy data
-        """wr1 = WorkRequest("WR0001","Fix roof","roof had giant hole in it","MR001", "E1234", "Reykjavik", "H001", "01-01-24", "11-01-24", False, 0, "Low", "MR0002", "Pending", False, "", False)
+    def get_all_work_requests_at_location(self, rank:str , location: str, status: str, is_accepted: bool) -> list: 
+        return self.work_request_logic_manager.get_all_work_requests_at_location(rank, location, status, is_accepted)
 
-        wr2 = WorkRequest("WR0002","Toilet cleaning","clean the damn toilets","MR002", "E1342", "Nuuk", "H002", "01-03-24", "15-03-24", True, 5, "High", "Open", False, "", False)
-
-        wr3 = WorkRequest("WR0003","Decorate Doors","doors are ulg as shit","MR003", "E4312", "Torshavn", "H003", "21-12-24", "25-12-24", False, 1, "Medium", "Open", False, "", False)
-
-        work_request_list1 = [wr1, wr2, wr3]
-        return work_request_list1"""
-
-    def get_work_request_by_id(self, rank: str, location: str, work_request_id: str) -> object:
-        return self.work_request_logic_manager.fetch_work_request_by_id(rank, location, work_request_id)
-        # dummy data 
-        """wr1 = WorkRequest("WR0001", "Fix roof", "roof had giant hole in it", "MR001", "E1234", "Reykjavik", "H001", "01-01-24", "11-01-24", False, 0, "Low", "MR0002", "Pending", False, "", False)
-
-        wr2 = WorkRequest("WR0002","Toilet cleaning","clean the damn toilets","MR002", "E1342", "Nuuk", "H002", "01-03-24", "15-03-24", True, 5, "High", "Open", False, "", False)
-
-        wr3 = WorkRequest("WR0003","Decorate Doors","doors are ulg as shit","MR003", "E4312", "Torshavn", "H003", "21-12-24", "25-12-24", False, 1, "Medium", "Open", False, "", False)
-
-        work_request_list2 = [wr1, wr2, wr3]
-        for object in work_request_list2:
-            if object.work_request_id == Work_request_id:
-                return object
-            else: 
-                return """
+    def get_work_request_by_id(self, rank: str, location: str, work_request_id: str, status: str, is_accepted: bool) -> object:
+        return self.work_request_logic_manager.get_work_request_by_id(rank, location, work_request_id, status, is_accepted)
     
-    def get_all_new_work_requests(self, rank, location) -> list:
-        return self.work_request_logic_manager.fetch_all_new_work_requests_in_storage(rank, location)
+    def get_all_new_work_requests(self, rank: str, location: str, status: str, is_accepted: bool) -> list:
+        return self.work_request_logic_manager.get_all_new_work_requests_in_storage(rank, location, status, is_accepted)
+
+    def get_all_open_work_requests(self, rank: str, location: str, status: str, is_accepted: bool) -> list:
+        return self.work_request_logic_manager.get_all_open_work_requests_in_storage(rank, location, status, is_accepted)
     
-    def get_all_open_work_requests(self, rank, location) -> list:
-        return self.work_request_logic_manager.fetch_all_open_work_requests_in_storage(rank, location)
+    def get_all_closed_work_requests(self, rank: str, location: str, status: str, is_accepted: bool) -> list: 
+        return self.work_request_logic_manager.get_all_closed_work_requests_in_storage(rank, location, status, is_accepted)
     
-    def get_all_closed_work_requests(self, rank, location) -> list: 
-        return self.work_request_logic_manager.fetch_all_closed_work_requests_in_storage(rank, location)
+    def get_all_pending_work_requests(self, rank: str, location: str, status: str, is_accepted: bool) -> list:
+        return self.work_request_logic_manager.get_all_pending_work_requests_in_storage(rank, location, status, is_accepted)
     
-    def get_all_pending_work_requests(self, rank, location) -> list:
-        return self.work_request_logic_manager.fetch_all_pending_work_requests_in_storage(rank, location)
-    
-    def get_my_work_requests(self, rank, location) -> list:
-        return self.work_request_logic_manager.fetch_my_work_request(rank, location)
+    def get_my_work_requests(self, rank: str, location: str, status: str, is_accepted: bool) -> list:
+        return self.work_request_logic_manager.get_my_work_request(rank, location, status, is_accepted)
     
     def edit_work_request(self, rank, location, WorkRequest) -> bool:
         return self.work_request_logic_manager.edit_work_request(rank, location, WorkRequest)
     
-    def add_work_request(self, rank: str, location: str, WorkRequest: object) -> bool:
-        return self.work_request_logic_manager.add_work_request(rank, location, WorkRequest)
-        """empty_work_request = []
-        wr1 = WorkRequest("WR0001", "Fix roof", "roof had giant hole in it", "MR001", "E1234", "Reykjavik", "H001", "01-01-24", "11-01-24", False, 0, "Low", "MR0002", "Pending", False, "", False)
+    def add_work_request(self, WorkRequest: object) -> bool:
+        return self.work_request_logic_manager.add_work_request(WorkRequest)
 
-        wr2 = WorkRequest("WR0002","Toilet cleaning","clean the damn toilets","MR002", "E1342", "Nuuk", "H002", "01-03-24", "15-03-24", True, 5, "High", "Open", False, "", False)
-
-        wr3 = WorkRequest("WR0003","Decorate Doors","doors are ulg as shit","MR003", "E4312", "Torshavn", "H003", "21-12-24", "25-12-24", False, 1, "Medium", "Open", False, "", False)
-
-        work_request_list2 = [wr1, wr2, wr3]
-        work_request_list2.append(WorkRequest)
-        empty_work_request.append(WorkRequest)
-        return empty_work_request"""
-        
+    def sanity_check_work_request_id(self, rank, location, WorkRequest) -> bool: 
+        return self.work_request_logic_manager.sanity_check_work_request_id(rank, location, WorkRequest)
     
-    def sanity_check_work_request(self, rank, location, WorkRequest) -> bool: 
-        return self.work_request_logic_manager.sanity_check_work_request(rank, location, WorkRequest)
+    def sanity_check_new_work_request_property_id(self, property_id: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_new_work_request_property_id(property_id)
     
+    def sanity_check_boolean_input_work_requests(self, yes_or_no: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_boolean_input_work_requests(yes_or_no)
+    
+    def sanity_check_location_for_request(self, location: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_location_for_request(location)
+    
+    def sanity_check_priority_for_request(self, priority: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_priority_for_request(priority)
+
     ########################################################################################################
     ### LOCATION ###########################################################################################
     def get_all_locations(self ,Location) -> list:
@@ -211,4 +187,4 @@ class Logic_Layer_Wrapper:
     def add_new_location_to_storage(self ,Location):
         return self.location_logic_manager.add_new_location_to_storage()
 
-    
+

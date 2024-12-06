@@ -1,7 +1,18 @@
 
 class contractor_logic_manager:
-    def __init__(self, Storage_Layer_Wrapper):
+    def __init__(self, Storage_Layer_Wrapper, location):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
+        self.location = location
+
+    def get_all_contractors(self, location) -> list:
+        contractor_lsit = []
+
+        all_contractors = self.Storage_Layer_Wrapper.get_all_contractor()
+
+        for contractor in all_contractors:
+            contractor_lsit.append(contractor)
+
+        return contractor_lsit
 
     def get_all_contractors_at_location(self, location) ->list:
         contractor_sorted_list = []
