@@ -4,14 +4,17 @@ class work_request_logic_manager:
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
 
     def sanity_check_work_request_id(self, work_request_id: str) -> bool:
-        work_request_id_list = list(work_request_id)
-        if len(work_request_id) < 3:
-            raise IndexError("Please Try Again")
-        is_number = (work_request_id_list[2]).isalpha()
-        if (len(work_request_id_list) == 3 and work_request_id_list[0] == "W" and 
-            work_request_id_list[1] == "R" and is_number == False):
-            return True
-        return False
+        try: 
+            work_request_id_list = list(work_request_id)
+            if len(work_request_id) < 3:
+                raise IndexError("Please Try Again")
+            is_number = (work_request_id_list[2]).isalpha()
+            if (len(work_request_id_list) == 3 and work_request_id_list[0] == "W" and 
+                work_request_id_list[1] == "R" and is_number == False):
+                return True
+            return False
+        except IndexError:  
+            return False
 
     def sanity_check_new_work_request_property_id(self, property_id: str) -> bool: 
         try:
