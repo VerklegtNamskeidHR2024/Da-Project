@@ -1,17 +1,12 @@
-from Logic_Layer.property_logic_manager import property_logic_manager
-from Logic_Layer.location_logic_manager import location_logic_manager
-from Logic_Layer.contractor_logic_manager import contractor_logic_manager
-from Logic_Layer.employee_logic_manager import employee_logic_manager
-from Logic_Layer.work_request_logic_manager import work_request_logic_manager
-
 class maintenance_report_logic_manager:
-    def __init__(self, Storage_Layer_Wrapper):
+    def __init__(self, Storage_Layer_Wrapper, location):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
-        self.Property_Logic_Manager = property_logic_manager(Storage_Layer_Wrapper)
-        self.Location_Logic_Manager = location_logic_manager(Storage_Layer_Wrapper)
-        self.Contractor_Logic_Manager = contractor_logic_manager(Storage_Layer_Wrapper)
-        self.Employee_Logic_Manager = employee_logic_manager(Storage_Layer_Wrapper)
-        self.Work_Request_Logic_Manager = work_request_logic_manager(Storage_Layer_Wrapper)
+        self.location = location
+        from Logic_Layer.property_logic_manager import property_logic_manager
+        from Logic_Layer.location_logic_manager import location_logic_manager
+        from Logic_Layer.contractor_logic_manager import contractor_logic_manager
+        from Logic_Layer.employee_logic_manager import employee_logic_manager
+        from Logic_Layer.work_request_logic_manager import work_request_logic_manager
 
     def sanity_check_maintencance_report(self, what_to_check, new_value, location):
         if what_to_check == 'report name':
