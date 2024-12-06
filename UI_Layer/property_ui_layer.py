@@ -124,7 +124,7 @@ class property_UI_menu:
             case "1":
                 self.display_property_work_requests()
             case "2":
-                self.display_property_maintenance_reports()
+                self.display_property_maintenance_report()
             case "3":
                 self.display_property_employees()
             case "4":
