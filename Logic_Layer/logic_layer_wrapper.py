@@ -156,24 +156,24 @@ class Logic_Layer_Wrapper:
     def edit_work_request(self, rank, location, WorkRequest) -> bool:
         return self.work_request_logic_manager.edit_work_request(rank, location, WorkRequest)
     
-    def add_work_request(self, rank: str, location: str, WorkRequest: object) -> bool:
-        return self.work_request_logic_manager.add_work_request(rank, location, WorkRequest)
-        """empty_work_request = []
-        wr1 = WorkRequest("WR0001", "Fix roof", "roof had giant hole in it", "MR001", "E1234", "Reykjavik", "H001", "01-01-24", "11-01-24", False, 0, "Low", "MR0002", "Pending", False, "", False)
+    def add_work_request(self, WorkRequest: object) -> bool:
+        return self.work_request_logic_manager.add_work_request(WorkRequest)
 
-        wr2 = WorkRequest("WR0002","Toilet cleaning","clean the damn toilets","MR002", "E1342", "Nuuk", "H002", "01-03-24", "15-03-24", True, 5, "High", "Open", False, "", False)
-
-        wr3 = WorkRequest("WR0003","Decorate Doors","doors are ulg as shit","MR003", "E4312", "Torshavn", "H003", "21-12-24", "25-12-24", False, 1, "Medium", "Open", False, "", False)
-
-        work_request_list2 = [wr1, wr2, wr3]
-        work_request_list2.append(WorkRequest)
-        empty_work_request.append(WorkRequest)
-        return empty_work_request"""
-        
+    def sanity_check_work_request_id(self, rank, location, WorkRequest) -> bool: 
+        return self.work_request_logic_manager.sanity_check_work_request_id(rank, location, WorkRequest)
     
-    def sanity_check_work_request(self, rank, location, WorkRequest) -> bool: 
-        return self.work_request_logic_manager.sanity_check_work_request(rank, location, WorkRequest)
+    def sanity_check_new_work_request_property_id(self, property_id: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_new_work_request_property_id(property_id)
     
+    def sanity_check_boolean_input_work_requests(self, yes_or_no: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_boolean_input_work_requests(yes_or_no)
+    
+    def sanity_check_location_for_request(self, location: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_location_for_request(location)
+    
+    def sanity_check_priority_for_request(self, priority: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_priority_for_request(priority)
+
     ########################################################################################################
     ### LOCATION ###########################################################################################
     def get_all_locations(self ,Location) -> list:
