@@ -2,6 +2,7 @@
 
 ### What we did through the day 
 Hreimur:\
+I finished logic for editing maintenance reports, and sanity check, then ran into issues with that, that i will fix tomorrow
 
 
 Tumi:\
