@@ -6,7 +6,7 @@ class employee_logic_manager:
     def __init__(self, Storage_Layer_Wrapper):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
         self.work_request_logic_mananger = work_request_logic_manager
-        self.maintenance_report_logic_manager = maintenance_report_logic_manager
+        self.maintenance_report_logic_mananger = maintenance_report_logic_manager
 
         #self.employee_list = fetch_employees #needs more information from employee storage
 
