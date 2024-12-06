@@ -83,18 +83,20 @@ class property_UI_menu:
     # Handles adding a new property.
         try:
             # New property
-            new_property = House()
+        
             # The details you can add for the property
             #new_property.set_property_id(input("Enter Property ID: "))
-            new_property.set_name(input("Enter Property Name: "))
-            new_property.set_condition(input("Enter Property Condition: "))
-            new_property.set_total_price_to_fix(int(input("Enter Price to Fix: ")))
-            new_property.set_property_price(int(input("Enter Property Price: ")))
+            name = (input("Enter Property Name: "))
+            condition = (input("Enter Property Condition: "))
+            total_price_to_fix = (int(input("Enter Price to Fix: ")))
+            property_price = (int(input("Enter Property Price: ")))
             if self.rank != "Admin":
-                new_property.set_location(self.location)
+                location = self.location
             else:
-                new_property.set_location(input("Enter Property Location: "))
+                location = (input("Enter Property Location: "))
             new_property.location = self.location
+            new_property = House('', name, location, condition, total_price_to_fix, False, property_price, False)
+        
             
             # Adds the property
             property_list = self.logic_wrapper.add_new_property_to_storage(self.rank, self.location, new_property)
@@ -105,7 +107,7 @@ class property_UI_menu:
                 print("New property has been added successfully!")
             else:
                 print("Failed to add new property.")
-        except ValueError:
+        except:
             # If you put an invalid input
             print("Invalid input.")
 
