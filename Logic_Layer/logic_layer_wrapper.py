@@ -67,43 +67,14 @@ class Logic_Layer_Wrapper:
     ########################################################################################################
     ### PROPERTIES #########################################################################################
     def get_all_properties_at_location(self, location):
-        # dummy stuff
-        """prop1 = Property("1", "hremmi diddy cave", "rvk", "96")
-        prop2 = Property("2", "Johun plage", "rvk", "swag")
-        prop3 = Property("3", "kormakur aka irl jon jones on a bad day cave", "rvk", "19")
-        prop4 = Property("4", "Langhals vegur", "rvk", "112")
-        property_list = [prop1,prop2,prop3,prop4] """
         return self.property_logic_manager.get_all_properties_at_location(location)
     
-    def get_property_by_id(self, location, property_id):
-        """
-        Retrieve a property by its ID.
-        """
-        try:
-            properties = self.get_all_properties(location)
-            for property in properties:
-                if property.property_id == property_id:
-                    return property
-            return None  # Property not found
-        except Exception:
-            print("Error retrieving property by ID")
-            return None
-    
-    def add_new_property_to_storage(self, rank, location, new_property):
-        """
-        Add a new property to the storage.
-        """
-        
-        try:
-            # Validate the new property before adding.
-            if not new_property.property_id or not new_property.property_name:
-                raise ValueError("Property ID and Name are required.")
+    def get_all_properties_at_location(self, location):
+        return self.property_logic_manager.get_all_properties_at_location(location)
 
-            # Save the property using the storage manager.
-            self.storage_manager.save_property(new_property)
-            print("Property with ID {new_property.property_id} added successfully.")
-        except Exception:
-            print("Error adding property")
+    def add_new_property_to_storage(self, rank, location, new_property):
+        return self.property_logic_manager.add_new_property_to_storage(rank, location, new_property)
+    
 
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################
@@ -203,24 +174,24 @@ class Logic_Layer_Wrapper:
     def edit_work_request(self, rank, location, WorkRequest) -> bool:
         return self.work_request_logic_manager.edit_work_request(rank, location, WorkRequest)
     
-    def add_work_request(self, rank: str, location: str, WorkRequest: object) -> bool:
-        return self.work_request_logic_manager.add_work_request(rank, location, WorkRequest)
-        """empty_work_request = []
-        wr1 = WorkRequest("WR0001", "Fix roof", "roof had giant hole in it", "MR001", "E1234", "Reykjavik", "H001", "01-01-24", "11-01-24", False, 0, "Low", "MR0002", "Pending", False, "", False)
+    def add_work_request(self, WorkRequest: object) -> bool:
+        return self.work_request_logic_manager.add_work_request(WorkRequest)
 
-        wr2 = WorkRequest("WR0002","Toilet cleaning","clean the damn toilets","MR002", "E1342", "Nuuk", "H002", "01-03-24", "15-03-24", True, 5, "High", "Open", False, "", False)
-
-        wr3 = WorkRequest("WR0003","Decorate Doors","doors are ulg as shit","MR003", "E4312", "Torshavn", "H003", "21-12-24", "25-12-24", False, 1, "Medium", "Open", False, "", False)
-
-        work_request_list2 = [wr1, wr2, wr3]
-        work_request_list2.append(WorkRequest)
-        empty_work_request.append(WorkRequest)
-        return empty_work_request"""
-        
+    def sanity_check_work_request_id(self, rank, location, WorkRequest) -> bool: 
+        return self.work_request_logic_manager.sanity_check_work_request_id(rank, location, WorkRequest)
     
-    def sanity_check_work_request(self, rank, location, WorkRequest) -> bool: 
-        return self.work_request_logic_manager.sanity_check_work_request(rank, location, WorkRequest)
+    def sanity_check_new_work_request_property_id(self, property_id: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_new_work_request_property_id(property_id)
     
+    def sanity_check_boolean_input_work_requests(self, yes_or_no: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_boolean_input_work_requests(yes_or_no)
+    
+    def sanity_check_location_for_request(self, location: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_location_for_request(location)
+    
+    def sanity_check_priority_for_request(self, priority: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_priority_for_request(priority)
+
     ########################################################################################################
     ### LOCATION ###########################################################################################
     def get_all_locations(self ,Location) -> list:
@@ -238,4 +209,3 @@ class Logic_Layer_Wrapper:
     def add_new_location_to_storage(self ,Location):
         return self.location_logic_manager.add_new_location_to_storage()
 
-    
