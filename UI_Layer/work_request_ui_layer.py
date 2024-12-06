@@ -141,57 +141,57 @@ class work_request_UI_menu:
         print("[ New Work Request Form ]")
         print("-" * 70)
         
-        while (request_name := input("Request Name: ").strip()):
-            if request_name.isalpha() == True:
-                break 
+        while request_name := input("Request Name: ").strip():
+            if request_name == "":
+                continue
         new_work_request.set_name(request_name)
 
-        while (request_description := input("Request Descrptition: ").strip()):
-            if request_description.isalpha() == True:
-                break
+        while request_description := input("Request Descrptition: ").strip():
+            if request_description == "":
+                continue
         new_work_request.set_description(request_description)  
 
-        while (property_id := input("Property ID Assigned: ").strip()):
+        while property_id := input("Property ID Assigned: ").strip():
             is_property_id_valid = self.logic_wrapper.sanity_check_new_work_request_property_id(property_id)
             if is_property_id_valid == True:
                 break
         new_work_request.set_property_id(property_id)
         
-        while (start_date := input("Start Date: ").strip()):
-            if len(start_date) == 6:
+        while start_date := input("Start Date: ").strip():
+            if len(start_date) == 8:
                 break
         new_work_request.set_start_date(start_date)
 
-        while (completition_date := input("Completition Date: ").strip()):
-            if len(completition_date) == 6:
+        while completition_date := input("Completition Date: ").strip():
+            if len(completition_date) == 8 or len(completition_date) == 0:
                 break
         new_work_request.set_completition_date(completition_date)
 
-        while (repetitive_work := input("Mark Repititive? (Yes or No): ").strip()):
+        while repetitive_work := input("Mark Repititive? (Yes or No): ").strip():
             is_set_repetitive_boolean = self.logic_wrapper.sanity_check_boolean_input_work_requests(repetitive_work)
             if is_set_repetitive_boolean == True:
                 break
         new_work_request.set_repetitive_work(repetitive_work)
 
-        while (interval_days := int(input("Interval of Days Until Request Re-Opens: ").strip())):
+        while interval_days := int(input("Interval of Days Until Request Re-Opens: ").strip()):
             if interval_days > 0:
                 break
         new_work_request.set_reopen_interval(interval_days)
         
-        while (set_priority := input("Request Priority (High, Medium or Low): ").strip()):
+        while set_priority := input("Request Priority (High, Medium or Low): ").strip():
             is_priority_set_valid = self.logic_wrapper.sanity_check_priority_for_request(set_priority)
             if is_priority_set_valid == True:
                 break
         new_work_request.set_priority(set_priority)
 
-        while (needs_contractor := input("Request Needs Contractor (Yes or No): ").strip()):
+        while needs_contractor := input("Request Needs Contractor (Yes or No): ").strip():
             is_needs_contractor_boolean = self.logic_wrapper.sanity_check_boolean_input_work_requests(needs_contractor)
             if is_needs_contractor_boolean == True:
                 break
         new_work_request.set_need_contractor(needs_contractor)
 
         if self.rank == "Admin": 
-            while set_location := input("Set Location for Work Request: "):
+            while set_location := input("Set Location for Work Request: ").strip():
                 is_set_location_valid = self.logic_wrapper.sanity_check_location_for_request(set_location)
                 if is_set_location_valid == True:
                     break 
@@ -203,13 +203,10 @@ class work_request_UI_menu:
             print("Sigma Sigma on the wall, who is the Skibidiest of them all")
         print("-" * 70)
         print()
-        print(new_work_request.to_dict())
-        
         self.logic_wrapper.add_work_request(new_work_request)
         return
          
         # print("Something Went Wrong When Creating the Work Request, Please Try Again.")
-        pass
         
     # Displays options, not been tested enough to verify it's functionality. 
     def employee_edit_work_request_form(self, work_request):
