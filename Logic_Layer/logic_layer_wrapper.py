@@ -93,11 +93,11 @@ class Logic_Layer_Wrapper:
     def fetch_employee_from_storage(self, social_security_number):
         return self.employee_logic_manager.fetch_employee_from_storage(social_security_number)
 
-    def fetch_all_work_request_for_employee(self):
-        return self.employee_logic_manager.fetch_all_work_request_for_employee()
+    def fetch_all_work_request_for_employee(self, social_security_number):
+        return self.employee_logic_manager.fetch_all_work_request_for_employee(social_security_number)
 
-    def fetch_all_maintenance_reports_for_employee(self):
-        return self.employee_logic_manager.fetch_all_maintenance_reports_for_employee()    
+    def fetch_all_maintenance_reports_for_employee(self, social_security_number):
+        return self.employee_logic_manager.fetch_all_maintenance_reports_for_employee(social_security_number)    
 
     ########################################################################################################
     ### MAINTENANCE_REPORTS ################################################################################
@@ -208,4 +208,5 @@ class Logic_Layer_Wrapper:
 
     def add_new_location_to_storage(self ,Location):
         return self.location_logic_manager.add_new_location_to_storage()
+
 
