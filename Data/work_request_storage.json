@@ -11,7 +11,7 @@
         "completition_date": "",
         "repetitive_work": false,
         "reopen_interval": 0,
-        "priority": "High",
+        "priority": "low",
         "work_request_status": "MR2",
         "need_contractor": "Pending",
         "contractor_id": false,
@@ -19,7 +19,7 @@
         "accepted_by_employee": false
     },
     {
-        "work_request_id": "WR1",
+        "work_request_id": "WR2",
         "name": "Fix roof",
         "description": "roof had giant hole in it",
         "maintenance_report_id": "MR1",
