@@ -10,20 +10,12 @@ class work_request_UI_menu:
     def start_point_work_requests_UI(self):
         """When this class is called it starts here, calling the display_requests_menu_items first to 
         load the menu and it's options for the user. """
-        # Call other functions in class from here
 
         self.display_work_requests_menu_items()
-        # self.display_selected_work_request_information()
-        # self.select_work_request_by_id()
-        # self.create_work_request_form()
-        # self.edit_work_request_form()
-        # self.display_my_work_requests()
-        # self.display_new_work_requests_to_accept() 
-        # self.display_pending_work_requests_printed() 
-        # self.display_closed_work_requests_printed() 
+
 
     # Completed, can be beautified.
-    def display_all_work_requests_printed(self, work_request_list: list=None) -> print: 
+    def display_all_work_requests_printed(self, work_request_list: list) -> print: 
         """Prints out all open work requests with their ID, Name and Description. """
         try:
             print("{:0}{:>6}{:>5}{:>9}{:>12}".format("ID", "|", "Name", "|", "Description"))
@@ -36,7 +28,7 @@ class work_request_UI_menu:
             print("{:>50}".format("No Work Requests To Display")) 
         
     # Completed, can be beautified.
-    def display_selected_work_request_information(self, work_request: object=None) -> print:
+    def display_selected_work_request_information(self, work_request: object) -> print:
         """Prints out a selected work requests and all it's information for user to read. """
 
         print("{:0}{:>14}{:<10}".format("Categories", "|", "Details"))
@@ -68,12 +60,14 @@ class work_request_UI_menu:
         """Displays the menu options depending if the user logged in is an admin/manager or
         an employee. It then calls the correct function based on what the user chose. """
 
-        work_request_list = self.logic_wrapper.get_all_work_requests_at_location(self.rank, self.location)
         print()
         print(f"{self.rank} - Work Request Menu")
         print("-" * 70)
         print("{:>50}".format("[ Open and Upcoming Work Requests ]"))
         print()
+        status = "Open"
+        is_accepted = True
+        work_request_list = self.logic_wrapper.get_all_work_requests_at_location(self.rank, self.location, status, is_accepted)
         self.display_all_work_requests_printed(work_request_list)
         if self.rank != "Employee":
             print("{:0}{:>3}{:>15}{:>3}{:>19}".format("1. Select Request", "|", "2. New Requests", "|", "3. Pending Requests"))
@@ -83,43 +77,41 @@ class work_request_UI_menu:
             print("{:0}{:>3}{:>20}".format("1. Select Request", "|", "2. New Requests"))
             print("{:0}{:>3}{:>20}".format("3. Pending Requests", "|", "4. My Requests"))
             print()
-        user_choice = input("Select an Option: ")
-        print("-" * 70)
-        match (user_choice , self.rank):
-            case ("1", self.rank): 
-                self.select_work_request_by_id()
-            case ("2", self.rank):
-                self.display_all_new_work_requests_printed()
-            case ("3", self.rank):
-                self.display_all_pending_work_requests_printed()
-            case ("4", self.rank):
-                self.display_my_work_requests_printed()
-            case ("5", "Admin") | ("5", "Manager"):
-                self.display_closed_work_requests_printed()
-            case ("6", "Admin") | ("6", "Manager"): 
-                self.display_create_work_request_form()
-            case "q":
-                print("Departing from NaN Air, Thank you for Visiting!")
-            case "Q":
-                print("Departing from NaN Air, Thank you for Visiting!")
-            case _:
-                print("Invalid Input, Please Try Again.")
-                self.start_point_work_requests_UI()
+        while (user_choice := input("Select an Option: ")) != "q": 
+            print("-" * 70)
+            match (user_choice , self.rank):
+                case ("1", self.rank): 
+                    self.select_work_request_by_id(status, is_accepted)
+                case ("2", self.rank):
+                    self.display_all_new_work_requests_printed()
+                case ("3", self.rank):
+                    self.display_all_pending_work_requests_printed()
+                case ("4", self.rank):
+                    self.display_my_work_requests_printed()
+                case ("5", "Admin") | ("5", "Manager"):
+                    self.display_closed_work_requests_printed()
+                case ("6", "Admin") | ("6", "Manager"): 
+                    self.display_create_work_request_form()
+                case "q":
+                    print("Departing from NaN Air, Thank you for Visiting!")
+                case "Q":
+                    print("Departing from NaN Air, Thank you for Visiting!")
+                case _:
+                    print("Invalid Input, Please Try Again.")
 
     # Works, but lacks verification on user input. Also can be beautified
-    def select_work_request_by_id(self) -> print:
+    def select_work_request_by_id(self, status: str, is_accepted: bool) -> print:
         """System asks user for the ID of the work request they wish to find and prints out 
         all it's information if it's found, otherwise it gives an error message. """
         try:
-            while work_request_selected_by_id := input("Enter Request ID: ").strip():
+            work_request_selected_by_id = ""
+            while (work_request_selected_by_id := input("Enter Request ID: ")) != "b":
                 if work_request_selected_by_id == "":
-                    raise ValueError
-        # if work_request_selected_by_id == "b" or work_request_selected_by_id == "B":
-        #     self.display_work_requests_menu_items()
-        # elif work_request_selected_by_id == "1":
-            
-            # is_valid = self.logic_wrapper.sanity_check_work_request_id(work_request_selected_by_id) 
-            work_request_object = self.logic_wrapper.get_work_request_by_id(self.rank, self.location, work_request_selected_by_id) # valid_select_conditition
+                    print()
+                    print("Must Bla")
+                    print()
+                        # is_valid = self.logic_wrapper.sanity_check_work_request_id(work_request_selected_by_id) 
+            work_request_object = self.logic_wrapper.get_work_request_by_id(self.rank, self.location, work_request_selected_by_id, status, is_accepted) 
             self.display_selected_work_request_information(work_request_object)
             if work_request_object != None:
                 if self.rank != "Employee":
@@ -130,7 +122,7 @@ class work_request_UI_menu:
             print()
             print("No Work Request With That ID Was Found, Please Try Again.")
             print()
-            self.select_work_request_by_id
+            return
     
     # Completed, verification of user input can be improved. Also can be beautified.
     def display_create_work_request_form(self) -> print:
@@ -207,12 +199,12 @@ class work_request_UI_menu:
                 print("This Field Is Required TO Fill Out")
                 print()
             is_set_repetitive_boolean = self.logic_wrapper.sanity_check_boolean_input_work_requests(repetitive_work)
-            if is_set_repetitive_boolean == True:
+            if is_set_repetitive_boolean == True or is_set_repetitive_boolean == False:
                 break
             print()
             print("This Field Is Required To Fill Out")
             print()
-        new_work_request.set_repetitive_work(repetitive_work)
+        new_work_request.set_repetitive_work(is_set_repetitive_boolean)
 
         while (interval_days := int(input("Interval of Days Until Request Re-Opens: "))) != "b":
             if interval_days >= 0:
@@ -274,6 +266,7 @@ class work_request_UI_menu:
         print("-" * 70)
         print()
         self.logic_wrapper.add_work_request(new_work_request)
+        print("Work Request Has Been Created")
         return
          
         # print("Something Went Wrong When Creating the Work Request, Please Try Again.")
@@ -283,12 +276,17 @@ class work_request_UI_menu:
         if work_request.mark_as_completed == False:
             print()
             print("-" * 70)
+            print("> Back: b, B")
+            mark_as_completed = ""
             while mark_as_completed := input("Mark as Completed (Yes or No): ") != "b":
-                is_completed_boolean = self.logic_wrapper.sanity_check_boolean_input_work_requests(mark_as_completed)
-                if is_completed_boolean == True:
-                    updated_work_request = work_request.set_mark_as_done(is_completed_boolean)
+                is_marked_completed_boolean = self.logic_wrapper.sanity_check_boolean_input_work_requests(mark_as_completed)
+                if is_marked_completed_boolean == True or is_marked_completed_boolean == False:
+                    updated_work_request = work_request.set_mark_as_done(is_marked_completed_boolean)
                     self.logic_wrapper.edit_work_requests(updated_work_request)
-                    self.display_work_requests_menu_items() 
+                    return
+                print()
+                print("")
+                print()
         
         if work_request.acceptance_status == False:
             print()
@@ -366,58 +364,39 @@ class work_request_UI_menu:
             
             
     def display_my_work_requests_printed(self):
-        my_work_request_list = self.logic_wrapper.get_my_work_requests(self.rank, self.location)
+        is_accepted = True
+        status = ""
+        my_work_request_list = self.logic_wrapper.get_my_work_requests(self.rank, self.location, status, is_accepted)
         self.display_all_work_requests_printed(my_work_request_list)
 
-        selected_work_request = input("Enter 1 to Select a Work Request or B to Go Back: ")
-        if selected_work_request == "1":
-            self.select_work_request_by_id()
-        elif selected_work_request == "b" or selected_work_request == "B":
-            self.start_point_work_requests_UI()
-        else: 
-            self.display_my_work_requests_printed()
+        while (selected_work_request := int(input("Enter 1 to Select a Work Request: "))) != 1:
+            print("Again")
+        self.select_work_request_by_id(status, is_accepted)
         pass
-
 
     def display_all_new_work_requests_printed(self): 
-        new_work_request_list = self.logic_wrapper.get_all_new_work_requests(self.rank, self.location)
-        self.display_all_work_requests_printed(new_work_request_list)
         is_accepted = False
-
-        selected_work_request = input("Enter 1 to Select a Work Request or B to Go Back: ")
-        if selected_work_request == "1":
-            self.select_work_request_by_id(is_accepted)
-        elif selected_work_request == "b" or selected_work_request == "B":
-            self.start_point_work_requests_UI()
-        else: 
-            self.display_all_new_work_requests_to_accept_printed()
-        pass
-        
+        status = "New"
+        new_work_request_list = self.logic_wrapper.get_all_new_work_requests(self.rank, self.location, status, is_accepted)
+        self.display_all_work_requests_printed(new_work_request_list)
+        while (selected_work_request := int(input("Enter 1 To Select A Work Request: "))) != 1:
+            print("Mama")
+        self.select_work_request_by_id(status, is_accepted)
     
     def display_all_pending_work_requests_printed(self): 
-        pending_work_request_list = self.logic_wrapper.get_all_pending_work_requests(self.rank, self.location)
+        is_accepted = True
+        status = "Pending"
+        pending_work_request_list = self.logic_wrapper.get_all_pending_work_requests(self.rank, self.location, status, is_accepted)
         self.display_all_work_requests_printed(pending_work_request_list)
-        is_pending = True
-
-        selected_work_request = input("Enter 1 to Select a Work Request or B to Go Back: ")
-        if selected_work_request == "1":
-            self.select_work_request_by_id(is_pending)
-        elif selected_work_request == "b" or selected_work_request == "B":
-            self.start_point_work_requests_UI()
-        else: 
-            self.display_all_pending_work_requests_printed()
-        pass
+        while (selected_work_request := int(input("Enter 1 To Select A Work Request: "))) != 1:
+            print("Mama")
+        self.select_work_request_by_id(status, is_accepted)
 
     def display_closed_work_requests_printed(self): 
-        closed_work_request_list = self.logic_wrapper.get_all_closed_work_requests(self.rank, self.location)
+        is_accepted = True
+        status = "Closed"
+        closed_work_request_list = self.logic_wrapper.get_all_closed_work_requests(self.rank, self.location, status, is_accepted)
         self.display_all_work_requests_printed(closed_work_request_list)
-        is_closed = True
-        
-        selected_work_request = input("Enter 1 to Select a Work Request or B to Go Back: ")
-        if selected_work_request == "1":
-            self.select_work_request_by_id(is_closed)
-        elif selected_work_request == "b" or selected_work_request == "B":
-            self.start_point_work_requests_UI()
-        else: 
-            self.display_closed_work_requests_printed()
-        pass
+        while (selected_work_request := int(input("Enter 1 To Select A Work Request: "))) != 1:
+            print("Mama")
+        self.select_work_request_by_id(status, is_accepted)
