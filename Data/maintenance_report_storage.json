@@ -68,5 +68,19 @@
         "mark_as_done": false,
         "contractor_id": "",
         "work_request_id": "WR1"
+    },
+    {
+        "report_id": "MR6",
+        "report_name": "Hreimur Test2",
+        "location": "Reykjavik",
+        "property_id": "P3",
+        "staff_id": "E2",
+        "regular_maintenance": false,
+        "maintenance_description": "sfgdsfgf",
+        "report_status": "Pending",
+        "price": 123.0,
+        "mark_as_done": false,
+        "contractor_id": "",
+        "work_request_id": "WR1"
     }
 ]

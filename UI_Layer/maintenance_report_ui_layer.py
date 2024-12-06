@@ -132,7 +132,7 @@ class maintenance_report_UI_menu:
         staff_id = input("Enter employee ID: ")
         regular_maintenance = bool(input("Is it scheduled? (yes/no): "))
         maintenance_description = input('Enter maintenance description: ')
-        price = input("Enter a price: ")
+        price = float(input("Enter a price: "))
         contractor_id = input('Enter contractor ID (leave empty if no contractor): ')
         work_request_id = input("Enter the ID of the work request in progress: ")
         new_maintenance_report = MaintenanceReport('', report_name, location, property_id, staff_id, False,
@@ -155,74 +155,57 @@ class maintenance_report_UI_menu:
         elif report_in_system == False:
             print(f'{selected_work_request} not found in the system please try again!')
             self.edit_report_details()
+        else:
+            pass
+            # print the maintenance report  info
+            # self.print_single_maintenance_report(maintenance_report_to_use)
 
-        # print the maintenance report  info
-        # self.print_single_maintenance_report(maintenance_report_to_use)
+            # Dont see a use for this - Hreimur
+            '''print("1. Mark as ready")
+            print("2. Edit report details")
+            user_input = input("Choose: ")
 
-        # Dont see a use for this - Hreimur
-        '''print("1. Mark as ready")
-        print("2. Edit report details")
-        user_input = input("Choose: ")
-
-        match user_input:
-            case"1":
-                print(f"Report {report_id} has been marked as ready.")
-            case "2":
-                self.display_edit_maintenance_report_details(maintenance_report_to_use)
-            case _:
-                print("Invalid choice.")'''
-
+            match user_input:
+                case"1":
+                    print(f"Report {report_id} has been marked as ready.")
+                case "2":
+                    self.display_edit_maintenance_report_details(maintenance_report_to_use)
+                case _:
+                    print("Invalid choice.")'''
 
     def display_edit_maintenance_report_details(self, selected_maintenance_report):
         """ Allows editing of maintenance report details. """
         print(f"Editing details for maintenance report ID: {selected_maintenance_report.report_id}")
         print('1. Change Report Name')
-        print('2. Change Location')
-        print('3. Change Property ID')
-        print('4. Change Staff ID ')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('2. Change Staff ID ')
+        print('3. Change Regular Maintenance (yes/no)')
+        print('4. Change Maintenance Description')
+        print('5. Change Cost')
+        print('6. Change Contractor ID')
         print("-" * 70)
 
         edit_choice = input("Select an option to edit: ")
 
         match edit_choice:
             case "1":
-                new_property_id = input("Enter new Property ID: ")
-                selected_maintenance_report.property_id = new_property_id
-                
-                print("Property ID updated successfully.")
-            case "2":
-                new_staff_id = input("Enter new Staff ID: ")
-                selected_maintenance_report.staff_id = new_staff_id
-                print("Staff ID updated successfully.")
-            case "3":
-                new_contractor_id = input("Enter new Contractor ID: ")
-                selected_maintenance_report.contractor_id = new_contractor_id
-                print("Contractor ID updated successfully.")
-            case "4":
-                new_scheduled_date = input("Enter new Scheduled Date: ")
-                selected_maintenance_report.scheduled_date = new_scheduled_date
-                print("Scheduled Date updated successfully.")
-            case "5":
-                new_work_done = input("Enter new Work Done description: ")
-                selected_maintenance_report.work_done = new_work_done
-                print("Work Done updated successfully.")
-            case "6":
-                new_status = input("Enter new Status: ")
-                selected_maintenance_report.status = new_status
-                print("Status updated successfully.")
-            case "7":
+                new_report_name = input('Enter new report name: ')
+            case '2':
+                new_staff_id = input('Enter new staff ID: ')
+            case '3':
+                regular_maintenance = input('Regular Maintenance (yes/no)')
+            case '4':
+                new_report_description = input('Enter new description')
+            case '5':
                 try:
-                    new_price = float(input("Enter new Price: "))
-                    selected_maintenance_report.price = new_price
-                    print("Price updated successfully.")
+                    new_report_cost = float(input('Enter New Cost'))
                 except ValueError:
-                    print("Invalid input.")
+                    print('Needs to be a number')
+            case '6':
+                new_contractor_id = input('Enter new contractor ID')
+
             case _:
                 print("Invalid input")
+
         print("Maintenance report details updated successfully!")
 
     def print_single_maintenance_report(self, maintenance_report):

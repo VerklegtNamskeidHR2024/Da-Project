@@ -5,6 +5,15 @@ class property_logic_manager:
     def __init__(self, Storage_Layer_Wrapper):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
         
+    def get_all_properties(self, location) -> list:
+        property_list = []
+
+        all_properties = self.Storage_Layer_Wrapper.get_all_properties_at_location()
+
+        for property in all_properties:
+            property_list.append(property)
+
+        return property_list  
 
     def get_all_properties_at_location(self, location) -> list:
         '''Gets all properties at specific location'''

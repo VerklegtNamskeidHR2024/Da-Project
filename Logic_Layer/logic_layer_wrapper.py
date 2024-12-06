@@ -88,6 +88,7 @@ class Logic_Layer_Wrapper:
         except Exception:
             print("Error retrieving property by ID")
             return None
+    
     def add_new_property_to_storage(self, rank, location, new_property):
         """
         Add a new property to the storage.
@@ -128,6 +129,13 @@ class Logic_Layer_Wrapper:
     
     def deny_or_accept_maintencance_report_for_admin(self, maintencance_report_ID, location, accept_or_deny): 
         return self.maintenance_report_logic_manager.deny_or_accept_maintencance_report_for_admin(maintencance_report_ID, location, accept_or_deny)
+    
+    def edit_maintencance_report(self, maintenance_report, location, edit_choice, new_value):
+        return self.maintenance_report_logic_manager.edit_maintencance_report(maintenance_report, location, edit_choice, new_value)
+    
+    def sanity_check_maintencance_report(self, what_to_check, new_value, location):
+        location_list = self.get_all_locations()
+        return self.maintenance_report_logic_manager.sanity_check_maintencance_report(what_to_check, new_value, location, )
 
     ########################################################################################################
     ### WORK_REQUESTS ######################################################################################

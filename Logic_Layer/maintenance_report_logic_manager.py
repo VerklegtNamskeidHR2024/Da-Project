@@ -2,12 +2,12 @@ class maintenance_report_logic_manager:
     def __init__(self, Storage_Layer_Wrapper):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
 
-    def sanity_check_maintencance_report(maintencance_report):
+    def sanity_check_maintencance_report(self, what_to_check, new_value, location):
         pass
 
     def get_highest_ID(self, location):
         highestID = -1
-        list_of_all_reports = self.get_all_maintencance_reports_at_location(location)
+        list_of_all_reports = self.get_all_maintencance_reports(location)
         for report in list_of_all_reports:
             stripped_ID = report.report_id[2:]
             if int(stripped_ID) > highestID:
@@ -17,15 +17,18 @@ class maintenance_report_logic_manager:
         new_report_id = 'MR' + str(highestID)
         return new_report_id
 
-    def add_maintencance_report_to_storage(self, location, maintenance_report, is_regular):
-        highestID = -1
-        list_of_all_reports = self.get_all_maintencance_reports_at_location(location)
-        for report in list_of_all_reports:
-            stripped_ID = report.report_id[2:]
-            if int(stripped_ID) > highestID:
-                highestID = int(stripped_ID)
-        highestID += 1
+    def get_all_maintencance_reports(self, location) -> list:
+        maintenance_report_list = []
 
+        all_maintenance_reports = self.Storage_Layer_Wrapper.get_all_maintenance_report()
+
+        for maintenance_report in all_maintenance_reports:
+            maintenance_report_list.append(maintenance_report)
+
+        return maintenance_report_list
+
+    def add_maintencance_report_to_storage(self, location, maintenance_report, is_regular):
+        list_of_all_reports = self.get_all_maintencance_reports_at_location(location)
         new_report_id = self.get_highest_ID(location)
         if is_regular == 'yes' or is_regular == 'Yes' or is_regular == 'YES':
             maintenance_report.set_regular_maintenance(True)
@@ -43,7 +46,7 @@ class maintenance_report_logic_manager:
                 return True
         return False
 
-    def edit_maintencance_report(maintenance_report):
+    def edit_maintencance_report(self, maintenance_report, location, edit_choice, new_value):
         pass
 
     def get_all_maintencance_reports_at_location(self, location) -> list:
