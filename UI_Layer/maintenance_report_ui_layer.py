@@ -194,13 +194,24 @@ class maintenance_report_UI_menu:
 
         match edit_choice:
             case "1":
-                new_report_name = input('Enter new report name: ')
-                self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Report Name', new_report_name)
+                is_valid = False
+                while is_valid == False:
+                    new_report_name = input('Enter new report name: ')
+                    is_valid = self.logic_wrapper.sanity_check_maintencance_report('report name', new_report_name, self.location)
+                    if is_valid == True:
+                        self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Report Name', new_report_name)
             case '2':
-                new_staff_id = input('Enter new staff ID: ')
-                self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Staff ID', new_staff_id)
+                is_valid = False
+                while is_valid == False:
+                    new_staff_id = input('Enter new staff ID: ')
+                    is_valid = self.logic_wrapper.sanity_check_maintencance_report('staff ID', new_staff_id, self.location)
+                    if is_valid == True:
+                        self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Staff ID', new_staff_id)
+                
             case '3':
-                regular_maintenance = input('Regular Maintenance (yes/no)')
+                is_valid = False
+                while is_valid == False:
+                    regular_maintenance = input('Regular Maintenance (yes/no)')
                 self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Regular', regular_maintenance)
             case '4':
                 new_report_description = input('Enter new description')

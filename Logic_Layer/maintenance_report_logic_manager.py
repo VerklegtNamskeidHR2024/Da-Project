@@ -1,9 +1,87 @@
+from Logic_Layer.property_logic_manager import property_logic_manager
+from Logic_Layer.location_logic_manager import location_logic_manager
+from Logic_Layer.contractor_logic_manager import contractor_logic_manager
+from Logic_Layer.employee_logic_manager import employee_logic_manager
+from Logic_Layer.work_request_logic_manager import work_request_logic_manager
+
 class maintenance_report_logic_manager:
     def __init__(self, Storage_Layer_Wrapper):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
+        self.Property_Logic_Manager = property_logic_manager(Storage_Layer_Wrapper)
+        self.Location_Logic_Manager = location_logic_manager(Storage_Layer_Wrapper)
+        self.Contractor_Logic_Manager = contractor_logic_manager(Storage_Layer_Wrapper)
+        self.Employee_Logic_Manager = employee_logic_manager(Storage_Layer_Wrapper)
+        self.Work_Request_Logic_Manager = work_request_logic_manager(Storage_Layer_Wrapper)
 
     def sanity_check_maintencance_report(self, what_to_check, new_value, location):
-        pass
+        if what_to_check == 'report name':
+            if len(new_value) > 3:
+                return True
+            else:
+                return False
+        elif what_to_check in 'location':
+            list_of_all_locations = self.Location_Logic_Manager.get_all_locations()
+            for location in list_of_all_locations:
+                if location.location == new_value:
+                    return True
+            return False
+        elif what_to_check in 'property id':
+            list_of_all_properties = self.Property_Logic_Manager.get_all_properties()
+            for property in list_of_all_properties:
+                if property.property_id == new_value:
+                    return True
+            return False
+        elif what_to_check in 'staff id':
+            list_of_all_employees = self.Employee_Logic_Manager.get_all_employees_at_location(location)
+            for employee in list_of_all_employees:
+                if employee.staff_id == new_value:
+                    return True
+            return False
+        elif what_to_check in 'regular maintenance':
+            if new_value in 'yes' or new_value in 'no':
+                return True
+            else:
+                return False
+        elif what_to_check in 'maintenance description':
+            if len(new_value) > 3:
+                return True
+            else:
+                return False
+            
+        elif what_to_check in 'report status':
+            if new_value in 'pending' or new_value in 'closed':
+                return True
+            else:
+                return False
+        
+        elif what_to_check in 'price':
+            try:
+                float(new_value)
+                return True
+            except ValueError:
+                return False
+            
+        elif what_to_check in 'mark as done':
+            if new_value in 'Yes' or new_value in 'No' or new_value in 'yes' or new_value in 'no':
+                return True
+            else:
+                return False
+            
+        elif what_to_check in 'contractor id':
+            list_of_all_contractors = self.Contractor_Logic_Manager.get_all_contractors()
+            for contractor in list_of_all_contractors:
+                if contractor.contractor_id == new_value:
+                    return True
+            return False
+            
+        elif what_to_check in 'work request id':
+            list_of_all_work_requests = self.Work_Request_Logic_Manager.get_all_work_requests(location)
+            for work_request in list_of_all_work_requests:
+                if work_request.work_request_id == new_value:
+                    return True
+            return False
+        
+        
 
     def get_highest_ID(self, location):
         highestID = -1
