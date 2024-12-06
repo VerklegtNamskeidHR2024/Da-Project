@@ -39,8 +39,11 @@ class WorkRequest:
     def set_property_id(self, property_id):
         self.property_id = property_id
 
-    def set_date_of_creation(self, date_of_creation):
-        self.date_of_creation = date_of_creation
+    def set_start_date(self, start_date):
+        self.start_date = start_date
+
+    def set_completition_date(self, completition_date):
+        self.completition_date = completition_date
 
     def set_repetitive_work(self, repetitive_work):
         self.repetitive_work = repetitive_work
@@ -87,8 +90,11 @@ class WorkRequest:
     def get_property_id(self):
         return self.property_id
 
-    def get_date_of_creation(self):
-        return self.date_of_creation
+    def get_start_date(self):
+        return self.start_date
+
+    def get_completition_date(self):
+        return self.completition_date
 
     def get_repetitive_work(self):
         return self.repetitive_work
