@@ -54,7 +54,7 @@ class maintenance_report_logic_manager:
             else:
                 return False
         
-        elif what_to_check in 'price':
+        elif what_to_check in 'cost':
             try:
                 float(new_value)
                 return True

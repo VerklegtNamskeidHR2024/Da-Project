@@ -126,7 +126,74 @@ class maintenance_report_UI_menu:
         #Create a new maintenance report
         print("Creating a new maintenance report")
         #the details that need to be filled out
-        report_name = input("Enter a name for the report: ")
+        is_valid_report_name = False
+        is_valid_location = False
+        is_valid_property_id = False
+        is_valid_staff_id = False
+        is_valid_regular_maintenance = False
+        is_valid_maintenance_description = False
+        is_valid_price = False
+        is_valid_contractor_id = False
+        is_valid_work_request_id = False
+        #while loop to check if the input is valid
+        while is_valid_report_name == False:
+            report_name = input("Enter a name for the report: ")
+            is_valid_report_name = self.logic_wrapper.sanity_check_maintencance_report('report name', report_name, self.location)
+            if is_valid_report_name == False:
+                print('Invalid input')
+        while is_valid_location == False:
+            location = input('Enter location name: ')
+            is_valid_location = self.logic_wrapper.sanity_check_maintencance_report('location', location, self.location)
+            if is_valid_location == False:
+                print('Invalid input')
+        while is_valid_property_id == False:
+            property_id = input("Enter property ID: ")
+            is_valid_property_id = self.logic_wrapper.sanity_check_maintencance_report('property id', property_id, self.location)
+            if is_valid_property_id == False:
+                print('Invalid input')
+
+        while is_valid_staff_id == False:
+            staff_id = input("Enter employee ID: ")
+            is_valid_staff_id = self.logic_wrapper.sanity_check_maintencance_report('staff id', staff_id, self.location)
+            if is_valid_staff_id == False:
+                print('Invalid input')
+
+        while is_valid_regular_maintenance == False:
+            regular_maintenance = input("Is it scheduled? (yes/no): ")
+            is_valid_regular_maintenance = self.logic_wrapper.sanity_check_maintencance_report('regular maintenance', regular_maintenance, self.location)
+            if is_valid_regular_maintenance == False:
+                print('Invalid input')
+
+        while is_valid_maintenance_description == False:
+            maintenance_description = input('Enter maintenance description: ')
+            is_valid_maintenance_description = self.logic_wrapper.sanity_check_maintencance_report('maintenance description', maintenance_description, self.location)
+            if is_valid_maintenance_description == False:
+                print('Invalid input')
+
+        while is_valid_price == False:
+            try:
+                price = float(input("Enter a price: "))
+                is_valid_price = self.logic_wrapper.sanity_check_maintencance_report('cost', price, self.location)
+                if is_valid_price == False:
+                    print('Invalid input')
+            except ValueError:
+                print('Needs to be a number')
+
+        while is_valid_contractor_id == False:
+            contractor_id = input('Enter contractor ID (leave empty if no contractor): ')
+            is_valid_contractor_id = self.logic_wrapper.sanity_check_maintencance_report('contractor id', contractor_id, self.location)
+            if is_valid_contractor_id == False:
+                print('Invalid input')
+
+        while is_valid_work_request_id == False:
+            work_request_id = input("Enter the ID of the work request in progress: ")
+            is_valid_work_request_id = self.logic_wrapper.sanity_check_maintencance_report('work request id', work_request_id, self.location)
+            if is_valid_work_request_id == False:
+                print('Invalid input')
+
+        
+        
+        '''report_name = input("Enter a name for the report: ")
         location = input('Enter location name: ')
         property_id = input("Enter property ID: ")
         staff_id = input("Enter employee ID: ")
@@ -134,7 +201,8 @@ class maintenance_report_UI_menu:
         maintenance_description = input('Enter maintenance description: ')
         price = float(input("Enter a price: "))
         contractor_id = input('Enter contractor ID (leave empty if no contractor): ')
-        work_request_id = input("Enter the ID of the work request in progress: ")
+        work_request_id = input("Enter the ID of the work request in progress: ")'''
+
         new_maintenance_report = MaintenanceReport('', report_name, location, property_id, staff_id, False,
         maintenance_description,'',price, False, contractor_id, work_request_id)
 
@@ -212,19 +280,33 @@ class maintenance_report_UI_menu:
                 is_valid = False
                 while is_valid == False:
                     regular_maintenance = input('Regular Maintenance (yes/no)')
-                self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Regular', regular_maintenance)
+                    is_valid = self.logic_wrapper.sanity_check_maintencance_report('regular maintenance', regular_maintenance, self.location)
+                    if is_valid == True:
+                        self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Regular', regular_maintenance)
             case '4':
-                new_report_description = input('Enter new description')
-                self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Description', new_report_description)
+                is_valid = False
+                while is_valid == False:
+                    new_report_description = input('Enter new description')
+                    is_valid = self.logic_wrapper.sanity_check_maintencance_report('maintenance description', new_report_description, self.location)
+                    if is_valid == True:
+                        self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Description', new_report_description)
             case '5':
                 try:
-                    new_report_cost = float(input('Enter New Cost'))
-                    self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Cost', new_report_cost)
+                    is_valid = False
+                    while is_valid == False:
+                        new_report_cost = float(input('Enter New Cost'))
+                        is_valid = self.logic_wrapper.sanity_check_maintencance_report('cost', new_report_cost, self.location)
+                        if is_valid == True:
+                            self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Cost', new_report_cost)
                 except ValueError:
                     print('Needs to be a number')
             case '6':
-                new_contractor_id = input('Enter new contractor ID')
-                self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Contractor ID', new_contractor_id)
+                is_valid = False
+                while is_valid == False:
+                    new_contractor_id = input('Enter new contractor ID')
+                    is_valid = self.logic_wrapper.sanity_check_maintencance_report('contractor id', new_contractor_id, self.location)
+                    if is_valid == True:
+                        self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Contractor ID', new_contractor_id)
             case '7':
                 self.admin_or_manager_menu()
             case _:
