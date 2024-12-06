@@ -16,6 +16,7 @@ I worked on the maintenance report section first then i worked then on property 
 
 
 Kormákur:\
+I worked on the work requests UI, logic and storage layer. I came at 8:00 and left at 23:00. 
  
 
 Jón:\
