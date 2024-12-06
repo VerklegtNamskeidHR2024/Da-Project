@@ -8,7 +8,15 @@ class employee_logic_manager:
 
         return
 
-    
+    def get_all_employees(self, location) -> list:
+        employees_list = []
+
+        all_employees = self.Storage_Layer_Wrapper.get_all_employee()
+
+        for employee in all_employees:
+            employees_list.append(employee)
+
+        return employees_list
 
     def get_all_employees_at_location(self, location) -> list:
         employees_sorted_list = []

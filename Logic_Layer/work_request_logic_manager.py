@@ -3,6 +3,16 @@ class work_request_logic_manager:
     def __init__(self, Storage_Layer_Wrapper):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
 
+    def get_all_work_requests(self, location) -> list:
+        work_request_list = []
+
+        all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
+
+        for work_request in all_work_requests:
+            work_request_list.append(work_request)
+
+        return work_request_list
+
     def sanity_check_work_request_id(self, work_request_id: str) -> bool:
         work_request_id_list = list(work_request_id)
         if (len(work_request_id_list) == 5 and work_request_id_list[0] == "W" and work_request_id_list[1] == "R") == True:
