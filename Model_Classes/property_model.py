@@ -35,3 +35,13 @@ class Property:
 
     def get_total_price_to_fix(self):
         return self.total_price_to_fix
+    
+    """def to_dict(self):
+        {
+        	"property_id": self.property_id,
+            "name": self.name,
+            "location": self.location,
+            "condition": self.condition,
+            "total_price_to_fix": self.total_price_to_fix,
+            
+        }"""

@@ -12,8 +12,7 @@ class maintenance_report_UI_menu:
 
     def display_maintenance_report(self):
         # if the choice is admin or mangers it goes to the admin_or_manager_menu
-        
-        if self.rank in ["Admin", "Manager"]:
+        if self.rank == "Admin" or self.rank == "Manager":
             self.admin_or_manager_menu()
 
         #if the choice is employee it goes to employee menu 

@@ -1,4 +1,4 @@
-from Model_Classes.property_model import Property
+from Model_Classes.house_model import House
  
 class property_UI_menu:
     def __init__(self, logic_wrapper, rank, location):
@@ -22,7 +22,8 @@ class property_UI_menu:
         print("-" * 85)
 
         for item in property_list:
-            print("{:>15}{:>10}{:>15}{:>10}{:>15}{:>15}".format(item.property_id,item.name, item.location, item.condition, item.total_price_to_fix, item.property_price))
+            print("{:>15}{:>10}{:>15}{:>10}{:>15}{:>15}".format(item.property_id, item.name, item.location, item.condition, item.total_price_to_fix, item.property_price))
+            
             # print(f"{item.name :> 15}|{item.phone_number :> 10}|{item.email :> 10}|{self.location :> 15}")
         print("-" * 85)
 
@@ -52,7 +53,7 @@ class property_UI_menu:
             #if there is not property with the slected id you will get a message 
             if not selected_property:
                 print("No property found with the provided ID.")
-                #adn it returns to the start point
+                #and it returns to the start point
                 return
             # print for single selected property 
             self.print_single_property(selected_property)
@@ -74,31 +75,39 @@ class property_UI_menu:
                 case _:
                     #if you put an invaild input
                     print("Invalid input. Please try again.")
-        except Exception as e:
-            print(f"An error occurred: {e}")
+        except Exception:
+            print("An error occurred")
 
     def display_add_property(self):
-        #Handles adding a new property.
+    # Handles adding a new property.
         try:
-            #new property
-            new_property = Property()
-            #the details you can add for the property
-            new_property.property_id = input("Enter Property ID: ")
-            new_property.property_name = input("Enter Property Name: ")
-            new_property.property_location = input("Enter Property Location: ")
-            new_property.property_condition = input("Enter Property Condition: ")
-            new_property.price_to_fix = int(input("Enter Price to Fix: "))
-            new_property.property_price = int(input("Enter Property Price: "))
+            # New property
+            new_property = House()
+            # The details you can add for the property
+            new_property.set_property_id(input("Enter Property ID: "))
+            new_property.set_name(input("Enter Property Name: "))
+            new_property.set_condition(input("Enter Property Condition: "))
+            new_property.set_total_price_to_fix(int(input("Enter Price to Fix: ")))
+            # new_property.set_property_price(int(input("Enter Property Price: ")))
+            if self.rank != "Admin":
+                new_property.set_location(self.location)
+            else:
+                new_property.set_location(input("Enter Property Location: "))
             new_property.location = self.location
-            # adds the property
-            self.logic_wrapper.add_property(new_property)
-            print("New property has been added successfully!")
+            
+            # Adds the property
+            property_list = self.logic_wrapper.add_new_property_to_storage(self.rank, self.location, new_property)
+            
+            if property_list is not None:
+                for obj in property_list:
+                    print(obj)
+                print("New property has been added successfully!")
+            else:
+                print("Failed to add new property.")
         except ValueError:
-            #if it you put an invaild input
-            print("Invalid input. Please enter numeric values for prices.")
-        except Exception as e:
-            #if it occurs an exception error
-            print(f"An error occurred: {e}")
+            # If you put an invalid input
+            print("Invalid input.")
+
 
     def display_view_attached_options(self):
         #Displays attached options for a property.
@@ -136,22 +145,22 @@ class property_UI_menu:
             case "1":
                 new_name = input("Enter new property name: ")
                 #updates the property name
-                selected_property.property_name = new_name
+                selected_property.name = new_name
             case "2":
                 new_location = input("Enter new property location: ")
                 #updates the property location
-                selected_property.property_location = new_location
+                selected_property.location = new_location
             case "3":
                 new_condition = input("Enter new property condition: ")
                 #updates the property condition
-                selected_property.property_condition = new_condition
+                selected_property.condition = new_condition
             case "4":
                 try:
                     new_price_to_fix = int(input("Enter new price to fix: "))
                     #updates the property price to fix
                     selected_property.price_to_fix = new_price_to_fix
                 except ValueError:
-                    print("Invalid input. Please enter a numeric value.")
+                    print("Invalid input.")
             case "5":
                 try:
                     new_price = int(input("Enter new property price: "))
@@ -159,9 +168,9 @@ class property_UI_menu:
                     selected_property.property_price = new_price
                 except ValueError:
                     #occurs value error if you put a non numeric value
-                    print("Invalid input. Please enter a numeric value.")
+                    print("Invalid input.")
             case _:
-                print("Invalid input. No changes were made.")
+                print("Invalid input.")
         print("Property details updated successfully!")
 
     def display_property_work_requests(self):

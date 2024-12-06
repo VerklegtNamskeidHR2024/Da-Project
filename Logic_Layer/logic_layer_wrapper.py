@@ -74,6 +74,7 @@ class Logic_Layer_Wrapper:
         prop4 = Property("4", "Langhals vegur", "rvk", "112")
         property_list = [prop1,prop2,prop3,prop4] """
         return self.property_logic_manager.get_all_properties_at_location(location)
+    
     def get_property_by_id(self, location, property_id):
         """
         Retrieve a property by its ID.
@@ -87,7 +88,7 @@ class Logic_Layer_Wrapper:
         except Exception:
             print("Error retrieving property by ID")
             return None
-    def add_property(self, new_property):
+    def add_new_property_to_storage(self, rank, location, new_property):
         """
         Add a new property to the storage.
         """
