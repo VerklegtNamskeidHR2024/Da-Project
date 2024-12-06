@@ -9,7 +9,7 @@
         "maintenance_description": "roof is leaking",
         "report_status": "Pending",
         "price": "1234",
-        "mark_as_done": true,
+        "mark_as_done": false,
         "contractor_id": "C1",
         "work_request_id": "WR3"
     },
@@ -71,14 +71,14 @@
     },
     {
         "report_id": "MR6",
-        "report_name": "Hreimur Test2",
+        "report_name": "Daniela test",
         "location": "Reykjavik",
-        "property_id": "P3",
+        "property_id": "P1",
         "staff_id": "E2",
         "regular_maintenance": false,
-        "maintenance_description": "sfgdsfgf",
+        "maintenance_description": "daniela please work now",
         "report_status": "Pending",
-        "price": 123.0,
+        "price": "24",
         "mark_as_done": false,
         "contractor_id": "",
         "work_request_id": "WR1"
