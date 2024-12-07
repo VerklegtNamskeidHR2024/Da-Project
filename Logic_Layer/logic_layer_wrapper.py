@@ -78,10 +78,10 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################
-    def get_all_employees_at_location(self, location):
+    def get_all_employees_at_location(self, location) -> list:
         return self.employee_logic_manager.get_all_employees_at_location(location)
     
-    def get_all_employees(self):
+    def get_all_employees(self) -> list:
         return self.employee_logic_manager.get_all_employees() 
     
     def add_new_employee_to_storage(self, location, new_employee):
@@ -93,11 +93,26 @@ class Logic_Layer_Wrapper:
     def fetch_employee_from_storage(self, social_security_number):
         return self.employee_logic_manager.fetch_employee_from_storage(social_security_number)
 
-    def fetch_all_work_request_for_employee(self, social_security_number):
+    def fetch_all_work_request_for_employee(self, social_security_number) -> list:
         return self.employee_logic_manager.fetch_all_work_request_for_employee(social_security_number)
 
-    def fetch_all_maintenance_reports_for_employee(self, social_security_number):
-        return self.employee_logic_manager.fetch_all_maintenance_reports_for_employee(social_security_number)    
+    def fetch_all_maintenance_reports_for_employee(self, social_security_number) -> list:
+        return self.employee_logic_manager.fetch_all_maintenance_reports_for_employee(social_security_number)
+
+    def sanity_check_employee_name(self, name) -> bool:
+        return self.employee_logic_manager.sanity_check_employee_name(name)
+    
+    def sanity_check_ssn(self, ssn) -> bool:
+        return self.employee_logic_manager.sanity_check_ssn(ssn)
+    
+    def sanity_check_phone_number(self, phone_number) -> bool:
+        return self.employee_logic_manager.sanity_check_phone_number(phone_number)
+    
+    def sanity_check_email(self, email) -> bool:
+        return self.employee_logic_manager.sanity_check_email(email)
+    
+    def sanity_check_location(self, location) -> bool:
+        return self.employee_logic_manager.sanity_check_location(location)
 
     ########################################################################################################
     ### MAINTENANCE_REPORTS ################################################################################
