@@ -1,32 +1,31 @@
-class maintenance_report_logic_manager:
-    def __init__(self, Storage_Layer_Wrapper):
-        self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
-        from Logic_Layer.property_logic_manager import property_logic_manager
-        from Logic_Layer.location_logic_manager import location_logic_manager
-        from Logic_Layer.contractor_logic_manager import contractor_logic_manager
-        from Logic_Layer.employee_logic_manager import employee_logic_manager
-        from Logic_Layer.work_request_logic_manager import work_request_logic_manager
 
-    def sanity_check_maintencance_report(self, what_to_check, new_value, location):
+class maintenance_report_logic_manager:
+    def __init__(self, storage_layer_wrapper, location):
+        self.storage_layer_wrapper = storage_layer_wrapper
+        self.location = location
+
+    def sanity_check_maintencance_report(self, what_to_check, new_value, location) -> bool:
+        print(f'In sanity check {what_to_check} {new_value}')
         if what_to_check == 'report name':
             if len(new_value) > 3:
                 return True
             else:
                 return False
-        elif what_to_check in 'location':
-            list_of_all_locations = self.Location_Logic_Manager.get_all_locations()
-            for location in list_of_all_locations:
-                if location.location == new_value:
+        elif what_to_check == 'location':
+            list_of_all_locations = self.storage_layer_wrapper.get_all_locations()
+            #list_of_all_locations = self.location_logic_manager.get_all_locations(self.location)
+            for loc in list_of_all_locations:
+                if loc.location == new_value:
                     return True
             return False
         elif what_to_check in 'property id':
-            list_of_all_properties = self.Property_Logic_Manager.get_all_properties()
+            list_of_all_properties = self.storage_layer_wrapper.get_all_properties_at_location()
             for property in list_of_all_properties:
                 if property.property_id == new_value:
                     return True
             return False
         elif what_to_check in 'staff id':
-            list_of_all_employees = self.Employee_Logic_Manager.get_all_employees_at_location(location)
+            list_of_all_employees = self.storage_layer_wrapper.get_all_employee()
             for employee in list_of_all_employees:
                 if employee.staff_id == new_value:
                     return True
@@ -62,14 +61,14 @@ class maintenance_report_logic_manager:
                 return False
             
         elif what_to_check in 'contractor id':
-            list_of_all_contractors = self.Contractor_Logic_Manager.get_all_contractors()
+            list_of_all_contractors = self.storage_layer_wrapper.get_all_contractor()
             for contractor in list_of_all_contractors:
                 if contractor.contractor_id == new_value:
                     return True
             return False
             
         elif what_to_check in 'work request id':
-            list_of_all_work_requests = self.Work_Request_Logic_Manager.get_all_work_requests(location)
+            list_of_all_work_requests = self.storage_layer_wrapper.get_all_work_requests()
             for work_request in list_of_all_work_requests:
                 if work_request.work_request_id == new_value:
                     return True
@@ -92,7 +91,7 @@ class maintenance_report_logic_manager:
     def get_all_maintencance_reports(self, location) -> list:
         maintenance_report_list = []
 
-        all_maintenance_reports = self.Storage_Layer_Wrapper.get_all_maintenance_report()
+        all_maintenance_reports = self.storage_layer_wrapper.get_all_maintenance_report()
 
         for maintenance_report in all_maintenance_reports:
             maintenance_report_list.append(maintenance_report)
@@ -142,7 +141,7 @@ class maintenance_report_logic_manager:
     def get_all_maintencance_reports_at_location(self, location) -> list:
         maintenance_report_sorted_list = []
 
-        all_maintenance_reports = self.Storage_Layer_Wrapper.get_all_maintenance_report()
+        all_maintenance_reports = self.storage_layer_wrapper.get_all_maintenance_report()
 
         for maintenance_report in all_maintenance_reports:
             if maintenance_report.location == location:

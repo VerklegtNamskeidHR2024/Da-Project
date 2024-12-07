@@ -456,6 +456,7 @@ class work_request_UI_menu:
         
     
     # Completed, can be beautifed.
+
     def display_all_new_work_requests_printed(self): 
         """Prints out all new work requests that haven't been accepted by an employee. """
         

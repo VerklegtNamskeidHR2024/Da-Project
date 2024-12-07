@@ -9,7 +9,7 @@ from UI_Layer.property_ui_layer import property_UI_menu
 
 class Main_Menu:
     def __init__(self, rank, location):
-        self.logic_wrapper = Logic_Layer_Wrapper()
+        self.logic_wrapper = Logic_Layer_Wrapper(location)
         # calls the select function for what user you want to see the system as and, then - 
         # calls the location select function
         self.rank = self.select_user_for_system()
