@@ -289,7 +289,7 @@ class work_request_UI_menu:
                 print("")
                 print()
         
-        if work_request.acceptance_status == False:
+        elif work_request.acceptance_status == False:
             print()
             print("-" * 70)
             accept_work_request = input("Aceept (Yes or No): ")
@@ -368,6 +368,9 @@ class work_request_UI_menu:
     # The functions below could very well be combined into one bigger function.
     # Displays work requests, but no verification on if it matches rank.
     def display_my_work_requests_printed(self):
+        print("-" * 70)
+        print("{:>50}".format("[ My Work Requests ]"))
+        print()
         is_accepted = True
         status = ""
         my_work_request_list = self.logic_wrapper.get_my_work_requests(self.rank, self.location, status, is_accepted)
@@ -379,7 +382,10 @@ class work_request_UI_menu:
         pass
     
     # Completed, can be beautifed.
-    def display_all_new_work_requests_printed(self): 
+    def display_all_new_work_requests_printed(self):
+        print("-" * 70)
+        print("{:>50}".format("[ New Work Requests ]"))
+        print() 
         is_accepted = False
         status = "New"
         new_work_request_list = self.logic_wrapper.get_all_new_work_requests(self.rank, self.location, status, is_accepted)
@@ -390,6 +396,9 @@ class work_request_UI_menu:
     
     # Completed, can be beautifed.
     def display_all_pending_work_requests_printed(self): 
+        print("-" * 70)
+        print("{:>50}".format("[ Pending Work Requests ]"))
+        print()
         is_accepted = True
         status = "Pending"
         pending_work_request_list = self.logic_wrapper.get_all_pending_work_requests(self.rank, self.location, status, is_accepted)
@@ -400,6 +409,9 @@ class work_request_UI_menu:
 
     # Completed, can be beautifed.
     def display_closed_work_requests_printed(self): 
+        print("-" * 70)
+        print("{:>50}".format("[ Closed Work Requests ]"))
+        print()
         is_accepted = True
         status = "Closed"
         closed_work_request_list = self.logic_wrapper.get_all_closed_work_requests(self.rank, self.location, status, is_accepted)
