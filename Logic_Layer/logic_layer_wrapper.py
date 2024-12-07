@@ -136,9 +136,6 @@ class Logic_Layer_Wrapper:
     
     def get_all_new_work_requests(self, rank: str, location: str, status: str, is_accepted: bool) -> list:
         return self.work_request_logic_manager.get_all_new_work_requests_in_storage(rank, location, status, is_accepted)
-
-    def get_all_open_work_requests(self, rank: str, location: str, status: str, is_accepted: bool) -> list:
-        return self.work_request_logic_manager.get_all_open_work_requests_in_storage(rank, location, status, is_accepted)
     
     def get_all_closed_work_requests(self, rank: str, location: str, status: str, is_accepted: bool) -> list: 
         return self.work_request_logic_manager.get_all_closed_work_requests_in_storage(rank, location, status, is_accepted)
@@ -154,24 +151,21 @@ class Logic_Layer_Wrapper:
     
     def add_work_request(self, WorkRequest: object) -> bool:
         return self.work_request_logic_manager.add_work_request(WorkRequest)
-
-    def sanity_check_work_request_id(self, rank, location, WorkRequest) -> bool: 
-        return self.work_request_logic_manager.sanity_check_work_request_id(rank, location, WorkRequest)
     
-    def sanity_check_new_work_request_property_id(self, property_id: str) -> bool:
-        return self.work_request_logic_manager.sanity_check_new_work_request_property_id(property_id)
+    def sanity_check_work_request_property_id(self, property_id: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_work_request_property_id(property_id)
     
     def sanity_check_boolean_input_work_requests(self, yes_or_no: str) -> bool:
         return self.work_request_logic_manager.sanity_check_boolean_input_work_requests(yes_or_no)
     
+    def sanity_check_priority_for_request(self, priority: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_priority_for_request(priority)
+
     def sanity_check_location_for_request(self, location: str) -> bool:
         return self.work_request_logic_manager.sanity_check_location_for_request(location)
     
-    def sanity_check_priority_for_request(self, priority: str) -> bool:
-        return self.work_request_logic_manager.sanity_check_priority_for_request(priority)
-    
-    def sanity_check_edit_employee_id_request(self, staff_id: str) -> bool:
-        return self.work_request_logic_manager.sanity_check_edit_employee_id_request(staff_id)
+    def sanity_check_employee_id_for_request(self, staff_id: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_employee_id_for_request(staff_id)
 
     ########################################################################################################
     ### LOCATION ###########################################################################################
