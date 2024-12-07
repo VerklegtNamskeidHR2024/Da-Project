@@ -365,6 +365,9 @@ class work_request_UI_menu:
 
     
     def edit_employee_id_for_work_request(self, work_request: object):
+        print()
+        print(work_request.to_dict())
+        print()
         while (edit_employee_id_for_request := input("New Employee ID: ")) != "b":
             is_employee_valid = self.logic_wrapper.sanity_check_employee_id_for_request(edit_employee_id_for_request)
             if is_employee_valid == True:
@@ -372,6 +375,9 @@ class work_request_UI_menu:
                 while (updated_work_request_confirmation := input("Enter 1 to Confirm: ")) != "1":
                     print("Mama they took my dingus")
                 work_request.set_staff_id(edit_employee_id_for_request)
+                print()
+                print(work_request.to_dict())
+                print()
                 self.logic_wrapper.edit_work_request(work_request)
                 break
             print("Mama they took my dingus")

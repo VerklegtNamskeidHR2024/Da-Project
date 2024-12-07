@@ -1,8 +1,7 @@
 class work_request_logic_manager:
 
-    def __init__(self, Storage_Layer_Wrapper, location):
+    def __init__(self, Storage_Layer_Wrapper):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
-        self.location = location
 
     def sanity_check_work_request_property_id(self, property_id: str) -> bool: 
         """Gets all properties from storage and compares the property ID given by the user and compares it
@@ -59,7 +58,7 @@ class work_request_logic_manager:
         return False 
 
     def set_id_for_work_request(self, Work_request: object) -> str:
-        highest_id = 0
+        highest_id = -1
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         for work_request in all_work_requests:
             stripped_id = work_request.work_request_id[2:]
@@ -80,13 +79,14 @@ class work_request_logic_manager:
 
 
     def edit_work_request(self, Work_request: object) -> bool:
+        print()
+        print(Work_request.to_dict())
+        print()
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         for request in all_work_requests:
             if request.work_request_id == Work_request.work_request_id:
                 request = Work_request
-        all_work_requests.append(request)
-        self.Storage_Layer_Wrapper.write_to_file_work_requests(all_work_requests)
-        return
+        # self.Storage_Layer_Wrapper.write_to_file_work_requests(all_work_requests)
 
 
     def get_work_request_by_id(self, rank: str, location: str, work_request_id: str, status: str, is_accepted: bool) -> object:
