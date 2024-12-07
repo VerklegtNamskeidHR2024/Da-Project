@@ -146,8 +146,8 @@ class Logic_Layer_Wrapper:
     def get_my_work_requests(self, rank: str, location: str, status: str, is_accepted: bool) -> list:
         return self.work_request_logic_manager.get_my_work_request(rank, location, status, is_accepted)
     
-    def edit_work_request(self, rank, location, WorkRequest) -> bool:
-        return self.work_request_logic_manager.edit_work_request(rank, location, WorkRequest)
+    def edit_work_request(self, WorkRequest: object) -> bool:
+        return self.work_request_logic_manager.edit_work_request(WorkRequest)
     
     def add_work_request(self, WorkRequest: object) -> bool:
         return self.work_request_logic_manager.add_work_request(WorkRequest)

@@ -12,8 +12,8 @@ class Main_Menu:
         self.logic_wrapper = Logic_Layer_Wrapper()
         # calls the select function for what user you want to see the system as and, then - 
         # calls the location select function
-        self.rank = rank
-        self.location = location
+        self.rank = self.select_user_for_system()
+        self.location = self.select_location_for_system()
         
         # sendir ekki inn self.blahblah útaf það er gert í þessum klasa, vilt bara senda inn location og rank
         # annars er sent inn vitlaust location - Kv Hreimur

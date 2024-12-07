@@ -51,7 +51,7 @@ class work_request_logic_manager:
         return False
     
     def sanity_check_employee_id_for_request(self, staff_id: str) -> bool:
-        all_employees = self.Storage_Layer_Wrapper.get_all_employees_at_location()
+        all_employees = self.Storage_Layer_Wrapper.get_all_employee()
         for employee in all_employees:
             if employee.staff_id == staff_id:
                 return True    
@@ -83,6 +83,7 @@ class work_request_logic_manager:
         for request in all_work_requests:
             if request.work_request_id == Work_request.work_request_id:
                 request = Work_request
+        all_work_requests.append(request)
         self.Storage_Layer_Wrapper.write_to_file_work_requests(all_work_requests)
         return
 

@@ -109,27 +109,29 @@ class work_request_UI_menu:
         """System asks user for the ID of the work request they wish to find and prints out 
         all it's information if it's found, otherwise it gives an error message. """
 
-        try:
-            while (work_request_selected_by_id := input("Enter Request ID: ")) != "b":
-                if len(work_request_selected_by_id) < 3:
-                    print()
-                    print("Must Enter A Valid Work Request ID")
-                    print()
-                work_request_object = self.logic_wrapper.get_work_request_by_id(self.rank, self.location, work_request_selected_by_id, status, is_accepted) 
-                if work_request_object != None:
-                    self.display_selected_work_request_information(work_request_object)
-                    if self.rank != "Employee":
-                        self.general_edit_work_request_form(work_request_object)
-                    else:
-                        if work_request_object.acceptance_status == False:
-                            self.employee_accept_work_request_(work_request_object)
-                        elif work_request_object.mark_as_completed == False:
-                            self.employee_mark_work_request_completed(work_request_object)
-        except :
+        while (work_request_selected_by_id := input("Enter Request ID: ")) != "b":
+            if len(work_request_selected_by_id) < 3:
+                print()
+                print("Must Enter A Valid Work Request ID")
+                print()
+            work_request_object = self.logic_wrapper.get_work_request_by_id(self.rank, self.location, work_request_selected_by_id, status, is_accepted) 
+            if work_request_object != None:
+                self.display_selected_work_request_information(work_request_object)
+                if self.rank != "Employee":
+                    self.general_edit_work_request_form(work_request_object)
+                    return
+                else:
+                    if work_request_object.acceptance_status == False:
+                        self.employee_accept_work_request_(work_request_object)
+                        return
+                    elif work_request_object.mark_as_completed == False:
+                        self.mark_work_request_completed(work_request_object)
+                        return
             print()
             print("Work Request Could Not Be Found, Please Try Again.")
             print()
-            return
+            continue
+        return
     
     # Completed, verification of user input can be improved. Also can be beautified.
     def display_create_work_request_form(self):
@@ -141,7 +143,10 @@ class work_request_UI_menu:
         print()
         print("[ New Work Request Form ]")
         print("-" * 70)
-        print("> Back: b, B")
+        print()
+        print("{:>15}{:>5}".format("> Go Back:", "b, B"))
+        print("{:>18}{:>5}".format("> Quit System:", "q, Q"))
+        print()
         print("-" * 70)
         while (request_name := input("Request Name: ")) != "b":
             if len(request_name) < 5:
@@ -259,23 +264,22 @@ class work_request_UI_menu:
         print("{:>18}{:>5}".format("> Quit System:", "q, Q"))
         print()
         print("-" * 70)
-        accept_work_request = ""
         while (accept_work_request := input("Aceept (Yes or No): ")) != "b":
-            if accept_work_request == "": 
+            if len(accept_work_request) < 2: 
                 print()
                 print("This Field Is Required to Fill Out.")
                 print()
             is_accepted_boolean = self.logic_wrapper.sanity_check_boolean_input_work_requests(accept_work_request)
             if is_accepted_boolean == True:
                 updated_work_request = work_request.set_accepted_by_employee(is_accepted_boolean)
-                self.logic_wrapper.edit_work_requests(updated_work_request)
+                self.logic_wrapper.edit_work_request(updated_work_request)
                 print()
                 print("Work Request Has Been Accepted!")
                 print()
                 break
             if is_accepted_boolean == False:
                 updated_work_request = work_request.set_accepted_by_employee(is_accepted_boolean)
-                self.logic_wrapper.edit_work_requests(updated_work_request)
+                self.logic_wrapper.edit_work_request(updated_work_request)
                 print()
                 print("Work Request Has Been Rejected!")
                 print()
@@ -299,21 +303,24 @@ class work_request_UI_menu:
             is_marked_completed_boolean = self.logic_wrapper.sanity_check_boolean_input_work_requests(mark_as_completed)
             if is_marked_completed_boolean == True:
                 while (updated_work_request_confirmation := input("Enter 1 to Confirm: ")) != "1":
-                            print("Mama they took my dingus")
+                    print("Mama they took my dingus")
                 updated_work_request = work_request.set_mark_as_done(is_marked_completed_boolean)
-                self.logic_wrapper.edit_work_requests(updated_work_request)
+                self.logic_wrapper.edit_work_request(updated_work_request)
                 print()
                 print("Work Request Has Been Marked Completed!")
                 print()
+                break
             if is_marked_completed_boolean == False:
                 while (updated_work_request_confirmation := input("Enter 1 to Confirm: ")) != "1":
-                            print("Mama they took my dingus")
+                    print("Mama they took my dingus")
                 updated_work_request = work_request.set_mark_as_done(is_marked_completed_boolean)
-                self.logic_wrapper.edit_work_requests(updated_work_request)
+                self.logic_wrapper.edit_work_request(updated_work_request)
                 print()
                 print("Work Request Has Been Marked Not Completed.")
                 print()
+                break
             print("Mama they took my dingus")
+            continue
         return
     
     # Displays options, not been tested enough to verify it's functionality.
@@ -323,75 +330,108 @@ class work_request_UI_menu:
         print()
         print("Choose a Category To Edit")
         print("-" * 70)
-        print("{:>18}".format("> 1. Employee ID"))
-        print("{:>18}".format("> 2. Property ID"))
-        print("{:>24}".format("> 3. Repitive"))
+        print("{:>15}".format("> 1. Employee ID"))
+        print("{:>15}".format("> 2. Property ID"))
+        print("{:>15}".format("> 3. Repitive"))
         print("{:>15}".format("> 4. Priority"))
-        print("{:>21}".format("> 5. Completed"))
+        print("{:>15}".format("> 5. Completed"))
         print()
-        print("{:>15}{:>5}".format("> Go Back:", "b, B"))
+        print("{:>18}{:>5}".format("> Go Back:", "b, B"))
         print("{:>18}{:>5}".format("> Quit System:", "q, Q"))
         print()
         print("-" * 70)
 
         while (category_to_edit := input("Choose a Category to Edit: ")) != "b":
+            match category_to_edit:
+                case "1":
+                    self.edit_employee_id_for_work_request(work_request)
+                    return
+                case "2":
+                    self.edit_property_id_for_request(work_request)   
+                    return
+                case "3":
+                    self.edit_repitive_work_request(work_request)
+                    return
+                case "4":
+                    self.edit_priority_for_request(work_request)
+                    return
+                case "5":
+                    self.mark_work_request_completed(work_request)
+                    return
+                case _:
+                    print("Mama they took my dingus")
+                    continue
+        return 
+
+    
+    def edit_employee_id_for_work_request(self, work_request: object):
+        while (edit_employee_id_for_request := input("New Employee ID: ")) != "b":
+            is_employee_valid = self.logic_wrapper.sanity_check_employee_id_for_request(edit_employee_id_for_request)
+            if is_employee_valid == True:
+                print()
+                while (updated_work_request_confirmation := input("Enter 1 to Confirm: ")) != "1":
+                    print("Mama they took my dingus")
+                work_request.set_staff_id(edit_employee_id_for_request)
+                self.logic_wrapper.edit_work_request(work_request)
+                break
             print("Mama they took my dingus")
-        match category_to_edit:
-            case "1":
-                while (edit_employee_id_for_request := input("New Employee ID: ")) != "b":
-                    is_employee_valid = self.logic_wrapper.sanity_check_employee_id(edit_employee_id_for_request)
-                    if is_employee_valid == True:
-                        while (updated_work_request_confirmation := input("Enter 1 to Confirm: ")) != "1":
-                            print("Mama they took my dingus")
-                        updated_work_request = work_request.set_staff_id(edit_employee_id_for_request)
-                        self.logic_wrapper.edit_work_requests(updated_work_request)
-                        return
-                    print("Mama they took my dingus")
-
-            case "2": 
-                while (edit_property_id_for_request := input("New Property ID: ")) != "b":
-                    is_property_id_valid = self.logic_wrapper.sanity_check_priority_id(edit_property_id_for_request)
-                
-                    if is_property_id_valid == True:
-                        while (updated_work_request_confirmation := input("Enter 1 to Confirm: ")) != "1":
-                            print("Mama they took my dingus")
-                        updated_work_request = work_request.set_property_id(edit_property_id_for_request)
-                        self.logic_wrapper.edit_work_requests(updated_work_request)
-                        return
-                    print("Mama they took my dingus")
-
-            case "3":
-                while (edit_repitive_work_request := input("Is Repitive? (Yes or No): ")) != "b":
-                    is_repetitive_boolean = self.logic_wrapper.sanity_check_boolean_input_work_requests(edit_repitive_work_request)
-                    
-                    if is_repetitive_boolean == True:
-                        while (updated_work_request_confirmation := input("Enter 1 to Confirm: ")) != "1":
-                            print("Mama they took my dingus")
-                        work_request.set_repetitive_work(is_repetitive_boolean)
-                        self.logic_wrapper.edit_work_requests(work_request)
-                        return
-                    if is_repetitive_boolean == False: 
-                        while (updated_work_request_confirmation := input("Enter 1 to Confirm: ")) != "1":
-                            print("Mama they took my dingus")
-                        work_request.set_repetitive_work(is_repetitive_boolean)
-                        self.logic_wrapper.edit_work_requests(work_request)
-                    print("Mama they took my dingus")
-
-            case "4":
-                while (edit_priority_for_request := input("Priority for Request: ")) != "b":
-                    is_priority_valid = self.logic_wrapper.sanity_check_priority_for_request(edit_priority_for_request)
-                    
-                    if is_priority_valid == True:
-                        while (updated_work_request_confirmation := input("Enter 1 to Confirm: ")) != "1":
-                            print("Mama they took my dingus")
-                        work_request.set_priority(edit_priority_for_request)
-                        self.logic_wrapper.edit_work_requests(work_request)
-                        return
-                    print("Mama they took my dingus")
-
-            case "5":
-                self.mark_work_request_completed(work_request)
+            continue
         return
+            
+
+    def edit_property_id_for_request(self, work_request: object):
+        while (edit_property_id_for_request := input("New Property ID: ")) != "b":
+            is_property_id_valid = self.logic_wrapper.sanity_check_work_request_property_id(edit_property_id_for_request)
+            if is_property_id_valid == True:
+                print()
+                while (updated_work_request_confirmation := input("Enter 1 to Confirm: ")) != "1":
+                    print("Mama they took my dingus")
+                work_request.set_property_id(edit_property_id_for_request)
+                self.logic_wrapper.edit_work_request(work_request)
+                break
+            print("Mama they took my dingus")
+            continue
+        return
+
+
+    def edit_repitive_work_request(self, work_request: object):
+        while (edit_repitive_work_request := input("Is Repitive? (Yes or No): ")) != "b":
+            is_repetitive_boolean = self.logic_wrapper.sanity_check_boolean_input_work_requests(edit_repitive_work_request)
+            
+            if is_repetitive_boolean == True:
+                print()
+                while (updated_work_request_confirmation := input("Enter 1 to Confirm: ")) != "1":
+                    print("Mama they took my dingus")
+                work_request.set_repetitive_work(is_repetitive_boolean)
+                self.logic_wrapper.edit_work_request(work_request)
+                break
+            if is_repetitive_boolean == False: 
+                print()
+                while (updated_work_request_confirmation := input("Enter 1 to Confirm: ")) != "1":
+                    print("Mama they took my dingus")
+                work_request.set_repetitive_work(is_repetitive_boolean)
+                self.logic_wrapper.edit_work_request(work_request)
+                break
+            print("Mama they took my dingus")
+            continue
+        return
+
+
+    def edit_priority_for_request(self, work_request: object):    
+        while (edit_priority_for_request := input("Priority for Request: ")) != "b":
+            is_priority_valid = self.logic_wrapper.sanity_check_priority_for_request(edit_priority_for_request)
+            
+            if is_priority_valid == True:
+                print()
+                while (updated_work_request_confirmation := input("Enter 1 to Confirm: ")) != "1":
+                    print("Mama they took my dingus")
+                work_request.set_priority(edit_priority_for_request)
+                self.logic_wrapper.edit_work_request(work_request)
+                break
+            print("Mama they took my dingus")
+            continue
+        return
+        
     
     # The functions below could very well be combined into one bigger function.
     # Displays work requests, but no verification on if it matches rank.
