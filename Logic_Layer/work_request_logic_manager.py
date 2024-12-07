@@ -1,7 +1,8 @@
 class work_request_logic_manager:
 
-    def __init__(self, Storage_Layer_Wrapper):
+    def __init__(self, Storage_Layer_Wrapper, location):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
+        self.location = location
 
     def sanity_check_new_work_request_property_id(self, property_id: str) -> bool: 
         """Gets all properties from storage and compares the property ID given by the user and compares it

@@ -3,7 +3,7 @@
         "report_id": "MR1",
         "report_name": "Fix Roof At P4",
         "location": "Reykjavik",
-        "property_id": "P4",
+        "property_id": "P1",
         "staff_id": "E5",
         "regular_maintenance": false,
         "maintenance_description": "New Description",
