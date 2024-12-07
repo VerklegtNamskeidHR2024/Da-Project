@@ -80,10 +80,11 @@ class work_request_logic_manager:
 
     def edit_work_request(self, Work_request: object) -> bool:
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
-        for request in all_work_requests:
+        for position, request in enumerate(all_work_requests):
             if request.work_request_id == Work_request.work_request_id:
-                request = Work_request
+                all_work_requests[position] = Work_request
         self.Storage_Layer_Wrapper.write_to_file_work_requests(all_work_requests)
+        return 
 
 
     def get_work_request_by_id(self, rank: str, location: str, work_request_id: str, status: str, is_accepted: bool) -> object:
