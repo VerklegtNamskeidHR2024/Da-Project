@@ -78,6 +78,12 @@ class Logic_Layer_Wrapper:
     
     def get_property_by_id(self, location, property_id):
         return self.property_logic_manager.get_property_by_id(location, property_id)
+    
+    def get_property_work_requests(self, location, property_id):
+        return self.property_logic_manager.get_property_work_requests(location, property_id)
+    
+    def get_property_maintenance_reports(self, location, property_id):
+        return self.property_logic_manager.get_property_maintenance_reports(location, property_id)
 
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################

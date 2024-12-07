@@ -64,7 +64,7 @@ class property_UI_menu:
 
             match user_choice:
                 case "1":
-                    self.display_view_attached_options()
+                    self.display_view_attached_options(selected_property)
                     #displays the attched options
                 case "2":
                     self.display_edit_property_details(selected_property)
@@ -108,26 +108,19 @@ class property_UI_menu:
             # If you put an invalid input
             print("Invalid input.")
 
-
-    def display_view_attached_options(self):
+    def display_view_attached_options(self, selected_property):
         #Displays attached options for a property.
         print("-" * 70)
         print("1. Display Work Requests")
         print("2. Display Maintenance Reports")
-        print("3. Display Employees")
-        print("4. Display Contractors")
         print("-" * 70)
         #lets you choice from the above options
         attached_selection = input("Enter choice: ")
         match attached_selection:
             case "1":
-                self.display_property_work_requests()
+                self.display_property_work_requests(selected_property)
             case "2":
-                self.display_property_maintenance_reports()
-            case "3":
-                self.display_property_employees()
-            case "4":
-                self.display_property_contractors()
+                self.display_property_maintenance_reports(selected_property)
             case _:
                 print("Invalid input. Please try again.")
 
@@ -173,24 +166,16 @@ class property_UI_menu:
                 print("Invalid input.")
         print("Property details updated successfully!")
 
-    def display_property_work_requests(self):
+    def display_property_work_requests(self, selected_property):
         #Displays work requests for a property.
         #need da code  for the work requests in here 
         print("Work Requests for the selected property.")
-
-    def display_property_maintenance_reports(self):
+        self.logic_wrapper.get_property_work_requests(self.location, selected_property.property_id)
+        
+    def display_property_maintenance_reports(self, selected_property):
         #Displays maintenance reports for a property.
         #need da code in here too gang 
         print("Maintenance Reports for the selected property.")
-
-    def display_property_employees(self):
-        #Displays employees assigned to a property.
-        #code...
-        print("Employees assigned to the selected property.")
-
-    def display_property_contractors(self):
-        """Displays contractors assigned to a property."""
-        print("Contractors assigned to the selected property.")
 
     def print_single_property(self, property):
         #Prints details of a single property
@@ -202,5 +187,3 @@ class property_UI_menu:
         print(f"{'Price to Fix':<20}: {property.total_price_to_fix}")
         print(f"{'Price':<20}: {property.property_price}")
         print("-" * 30)
-
-    
