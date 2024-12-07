@@ -2,8 +2,12 @@
 
 class property_logic_manager:
 
-    def __init__(self, Storage_Layer_Wrapper):
+    def __init__(self, Storage_Layer_Wrapper, location):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
+        self.location = location
+
+    def sanity_check_properties(property):
+        pass
 
     def get_all_properties(self) -> list:
         property_list = []
@@ -38,8 +42,11 @@ class property_logic_manager:
 
         return properties_sorted_list
     
-    def sanity_check_properties(property):
-        pass
+    def get_property_by_id(self, location, property_id) -> object:
+        property_list = self.get_all_properties_at_location(location)
+        for property in property_list:
+            if property.property_id == property_id:
+                return property
 
     def add_new_property_to_storage(self, rank, location, property):
         highestID = -1
@@ -58,7 +65,22 @@ class property_logic_manager:
             if property_ID in prop:
                 return prop
             
-        return #error message property ID is not in the system 
+    def get_property_work_requests(self, location, property_id) -> list:
+        work_request_list = []
+        all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
+        for work_request in all_work_requests:
+            if work_request.property_id == property_id:
+                work_request_list.append(work_request)
+        return work_request_list
+    
+    def get_property_maintenance_reports(self, location, property_id):
+        maintenance_report_list = []
+        all_maintenance_reports = self.Storage_Layer_Wrapper.get_all_maintenance_report()
+        for maintenance_report in all_maintenance_reports:
+            if maintenance_report.property_id == property_id:
+                maintenance_report_list.append(maintenance_report)
+        return maintenance_report_list
+
     def fetch_all_work_request_in_storage(work_request_ID):
         pass
 

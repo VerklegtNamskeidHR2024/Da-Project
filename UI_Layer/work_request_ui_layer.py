@@ -13,9 +13,8 @@ class work_request_UI_menu:
 
         self.display_work_requests_menu_items()
 
-
     # Completed, can be beautified.
-    def display_all_work_requests_printed(self, work_request_list: list) -> print: 
+    def display_all_work_requests_printed(self, work_request_list: list): 
         """Prints out all open work requests with their ID, Name and Description. """
         try:
             print("{:0}{:>6}{:>5}{:>9}{:>12}".format("ID", "|", "Name", "|", "Description"))
@@ -28,7 +27,7 @@ class work_request_UI_menu:
             print("{:>50}".format("No Work Requests To Display")) 
         
     # Completed, can be beautified.
-    def display_selected_work_request_information(self, work_request: object) -> print:
+    def display_selected_work_request_information(self, work_request: object):
         """Prints out a selected work requests and all it's information for user to read. """
 
         print("{:0}{:>14}{:<10}".format("Categories", "|", "Details"))
@@ -99,8 +98,8 @@ class work_request_UI_menu:
                 case _:
                     print("Invalid Input, Please Try Again.")
 
-    # Works, but lacks verification on user input. Also can be beautified
-    def select_work_request_by_id(self, status: str, is_accepted: bool) -> print:
+    # Works, but lacks more detailed verification on user input. Also can be beautified
+    def select_work_request_by_id(self, status: str, is_accepted: bool):
         """System asks user for the ID of the work request they wish to find and prints out 
         all it's information if it's found, otherwise it gives an error message. """
         try:
@@ -125,7 +124,7 @@ class work_request_UI_menu:
             return
     
     # Completed, verification of user input can be improved. Also can be beautified.
-    def display_create_work_request_form(self) -> print:
+    def display_create_work_request_form(self):
         """Creates a new work request object and asks for different information details that are passed to, and set
         for the class model. Once completed the validity of the request object is verified: if it returns True it's
         created but otherwise it returns the user to the main menu. """
@@ -273,6 +272,8 @@ class work_request_UI_menu:
 
     # Displays options, not been tested enough to verify it's functionality. 
     def employee_edit_work_request_form(self, work_request):
+        """Allows the Employee to either accept a work request or mark it completed. """
+
         if work_request.mark_as_completed == False:
             print()
             print("-" * 70)
@@ -288,7 +289,7 @@ class work_request_UI_menu:
                 print("")
                 print()
         
-        if work_request.acceptance_status == False:
+        elif work_request.acceptance_status == False:
             print()
             print("-" * 70)
             accept_work_request = input("Aceept (Yes or No): ")
@@ -302,6 +303,8 @@ class work_request_UI_menu:
     
     # Displays options, not been tested enough to verify it's functionality.
     def general_edit_work_request_form(self, work_request):
+        """Allows the Admin or Manager to edit specific details about a work request of their choosing. """
+
         print()
         print("Choose a Category To Edit")
         print("-" * 70)
@@ -361,9 +364,13 @@ class work_request_UI_menu:
 
         # updated_work_request_confirmation_confirmation = input("Enter 1 to Confirm: ")
         pass
-            
-            
+    
+    # The functions below could very well be combined into one bigger function.
+    # Displays work requests, but no verification on if it matches rank.
     def display_my_work_requests_printed(self):
+        print("-" * 70)
+        print("{:>50}".format("[ My Work Requests ]"))
+        print()
         is_accepted = True
         status = ""
         my_work_request_list = self.logic_wrapper.get_my_work_requests(self.rank, self.location, status, is_accepted)
@@ -373,8 +380,12 @@ class work_request_UI_menu:
             print("Again")
         self.select_work_request_by_id(status, is_accepted)
         pass
-
-    def display_all_new_work_requests_printed(self): 
+    
+    # Completed, can be beautifed.
+    def display_all_new_work_requests_printed(self):
+        print("-" * 70)
+        print("{:>50}".format("[ New Work Requests ]"))
+        print() 
         is_accepted = False
         status = "New"
         new_work_request_list = self.logic_wrapper.get_all_new_work_requests(self.rank, self.location, status, is_accepted)
@@ -383,7 +394,11 @@ class work_request_UI_menu:
             print("Mama")
         self.select_work_request_by_id(status, is_accepted)
     
+    # Completed, can be beautifed.
     def display_all_pending_work_requests_printed(self): 
+        print("-" * 70)
+        print("{:>50}".format("[ Pending Work Requests ]"))
+        print()
         is_accepted = True
         status = "Pending"
         pending_work_request_list = self.logic_wrapper.get_all_pending_work_requests(self.rank, self.location, status, is_accepted)
@@ -392,7 +407,11 @@ class work_request_UI_menu:
             print("Mama")
         self.select_work_request_by_id(status, is_accepted)
 
+    # Completed, can be beautifed.
     def display_closed_work_requests_printed(self): 
+        print("-" * 70)
+        print("{:>50}".format("[ Closed Work Requests ]"))
+        print()
         is_accepted = True
         status = "Closed"
         closed_work_request_list = self.logic_wrapper.get_all_closed_work_requests(self.rank, self.location, status, is_accepted)

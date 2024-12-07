@@ -3,8 +3,6 @@ class employee_logic_manager:
     def __init__(self, Storage_Layer_Wrapper, location):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
         self.location = location
-        from Logic_Layer.work_request_logic_manager import work_request_logic_manager
-        from Logic_Layer.maintenance_report_logic_manager import maintenance_report_logic_manager
 
 
     def get_all_employees(self) -> list:
@@ -42,8 +40,6 @@ class employee_logic_manager:
         new_employee_id = 'E' + str(highestID)
         return new_employee_id    
 
-    def sanity_check_employee(employee, display):
-        pass
         
     def add_new_employee_to_storage(self,employee):
         list_of_all_employees = self.get_all_employees()
@@ -63,7 +59,7 @@ class employee_logic_manager:
 
     #def fetch_all_work_request_for_employee(self, work_request_ID) -> list:
     def fetch_all_work_request_for_employee(self, social_security_number) -> list:
-        work_request_list = self.work_request_logic_mananger.get_all_work_requests()
+        work_request_list = self.Storage_Layer_Wrapper.get_all_work_requests()
         work_request_by_employee = []
         for wr in work_request_list:
             if wr.staff_id == social_security_number:
@@ -72,9 +68,47 @@ class employee_logic_manager:
         
 
     def fetch_all_maintenance_reports_for_employee(self, social_security_number) -> list:
-        maintenance_reports_list = self.maintenance_report_logic_mananger.get_all_maintenance_reports()
+        maintenance_reports_list = self.Storage_Layer_Wrapper.get_all_maintenance_reports()
         maintenance_reports_by_employee = []
         for mr in maintenance_reports_list:
             if mr.staff_id == social_security_number:
                 maintenance_reports_by_employee.append(mr)
         return maintenance_reports_by_employee
+    
+    def sanity_check_employee_name(self, name) -> bool:
+ 
+        for chr in name:
+            if chr.isalpha() or chr.isspace():
+                pass
+            else:
+                return False
+        return True
+    
+    def sanity_check_ssn(self, ssn) -> bool:
+     
+        if len(ssn) == 10:
+            return True
+        else:
+            return False
+        
+    def sanity_check_phone_number(self, phone_number) -> bool:
+        
+        if len(phone_number) == 7:
+            return True
+        else:
+            return False
+        
+    def sanity_check_email(self, email) -> bool:
+        if "@" in email:
+            return True
+        else:
+            return False
+        
+    def sanity_check_location(self, location) -> bool:
+        location_list = self.Storage_Layer_Wrapper.get_all_locations()
+        if location in location_list:
+            return True
+        else:
+            return False
+
+

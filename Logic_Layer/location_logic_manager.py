@@ -1,7 +1,8 @@
 class location_logic_manager:
 
-    def __init__(self, Storage_Layer_Wrapper):
+    def __init__(self, Storage_Layer_Wrapper, location):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
+        self.location = location
 
     def all_location(self) -> list:
         locations_list = []
