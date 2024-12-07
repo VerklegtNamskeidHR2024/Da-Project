@@ -39,19 +39,6 @@ class Logic_Layer_Wrapper:
     ### CONTRACTOR #########################################################################################
     def get_all_contractors_at_location(self, location):
         return self.contractor_logic_manager.get_all_contractors_at_location(location)
-        # her mynd það kalla í sama fall inn í contractors logic manager 
-        # er núna bara með dummy gögn
-        """ con1 = Contractor("1","alverk","tumi","8-19",["meow"])
-        con2 = Contractor("2","alverk","gabbi","8-19",["meow"])
-        con3 = Contractor("3","alverk","jon","8-19",["meow"])
-        contractor_list = [con1,con2,con3]
-        return contractor_list """
-
-    print('we in da wrapper bro')
-    '''con1 = Contractor("1","alverk","tumi","8-19",["meow"])
-    con2 = Contractor("2","alverk","gabbi","8-19",["meow"])
-    con3 = Contractor("3","alverk","jon","8-19",["meow"])
-    contractor_list = [con1,con2,con3]'''
 
     def get_contractor_by_id(self, rank, location, contractor_id) -> Contractor:
         return self.contractor_logic_manager.get_contractor_by_id(location,contractor_id)
