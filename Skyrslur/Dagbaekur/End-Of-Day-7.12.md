@@ -1,5 +1,5 @@
 Hreimur:\
-
+I finished all of the things needed for maintenance reports and started working on properties. I got here at 14 and left around 18
 
 
 Daníela:\
