@@ -1,7 +1,8 @@
 class work_request_logic_manager:
 
-    def __init__(self, Storage_Layer_Wrapper):
+    def __init__(self, Storage_Layer_Wrapper, location):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
+        self.location = location
 
     def get_all_work_requests(self, location) -> list:
         work_request_list = []

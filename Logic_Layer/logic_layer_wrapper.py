@@ -19,19 +19,25 @@ from Logic_Layer.work_request_logic_manager import work_request_logic_manager
 
 
 class Logic_Layer_Wrapper:
-    def __init__(self):
+    def __init__(self, location):
         # creating the storage layer wrapper
         self.storage_layer_wrapper = Storage_Layer_Wrapper()
+        self.location = location
 
         # creating all the logic classes.
         # Send the storage layer wrapper into each manager so they can talk to the same instance-
         # of the storage layer wrapper.
-        self.contractor_logic_manager = contractor_logic_manager(self.storage_layer_wrapper)
-        self.employee_logic_manager = employee_logic_manager(self.storage_layer_wrapper)
-        self.location_logic_manager = location_logic_manager(self.storage_layer_wrapper)
-        self.maintenance_report_logic_manager = maintenance_report_logic_manager(self.storage_layer_wrapper)
-        self.property_logic_manager = property_logic_manager(self.storage_layer_wrapper)
-        self.work_request_logic_manager = work_request_logic_manager(self.storage_layer_wrapper)
+        self.contractor_logic_manager = contractor_logic_manager(self.storage_layer_wrapper, location)
+        self.employee_logic_manager = employee_logic_manager(self.storage_layer_wrapper, location)
+        self.location_logic_manager = location_logic_manager(self.storage_layer_wrapper, location)
+        self.property_logic_manager = property_logic_manager(self.storage_layer_wrapper, location)
+        self.work_request_logic_manager = work_request_logic_manager(self.storage_layer_wrapper, location)
+        self.maintenance_report_logic_manager = maintenance_report_logic_manager(
+            self.storage_layer_wrapper, location,
+            self.employee_logic_manager,
+            self.property_logic_manager,
+            self.location_logic_manager
+        )
 
     ########################################################################################################
     ### CONTRACTOR #########################################################################################
@@ -123,8 +129,8 @@ class Logic_Layer_Wrapper:
         return self.maintenance_report_logic_manager.edit_maintencance_report(maintenance_report, location, edit_choice, new_value)
     
     def sanity_check_maintencance_report(self, what_to_check, new_value, location):
-        location_list = self.get_all_locations()
-        return self.maintenance_report_logic_manager.sanity_check_maintencance_report(what_to_check, new_value, location, )
+        location_list = self.get_all_locations(location)
+        return self.maintenance_report_logic_manager.sanity_check_maintencance_report(what_to_check, new_value, location)
 
     ########################################################################################################
     ### WORK_REQUESTS ######################################################################################
@@ -173,7 +179,7 @@ class Logic_Layer_Wrapper:
     ########################################################################################################
     ### LOCATION ###########################################################################################
     def get_all_locations(self ,Location) -> list:
-        return self.location_logic_manager.fetch_all_locations_in_storage(Location)
+        return self.location_logic_manager.all_location()
 
     def fetch_all_amenities_for_location_in_storage(self ,location) -> list:
         return self.location_logic_manager.fetch_all_amenities_for_location_in_storage()
