@@ -32,12 +32,7 @@ class Logic_Layer_Wrapper:
         self.location_logic_manager = location_logic_manager(self.storage_layer_wrapper, location)
         self.property_logic_manager = property_logic_manager(self.storage_layer_wrapper, location)
         self.work_request_logic_manager = work_request_logic_manager(self.storage_layer_wrapper, location)
-        self.maintenance_report_logic_manager = maintenance_report_logic_manager(
-            self.storage_layer_wrapper, location,
-            self.employee_logic_manager,
-            self.property_logic_manager,
-            self.location_logic_manager
-        )
+        self.maintenance_report_logic_manager = maintenance_report_logic_manager(self.storage_layer_wrapper, location)
 
     ########################################################################################################
     ### CONTRACTOR #########################################################################################
@@ -81,6 +76,8 @@ class Logic_Layer_Wrapper:
     def add_new_property_to_storage(self, rank, location, new_property):
         return self.property_logic_manager.add_new_property_to_storage(rank, location, new_property)
     
+    def get_property_by_id(self, location, property_id):
+        return self.property_logic_manager.get_property_by_id(location, property_id)
 
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################

@@ -45,7 +45,7 @@ class property_UI_menu:
 
     def display_select_property(self):
         #Displays options for a selected property.
-        try:
+        #try:
             #you choose the property id for the properrty you looking for
             property_id = input("Enter the Property ID to select: ")
             # gets property by id
@@ -75,8 +75,8 @@ class property_UI_menu:
                 case _:
                     #if you put an invaild input
                     print("Invalid input. Please try again.")
-        except Exception:
-            print("An error occurred")
+        #except Exception:
+         #   print("An error occurred")
 
     def display_add_property(self):
     # Handles adding a new property.
