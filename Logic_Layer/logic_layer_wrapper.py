@@ -169,6 +169,9 @@ class Logic_Layer_Wrapper:
     
     def sanity_check_priority_for_request(self, priority: str) -> bool:
         return self.work_request_logic_manager.sanity_check_priority_for_request(priority)
+    
+    def sanity_check_edit_employee_id_request(self, staff_id: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_edit_employee_id_request(staff_id)
 
     ########################################################################################################
     ### LOCATION ###########################################################################################

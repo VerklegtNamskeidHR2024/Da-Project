@@ -17,7 +17,8 @@ class work_request_logic_manager:
     def sanity_check_boolean_input_work_requests(self, yes_or_no: str) -> bool:
         """Takes the input given by the user and returns True or False based on if the user had entered spefically 
         yes/Yes or no/No. Otherwise it returns None. """
-
+        if len(yes_or_no) < 2:
+            return 
         match yes_or_no:
             case "yes" | "Yes":
                 return True
@@ -29,7 +30,6 @@ class work_request_logic_manager:
     def sanity_check_priority_for_request(self, priority: str) -> bool:
         """Takes the input given by the user and returns True if the user had entered spefically low/Low, medium/Medium
         or high/High. Otherwise it returns False. """
-
         match priority:
             case "high" | "High":
                 return True
@@ -49,7 +49,7 @@ class work_request_logic_manager:
                 return True
         return False
     
-    # def sanity_check_edit_employee_id_request(self, staff_id: str) -> bool:
+    def sanity_check_edit_employee_id_request(self, staff_id: str) -> bool:
     
     # def sanity_check_edit_request_status(self, status: str) -> bool:
 
