@@ -13,7 +13,7 @@ class employee_UI_menu:
         if self.rank == "Manager" or self.rank == "Admin":
             action = self.action_choice()
             if action == 1:
-                self.search_employee()
+                employee_ssn = self.search_employee()
                 #sanity check
                     #display_employee()
                     #choice = employee_options()
@@ -26,9 +26,9 @@ class employee_UI_menu:
                         #elif edit_choice == 3:
                             #edit_employee_email()
                     #elif choice == 2:
-                        #display_employee_work_requests()
+                        #display_employee_work_requests(employee_ssn)
                     #elif choice == 3:
-                        #display_employee_maintenance_report()
+                        #display_employee_maintenance_report(employee_ssn)
             elif action == 2:
                 self.add_employee()
 
@@ -98,14 +98,28 @@ class employee_UI_menu:
     def add_new_employee_to_storage(self):
         """The function asks for all the information needed for regestering an employee"""
         print("Creating a new employee")
+        new_employee = Employee()
+       # employee_name = ""
+        while (employee_name := input("Enter Employee Name: ")) != "b":
+            if employee_name == "":
+                print()
+                print("This Field Is Required To Fill Out")
+                print()
+            else:
+                is_valid_name = self.logic_wrapper.sanity_check_employee_name(employee_name)
+                if is_valid_name:
+                    break
+                else:
+                    print("Employee Name Can Only Contain Letters And Spaces")
+        new_employee.set_name(employee_name)
+                     
 
-        employee_name = input("Enter Employee Name: ")
-        employee_social_security_number = int(input("Enter Employee Social Security: "))
-        employee_phone_number = int(input("Enter Employee Phone Number: "))
+        #employee_social_security_number = int(input("Enter Employee Social Security: "))
+        #employee_phone_number = int(input("Enter Employee Phone Number: "))
         #employee_location = input("Enter Employee Location: ")
-        employee_email = input("Enter Email: ")
-        new_employee = Employee(employee_name, employee_social_security_number, employee_phone_number, employee_location, "Employee", employee_email, "")
-        new_employee_added = self.logic_wrapper.add_new_employee_to_storage()
+        #employee_email = input("Enter Email: ")
+        ##new_employee = Employee(employee_name, employee_social_security_number, employee_phone_number, employee_location, "Employee", employee_email, "")
+        #new_employee_added = self.logic_wrapper.add_new_employee_to_storage()
 
     def display_edit_options(self) -> int:
         """The Function displays and asks for the edit option"""
@@ -144,10 +158,25 @@ class employee_UI_menu:
         except:
             print("Somthing Went Wrong")
 
-    def display_employee_work_requests(self, social_security_number):
+    def display_employee_work_requests(self):
         """The function displays all work requests by an employee"""
-        
+        wr_by_employee_list = self.logic_wrapper.fetch_all_work_request_for_employee(social_security_number)
+        print()
+        print("--- All Work Requests By This Employee ---")
+        print("{:>15}{:>10}{:>15}".format("Name", "Work Request ID", "Status"))
+        print("-" * 70)
+        for wr in wr_by_employee_list:
+            print("{:>15}{:>10}{:>15}".format(wr.name, wr.work_request_id, wr.work_request_status))
+        print("-" * 70)     
 
     def display_employee_maintenance_report(self, social_security_number):
-        pass
+        """The function displays all maintenance reports by an employee"""
+        mr_by_employee_list = self.logic_wrapper.fetch_all_maintenance_report_for_employee(social_security_number)
+        print()
+        print("--- All Maintenance Report By This Employee ---")
+        print("{:>15}{:>10}{:>15}".format("Name", "Maintenance ID", "Status"))
+        print("-" * 70)
+        for mr in mr_by_employee_list:
+            print("{:>15}{:>10}{:>15}".format(mr.report_name, mr.report_id, mr.report_status))
+        print("-" * 70)  
 
