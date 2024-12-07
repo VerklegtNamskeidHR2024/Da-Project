@@ -1,7 +1,6 @@
 class maintenance_report_logic_manager:
-    def __init__(self, Storage_Layer_Wrapper, location):
+    def __init__(self, Storage_Layer_Wrapper):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
-        self.location = location
         from Logic_Layer.property_logic_manager import property_logic_manager
         from Logic_Layer.location_logic_manager import location_logic_manager
         from Logic_Layer.contractor_logic_manager import contractor_logic_manager

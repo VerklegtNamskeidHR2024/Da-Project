@@ -1,8 +1,7 @@
 class employee_logic_manager:
     
-    def __init__(self, Storage_Layer_Wrapper, location):
+    def __init__(self, Storage_Layer_Wrapper):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
-        self.location = location
         from Logic_Layer.work_request_logic_manager import work_request_logic_manager
         from Logic_Layer.maintenance_report_logic_manager import maintenance_report_logic_manager
 
