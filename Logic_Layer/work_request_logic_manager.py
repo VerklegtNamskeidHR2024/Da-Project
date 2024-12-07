@@ -3,30 +3,22 @@ class work_request_logic_manager:
     def __init__(self, Storage_Layer_Wrapper):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
 
-    def sanity_check_work_request_id(self, work_request_id: str) -> bool:
-        try: 
-            work_request_id_list = list(work_request_id)
-            if len(work_request_id) < 3:
-                raise IndexError("Please Try Again")
-            is_number = (work_request_id_list[2]).isalpha()
-            if (len(work_request_id_list) == 3 and work_request_id_list[0] == "W" and 
-                work_request_id_list[1] == "R" and is_number == False):
-                return True
-            return False
-        except IndexError:  
-            return False
 
     def sanity_check_new_work_request_property_id(self, property_id: str) -> bool: 
-        try:
-            property_id_listed = list(property_id)
-            is_number = (property_id_listed[1]).isalpha()
-            if (len(property_id_listed) == 2 and property_id_listed[0] == "P" and is_number == False):
+        """Gets all properties from storage and compares the property ID given by the user and compares it
+        to the ones that already exist. """
+
+        all_properties = self.Storage_Layer_Wrapper.get_all_properties_at_location()
+        for property in all_properties:
+            if property.property_id == property_id:
                 return True    
-            return False 
-        except IndexError:
-            return False
+        return False 
+    
                 
     def sanity_check_boolean_input_work_requests(self, yes_or_no: str) -> bool:
+        """Takes the input given by the user and returns True or False based on if the user had entered spefically 
+        yes/Yes or no/No. Otherwise it returns None. """
+
         match yes_or_no:
             case "yes" | "Yes":
                 return True
@@ -36,6 +28,9 @@ class work_request_logic_manager:
                 return 
             
     def sanity_check_priority_for_request(self, priority: str) -> bool:
+        """Takes the input given by the user and returns True if the user had entered spefically low/Low, medium/Medium
+        or high/High. Otherwise it returns False. """
+
         match priority:
             case "high" | "High":
                 return True
@@ -47,9 +42,11 @@ class work_request_logic_manager:
                 return False
             
     def sanity_check_location_for_request(self, set_location: str) -> bool:
-        valid_locations = ["Reykjavik", "Nuuk", "Kulusuk", "Longyearbyen", "Torshavn", "Tingwall"]
-        for location in valid_locations:
-            if location == set_location:
+        """Gets all locations from storage and compares the names input given by the user to the  that already exist. """
+
+        all_locations = self.Storage_Layer_Wrapper.get_all_locations()
+        for location in all_locations:
+            if location.name == set_location:
                 return True
         return False
     
@@ -90,7 +87,7 @@ class work_request_logic_manager:
         return 
 
     def get_all_work_requests_at_location(self, rank: str, location: str, status: str, is_accepted: bool) -> list:
-            '''Gets all work requests at specific location'''
+            """Gets all work requests at specific location. """
             work_request_sorted_list = []
 
             all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
