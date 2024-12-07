@@ -17,6 +17,7 @@ Yeabsire:\
 
 
 Kormákur:\
+I finished most of the work request logic and UI, only thing left is completing the edit feature. I came at 11:00 and left at 19:30. 
 
 
 Jón:\

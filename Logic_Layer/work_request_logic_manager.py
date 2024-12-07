@@ -4,7 +4,7 @@ class work_request_logic_manager:
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
         self.location = location
 
-    def sanity_check_new_work_request_property_id(self, property_id: str) -> bool: 
+    def sanity_check_work_request_property_id(self, property_id: str) -> bool: 
         """Gets all properties from storage and compares the property ID given by the user and compares it
         to the ones that already exist. """
 
@@ -18,7 +18,8 @@ class work_request_logic_manager:
     def sanity_check_boolean_input_work_requests(self, yes_or_no: str) -> bool:
         """Takes the input given by the user and returns True or False based on if the user had entered spefically 
         yes/Yes or no/No. Otherwise it returns None. """
-
+        if len(yes_or_no) < 2:
+            return 
         match yes_or_no:
             case "yes" | "Yes":
                 return True
@@ -50,11 +51,14 @@ class work_request_logic_manager:
                 return True
         return False
     
-    # def sanity_check_edit_employee_id_request(self, staff_id: str) -> bool:
-    
-    # def sanity_check_edit_request_status(self, status: str) -> bool:
+    def sanity_check_employee_id_for_request(self, staff_id: str) -> bool:
+        all_employees = self.Storage_Layer_Wrapper.get_all_employee()
+        for employee in all_employees:
+            if employee.staff_id == staff_id:
+                return True    
+        return False 
 
-    def set_new_work_request_id(self, Work_request: object) -> str:
+    def set_id_for_work_request(self, Work_request: object) -> str:
         highest_id = 0
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         for work_request in all_work_requests:
@@ -68,15 +72,22 @@ class work_request_logic_manager:
             
 
     def add_work_request(self, Work_request: object) -> bool:
-        Work_request_with_id = self.set_new_work_request_id(Work_request)
-        all_works_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
-        all_works_requests.append(Work_request_with_id)
-        self.Storage_Layer_Wrapper.write_to_file_work_requests(all_works_requests) 
+        Work_request_with_id = self.set_id_for_work_request(Work_request)
+        all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
+        all_work_requests.append(Work_request_with_id)
+        self.Storage_Layer_Wrapper.write_to_file_work_requests(all_work_requests) 
         return 
 
 
     def edit_work_request(self, Work_request: object) -> bool:
-        pass
+        all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
+        for request in all_work_requests:
+            if request.work_request_id == Work_request.work_request_id:
+                request = Work_request
+        all_work_requests.append(request)
+        self.Storage_Layer_Wrapper.write_to_file_work_requests(all_work_requests)
+        return
+
 
     def get_work_request_by_id(self, rank: str, location: str, work_request_id: str, status: str, is_accepted: bool) -> object:
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
