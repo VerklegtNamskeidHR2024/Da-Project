@@ -40,7 +40,7 @@ class maintenance_report_UI_menu:
         elif user_choice == '3':
             self.display_create_maintenance_report_form()
         elif user_choice == '4':
-            self.edit_report_details()
+            self.edit_report_details(self.location)
         else:
             print("Invalid choice.")
 
@@ -111,9 +111,6 @@ class maintenance_report_UI_menu:
             case "1":
                 # create maintenance reports 
                 self.display_create_maintenance_report_form()
-            case "2":
-                # view incomplete reports
-                 self.view_incomplete_reports()
             case "q":
                 """quit back to main menu"""
                 pass
@@ -129,103 +126,206 @@ class maintenance_report_UI_menu:
         #Create a new maintenance report
         print("Creating a new maintenance report")
         #the details that need to be filled out
-        report_name = input("Enter a name for the report: ")
+        is_valid_report_name = False
+        is_valid_location = False
+        is_valid_property_id = False
+        is_valid_staff_id = False
+        is_valid_regular_maintenance = False
+        is_valid_maintenance_description = False
+        is_valid_price = False
+        is_valid_contractor_id = False
+        is_valid_work_request_id = False
+        #while loop to check if the input is valid
+        while is_valid_report_name == False:
+            report_name = input("Enter a name for the report: ")
+            is_valid_report_name = self.logic_wrapper.sanity_check_maintencance_report('report name', report_name, self.location)
+            if is_valid_report_name == False:
+                print('Invalid input')
+        while is_valid_location == False:
+            location = input('Enter location name: ')
+            is_valid_location = self.logic_wrapper.sanity_check_maintencance_report('location', location, self.location)
+            if is_valid_location == False:
+                print('Invalid input')
+        while is_valid_property_id == False:
+            property_id = input("Enter property ID: ")
+            is_valid_property_id = self.logic_wrapper.sanity_check_maintencance_report('property id', property_id, self.location)
+            if is_valid_property_id == False:
+                print('Invalid input')
+
+        while is_valid_staff_id == False:
+            staff_id = input("Enter employee ID: ")
+            is_valid_staff_id = self.logic_wrapper.sanity_check_maintencance_report('staff id', staff_id, self.location)
+            if is_valid_staff_id == False:
+                print('Invalid input')
+
+        while is_valid_regular_maintenance == False:
+            regular_maintenance = input("Is it scheduled? (yes/no): ")
+            is_valid_regular_maintenance = self.logic_wrapper.sanity_check_maintencance_report('regular maintenance', regular_maintenance, self.location)
+            if is_valid_regular_maintenance == False:
+                print('Invalid input')
+
+        while is_valid_maintenance_description == False:
+            maintenance_description = input('Enter maintenance description: ')
+            is_valid_maintenance_description = self.logic_wrapper.sanity_check_maintencance_report('maintenance description', maintenance_description, self.location)
+            if is_valid_maintenance_description == False:
+                print('Invalid input')
+
+        while is_valid_price == False:
+            try:
+                price = float(input("Enter a price: "))
+                is_valid_price = self.logic_wrapper.sanity_check_maintencance_report('cost', price, self.location)
+                if is_valid_price == False:
+                    print('Invalid input')
+            except ValueError:
+                print('Needs to be a number')
+
+        while is_valid_contractor_id == False:
+            contractor_id = input('Enter contractor ID (leave empty if no contractor): ')
+            is_valid_contractor_id = self.logic_wrapper.sanity_check_maintencance_report('contractor id', contractor_id, self.location)
+            if is_valid_contractor_id == False:
+                print('Invalid input')
+
+        while is_valid_work_request_id == False:
+            work_request_id = input("Enter the ID of the work request in progress: ")
+            is_valid_work_request_id = self.logic_wrapper.sanity_check_maintencance_report('work request id', work_request_id, self.location)
+            if is_valid_work_request_id == False:
+                print('Invalid input')
+
+        
+        
+        '''report_name = input("Enter a name for the report: ")
         location = input('Enter location name: ')
         property_id = input("Enter property ID: ")
         staff_id = input("Enter employee ID: ")
         regular_maintenance = bool(input("Is it scheduled? (yes/no): "))
         maintenance_description = input('Enter maintenance description: ')
-        price = input("Enter a price: ")
+        price = float(input("Enter a price: "))
         contractor_id = input('Enter contractor ID (leave empty if no contractor): ')
-        work_request_id = input("Enter the ID of the work request in progress: ")
+        work_request_id = input("Enter the ID of the work request in progress: ")'''
+
         new_maintenance_report = MaintenanceReport('', report_name, location, property_id, staff_id, False,
-        maintenance_description,'' ,price, False, contractor_id, work_request_id)
+        maintenance_description,'',price, False, contractor_id, work_request_id)
 
         new_maintenance_report_added = self.logic_wrapper.add_new_maintenance_report_to_storage(self.location, new_maintenance_report, regular_maintenance)
 
     #WIP
-    def edit_report_details(self):
+    def edit_report_details(self, location):
         """Editing report {report_id} (details to be implemented)"""
         all_report_list = self.logic_wrapper.get_all_maintenance_reports_at_location(self.location)
         for report in all_report_list:
             print(f'{report.report_id:<10}{report.report_name:<10}')
         print("-" * 70)
         selected_work_request = input('Please type in work request id: ')
+        report_in_system = self.logic_wrapper.check_if_report_in_system(selected_work_request, self.location)
+        if report_in_system == True:
+            for report in all_report_list:
+                if report.report_id == selected_work_request:
+                    maintenance_report_to_use = report
+            self.print_single_maintenance_report(maintenance_report_to_use)
+            self.display_edit_maintenance_report_details(maintenance_report_to_use)
+        elif report_in_system == False:
+            print(f'{selected_work_request} not found in the system please try again!')
+            self.edit_report_details()
+        else:
+            pass
+            # print the maintenance report  info
+            # self.print_single_maintenance_report(maintenance_report_to_use)
 
-        # print the maintenance report  info
-        # self.print_single_maintenance_report(maintenance_report_to_use)
+            # Dont see a use for this - Hreimur
+            '''print("1. Mark as ready")
+            print("2. Edit report details")
+            user_input = input("Choose: ")
 
-        # Dont see a use for this - Hreimur
-        '''print("1. Mark as ready")
-        print("2. Edit report details")
-        user_input = input("Choose: ")
+            match user_input:
+                case"1":
+                    print(f"Report {report_id} has been marked as ready.")
+                case "2":
+                    self.display_edit_maintenance_report_details(maintenance_report_to_use)
+                case _:
+                    print("Invalid choice.")'''
 
-        match user_input:
-            case"1":
-                print(f"Report {report_id} has been marked as ready.")
-            case "2":
-                self.display_edit_maintenance_report_details(maintenance_report_to_use)
-            case _:
-                print("Invalid choice.")'''
-
-
+    #Completed - But needs to do sanity check! - And also find incomplete reports
+    # need to implement so user can stop making a report mid way through and that would give the report an incomplete status
     def display_edit_maintenance_report_details(self, selected_maintenance_report):
         """ Allows editing of maintenance report details. """
         print(f"Editing details for maintenance report ID: {selected_maintenance_report.report_id}")
-        print("1. Change Property ID")
-        print("2. Change Staff ID")
-        print("3. Change Contractor ID")
-        print("4. Change Scheduled Date")
-        print("5. Change Work Done")
-        print("6. Change Status")
-        print("7. Change Price")
+        print('1. Change Report Name')
+        print('2. Change Staff ID ')
+        print('3. Change Regular Maintenance (yes/no)')
+        print('4. Change Maintenance Description')
+        print('5. Change Cost')
+        print('6. Change Contractor ID')
+        print('7. Go back')
         print("-" * 70)
 
         edit_choice = input("Select an option to edit: ")
 
         match edit_choice:
             case "1":
-                new_property_id = input("Enter new Property ID: ")
-                selected_maintenance_report.property_id = new_property_id
-                print("Property ID updated successfully.")
-            case "2":
-                new_staff_id = input("Enter new Staff ID: ")
-                selected_maintenance_report.staff_id = new_staff_id
-                print("Staff ID updated successfully.")
-            case "3":
-                new_contractor_id = input("Enter new Contractor ID: ")
-                selected_maintenance_report.contractor_id = new_contractor_id
-                print("Contractor ID updated successfully.")
-            case "4":
-                new_scheduled_date = input("Enter new Scheduled Date: ")
-                selected_maintenance_report.scheduled_date = new_scheduled_date
-                print("Scheduled Date updated successfully.")
-            case "5":
-                new_work_done = input("Enter new Work Done description: ")
-                selected_maintenance_report.work_done = new_work_done
-                print("Work Done updated successfully.")
-            case "6":
-                new_status = input("Enter new Status: ")
-                selected_maintenance_report.status = new_status
-                print("Status updated successfully.")
-            case "7":
+                is_valid = False
+                while is_valid == False:
+                    new_report_name = input('Enter new report name: ')
+                    is_valid = self.logic_wrapper.sanity_check_maintencance_report('report name', new_report_name, self.location)
+                    if is_valid == True:
+                        self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Report Name', new_report_name)
+            case '2':
+                is_valid = False
+                while is_valid == False:
+                    new_staff_id = input('Enter new staff ID: ')
+                    is_valid = self.logic_wrapper.sanity_check_maintencance_report('staff ID', new_staff_id, self.location)
+                    if is_valid == True:
+                        self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Staff ID', new_staff_id)
+                
+            case '3':
+                is_valid = False
+                while is_valid == False:
+                    regular_maintenance = input('Regular Maintenance (yes/no)')
+                    is_valid = self.logic_wrapper.sanity_check_maintencance_report('regular maintenance', regular_maintenance, self.location)
+                    if is_valid == True:
+                        self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Regular', regular_maintenance)
+            case '4':
+                is_valid = False
+                while is_valid == False:
+                    new_report_description = input('Enter new description')
+                    is_valid = self.logic_wrapper.sanity_check_maintencance_report('maintenance description', new_report_description, self.location)
+                    if is_valid == True:
+                        self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Description', new_report_description)
+            case '5':
                 try:
-                    new_price = float(input("Enter new Price: "))
-                    selected_maintenance_report.price = new_price
-                    print("Price updated successfully.")
+                    is_valid = False
+                    while is_valid == False:
+                        new_report_cost = float(input('Enter New Cost'))
+                        is_valid = self.logic_wrapper.sanity_check_maintencance_report('cost', new_report_cost, self.location)
+                        if is_valid == True:
+                            self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Cost', new_report_cost)
                 except ValueError:
-                    print("Invalid input.")
+                    print('Needs to be a number')
+            case '6':
+                is_valid = False
+                while is_valid == False:
+                    new_contractor_id = input('Enter new contractor ID')
+                    is_valid = self.logic_wrapper.sanity_check_maintencance_report('contractor id', new_contractor_id, self.location)
+                    if is_valid == True:
+                        self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Contractor ID', new_contractor_id)
+            case '7':
+                self.admin_or_manager_menu()
             case _:
                 print("Invalid input")
+
         print("Maintenance report details updated successfully!")
+        self.display_edit_maintenance_report_details(selected_maintenance_report)
 
     def print_single_maintenance_report(self, maintenance_report):
             print("-"*30)
+            print(f"{'Report ID':<15}: {maintenance_report.report_id}")
+            print(f"{'Report Name':<15}: {maintenance_report.report_name}")
+            print(f"{'Maintenance Description':<15}: {maintenance_report.maintenance_description}")
+            print(f"{'Location':<15}: {maintenance_report.location}")
             print(f"{'Property ID':<15}: {maintenance_report.property_id}")
-            print(f"{'Staff ID':<15}: {maintenance_report.property_name}")
-            print(f"{'Contractor ID':<15}: {maintenance_report.contractor_id}")
-            print(f"{'Scheduled date':<15}: {maintenance_report.scheduled_date}")
-            print(f"{'Work done':<15}: {maintenance_report.work_done}")
-            print(f"{'Status':<15}: {maintenance_report.status}")
+            print(f"{'Staff ID':<15}: {maintenance_report.staff_id}")
+            print(f"{'Regular Maintenance':<15}: {maintenance_report.regular_maintenance}")
             print(f"{'Price':<15}: {maintenance_report.price}")
+            print(f"{'Completed':<15}: {maintenance_report.mark_as_done}")
+            print(f"{'Contractor ID':<15}: {maintenance_report.contractor_id}")
+            print(f"{'Work Request ID':<15}: {maintenance_report.work_request_id}")
             print("-"*30)
