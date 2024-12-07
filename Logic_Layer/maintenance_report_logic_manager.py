@@ -1,8 +1,7 @@
 
 class maintenance_report_logic_manager:
-    def __init__(self, storage_layer_wrapper, location):
+    def __init__(self, storage_layer_wrapper):
         self.storage_layer_wrapper = storage_layer_wrapper
-        self.location = location
 
     def sanity_check_maintencance_report(self, what_to_check, new_value, location) -> bool:
         print(f'In sanity check {what_to_check} {new_value}')

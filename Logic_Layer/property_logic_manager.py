@@ -2,9 +2,8 @@
 
 class property_logic_manager:
 
-    def __init__(self, Storage_Layer_Wrapper, location):
+    def __init__(self, Storage_Layer_Wrapper):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
-        self.location = location
 
     def sanity_check_properties(property):
         pass
