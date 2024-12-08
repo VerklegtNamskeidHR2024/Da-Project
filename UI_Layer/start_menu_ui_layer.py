@@ -134,11 +134,6 @@ class Main_Menu:
     def display_menu_items(self):
         user_action = ""
         while user_action.lower() != "q":
-            # maybe have while for loop
-            # and add a quit opition
-            # admin manager
-            # print("Welcome ", self.rank)
-            # print(f'{"Current Location - {self.location}"}')
             print()
             print(f" {self.rank} - Home Page")
             print("-" * 70)
@@ -150,16 +145,13 @@ class Main_Menu:
             if self.rank != "Employee":
                 print("6. Locations")
             print()
-            print("{:>15}{:>5}".format("> Go Back:", "b, B"))
-            print("{:>18}{:>5}".format("> Quit System:", "q, Q"))
+            print("{:>15}".format("> Log Out: log"))
+            print("{:>18}".format("> Quit System: q, Q"))
             print("-" * 70)
 
-            while (user_action = input("Select an Option:  ").lower()) != "b":
+            user_action = input("Select an Option: ")
             self.user_choice_select(user_action.lower())
-
-            # used to get a loop may want to change
-            #self.display_menu_items()
-        return
+        return 
 
     def user_choice_select(self, user_action):
 

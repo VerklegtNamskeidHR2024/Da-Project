@@ -73,15 +73,17 @@ class work_request_UI_menu:
             print("{:0}{:>3}{:>15}{:>3}{:>19}".format("1. Select Request", "|", "2. New Requests", "|", "3. Pending Requests"))
             print("{:0}{:>3}{:>20}{:>3}{:>19}".format("4. My Requests", "|", "5. Closed Requests", "|", "6. Add Request" ))
             print()
-            print("{:>15}{:>5}".format("> Go Back:", "b, B"))
-            print("{:>18}{:>5}".format("> Quit System:", "q, Q"))
+            print("{:>20}".format("> Go Back: b, B"))
+            print("{:>20}".format("> Log Out: log"))
+            print("{:>20}".format("> Quit System: q, Q"))
             print()
         else:
             print("{:0}{:>3}{:>20}".format("1. Select Request", "|", "2. New Requests"))
             print("{:0}{:>3}{:>20}".format("3. Pending Requests", "|", "4. My Requests"))
             print()
-            print("{:>15}{:>5}".format("> Go Back:", "b, B"))
-            print("{:>18}{:>5}".format("> Quit System:", "q, Q"))
+            print("{:>20}".format("> Go Back: b, B"))
+            print("{:>20}".format("> Log Out: log"))
+            print("{:>20}".format("> Quit System: q, Q"))
             print()
     
     def select_menu_option(self):
@@ -124,7 +126,7 @@ class work_request_UI_menu:
             if work_request_object != None:
                 self.display_selected_work_request_information(work_request_object)
                 if self.rank != "Employee":
-                    self.general_edit_work_request_form(work_request_object)
+                    self.general_edit_work_request_selected_option(work_request_object)
                     return
                 elif work_request_object.accepted_by_employee == False:
                     self.employee_accept_work_request_(work_request_object)
@@ -135,11 +137,10 @@ class work_request_UI_menu:
             print()
             print("Work Request Could Not Be Found, Please Try Again.")
             print()
-            continue
         return
     
     # Completed, verification of user input can be improved. Also can be beautified.
-    def display_create_work_request_form(self):
+    def display_create_work_request_form_(self):
         """Creates a new work request object and asks for different information details that are passed to, and set
         for the class model. Once completed the validity of the request object is verified: if it returns True it's
         created but otherwise it returns the user to the main menu. """
@@ -149,11 +150,11 @@ class work_request_UI_menu:
         print("[ New Work Request Form ]")
         print("-" * 70)
         print()
-        print("{:>15}{:>5}".format("> Go Back:", "b, B"))
-        print("{:>20}{:>5}".format("> Quit System:", "q, Q"))
+        print("{:>15}".format("> Go Back: b, B"))
+        print("{:>20}".format("> Quit System: q, Q"))
         print()
         print("-" * 70)
-
+    
         while (request_name := input("Request Name: ")) != "b" and request_name != "B":
             if len(request_name) < 5:
                 print()
@@ -292,10 +293,11 @@ class work_request_UI_menu:
         print()
         print("-" * 70)
         print()
-        print("{:>15}{:>5}".format("> Go Back:", "b, B"))
-        print("{:>18}{:>5}".format("> Quit System:", "q, Q"))
+        print("{:>20}".format("> Go Back: b, B"))
+        print("{:>20}".format("> Quit System: q, Q"))
         print()
         print("-" * 70)
+
         while (accept_work_request := input("Aceept (Yes or No): ")) != "b" and accept_work_request != "B":
             if len(accept_work_request) < 2: 
                 print()
@@ -307,9 +309,9 @@ class work_request_UI_menu:
                 while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1" and update_confirmation != "b":
                     print("Mama they took my dingus")
                 if update_confirmation == "b":
-                    return
-                updated_work_request = work_request.set_accepted_by_employee(is_accepted_boolean)
-                self.logic_wrapper.edit_work_request(updated_work_request)
+                    continue
+                work_request.set_accepted_by_employee(is_accepted_boolean)
+                self.logic_wrapper.edit_work_request(work_request)
                 print()
                 print("Work Request Has Been Accepted!")
                 print()
@@ -319,15 +321,14 @@ class work_request_UI_menu:
                 while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1" and update_confirmation != "b":
                     print("Mama they took my dingus")
                 if update_confirmation == "b":
-                    return
-                updated_work_request = work_request.set_accepted_by_employee(is_accepted_boolean)
-                self.logic_wrapper.edit_work_request(updated_work_request)
+                    continue
+                work_request.set_accepted_by_employee(is_accepted_boolean)
+                self.logic_wrapper.edit_work_request(work_request)
                 print()
                 print("Work Request Has Been Rejected!")
                 print()
                 break
             print("Mama they took my dingus")
-            continue
         return
         
 
@@ -337,8 +338,8 @@ class work_request_UI_menu:
         print()
         print("-" * 70)
         print()
-        print("{:>15}{:>5}".format("> Go Back:", "b, B"))
-        print("{:>18}{:>5}".format("> Quit System:", "q, Q"))
+        print("{:>20}".format("> Go Back: b, B"))
+        print("{:>20}".format("> Quit System: q, Q"))
         print()
         print("-" * 70)
         while (mark_as_completed := input("Mark as Completed (Yes or No): ")) != "b" and mark_as_completed != "B":
@@ -352,9 +353,9 @@ class work_request_UI_menu:
                 while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1" and update_confirmation != "b":
                     print("Mama they took my dingus")
                 if update_confirmation == "b":
-                    return
-                updated_work_request = work_request.set_mark_as_done(is_marked_completed_boolean)
-                self.logic_wrapper.edit_work_request(updated_work_request)
+                    continue
+                work_request.set_mark_as_done(is_marked_completed_boolean)
+                self.logic_wrapper.edit_work_request(work_request)
                 print()
                 print("Work Request Has Been Marked Completed!")
                 print()
@@ -364,19 +365,18 @@ class work_request_UI_menu:
                 while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1" and update_confirmation != "b":
                     print("Mama they took my dingus")
                 if update_confirmation == "b":
-                    return
-                updated_work_request = work_request.set_mark_as_done(is_marked_completed_boolean)
-                self.logic_wrapper.edit_work_request(updated_work_request)
+                    continue
+                work_request.set_mark_as_done(is_marked_completed_boolean)
+                self.logic_wrapper.edit_work_request(work_request)
                 print()
                 print("Work Request Has Been Marked Not Completed.")
                 print()
                 break
             print("Mama they took my dingus")
-            continue
         return
     
     # Displays options, not been tested enough to verify it's functionality.
-    def general_edit_work_request_form(self, work_request: object):
+    def general_edit_work_request_menu(self):
         """Allows the Admin or Manager to edit specific details about a work request of their choosing. """
 
         print()
@@ -388,31 +388,30 @@ class work_request_UI_menu:
         print("{:>15}".format("> 4. Priority"))
         print("{:>15}".format("> 5. Completed"))
         print()
-        print("{:>18}{:>5}".format("> Go Back:", "b, B"))
-        print("{:>18}{:>5}".format("> Quit System:", "q, Q"))
+        print("{:>18}".format("> Go Back: b, B"))
+        print("{:>18}".format("> Quit System: q, Q"))
         print()
         print("-" * 70)
 
-        while (category_to_edit := input("Choose a Category to Edit: ").lower()) != "b":
+
+    def general_edit_work_request_selected_option(self, work_request: object):
+        category_to_edit = ""
+        while category_to_edit != "b":
+            self.general_edit_work_request_menu()
+            category_to_edit = input("Choose a Category to Edit: ").lower()
             match category_to_edit:
                 case "1":
                     self.edit_employee_id_for_work_request(work_request)
-                    return
                 case "2":
                     self.edit_property_id_for_request(work_request)   
-                    return
                 case "3":
                     self.edit_repitive_work_request(work_request)
-                    return
                 case "4":
                     self.edit_priority_for_request(work_request)
-                    return
                 case "5":
                     self.mark_work_request_completed(work_request)
-                    return
                 case _:
                     print("Mama they took my dingus")
-                    continue
         return 
 
     
@@ -424,12 +423,11 @@ class work_request_UI_menu:
                 while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1" and update_confirmation != "b":
                     print("Mama they took my dingus")
                 if update_confirmation == "b":
-                    return
+                    continue
                 work_request.set_staff_id(edit_employee_id_for_request)
                 self.logic_wrapper.edit_work_request(work_request)
                 break
             print("Mama they took my dingus")
-            continue
         return
             
 
@@ -441,12 +439,11 @@ class work_request_UI_menu:
                 while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1" and update_confirmation != "b":
                     print("Mama they took my dingus")
                 if update_confirmation == "b":
-                    return
+                    continue
                 work_request.set_property_id(edit_property_id_for_request)
                 self.logic_wrapper.edit_work_request(work_request)
                 break
             print("Mama they took my dingus")
-            continue
         return
 
 
@@ -459,7 +456,7 @@ class work_request_UI_menu:
                 while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1" and update_confirmation != "b":
                     print("Mama they took my dingus")
                 if update_confirmation == "b":
-                    return
+                    continue
                 work_request.set_repetitive_work(is_repetitive_boolean)
                 self.logic_wrapper.edit_work_request(work_request)
                 break
@@ -469,12 +466,11 @@ class work_request_UI_menu:
                 while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1" and update_confirmation != "b":
                     print("Mama they took my dingus")
                 if update_confirmation == "b":
-                    return
+                    continue
                 work_request.set_repetitive_work(is_repetitive_boolean)
                 self.logic_wrapper.edit_work_request(work_request)
                 break
             print("Mama they took my dingus")
-            continue
         return
 
 
@@ -487,12 +483,11 @@ class work_request_UI_menu:
                 while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1" and update_confirmation != "b":
                     print("Mama they took my dingus")
                 if update_confirmation == "b":
-                    return
+                    continue
                 work_request.set_priority(edit_priority_for_request)
                 self.logic_wrapper.edit_work_request(work_request)
                 break
             print("Mama they took my dingus")
-            continue
         return
         
     
@@ -507,8 +502,8 @@ class work_request_UI_menu:
         my_work_request_list = self.logic_wrapper.get_my_work_requests(self.rank, self.location)
         self.display_all_work_requests_printed(my_work_request_list)
         print()
-        print("{:>15}{:>5}".format("> Go Back:", "b, B"))
-        print("{:>18}{:>5}".format("> Quit System:", "q, Q"))
+        print("{:>15}".format("> Go Back: b, B"))
+        print("{:>18}".format("> Quit System: q, Q"))
         print("-" * 70)
         while (selected_work_request := input("Enter 1 to Select a Work Request: ").lower()) != "1" and selected_work_request != "b":
             print("Mama they took my dingus")
@@ -528,8 +523,8 @@ class work_request_UI_menu:
         new_work_request_list = self.logic_wrapper.get_all_new_work_requests(self.rank, self.location)
         self.display_all_work_requests_printed(new_work_request_list)
         print()
-        print("{:>15}{:>5}".format("> Go Back:", "b, B"))
-        print("{:>18}{:>5}".format("> Quit System:", "q, Q"))
+        print("{:>15}".format("> Go Back: b, B"))
+        print("{:>18}".format("> Quit System: q, Q"))
         print("-" * 70)
         while (selected_work_request := input("Enter 1 To Select A Work Request: ").lower()) != "1" and selected_work_request != "b":
             print("Mama they took my dingus")
@@ -548,8 +543,8 @@ class work_request_UI_menu:
         pending_work_request_list = self.logic_wrapper.get_all_pending_work_requests(self.rank, self.location)
         self.display_all_work_requests_printed(pending_work_request_list)
         print()
-        print("{:>15}{:>5}".format("> Go Back:", "b, B"))
-        print("{:>18}{:>5}".format("> Quit System:", "q, Q"))
+        print("{:>15}".format("> Go Back: b, B"))
+        print("{:>18}".format("> Quit System: q, Q"))
         print("-" * 70)
         while (selected_work_request := input("Enter 1 To Select A Work Request: ").lower()) != "1" and selected_work_request != "b":
             print("Mama they took my dingus")
@@ -567,8 +562,8 @@ class work_request_UI_menu:
         closed_work_request_list = self.logic_wrapper.get_all_closed_work_requests(self.rank, self.location)
         self.display_all_work_requests_printed(closed_work_request_list)
         print()
-        print("{:>15}{:>5}".format("> Go Back:", "b, B"))
-        print("{:>18}{:>5}".format("> Quit System:", "q, Q"))
+        print("{:>20}".format("> Go Back: b, B"))
+        print("{:>20}".format("> Quit System: q, Q"))
         print("-" * 70)
         while (selected_work_request := input("Enter 1 To Select A Work Request: ").lower()) != "1" and selected_work_request != "b":
             print("Mama they took my dingus")

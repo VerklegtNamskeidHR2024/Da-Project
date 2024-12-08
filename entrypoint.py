@@ -32,8 +32,9 @@ def select_user_for_system():
         print("3. Employee")
         print()
         print("Universal System Commands:")
-        print("{:>15}{:>5}".format("> Go Back:", "b, B"))
-        print("{:>18}{:>5}".format("> Quit System:", "q, Q"))
+        print("{:>15}".format("> Go Back: b, B"))
+        print("{:>15}".format("> Log Out: log"))
+        print("{:>18}".format("> Quit System: q, Q"))
         print("-" * 70)
 
         user_action = input("Select a Profile: ")
