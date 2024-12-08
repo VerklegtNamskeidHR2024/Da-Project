@@ -69,7 +69,7 @@ class property_UI_menu:
                 case "2":
                     self.display_edit_property_details(selected_property)
                     #lets you edit property details
-                case "q":
+                case "b":
                     #if you want to quit and return to the property list
                     print("Returning to the property list...")
                 case _:
@@ -79,34 +79,47 @@ class property_UI_menu:
          #   print("An error occurred")
 
     def display_add_property(self):
-    # Handles adding a new property.
-        try:
-            # New property
-            new_property = House()
-            # The details you can add for the property
-            new_property.set_property_id(input("Enter Property ID: "))
-            new_property.set_name(input("Enter Property Name: "))
-            new_property.set_condition(input("Enter Property Condition: "))
-            new_property.set_total_price_to_fix(int(input("Enter Price to Fix: ")))
-            # new_property.set_property_price(int(input("Enter Property Price: ")))
-            if self.rank != "Admin":
-                new_property.set_location(self.location)
-            else:
-                new_property.set_location(input("Enter Property Location: "))
-            new_property.location = self.location
-            
-            # Adds the property
-            property_list = self.logic_wrapper.add_new_property_to_storage(self.rank, self.location, new_property)
-            
-            if property_list is not None:
-                for obj in property_list:
-                    print(obj)
-                print("New property has been added successfully!")
-            else:
-                print("Failed to add new property.")
-        except ValueError:
-            # If you put an invalid input
-            print("Invalid input.")
+        '''Displays the add property form'''
+        '''
+        "property_id": "P3",
+        "name": "suite",
+        "location": "Reykjavik",
+        "condition": "excellent",
+        "total_price_to_fix": 1500.0,
+        "property_price": 30
+        '''
+        is_valid_name = False
+        is_valid_location = False
+        is_valid_condition = False
+        is_valid_price_to_fix = False
+        is_valid_price = False
+        while is_valid_name == False:
+            new_name = input("Enter the property name: ")
+            is_valid_name = self.logic_wrapper.sanity_check_properties('name', new_name)
+            if is_valid_name == False:
+                print("Invalid name. Please try again.")
+        while is_valid_location == False:
+            new_location = input("Enter the property location: ")
+            is_valid_location = self.logic_wrapper.sanity_check_properties('location', new_location)
+            if is_valid_location == False:
+                print("Invalid location. Please try again.")
+        while is_valid_condition == False:
+            new_condition = input("Enter the property condition: ")
+            is_valid_condition = self.logic_wrapper.sanity_check_properties('condition', new_condition)
+            if is_valid_condition == False:
+                print("Invalid condition. Please try again.")
+        while is_valid_price_to_fix == False:
+            new_price_to_fix = input("Enter the price to fix: ")
+            is_valid_price_to_fix = self.logic_wrapper.sanity_check_properties('price_to_fix', new_price_to_fix)
+            if is_valid_price_to_fix == False:
+                print("Invalid price to fix. Please try again.")
+        while is_valid_price == False:
+            new_price = input("Enter the property price: ")
+            is_valid_price = self.logic_wrapper.sanity_check_properties('price', new_price)
+            if is_valid_price == False:
+                print("Invalid price. Please try again.")
+        new_property = House('', new_name, new_location, new_condition, new_price_to_fix, new_price)
+        self.logic_wrapper.add_new_property_to_storage(self.rank, self.location, new_property)
 
     def display_view_attached_options(self, selected_property):
         #Displays attached options for a property.
@@ -128,54 +141,67 @@ class property_UI_menu:
         #allows editing of property details.
         print(f"Editing details for Property ID: {selected_property.property_id}")
         print("1. Change Property Name")
-        print("2. Change Property Location")
-        print("3. Change Property Condition")
-        print("4. Change Price to Fix")
-        print("5. Change Property Price")
+        print("2. Change Property Condition")
+        print("3. Change Price to Fix")
+        print("4. Change Property Price")
 
         edit_choice = input("Select an option to edit: ")
         match edit_choice:
             case "1":
-                new_name = input("Enter new property name: ")
-                #updates the property name
-                selected_property.name = new_name
+                is_valid_name = False
+                while is_valid_name == False:
+                    new_name = input("Enter new property name: ")
+                    is_valid_name = self.logic_wrapper.sanity_check_properties('name', new_name)
+                    if is_valid_name == True:
+                        self.logic_wrapper.edit_existing_property_in_storage(selected_property, self.location, 'name', new_name)
             case "2":
-                new_location = input("Enter new property location: ")
-                #updates the property location
-                selected_property.location = new_location
+                is_valid_condition = False
+                while is_valid_condition == False:
+                    new_condition = input("Enter new conditions: ")
+                    is_valid_condition = self.logic_wrapper.sanity_check_properties('condition', new_condition)
+                    if is_valid_condition == True:
+                        self.logic_wrapper.edit_existing_property_in_storage(selected_property, self.location, 'condition', new_condition)
             case "3":
-                new_condition = input("Enter new property condition: ")
-                #updates the property condition
-                selected_property.condition = new_condition
+                is_valid_price_to_fix = False
+                while is_valid_price_to_fix == False:
+                    new_price_to_fix = input("Enter new price to fix: ")
+                    is_valid_price_to_fix = self.logic_wrapper.sanity_check_properties('price_to_fix', new_price_to_fix)
+                    if is_valid_price_to_fix == True:
+                        self.logic_wrapper.edit_existing_property_in_storage(selected_property, self.location, 'price to fix', new_price_to_fix)
             case "4":
-                try:
-                    new_price_to_fix = int(input("Enter new price to fix: "))
-                    #updates the property price to fix
-                    selected_property.price_to_fix = new_price_to_fix
-                except ValueError:
-                    print("Invalid input.")
-            case "5":
-                try:
-                    new_price = int(input("Enter new property price: "))
-                    #updates the property price
-                    selected_property.property_price = new_price
-                except ValueError:
-                    #occurs value error if you put a non numeric value
-                    print("Invalid input.")
+                is_valid_price = False
+                while is_valid_price == False:
+                    new_price = input("Enter new property price: ")
+                    is_valid_price = self.logic_wrapper.sanity_check_properties('price', new_price)
+                    if is_valid_price == True:
+                        self.logic_wrapper.edit_existing_property_in_storage(selected_property, self.location, 'price', new_price)
+            case "b":
+                print("Returning to the property list...")
+                self.start_point_property_UI()
             case _:
-                print("Invalid input.")
+                print("Invalid input. Please try again.")
         print("Property details updated successfully!")
 
-    def display_property_work_requests(self, selected_property):
-        #Displays work requests for a property.
-        #need da code  for the work requests in here 
+    def display_property_work_requests(self, selected_property) -> print : #type hint to print because of kormakur >:)
+        ''' Displays work requests for a property '''
         print("Work Requests for the selected property.")
-        self.logic_wrapper.get_property_work_requests(self.location, selected_property.property_id)
+        property_work_requests = self.logic_wrapper.get_property_work_requests(self.location, selected_property.property_id)
+        for work_request in property_work_requests:
+            print(f'{work_request.work_request_id} - {work_request.description} - {work_request.mark_as_completed}')
+        bause_breaker = input("\nPress Enter to return to the property list.")
+        print('')
+        self.start_point_property_UI()
         
     def display_property_maintenance_reports(self, selected_property):
         #Displays maintenance reports for a property.
         #need da code in here too gang 
         print("Maintenance Reports for the selected property.")
+        property_maintenance_reports = self.logic_wrapper.get_property_maintenance_reports(self.location, selected_property.property_id)
+        for maintenance_report in property_maintenance_reports:
+            print(f'{maintenance_report.report_id} - {maintenance_report.report_name} - {maintenance_report.maintenance_description} - {maintenance_report.report_status}')
+        bbause_breaker = input("\nPress Enter to return to the property list.")
+        print('')
+        self.start_point_property_UI()
 
     def print_single_property(self, property):
         #Prints details of a single property

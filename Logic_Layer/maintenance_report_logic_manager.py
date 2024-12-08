@@ -1,11 +1,8 @@
-
 class maintenance_report_logic_manager:
-    def __init__(self, storage_layer_wrapper, location):
+    def __init__(self, storage_layer_wrapper):
         self.storage_layer_wrapper = storage_layer_wrapper
-        self.location = location
 
     def sanity_check_maintencance_report(self, what_to_check, new_value, location) -> bool:
-        print(f'In sanity check {what_to_check} {new_value}')
         if what_to_check == 'report name':
             if len(new_value) > 3:
                 return True
@@ -27,6 +24,7 @@ class maintenance_report_logic_manager:
         elif what_to_check in 'staff id':
             list_of_all_employees = self.storage_layer_wrapper.get_all_employee()
             for employee in list_of_all_employees:
+                print(f'Checking if {employee.staff_id} == {new_value}')
                 if employee.staff_id == new_value:
                     return True
             return False
@@ -63,7 +61,7 @@ class maintenance_report_logic_manager:
         elif what_to_check in 'contractor id':
             list_of_all_contractors = self.storage_layer_wrapper.get_all_contractor()
             for contractor in list_of_all_contractors:
-                if contractor.contractor_id == new_value:
+                if contractor.contractor_id == new_value or new_value == '':
                     return True
             return False
             
@@ -74,8 +72,6 @@ class maintenance_report_logic_manager:
                     return True
             return False
         
-        
-
     def get_highest_ID(self, location):
         highestID = -1
         list_of_all_reports = self.get_all_maintencance_reports(location)
@@ -108,7 +104,7 @@ class maintenance_report_logic_manager:
         maintenance_report.set_report_id(new_report_id)
         maintenance_report.set_report_status('Pending')
         list_of_all_reports.append(maintenance_report)
-        self.Storage_Layer_Wrapper.write_to_file_maintenance_reports(list_of_all_reports)
+        self.storage_layer_wrapper.write_to_file_maintenance_reports(list_of_all_reports)
 
     def check_if_report_in_system(self, maintenance_report_id, location) -> bool:
         list_of_reports = self.get_all_maintencance_reports_at_location(location)
@@ -123,6 +119,7 @@ class maintenance_report_logic_manager:
             if report.report_id == maintenance_report.report_id:
                 if edit_choice == 'Report Name':
                     report.set_report_name(new_value)
+                #Need to fix
                 elif edit_choice == 'Staff ID':
                     report.set_staff_id(new_value)
                 elif edit_choice == 'Description':
@@ -136,7 +133,7 @@ class maintenance_report_logic_manager:
                         report.set_regular_maintenance(False)
                 elif edit_choice == 'Contractor ID':
                     report.set_contractor_id(new_value)
-        self.Storage_Layer_Wrapper.write_to_file_maintenance_reports(list_of_reports)
+        self.storage_layer_wrapper.write_to_file_maintenance_reports(list_of_reports)
 
     def get_all_maintencance_reports_at_location(self, location) -> list:
         maintenance_report_sorted_list = []
@@ -159,7 +156,7 @@ class maintenance_report_logic_manager:
                 elif accept_or_deny == 'Deny':
                     report.set_mark_as_done(False)
 
-        self.Storage_Layer_Wrapper.write_to_file_maintenance_reports(list_of_reports)
+        self.storage_layer_wrapper.write_to_file_maintenance_reports(list_of_reports)
 
     def fetch_all_pending_maintencance_reports(self, location) -> list:
         pending_reports = []

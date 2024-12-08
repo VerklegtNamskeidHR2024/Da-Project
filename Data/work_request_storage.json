@@ -8,14 +8,14 @@
         "location": "Reykjavik",
         "property_id": "P1",
         "start_date": "01-01-24",
-        "completition_date": "",
+        "completition_date": "05-01-24",
         "repetitive_work": false,
         "reopen_interval": 0,
         "priority": "low",
         "work_request_status": "Open",
         "need_contractor": true,
         "contractor_id": "C1",
-        "mark_as_completed": "",
+        "mark_as_completed": false,
         "accepted_by_employee": true
     },
     {
@@ -26,15 +26,15 @@
         "staff_id": "E1",
         "location": "Reykjavik",
         "property_id": "P1",
-        "start_date": "01-01-24",
-        "completition_date": "",
+        "start_date": "20-01-24",
+        "completition_date": "30-01-24",
         "repetitive_work": false,
         "reopen_interval": 0,
         "priority": "High",
         "work_request_status": "New",
         "need_contractor": true,
         "contractor_id": "C2",
-        "mark_as_completed": "",
+        "mark_as_completed": false,
         "accepted_by_employee": false
     },
     {
@@ -53,7 +53,7 @@
         "work_request_status": "New",
         "need_contractor": true,
         "contractor_id": "",
-        "mark_as_completed": "",
+        "mark_as_completed": false,
         "accepted_by_employee": false
     },
     {
@@ -72,7 +72,7 @@
         "work_request_status": "New",
         "need_contractor": true,
         "contractor_id": "",
-        "mark_as_completed": "",
+        "mark_as_completed": false,
         "accepted_by_employee": false
     },
     {
@@ -85,13 +85,13 @@
         "property_id": "P1",
         "start_date": "01-01-24",
         "completition_date": "",
-        "repetitive_work": false,
+        "repetitive_work": true,
         "reopen_interval": 0,
         "priority": "High",
         "work_request_status": "Closed",
         "need_contractor": false,
         "contractor_id": false,
-        "mark_as_completed": "",
+        "mark_as_completed": true,
         "accepted_by_employee": true
     },
     {
@@ -110,7 +110,7 @@
         "work_request_status": "Pending",
         "need_contractor": true,
         "contractor_id": "C6",
-        "mark_as_completed": "",
+        "mark_as_completed": true,
         "accepted_by_employee": true
     },
     {
@@ -129,7 +129,7 @@
         "work_request_status": "New",
         "need_contractor": false,
         "contractor_id": "",
-        "mark_as_completed": "",
+        "mark_as_completed": false,
         "accepted_by_employee": false
     },
     {
@@ -148,7 +148,7 @@
         "work_request_status": "Open",
         "need_contractor": false,
         "contractor_id": "",
-        "mark_as_completed": "",
+        "mark_as_completed": false,
         "accepted_by_employee": true
     },
     {
@@ -164,10 +164,10 @@
         "repetitive_work": false,
         "reopen_interval": 0,
         "priority": "High",
-        "work_request_status": "New",
+        "work_request_status": "Pending",
         "need_contractor": false,
         "contractor_id": "",
-        "mark_as_completed": "",
+        "mark_as_completed": true,
         "accepted_by_employee": false
     },
     {
@@ -186,7 +186,26 @@
         "work_request_status": "Closed",
         "need_contractor": true,
         "contractor_id": "C10",
-        "mark_as_completed": "",
+        "mark_as_completed": true,
         "accepted_by_employee": true
+    },
+    {
+        "work_request_id": "WR11",
+        "name": "Hang up decorations",
+        "description": "It's Christmas season guys, let's get festive and put up those ornament balls",
+        "maintenance_report_id": "",
+        "staff_id": "",
+        "location": "Reykjavik",
+        "property_id": "P4",
+        "start_date": "15-12-24",
+        "completition_date": "23-12-24",
+        "repetitive_work": false,
+        "reopen_interval": "0",
+        "priority": "High",
+        "work_request_status": "",
+        "need_contractor": "No",
+        "contractor_id": "",
+        "mark_as_completed": false,
+        "accepted_by_employee": false
     }
 ]

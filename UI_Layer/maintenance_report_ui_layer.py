@@ -272,7 +272,10 @@ class maintenance_report_UI_menu:
                 is_valid = False
                 while is_valid == False:
                     new_staff_id = input('Enter new staff ID: ')
-                    is_valid = self.logic_wrapper.sanity_check_maintencance_report('staff ID', new_staff_id, self.location)
+                    print('before valid check')
+                    is_valid = self.logic_wrapper.sanity_check_maintencance_report('staff id', new_staff_id, self.location)
+                    print('after vaild check')
+                    print(is_valid)
                     if is_valid == True:
                         self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Staff ID', new_staff_id)
                 

@@ -1,8 +1,10 @@
 class employee_logic_manager:
     
-    def __init__(self, Storage_Layer_Wrapper, location):
+    def __init__(self, Storage_Layer_Wrapper):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
-        self.location = location
+        
+        from Logic_Layer.work_request_logic_manager import work_request_logic_manager
+        from Logic_Layer.maintenance_report_logic_manager import maintenance_report_logic_manager
 
 
     def get_all_employees(self) -> list:
@@ -62,7 +64,7 @@ class employee_logic_manager:
         work_request_list = self.Storage_Layer_Wrapper.get_all_work_requests()
         work_request_by_employee = []
         for wr in work_request_list:
-            if wr.staff_id == social_security_number:
+            if wr.social_security_number == social_security_number:
                 work_request_by_employee.append(wr)
         return work_request_by_employee
         
@@ -85,14 +87,14 @@ class employee_logic_manager:
         return True
     
     def sanity_check_ssn(self, ssn) -> bool:
-     
+        ssn = str(ssn)
         if len(ssn) == 10:
             return True
         else:
             return False
         
     def sanity_check_phone_number(self, phone_number) -> bool:
-        
+        phone_number = str(phone_number)
         if len(phone_number) == 7:
             return True
         else:
@@ -104,7 +106,7 @@ class employee_logic_manager:
         else:
             return False
         
-    def sanity_check_location(self, location) -> bool:
+    def sanity_check_for_employee_location(self, location) -> bool:
         location_list = self.Storage_Layer_Wrapper.get_all_locations()
         if location in location_list:
             return True
