@@ -108,8 +108,8 @@ class Logic_Layer_Wrapper:
     def sanity_check_email(self, email) -> bool:
         return self.employee_logic_manager.sanity_check_email(email)
     
-    def sanity_check_location(self, location) -> bool:
-        return self.employee_logic_manager.sanity_check_location(location)
+    def sanity_check_for_employee_location(self, location) -> bool:
+        return self.employee_logic_manager.sanity_check_for_employee_location(location)
 
     ########################################################################################################
     ### MAINTENANCE_REPORTS ################################################################################
@@ -191,7 +191,7 @@ class Logic_Layer_Wrapper:
         return self.location_logic_manager.fetch_location_from_storage()
 
     def sanity_check_location(self ,Location):
-        return self.location_logic_manager.sanity_check_location()
+        return self.location_logic_manager.sanity_check_location(Location)
 
     def add_new_location_to_storage(self ,Location):
         return self.location_logic_manager.add_new_location_to_storage()
