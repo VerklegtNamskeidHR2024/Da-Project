@@ -154,7 +154,7 @@ class Main_Menu:
             print("{:>18}{:>5}".format("> Quit System:", "q, Q"))
             print("-" * 70)
 
-            user_action = input("Select an Option:  ")
+            while (user_action = input("Select an Option:  ").lower()) != "b":
             self.user_choice_select(user_action.lower())
 
             # used to get a loop may want to change

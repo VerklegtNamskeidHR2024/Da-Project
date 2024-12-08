@@ -16,16 +16,19 @@ class contractor_UI_menu():
         # call other functions in class from here
         self.display_contractor_menu()
         return
+    
+
     def display_all_contractors(self):
         """Function to display all contractors at the selected locations"""
         contractor_list = self.logic_wrapper.get_all_contractors_at_location(self.location)
-        print('-' * 75)
+        print('-' * 70)
         print(f'{"ID":<6}|{"Company Name":>25}|{"Contact Name":>20}|{"Location":>20}')
         print("-" * 75)
 
         for item in contractor_list:
             print(f"{item.contractor_id:<6}|{item.company_name:>25}|{item.contact_name:>20}|{item.location:>20}")
-        print('-' * 75)
+        print('-' * 70)
+
 
     # display contractor menu
     def display_contractor_menu(self):
