@@ -1,10 +1,13 @@
 from Model_Classes.house_model import House
- 
+from prettytable import PrettyTable 
+from colorama import Fore, Style, init
+init()
 class property_UI_menu:
     def __init__(self, logic_wrapper, rank, location):
         self.logic_wrapper = logic_wrapper
         self.rank = rank
         self.location = location
+        self.dash_length = 79
 
     def start_point_property_UI(self):
         
@@ -15,21 +18,22 @@ class property_UI_menu:
 
         # NEEDS to be changed to match with other UI files!!!!
         #Displays the list of all properties and provides options
-        print(f"{self.rank} - Properties Page")
+        print(f"\033[94m{self.rank}\033[0m - Properties Page")
         property_list = self.logic_wrapper.get_all_properties_at_location(self.location)
-        print("-" * 85)
-        print("{:>15}{:>10}{:>15}{:>10}{:>15}{:>15}".format("Id", "Name", "Location", "Condtion", "Price to fix", "Price"))
-        print("-" * 85)
+        property_table = PrettyTable(['Property ID', 'Name', 'Location', 'Condition', 'Price to Fix', 'Price'])
+        for property in property_list:
+            property_table.add_row([property.property_id, property.name, property.location, property.condition, property.total_price_to_fix, property.property_price])
+        border_color = Fore.MAGENTA
+        reset_color = Style.RESET_ALL
+        property_table.border = True
+        property_table.junction_char = f"{border_color}+{reset_color}"
+        property_table.horizontal_char = f"{border_color}-{reset_color}"
+        property_table.vertical_char = f"{border_color}|{reset_color}"
 
-        for item in property_list:
-            print("{:>15}{:>10}{:>15}{:>10}{:>15}{:>15}".format(item.property_id, item.name, item.location, item.condition, item.total_price_to_fix, item.property_price))
-            
-            # print(f"{item.name :> 15}|{item.phone_number :> 10}|{item.email :> 10}|{self.location :> 15}")
-        print("-" * 85)
-
+        print(property_table)
         print("1. Select Property")
         print("2. Add Property")
-        print("-" * 70)
+        print("-" * self.dash_length)
 
         user_action = input("Select an Option:  ")
         #depending on your choice you will  be sent to the following places 
@@ -75,19 +79,9 @@ class property_UI_menu:
                 case _:
                     #if you put an invaild input
                     print("Invalid input. Please try again.")
-        #except Exception:
-         #   print("An error occurred")
 
     def display_add_property(self):
-        '''Displays the add property form'''
-        '''
-        "property_id": "P3",
-        "name": "suite",
-        "location": "Reykjavik",
-        "condition": "excellent",
-        "total_price_to_fix": 1500.0,
-        "property_price": 30
-        '''
+        '''Displays the form to add a new property.'''
         is_valid_name = False
         is_valid_location = False
         is_valid_condition = False
@@ -184,32 +178,48 @@ class property_UI_menu:
 
     def display_property_work_requests(self, selected_property) -> print : #type hint to print because of kormakur >:)
         ''' Displays work requests for a property '''
+        property_work_requests_table = PrettyTable(['Work Request ID', 'Description', 'Mark as Completed'])
         print("Work Requests for the selected property.")
         property_work_requests = self.logic_wrapper.get_property_work_requests(self.location, selected_property.property_id)
         for work_request in property_work_requests:
-            print(f'{work_request.work_request_id} - {work_request.description} - {work_request.mark_as_completed}')
+            property_work_requests_table.add_row([work_request.work_request_id, work_request.description, work_request.mark_as_completed])
+        border_color = Fore.MAGENTA
+        reset_color = Style.RESET_ALL
+        property_work_requests_table.border = True
+        property_work_requests_table.junction_char = f"{border_color}+{reset_color}"
+        property_work_requests_table.horizontal_char = f"{border_color}-{reset_color}"
+        property_work_requests_table.vertical_char = f"{border_color}|{reset_color}"
+        print(property_work_requests_table)
         bause_breaker = input("\nPress Enter to return to the property list.")
         print('')
         self.start_point_property_UI()
         
     def display_property_maintenance_reports(self, selected_property):
-        #Displays maintenance reports for a property.
-        #need da code in here too gang 
+        ''' Displays maintenance reports for a property '''
+        property_maintenance_reports_table = PrettyTable(['Report ID', 'Report Name', 'Description', 'Status'])
         print("Maintenance Reports for the selected property.")
         property_maintenance_reports = self.logic_wrapper.get_property_maintenance_reports(self.location, selected_property.property_id)
         for maintenance_report in property_maintenance_reports:
-            print(f'{maintenance_report.report_id} - {maintenance_report.report_name} - {maintenance_report.maintenance_description} - {maintenance_report.report_status}')
+            property_maintenance_reports_table.add_row([maintenance_report.report_id, maintenance_report.report_name, maintenance_report.maintenance_description, maintenance_report.report_status])
+        border_color = Fore.MAGENTA
+        reset_color = Style.RESET_ALL
+        property_maintenance_reports_table.border = True
+        property_maintenance_reports_table.junction_char = f"{border_color}+{reset_color}"
+        property_maintenance_reports_table.horizontal_char = f"{border_color}-{reset_color}"
+        property_maintenance_reports_table.vertical_char = f"{border_color}|{reset_color}"
+        print(property_maintenance_reports_table)
         bbause_breaker = input("\nPress Enter to return to the property list.")
         print('')
         self.start_point_property_UI()
 
     def print_single_property(self, property):
         #Prints details of a single property
-        print("-" * 30)
-        print(f"{'Property ID':<20}: {property.property_id}")
-        print(f"{'Name':<20}: {property.name}")
-        print(f"{'Location':<20}: {property.location}")
-        print(f"{'Condition':<20}: {property.condition}")
-        print(f"{'Price to Fix':<20}: {property.total_price_to_fix}")
-        print(f"{'Price':<20}: {property.property_price}")
-        print("-" * 30)
+        single_property_table = PrettyTable(['Property ID', 'Name', 'Location', 'Condition', 'Price to Fix', 'Price'])
+        single_property_table.add_row([property.property_id, property.name, property.location, property.condition, property.total_price_to_fix, property.property_price])
+        border_color = Fore.MAGENTA
+        reset_color = Style.RESET_ALL
+        single_property_table.border = True
+        single_property_table.junction_char = f"{border_color}+{reset_color}"
+        single_property_table.horizontal_char = f"{border_color}-{reset_color}"
+        single_property_table.vertical_char = f"{border_color}|{reset_color}"
+        print(single_property_table)
