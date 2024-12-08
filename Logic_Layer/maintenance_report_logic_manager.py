@@ -120,6 +120,7 @@ class maintenance_report_logic_manager:
             if report.report_id == maintenance_report.report_id:
                 if edit_choice == 'Report Name':
                     report.set_report_name(new_value)
+                #Need to fix
                 elif edit_choice == 'Staff ID':
                     report.set_staff_id(new_value)
                 elif edit_choice == 'Description':
