@@ -56,8 +56,8 @@ class Storage_Layer_Wrapper:
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################
     
-    def get_all_employee(self):
-        all_employees = self.employee_storage_manager.get_all_employee()
+    def get_all_employees(self):
+        all_employees = self.employee_storage_manager.get_all_employees()
         return all_employees
     
     def write_to_file_employee(self, list_of_employees):

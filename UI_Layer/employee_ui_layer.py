@@ -14,6 +14,7 @@ class employee_UI_menu:
             action = self.action_choice()
             if action == 1:
                 employee_ssn = self.search_employee()
+
                 if self.logic_wrapper.sanity_check_ssn(employee_ssn):
                     employee = self.logic_wrapper.fetch_employee_from_storage(employee_ssn)
                     self.display_employee(employee)
@@ -27,7 +28,7 @@ class employee_UI_menu:
                         elif edit_choice == 3:
                             self.edit_employee_email(employee)
                     elif choice == 2:
-                        self.display_employee_work_requests(employee_ssn)
+                        self.display_employee_work_requests(employee.staff_id)
                     elif choice == 3:
                         self.display_employee_maintenance_report(employee_ssn)
             elif action == 2:
@@ -63,6 +64,7 @@ class employee_UI_menu:
 
         print()
         employee_ssn = int(input("Enter Employee Social Security Number: "))
+
         return employee_ssn
 
 
@@ -159,7 +161,7 @@ class employee_UI_menu:
                 if is_valid_email:
                     break
                 else:
-                    print("Employee Name Can Only Contain Letters And Spaces")
+                    print("Employee Email should contain @")
 
         new_employee = Employee(employee_name, employee_social_security_number, employee_phone_number, employee_location, "Employee", employee_email, "")
         new_employee_added = self.logic_wrapper.add_new_employee_to_storage(new_employee)
@@ -174,37 +176,46 @@ class employee_UI_menu:
         edit_choice = int(input("Enter Your Edit Choice: "))
         return edit_choice
 
-    def edit_employee_phone_number(self, employee):
+    def edit_employee_phone_number(self, employee: object):
         """This function sets a new phone number for the employee"""
-        try:
-            new_phone_number = int(input("Enter New Phone Number: "))
-            employee.set_phone_number(new_phone_number)
-            #sanity check?
-        except:
-            print("Somthing Went Wrong")
+        
+        while (new_phone_number := int(input("Enter New Phone Number: "))) != "b":
+            is_valid_pn = self.logic_wrapper.sanity_check_phone_number(new_phone_number)
+            if is_valid_pn:
+                employee.set_phone_number(new_phone_number)
+                self.logic_wrapper.edit_employee_info(employee)
+                break
+            else:
+                print("Employee Phone Number Should Be 7 Numbers")
     
-    def edit_employee_location(self, employee):
+    def edit_employee_location(self, employee: object):
         """This function sets a new location for the employee"""
-        employee = self.logic_wrapper.fe
-        try:
-            new_location = input("Enter New Location")
-            employee.set_location(new_location)
-            #sanity check?
-        except:
-            print("Somthing Went Wrong")
+        
+        while (new_location := input("Enter New Location")) != "b":
+            is_valid_location = self.logic_wrapper.sanity_check_location(new_location)
+            if is_valid_location:
+                employee.set_location(new_location)
+                self.logic_wrapper.edit_employee_info(employee)
+                break
+            else:
+                print("Not a valid location.") 
+                print("Valid locations: Reykjavik, Nuuk, Kulusuk, Thorshofn, Tingwall, Longyearbyen""")
 
-    def edit_employee_email(self, employee):
+    def edit_employee_email(self, employee: object):
         """This function sets a new email for the employee"""
-        try:
-            new_email = int(input("Enter New Email: "))
-            employee.set_email(new_email)
-            #sanity check?
-        except:
-            print("Somthing Went Wrong")
+        
+        while (new_email := int(input("Enter New Email: "))) != "b":
+            is_valid_email = self.logic_wrapper.sanity_check_email(new_email)
+            if is_valid_email:
+                employee.set_phone_number(new_email)
+                self.logic_wrapper.edit_employee_info(employee)
+                break
+            else:
+                print("Employee Email should contain @")
 
-    def display_employee_work_requests(self, ssn):
+    def display_employee_work_requests(self, staff_id):
         """The function displays all work requests by an employee"""
-        wr_by_employee_list = self.logic_wrapper.fetch_all_work_request_for_employee(ssn)
+        wr_by_employee_list = self.logic_wrapper.fetch_all_work_request_for_employee(staff_id)
         print()
         print("--- All Work Requests By This Employee ---")
         print("{:>15}{:>10}{:>15}".format("Name", "Work Request ID", "Status"))

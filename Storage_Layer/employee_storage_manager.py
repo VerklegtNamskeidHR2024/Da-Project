@@ -5,7 +5,7 @@ class employee_storage():
     def __init__(self):
         pass
 
-    def get_all_employee(self) -> list[Employee]:
+    def get_all_employees(self) -> list[Employee]:
         with open('Data/employee_storage.json', 'r') as employee_file:
             employee_data = json.load(employee_file)
         employee_list = [Employee(**data) for data in employee_data]
