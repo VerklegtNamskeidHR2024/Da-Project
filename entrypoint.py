@@ -24,8 +24,6 @@ def create_location_table():
     print(locations_table)
 
 def main():
-    # selected_user = select_user_for_system()
-    # selected_location = select_location_for_system()
     main = Main_Menu("", "")
     main.start_point()
 
