@@ -207,5 +207,24 @@
         "contractor_id": "",
         "mark_as_completed": false,
         "accepted_by_employee": false
+    },
+    {
+        "work_request_id": "WR12",
+        "name": "Kormakur er bestur",
+        "description": "Ekki gleyma að eg er bestur og klarastur",
+        "maintenance_report_id": "",
+        "staff_id": "",
+        "location": "Reykjavik",
+        "property_id": "P1",
+        "start_date": "08-12-24",
+        "completition_date": "",
+        "repetitive_work": true,
+        "reopen_interval": "0",
+        "priority": "High",
+        "work_request_status": "",
+        "need_contractor": "No",
+        "contractor_id": "",
+        "mark_as_completed": false,
+        "accepted_by_employee": false
     }
 ]

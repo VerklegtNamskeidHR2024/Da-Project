@@ -70,7 +70,7 @@ class work_request_logic_manager:
         return Work_request
             
 
-    def add_work_request(self, Work_request: object) -> bool:
+    def add_work_request(self, Work_request: object):
         Work_request_with_id = self.set_id_for_work_request(Work_request)
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         all_work_requests.append(Work_request_with_id)
@@ -78,7 +78,7 @@ class work_request_logic_manager:
         return 
 
 
-    def edit_work_request(self, Work_request: object) -> bool:
+    def edit_work_request(self, Work_request: object):
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         for position, request in enumerate(all_work_requests):
             if request.work_request_id == Work_request.work_request_id:
