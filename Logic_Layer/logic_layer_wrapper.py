@@ -75,6 +75,12 @@ class Logic_Layer_Wrapper:
     
     def sanity_check_properties(self, what_to_check, new_value) -> bool:
         return self.property_logic_manager.sanity_check_properties(what_to_check, new_value)
+    
+    def add_new_property_to_storage(self, rank, location, new_property):
+        return self.property_logic_manager.add_new_property_to_storage(rank, location, new_property)
+    
+    def edit_existing_property_in_storage(self, property, location, edit_choice, new_value):
+        return self.property_logic_manager.edit_existing_property_in_storage(property, location, edit_choice, new_value)
 
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################

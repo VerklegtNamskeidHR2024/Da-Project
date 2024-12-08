@@ -78,7 +78,6 @@ class property_UI_menu:
         #except Exception:
          #   print("An error occurred")
 
-    # Completed
     def display_add_property(self):
         '''Displays the add property form'''
         '''
@@ -149,34 +148,38 @@ class property_UI_menu:
         edit_choice = input("Select an option to edit: ")
         match edit_choice:
             case "1":
-                new_name = input("Enter new property name: ")
-                #updates the property name
-                selected_property.name = new_name
+                is_valid_name = False
+                while is_valid_name == False:
+                    new_name = input("Enter new property name: ")
+                    is_valid_name = self.logic_wrapper.sanity_check_properties('name', new_name)
+                    if is_valid_name == True:
+                        self.logic_wrapper.edit_existing_property_in_storage(selected_property, self.location, 'name', new_name)
             case "2":
-                new_location = input("Enter new property location: ")
-                #updates the property location
-                selected_property.location = new_location
+                is_valid_condition = False
+                while is_valid_condition == False:
+                    new_condition = input("Enter new conditions: ")
+                    is_valid_condition = self.logic_wrapper.sanity_check_properties('condition', new_condition)
+                    if is_valid_condition == True:
+                        self.logic_wrapper.edit_existing_property_in_storage(selected_property, self.location, 'condition', new_condition)
             case "3":
-                new_condition = input("Enter new property condition: ")
-                #updates the property condition
-                selected_property.condition = new_condition
+                is_valid_price_to_fix = False
+                while is_valid_price_to_fix == False:
+                    new_price_to_fix = input("Enter new price to fix: ")
+                    is_valid_price_to_fix = self.logic_wrapper.sanity_check_properties('price_to_fix', new_price_to_fix)
+                    if is_valid_price_to_fix == True:
+                        self.logic_wrapper.edit_existing_property_in_storage(selected_property, self.location, 'price to fix', new_price_to_fix)
             case "4":
-                try:
-                    new_price_to_fix = int(input("Enter new price to fix: "))
-                    #updates the property price to fix
-                    selected_property.price_to_fix = new_price_to_fix
-                except ValueError:
-                    print("Invalid input.")
-            case "5":
-                try:
-                    new_price = int(input("Enter new property price: "))
-                    #updates the property price
-                    selected_property.property_price = new_price
-                except ValueError:
-                    #occurs value error if you put a non numeric value
-                    print("Invalid input.")
+                is_valid_price = False
+                while is_valid_price == False:
+                    new_price = input("Enter new property price: ")
+                    is_valid_price = self.logic_wrapper.sanity_check_properties('price', new_price)
+                    if is_valid_price == True:
+                        self.logic_wrapper.edit_existing_property_in_storage(selected_property, self.location, 'price', new_price)
+            case "b":
+                print("Returning to the property list...")
+                self.start_point_property_UI()
             case _:
-                print("Invalid input.")
+                print("Invalid input. Please try again.")
         print("Property details updated successfully!")
 
     def display_property_work_requests(self, selected_property) -> print : #type hint to print because of kormakur >:)

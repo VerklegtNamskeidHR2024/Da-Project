@@ -18,7 +18,7 @@ class property_logic_manager:
                     return True
             return False
         elif what_to_check == 'condition':
-            if len(new_value) > 3:
+            if len(new_value) > 0:
                 return True
             else:
                 return False
@@ -74,15 +74,26 @@ class property_logic_manager:
                 return property
 
     def add_new_property_to_storage(self, rank, location, property):
+        print('Adding new property to storage')
         list_of_all_properties = self.get_all_properties()
         new_property_id = self.get_highest_ID(location)
         property.property_id = new_property_id
         list_of_all_properties.append(property)
         self.Storage_Layer_Wrapper.write_to_file_property(list_of_all_properties)
         
-
-    def edit_existing_property_in_storage(property):
-        pass
+    def edit_existing_property_in_storage(self, property, location, edit_choice, new_value):
+        list_of_properties = self.get_all_properties()
+        for prop in list_of_properties:
+            if prop.property_id == property.property_id:
+                if edit_choice == 'name':
+                    prop.set_name(new_value)
+                elif edit_choice == 'condition':
+                    prop.set_condition(new_value)
+                elif edit_choice == 'price to fix':
+                    prop.set_total_price_to_fix(new_value)
+                elif edit_choice == 'price':
+                    prop.set_property_price(new_value)
+        self.Storage_Layer_Wrapper.write_to_file_property(list_of_properties)
 
     def fetch_property_from_storage(self, property_ID):
         '''property ID = input, if the property ID is in the property list it returns that property'''
