@@ -3,7 +3,6 @@ class maintenance_report_logic_manager:
         self.storage_layer_wrapper = storage_layer_wrapper
 
     def sanity_check_maintencance_report(self, what_to_check, new_value, location) -> bool:
-        print(f'In sanity check {what_to_check} {new_value}')
         if what_to_check == 'report name':
             if len(new_value) > 3:
                 return True
