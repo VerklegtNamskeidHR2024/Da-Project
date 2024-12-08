@@ -1,5 +1,8 @@
 #from UI_Layer.start_menu_ui_layer import main
 from UI_Layer.start_menu_ui_layer import Main_Menu
+from prettytable import PrettyTable 
+from colorama import Fore, Style, init
+init()
 
 def show_ascii_art_hq():
         # print("                                            ===================    "
@@ -36,7 +39,6 @@ def select_user_for_system():
         print("{:>15}".format("> Log Out: log"))
         print("{:>18}".format("> Quit System: q, Q"))
         print("-" * 70)
-
         user_action = input("Select a Profile: ")
         match user_action:
             case "1":
@@ -57,12 +59,9 @@ def select_location_for_system():
     return_location = ""
     while return_location == "":
         print()
-        print("{:0}{:>3}{:>8}{:>7}{:>11}".format("1. Reykjavik", "|", "2. Nuuk", "|", "3. Kulusuk"))
+        create_location_table()
         print()
-        print("{:0}{:>4}{:>12}{:>3}{:>16}".format("4. Torshavn", "|", "5. Tingwall", "|", "6. Longyearbyen"))
-        print()
-
-        user_action = input("Select a Location: ")
+        user_action = input("Enter Location ID: ")
         match user_action:
             case "1":
                 return_location = "Reykjavik"
@@ -84,6 +83,25 @@ def select_location_for_system():
             case _:
                 print("No Location Found, Please Try Again.")
     return return_location
+
+def create_location_table():
+    locations_table = PrettyTable()
+    locations_table.field_names = ['ID',"Country", "Location Name"]
+    locations_table.add_row(['1',"Iceland", "Reykjavik"])
+    locations_table.add_row(['2',"Greenland", "Nuuk"])
+    locations_table.add_row(['3',"Greenland", "Kulusuk"])
+    locations_table.add_row(['4',"Faroe Islands", "Torshavn"])
+    locations_table.add_row(['5',"Shetland Islands", "Tingwall"])
+    locations_table.add_row(['6',"Svalbard", "Longyearbyen"])
+        
+    border_color = Fore.BLUE
+    reset_color = Style.RESET_ALL
+    locations_table.border = True
+    locations_table.junction_char = f"{border_color}+{reset_color}"
+    locations_table.horizontal_char = f"{border_color}-{reset_color}"
+    locations_table.vertical_char = f"{border_color}|{reset_color}"
+
+    print(locations_table)
 
 def main():
     selected_user = select_user_for_system()

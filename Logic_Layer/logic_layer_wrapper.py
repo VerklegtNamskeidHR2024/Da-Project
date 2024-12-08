@@ -67,11 +67,20 @@ class Logic_Layer_Wrapper:
     def get_property_by_id(self, location, property_id):
         return self.property_logic_manager.get_property_by_id(location, property_id)
     
-    def get_property_work_requests(self, location, property_id):
+    def get_property_work_requests(self, location, property_id) -> list:
         return self.property_logic_manager.get_property_work_requests(location, property_id)
     
-    def get_property_maintenance_reports(self, location, property_id):
+    def get_property_maintenance_reports(self, location, property_id) -> list:
         return self.property_logic_manager.get_property_maintenance_reports(location, property_id)
+    
+    def sanity_check_properties(self, what_to_check, new_value) -> bool:
+        return self.property_logic_manager.sanity_check_properties(what_to_check, new_value)
+    
+    def add_new_property_to_storage(self, rank, location, new_property):
+        return self.property_logic_manager.add_new_property_to_storage(rank, location, new_property)
+    
+    def edit_existing_property_in_storage(self, property, location, edit_choice, new_value):
+        return self.property_logic_manager.edit_existing_property_in_storage(property, location, edit_choice, new_value)
 
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################
@@ -84,14 +93,14 @@ class Logic_Layer_Wrapper:
     def add_new_employee_to_storage(self, location, new_employee):
         return self.employee_logic_manager.add_new_employee_to_storage(location, new_employee)
 
-    def edit_existing_employee_in_storage(self):
-        return self.employee_logic_manager.edit_existing_employee_in_storage()
+    def edit_employee_info(self, employee):
+        return self.employee_logic_manager.edit_employee_info(employee)
     
     def fetch_employee_from_storage(self, social_security_number):
         return self.employee_logic_manager.fetch_employee_from_storage(social_security_number)
 
-    def fetch_all_work_request_for_employee(self, social_security_number) -> list:
-        return self.employee_logic_manager.fetch_all_work_request_for_employee(social_security_number)
+    def fetch_all_work_request_for_employee(self, staff_id) -> list:
+        return self.employee_logic_manager.fetch_all_work_request_for_employee(staff_id)
 
     def fetch_all_maintenance_reports_for_employee(self, social_security_number) -> list:
         return self.employee_logic_manager.fetch_all_maintenance_reports_for_employee(social_security_number)
@@ -108,8 +117,8 @@ class Logic_Layer_Wrapper:
     def sanity_check_email(self, email) -> bool:
         return self.employee_logic_manager.sanity_check_email(email)
     
-    def sanity_check_location(self, location) -> bool:
-        return self.employee_logic_manager.sanity_check_location(location)
+    def sanity_check_for_employee_location(self, location) -> bool:
+        return self.employee_logic_manager.sanity_check_for_employee_location(location)
 
     ########################################################################################################
     ### MAINTENANCE_REPORTS ################################################################################
@@ -191,7 +200,7 @@ class Logic_Layer_Wrapper:
         return self.location_logic_manager.fetch_location_from_storage()
 
     def sanity_check_location(self ,Location):
-        return self.location_logic_manager.sanity_check_location()
+        return self.location_logic_manager.sanity_check_location(Location)
 
     def add_new_location_to_storage(self ,Location):
         return self.location_logic_manager.add_new_location_to_storage()

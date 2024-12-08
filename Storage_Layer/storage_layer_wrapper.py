@@ -47,8 +47,7 @@ class Storage_Layer_Wrapper:
     ### PROPERTIES #########################################################################################
     
     def get_all_properties_at_location(self):
-        all_properties = self.property_storage_manager.get_all_properties()
-        return all_properties
+        return self.property_storage_manager.get_all_properties()
     
     def write_to_file_property(self, list_of_all_properties):
         write_to_file_property = self.property_storage_manager.write_to_file_property(list_of_all_properties)
@@ -56,8 +55,8 @@ class Storage_Layer_Wrapper:
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################
     
-    def get_all_employee(self):
-        all_employees = self.employee_storage_manager.get_all_employee()
+    def get_all_employees(self):
+        all_employees = self.employee_storage_manager.get_all_employees()
         return all_employees
     
     def write_to_file_employee(self, list_of_employees):
