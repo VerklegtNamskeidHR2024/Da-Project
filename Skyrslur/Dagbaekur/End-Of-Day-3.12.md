@@ -17,6 +17,6 @@ Kormákur:\
 I worked on the UI for the start menu and work requests. I arrived at 10:00 and left at 18:30 
 
 
-Jón:\ I worked on seeting up the functions for the UI layer and later in the day I started programming the UI for the location options. I arrived at 8:00 and left at 17:45.\
+Jón:\ I worked on seetinx up the functions for the UI layer and later in the day I started programming the UI for the location options. I arrived at 8:00 and left at 17:45.\
 
 ## Progress of the day
