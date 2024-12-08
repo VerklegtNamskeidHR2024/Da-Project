@@ -238,5 +238,13 @@
         "condition": "fair",
         "total_price_to_fix": 1200.0,
         "property_price": 30000000
+    },
+    {
+        "property_id": "P31",
+        "name": "Hreimur Test",
+        "location": "Reykjavik",
+        "condition": "Good",
+        "total_price_to_fix": "0",
+        "property_price": "1234"
     }
 ]
