@@ -85,7 +85,6 @@ def select_location_for_system():
     return return_location
 
 def main():
-    print()
     selected_user = select_user_for_system()
     selected_location = select_location_for_system()
     main = Main_Menu(selected_user, selected_location)
