@@ -3,14 +3,14 @@ class employee_logic_manager:
     def __init__(self, Storage_Layer_Wrapper):
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
         
-        from Logic_Layer.work_request_logic_manager import work_request_logic_manager
-        from Logic_Layer.maintenance_report_logic_manager import maintenance_report_logic_manager
+        #from Logic_Layer.work_request_logic_manager import work_request_logic_manager
+        #from Logic_Layer.maintenance_report_logic_manager import maintenance_report_logic_manager
 
 
     def get_all_employees(self) -> list:
         employees_list = []
 
-        all_employees = self.Storage_Layer_Wrapper.get_all_employee()
+        all_employees = self.Storage_Layer_Wrapper.get_all_employees()
 
         for employee in all_employees:
             employees_list.append(employee)
@@ -20,7 +20,7 @@ class employee_logic_manager:
     def get_all_employees_at_location(self, location) -> list:
         employees_sorted_list = []
 
-        all_employees = self.Storage_Layer_Wrapper.get_all_employee()
+        all_employees = self.Storage_Layer_Wrapper.get_all_employees()
 
         for employee in all_employees:
             if employee.location == location:
@@ -50,8 +50,15 @@ class employee_logic_manager:
         list_of_all_employees.append(employee)
         self.Storage_Layer_Wrapper.write_to_file_employee(list_of_all_employees)
 
-    def edit_existing_employee_in_storage(self, employee):
-        pass
+    def edit_employee_info(self, employee: object):
+        all_employees = self.Storage_Layer_Wrapper.get_all_employees()
+        for position, staff in enumerate(all_employees):
+            if staff.staff_id == employee.staff_id:
+                all_employees[position] = employee
+        self.Storage_Layer_Wrapper.write_to_file_work_requests(all_employees)
+        
+
+
     def fetch_employee_from_storage(self, social_security_number) -> object:
         employee_list = self.get_all_employees()
         for employee in employee_list:
@@ -60,11 +67,11 @@ class employee_logic_manager:
         return "Employee is not in the system"           
 
     #def fetch_all_work_request_for_employee(self, work_request_ID) -> list:
-    def fetch_all_work_request_for_employee(self, social_security_number) -> list:
+    def fetch_all_work_request_for_employee(self, staff_id) -> list:
         work_request_list = self.Storage_Layer_Wrapper.get_all_work_requests()
         work_request_by_employee = []
         for wr in work_request_list:
-            if wr.social_security_number == social_security_number:
+            if wr.staff_id == staff_id:
                 work_request_by_employee.append(wr)
         return work_request_by_employee
         
