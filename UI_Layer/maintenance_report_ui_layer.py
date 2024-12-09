@@ -14,10 +14,14 @@ class maintenance_report_UI_menu:
         self.display_maintenance_report()
         return
 
+    def quit_system():
+        print("Quitting system")
+        return
+
     def display_maintenance_report(self):
         # if the choice is admin or mangers it goes to the admin_or_manager_menu
         if self.rank == "Admin" or self.rank == "Manager":
-            self.admin_or_manager_menu()
+            self.select_menu_option_admin_manager()
 
         #if the choice is employee it goes to employee menu 
         elif self.rank == "Employee":
@@ -25,8 +29,7 @@ class maintenance_report_UI_menu:
         else:
             print("Invalid rank. Access denied.")
 
-    def admin_or_manager_menu(self):
-        #Menu for admin or manager roles
+    def select_menu_option_admin_manager(self):
         print(f"{self.rank} - Maintenance Report Menu")
         print("------------------------------------------------")
         # choice between 2 choices 
@@ -34,26 +37,30 @@ class maintenance_report_UI_menu:
         print("2. Closed reports")
         print('3. Create new reports')
         print('4. Edit report')
+        print('b. Go back')
         print("------------------------------------------------")
-        user_choice = input("Choose: ")
-
-        if user_choice == "1":
-            self.list_pending_reports()
-        elif user_choice == "2":
-            self.list_closed_reports()
-        elif user_choice == '3':
-            self.display_create_maintenance_report_form()
-        elif user_choice == '4':
-            self.edit_report_details(self.location)
-        else:
-            print("Invalid choice.")
+        user_choice = ""
+        while user_choice != "b": 
+            user_choice = input("Select an Option: ").lower()
+            match (user_choice , self.rank):
+                case ("1", self.rank): 
+                    self.list_pending_reports()
+                case ("2", self.rank):
+                    self.list_closed_reports()
+                case ("3", self.rank):
+                    self.display_create_maintenance_report_form()
+                case ("4", self.rank):
+                    self.edit_report_details(self.location)
+                case ("q", self.rank) | ("Q", self.rank):
+                    self.quit_system()
+                case _:
+                    print("Invalid Input, Please Try Again.")
+        return 
 
     #Completed - And Accepting/Denying Reports
     def list_pending_reports(self):
         #Display a list of pending reports
         print(f"{self.rank} - Maintenance Report Menu")
-
-        """List of pending reports (to be implemented)"""
         self.get_pending_reports()
         print("------------------------------------------------")
         report_id = input("Enter report ID to manage: ")
@@ -86,22 +93,42 @@ class maintenance_report_UI_menu:
     #Completed
     def get_pending_reports(self):
         '''displays all pending report'''
+        pending_reports_table = PrettyTable()
+        pending_reports_table.field_names = ['Report ID', 'Report Name', 'Property ID']
         print('List of pending reports\n')
+
         pending_report_list = self.logic_wrapper.get_all_pending_maintenance_reports(self.location)
         for report in pending_report_list:
-            print(f'{report.report_id:<10}{report.report_name:<10}{report.property_id:>10}')
+            pending_reports_table.add_row([report.report_id, report.report_name, report.property_id])
+        border_color = Fore.BLUE
+        reset_color = Style.RESET_ALL
+        pending_reports_table.border = True
+        pending_reports_table.junction_char = f"{border_color}+{reset_color}"
+        pending_reports_table.horizontal_char = f"{border_color}-{reset_color}"
+        pending_reports_table.vertical_char = f"{border_color}|{reset_color}"
+        print(pending_reports_table)
 
     #Completed
     def list_closed_reports(self):
-        #Display a list of closed reports
-        """need the closed report list here"""
+        """ Display a list of closed reports """
+        closed_report_table = PrettyTable()
+        closed_report_table.field_names = ['Report ID', 'Report Name', 'Property ID']
         print("List of closed reports\n")
         closed_report_list = self.logic_wrapper.get_all_closed_maintenance_reports(self.location)
         if closed_report_list == 'No closed reports':
             print('No Closed Reports!')
         else:
             for report in closed_report_list:
-                print(f'{report.report_id:<10}{report.report_name:<10}{report.property_id:>10}')
+                closed_report_table.add_row([report.report_id, report.report_name, report.property_id])
+
+            border_color = Fore.BLUE
+            reset_color = Style.RESET_ALL
+            closed_report_table.border = True
+            closed_report_table.junction_char = f"{border_color}+{reset_color}"
+            closed_report_table.horizontal_char = f"{border_color}-{reset_color}"
+            closed_report_table.vertical_char = f"{border_color}|{reset_color}"
+            print(closed_report_table)
+
     
     def employee_menu(self):
         #Menu for employee role
