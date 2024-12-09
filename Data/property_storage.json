@@ -267,7 +267,7 @@
         "property_id": "P34",
         "name": "house",
         "location": "Reykjavik",
-        "condition": "good",
+        "condition": "bad",
         "total_price_to_fix": "1500",
         "property_price": "20"
     }
