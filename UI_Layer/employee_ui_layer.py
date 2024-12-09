@@ -30,7 +30,7 @@ class employee_UI_menu:
                     elif choice == 2:
                         self.display_employee_work_requests(employee.staff_id)
                     elif choice == 3:
-                        self.display_employee_maintenance_report(employee_ssn)
+                        self.display_employee_maintenance_report(employee.staff_id)
             elif action == 2:
                 self.add_new_employee_to_storage()
             else:
@@ -63,7 +63,7 @@ class employee_UI_menu:
         """The Function Is Searching For An Employee by SSN""" 
 
         print()
-        employee_ssn = int(input("Enter Employee Social Security Number: "))
+        employee_ssn = input("Enter Employee Social Security Number: ")
 
         return employee_ssn
 
@@ -73,12 +73,12 @@ class employee_UI_menu:
         #employee = self.logic_wrapper.fetch_employee_from_storage(ssn)
         print()
         print("-" * 70)
-        print("{:<15}{:<15}{:<15}".format("Employee Name", "|", employee.name))
-        print("{:<15}{:<15}{:<15}".format("Social Security Number", "|", employee.social_security_number))
-        print("{:<15}{:<15}{:<15}".format("Phone Number", "|", employee.phone_number))
-        print("{:<15}{:<15}{:<15}".format("Location", "|", employee.location))
-        print("{:<15}{:<15}{:<15}".format("Email", "|", employee.email))
-        print("{:<15}{:<15}{:<15}".format("Employee ID", "|", employee.staff_id))
+        print("{:<20}{:<15}{:<15}".format("Employee Name", "|", employee.name))
+        print("{:<20}{:<15}{:<15}".format("Social Security Number", "|", employee.social_security_number))
+        print("{:<20}{:<15}{:<15}".format("Phone Number", "|", employee.phone_number))
+        print("{:<20}{:<15}{:<15}".format("Location", "|", employee.location))
+        print("{:<20}{:<15}{:<15}".format("Email", "|", employee.email))
+        print("{:<20}{:<15}{:<15}".format("Employee ID", "|", employee.staff_id))
 
         # print(f"{"Employee Name" :< 15}| {employee.name}")
         # print(f"{"Social Security Number" :< 15}| {employee.social_security_number}")
@@ -208,10 +208,10 @@ class employee_UI_menu:
     def edit_employee_email(self, employee: object):
         """This function sets a new email for the employee"""
         
-        while (new_email := int(input("Enter New Email: "))) != "b":
+        while (new_email := input("Enter New Email: ")) != "b":
             is_valid_email = self.logic_wrapper.sanity_check_email(new_email)
             if is_valid_email:
-                employee.set_phone_number(new_email)
+                employee.set_email(new_email)
                 self.logic_wrapper.edit_employee_info(employee)
                 break
             else:
@@ -229,9 +229,9 @@ class employee_UI_menu:
             print("{:>15}{:>10}{:>15}".format(wr.name, wr.work_request_id, wr.work_request_status))
         print("-" * 70)     
 
-    def display_employee_maintenance_report(self, social_security_number):
+    def display_employee_maintenance_report(self, staff_id):
         """The function displays all maintenance reports by an employee"""
-        mr_by_employee_list = self.logic_wrapper.fetch_all_maintenance_report_for_employee(social_security_number)
+        mr_by_employee_list = self.logic_wrapper.fetch_all_maintenance_reports_for_employee(staff_id)
         print()
         print("--- All Maintenance Report By This Employee ---")
         print("{:>15}{:>10}{:>15}".format("Name", "Maintenance ID", "Status"))
