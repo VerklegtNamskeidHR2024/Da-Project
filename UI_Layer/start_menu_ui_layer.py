@@ -9,6 +9,7 @@ from UI_Layer.property_ui_layer import property_UI_menu
 
 from prettytable import PrettyTable 
 from colorama import Fore, Style, init
+init()
 
 class Main_Menu:
     def __init__(self, rank, location):
@@ -52,12 +53,17 @@ class Main_Menu:
         #self.select_location_for_system()
         self.display_menu_items()
 
+    def quit_system_message(self):
+        print("Departing from NaN Air, Thank you for Visiting!")
+
+
     def show_ascii_art_hq(self):
         print("{:>61}".format("==================="))
         print("{:>44}{:>13}{:>3}".format("|", "NaN Air HQ", "|"))
         print("{:>14}{:>7}{:>15}{:>8}{:>10}{:>6}".format("___________", ".", ": : : :", "|", "_____","|"))
         print("{:>13}{:>12}{:>11}{:>5}{:>3}{:>10}{:>6}{:>4}".format("_\_(*)_/_", "___(*)___", ": : : :", "o o", "|", "| | |", "|", "_ ,"))
         print("{:0}{:>1}{:>31}".format("_______|-|_________/-\__________", ":", "_____|_|__|_____| | |_____| o-o"))
+        pass
 
     def create_location_table(self):
         """print for location selection"""
@@ -95,11 +101,10 @@ class Main_Menu:
             print("3. Employee")
             print()
             print("Universal System Commands:")
-            print("{:>15}{:>5}".format("> Go Back:", "b, B"))
-            print("{:>18}{:>5}".format("> Quit System:", "q, Q"))
+            print("{:>20}".format("> Quit System: q, Q"))
             print("-" * 70)
 
-            user_action = input("Select a Profile: ")
+            user_action = input("Select a Profile: ").lower()
             match user_action:
                 case "1":
                     return_user = "Admin"
@@ -107,9 +112,8 @@ class Main_Menu:
                     return_user = "Manager"
                 case "3":
                     return_user = "Employee"
-                case "q" | "Q":
-                    print("Departing from NaN Air, Thank you for Visiting!")
-                    return
+                case "q":
+                    return "q"
                 case _:
                     print("No User Found, Please Try Again.")
         return return_user
@@ -118,15 +122,23 @@ class Main_Menu:
         # select location for system to use 
         return_location = ""
         while return_location == "":
-            """ print()
-            print("{:0}{:>3}{:>8}{:>7}{:>11}".format("1. Reykjavik", "|", "2. Nuuk", "|", "3. Kulusuk"))
-            print()
-            print("{:0}{:>4}{:>12}{:>3}{:>16}".format("4. Torshavn", "|", "5. Tingwall", "|", "6. Longyearbyen"))
-            print() """
+            location_table = PrettyTable()
+            location_table.field_names = ['ID',"Location", "Country"]
+            all_locations = self.logic_wrapper.get_all_locations()
+            counter = 0
+            for location in all_locations:
+                counter += 1
+                location_table.add_row([counter, location.location, location.country])
 
-            self.create_location_table()
+            border_color = Fore.BLUE
+            reset_color = Style.RESET_ALL
+            location_table.border = True
+            location_table.junction_char = f"{border_color}+{reset_color}"
+            location_table.horizontal_char = f"{border_color}-{reset_color}"
+            location_table.vertical_char = f"{border_color}|{reset_color}"
+            print(location_table)
 
-            user_action = input("Select a Location: ")
+            user_action = input("Select a Location: ").lower()
             match user_action:
                 case "1":
                     return_location = "Reykjavik"
@@ -140,11 +152,8 @@ class Main_Menu:
                     return_location = "Tingwall"
                 case "6":
                     return_location = "Longyearbyen"
-                case "b" | "B":
-                    return 
-                case "q" | "Q":
-                    print("Departing from NaN Air, Thank you for Visiting!")
-                    return
+                case "q":
+                    return "q"
                 case _:
                     print("No Location Found, Please Try Again.")
         return return_location
@@ -168,37 +177,32 @@ class Main_Menu:
             print("{:<18}".format("> Quit System: q, Q"))
             print("-" * 70)
 
-            user_action = input("Select an Option: ")
-            self.user_choice_select(user_action.lower())
-        return 
+            user_action = input("Select an Option: ").lower()
+            user_action = self.user_choice_select(user_action.lower())
+        return user_action
 
     def user_choice_select(self, user_action):
 
         # calls the sub menus
         match user_action:
             case "1":
-                self.property_UI_menu.start_point_property_UI()
+                user_action = self.property_UI_menu.start_point_property_UI()
             case "2":
-                self.work_request_UI_menu.start_point_work_requests_UI()
+                user_action = self.work_request_UI_menu.start_point_work_requests_UI()
             case "3":
-                self.employee_UI_menu.start_point_employee_UI()
+                user_action = self.employee_UI_menu.start_point_employee_UI()
             case "4":
-                self.contractor_UI_menu.start_point_contractor_UI()
+                user_action = self.contractor_UI_menu.start_point_contractor_UI()
             case "5":
-                self.maintenance_report_UI_menu.start_point_maintenance_reports_UI()
+                user_action = self.maintenance_report_UI_menu.start_point_maintenance_reports_UI()
             case "6" if self.rank != "Employee":
-                # only allowed if admin or manager
-                self.location_UI_menu.start_point_location_UI()
-            case "7":
-                self.test_some_stuff()
-            case "b" | "B":
-                return 
-            case "q" | "Q":
-                print("Departing from NaN Air, Thank you for Visiting!")
-                return
+                # This option is only displayed if the user is an admin or manager
+                user_action = self.location_UI_menu.start_point_location_UI()
+            case "q":
+                return "q"
             case _:
                 print("Wrong Input")
-        return
+        return user_action
     
     def test_some_stuff(self):
         """just some tesing with getting data from storage""" 
