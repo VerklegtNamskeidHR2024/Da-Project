@@ -248,14 +248,14 @@ class work_request_UI_menu:
 
     def set_interval_days_for_request(self, new_work_request: object):
         while (interval_days := input("Set The Interval Of Days Until Request Re-Opens: ")) != "b" and interval_days != "B":
-            try:
-                if int(interval_days) >= 0:
-                    new_work_request.set_reopen_interval(interval_days)
-                    self.set_priority_for_request(new_work_request)
-                else:
+            try:    
+                if interval_days == "":
                     print()
                     print("This Field Is Required To Fill Out")
                     print()
+                elif int(interval_days) >= 0:
+                    new_work_request.set_reopen_interval(interval_days)
+                    self.set_priority_for_request(new_work_request)
             except ValueError:
                 print()
                 print("Alphabetic Characters Are Not Allowed, Please Try Again.")
@@ -299,7 +299,7 @@ class work_request_UI_menu:
                 is_set_location_valid = self.logic_wrapper.sanity_check_location_for_request(set_location)
                 if is_set_location_valid == True:
                     new_work_request.set_location(set_location)
-                    break 
+                    self.work_request_confirmation(new_work_request) 
                 else:
                     print()
                     print("This Field Is Required TO Fill Out")
@@ -308,8 +308,10 @@ class work_request_UI_menu:
                 return
         else:
             new_work_request.set_location(self.location)
+    
+    def work_request_confirmation(self, new_work_request: object):
         print()    
-        while (new_work_request_confirmation := input("Enter 1 to Confirm: ").lower()) != "1" and new_work_request_confirmation == "b": 
+        while (new_work_request_confirmation := input("Enter 1 to Confirm: ").lower()) != "1" and new_work_request_confirmation != "b": 
             print("Sigma Sigma on the wall, who is the Skibidiest of them all")
         if new_work_request_confirmation == "b":
             return
@@ -317,7 +319,7 @@ class work_request_UI_menu:
         print()
         self.logic_wrapper.add_work_request(new_work_request)
         print("Work Request Has Been Created")
-        self.display_work_requests_menu_items()
+        self.select_menu_option()
          
     # Displays options, not been tested enough to verify it's functionality. 
     def employee_accept_work_request_(self, work_request: object):
@@ -337,6 +339,7 @@ class work_request_UI_menu:
             is_accepted_boolean = self.logic_wrapper.sanity_check_boolean_input_work_requests(accept_work_request)
             if is_accepted_boolean == True:
                 print()
+                # Ask for staff ID
                 while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1" and update_confirmation != "b":
                     print("Mama they took my dingus")
                 if update_confirmation == "b":
@@ -350,6 +353,7 @@ class work_request_UI_menu:
 
             if is_accepted_boolean == False:
                 print()
+                # Ask for staff ID
                 while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1" and update_confirmation != "b":
                     print("Mama they took my dingus")
                 if update_confirmation == "b":
