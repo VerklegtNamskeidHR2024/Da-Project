@@ -9,7 +9,7 @@ Daníela:\
 I worked on fixing the report
 
 Yeabsire:\
-I worked on fixing t he use cases\
+I worked on fixing the use cases\
 
 Kormákur:\
 I worked on fixing the requirements list and use cases, along with writing a few lines for the UI layer. 
