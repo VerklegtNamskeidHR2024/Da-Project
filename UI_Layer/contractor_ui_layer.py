@@ -43,7 +43,7 @@ class contractor_UI_menu():
         print("------------------------------------------------")
         print("1) Add contractor")
         print("2) edit contractor")
-        print("2) give contractor warning")
+        print("3) give contractor warning")
         print("------------------------------------------------")
 
         user_action = input("Select an Option:  ")
