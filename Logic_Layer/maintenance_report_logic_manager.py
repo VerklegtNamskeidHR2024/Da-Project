@@ -21,7 +21,7 @@ class maintenance_report_logic_manager:
                     return True
             return False
         elif what_to_check in 'staff id':
-            list_of_all_employees = self.storage_layer_wrapper.get_all_employee()
+            list_of_all_employees = self.storage_layer_wrapper.get_all_employees()
             for employee in list_of_all_employees:
                 print(f'Checking if {employee.staff_id} == {new_value}')
                 if employee.staff_id == new_value:
