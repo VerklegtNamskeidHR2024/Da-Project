@@ -12,11 +12,11 @@ Daníela:\
 
 
 Yeabsire:\
-I worked on fixing the use cases and requriments according to our code. i came at 10 and left at 6:30.\
+I worked on fixing the use cases and requriments according to our code. i came at 10 and left at 18:00.\
 
 Kormákur:\
 
-Jón:\ I worked on fixing the use cases and requierments according to our code. I arrived at 10 and left 15 18:00\
+Jón:\ I worked on fixing the use cases and requierments according to our code. I arrived at 10 and left at 18:00\
 
 
 ## Progress of the day
