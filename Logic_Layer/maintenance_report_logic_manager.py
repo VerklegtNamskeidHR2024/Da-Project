@@ -10,7 +10,6 @@ class maintenance_report_logic_manager:
                 return False
         elif what_to_check == 'location':
             list_of_all_locations = self.storage_layer_wrapper.get_all_locations()
-            #list_of_all_locations = self.location_logic_manager.get_all_locations(self.location)
             for loc in list_of_all_locations:
                 if loc.location == new_value:
                     return True
