@@ -138,7 +138,6 @@ class maintenance_report_UI_menu:
             closed_report_table.vertical_char = f"{border_color}|{reset_color}"
             print(closed_report_table)
 
-    
     def employee_menu(self):
         #Menu for employee role
         print(f"{self.rank} - Maintenance Report Menu")
@@ -231,22 +230,15 @@ class maintenance_report_UI_menu:
             if is_valid_work_request_id == False:
                 print('Invalid input')
 
-        
-        
-        '''report_name = input("Enter a name for the report: ")
-        location = input('Enter location name: ')
-        property_id = input("Enter property ID: ")
-        staff_id = input("Enter employee ID: ")
-        regular_maintenance = bool(input("Is it scheduled? (yes/no): "))
-        maintenance_description = input('Enter maintenance description: ')
-        price = float(input("Enter a price: "))
-        contractor_id = input('Enter contractor ID (leave empty if no contractor): ')
-        work_request_id = input("Enter the ID of the work request in progress: ")'''
-
         new_maintenance_report = MaintenanceReport('', report_name, location, property_id, staff_id, False,
         maintenance_description,'',price, False, contractor_id, work_request_id)
 
         new_maintenance_report_added = self.logic_wrapper.add_new_maintenance_report_to_storage(self.location, new_maintenance_report, regular_maintenance)
+        
+        if self.rank == "Admin" or self.rank == "Manager":
+            self.select_menu_option_admin_manager()
+        elif self.rank == "Employee":
+            self.employee_menu()
 
     #WIP
     def edit_report_details(self, location):
@@ -267,23 +259,9 @@ class maintenance_report_UI_menu:
             print(f'{selected_work_request} not found in the system please try again!')
             self.edit_report_details(self.location)
         else:
-            pass
-            # print the maintenance report  info
-            # self.print_single_maintenance_report(maintenance_report_to_use)
-
-            # Dont see a use for this - Hreimur
-            '''print("1. Mark as ready")
-            print("2. Edit report details")
-            user_input = input("Choose: ")
-
-            match user_input:
-                case"1":
-                    print(f"Report {report_id} has been marked as ready.")
-                case "2":
-                    self.display_edit_maintenance_report_details(maintenance_report_to_use)
-                case _:
-                    print("Invalid choice.")'''
-
+            print('Invalid input')
+            self.edit_report_details(self.location)
+            
     #Completed - But needs to do sanity check! - And also find incomplete reports
     # need to implement so user can stop making a report mid way through and that would give the report an incomplete status
     def display_edit_maintenance_report_details(self, selected_maintenance_report):
