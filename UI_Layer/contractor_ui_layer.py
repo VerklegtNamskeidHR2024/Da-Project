@@ -179,28 +179,29 @@ class contractor_UI_menu():
 
     # change phone number
     def change_phone_number(self, contractor) -> None:
+        is_valid = False
+        while is_valid == False:
+            phone_input = input("enter phone number: ")
+            is_valid = self.logic_wrapper.sanity_check_contractor(contractor, phone_input)
+            if not phone_input.isdigit() or is_valid != True:
+                print("Invalid input. Please enter numbers only.")
+            else:
+                self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'phone_number', phone_input)
+                self.print_single_contractor(contractor)
         try:
-            is_valid = False
-            while is_valid == False:
-                phone_input = input("enter phone number: ")
-                is_valid = self.logic_wrapper.sanity_check_contractor(contractor)
-                if not phone_input.isdigit() or is_valid != True:
-                    print("Invalid input. Please enter numbers only.")
-                else:
-                    self.logic_wrapper.edit_existing_property_in_storage(contractor, self.location, 'phone_number', phone_input)
-                    self.print_single_contractor(contractor)
+            pass
         except:
             print("something went wrong")
 
     # change opening hours
     def change_opening_hours(self, contractor):
+        new_opening_hours = input("Enter new opening Hours: ")
+        is_valid = self.logic_wrapper.sanity_check_contractor(contractor, new_opening_hours)
+        if is_valid == True:
+            self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'opening_hours', new_opening_hours)
+        self.print_single_contractor(contractor)
         try:
-            new_opening_hours = input("Enter new opening Hours: ")
-            #contractor.set_contact_name(new_contact_name)
-            is_valid = self.logic_wrapper.sanity_check_contractor(contractor)
-            if is_valid == True:
-                self.logic_wrapper.edit_existing_property_in_storage(contractor, self.location, 'opening_hours', new_opening_hours)
-            self.print_single_contractor(contractor)
+            pass
         except:
             print("something went wrong")
 
@@ -220,12 +221,28 @@ class contractor_UI_menu():
     # print single contractor
     def print_single_contractor(self, contractor) -> None:
         print("-"*30)
-        print(f"{'Contractor ID':<15}: {contractor.contractor_id}")
+        contractor_print_table = PrettyTable()
+        contractor.field_names = ['info',""]
+        contractor_print_table.add_row(['Contractor ID', contractor.contractor_id])
+        contractor_print_table.add_row(['Company Name', contractor.company_name])
+        contractor_print_table.add_row(['Contact Name', contractor.contact_name])
+        contractor_print_table.add_row(['Location', contractor.location])
+        contractor_print_table.add_row(['Opening Hours', contractor.opening_hours])
+        contractor_print_table.add_row(['Phone Number', contractor.phone_number])
+
+        border_color = Fore.BLUE
+        reset_color = Style.RESET_ALL
+        contractor_print_table.border = True
+        contractor_print_table.junction_char = f"{border_color}+{reset_color}"
+        contractor_print_table.horizontal_char = f"{border_color}-{reset_color}"
+        contractor_print_table.vertical_char = f"{border_color}|{reset_color}"
+        print(contractor_print_table)
+        """ print(f"{'Contractor ID':<15}: {contractor.contractor_id}")
         print(f"{'Company Name':<15}: {contractor.company_name}")
         print(f"{'Contact Name':<15}: {contractor.contact_name}")
         print(f"{'Location':<15}: {contractor.location}")
         print(f"{'Opening Hours':<15}: {contractor.opening_hours}")
-        print(f"{'Phone Number':<15}: {contractor.phone_number}")
+        print(f"{'Phone Number':<15}: {contractor.phone_number}") """
         print("-"*30)
 
     def display_contractor_maintenance_reports(self, selected_contractor) -> None:
