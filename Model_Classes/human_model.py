@@ -1,5 +1,5 @@
 class Human:
-    def __init__(self,name:str="", social_security_number:int=0, phone_number:int=0, location:str="",
+    def __init__(self,name:str="", social_security_number:str='', phone_number:str='', location:str="",
                 system_permissions:str="", email:str="", staff_id:str=""):
         self.name = name
         self.social_security_number = social_security_number

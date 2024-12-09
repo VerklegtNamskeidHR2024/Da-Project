@@ -4,7 +4,7 @@
         "company_name": "Daniela and Daughters",
         "contact_name": "Daniela",
         "opening_hours": "8-16",
-        "phone_number": 1234567,
+        "phone_number": "1234567",
         "location": "Reykjavik",
         "previous_job_reports": []
     },
@@ -13,7 +13,7 @@
         "company_name": "Daniela and Daughters",
         "contact_name": "Daniela",
         "opening_hours": "8-16",
-        "phone_number": 1234567,
+        "phone_number": "1234567",
         "location": "Nuuk",
         "previous_job_reports": []
     },
@@ -22,7 +22,7 @@
         "company_name": "Daniela and Daughters",
         "contact_name": "Daniela",
         "opening_hours": "8-16",
-        "phone_number": 1234567,
+        "phone_number": "1234567",
         "location": "Tingwall",
         "previous_job_reports": []
     }

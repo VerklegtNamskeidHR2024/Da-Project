@@ -1,7 +1,7 @@
 from Model_Classes.human_model import Human
 
 class Admin(Human):
-    def __init__(self, name:str="", social_security_number:int=0, phone_number:int=0, location:str="", system_permissions:str="Admin",
+    def __init__(self, name:str="", social_security_number:str='', phone_number:str='', location:str="", system_permissions:str="Admin",
                 email:str="", staff_id:str=""):
         super().__init__(name, social_security_number, phone_number, location, system_permissions, email, staff_id)
     
