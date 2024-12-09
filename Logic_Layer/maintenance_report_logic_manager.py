@@ -91,7 +91,7 @@ class maintenance_report_logic_manager:
     def get_all_maintencance_reports(self, location) -> list:
         maintenance_report_list = []
 
-        all_maintenance_reports = self.storage_layer_wrapper.get_all_maintenance_report()
+        all_maintenance_reports = self.storage_layer_wrapper.get_all_maintenance_reports()
 
         for maintenance_report in all_maintenance_reports:
             maintenance_report_list.append(maintenance_report)
@@ -108,7 +108,6 @@ class maintenance_report_logic_manager:
             maintenance_report.set_regular_maintenance(False)
 
         maintenance_report.set_report_id(new_report_id)
-        maintenance_report.set_report_status('Pending')
 
         list_of_all_reports.append(maintenance_report)
         self.storage_layer_wrapper.write_to_file_maintenance_reports(list_of_all_reports)

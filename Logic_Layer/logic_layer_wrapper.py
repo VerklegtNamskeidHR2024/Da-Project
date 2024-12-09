@@ -153,7 +153,7 @@ class Logic_Layer_Wrapper:
         return self.maintenance_report_logic_manager.edit_maintencance_report(maintenance_report, location, edit_choice, new_value)
     
     def sanity_check_maintencance_report(self, what_to_check, new_value, location):
-        location_list = self.get_all_locations(location)
+        location_list = self.get_all_locations()
         return self.maintenance_report_logic_manager.sanity_check_maintencance_report(what_to_check, new_value, location)
 
     ########################################################################################################
@@ -199,7 +199,7 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### LOCATION ###########################################################################################
-    def get_all_locations(self ,Location) -> list:
+    def get_all_locations(self) -> list:
         return self.location_logic_manager.all_location()
 
     def fetch_all_amenities_for_location_in_storage(self ,location) -> list:

@@ -127,7 +127,6 @@ class maintenance_report_UI_menu:
 
                 elif choice == 'b':
                     valid_choice = True
-            
                 else:
                     print("Invalid choice.")
         else:
@@ -152,6 +151,7 @@ class maintenance_report_UI_menu:
         pending_reports_table.horizontal_char = f"{border_color}-{reset_color}"
         pending_reports_table.vertical_char = f"{border_color}|{reset_color}"
         print(pending_reports_table)
+        return
 
     #Completed
     def list_closed_reports(self):
@@ -179,7 +179,7 @@ class maintenance_report_UI_menu:
     def display_create_maintenance_report_form(self):
         self.clear_screen()
         #Create a new maintenance report
-        print("Creating a new maintenance report")
+        print('Creating a new maintenance report, type "cancel" to stop and save as incomplete at any time')
         #the details that need to be filled out
         is_valid_report_name = False
         is_valid_location = False
@@ -190,37 +190,73 @@ class maintenance_report_UI_menu:
         is_valid_price = False
         is_valid_contractor_id = False
         is_valid_work_request_id = False
-        #while loop to check if the input is valid
+        report_name = ''
+        location = ''
+        property_id = ''
+        staff_id = ''
+        regular_maintenance = ''
+        maintenance_description = ''
+        price = 0
+        contractor_id = ''
+        work_request_id = ''
+        mark_as_done = False
+
         while is_valid_report_name == False:
             report_name = input("Enter a name for the report: ")
+            if report_name.lower() == 'cancel':
+                report_name = ''
+                self.create_new_maintenance_report(report_name, location, property_id, staff_id, regular_maintenance, maintenance_description, 'Incomplete', price, mark_as_done, contractor_id, work_request_id)
+                return
             is_valid_report_name = self.logic_wrapper.sanity_check_maintencance_report('report name', report_name, self.location)
             if is_valid_report_name == False:
                 print('Invalid input')
+
         while is_valid_location == False:
             location = input('Enter location name: ')
+            if location.lower() == 'cancel':
+                location = ''
+                self.create_new_maintenance_report(report_name, location, property_id, staff_id, regular_maintenance, maintenance_description, 'Incomplete', price, mark_as_done, contractor_id, work_request_id)
+                return
             is_valid_location = self.logic_wrapper.sanity_check_maintencance_report('location', location, self.location)
             if is_valid_location == False:
                 print('Invalid input')
+
         while is_valid_property_id == False:
             property_id = input("Enter property ID: ")
+            if property_id.lower() == 'cancel':
+                property_id = ''
+                self.create_new_maintenance_report(report_name, location, property_id, staff_id, regular_maintenance, maintenance_description, 'Incomplete', price, mark_as_done, contractor_id, work_request_id)
+                return
             is_valid_property_id = self.logic_wrapper.sanity_check_maintencance_report('property id', property_id, self.location)
             if is_valid_property_id == False:
                 print('Invalid input')
 
         while is_valid_staff_id == False:
             staff_id = input("Enter employee ID: ")
+            if staff_id.lower() == 'cancel':
+                staff_id = ''
+                self.create_new_maintenance_report(report_name, location, property_id, staff_id, regular_maintenance, maintenance_description, 'Incomplete', price, mark_as_done, contractor_id, work_request_id)
+                return
             is_valid_staff_id = self.logic_wrapper.sanity_check_maintencance_report('staff id', staff_id, self.location)
             if is_valid_staff_id == False:
                 print('Invalid input')
 
         while is_valid_regular_maintenance == False:
             regular_maintenance = input("Is it scheduled? (yes/no): ")
+            if regular_maintenance.lower() == 'cancel':
+                regular_maintenance = ''
+                self.create_new_maintenance_report(report_name, location, property_id, staff_id, regular_maintenance, maintenance_description, 'Incomplete', price, mark_as_done, contractor_id, work_request_id)
+                return
             is_valid_regular_maintenance = self.logic_wrapper.sanity_check_maintencance_report('regular maintenance', regular_maintenance, self.location)
             if is_valid_regular_maintenance == False:
                 print('Invalid input')
 
         while is_valid_maintenance_description == False:
             maintenance_description = input('Enter maintenance description: ')
+            if maintenance_description.lower() == 'cancel':
+                maintenance_description = ''
+                self.create_new_maintenance_report(report_name, location, property_id, staff_id, regular_maintenance, maintenance_description, 'Incomplete', price, mark_as_done, contractor_id, work_request_id)
+                return
             is_valid_maintenance_description = self.logic_wrapper.sanity_check_maintencance_report('maintenance description', maintenance_description, self.location)
             if is_valid_maintenance_description == False:
                 print('Invalid input')
@@ -228,6 +264,10 @@ class maintenance_report_UI_menu:
         while is_valid_price == False:
             try:
                 price = float(input("Enter a price: "))
+                if price.lower() == 'cancel':
+                    price = 0
+                    self.create_new_maintenance_report(report_name, location, property_id, staff_id, regular_maintenance, maintenance_description, 'Incomplete', price, mark_as_done, contractor_id, work_request_id)
+                    return
                 is_valid_price = self.logic_wrapper.sanity_check_maintencance_report('cost', price, self.location)
                 if is_valid_price == False:
                     print('Invalid input')
@@ -236,29 +276,41 @@ class maintenance_report_UI_menu:
 
         while is_valid_contractor_id == False:
             contractor_id = input('Enter contractor ID (leave empty if no contractor): ')
+            if contractor_id.lower() == 'cancel':
+                contractor_id = ''
+                self.create_new_maintenance_report(report_name, location, property_id, staff_id, regular_maintenance, maintenance_description, 'Incomplete', price, mark_as_done, contractor_id, work_request_id)
+                return
             is_valid_contractor_id = self.logic_wrapper.sanity_check_maintencance_report('contractor id', contractor_id, self.location)
             if is_valid_contractor_id == False:
                 print('Invalid input')
 
         while is_valid_work_request_id == False:
             work_request_id = input("Enter the ID of the work request in progress: ")
+            if work_request_id.lower() == 'cancel':
+                work_request_id = ''
+                self.create_new_maintenance_report(report_name, location, property_id, staff_id, regular_maintenance, maintenance_description, 'Incomplete', price, mark_as_done, contractor_id, work_request_id)
+                return
             is_valid_work_request_id = self.logic_wrapper.sanity_check_maintencance_report('work request id', work_request_id, self.location)
             if is_valid_work_request_id == False:
                 print('Invalid input')
 
-        new_maintenance_report = MaintenanceReport('', report_name, location, property_id, staff_id, False,
-        maintenance_description,'',price, False, contractor_id, work_request_id)
+        self.create_new_maintenance_report(report_name, location, property_id, staff_id, regular_maintenance, maintenance_description, 'Pending', price, mark_as_done, contractor_id, work_request_id)
+
+    def create_new_maintenance_report(self, report_name, location, property_id, staff_id, regular_maintenance, maintenance_description, report_status, price, mark_as_done, contractor_id, work_request_id):
+        new_maintenance_report = MaintenanceReport('', report_name, location, property_id, staff_id, regular_maintenance,
+        maintenance_description, report_status, price, mark_as_done, contractor_id, work_request_id)
 
         new_maintenance_report_added = self.logic_wrapper.add_new_maintenance_report_to_storage(self.location, new_maintenance_report, regular_maintenance)
+
 
     def print_all_reports(self):
         self.clear_screen()
         '''displays all pending report'''
         all_reports_table = PrettyTable()
         all_reports_table.field_names = ['Report ID', 'Report Name', 'Property ID', 'Report Status']
-        print('List of pending reports\n')
+        print(f'List of all reports at {self.location}\n')
 
-        pending_report_list = self.logic_wrapper.get_all_pending_maintenance_reports(self.location)
+        pending_report_list = self.logic_wrapper.get_all_maintenance_reports_at_location(self.location)
         for report in pending_report_list:
             all_reports_table.add_row([report.report_id, report.report_name, report.property_id, report.report_status])
         border_color = Fore.BLUE
