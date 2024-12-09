@@ -30,32 +30,32 @@ class maintenance_report_UI_menu:
             print("Invalid rank. Access denied.")
 
     def select_menu_option_admin_manager(self):
-        print(f"{self.rank} - Maintenance Report Menu")
-        print("------------------------------------------------")
-        # choice between 2 choices 
-        print("1. Pending reports")
-        print("2. Closed reports")
-        print('3. Create new reports')
-        print('4. Edit report')
-        print('b. Go back')
-        print("------------------------------------------------")
         user_choice = ""
-        while user_choice != "b": 
-            user_choice = input("Select an Option: ").lower()
-            match (user_choice , self.rank):
-                case ("1", self.rank): 
-                    self.list_pending_reports()
-                case ("2", self.rank):
-                    self.list_closed_reports()
-                case ("3", self.rank):
-                    self.display_create_maintenance_report_form()
-                case ("4", self.rank):
-                    self.edit_report_details(self.location)
-                case ("q", self.rank) | ("Q", self.rank):
-                    self.quit_system()
-                case _:
-                    print("Invalid Input, Please Try Again.")
-        return 
+        while user_choice != "b":
+            print(f"{self.rank} - Maintenance Report Menu")
+            print("------------------------------------------------")
+            # choice between 2 choices 
+            print("1. Pending reports")
+            print("2. Closed reports")
+            print('3. Create new reports')
+            print('4. Edit report')
+            print('b. Go back')
+            print("------------------------------------------------")
+            user_choice = input("Select an Option: ")
+            if user_choice == "b":
+                return
+            elif user_choice == 'q':
+                self.quit_system()
+            elif user_choice == '1':
+                self.list_pending_reports()
+            elif user_choice == '2':
+                self.list_closed_reports()
+            elif user_choice == '3':
+                self.display_create_maintenance_report_form()
+            elif user_choice == '4':
+                self.edit_report_details(self.location)
+            else:
+                print("Invalid input") 
 
     #Completed - And Accepting/Denying Reports
     def list_pending_reports(self):
@@ -69,6 +69,7 @@ class maintenance_report_UI_menu:
             print("------------------------------------------------")
             print("1. Accept")
             print("2. Deny")
+            print('b. Go back')
             print("------------------------------------------------")
             valid_choice = False
             accept_or_deny = ''
@@ -89,6 +90,12 @@ class maintenance_report_UI_menu:
                     accept_or_deny = 'Deny'
                     self.logic_wrapper.deny_or_accept_maintencance_report_for_admin(report_id, self.location, accept_or_deny)
                     print(f"Report {report_id} has been denied.")
+                    if self.rank == "Admin" or self.rank == "Manager":
+                        self.select_menu_option_admin_manager()
+                    elif self.rank == "Employee":
+                        self.employee_menu()
+                elif choice == 'b':
+                    valid_choice = True
                     if self.rank == "Admin" or self.rank == "Manager":
                         self.select_menu_option_admin_manager()
                     elif self.rank == "Employee":
@@ -126,6 +133,10 @@ class maintenance_report_UI_menu:
         closed_report_list = self.logic_wrapper.get_all_closed_maintenance_reports(self.location)
         if closed_report_list == 'No closed reports':
             print('No Closed Reports!')
+            if self.rank == "Admin" or self.rank == "Manager":
+                self.select_menu_option_admin_manager()
+            elif self.rank == "Employee":
+                self.employee_menu()
         else:
             for report in closed_report_list:
                 closed_report_table.add_row([report.report_id, report.report_name, report.property_id])
@@ -137,6 +148,10 @@ class maintenance_report_UI_menu:
             closed_report_table.horizontal_char = f"{border_color}-{reset_color}"
             closed_report_table.vertical_char = f"{border_color}|{reset_color}"
             print(closed_report_table)
+            if self.rank == "Admin" or self.rank == "Manager":
+                self.select_menu_option_admin_manager()
+            elif self.rank == "Employee":
+                self.employee_menu()
 
     def employee_menu(self):
         #Menu for employee role

@@ -110,5 +110,19 @@
         "mark_as_done": false,
         "contractor_id": "C1",
         "work_request_id": "WR2"
+    },
+    {
+        "report_id": "MR9",
+        "report_name": "New Name",
+        "location": "Reykjavik",
+        "property_id": "P2",
+        "staff_id": "E1",
+        "regular_maintenance": true,
+        "maintenance_description": "Just a testing thing",
+        "report_status": "Pending",
+        "price": 248694.0,
+        "mark_as_done": false,
+        "contractor_id": "",
+        "work_request_id": "WR1"
     }
 ]
