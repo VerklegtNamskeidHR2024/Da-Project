@@ -11,7 +11,7 @@
         "completition_date": "05-01-24",
         "repetitive_work": false,
         "reopen_interval": 0,
-        "priority": "low",
+        "priority": "Medium",
         "work_request_status": "Open",
         "need_contractor": true,
         "contractor_id": "C1",
@@ -35,7 +35,7 @@
         "need_contractor": true,
         "contractor_id": "C2",
         "mark_as_completed": false,
-        "accepted_by_employee": false
+        "accepted_by_employee": true
     },
     {
         "work_request_id": "WR3",
@@ -211,7 +211,7 @@
     {
         "work_request_id": "WR12",
         "name": "Kormakur er bestur",
-        "description": "Ekki gleyma að eg er bestur og klarastur",
+        "description": "Ekki gleyma ad eg er bestur og klarastur",
         "maintenance_report_id": "",
         "staff_id": "",
         "location": "Reykjavik",
@@ -223,6 +223,25 @@
         "priority": "High",
         "work_request_status": "",
         "need_contractor": "No",
+        "contractor_id": "",
+        "mark_as_completed": false,
+        "accepted_by_employee": false
+    },
+    {
+        "work_request_id": "WR13",
+        "name": "kormakur",
+        "description": "kormakur er ad forrita",
+        "maintenance_report_id": "",
+        "staff_id": "",
+        "location": "Nuuk",
+        "property_id": "P1",
+        "start_date": "10-12-24",
+        "completition_date": "",
+        "repetitive_work": false,
+        "reopen_interval": "0",
+        "priority": "low",
+        "work_request_status": "",
+        "need_contractor": "no",
         "contractor_id": "",
         "mark_as_completed": false,
         "accepted_by_employee": false
