@@ -1,8 +1,7 @@
-#########  Day-1 - 5/11/24 ############################
+#########   5/12/24 ############################
 
 Mættir / In attendance: 
     Hreimur
-    Daniela
     Kormakur
     Yeabsira
 
@@ -11,4 +10,4 @@ Málefni rædd / Issues addressed:
     Yeabsira will work on properties and maintanenace ui and a bit of logic
     Kormakur finish work request ui and then work on the logic layer
     Hreimur will start work on connecting the storage layer with the rest of the system
-    Daniela
+    Daniela was sick

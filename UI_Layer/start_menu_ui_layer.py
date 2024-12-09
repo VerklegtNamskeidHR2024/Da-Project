@@ -9,12 +9,14 @@ from UI_Layer.property_ui_layer import property_UI_menu
 
 class Main_Menu:
     def __init__(self, rank, location):
-        self.logic_wrapper = Logic_Layer_Wrapper()
+        self.logic_wrapper = Logic_Layer_Wrapper(rank, location)
         # calls the select function for what user you want to see the system as and, then - 
         # calls the location select function
-        self.rank = self.select_user_for_system()
-        self.location = self.select_location_for_system()
-
+        rank = self.select_user_for_system()
+        location = self.select_location_for_system()
+        self.rank = rank
+        self.location = location
+        
         # sendir ekki inn self.blahblah útaf það er gert í þessum klasa, vilt bara senda inn location og rank
         # annars er sent inn vitlaust location - Kv Hreimur
         self.employee_UI_menu = employee_UI_menu(self.logic_wrapper, rank, location) # , self.rank, self.location
@@ -30,11 +32,17 @@ class Main_Menu:
 
     # Needs to be implemented in all of the ui menus so we can acctually select the locations
     
-    def set_location(self, new_location):
-        self.location = new_location
+    # def set_new_rank(self, new_rank):
+    #     self.rank = new_rank
 
-    def get_location(self):
-        return self.location
+    # def set_new_location(self, new_location):
+    #     self.location = new_location
+
+    # def get_location(self):
+    #     return self.location
+
+    # def get_rank(self):
+    #     return self.rank
 
     def start_point(self):
         #self.select_user_for_system()
@@ -47,8 +55,7 @@ class Main_Menu:
         print("{:>14}{:>7}{:>15}{:>8}{:>10}{:>6}".format("___________", ".", ": : : :", "|", "_____","|"))
         print("{:>13}{:>12}{:>11}{:>5}{:>3}{:>10}{:>6}{:>4}".format("_\_(*)_/_", "___(*)___", ": : : :", "o o", "|", "| | |", "|", "_ ,"))
         print("{:0}{:>1}{:>31}".format("_______|-|_________/-\__________", ":", "_____|_|__|_____| | |_____| o-o"))
-        pass
-
+        
 
     def select_user_for_system(self):
         # select a user for the system to use
@@ -64,9 +71,9 @@ class Main_Menu:
             print("2. Manager")
             print("3. Employee")
             print()
-            print("Universal Commands:")
-            print("{:>24}{:>5}".format(">Go to Home Page:", "home, Home"))
-            print("{:>20}{:>5}".format(">Quit System:", "q, Q"))
+            print("Universal System Commands:")
+            print("{:>15}{:>5}".format("> Go Back:", "b, B"))
+            print("{:>18}{:>5}".format("> Quit System:", "q, Q"))
             print("-" * 70)
 
             user_action = input("Select a Profile: ")
@@ -77,6 +84,9 @@ class Main_Menu:
                     return_user = "Manager"
                 case "3":
                     return_user = "Employee"
+                case "q" | "Q":
+                    print("Departing from NaN Air, Thank you for Visiting!")
+                    return
                 case _:
                     print("No User Found, Please Try Again.")
         return return_user
@@ -105,6 +115,11 @@ class Main_Menu:
                     return_location = "Tingwall"
                 case "6":
                     return_location = "Longyearbyen"
+                case "b" | "B":
+                    return 
+                case "q" | "Q":
+                    print("Departing from NaN Air, Thank you for Visiting!")
+                    return
                 case _:
                     print("No Location Found, Please Try Again.")
         return return_location
@@ -113,11 +128,6 @@ class Main_Menu:
     def display_menu_items(self):
         user_action = ""
         while user_action.lower() != "q":
-            # maybe have while for loop
-            # and add a quit opition
-            # admin manager
-            # print("Welcome ", self.rank)
-            # print(f'{"Current Location - {self.location}"}')
             print()
             print(f" {self.rank} - Home Page")
             print("-" * 70)
@@ -128,15 +138,14 @@ class Main_Menu:
             print("5. Maintenance Reports")
             if self.rank != "Employee":
                 print("6. Locations")
-            print("q. Quit")
+            print()
+            print("{:>15}".format("> Log Out: log"))
+            print("{:>18}".format("> Quit System: q, Q"))
             print("-" * 70)
 
-            user_action = input("Select an Option:  ")
+            user_action = input("Select an Option: ")
             self.user_choice_select(user_action.lower())
-
-            # used to get a loop may want to change
-            #self.display_menu_items()
-        return
+        return 
 
     def user_choice_select(self, user_action):
 
@@ -157,11 +166,13 @@ class Main_Menu:
                 self.location_UI_menu.start_point_location_UI()
             case "7":
                 self.test_some_stuff()
-            case "q":
+            case "b" | "B":
+                return 
+            case "q" | "Q":
+                print("Departing from NaN Air, Thank you for Visiting!")
                 return
             case _:
-                print("wrong input")
-
+                print("Wrong Input")
         return
     
     def test_some_stuff(self):
