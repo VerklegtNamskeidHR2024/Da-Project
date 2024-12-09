@@ -62,7 +62,9 @@ class Main_Menu:
     def start_point(self):
         #self.select_user_for_system()
         #self.select_location_for_system()
-        self.user_choice_select()
+        user_home_page = self.user_choice_select()
+        if user_home_page == "q":
+            self.quit_system_message()
 
     def quit_system_message(self):
         print("Departing from NaN Air, Thank you for Visiting!")
@@ -188,8 +190,9 @@ class Main_Menu:
 
         # Calls the sub menus
         user_action = ""
+        # user_action = self.display_menu_items()
         while user_action != "q":
-            user_action = self.display_menu_items()
+            user_action = user_action = self.display_menu_items()
             match user_action:
                 case "1":
                     user_action = self.property_UI_menu.start_point_property_UI()
@@ -205,9 +208,14 @@ class Main_Menu:
                     # This option is only displayed if the user is an admin or manager
                     user_action = self.location_UI_menu.start_point_location_UI()
                 case "q":
-                    self.quit_system_message()
+                    return "q"
                 case _:
                     print("Wrong Input")
+            # user_action = self.display_menu_items()
+            # continue
+        # self.quit_system_message()
+        return user_action
+                    
     
     def test_some_stuff(self):
         """just some tesing with getting data from storage""" 
