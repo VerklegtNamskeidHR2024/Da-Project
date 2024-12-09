@@ -16,7 +16,7 @@ I worked on fixing the use cases and requriments according to our code. i came a
 
 Kormákur:\
 
-Jón:\
+Jón:\ I worked on fixing the use cases and requierments according to our code. I arrived at 10 and left 15 18:00\
 
 
 ## Progress of the day
