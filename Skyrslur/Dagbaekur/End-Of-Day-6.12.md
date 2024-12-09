@@ -14,7 +14,7 @@ I worked on employee logic and ui, and connecting them in the logic wrapper. I a
 
 
 Yeabsire:\
-
+I worked on property ui and connecting it to the logic wrapper. i came at 10 and left at 6:30.\
 
 Kormákur:\
 I finished most of the work request logic and UI, only thing left is completing the edit feature. I came at 11:00 and left at 19:30. 
