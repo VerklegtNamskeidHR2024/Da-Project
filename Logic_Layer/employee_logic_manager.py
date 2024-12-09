@@ -55,7 +55,7 @@ class employee_logic_manager:
         for position, staff in enumerate(all_employees):
             if staff.staff_id == employee.staff_id:
                 all_employees[position] = employee
-        self.Storage_Layer_Wrapper.write_to_file_work_requests(all_employees)
+        self.Storage_Layer_Wrapper.write_to_file_employee(all_employees)
         
 
 
