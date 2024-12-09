@@ -79,11 +79,20 @@ class maintenance_report_UI_menu:
                     accept_or_deny = 'Accept'
                     self.logic_wrapper.deny_or_accept_maintencance_report_for_admin(report_id, self.location, accept_or_deny)
                     print(f"Report {report_id} has been accepted.")
+                    if self.rank == "Admin" or self.rank == "Manager":
+                        self.select_menu_option_admin_manager()
+                    elif self.rank == "Employee":
+                        self.employee_menu()
+
                 elif choice == "2":
                     valid_choice = True
                     accept_or_deny = 'Deny'
                     self.logic_wrapper.deny_or_accept_maintencance_report_for_admin(report_id, self.location, accept_or_deny)
                     print(f"Report {report_id} has been denied.")
+                    if self.rank == "Admin" or self.rank == "Manager":
+                        self.select_menu_option_admin_manager()
+                    elif self.rank == "Employee":
+                        self.employee_menu()
                 else:
                     print("Invalid choice.")
         else:

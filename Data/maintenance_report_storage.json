@@ -9,7 +9,7 @@
         "maintenance_description": "New New Description",
         "report_status": "Pending",
         "price": 12345.0,
-        "mark_as_done": false,
+        "mark_as_done": true,
         "contractor_id": "",
         "work_request_id": "WR3"
     },
