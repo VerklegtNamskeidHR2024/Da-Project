@@ -99,8 +99,8 @@ class Logic_Layer_Wrapper:
     def get_all_employees(self) -> list:
         return self.employee_logic_manager.get_all_employees() 
     
-    def add_new_employee_to_storage(self, location, new_employee):
-        return self.employee_logic_manager.add_new_employee_to_storage(location, new_employee)
+    def add_new_employee_to_storage(self, new_employee):
+        return self.employee_logic_manager.add_new_employee_to_storage(new_employee)
 
     def edit_employee_info(self, employee):
         return self.employee_logic_manager.edit_employee_info(employee)
@@ -111,8 +111,8 @@ class Logic_Layer_Wrapper:
     def fetch_all_work_request_for_employee(self, staff_id) -> list:
         return self.employee_logic_manager.fetch_all_work_request_for_employee(staff_id)
 
-    def fetch_all_maintenance_reports_for_employee(self, social_security_number) -> list:
-        return self.employee_logic_manager.fetch_all_maintenance_reports_for_employee(social_security_number)
+    def fetch_all_maintenance_reports_for_employee(self, staff_id) -> list:
+        return self.employee_logic_manager.fetch_all_maintenance_reports_for_employee(staff_id)
 
     def sanity_check_employee_name(self, name) -> bool:
         return self.employee_logic_manager.sanity_check_employee_name(name)
