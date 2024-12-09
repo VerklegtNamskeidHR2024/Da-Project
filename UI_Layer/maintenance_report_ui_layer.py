@@ -48,14 +48,13 @@ class maintenance_report_UI_menu:
         user_choice = ""
         while user_choice != "b":
             print(f"{self.rank} - Maintenance Report Menu")
-            print("------------------------------------------------")
-            # choice between 2 choices 
+            print('-' * 50)
             print("1. Pending reports")
             print("2. Closed reports")
             print('3. Create new reports')
             print('4. Edit report')
             print('b. Go back')
-            print("------------------------------------------------")
+            print('-' * 50)
             user_choice = input("Select an Option: ")
             if user_choice == "b":
                 return
@@ -73,26 +72,46 @@ class maintenance_report_UI_menu:
                 print("Invalid input") 
 
     def employee_menu(self, staff_id):
+        ''' Employee menu '''
         self.clear_screen()
-        #Menu for employee role
-        print(f"{self.rank} - Maintenance Report Menu")
-        print("------------------------------------------------")
-        print("1. Create maintenance report")
-        print("------------------------------------------------")
-        user_action = input("Select an Option:  ")
-        match user_action:
-            case "1":
-                # create maintenance reports 
-                self.display_create_maintenance_report_form()
-            case "q":
-                """quit back to main menu"""
-                pass
-            case _:
-                print("wrong input")
+        self.get_employee_reports(staff_id)
+        user_choice = ""
+        while user_choice != "b":
+            print(f"{self.rank} - Maintenance Report Menu")
+            print('-' * 50)
+            print("1. Create maintenance report")
+            print("2. View Incomplete Reports")
+            print("b. Go back")
+            print('-' * 50)
+            user_choice = input("Select an Option:  ")
+            if user_choice == "b":
+                return
+            elif user_choice == 'q':
+                self.quit_system()
+            elif user_choice == '1':
+                    self.display_create_maintenance_report_form()
+            elif user_choice == '2':
+                self.get_incomplete_reports()
+            else:
+                print("Invalid input")
+                
+    def get_incomplete_reports(self):
+        '''displays all incomplete reports'''
+        incomplete_reports_table = PrettyTable()
+        incomplete_reports_table.field_names = ['Report ID', 'Report Name', 'Property ID']
+        print('List of incomplete reports\n')
 
-        # test print
-        print("we going back to main menu in UI layer")
-        return 
+        incomplete_report_list = self.logic_wrapper.get_incomplete_maintenance_reports(self.location)
+        for report in incomplete_report_list:
+            incomplete_reports_table.add_row([report.report_id, report.report_name, report.property_id])
+        border_color = Fore.BLUE
+        reset_color = Style.RESET_ALL
+        incomplete_reports_table.border = True
+        incomplete_reports_table.junction_char = f"{border_color}+{reset_color}"
+        incomplete_reports_table.horizontal_char = f"{border_color}-{reset_color}"
+        incomplete_reports_table.vertical_char = f"{border_color}|{reset_color}"
+        print(incomplete_reports_table)
+        return
 
     #Completed - And Accepting/Denying Reports
     def list_pending_reports(self):
@@ -302,6 +321,22 @@ class maintenance_report_UI_menu:
 
         new_maintenance_report_added = self.logic_wrapper.add_new_maintenance_report_to_storage(self.location, new_maintenance_report, regular_maintenance)
 
+    def get_employee_reports(self, staff_id):
+        emplyee_report_table = PrettyTable()
+        emplyee_report_table.field_names = ['Report ID', 'Report Name', 'Property ID', 'Report Status']
+
+        print(f'List of all reports connected to staff member {staff_id}\n')
+        employee_report_list = self.logic_wrapper.get_employee_reports(staff_id)
+        for report in employee_report_list:
+            emplyee_report_table.add_row([report.report_id, report.report_name, report.property_id, report.report_status])
+
+        border_color = Fore.BLUE
+        reset_color = Style.RESET_ALL
+        emplyee_report_table.border = True
+        emplyee_report_table.junction_char = f"{border_color}+{reset_color}"
+        emplyee_report_table.horizontal_char = f"{border_color}-{reset_color}"
+        emplyee_report_table.vertical_char = f"{border_color}|{reset_color}"
+        print(emplyee_report_table)
 
     def print_all_reports(self):
         self.clear_screen()
@@ -320,7 +355,7 @@ class maintenance_report_UI_menu:
         all_reports_table.horizontal_char = f"{border_color}-{reset_color}"
         all_reports_table.vertical_char = f"{border_color}|{reset_color}"
         print(all_reports_table)
-
+    
     #WIP
     def edit_report_details(self, location):
         self.clear_screen() 

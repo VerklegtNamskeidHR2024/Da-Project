@@ -152,6 +152,12 @@ class Logic_Layer_Wrapper:
     def edit_maintencance_report(self, maintenance_report, location, edit_choice, new_value):
         return self.maintenance_report_logic_manager.edit_maintencance_report(maintenance_report, location, edit_choice, new_value)
     
+    def get_employee_reports(self, staff_id):
+        return self.maintenance_report_logic_manager.get_employee_reports(staff_id)
+    
+    def get_incomplete_maintenance_reports(self, location):
+        return self.maintenance_report_logic_manager.get_incomplete_maintenance_reports(location)
+    
     def sanity_check_maintencance_report(self, what_to_check, new_value, location):
         location_list = self.get_all_locations()
         return self.maintenance_report_logic_manager.sanity_check_maintencance_report(what_to_check, new_value, location)

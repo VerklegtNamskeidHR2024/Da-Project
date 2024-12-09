@@ -119,6 +119,26 @@ class maintenance_report_logic_manager:
             if report.report_id == maintenance_report_id:
                 return True
         return False
+    
+    def get_employee_reports(self, staff_id) -> list:
+        employee_reports = []
+        all_reports = self.get_all_maintencance_reports('')
+
+        for report in all_reports:
+            if report.staff_id == staff_id:
+                employee_reports.append(report)
+
+        return employee_reports
+    
+    def get_incomplete_maintenance_reports(self, location) -> list:
+        incomplete_reports = []
+        all_reports = self.get_all_maintencance_reports_at_location(location)
+
+        for report in all_reports:
+            if report.report_status == 'Incomplete':
+                incomplete_reports.append(report)
+
+        return incomplete_reports
 
     def edit_maintencance_report(self, maintenance_report, location, edit_choice, new_value):
         list_of_reports = self.get_all_maintencance_reports_at_location(location)
