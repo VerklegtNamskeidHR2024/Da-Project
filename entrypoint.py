@@ -4,7 +4,7 @@ from prettytable import PrettyTable
 from colorama import Fore, Style, init
 init()
 
-def create_location_table():
+""" def create_location_table():
     locations_table = PrettyTable()
     locations_table.field_names = ['ID',"Country", "Location Name"]
     locations_table.add_row(['1',"Iceland", "Reykjavik"])
@@ -21,7 +21,7 @@ def create_location_table():
     locations_table.horizontal_char = f"{border_color}-{reset_color}"
     locations_table.vertical_char = f"{border_color}|{reset_color}"
 
-    print(locations_table)
+    print(locations_table) """
 
 def main():
     main = Main_Menu("", "")

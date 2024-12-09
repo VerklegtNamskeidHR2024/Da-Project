@@ -5,7 +5,7 @@ class maintenance_report_storage:
     def __init__(self):
         pass
 
-    def get_all_maintenance_report(self) -> list[MaintenanceReport]:
+    def get_all_maintenance_reports(self) -> list[MaintenanceReport]:
         with open('Data/maintenance_report_storage.json', 'r') as maintenance_report_file:
             maintenance_report_data = json.load(maintenance_report_file)
         maintenance_report_list = [MaintenanceReport(**data) for data in maintenance_report_data]

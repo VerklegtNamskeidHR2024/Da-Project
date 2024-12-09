@@ -34,7 +34,7 @@ class employee_logic_manager:
         highestID = -1
         list_of_all_employees = self.get_all_employees()
         for employee in list_of_all_employees:
-            stripped_ID = employee.employee_id[1:]
+            stripped_ID = employee.staff_id[1:]
             if int(stripped_ID) > highestID:
                 highestID = int(stripped_ID)
         highestID += 1
@@ -46,7 +46,7 @@ class employee_logic_manager:
     def add_new_employee_to_storage(self,employee):
         list_of_all_employees = self.get_all_employees()
         new_employee_id = self.get_highest_ID()
-        employee.set_employee_id(new_employee_id)
+        employee.set_staff_id(new_employee_id)
         list_of_all_employees.append(employee)
         self.Storage_Layer_Wrapper.write_to_file_employee(list_of_all_employees)
 
@@ -76,11 +76,11 @@ class employee_logic_manager:
         return work_request_by_employee
         
 
-    def fetch_all_maintenance_reports_for_employee(self, social_security_number) -> list:
+    def fetch_all_maintenance_reports_for_employee(self, staff_id) -> list:
         maintenance_reports_list = self.Storage_Layer_Wrapper.get_all_maintenance_reports()
         maintenance_reports_by_employee = []
         for mr in maintenance_reports_list:
-            if mr.staff_id == social_security_number:
+            if mr.staff_id == staff_id:
                 maintenance_reports_by_employee.append(mr)
         return maintenance_reports_by_employee
     
@@ -94,14 +94,14 @@ class employee_logic_manager:
         return True
     
     def sanity_check_ssn(self, ssn) -> bool:
-        ssn = str(ssn)
+
         if len(ssn) == 10:
             return True
         else:
             return False
         
     def sanity_check_phone_number(self, phone_number) -> bool:
-        phone_number = str(phone_number)
+
         if len(phone_number) == 7:
             return True
         else:
@@ -115,8 +115,11 @@ class employee_logic_manager:
         
     def sanity_check_for_employee_location(self, location) -> bool:
         location_list = self.Storage_Layer_Wrapper.get_all_locations()
-        if location in location_list:
-            return True
+        print(location)
+        for loc in location_list:
+            print(loc.location)
+            if loc.location == location:
+                return True
         else:
             return False
 

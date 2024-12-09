@@ -2,9 +2,9 @@
     {
         "contractor_id": "C1",
         "company_name": "Daniela and Daughters",
-        "contact_name": "Daniela",
-        "opening_hours": "8-16",
-        "phone_number": 1234567,
+        "contact_name": "sdas",
+        "opening_hours": "asd",
+        "phone_number": "9999999",
         "location": "Reykjavik",
         "previous_job_reports": []
     },
@@ -13,7 +13,7 @@
         "company_name": "Daniela and Daughters",
         "contact_name": "Daniela",
         "opening_hours": "8-16",
-        "phone_number": 1234567,
+        "phone_number": "1234567",
         "location": "Nuuk",
         "previous_job_reports": []
     },
@@ -22,8 +22,35 @@
         "company_name": "Daniela and Daughters",
         "contact_name": "Daniela",
         "opening_hours": "8-16",
-        "phone_number": 1234567,
+        "phone_number": "1234567",
         "location": "Tingwall",
+        "previous_job_reports": []
+    },
+    {
+        "contractor_id": "C4",
+        "company_name": "asdas",
+        "contact_name": "asdasd",
+        "opening_hours": "asd",
+        "phone_number": 1234567,
+        "location": "Reykjavik",
+        "previous_job_reports": []
+    },
+    {
+        "contractor_id": "C5",
+        "company_name": "kol",
+        "contact_name": "JAo",
+        "opening_hours": "23-12",
+        "phone_number": 6680282,
+        "location": "Reykjavik",
+        "previous_job_reports": []
+    },
+    {
+        "contractor_id": "C6",
+        "company_name": "asdas",
+        "contact_name": "asdasd",
+        "opening_hours": "ww",
+        "phone_number": 1234567,
+        "location": "Reykjavik",
         "previous_job_reports": []
     }
 ]

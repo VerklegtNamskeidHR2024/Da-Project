@@ -7,6 +7,9 @@ from UI_Layer.maintenance_report_ui_layer import maintenance_report_UI_menu
 from UI_Layer.work_request_ui_layer import work_request_UI_menu
 from UI_Layer.property_ui_layer import property_UI_menu
 
+from prettytable import PrettyTable 
+from colorama import Fore, Style, init
+
 class Main_Menu:
     def __init__(self, rank, location):
         self.logic_wrapper = Logic_Layer_Wrapper(rank, location)
@@ -55,6 +58,26 @@ class Main_Menu:
         print("{:>14}{:>7}{:>15}{:>8}{:>10}{:>6}".format("___________", ".", ": : : :", "|", "_____","|"))
         print("{:>13}{:>12}{:>11}{:>5}{:>3}{:>10}{:>6}{:>4}".format("_\_(*)_/_", "___(*)___", ": : : :", "o o", "|", "| | |", "|", "_ ,"))
         print("{:0}{:>1}{:>31}".format("_______|-|_________/-\__________", ":", "_____|_|__|_____| | |_____| o-o"))
+
+    def create_location_table(self):
+        """print for location selection"""
+        locations_table = PrettyTable()
+        locations_table.field_names = ['ID',"Country", "Location Name"]
+        locations_table.add_row(['1',"Iceland", "Reykjavik"])
+        locations_table.add_row(['2',"Greenland", "Nuuk"])
+        locations_table.add_row(['3',"Greenland", "Kulusuk"])
+        locations_table.add_row(['4',"Faroe Islands", "Torshavn"])
+        locations_table.add_row(['5',"Shetland Islands", "Tingwall"])
+        locations_table.add_row(['6',"Svalbard", "Longyearbyen"])
+            
+        border_color = Fore.BLUE
+        reset_color = Style.RESET_ALL
+        locations_table.border = True
+        locations_table.junction_char = f"{border_color}+{reset_color}"
+        locations_table.horizontal_char = f"{border_color}-{reset_color}"
+        locations_table.vertical_char = f"{border_color}|{reset_color}"
+
+        print(locations_table)
         
 
     def select_user_for_system(self):
@@ -95,11 +118,13 @@ class Main_Menu:
         # select location for system to use 
         return_location = ""
         while return_location == "":
-            print()
+            """ print()
             print("{:0}{:>3}{:>8}{:>7}{:>11}".format("1. Reykjavik", "|", "2. Nuuk", "|", "3. Kulusuk"))
             print()
             print("{:0}{:>4}{:>12}{:>3}{:>16}".format("4. Torshavn", "|", "5. Tingwall", "|", "6. Longyearbyen"))
-            print()
+            print() """
+
+            self.create_location_table()
 
             user_action = input("Select a Location: ")
             match user_action:
@@ -131,16 +156,16 @@ class Main_Menu:
             print()
             print(f" {self.rank} - Home Page")
             print("-" * 70)
-            print("1. Properties")
-            print("2. Work Requests")
-            print("3. Employees")
-            print("4. Contractors")
-            print("5. Maintenance Reports")
+            print("1) Properties")
+            print("2) Work Requests")
+            print("3) Employees")
+            print("4) Contractors")
+            print("5) Maintenance Reports")
             if self.rank != "Employee":
-                print("6. Locations")
+                print("6) Locations")
             print()
-            print("{:>15}".format("> Log Out: log"))
-            print("{:>18}".format("> Quit System: q, Q"))
+            print("{:<15}".format("> Log Out: log"))
+            print("{:<18}".format("> Quit System: q, Q"))
             print("-" * 70)
 
             user_action = input("Select an Option: ")
@@ -158,7 +183,7 @@ class Main_Menu:
             case "3":
                 self.employee_UI_menu.start_point_employee_UI()
             case "4":
-                self.contractor_UI_menu.display_contractor_menu()
+                self.contractor_UI_menu.start_point_contractor_UI()
             case "5":
                 self.maintenance_report_UI_menu.start_point_maintenance_reports_UI()
             case "6" if self.rank != "Employee":
