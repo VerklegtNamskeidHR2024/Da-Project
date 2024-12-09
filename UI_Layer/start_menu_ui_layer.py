@@ -122,13 +122,21 @@ class Main_Menu:
         # select location for system to use 
         return_location = ""
         while return_location == "":
-            """ print()
-            print("{:0}{:>3}{:>8}{:>7}{:>11}".format("1. Reykjavik", "|", "2. Nuuk", "|", "3. Kulusuk"))
-            print()
-            print("{:0}{:>4}{:>12}{:>3}{:>16}".format("4. Torshavn", "|", "5. Tingwall", "|", "6. Longyearbyen"))
-            print() """
+            location_table = PrettyTable()
+            location_table.field_names = ['ID',"Location", "Country"]
+            all_locations = self.logic_wrapper.get_all_locations()
+            counter = 0
+            for location in all_locations:
+                counter += 1
+                location_table.add_row([counter, location.location, location.country])
 
-            self.create_location_table()
+            border_color = Fore.BLUE
+            reset_color = Style.RESET_ALL
+            location_table.border = True
+            location_table.junction_char = f"{border_color}+{reset_color}"
+            location_table.horizontal_char = f"{border_color}-{reset_color}"
+            location_table.vertical_char = f"{border_color}|{reset_color}"
+            print(location_table)
 
             user_action = input("Select a Location: ").lower()
             match user_action:
