@@ -6,17 +6,16 @@ class work_request_UI_menu:
         self.rank = rank
         self.location = location
 
-    def start_point_work_requests_UI(self, quit: str=""):
+    def start_point_work_requests_UI(self):
         """When this class is called it starts here, calling the display_requests_menu_items function 
         first to load the menu and it's options for the user. """
 
-        work_request_menu = self.select_menu_option()
-        if work_request_menu == "q":
-            return "q"
+        self.select_menu_option()
+        
 
 
-    def quit_system(self):
-        self.start_point_work_requests_UI("quit") 
+    # def quit_system(self):
+    #     self.start_point_work_requests_UI("quit") 
 
     # Completed, can be beautified.
     def display_all_work_requests_printed(self, work_request_list: list): 
@@ -77,7 +76,6 @@ class work_request_UI_menu:
             print("{:0}{:>3}{:>20}{:>3}{:>19}".format("4. My Requests", "|", "5. Closed Requests", "|", "6. Add Request" ))
             print()
             print("{:>20}".format("> Go Back: b, B"))
-            print("{:>20}".format("> Log Out: log"))
             print("{:>20}".format("> Quit System: q, Q"))
             print()
         else:
@@ -85,7 +83,6 @@ class work_request_UI_menu:
             print("{:0}{:>3}{:>20}".format("3. Pending Requests", "|", "4. My Requests"))
             print()
             print("{:>20}".format("> Go Back: b, B"))
-            print("{:>20}".format("> Log Out: log"))
             print("{:>20}".format("> Quit System: q, Q"))
             print()
         user_choice = input("Select an Option: ").lower()
@@ -111,7 +108,7 @@ class work_request_UI_menu:
                     # self.quit_system()
                     return "q"
                 case ("b", self.rank):
-                    pass
+                    return "b"
                 case _:
                     print("Invalid Input, Please Try Again.")
         return user_choice
@@ -339,32 +336,48 @@ class work_request_UI_menu:
             is_accepted_boolean = self.logic_wrapper.sanity_check_boolean_input_work_requests(accept_work_request)
             if is_accepted_boolean == True:
                 print()
-                # Ask for staff ID
-                while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1" and update_confirmation != "b":
-                    print("Mama they took my dingus")
-                if update_confirmation == "b":
-                    continue
-                work_request.set_accepted_by_employee(is_accepted_boolean)
-                self.logic_wrapper.edit_work_request(work_request)
-                print()
-                print("Work Request Has Been Accepted!")
-                print()
-                break
+                # Asks for staff ID
+                while (staff_id := input("Enter Your Staff ID: ")) != "b" and staff_id != "B": 
+                    is_staff_id_valid = self.logic_wrapper.sanity_check_sanity_check_staff_id_for_request(staff_id)
+                    if is_staff_id_valid == True:
+                        while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1" and update_confirmation != "b":
+                            print("Mama they took my dingus")
+                        if update_confirmation == "b":
+                            continue
+                        work_request.set_accepted_by_employee(is_accepted_boolean)
+                        self.logic_wrapper.edit_work_request(work_request)
+                        print()
+                        print("Work Request Has Been Accepted!")
+                        print()
+                        return
+                    else:
+                        print("Invalid")
+                if staff_id == "b" or staff_id == "B":
+                    continue 
 
             if is_accepted_boolean == False:
                 print()
                 # Ask for staff ID
-                while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1" and update_confirmation != "b":
-                    print("Mama they took my dingus")
-                if update_confirmation == "b":
-                    continue
-                work_request.set_accepted_by_employee(is_accepted_boolean)
-                self.logic_wrapper.edit_work_request(work_request)
-                print()
-                print("Work Request Has Been Rejected!")
-                print()
-                break
-            print("Mama they took my dingus")
+                while (staff_id := input("Enter Your Staff ID: ")) != "b" and staff_id != "B": 
+                    is_staff_id_valid = self.logic_wrapper.sanity_check_sanity_check_staff_id_for_request(staff_id)
+                    if is_staff_id_valid == True:
+                        while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1" and update_confirmation != "b":
+                            print("Mama they took my dingus")
+                        if update_confirmation == "b":
+                            continue
+                        work_request.set_accepted_by_employee(is_accepted_boolean)
+                        work_request.set_staff_id(staff_id)
+                        self.logic_wrapper.edit_work_request(work_request)
+                        print()
+                        print("Work Request Has Been Rejected!")
+                        print()
+                        return
+                    else:
+                        print("Invalid")
+                if staff_id == "b" or staff_id == "B":
+                    continue 
+            else:
+                print("Mama they took my dingus")
         return
         
 
@@ -455,7 +468,7 @@ class work_request_UI_menu:
     
     def edit_employee_id_for_work_request(self, work_request: object):
         while (edit_employee_id_for_request := input("New Employee ID: ")) != "b" and edit_employee_id_for_request != "B":
-            is_employee_valid = self.logic_wrapper.sanity_check_employee_id_for_request(edit_employee_id_for_request)
+            is_employee_valid = self.logic_wrapper.sanity_check_sanity_check_staff_id_for_request(edit_employee_id_for_request)
             if is_employee_valid == True:
                 print()
                 while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1" and update_confirmation != "b":
@@ -533,7 +546,13 @@ class work_request_UI_menu:
     # Displays work requests, but no verification on if it matches rank.
     def display_and_select_my_work_request(self):
         """Prints out all work requests related to the user logged in. """
-        
+        while (staff_id := input("Enter Your Staff ID: ")) != "b" and staff_id != "B": 
+            is_staff_id_valid = self.logic_wrapper.sanity_check_sanity_check_staff_id_for_request(staff_id)
+            if is_staff_id_valid == True:
+                break
+            else:
+                print("Invalid")
+                continue
         selected_work_request = ""
         while selected_work_request != "b":
             print()

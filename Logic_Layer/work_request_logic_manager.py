@@ -50,8 +50,8 @@ class work_request_logic_manager:
                 return True
         return False
     
-    def sanity_check_employee_id_for_request(self, staff_id: str) -> bool:
-        all_employees = self.Storage_Layer_Wrapper.get_all_employee()
+    def sanity_check_sanity_check_staff_id_for_request(self, staff_id: str) -> bool:
+        all_employees = self.Storage_Layer_Wrapper.get_all_employees()
         for employee in all_employees:
             if employee.staff_id == staff_id:
                 return True    

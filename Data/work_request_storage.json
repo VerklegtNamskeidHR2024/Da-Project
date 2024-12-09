@@ -42,7 +42,7 @@
         "name": "Fix roof",
         "description": "roof had giant hole in it",
         "maintenance_report_id": "MR1",
-        "staff_id": "E1",
+        "staff_id": "",
         "location": "Reykjavik",
         "property_id": "P1",
         "start_date": "01-01-24",
@@ -54,7 +54,7 @@
         "need_contractor": true,
         "contractor_id": "",
         "mark_as_completed": false,
-        "accepted_by_employee": false
+        "accepted_by_employee": true
     },
     {
         "work_request_id": "WR4",
@@ -240,6 +240,25 @@
         "repetitive_work": false,
         "reopen_interval": "0",
         "priority": "low",
+        "work_request_status": "",
+        "need_contractor": "no",
+        "contractor_id": "",
+        "mark_as_completed": false,
+        "accepted_by_employee": false
+    },
+    {
+        "work_request_id": "WR14",
+        "name": "laga villur",
+        "description": "er ad laga create work request daemid ",
+        "maintenance_report_id": "",
+        "staff_id": "",
+        "location": "Nuuk",
+        "property_id": "P1",
+        "start_date": "12-12-24",
+        "completition_date": "",
+        "repetitive_work": false,
+        "reopen_interval": "0",
+        "priority": "Low",
         "work_request_status": "",
         "need_contractor": "no",
         "contractor_id": "",
