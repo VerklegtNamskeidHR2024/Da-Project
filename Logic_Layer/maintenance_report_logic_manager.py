@@ -152,7 +152,7 @@ class maintenance_report_logic_manager:
     def get_all_maintencance_reports_at_location(self, location) -> list:
         maintenance_report_sorted_list = []
 
-        all_maintenance_reports = self.storage_layer_wrapper.get_all_maintenance_report()
+        all_maintenance_reports = self.storage_layer_wrapper.get_all_maintenance_reports()
 
         for maintenance_report in all_maintenance_reports:
             if maintenance_report.location == location:
@@ -188,7 +188,7 @@ class maintenance_report_logic_manager:
     def fetch_all_closed_maintencance_reports(self, location) -> list:
         closed_reports = []
         list_of_all_reports = self.get_all_maintencance_reports_at_location(location)
-        
+
         for report in list_of_all_reports:
             if report.report_status == 'Closed':
                 closed_reports.append(report)
