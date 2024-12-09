@@ -94,14 +94,16 @@ class employee_logic_manager:
         return True
     
     def sanity_check_ssn(self, ssn) -> bool:
-        ssn = str(ssn)
+        #ssn = str(ssn)
+        print(ssn)
         if len(ssn) == 10:
             return True
         else:
             return False
         
     def sanity_check_phone_number(self, phone_number) -> bool:
-        phone_number = str(phone_number)
+        #phone_number = str(phone_number)
+        print(phone_number)
         if len(phone_number) == 7:
             return True
         else:
@@ -115,8 +117,11 @@ class employee_logic_manager:
         
     def sanity_check_for_employee_location(self, location) -> bool:
         location_list = self.Storage_Layer_Wrapper.get_all_locations()
-        if location in location_list:
-            return True
+        print(location)
+        for loc in location_list:
+            print(loc.location)
+            if loc.location == location:
+                return True
         else:
             return False
 
