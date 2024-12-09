@@ -158,7 +158,7 @@ class Main_Menu:
             case "3":
                 self.employee_UI_menu.start_point_employee_UI()
             case "4":
-                self.contractor_UI_menu.display_contractor_menu()
+                self.contractor_UI_menu.start_point_contractor_UI()
             case "5":
                 self.maintenance_report_UI_menu.start_point_maintenance_reports_UI()
             case "6" if self.rank != "Employee":
