@@ -10,7 +10,6 @@ class maintenance_report_logic_manager:
                 return False
         elif what_to_check == 'location':
             list_of_all_locations = self.storage_layer_wrapper.get_all_locations()
-            #list_of_all_locations = self.location_logic_manager.get_all_locations(self.location)
             for loc in list_of_all_locations:
                 if loc.location == new_value:
                     return True
@@ -22,7 +21,7 @@ class maintenance_report_logic_manager:
                     return True
             return False
         elif what_to_check in 'staff id':
-            list_of_all_employees = self.storage_layer_wrapper.get_all_employee()
+            list_of_all_employees = self.storage_layer_wrapper.get_all_employees()
             for employee in list_of_all_employees:
                 print(f'Checking if {employee.staff_id} == {new_value}')
                 if employee.staff_id == new_value:
