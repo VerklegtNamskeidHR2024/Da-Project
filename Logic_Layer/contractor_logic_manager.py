@@ -40,10 +40,10 @@ class contractor_logic_manager:
         """check if all info in a contractor object is correct"""
         # needs to check phone number 
         #print(len(contractor.phone_number))
-        if len(str(contractor.phone_number)) == 7:
-            return True
+        if len(str(contractor.phone_number)) != 7:
+            return False
         
-        return False
+        return True
     
     def add_new_contractor_to_storage(self, rank, location, contractor):
         print('Adding new contractor to storage')
