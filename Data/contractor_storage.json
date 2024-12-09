@@ -47,9 +47,18 @@
     {
         "contractor_id": "C6",
         "company_name": "asdas",
-        "contact_name": "asdasd",
+        "contact_name": "ass",
         "opening_hours": "ww",
         "phone_number": 1234567,
+        "location": "Reykjavik",
+        "previous_job_reports": []
+    },
+    {
+        "contractor_id": "C7",
+        "company_name": "sadsa",
+        "contact_name": "dasd",
+        "opening_hours": "12",
+        "phone_number": 2313132,
         "location": "Reykjavik",
         "previous_job_reports": []
     }
