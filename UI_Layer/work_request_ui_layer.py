@@ -6,15 +6,17 @@ class work_request_UI_menu:
         self.rank = rank
         self.location = location
 
-    def start_point_work_requests_UI(self):
+    def start_point_work_requests_UI(self, quit: str=""):
         """When this class is called it starts here, calling the display_requests_menu_items function 
         first to load the menu and it's options for the user. """
 
-        self.select_menu_option()
+        work_request_menu = self.select_menu_option()
+        if work_request_menu == "q":
+            return "q"
 
 
     def quit_system(self):
-        return 
+        self.start_point_work_requests_UI("quit") 
 
     # Completed, can be beautified.
     def display_all_work_requests_printed(self, work_request_list: list): 
@@ -33,6 +35,7 @@ class work_request_UI_menu:
     def display_selected_work_request_information(self, work_request: object):
         """Prints out a selected work requests and all it's information for user to read. """
         
+        print("-" * 70)
         print("{:0}{:>14}{:<10}".format("Categories", "|", "Details"))
         print("-" * 35)     
         print("{:0}{:>9}{:<10}".format("Work Request ID", "|", work_request.work_request_id)) 
@@ -85,12 +88,12 @@ class work_request_UI_menu:
             print("{:>20}".format("> Log Out: log"))
             print("{:>20}".format("> Quit System: q, Q"))
             print()
+        user_choice = input("Select an Option: ").lower()
+        return user_choice 
     
     def select_menu_option(self):
-        user_choice = ""
-        while user_choice != "b": 
-            self.display_work_requests_menu_items()
-            user_choice = input("Select an Option: ").lower()
+        user_choice = self.display_work_requests_menu_items()
+        while user_choice.lower() != "q": 
             match (user_choice , self.rank):
                 case ("1", self.rank): 
                     self.select_work_request_by_id()
@@ -104,11 +107,14 @@ class work_request_UI_menu:
                     self.display_and_select_closed_work_requests()
                 case ("6", "Admin") | ("6", "Manager"): 
                     self.display_create_work_request_form()
-                case ("q", self.rank) | ("Q", self.rank):
-                    self.quit_system()
+                case ("q", self.rank):
+                    # self.quit_system()
+                    return "q"
+                case ("b", self.rank):
+                    pass
                 case _:
                     print("Invalid Input, Please Try Again.")
-        return 
+        return user_choice
 
     # Works, but lacks more detailed verification on user input. Also can be beautified
     def select_work_request_by_id(self):
@@ -128,16 +134,17 @@ class work_request_UI_menu:
                 if self.rank != "Employee":
                     self.general_edit_work_request_selected_option(work_request_object)
                     return
-                elif work_request_object.accepted_by_employee == False:
+                elif (work_request_object.accepted_by_employee == False and work_request_object.work_request_status == "New"):
                     self.employee_accept_work_request_(work_request_object)
                     return
-                elif work_request_object.mark_as_completed == False:
+                elif (work_request_object.mark_as_completed == False and work_request_object.work_request_status == "Open"):
                     self.mark_work_request_completed(work_request_object)
                     return
-            print()
-            print("Work Request Could Not Be Found, Please Try Again.")
-            print()
-        return
+            else:
+                print()
+                print("Work Request Could Not Be Found, Please Try Again.")
+                print()
+        return work_request_selected_by_id
     
     # Completed, verification of user input can be improved. Also can be beautified.
     def display_create_work_request_form(self):
@@ -198,6 +205,7 @@ class work_request_UI_menu:
         if property_id == "b" or property_id == "B":
             return
     
+
     def set_start_date_for_request(self, new_work_request: object):
         while (start_date := input("Set The Start Date: ")) != "b" and start_date != "B":
             if len(start_date) == 8:
@@ -209,7 +217,8 @@ class work_request_UI_menu:
                 print()
         if start_date == "b" or start_date == "B":
             return
-        
+
+
     def set_completition_date_for_request(self, new_work_request: object):
         while (completition_date := input("Set The Completition Date (Not Required): ")) != "b" and completition_date != "B":
             if len(completition_date) == 8 or completition_date == "":
@@ -221,7 +230,8 @@ class work_request_UI_menu:
                 print()
         if completition_date == "b" or completition_date == "B":
             return
-        
+
+
     def set_repetitive_work_for_request(self, new_work_request: object):
         while (repetitive_work := input("Mark Request Repititive? (Yes or No): ")) != "b" and repetitive_work != "B":
             is_set_repetitive_boolean = self.logic_wrapper.sanity_check_boolean_input_work_requests(repetitive_work)
@@ -234,6 +244,7 @@ class work_request_UI_menu:
                 print()
         if repetitive_work == "b" or repetitive_work == "B":
             return
+
 
     def set_interval_days_for_request(self, new_work_request: object):
         while (interval_days := input("Set The Interval Of Days Until Request Re-Opens: ")) != "b" and interval_days != "B":
@@ -253,6 +264,7 @@ class work_request_UI_menu:
         if interval_days == "b" or interval_days == "B":
             return
         
+
     def set_priority_for_request(self, new_work_request: object):
         while (set_priority := input("Set The Request Priority (High, Medium or Low): ")) != "b" and set_priority != "B":
             is_priority_set_valid = self.logic_wrapper.sanity_check_priority_for_request(set_priority)
@@ -266,6 +278,7 @@ class work_request_UI_menu:
         if set_priority == "b" or set_priority == "B":
             return
         
+
     def set_needs_contractor_for_request(self, new_work_request: object):
         while (needs_contractor := input("Request Needs Contractor? (Yes or No): ")) != "b" and needs_contractor != "B":
             is_needs_contractor_boolean = self.logic_wrapper.sanity_check_boolean_input_work_requests(needs_contractor)
@@ -278,6 +291,7 @@ class work_request_UI_menu:
                 print()
         if needs_contractor == "b" or needs_contractor == "B":
             return 
+
 
     def set_location_for_request(self, new_work_request: object):
         if self.rank == "Admin": 
@@ -307,14 +321,10 @@ class work_request_UI_menu:
         print("Work Request Has Been Created")
         self.select_menu_option()
          
-
     # Displays options, not been tested enough to verify it's functionality. 
     def employee_accept_work_request_(self, work_request: object):
         """Allows the employee accept a new work request. """
 
-        print()
-        print("-" * 70)
-        print()
         print("{:>20}".format("> Go Back: b, B"))
         print("{:>20}".format("> Quit System: q, Q"))
         print()
@@ -523,7 +533,7 @@ class work_request_UI_menu:
     # Displays work requests, but no verification on if it matches rank.
     def display_and_select_my_work_request(self):
         """Prints out all work requests related to the user logged in. """
-
+        
         selected_work_request = ""
         while selected_work_request != "b":
             print()
@@ -535,10 +545,9 @@ class work_request_UI_menu:
             print("{:>15}".format("> Go Back: b, B"))
             print("{:>18}".format("> Quit System: q, Q"))
             print("-" * 70)
-            selected_work_request = input("Enter 1 to Select a Work Request: ").lower()
-            if selected_work_request == "1":
-                self.select_work_request_by_id()
-            print("Mama they took my dingus")
+            select_request = self.select_work_request_by_id()
+            if select_request == "b":
+                break
         return
 
     
@@ -557,10 +566,9 @@ class work_request_UI_menu:
             print("{:>15}".format("> Go Back: b, B"))
             print("{:>18}".format("> Quit System: q, Q"))
             print("-" * 70)
-            selected_work_request = input("Enter 1 To Select A Work Request: ").lower()
-            if selected_work_request == "1":
-                self.select_work_request_by_id()
-            print("Mama they took my dingus")
+            select_request = self.select_work_request_by_id()
+            if select_request == "b":
+                break
         return
         
     
@@ -580,10 +588,9 @@ class work_request_UI_menu:
             print("{:>15}".format("> Go Back: b, B"))
             print("{:>18}".format("> Quit System: q, Q"))
             print("-" * 70)
-            selected_work_request = input("Enter 1 To Select A Work Request: ").lower() 
-            if selected_work_request == "1":
-                self.select_work_request_by_id()
-            print("Mama they took my dingus")
+            select_request = self.select_work_request_by_id()
+            if select_request == "b":
+                break
         return
 
 
@@ -602,9 +609,8 @@ class work_request_UI_menu:
             print("{:>20}".format("> Go Back: b, B"))
             print("{:>20}".format("> Quit System: q, Q"))
             print("-" * 70)
-            selected_work_request = input("Enter 1 To Select A Work Request: ").lower() 
-            if selected_work_request == "1":
-                self.select_work_request_by_id()
-            print("Mama they took my dingus")
+            select_request = self.select_work_request_by_id()
+            if select_request == "b":
+                break
         return
         

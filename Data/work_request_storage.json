@@ -11,7 +11,7 @@
         "completition_date": "05-01-24",
         "repetitive_work": false,
         "reopen_interval": 0,
-        "priority": "high",
+        "priority": "Medium",
         "work_request_status": "Open",
         "need_contractor": true,
         "contractor_id": "C1",
@@ -35,7 +35,7 @@
         "need_contractor": true,
         "contractor_id": "C2",
         "mark_as_completed": false,
-        "accepted_by_employee": false
+        "accepted_by_employee": true
     },
     {
         "work_request_id": "WR3",
@@ -211,7 +211,7 @@
     {
         "work_request_id": "WR12",
         "name": "Kormakur er bestur",
-        "description": "Ekki gleyma a\u00c3\u00b0 eg er bestur og klarastur",
+        "description": "Ekki gleyma ad eg er bestur og klarastur",
         "maintenance_report_id": "",
         "staff_id": "",
         "location": "Reykjavik",
