@@ -25,7 +25,7 @@ class work_request_logic_manager:
             case "no" | "No":
                 return False
             case _:
-                return 
+                return None
             
     def sanity_check_priority_for_request(self, priority: str) -> bool:
         """Takes the input given by the user and returns True if the user had entered spefically low/Low, medium/Medium

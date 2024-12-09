@@ -11,7 +11,7 @@
         "completition_date": "05-01-24",
         "repetitive_work": false,
         "reopen_interval": 0,
-        "priority": "low",
+        "priority": "Medium",
         "work_request_status": "Open",
         "need_contractor": true,
         "contractor_id": "C1",

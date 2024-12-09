@@ -10,7 +10,9 @@ class work_request_UI_menu:
         """When this class is called it starts here, calling the display_requests_menu_items function 
         first to load the menu and it's options for the user. """
 
-        self.select_menu_option()
+        work_request_menu = self.select_menu_option()
+        if work_request_menu == "q":
+            return "q"
 
 
     def quit_system(self):
@@ -86,12 +88,12 @@ class work_request_UI_menu:
             print("{:>20}".format("> Log Out: log"))
             print("{:>20}".format("> Quit System: q, Q"))
             print()
+        user_choice = input("Select an Option: ").lower()
+        return user_choice 
     
     def select_menu_option(self):
-        user_choice = ""
-        while user_choice != "b": 
-            self.display_work_requests_menu_items()
-            user_choice = input("Select an Option: ").lower()
+        user_choice = self.display_work_requests_menu_items()
+        while user_choice.lower() != "q": 
             match (user_choice , self.rank):
                 case ("1", self.rank): 
                     self.select_work_request_by_id()
@@ -105,11 +107,14 @@ class work_request_UI_menu:
                     self.display_and_select_closed_work_requests()
                 case ("6", "Admin") | ("6", "Manager"): 
                     self.display_create_work_request_form()
-                case ("q", self.rank) | ("Q", self.rank):
-                    self.quit_system()
+                case ("q", self.rank):
+                    # self.quit_system()
+                    return "q"
+                case ("b", self.rank):
+                    pass
                 case _:
                     print("Invalid Input, Please Try Again.")
-        return 
+        return user_choice
 
     # Works, but lacks more detailed verification on user input. Also can be beautified
     def select_work_request_by_id(self):

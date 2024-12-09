@@ -144,7 +144,7 @@ class Main_Menu:
             print("-" * 70)
 
             user_action = input("Select an Option: ")
-            self.user_choice_select(user_action.lower())
+            user_action = self.user_choice_select(user_action.lower())
         return 
 
     def user_choice_select(self, user_action):
@@ -154,7 +154,7 @@ class Main_Menu:
             case "1":
                 self.property_UI_menu.start_point_property_UI()
             case "2":
-                self.work_request_UI_menu.start_point_work_requests_UI()
+                user_action = self.work_request_UI_menu.start_point_work_requests_UI()
             case "3":
                 self.employee_UI_menu.start_point_employee_UI()
             case "4":
@@ -173,7 +173,7 @@ class Main_Menu:
                 return
             case _:
                 print("Wrong Input")
-        return
+        return user_action
     
     def test_some_stuff(self):
         """just some tesing with getting data from storage""" 
