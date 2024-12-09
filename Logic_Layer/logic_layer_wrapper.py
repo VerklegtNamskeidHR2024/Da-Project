@@ -40,18 +40,27 @@ class Logic_Layer_Wrapper:
     def get_all_contractors_at_location(self, location):
         return self.contractor_logic_manager.get_all_contractors_at_location(location)
 
-    def get_contractor_by_id(self, rank, location, contractor_id) -> Contractor:
+    def get_contractor_by_id(self, location, contractor_id) -> Contractor:
         return self.contractor_logic_manager.get_contractor_by_id(location,contractor_id)
    
-    def sanity_check_contractor(self, contractor):
+    def sanity_check_contractor(self, contractor, new):
         """check if all info in a contractor object"""
-        return self.contractor_logic_manager.sanity_check_contractor(contractor)
+        return self.contractor_logic_manager.sanity_check_contractor(contractor, new)
     
-    def add_new_contractor(self, contractor):
-        return self.contractor_logic_manager.add_new_contractor(contractor)
+    def add_new_contractor(self, rank, location, contractor):
+        return self.contractor_logic_manager.add_new_contractor_to_storage(rank, location, contractor)
+    
+    def get_contractor_maintenance_reports(self, location, contractor_id):
+        return self.contractor_logic_manager.get_contractor_maintenance_reports(location, contractor_id)
+    
+    def get_contractor_work_requests(self, location, property_id) -> list:
+        return self.contractor_logic_manager.get_contractor_work_requests(location, property_id)
     
     def write_to_file_checker(self, new_list):
         return self.contractor_logic_manager.write_to_file_checker(new_list)
+    
+    def edit_existing_contractor_in_storage(self, contractor, location, edit_choice, new_value):
+        return self.contractor_logic_manager.edit_existing_contractor_in_storage(contractor, location, edit_choice, new_value)
     
     ########################################################################################################
     ### PROPERTIES #########################################################################################

@@ -12,7 +12,7 @@ class contractor_storage:
         return contractors_list
 
     def write_to_file_contractor(self, list_of_contractors: list[Contractor]):
-        print('we writing')
+        #print('we writing')
         dict_of_contractors = [contractor.to_dict() for contractor in list_of_contractors]
         with open('Data/contractor_storage.json', 'w') as contractor_file:
             json.dump(dict_of_contractors, contractor_file, indent=4)
