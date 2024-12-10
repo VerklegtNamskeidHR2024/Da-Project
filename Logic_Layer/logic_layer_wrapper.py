@@ -108,12 +108,20 @@ class Logic_Layer_Wrapper:
         # edits an existing property in the storage
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################
+    def get_all_admins(self, rank: str): 
+        return self.employee_logic_manager.get_all_admins(rank)
+
+    def get_all_managers(self, rank: str): 
+        return self.employee_logic_manager.get_all_managers(rank)
     def get_all_employees_at_location(self, location) -> list:
         return self.employee_logic_manager.get_all_employees_at_location(location)
         # returns a list of all employees at a specific location
     
     def get_all_employees(self) -> list:
         return self.employee_logic_manager.get_all_employees() 
+
+    def get_all_employees_at_location(self, location) -> list:
+        return self.employee_logic_manager.get_all_employees_at_location(location)
         # returns a list of all employees
     
     def add_new_employee_to_storage(self, new_employee):
@@ -136,7 +144,10 @@ class Logic_Layer_Wrapper:
         return self.employee_logic_manager.fetch_all_maintenance_reports_for_employee(staff_id)
         # returns a list of all maintenance reports for a specific employee
 
-    def sanity_check_employee_name(self, name) -> bool:
+    def sanity_check_staff_id(self, rank: str, staff_id: str) -> bool:
+        return self.employee_logic_manager.sanity_check_staff_id(self, staff_id)
+
+    def sanity_check_employee_name(self, name: str) -> bool:
         return self.employee_logic_manager.sanity_check_employee_name(name)
         # checks if the name of an employee is correct
     
@@ -193,6 +204,12 @@ class Logic_Layer_Wrapper:
     def get_incomplete_maintenance_reports(self, location):
         return self.maintenance_report_logic_manager.get_incomplete_maintenance_reports(location)
         # returns a list of all incomplete maintenance reports
+    
+    def get_single_maintenance_report(self, report_id):
+        return self.maintenance_report_logic_manager.get_single_maintenance_report(report_id)
+    
+    def get_single_maintenance_report(self, report_id):
+        return self.maintenance_report_logic_manager.get_single_maintenance_report(report_id)
     
     def sanity_check_maintencance_report(self, what_to_check, new_value, location):
         location_list = self.get_all_locations() # get all locations
