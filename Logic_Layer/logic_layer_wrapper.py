@@ -19,10 +19,11 @@ from Logic_Layer.work_request_logic_manager import work_request_logic_manager
 
 
 class Logic_Layer_Wrapper:
-    def __init__(self, rank, location):
+    def __init__(self, rank, location, staff_id):
         # creating the storage layer wrapper
         self.storage_layer_wrapper = Storage_Layer_Wrapper()
         self.rank = rank
+        self.staff_id = staff_id
         self.location = location
 
         # creating all the logic classes.
@@ -42,8 +43,9 @@ class Logic_Layer_Wrapper:
         # returns a list of all contractors at a specific location
 
     def get_contractor_by_id(self, location, contractor_id) -> Contractor:
-        return self.contractor_logic_manager.get_contractor_by_id(location,contractor_id)
+        return self.contractor_logic_manager.get_contractor_by_id(location, contractor_id)
         # returns a contractor object by contractor_id
+
    
     def sanity_check_contractor(self, contractor, new):
         """check if all info in a contractor object"""
@@ -108,17 +110,12 @@ class Logic_Layer_Wrapper:
         # edits an existing property in the storage
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################
-    def get_all_admins(self, rank: str): 
-        return self.employee_logic_manager.get_all_admins(rank)
-
-    def get_all_managers(self, rank: str): 
-        return self.employee_logic_manager.get_all_managers(rank)
-    def get_all_employees_at_location(self, location) -> list:
-        return self.employee_logic_manager.get_all_employees_at_location(location)
+    def get_employee_by_id(self, staff_id: str) -> str:
+        return self.employee_logic_manager.get_employee_by_id(staff_id) 
         # returns a list of all employees at a specific location
     
-    def get_all_employees(self) -> list:
-        return self.employee_logic_manager.get_all_employees() 
+    def get_manager_by_id(self, staff_id: str) -> str:
+        return self.employee_logic_manager.get_manager_by_id(staff_id)
 
     def get_all_employees_at_location(self, location) -> list:
         return self.employee_logic_manager.get_all_employees_at_location(location)
@@ -145,7 +142,7 @@ class Logic_Layer_Wrapper:
         # returns a list of all maintenance reports for a specific employee
 
     def sanity_check_staff_id(self, rank: str, staff_id: str) -> bool:
-        return self.employee_logic_manager.sanity_check_staff_id(self, staff_id)
+        return self.employee_logic_manager.sanity_check_staff_id(rank, staff_id)
 
     def sanity_check_employee_name(self, name: str) -> bool:
         return self.employee_logic_manager.sanity_check_employee_name(name)
