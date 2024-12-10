@@ -155,14 +155,14 @@ class maintenance_report_logic_manager:
                 if edit_choice == 'Report Name':
                     report.set_report_name(new_value)
                 
+                elif edit_choice == 'Location':
+                    report.set_location(new_value)
+
+                elif edit_choice == 'Property ID':
+                    report.set_property_id(new_value)
+                
                 elif edit_choice == 'Staff ID':
                     report.set_staff_id(new_value)
-
-                elif edit_choice == 'Description':
-                    report.set_maintenance_description(new_value)
-
-                elif edit_choice == 'Cost':
-                    report.set_price(new_value)
 
                 elif edit_choice == 'Regular':
                     if new_value == 'Yes' or new_value == 'yes':
@@ -170,8 +170,20 @@ class maintenance_report_logic_manager:
                     elif new_value == 'No' or new_value == 'no':
                         report.set_regular_maintenance(False)
 
+                elif edit_choice == 'Description':
+                    report.set_maintenance_description(new_value)
+
+                elif edit_choice == 'Report Status':
+                    report.set_report_status(new_value)
+
+                elif edit_choice == 'Cost':
+                    report.set_price(new_value)
+
                 elif edit_choice == 'Contractor ID':
                     report.set_contractor_id(new_value)
+
+                elif edit_choice == 'Work Request ID':
+                    report.set_work_request_id(new_value)
 
         self.storage_layer_wrapper.write_to_file_maintenance_reports(list_of_reports)
 
@@ -223,3 +235,10 @@ class maintenance_report_logic_manager:
             return 'No closed reports'
         else:
             return closed_reports
+        
+
+    def get_single_maintenance_report(self, report_id):
+        all_reports = self.get_all_maintencance_reports('')
+        for report in all_reports:
+            if report.report_id == report_id:
+                return report
