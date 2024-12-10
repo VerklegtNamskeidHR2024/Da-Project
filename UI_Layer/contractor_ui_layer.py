@@ -85,7 +85,7 @@ class contractor_UI_menu():
                 self.display_add_contractor_form()
             case "2":
                 # edit contractor
-                self.display_edit_contracor_menu()
+                self.display_edit_contractor_menu()
             case "3":
                 self.display_view_contractor()
             case "4":
@@ -135,17 +135,27 @@ class contractor_UI_menu():
             if contractor_to_use == None:
                 print("No contractor with that ID")
                 return
-            else:
-                self.print_single_contractor(contractor_to_use)
-                self.display_contractor_maintenance_reports(contractor_to_use)
-                self.display_contractor_work_requests(contractor_to_use)
-                return
         except:
             print("something went wrong")
             return
+        self.print_single_contractor(contractor_to_use)
+        print("1) View work requests")
+        print("2) Give warning")
+        print("3) Change Opening Hours")
+        edit_user_action = input("What action would you like to perform: ")
+        match edit_user_action:
+            case "1":
+                self.display_contractor_work_requests(contractor_to_use)
+            case "2":
+                self.change_phone_number(contractor_to_use)
+            case "3":
+                self.change_opening_hours(contractor_to_use)
+            case _:
+                print("not valid input")
+                return
 
     # display edit contractor
-    def display_edit_contracor_menu(self) -> None:
+    def display_edit_contractor_menu(self) -> None:
         """edit contractor menu"""
         # find contracotor from id
         try:
