@@ -1,3 +1,10 @@
+import sys
+import time
+import os
+import msvcrt, time
+from datetime import datetime
+from threading import Thread
+
 from Logic_Layer.logic_layer_wrapper import Logic_Layer_Wrapper
 
 from UI_Layer.employee_ui_layer import employee_UI_menu
@@ -102,6 +109,11 @@ class Main_Menu:
 
     def select_user_for_system(self):
         # select a user for the system to use
+        print()
+        sys.stdout.write("\r" + "Loading" + "." * 10)
+        time.sleep(1)
+        sys.stdout.flush()
+
         return_user = ""
         while return_user == "":
             print()
@@ -133,6 +145,15 @@ class Main_Menu:
                     break
                 case _:
                     print("No User Found, Please Try Again.")
+
+        # sys.stdout.write('\x1b[2K')
+        # print("something will be updated/erased during next loop", end="")
+        # print("\r", end="")
+        # print("the info")
+
+        # print ("\033[A                             \033[A")
+        # print()
+        
         return return_user
     
 
