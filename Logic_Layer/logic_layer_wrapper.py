@@ -207,9 +207,12 @@ class Logic_Layer_Wrapper:
     
     def get_single_maintenance_report(self, report_id: str) -> MaintenanceReport:
         return self.maintenance_report_logic_manager.get_single_maintenance_report(report_id)
+
+    def get_denied_reports(self, staff_id: str, location: str) -> list[MaintenanceReport]:
+        return self.maintenance_report_logic_manager.get_denied_reports(staff_id, location)
     
-    def sanity_check_maintencance_report(self, what_to_check: str, new_value: str, location: str):
-        # location_list = self.get_all_locations() # get all locations
+    def sanity_check_maintencance_report(self, what_to_check, new_value, location):
+        location_list = self.get_all_locations() # get all locations
         return self.maintenance_report_logic_manager.sanity_check_maintencance_report(what_to_check, new_value, location)
         # checks if all info in a maintenance report object is correct
 
