@@ -78,7 +78,7 @@ class Logic_Layer_Wrapper:
         return self.property_logic_manager.get_all_properties_at_location(location)
         # returns a list of all properties at a specific location
     
-    def get_all_properties_at_location(self, location):
+    def get_all_properties_at_location(self, location: str):
         return self.property_logic_manager.get_all_properties_at_location(location)
         # returns a list of all properties at a specific location
 
@@ -215,28 +215,28 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### WORK_REQUESTS ######################################################################################
-    def get_all_work_requests_at_location(self, rank:str , location: str) -> list[WorkRequest]: 
-        return self.work_request_logic_manager.get_all_work_requests_at_location(rank, location)
+    def get_all_work_requests_at_location(self, rank: str, location: str, staff_id: str) -> list[WorkRequest]: 
+        return self.work_request_logic_manager.get_all_work_requests_at_location(rank, location, staff_id)
         # returns a list of all work requests at a specific location
 
-    def get_work_request_by_id(self, rank: str, location: str, work_request_id: str) -> WorkRequest:
-        return self.work_request_logic_manager.get_work_request_by_id(rank, location, work_request_id)  
+    def get_work_request_by_id(self, location: str, work_request_id: str, status: str, accepted_by_employee: bool) -> WorkRequest:
+        return self.work_request_logic_manager.get_work_request_by_id(location, work_request_id, status, accepted_by_employee)  
         # returns a work request object by work_request_id
     
-    def get_all_new_work_requests(self, rank: str, location: str) -> list[WorkRequest]:
-        return self.work_request_logic_manager.get_all_new_work_requests_in_storage(rank, location)
+    def get_all_new_work_requests(self, location: str) -> list[WorkRequest]:
+        return self.work_request_logic_manager.get_all_new_work_requests_in_storage(location)
         # returns a list of all new work requests
     
-    def get_all_closed_work_requests(self, rank: str, location: str) -> list[WorkRequest]: 
-        return self.work_request_logic_manager.get_all_closed_work_requests_in_storage(rank, location)
+    def get_all_closed_work_requests(self, location: str) -> list[WorkRequest]: 
+        return self.work_request_logic_manager.get_all_closed_work_requests_in_storage(location)
         # returns a list of all closed work requests
     
-    def get_all_pending_work_requests(self, rank: str, location: str) -> list[WorkRequest]:
-        return self.work_request_logic_manager.get_all_pending_work_requests_in_storage(rank, location)
+    def get_all_pending_work_requests(self, rank: str, location: str, staff_id: str) -> list[WorkRequest]:
+        return self.work_request_logic_manager.get_all_pending_work_requests_in_storage(rank, location, staff_id)
         # returns a list of all pending work requests
     
-    def get_my_work_requests(self, rank: str, location: str) -> list[WorkRequest]:
-        return self.work_request_logic_manager.get_my_work_request(rank, location)
+    def get_my_work_requests(self, rank: str, location: str, staff_id: str) -> list[WorkRequest]:
+        return self.work_request_logic_manager.get_my_work_request(rank, location, staff_id)
         # returns a list of all work requests for a specific employee
     def edit_work_request(self, WorkRequest: object) -> None:
         return self.work_request_logic_manager.edit_work_request(WorkRequest)

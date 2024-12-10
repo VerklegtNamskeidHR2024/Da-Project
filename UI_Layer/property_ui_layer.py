@@ -2,6 +2,7 @@ from Model_Classes.house_model import House
 from prettytable import PrettyTable 
 from colorama import Fore, Style, init
 init()
+
 class property_UI_menu:
     def __init__(self, logic_wrapper, rank, location, staff_id):
         self.logic_wrapper = logic_wrapper
@@ -13,7 +14,7 @@ class property_UI_menu:
         
         #Entry point for the property UI.
         properties_menu = self.properties_menu_logistics()
-        if properties_menu == "q" or properties_menu == "b": 
+        if properties_menu in ["q", "b"]:
             return properties_menu 
 
     def display_properties_menu(self):   
@@ -53,6 +54,8 @@ class property_UI_menu:
                     user_action = self.display_select_property()
                 case ("2", "Admin") | ("2", "Manager"):
                     user_action = self.display_add_property()
+                case ("2", "Employee"):
+                    user_action = self.display_add_amenity()
                 case "b":
                     return "b"
                 case "q":
@@ -65,15 +68,13 @@ class property_UI_menu:
         #Displays options for a selected property.
         # You choose the property id for the properrty you looking for
 
-        while (property_id_selected := input("Enter the Property ID to select: ")) != "q" and property_id_selected != "Q":
-            if property_id_selected.lower() == "b" or property_id_selected == "B":
-                break
+        while (property_id_selected := input("Enter the Property ID to select: ")) not in ["q", "b", "Q", "B"]:
         # Gets property by id
             if len(property_id_selected) < 3:
                 print()
                 print("Must Enter A Valid Property ID")
                 print()
-            selected_property = self.logic_wrapper.get_property_by_id(self.location, property_id)
+            selected_property = self.logic_wrapper.get_property_by_id(self.location, property_id_selected)
 
             # If there is not property with the slected id you will get a message 
             if not selected_property:
@@ -106,36 +107,43 @@ class property_UI_menu:
 
     def display_add_property(self):
         '''Displays the form to add a new property.'''
+        
         is_valid_name = False
         is_valid_location = False
         is_valid_condition = False
         is_valid_price_to_fix = False
         is_valid_price = False
+
         while is_valid_name == False:
             new_name = input("Enter the property name: ")
             is_valid_name = self.logic_wrapper.sanity_check_properties('name', new_name)
             if is_valid_name == False:
                 print("Invalid name. Please try again.")
+
         while is_valid_location == False:
             new_location = input("Enter the property location: ")
             is_valid_location = self.logic_wrapper.sanity_check_properties('location', new_location)
             if is_valid_location == False:
                 print("Invalid location. Please try again.")
+
         while is_valid_condition == False:
             new_condition = input("Enter the property condition: ")
             is_valid_condition = self.logic_wrapper.sanity_check_properties('condition', new_condition)
             if is_valid_condition == False:
                 print("Invalid condition. Please try again.")
+
         while is_valid_price_to_fix == False:
             new_price_to_fix = input("Enter the price to fix: ")
             is_valid_price_to_fix = self.logic_wrapper.sanity_check_properties('price_to_fix', new_price_to_fix)
             if is_valid_price_to_fix == False:
                 print("Invalid price to fix. Please try again.")
+
         while is_valid_price == False:
             new_price = input("Enter the property price: ")
             is_valid_price = self.logic_wrapper.sanity_check_properties('price', new_price)
             if is_valid_price == False:
                 print("Invalid price. Please try again.")
+
         new_property = House('', new_name, new_location, new_condition, new_price_to_fix, new_price)
         self.logic_wrapper.add_new_property_to_storage(self.rank, self.location, new_property)
 
@@ -146,31 +154,37 @@ class property_UI_menu:
         is_valid_condition = False
         is_valid_price_to_fix = False
         is_valid_price = False
+
         while is_valid_name == False:
             new_name = input("Enter the property name: ")
             is_valid_name = self.logic_wrapper.sanity_check_properties('name', new_name)
             if is_valid_name == False:
                 print("Invalid name. Please try again.")
+
         while is_valid_location == False:
             new_location = input("Enter the property location: ")
             is_valid_location = self.logic_wrapper.sanity_check_properties('location', new_location)
             if is_valid_location == False:
                 print("Invalid location. Please try again.")
+
         while is_valid_condition == False:
             new_condition = input("Enter the property condition: ")
             is_valid_condition = self.logic_wrapper.sanity_check_properties('condition', new_condition)
             if is_valid_condition == False:
                 print("Invalid condition. Please try again.")
+
         while is_valid_price_to_fix == False:
             new_price_to_fix = input("Enter the price to fix: ")
             is_valid_price_to_fix = self.logic_wrapper.sanity_check_properties('price_to_fix', new_price_to_fix)
             if is_valid_price_to_fix == False:
                 print("Invalid price to fix. Please try again.")
+
         while is_valid_price == False:
             new_price = input("Enter the property price: ")
             is_valid_price = self.logic_wrapper.sanity_check_properties('price', new_price)
             if is_valid_price == False:
                 print("Invalid price. Please try again.")
+
         new_property = House('', new_name, new_location, new_condition, new_price_to_fix, new_price)
         self.logic_wrapper.add_new_property_to_storage(self.rank, self.location, new_property)
 
