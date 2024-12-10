@@ -164,11 +164,11 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### WORK_REQUESTS ######################################################################################
-    def get_all_work_requests_at_location(self, rank:str , location: str) -> list[WorkRequest]: 
-        return self.work_request_logic_manager.get_all_work_requests_at_location(rank, location)
+    def get_all_work_requests_at_location(self, rank: str , location: str, staff_id: str) -> list[WorkRequest]: 
+        return self.work_request_logic_manager.get_all_work_requests_at_location(rank, location, staff_id)
 
-    def get_work_request_by_id(self, rank: str, location: str, work_request_id: str) -> WorkRequest:
-        return self.work_request_logic_manager.get_work_request_by_id(rank, location, work_request_id)
+    def get_work_request_by_id(self, rank: str, location: str, work_request_id: str, status: str, accepted_by_employee: bool) -> WorkRequest:
+        return self.work_request_logic_manager.get_work_request_by_id(rank, location, work_request_id, status, accepted_by_employee)
     
     def get_all_new_work_requests(self, rank: str, location: str) -> list[WorkRequest]:
         return self.work_request_logic_manager.get_all_new_work_requests_in_storage(rank, location)
@@ -176,11 +176,11 @@ class Logic_Layer_Wrapper:
     def get_all_closed_work_requests(self, rank: str, location: str) -> list[WorkRequest]: 
         return self.work_request_logic_manager.get_all_closed_work_requests_in_storage(rank, location)
     
-    def get_all_pending_work_requests(self, rank: str, location: str) -> list[WorkRequest]:
-        return self.work_request_logic_manager.get_all_pending_work_requests_in_storage(rank, location)
+    def get_all_pending_work_requests(self, rank: str, location: str, staff_id: str) -> list[WorkRequest]:
+        return self.work_request_logic_manager.get_all_pending_work_requests_in_storage(rank, location, staff_id)
     
-    def get_my_work_requests(self, rank: str, location: str) -> list[WorkRequest]:
-        return self.work_request_logic_manager.get_my_work_request(rank, location)
+    def get_my_work_requests(self, rank: str, location: str, staff_id: str) -> list[WorkRequest]:
+        return self.work_request_logic_manager.get_my_work_request(rank, location, staff_id)
     
     def edit_work_request(self, WorkRequest: object) -> None:
         return self.work_request_logic_manager.edit_work_request(WorkRequest)
@@ -199,9 +199,6 @@ class Logic_Layer_Wrapper:
 
     def sanity_check_location_for_request(self, location: str) -> bool:
         return self.work_request_logic_manager.sanity_check_location_for_request(location)
-    
-    def sanity_check_employee_id_for_request(self, staff_id: str) -> bool:
-        return self.work_request_logic_manager.sanity_check_employee_id_for_request(staff_id)
     
     def sanity_check_staff_id_for_request(self, staff_id: str) -> bool:
         return self.work_request_logic_manager.sanity_check_staff_id_for_request(staff_id)

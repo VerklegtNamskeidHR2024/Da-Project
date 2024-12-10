@@ -51,13 +51,6 @@ class work_request_logic_manager:
                 return True
         return False
     
-    def sanity_check_employee_id_for_request(self, staff_id: str) -> bool:
-        all_employees = self.Storage_Layer_Wrapper.get_all_employees()
-        for employee in all_employees:
-            if employee.staff_id == staff_id:
-                return True    
-        return False 
-    
     # Might not fully implement, needs further thought.
     def sanity_check_staff_id_for_request(self, staff_id: str) -> bool:
         all_employees = self.Storage_Layer_Wrapper.get_all_employees()
@@ -101,30 +94,44 @@ class work_request_logic_manager:
         return 
 
 
-    def get_work_request_by_id(self, rank: str, location: str, work_request_id: str) -> object:
+    def get_work_request_by_id(self, rank: str, location: str, work_request_id: str, status: str, accepted_by_employee: bool) -> object:
         
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         for work_request in all_work_requests:
-            if (work_request.location == location and work_request.work_request_id == work_request_id):
-                return work_request 
+            if (status == "" and accepted_by_employee == True):
+                if (work_request.location == location and work_request.work_request_id == work_request_id):
+                    return work_request 
+            else:
+                if (work_request.location == location and work_request.work_request_id == work_request_id 
+                    and work_request.work_request_status == status and work_request.accepted_by_employee == accepted_by_employee):
+                    return work_request
 
-    def get_all_work_requests_at_location(self, rank: str, location: str) -> list:
+    def get_all_work_requests_at_location(self, rank: str, location: str, staff_id) -> list:
         """Gets all work requests at specific location. """
 
         work_request_sorted_list = []
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         for work_request in all_work_requests:
-            if (work_request.location == location and work_request.accepted_by_employee == True and work_request.work_request_status == "Open"):
-                work_request_sorted_list.append(work_request)
+            if staff_id == "":
+                if (work_request.location == location and work_request.accepted_by_employee == True and work_request.work_request_status == "Open"):
+                    work_request_sorted_list.append(work_request)
+            else:
+                if (work_request.location == location and work_request.accepted_by_employee == True 
+                    and work_request.work_request_status == "Open" and work_request.staff_id == staff_id):
+                    work_request_sorted_list.append(work_request)
         return work_request_sorted_list 
         
-    def get_my_work_request(self, rank: str, location: str) -> list:
+    def get_my_work_request(self, rank: str, location: str, staff_id) -> list:
         
         work_request_sorted_list = []
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         for work_request in all_work_requests:
-            if (work_request.location == location and work_request.accepted_by_employee == True):
-                work_request_sorted_list.append(work_request)
+            if staff_id == "":
+                if (work_request.location == location and work_request.accepted_by_employee == True):
+                    work_request_sorted_list.append(work_request)
+            else:
+                if (work_request.location == location and work_request.accepted_by_employee == True and work_request.staff_id == staff_id):
+                    work_request_sorted_list.append(work_request)
         return work_request_sorted_list
 
     def get_all_closed_work_requests_in_storage(self, rank: str, location: str) -> list:
@@ -137,16 +144,18 @@ class work_request_logic_manager:
                 work_request_sorted_list.append(work_request)
         return work_request_sorted_list
 
-    def get_all_pending_work_requests_in_storage(self, rank: str, location: str) -> list:
+    def get_all_pending_work_requests_in_storage(self, rank: str, location: str, staff_id) -> list:
+
         work_request_sorted_list = []
-
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
-
         for work_request in all_work_requests:
-            if (work_request.location == location and work_request.work_request_status == "Pending" 
-                and work_request.accepted_by_employee == True):
-                work_request_sorted_list.append(work_request)
-        
+            if staff_id == "":
+                if (work_request.location == location and work_request.work_request_status == "Pending" and work_request.accepted_by_employee == True):
+                    work_request_sorted_list.append(work_request)
+            else:
+                if (work_request.location == location and work_request.work_request_status == "Pending" 
+                and work_request.accepted_by_employee == True and work_request.staff_id == staff_id):
+                    work_request_sorted_list.append(work_request)
         return work_request_sorted_list
 
     def get_all_new_work_requests_in_storage(self, rank: str, location: str) -> list:

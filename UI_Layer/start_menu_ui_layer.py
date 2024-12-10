@@ -20,6 +20,7 @@ init()
 
 class Main_Menu:
     def __init__(self, rank, location):
+        self.logic_wrapper = Logic_Layer_Wrapper(rank, location)
         # calls the select function for what user you want to see the system as and, then - 
         # calls the location select function
         rank = self.select_user_for_system()
@@ -27,7 +28,7 @@ class Main_Menu:
 
         self.rank = rank
         self.location = location
-        self.logic_wrapper = Logic_Layer_Wrapper(self.rank, self.location)
+        
 
         
         # sendir ekki inn self.blahblah útaf það er gert í þessum klasa, vilt bara senda inn location og rank
@@ -69,7 +70,7 @@ class Main_Menu:
     def start_point(self):
         #self.select_user_for_system()
         #self.select_location_for_system()
-        user_home_page = self.user_choice_select()
+        user_home_page = self.user_home_page_logistics()
         if user_home_page == "q":
             self.quit_system_message()
 
@@ -215,7 +216,7 @@ class Main_Menu:
         user_action = input("Select an Option: ").lower()
         return user_action
 
-    def user_choice_select(self):
+    def user_home_page_logistics(self):
 
         # Calls the sub menus
         user_action = ""
