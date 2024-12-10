@@ -62,15 +62,6 @@ class Storage_Layer_Wrapper:
 
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################
-    # def get_all_admins(self) -> list[Admin]:
-    #     """Get all admins"""
-    #     all_admins = self.admin_storage_manager.get_all_admins()
-    #     return all_admins 
-
-    # def get_all_managers(self) -> list[Manager]:
-    #     """Get all managers"""
-    #     all_managers = self.manager_storage_manager.get_all_managers()
-    #     return all_managers 
     
     def get_all_employees(self) -> list:
         """Get all managers"""
@@ -124,7 +115,7 @@ class Storage_Layer_Wrapper:
     def get_all_admins(self) -> list[Admin]:
         """Get all admins"""
         all_admins = self.admin_storage_manager.get_all_admins()
-        return all_admins 
+        return all_admins  
     
     def write_to_file_admin(self, list_of_admins: list):
         self.admin_storage_manager.write_to_file_admin(list_of_admins)
@@ -132,13 +123,14 @@ class Storage_Layer_Wrapper:
     ########################################################################################################
     ### MANAGER ############################################################################################
     
-    def get_all_managers(self):
+    def get_all_managers(self) -> list[Manager]:
         """Get all managers"""
         all_managers = self.manager_storage_manager.get_all_managers()
-        return all_managers    
+        return all_managers
+    
     def write_to_file_managers(self, list_of_managers: list):
         """Write to file managers"""
-        write_to_file_manager = self.manager_storage_manager.write_to_file_managers(list_of_managers)
+        self.manager_storage_manager.write_to_file_managers(list_of_managers)
     
     ########################################################################################################
     ### AMENITY ############################################################################################
