@@ -202,6 +202,9 @@ class Logic_Layer_Wrapper:
     
     def sanity_check_employee_id_for_request(self, staff_id: str) -> bool:
         return self.work_request_logic_manager.sanity_check_employee_id_for_request(staff_id)
+    
+    def sanity_check_staff_id_for_request(self, staff_id: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_staff_id_for_request(staff_id)
 
     ########################################################################################################
     ### LOCATION ###########################################################################################

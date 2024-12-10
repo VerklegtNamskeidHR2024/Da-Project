@@ -13,22 +13,24 @@ init()
 
 class Main_Menu:
     def __init__(self, rank, location):
-        self.logic_wrapper = Logic_Layer_Wrapper(rank, location)
         # calls the select function for what user you want to see the system as and, then - 
         # calls the location select function
         rank = self.select_user_for_system()
         location = self.select_location_for_system()
+
         self.rank = rank
         self.location = location
+        self.logic_wrapper = Logic_Layer_Wrapper(self.rank, self.location)
+
         
         # sendir ekki inn self.blahblah útaf það er gert í þessum klasa, vilt bara senda inn location og rank
         # annars er sent inn vitlaust location - Kv Hreimur
-        self.employee_UI_menu = employee_UI_menu(self.logic_wrapper, rank, location) # , self.rank, self.location
-        self.location_UI_menu = location_UI_menu(self.logic_wrapper, rank, location) # , self.rank, self.location
-        self.contractor_UI_menu = contractor_UI_menu(self.logic_wrapper, rank, location) 
-        self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper, rank, location) # , self.rank, self.location
-        self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper, rank, location) # , self.rank, self.location
-        self.property_UI_menu = property_UI_menu(self.logic_wrapper, rank, location) # , self.rank, self.location
+        self.employee_UI_menu = employee_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
+        self.location_UI_menu = location_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
+        self.contractor_UI_menu = contractor_UI_menu(self.logic_wrapper, self.rank, self.location) 
+        self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
+        self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
+        self.property_UI_menu = property_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
 
         # these may need to be sent into each UI class
         #self.rank = rank
@@ -48,10 +50,21 @@ class Main_Menu:
     # def get_rank(self):
     #     return self.rank
 
+    # def do_user_selection(self):
+    #     # 
+    #     self.rank = self.select_user_for_system()
+    #     if self.rank == "q":
+    #         return None
+    #     self.location = self.select_location_for_system()
+    #     if self.location == "q":
+    #         return None 
+
     def start_point(self):
         #self.select_user_for_system()
         #self.select_location_for_system()
-        self.display_menu_items()
+        user_home_page = self.user_choice_select()
+        if user_home_page == "q":
+            self.quit_system_message()
 
     def quit_system_message(self):
         print("Departing from NaN Air, Thank you for Visiting!")
@@ -61,12 +74,13 @@ class Main_Menu:
         print("{:>61}".format("==================="))
         print("{:>44}{:>13}{:>3}".format("|", "NaN Air HQ", "|"))
         print("{:>14}{:>7}{:>15}{:>8}{:>10}{:>6}".format("___________", ".", ": : : :", "|", "_____","|"))
-        print("{:>13}{:>12}{:>11}{:>5}{:>3}{:>10}{:>6}{:>4}".format("_\_(*)_/_", "___(*)___", ": : : :", "o o", "|", "| | |", "|", "_ ,"))
-        print("{:0}{:>1}{:>31}".format("_______|-|_________/-\__________", ":", "_____|_|__|_____| | |_____| o-o"))
-        pass
+        print("{:>13}{:>12}{:>11}{:>5}{:>3}{:>10}{:>6}{:>4}".format("_\\_(*)_/_", "___(*)___", ": : : :", "o o", "|", "| | |", "|", "_ ,"))
+        print("{:0}{:>1}{:>31}".format("_______|-|_________/-\\__________", ":", "_____|_|__|_____| | |_____| o-o"))
+
 
     def create_location_table(self):
-        """print for location selection"""
+        """Prints out a table of available locations for the user to select. """
+
         locations_table = PrettyTable()
         locations_table.field_names = ['ID',"Country", "Location Name"]
         locations_table.add_row(['1',"Iceland", "Reykjavik"])
@@ -101,6 +115,8 @@ class Main_Menu:
             print("3. Employee")
             print()
             print("Universal System Commands:")
+            print("{:>20}".format("> Go Back: b, B"))
+            # print("{:>20}".format("> Log Out: log, Log"))
             print("{:>20}".format("> Quit System: q, Q"))
             print("-" * 70)
 
@@ -108,16 +124,18 @@ class Main_Menu:
             match user_action:
                 case "1":
                     return_user = "Admin"
+                    break
                 case "2":
                     return_user = "Manager"
+                    break
                 case "3":
                     return_user = "Employee"
-                case "q":
-                    return "q"
+                    break
                 case _:
                     print("No User Found, Please Try Again.")
         return return_user
     
+
     def select_location_for_system(self):
         # select location for system to use 
         return_location = ""
@@ -152,57 +170,60 @@ class Main_Menu:
                     return_location = "Tingwall"
                 case "6":
                     return_location = "Longyearbyen"
-                case "q":
-                    return "q"
                 case _:
                     print("No Location Found, Please Try Again.")
         return return_location
                     
 
     def display_menu_items(self):
+        
+        print()
+        print(f" {self.rank} - Home Page")
+        print("-" * 70)
+        print("1) Properties")
+        print("2) Work Requests")
+        print("3) Employees")
+        print("4) Contractors")
+        print("5) Maintenance Reports")
+        if self.rank != "Employee":
+            print("6) Locations")
+        print()
+        print("{:<18}".format("> Quit System: q, Q"))
+        print("-" * 70)
+
+        user_action = input("Select an Option: ").lower()
+        return user_action
+
+    def user_choice_select(self):
+
+        # Calls the sub menus
         user_action = ""
-        while user_action.lower() != "q":
-            print()
-            print(f" {self.rank} - Home Page")
-            print("-" * 70)
-            print("1) Properties")
-            print("2) Work Requests")
-            print("3) Employees")
-            print("4) Contractors")
-            print("5) Maintenance Reports")
-            if self.rank != "Employee":
-                print("6) Locations")
-            print()
-            print("{:<15}".format("> Log Out: log"))
-            print("{:<18}".format("> Quit System: q, Q"))
-            print("-" * 70)
-
-            user_action = input("Select an Option: ").lower()
-            user_action = self.user_choice_select(user_action.lower())
+        # user_action = self.display_menu_items()
+        while user_action != "q":
+            user_action = user_action = self.display_menu_items()
+            match user_action:
+                case "1":
+                    user_action = self.property_UI_menu.start_point_property_UI()
+                case "2":
+                    user_action = self.work_request_UI_menu.start_point_work_requests_UI()
+                case "3":
+                    user_action = self.employee_UI_menu.start_point_employee_UI()
+                case "4":
+                    user_action = self.contractor_UI_menu.start_point_contractor_UI()
+                case "5":
+                    user_action = self.maintenance_report_UI_menu.start_point_maintenance_reports_UI()
+                case "6" if self.rank != "Employee":
+                    # This option is only displayed if the user is an admin or manager
+                    user_action = self.location_UI_menu.start_point_location_UI()
+                case "q":
+                    return "q"
+                case _:
+                    print("Wrong Input")
+            # user_action = self.display_menu_items()
+            # continue
+        # self.quit_system_message()
         return user_action
-
-    def user_choice_select(self, user_action):
-
-        # calls the sub menus
-        match user_action:
-            case "1":
-                user_action = self.property_UI_menu.start_point_property_UI()
-            case "2":
-                user_action = self.work_request_UI_menu.start_point_work_requests_UI()
-            case "3":
-                user_action = self.employee_UI_menu.start_point_employee_UI()
-            case "4":
-                user_action = self.contractor_UI_menu.start_point_contractor_UI()
-            case "5":
-                user_action = self.maintenance_report_UI_menu.start_point_maintenance_reports_UI()
-            case "6" if self.rank != "Employee":
-                # This option is only displayed if the user is an admin or manager
-                user_action = self.location_UI_menu.start_point_location_UI()
-            case "q":
-                return "q"
-            case _:
-                print("Wrong Input")
-        return user_action
+                    
     
     def test_some_stuff(self):
         """just some tesing with getting data from storage""" 
