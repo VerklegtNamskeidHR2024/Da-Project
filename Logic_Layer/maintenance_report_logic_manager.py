@@ -219,8 +219,10 @@ class maintenance_report_logic_manager:
             if report.report_id == maintencance_report_ID: # checks if the report id is the same as the maintenance report id
                 if accept_or_deny == 'Accept': # checks if the admin accepts the report
                     report.set_mark_as_done(True)
+                    report.set_report_status('Closed')
                 elif accept_or_deny == 'Deny': # checks if the admin denies the report
                     report.set_mark_as_done(False)
+                    report.set_report_status('Denied')
 
         self.storage_layer_wrapper.write_to_file_maintenance_reports(list_of_reports)
 
@@ -251,6 +253,19 @@ class maintenance_report_logic_manager:
             return 'No closed reports' # return no closed reports if there are no closed reports
         else:
             return closed_reports
+        
+    def get_denied_reports(self, staff_id, location):
+        denied_reports = []
+        list_of_all_reports = self.get_all_maintencance_reports_at_location(location)
+
+        for report in list_of_all_reports:
+            if report.staff_id == staff_id and report.report_status == 'Denied':
+                denied_reports.append(report)
+
+        if not denied_reports:
+            return 'No denied reports'
+        else:
+            return denied_reports
         
 
     def get_single_maintenance_report(self, report_id):
