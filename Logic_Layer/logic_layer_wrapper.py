@@ -46,7 +46,7 @@ class Logic_Layer_Wrapper:
         return self.contractor_logic_manager.get_contractor_by_id(location, contractor_id)
         # returns a contractor object by contractor_id
 
-   
+
     def sanity_check_contractor(self, contractor, new):
         """check if all info in a contractor object"""
         return self.contractor_logic_manager.sanity_check_contractor(contractor, new)
@@ -134,7 +134,7 @@ class Logic_Layer_Wrapper:
         # returns an employee object by social_security_number
 
     def fetch_all_work_request_for_employee(self, staff_id) -> list:
-        return self.employee_logic_manager.fetch_all_work_request_for_employee(staff_id)´
+        return self.employee_logic_manager.fetch_all_work_request_for_employee(staff_id)
         # returns a list of all work requests for a specific employee
 
     def fetch_all_maintenance_reports_for_employee(self, staff_id) -> list:
