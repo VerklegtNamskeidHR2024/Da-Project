@@ -8,6 +8,7 @@ Tumi:\
 
 
 Daníela:\
+I did back and quit for employee, except for edit and add employee will maybe finnish tonight. I got here at 11 and left at 19:30.
 
 
 Yeabsira:\
