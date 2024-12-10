@@ -691,7 +691,7 @@ class work_request_UI_menu:
         selected_work_request = ""
         while selected_work_request != "q" and selected_work_request != "b":
             print()
-            print("{:>50}".format("[ New Work Requests ]"))
+            print("{:>50}".format(f"[ New Work Requests ]"))
             print("-" * 70)
             new_work_request_list = self.logic_wrapper.get_all_new_work_requests(self.rank, self.location)
             self.display_all_work_requests_printed(new_work_request_list)

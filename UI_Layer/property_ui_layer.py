@@ -8,7 +8,6 @@ class property_UI_menu:
         self.rank = rank
         self.location = location
         self.staff_id = staff_id
-        self.dash_length = 70
 
     def start_point_property_UI(self):
         
@@ -39,7 +38,7 @@ class property_UI_menu:
             print("2. Add Amenities")
         else:
             print("2. Add Property")
-        print("-" * self.dash_length)
+        print("-" * 70)
 
         user_action = input("Select an Option:  ").lower()
         return user_action 
@@ -64,12 +63,19 @@ class property_UI_menu:
 
     def display_select_property(self):
         #Displays options for a selected property.
-        #try:
-            #you choose the property id for the properrty you looking for
-            property_id = input("Enter the Property ID to select: ")
-            # gets property by id
+        # You choose the property id for the properrty you looking for
+
+        while (property_id_selected := input("Enter the Property ID to select: ")) != "q" and property_id_selected != "Q":
+            if property_id_selected.lower() == "b" or property_id_selected == "B":
+                break
+        # Gets property by id
+            if len(property_id_selected) < 3:
+                print()
+                print("Must Enter A Valid Property ID")
+                print()
             selected_property = self.logic_wrapper.get_property_by_id(self.location, property_id)
-            #if there is not property with the slected id you will get a message 
+
+            # If there is not property with the slected id you will get a message 
             if not selected_property:
                 print("No property found with the provided ID.")
                 #and it returns to the start point
@@ -81,19 +87,22 @@ class property_UI_menu:
             # let you choose from the above 2.
             user_choice = input("Enter your choice: ")
 
-            match user_choice:
-                case "1":
-                    self.display_view_attached_options(selected_property)
-                    #displays the attched options
-                case "2":
-                    self.display_edit_property_details(selected_property)
-                    #lets you edit property details
-                case "b":
-                    #if you want to quit and return to the property list
-                    print("Returning to the property list...")
-                case _:
-                    #if you put an invaild input
-                    print("Invalid input. Please try again.")
+        match user_choice:
+            case "1":
+                # Displays the attched options
+                self.display_view_attached_options(selected_property)
+            case "2":
+                # Lets you edit property details
+                self.display_edit_property_details(selected_property)
+            case "b":
+                # Goes back to the previous page  
+                return "b"
+                # Exits and turns off the system
+            case "q":
+                return "q"
+            case _:
+                #if you put an invaild input
+                print("Invalid input. Please try again.")
 
     def display_add_property(self):
         '''Displays the form to add a new property.'''
