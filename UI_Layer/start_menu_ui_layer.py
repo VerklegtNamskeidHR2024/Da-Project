@@ -1,7 +1,6 @@
 import sys
 import time
 import os
-import msvcrt, time
 from datetime import datetime
 from threading import Thread
 

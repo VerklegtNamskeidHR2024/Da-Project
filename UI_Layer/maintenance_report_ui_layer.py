@@ -111,9 +111,14 @@ class maintenance_report_UI_menu:
         incomplete_reports_table.horizontal_char = f"{border_color}-{reset_color}"
         incomplete_reports_table.vertical_char = f"{border_color}|{reset_color}"
         print(incomplete_reports_table)
-        return
+        user_choice = input('Enter report ID: ')
+        if user_choice.lower() == 'b':
+            return
+        is_report_in_system = self.logic_wrapper.check_if_report_in_system(user_choice, self.location)
 
-    #Completed - And Accepting/Denying Reports
+    def finish_incomplete_report(self):
+        pass
+
     def list_pending_reports(self):
         self.clear_screen()
         #Display a list of pending reports
@@ -152,7 +157,6 @@ class maintenance_report_UI_menu:
             print('Report ID not found in system please try again')
             self.list_pending_reports()
     
-    #Completed
     def get_pending_reports(self):
         self.clear_screen()
         '''displays all pending report'''
@@ -172,7 +176,6 @@ class maintenance_report_UI_menu:
         print(pending_reports_table)
         return
 
-    #Completed
     def list_closed_reports(self):
         self.clear_screen()
         """ Display a list of closed reports """
@@ -194,7 +197,6 @@ class maintenance_report_UI_menu:
             closed_report_table.vertical_char = f"{border_color}|{reset_color}"
             print(closed_report_table)
  
-    #Completed - But needs to do sanity check!
     def display_create_maintenance_report_form(self):
         self.clear_screen()
         #Create a new maintenance report
@@ -282,8 +284,8 @@ class maintenance_report_UI_menu:
 
         while is_valid_price == False:
             try:
-                price = float(input("Enter a price: "))
-                if price.lower() == 'cancel':
+                price = input("Enter a price: ")
+                if price == 'cancel':
                     price = 0
                     self.create_new_maintenance_report(report_name, location, property_id, staff_id, regular_maintenance, maintenance_description, 'Incomplete', price, mark_as_done, contractor_id, work_request_id)
                     return
@@ -356,7 +358,6 @@ class maintenance_report_UI_menu:
         all_reports_table.vertical_char = f"{border_color}|{reset_color}"
         print(all_reports_table)
     
-    #WIP
     def edit_report_details(self, location):
         self.clear_screen() 
         """Editing report {report_id} (details to be implemented)"""
@@ -379,7 +380,6 @@ class maintenance_report_UI_menu:
             print('Invalid input')
             self.edit_report_details(self.location)
             
-    #Completed - But needs to do sanity check! - And also find incomplete reports
     def display_edit_maintenance_report_details(self, selected_maintenance_report):
         self.clear_screen()
         """ Allows editing of maintenance report details. """

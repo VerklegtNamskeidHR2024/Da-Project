@@ -75,6 +75,13 @@ class maintenance_report_logic_manager:
                     return True
             return False
         
+        elif what_to_check in 'report id':
+            list_of_all_reports = self.get_all_maintencance_reports_at_location(location)
+            for report in list_of_all_reports:
+                if report.report_id == new_value:
+                    return True
+            return False
+        
     def get_highest_ID(self, location):
         highestID = -1
         list_of_all_reports = self.get_all_maintencance_reports(location)
