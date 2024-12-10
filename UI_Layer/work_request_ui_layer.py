@@ -205,16 +205,15 @@ class work_request_UI_menu:
                 status,
                 accepted_by_employee
             )
-            if work_request != None:
+            if work_request is not None:
                 self.display_selected_work_request_information(work_request)
                 edit_work_request = self.edit_work_request_logistics(work_request)
                 if edit_work_request == "b":
                     continue
                 return edit_work_request.lower()
-            else:
-                print()
-                print("Work Request Can't Be Accessed At The Moment, Please Try Again.")
-                print()
+            print()
+            print("Work Request Can't Be Accessed At The Moment, Please Try Again.")
+            print()
         return work_request_selected.lower()
 
     # Completed. Can be beautified.
@@ -229,8 +228,8 @@ class work_request_UI_menu:
             )
             return edit_work_request.lower()
 
-        elif (
-            work_request_object.mark_as_completed == True
+        if (
+            work_request_object.mark_as_completed is True
             and work_request_object.work_request_status == "Pending"
         ):
             print()
@@ -245,8 +244,8 @@ class work_request_UI_menu:
                 print()
             return go_back_or_quit.lower()
 
-        elif (
-            work_request_object.accepted_by_employee == False
+        if (
+            work_request_object.accepted_by_employee is False
             and work_request_object.work_request_status == "New"
         ):
             accept_work_request = self.employee_accept_work_request_(
@@ -254,8 +253,8 @@ class work_request_UI_menu:
             )
             return accept_work_request.lower()
 
-        elif (
-            work_request_object.mark_as_completed == False
+        if (
+            work_request_object.mark_as_completed is False
             and work_request_object.work_request_status == "Open"
         ):
             mark_completed = self.mark_work_request_completed(work_request_object)
@@ -285,16 +284,16 @@ class work_request_UI_menu:
         to the next function."""
 
         while (request_name := input("Request Name: ")) not in ["q", "b", "Q", "B"]:
-            if len(request_name) < 5:
-                print()
-                print("This Field Is Required To Fill Out")
-                print()
-            else:
+            is_name_valid = self.logic_wrapper.sanity_check_low_level_logistics('name', request_name)
+            if is_name_valid is True:
                 new_work_request.set_name(request_name)
                 request_description = self.set_description_for_request(new_work_request)
                 if request_description == "b":
                     continue
                 return request_description
+            print()
+            print("Invalid Input")
+            print()
         return request_name.lower()
 
     # Completed. Can be beautified.
@@ -303,19 +302,17 @@ class work_request_UI_menu:
         verification before setting the description attribute to what the user entered and passing the object down
         to the next function."""
 
-        while (
-            request_description := input("Request Descriptition: ")
-        ) not in ["q", "b", "Q", "B"]:
-            if len(request_description) < 10:
-                print()
-                print("This Field Is Required To Fill Out")
-                print()
-            else:
+        while (request_description := input("Request Descriptition: ")) not in ["q", "b", "Q", "B"]:
+            is_description_valid = self.logic_wrapper.sanity_check_low_level_logistics('description', request_description)
+            if is_description_valid is True:
                 new_work_request.set_description(request_description)
                 property_id = self.set_property_id_for_request(new_work_request)
                 if property_id == "b":
                     continue
                 return property_id
+            print()
+            print("Invalid Input")
+            print()
         return request_description.lower()
 
     # Completed. Can be beautified.
@@ -331,17 +328,17 @@ class work_request_UI_menu:
             is_property_id_valid = (
                 self.logic_wrapper.sanity_check_work_request_property_id(property_id)
             )
-            if is_property_id_valid == True:
+            if is_property_id_valid is True:
                 new_work_request.set_property_id(property_id)
                 start_date = self.set_start_date_for_request(new_work_request)
                 if start_date == "b":
                     continue
                 return start_date
-            else:
-                print()
-                print("This Field Is Required To Fill Out")
-                print()
+            print()
+            print("Invalid Input")
+            print()
         return property_id.lower()
+            
 
     # Completed. Can be beautified.
     def set_start_date_for_request(self, new_work_request: object) -> str:
@@ -352,7 +349,8 @@ class work_request_UI_menu:
         while (
             start_date := input("Set The Start Date: ")
         ) not in ["q", "b", "Q", "B"]:
-            if len(start_date) == 8:
+            is_start_date_valid = self.logic_wrapper.sanity_check_low_level_logistics('start_date', start_date)
+            if is_start_date_valid is True:
                 new_work_request.set_start_date(start_date)
                 completition_date = self.set_completition_date_for_request(
                     new_work_request
@@ -360,10 +358,9 @@ class work_request_UI_menu:
                 if completition_date == "b":
                     continue
                 return completition_date
-            else:
-                print()
-                print("This Field Is Required To Fill Out")
-                print()
+            print()
+            print("Invalid Input")
+            print()
         return start_date.lower()
 
     # Completed. Can be beautified.
@@ -376,20 +373,21 @@ class work_request_UI_menu:
         while (
             completition_date := input("Set The Completition Date (Not Required): ")
         ) not in ["q", "b", "Q", "B"]:
-            if len(completition_date) == 8 or completition_date == "":
+            is_completition_date_valid = self.logic_wrapper.sanity_check_low_level_logistics('completition_date', completition_date)
+            if is_completition_date_valid is True:
                 new_work_request.set_completition_date(completition_date)
                 repetitive_work = self.set_repetitive_work_for_request(new_work_request)
                 if repetitive_work == "b":
                     continue
                 return repetitive_work
-            else:
-                print()
-                print("Completition Date Must Be Formatted Correctly")
-                print()
+            print()
+            print("Completition Date Must Be Formatted Correctly")
+            print()
         return completition_date.lower()
 
     # Completed. Can be beautified.
     def set_repetitive_work_for_request(self, new_work_request: object) -> str:
+
         while (
             repetitive_work := input("Mark Request Repititive? (Yes or No): ")
         ) not in ["q", "b", "Q", "B"]:
@@ -398,39 +396,33 @@ class work_request_UI_menu:
                     repetitive_work
                 )
             )
-            if is_set_repetitive_boolean == True or is_set_repetitive_boolean == False:
+            if is_set_repetitive_boolean is True or is_set_repetitive_boolean is False:
                 new_work_request.set_repetitive_work(is_set_repetitive_boolean)
                 interval_days = self.set_interval_days_for_request(new_work_request)
                 if interval_days == "b":
                     continue
                 return interval_days
-            else:
-                print()
-                print("This Field Is Required To Fill Out")
-                print()
+            print()
+            print("Invalid Input")
+            print()
         return repetitive_work.lower()
 
     # Completed. Can be beautified.
     def set_interval_days_for_request(self, new_work_request: object):
         while (
             interval_days := input("Set The Interval Of Days Until Request Re-Opens: ")
-        ) not in ["q", "b", "Q", "B"]:
-            try:
-                if interval_days == "":
-                    print()
-                    print("This Field Is Required To Fill Out")
-                    print()
-                elif int(interval_days) >= 0:
-                    new_work_request.set_reopen_interval(interval_days)
-                    set_priority = self.set_priority_for_request(new_work_request)
-                    if set_priority == "b":
-                        continue
-                    return set_priority
-            except ValueError:
-                print()
-                print("Alphabetic Characters Are Not Allowed, Please Try Again.")
-                print()
-                continue
+        ) not in ["q", "b", "Q", "B"]:                
+            is_interval_days_valid = self.logic_wrapper.sanity_check_low_level_logistics('completition_date', interval_days)
+            if is_interval_days_valid is True:
+                new_work_request.set_reopen_interval(interval_days)
+                set_priority = self.set_priority_for_request(new_work_request)
+                if set_priority == "b":
+                    continue
+                return set_priority
+            print()
+            print("Invalid Input")
+            print()
+            continue
         return interval_days.lower()
 
     # Completed. Can be beautified.
@@ -441,7 +433,7 @@ class work_request_UI_menu:
             is_priority_set_valid = (
                 self.logic_wrapper.sanity_check_priority_for_request(set_priority)
             )
-            if is_priority_set_valid == True:
+            if is_priority_set_valid is True:
                 new_work_request.set_priority(set_priority)
                 needs_contractor = self.set_needs_contractor_for_request(
                     new_work_request
@@ -449,10 +441,9 @@ class work_request_UI_menu:
                 if needs_contractor == "b":
                     continue
                 return needs_contractor
-            else:
-                print()
-                print("This Field Is Required TO Fill Out")
-                print()
+            print()
+            print("Invalid Input")
+            print()
         return set_priority.lower()
 
     # Completed. Can be beautified.
@@ -466,18 +457,17 @@ class work_request_UI_menu:
                 )
             )
             if (
-                is_needs_contractor_boolean == True
-                or is_needs_contractor_boolean == False
+                is_needs_contractor_boolean is True
+                or is_needs_contractor_boolean is False
             ):
                 new_work_request.set_need_contractor(needs_contractor)
                 set_location = self.set_location_for_request(new_work_request)
                 if set_location == "b":
                     continue
                 return set_location
-            else:
-                print()
-                print("This Field Is Required TO Fill Out")
-                print()
+            print()
+            print("Invalid Input")
+            print()
         return needs_contractor.lower()
 
     # Completed. Can be beautified.
@@ -489,36 +479,33 @@ class work_request_UI_menu:
                 is_set_location_valid = (
                     self.logic_wrapper.sanity_check_location_for_request(set_location)
                 )
-                if is_set_location_valid == True:
+                if is_set_location_valid is True:
                     new_work_request.set_location(set_location)
                     confirmation = self.work_request_confirmation(new_work_request)
                     if confirmation == "b":
                         continue
                     return confirmation
-                else:
-                    print()
-                    print("This Field Is Required TO Fill Out")
-                    print()
+                print()
+                print("Invalid Input")
+                print()
             return set_location.lower()
-        else:
-            new_work_request.set_location(self.location)
+        new_work_request.set_location(self.location)
 
     # Completed. Can be beautified.
-    def work_request_confirmation(self, new_work_request: object):
+    def work_request_confirmation(self, new_work_request: object) -> str:
         print()
         while (
             new_work_request_confirmation := input("Enter 1 to Confirm: ").lower()) != "1":
             if new_work_request_confirmation in ["q", "b", "Q", "B"]:
                 return new_work_request_confirmation.lower()
-            else:
-                print("Sigma Sigma on the wall, who is the Skibidiest of them all")
+            print("Sigma Sigma on the wall, who is the Skibidiest of them all")
         print("-" * 70)
         print()
         new_work_request.set_work_request_status("New")
         self.logic_wrapper.add_work_request(new_work_request)
         print("Work Request Has Been Created!")
         print()
-        return
+        return ""
 
     # Completed. Can be beautified.
     def employee_accept_work_request_(self, work_request: object):
@@ -542,7 +529,7 @@ class work_request_UI_menu:
                     accept_work_request
                 )
             )
-            if is_accepted_boolean == True:
+            if is_accepted_boolean is True:
                 print()
                 while (
                     update_confirmation := input("Enter 1 to Confirm: ").lower()
@@ -560,7 +547,7 @@ class work_request_UI_menu:
             else:
                 print("Invalid")
 
-            if is_accepted_boolean == False:
+            if is_accepted_boolean is False:
                 while (
                     update_confirmation := input("Enter 1 to Confirm: ").lower()
                 ) != "1":
@@ -612,7 +599,7 @@ class work_request_UI_menu:
                     mark_as_completed
                 )
             )
-            if is_marked_completed_boolean == True:
+            if is_marked_completed_boolean is True:
                 print()
                 while (
                     update_confirmation := input("Enter 1 to Confirm: ").lower()
@@ -631,7 +618,7 @@ class work_request_UI_menu:
                 print()
                 break
 
-            if is_marked_completed_boolean == False:
+            if is_marked_completed_boolean is False:
                 print()
                 while (
                     update_confirmation := input("Enter 1 to Confirm: ").lower()
@@ -711,7 +698,7 @@ class work_request_UI_menu:
             is_employee_valid = self.logic_wrapper.sanity_check_staff_id(
                 edit_employee_id_for_request
             )
-            if is_employee_valid == True:
+            if is_employee_valid is True:
                 print()
                 while (
                     update_confirmation := input("Enter 1 to Confirm: ").lower()
@@ -738,7 +725,7 @@ class work_request_UI_menu:
                     edit_property_id_for_request
                 )
             )
-            if is_property_id_valid == True:
+            if is_property_id_valid is True:
                 print()
                 while (
                     update_confirmation := input("Enter 1 to Confirm: ").lower()
@@ -766,22 +753,21 @@ class work_request_UI_menu:
                     edit_repitive_work_request
                 )
             )
-            if is_repetitive_boolean == True or is_repetitive_boolean == False:
+            if is_repetitive_boolean is True or is_repetitive_boolean is False:
                 print()
                 while (
                     update_confirmation := input("Enter 1 to Confirm: ").lower()
                 ) != "1":
                     if update_confirmation in ["q", "b", "Q", "B"]:
                         return update_confirmation.lower()
-                    else:
-                        print(
-                            "Sigma Sigma on the wall, who is the Skibidiest of them all"
+                    
+                    print(
+                        "Sigma Sigma on the wall, who is the Skibidiest of them all"
                         )
                 work_request.set_repetitive_work(is_repetitive_boolean)
                 self.logic_wrapper.edit_work_request(work_request)
-                return
-            else:
-                print("Mama they took my dingus")
+                return        
+            print("Mama they took my dingus")
         return edit_repitive_work_request.lower()
 
     # Completed. Can be beautified.
@@ -792,22 +778,20 @@ class work_request_UI_menu:
             is_priority_valid = self.logic_wrapper.sanity_check_priority_for_request(
                 edit_priority_for_request
             )
-            if is_priority_valid == True:
+            if is_priority_valid is True:
                 print()
                 while (
                     update_confirmation := input("Enter 1 to Confirm: ").lower()
                 ) != "1":
                     if update_confirmation in ["q", "b", "Q", "B"]:
                         return update_confirmation.lower()
-                    else:
-                        print(
-                            "Sigma Sigma on the wall, who is the Skibidiest of them all"
+                    print(
+                        "Sigma Sigma on the wall, who is the Skibidiest of them all"
                         )
                 work_request.set_priority(edit_priority_for_request)
                 self.logic_wrapper.edit_work_request(work_request)
                 return
-            else:
-                print("Mama they took my dingus")
+            print("Mama they took my dingus")
         return edit_priority_for_request.lower()
 
     """The functions below could very well be combined into one, larger function. """

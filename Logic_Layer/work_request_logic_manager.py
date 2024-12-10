@@ -41,7 +41,36 @@ class work_request_logic_manager:
                 return True
             case _ :
                 return False
-            
+    
+    def sanity_check_low_level_logistics(self, category: str, value_to_be_verified: str) -> bool:
+
+        if category == 'name':
+            if len(value_to_be_verified) < 5:
+                return False
+            return True
+        
+        if category == 'description':
+            if len(value_to_be_verified) < 10:
+                return False 
+            return True
+
+        if category == 'start_date':
+            if len(value_to_be_verified) == 8:
+                return True
+            return False
+
+        if category == 'completition_date':
+            if len(value_to_be_verified) == 8 or value_to_be_verified == "":
+                return False
+            return True
+
+        if category == 'reopen_interval':
+            try:
+                if int(value_to_be_verified) >= 0:
+                    return True
+            except ValueError:
+                return False
+
     def sanity_check_location_for_request(self, set_location: str) -> bool:
         """Gets all locations from storage and compares the names input given by the user to the  that already exist. """
 
