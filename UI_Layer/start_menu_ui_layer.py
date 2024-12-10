@@ -27,7 +27,7 @@ class Main_Menu:
 
         self.rank = rank
         self.location = location
-        self.logic_wrapper = Logic_Layer_Wrapper(self.rank, self.location)
+        self.logic_wrapper = Logic_Layer_Wrapper(rank, location)
 
         
         # sendir ekki inn self.blahblah útaf það er gert í þessum klasa, vilt bara senda inn location og rank
@@ -74,7 +74,8 @@ class Main_Menu:
             self.quit_system_message()
 
     def quit_system_message(self):
-        print("Departing from NaN Air, Thank you for Visiting!")
+        quit_string = "Departing from NaN Air, Thank you for Visiting!"
+        self.fun_print(quit_string)
 
 
     def show_ascii_art_hq(self):
@@ -84,9 +85,22 @@ class Main_Menu:
         print("{:>13}{:>12}{:>11}{:>5}{:>3}{:>10}{:>6}{:>4}".format("_\\_(*)_/_", "___(*)___", ": : : :", "o o", "|", "| | |", "|", "_ ,"))
         print("{:0}{:>1}{:>31}".format("_______|-|_________/-\\__________", ":", "_____|_|__|_____| | |_____| o-o"))
 
+    def fun_print(text_to_print = "i need input bro", delay_in = 0.05):
+        """send me a string ;)"""
+        delay = delay_in
+        start = len(text_to_print)
+        text_print = ""
+        for i, char in enumerate(text_to_print):
+            text_print = text_to_print[:i+1] + '*' * (start - i - 1)
+            
+            print(text_print, end="\r", flush=True)
+            
+            time.sleep(delay)  
+        print()
 
     def create_location_table(self):
         """Prints out a table of available locations for the user to select. """
+        # maybe delete
 
         locations_table = PrettyTable()
         locations_table.field_names = ['ID',"Country", "Location Name"]
@@ -110,9 +124,16 @@ class Main_Menu:
     def select_user_for_system(self):
         # select a user for the system to use
         print()
-        sys.stdout.write("\r" + "Loading" + "." * 10)
+        loading = "Loading" + ("." * 20)
+        for char in loading:
+            sys.stdout.write(char)
+            sys.stdout.flush() 
+            time.sleep(0.01)
+        print()
+
+        """ sys.stdout.write("\r" + "Loading" + "." * 10)
         time.sleep(1)
-        sys.stdout.flush()
+        sys.stdout.flush() """
 
         return_user = ""
         while return_user == "":
@@ -163,11 +184,12 @@ class Main_Menu:
         while return_location == "":
             location_table = PrettyTable()
             location_table.field_names = ['ID',"Location", "Country"]
-            all_locations = self.logic_wrapper.get_all_locations()
-            counter = 0
-            for location in all_locations:
-                counter += 1
-                location_table.add_row([counter, location.location, location.country])
+            location_table.add_row(['1',"Iceland", "Reykjavik"])
+            location_table.add_row(['2',"Greenland", "Nuuk"])
+            location_table.add_row(['3',"Greenland", "Kulusuk"])
+            location_table.add_row(['4',"Faroe Islands", "Torshavn"])
+            location_table.add_row(['5',"Shetland Islands", "Tingwall"])
+            location_table.add_row(['6',"Svalbard", "Longyearbyen"])
 
             border_color = Fore.BLUE
             reset_color = Style.RESET_ALL
