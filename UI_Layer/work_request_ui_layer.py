@@ -1,21 +1,19 @@
 from Model_Classes.work_request_model import WorkRequest
 
 class work_request_UI_menu:
-    def __init__(self, logic_wrapper, rank, location):
+    def __init__(self, logic_wrapper, rank, location, staff_id):
         self.logic_wrapper = logic_wrapper
         self.rank = rank
         self.location = location
+        self.staff_id = staff_id 
+
 
     # Completed. 
     def start_point_work_requests_UI(self) -> str:
         """When an instance of this class is created, the class object calls this function first which in 
         turn calls the function to load the work request menu and it's options for the user. """
-
-        staff_id = self.enter_staff_id()
-        if staff_id == "q" or staff_id == "b":
-            return staff_id.lower()
     
-        work_request_menu = self.menu_selection_logistics(staff_id)
+        work_request_menu = self.menu_selection_logistics(self.staff_id)
         if work_request_menu == "q" or work_request_menu == "b": 
             return work_request_menu 
     
@@ -66,7 +64,7 @@ class work_request_UI_menu:
         print("-" * 70)
 
     # Completed. Can be beautified.
-    def display_work_requests_menu_items(self, staff_id: str) -> str:
+    def display_work_requests_menu_items(self) -> str:
         """Displays all open work requests and menu options depending on if the user logged in is an admin/manager
         or an employee. It then asks the user to select an option which is sent to be verified in the function 
         below. """
@@ -76,7 +74,7 @@ class work_request_UI_menu:
         print("-" * 70)
         print("{:>50}".format("[ Open and Ongoing Work Requests ]"))
         print()
-        work_request_list = self.logic_wrapper.get_all_work_requests_at_location(self.rank, self.location, staff_id)
+        work_request_list = self.logic_wrapper.get_all_work_requests_at_location(self.rank, self.location, self.staff_id)
         self.display_all_work_requests_printed(work_request_list)
         if self.rank != "Employee":
             print("{:0}{:>3}{:>15}{:>3}{:>19}".format("1. Select Request", "|", "2. New Requests", "|", "3. Pending Requests"))
@@ -95,23 +93,23 @@ class work_request_UI_menu:
         user_choice = input("Select an Option: ").lower()
         return user_choice 
     
-    # Completed. Has a functioning quit and back feature. Can be beautified.
-    def menu_selection_logistics(self, staff_id: str) -> str:
+    # Completed. Can be beautified.
+    def menu_selection_logistics(self) -> str:
         """Calls the menu display function above and performs low-level logicistics to interpret the user input it received.
         If it's verified as an invalid input the system displays an error message and performs the operation again. """
 
         user_choice = ""
         while user_choice != "q": 
-            user_choice = self.display_work_requests_menu_items(staff_id)
+            user_choice = self.display_work_requests_menu_items()
             match (user_choice , self.rank):
                 case ("1", self.rank): 
                     user_choice = self.select_work_request_by_id()
                 case ("2", self.rank):
                     user_choice = self.display_and_select_new_work_requests()
                 case ("3", self.rank):
-                    user_choice = self.display_and_select_pending_work_requests(staff_id)
+                    user_choice = self.display_and_select_pending_work_requests()
                 case ("4", self.rank):
-                    user_choice = self.display_and_select_my_work_request(staff_id)
+                    user_choice = self.display_and_select_my_work_request()
                 case ("5", "Admin") | ("5", "Manager"):
                     user_choice = self.display_and_select_closed_work_requests()
                 case ("6", "Admin") | ("6", "Manager"): 
@@ -119,41 +117,12 @@ class work_request_UI_menu:
                 case ("b", self.rank):
                     return "b"
                 case ("q", self.rank):
-                    
                     return "q"
                 case _:
                     print("Invalid Input, Please Try Again.")
         return user_choice
-        
-
-    def enter_staff_id(self) -> str:
-        
-        print()
-        if self.rank == "Employee":
-            while (staff_id := input("Enter Your Staff ID: ")) != "q" and staff_id != "Q": 
-                if staff_id == "b" or staff_id == "B" or staff_id == "q" or staff_id == "Q":
-                    return staff_id.lower()
-                is_staff_id_valid = self.logic_wrapper.sanity_check_staff_id_for_request(staff_id)
-                if is_staff_id_valid == True:
-                    break
-                else:
-                    print("Invalid")
-            return staff_id
-        else:
-            return ""
-
-    # Completed. Could make it so that it verifies where in the system the user is selecting a work request from.
-    # 
-    # 
-    # Example of current functionality: "User is viewing a list of new work requests, enters the ID of a closed work
-        # request and receives it."
-    # 
-    # 
-    # Example of desired functionality: "User is viewing a list of new work requests, enters the ID of a closed work 
-        # request and is given an error message (akin to: Can't Access This Work Request At The Moment). "
-    # 
-    # 
-    # Has a functioning quit and back feature. Can be beautified.
+    
+    # Completed. Can be beautified.
     def select_work_request_by_id(self, status: str="", accepted_by_employee: bool=True) -> str:
         """System asks the user to enter an ID of the work request they wish to select. If found, the system 
         will display all of its information and directs them to the editing function below. Otherwise it gives 
@@ -177,11 +146,11 @@ class work_request_UI_menu:
                 return edit_work_request.lower()
             else:
                 print()
-                print("Work Request Could Not Be Found, Please Try Again.")
+                print("Work Request Can't Be Accessed At The Moment, Please Try Again.")
                 print()
         return work_request_selected.lower()
     
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def edit_work_request_logistics(self, work_request_object) -> str: 
         """Receives a single, user-selected work request and gives the user the ability to edit its information; 
         the extent of which corresponding to the user's rank. Also verifies what can be edited based on what the
@@ -227,7 +196,7 @@ class work_request_UI_menu:
         request_name = self.set_name_for_request(new_work_request)
         return request_name
 
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def set_name_for_request(self, new_work_request: object) -> str:
         """Asks the user to enter a name for the work request they are creating. Goes through very simple input 
         verification before setting the name attribute to what the user entered and passing the object down 
@@ -248,7 +217,7 @@ class work_request_UI_menu:
                 return request_description
         return request_name.lower()
 
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def set_description_for_request(self, new_work_request: object) -> str:
         """Asks the user to enter a description for the work request they are creating. Goes through very simple input 
         verification before setting the description attribute to what the user entered and passing the object down 
@@ -269,7 +238,7 @@ class work_request_UI_menu:
                 return property_id
         return request_description.lower()
 
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def set_property_id_for_request(self, new_work_request: object) -> str:
         """Asks the user to enter the property ID for the work request they are creating. Its then sent to the logic
         layer where the input is verified. If its verified as valid, it sets the property ID attribute to what the user
@@ -291,7 +260,7 @@ class work_request_UI_menu:
                 print()
         return property_id.lower()
     
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def set_start_date_for_request(self, new_work_request: object) -> str:
         """Asks the user to enter the start date for the work request they are creating. Goes through very simple input 
         verification before setting the start date attribute to what the user entered and passing the object down to 
@@ -312,7 +281,7 @@ class work_request_UI_menu:
                 print()
         return start_date.lower()
 
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def set_completition_date_for_request(self, new_work_request: object) -> str:
         """Asks the user to enter the completition date for the work request they are creating. Goes through very simple input 
         verification where, it has to either be nothing (since this field is not required to fill out) or exactly 8 characters long.
@@ -333,7 +302,7 @@ class work_request_UI_menu:
                 print()
         return completition_date.lower()
 
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def set_repetitive_work_for_request(self, new_work_request: object) -> str:
         while (repetitive_work := input("Mark Request Repititive? (Yes or No): ")) != "q" and repetitive_work != "Q":
             if repetitive_work == "b" or repetitive_work == "B":
@@ -351,7 +320,7 @@ class work_request_UI_menu:
                 print()
         return repetitive_work.lower()
 
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def set_interval_days_for_request(self, new_work_request: object):
         while (interval_days := input("Set The Interval Of Days Until Request Re-Opens: ")) != "q" and interval_days != "Q":
             try:
@@ -374,7 +343,7 @@ class work_request_UI_menu:
                 continue
         return interval_days.lower()
         
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def set_priority_for_request(self, new_work_request: object):
         while (set_priority := input("Set The Request Priority (High, Medium or Low): ")) != "q" and set_priority != "Q":
             if set_priority == "b" or set_priority == "B":
@@ -392,7 +361,7 @@ class work_request_UI_menu:
                 print()
         return set_priority.lower()
         
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def set_needs_contractor_for_request(self, new_work_request: object):
         while (needs_contractor := input("Request Needs Contractor? (Yes or No): ")) != "q" and needs_contractor != "Q":
             if needs_contractor == "b" or needs_contractor == "B":
@@ -410,7 +379,7 @@ class work_request_UI_menu:
                 print()
         return needs_contractor.lower()
         
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def set_location_for_request(self, new_work_request: object):
         if self.rank == "Admin": 
             while (set_location := input("Set Location for Work Request: ")) != "q" and set_location != "Q":
@@ -431,7 +400,7 @@ class work_request_UI_menu:
         else:
             new_work_request.set_location(self.location)
     
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def work_request_confirmation(self, new_work_request: object):
         print()    
         while (new_work_request_confirmation := input("Enter 1 to Confirm: ").lower()) != "1": 
@@ -447,8 +416,8 @@ class work_request_UI_menu:
         print()
         return
         
-    # Completed. Has a functioning quit and back feature. Can be beautified.
-    def employee_accept_work_request_(self, work_request: object, staff_id: str):
+    # Completed. Can be beautified.
+    def employee_accept_work_request_(self, work_request: object):
         """Allows the employee accept a new work request. """
 
         print("{:>20}".format("> Go Back: b, B"))
@@ -472,7 +441,7 @@ class work_request_UI_menu:
                         return update_confirmation.lower()
                     print("Mama they took my dingus")
                 work_request.set_accepted_by_employee(is_accepted_boolean)
-                work_request.set_staff_id(staff_id)
+                work_request.set_staff_id(self.staff_id)
                 self.logic_wrapper.edit_work_request(work_request)
                 print()
                 print("Work Request Has Been Accepted!")
@@ -497,7 +466,7 @@ class work_request_UI_menu:
                 print("Invalid")
         return accept_work_request.lower()
         
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def mark_work_request_completed(self, work_request: object):
         """Allows the user to mark a work request completed. """
 
@@ -560,7 +529,7 @@ class work_request_UI_menu:
                 print("Mama they took my dingus")
         return mark_as_completed.lower()
     
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def general_edit_work_request_menu(self) -> str:
         """Displays all the categories that an admin or manager are able to edit about a work request they have selected.
         It then asks them to select one of the 5, where the input is then sent to, and verified in the function below. """
@@ -581,7 +550,7 @@ class work_request_UI_menu:
         category_to_edit = input("Choose a Category to Edit: ").lower()
         return category_to_edit.lower()
 
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def general_edit_work_request_selected_option(self, work_request: object) -> str:
         """Calls the edit menu function above and performs low-level logicistics to interpret the user input it received.
         If it's verified as an invalid input the system displays an error message and performs the operation again. """
@@ -608,13 +577,13 @@ class work_request_UI_menu:
                     print("Mama they took my dingus")
         return category_to_edit.lower()
 
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def edit_employee_id_for_work_request(self, work_request: object):
         
         while (edit_employee_id_for_request := input("New Employee ID: ")) != "q" and edit_employee_id_for_request != "Q":
             if edit_employee_id_for_request == "b" or edit_employee_id_for_request == "B":
                 break
-            is_employee_valid = self.logic_wrapper.sanity_check_staff_id_for_request(edit_employee_id_for_request)
+            is_employee_valid = self.logic_wrapper.sanity_check_staff_id(edit_employee_id_for_request)
             if is_employee_valid == True:
                 print()
                 while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1":
@@ -629,7 +598,7 @@ class work_request_UI_menu:
                 print("Mama they took my dingus")
         return edit_employee_id_for_request.lower()
             
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def edit_property_id_for_request(self, work_request: object):
         while (edit_property_id_for_request := input("New Property ID: ")) != "q" and edit_property_id_for_request != "Q":
             if edit_property_id_for_request == "b" or edit_property_id_for_request == "B":
@@ -649,7 +618,7 @@ class work_request_UI_menu:
                 print("Mama they took my dingus")
         return edit_property_id_for_request.lower()
 
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def edit_repitive_work_request(self, work_request: object):
         while (edit_repitive_work_request := input("Is Repitive? (Yes or No): ")) != "q" and edit_repitive_work_request != "Q":
             if edit_repitive_work_request == "b" or edit_repitive_work_request == "B":
@@ -669,7 +638,7 @@ class work_request_UI_menu:
                 print("Mama they took my dingus")
         return edit_repitive_work_request.lower()
 
-    # Completed. Has a functioning quit and back feature. Can be beautified.
+    # Completed. Can be beautified.
     def edit_priority_for_request(self, work_request: object):    
         while (edit_priority_for_request := input("Priority for Request: ")) != "q" and edit_priority_for_request != "Q":
             if edit_priority_for_request == "b" or edit_priority_for_request == "B":
@@ -692,13 +661,8 @@ class work_request_UI_menu:
 
     """The functions below could very well be combined into one, larger function. """
 
-    # Works. Only displays work requests in the selected location and if they have been accepted by an employee. 
-    # Needs to filter the work requests displayed by staff ID as well to be fully functioning. Could do so by having the user
-    # enter a staff ID during the log in menu.
-    # 
-    # 
-    # Has a functioning quit and back feature. Can be beautified.
-    def display_and_select_my_work_request(self, staff_id):
+    # Completed. Can be beautified.
+    def display_and_select_my_work_request(self):
         """Displays all work requests that have been accepted by an employee. """
 
         status = ""
@@ -708,7 +672,7 @@ class work_request_UI_menu:
             print()
             print("{:>50}".format("[ My Work Requests ]"))
             print("-" * 70)
-            my_work_request_list = self.logic_wrapper.get_my_work_requests(self.rank, self.location, staff_id)
+            my_work_request_list = self.logic_wrapper.get_my_work_requests(self.rank, self.location, self.staff_id)
             self.display_all_work_requests_printed(my_work_request_list)
             print()
             print("{:>15}".format("> Go Back: b, B"))
@@ -741,7 +705,7 @@ class work_request_UI_menu:
     
     
     # Completed. Can be beautifed.
-    def display_and_select_pending_work_requests(self, staff_id): 
+    def display_and_select_pending_work_requests(self): 
         """Prints out all pending work requests that haven't been marked closed by a manager or admin. """
         
         status = "Pending"
@@ -751,7 +715,7 @@ class work_request_UI_menu:
             print()
             print("{:>50}".format("[ Pending Work Requests ]"))
             print("-" * 70)
-            pending_work_request_list = self.logic_wrapper.get_all_pending_work_requests(self.rank, self.location, staff_id)
+            pending_work_request_list = self.logic_wrapper.get_all_pending_work_requests(self.rank, self.location, self.staff_id)
             self.display_all_work_requests_printed(pending_work_request_list)
             print()
             print("{:>15}".format("> Go Back: b, B"))

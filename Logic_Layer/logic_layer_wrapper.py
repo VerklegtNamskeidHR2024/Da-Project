@@ -93,11 +93,17 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################
-    def get_all_employees_at_location(self, location) -> list:
-        return self.employee_logic_manager.get_all_employees_at_location(location)
+    def get_all_admins(self, rank: str): 
+        return self.employee_logic_manager.get_all_admins(rank)
+
+    def get_all_managers(self, rank: str): 
+        return self.employee_logic_manager.get_all_managers(rank)
     
     def get_all_employees(self) -> list:
         return self.employee_logic_manager.get_all_employees() 
+
+    def get_all_employees_at_location(self, location) -> list:
+        return self.employee_logic_manager.get_all_employees_at_location(location)
     
     def add_new_employee_to_storage(self, new_employee):
         return self.employee_logic_manager.add_new_employee_to_storage(new_employee)
@@ -114,7 +120,10 @@ class Logic_Layer_Wrapper:
     def fetch_all_maintenance_reports_for_employee(self, staff_id) -> list:
         return self.employee_logic_manager.fetch_all_maintenance_reports_for_employee(staff_id)
 
-    def sanity_check_employee_name(self, name) -> bool:
+    def sanity_check_staff_id(self, rank: str, staff_id: str) -> bool:
+        return self.employee_logic_manager.sanity_check_staff_id(self, staff_id)
+
+    def sanity_check_employee_name(self, name: str) -> bool:
         return self.employee_logic_manager.sanity_check_employee_name(name)
     
     def sanity_check_ssn(self, ssn) -> bool:
@@ -200,9 +209,6 @@ class Logic_Layer_Wrapper:
     def sanity_check_location_for_request(self, location: str) -> bool:
         return self.work_request_logic_manager.sanity_check_location_for_request(location)
     
-    def sanity_check_staff_id_for_request(self, staff_id: str) -> bool:
-        return self.work_request_logic_manager.sanity_check_staff_id_for_request(staff_id)
-
     ########################################################################################################
     ### LOCATION ###########################################################################################
     def get_all_locations(self) -> list:

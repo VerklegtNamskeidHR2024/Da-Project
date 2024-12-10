@@ -20,12 +20,12 @@ init()
 
 class Main_Menu:
     def __init__(self, rank, location):
-        self.logic_wrapper = Logic_Layer_Wrapper(rank, location)
         # calls the select function for what user you want to see the system as and, then - 
         # calls the location select function
+        self.logic_wrapper = Logic_Layer_Wrapper(rank, location)
         rank = self.select_user_for_system()
         location = self.select_location_for_system()
-
+        self.staff_id = self.enter_and_validate_staff_id(rank)
         self.rank = rank
         self.location = location
         
@@ -33,12 +33,12 @@ class Main_Menu:
         
         # sendir ekki inn self.blahblah útaf það er gert í þessum klasa, vilt bara senda inn location og rank
         # annars er sent inn vitlaust location - Kv Hreimur
-        self.employee_UI_menu = employee_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
-        self.location_UI_menu = location_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
-        self.contractor_UI_menu = contractor_UI_menu(self.logic_wrapper, self.rank, self.location) 
-        self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
-        self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
-        self.property_UI_menu = property_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
+        self.employee_UI_menu = employee_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
+        self.location_UI_menu = location_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
+        self.contractor_UI_menu = contractor_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) 
+        self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
+        self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
+        self.property_UI_menu = property_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
 
         # these may need to be sent into each UI class
         #self.rank = rank
@@ -110,10 +110,6 @@ class Main_Menu:
 
     def select_user_for_system(self):
         # select a user for the system to use
-        print()
-        sys.stdout.write("\r" + "Loading" + "." * 10)
-        time.sleep(1)
-        sys.stdout.flush()
 
         return_user = ""
         while return_user == "":
@@ -147,15 +143,20 @@ class Main_Menu:
                 case _:
                     print("No User Found, Please Try Again.")
 
-        # sys.stdout.write('\x1b[2K')
-        # print("something will be updated/erased during next loop", end="")
-        # print("\r", end="")
-        # print("the info")
-
-        # print ("\033[A                             \033[A")
-        # print()
-        
         return return_user
+    
+    def enter_and_validate_staff_id(self, user) -> str:
+        print()
+        staff_id = ""
+        while staff_id == "":
+            staff_id = input("Enter Your Staff ID: ")
+            is_staff_id_valid = self.logic_wrapper.sanity_check_staff_id(user, staff_id)
+            if is_staff_id_valid == True:
+                break
+            else:
+                print("Invalid")
+                continue
+        return staff_id
     
 
     def select_location_for_system(self):

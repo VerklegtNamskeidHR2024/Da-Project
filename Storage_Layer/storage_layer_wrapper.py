@@ -54,8 +54,15 @@ class Storage_Layer_Wrapper:
 
     ########################################################################################################
     ### EMPLOYEES ##########################################################################################
+    def get_all_admins(self) -> list:
+        all_admins = self.admin_storage_manager.get_all_admins()
+        return all_admins 
+
+    def get_all_managers(self) -> list:
+        all_managers = self.manager_storage_manager.get_all_managers()
+        return all_managers 
     
-    def get_all_employees(self):
+    def get_all_employees(self) -> list:
         all_employees = self.employee_storage_manager.get_all_employees()
         return all_employees
     
