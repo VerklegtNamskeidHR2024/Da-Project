@@ -99,8 +99,8 @@ class Logic_Layer_Wrapper:
     def get_all_managers(self, rank: str): 
         return self.employee_logic_manager.get_all_managers(rank)
     
-    def get_all_employees(self) -> list:
-        return self.employee_logic_manager.get_all_employees() 
+    def get_all_employees(self, rank: str) -> list:
+        return self.employee_logic_manager.get_all_employees(rank) 
 
     def get_all_employees_at_location(self, location) -> list:
         return self.employee_logic_manager.get_all_employees_at_location(location)

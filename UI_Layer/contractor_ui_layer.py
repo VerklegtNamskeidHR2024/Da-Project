@@ -6,10 +6,11 @@ from colorama import Fore, Style, init
 # give contractor warning
 
 class contractor_UI_menu():
-    def __init__(self, logic_wrapper, rank, location) -> None:
+    def __init__(self, logic_wrapper, rank, location, staff_id) -> None:
         self.logic_wrapper = logic_wrapper
         self.rank = rank
         self.location = location
+        self.staff_id = staff_id
     
     def start_point_contractor_UI(self) -> None:
         # when this class is called it starts here

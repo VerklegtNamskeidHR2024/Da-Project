@@ -5,10 +5,11 @@ from colorama import Fore, Style, init
 init()
 
 class maintenance_report_UI_menu:
-    def __init__(self, logic_wrapper, rank, location):
+    def __init__(self, logic_wrapper, rank, location, staff_id):
         self.logic_wrapper = logic_wrapper
         self.rank = rank
         self.location = location
+        self.staff_id = staff_id
 
     def clear_screen(self):
         os.system('cls' if os.name == 'nt' else 'clear')

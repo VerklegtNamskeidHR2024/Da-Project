@@ -12,11 +12,12 @@ opening_hours = "10-11"
 location_list = ["Nuk", "Kef", "SVL", "TOR"]
 
 class location_UI_menu:
-    def __init__(self, logic_wrapper, rank, location):
+    def __init__(self, logic_wrapper, rank, location, staff_id):
         '''Class builder'''
         self.logic_wrapper = logic_wrapper
         self.rank = rank
         self.location = location  
+        self.staff_id = staff_id
 
     def start_point_location_UI(self):
         # when this class is called it starts here
