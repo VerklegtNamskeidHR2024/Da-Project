@@ -140,16 +140,13 @@ class contractor_UI_menu():
             return
         self.print_single_contractor(contractor_to_use)
         print("1) View work requests")
-        print("2) Give warning")
-        print("3) Change Opening Hours")
+        print("2) Give warning")#maybe
         edit_user_action = input("What action would you like to perform: ")
         match edit_user_action:
             case "1":
                 self.display_contractor_work_requests(contractor_to_use)
             case "2":
                 self.change_phone_number(contractor_to_use)
-            case "3":
-                self.change_opening_hours(contractor_to_use)
             case _:
                 print("not valid input")
                 return
