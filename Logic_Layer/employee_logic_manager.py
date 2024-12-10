@@ -6,16 +6,12 @@ class employee_logic_manager:
         #from Logic_Layer.work_request_logic_manager import work_request_logic_manager
         #from Logic_Layer.maintenance_report_logic_manager import maintenance_report_logic_manager
 
-
     def get_all_employees(self) -> list:
-        #employees_list = []
 
         all_employees = self.Storage_Layer_Wrapper.get_all_employees()
 
-        #for employee in all_employees:
-            #employees_list.append(employee)
-
         return all_employees
+
 
     def get_all_employees_at_location(self, location) -> list:
         employees_sorted_list = []
@@ -115,9 +111,9 @@ class employee_logic_manager:
         
     def sanity_check_for_employee_location(self, location) -> bool:
         location_list = self.Storage_Layer_Wrapper.get_all_locations()
-        print(location)
+
         for loc in location_list:
-            print(loc.location)
+
             if loc.location == location:
                 return True
         else:
