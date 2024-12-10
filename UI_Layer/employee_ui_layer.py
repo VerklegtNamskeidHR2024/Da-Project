@@ -11,20 +11,33 @@ class employee_UI_menu:
         # when this class is called it starts here
         # call other functions in class from here
 
-        self.display_all_employees_by_locationa(self.location)
+        display_all_employees = self.display_all_employees_by_locationa()
+        if self.rank != "Employee":
+            employee_menu = self.employee_menu_selection()
+        if employee_menu == "q" or employee_menu == "b":
+            return employee_menu
+
+    def employee_menu_selection(self):    
+        user_choice = ""
+        while user_choice != "q":
+            user_choice = self.action_choice()
+            if user_choice == "1":
+                user_choice = self.search_employee()
+            elif user_choice == "2":
+                user_choice = self.add_new_employee_to_storage()
+            elif user_choice == "b":
+                return "b"
+            elif user_choice == "q":
+                return "q"
+        return user_choice
+    
 
     
-    def employee_logistics(self):
-        pass
-    
-    
-
-    
 
 
-    def display_all_employees_by_locationa(self, location):
+    def display_all_employees_by_locationa(self):
         """The function displays all employees at a location and their basic information"""
-        employee_list = self.logic_wrapper.get_all_employees_at_location(location)
+        employee_list = self.logic_wrapper.get_all_employees_at_location(self.location)
         print("-" * 70)
         print("{:>15}{:>10}{:>15}{:>15}".format("Name", "Phone", "Location", "ssn"))
         print("-" * 70)
@@ -33,8 +46,8 @@ class employee_UI_menu:
             print("{:>15}{:>10}{:>15}{:>15}".format(employee.name, employee.phone_number, employee.location, employee.social_security_number))
             
         print("-" * 70)
-        if self.rank == "Manager" or self.rank == "Admin":
-            self.action_choice()
+        #if self.rank == "Manager" or self.rank == "Admin":
+            #self.action_choice()
 
     def action_choice(self) -> str:
         """The function is asking the user if they want to search or add an employee and calls the chosen function"""
@@ -44,42 +57,30 @@ class employee_UI_menu:
         print("2. Add Employee")
         print("-" * 70)
         search_or_add = input("Enter choice: ")
+        return search_or_add.lower()
 
-        if search_or_add == "1":
-            self.search_employee()
-
-        elif search_or_add == "2":
-            self.add_new_employee_to_storage()
-
-        elif search_or_add.lower == "b":
-            return
-        
-        elif search_or_add.lower() == "q":
-            self.quit_employee()
-        return search_or_add 
         
 
     def search_employee(self) -> str:
         """The Function Is Searching For An Employee by SSN""" 
+        employee_ssn = ""
+        while employee_ssn != "q" and employee_ssn != "b":
+            print()
+            employee_ssn = input("Enter Employee Social Security Number: ")
+            print()
+            print("Go Back: b, B")
+            print("Quit system: q, Q")
+            #Makes sure the enterd ssn exists in the system
+            is_employee_ssn_valid = self.logic_wrapper.sanity_check_ssn(employee_ssn)
+            if is_employee_ssn_valid == True:
+                employee = self.logic_wrapper.fetch_employee_from_storage(employee_ssn)
+                employee_options = self.employee_options(employee)
+                if employee_options == "b":
+                    continue
+                return employee_options
+        #creates a instans of the employee with the maching ssn
+        return employee_ssn.lower()
 
-        print()
-        employee_ssn = input("Enter Employee Social Security Number: ")
-        print()
-        print("Go Back: b, B")
-        print("Quit system: q, Q")
-
-        if employee_ssn.lower() == "b":
-            self.action_choice()
-        
-        elif employee_ssn.lower() == "q":
-            self.quit_employee()
-        #Makes sure the enterd ssn exists in the system
-        elif self.logic_wrapper.sanity_check_ssn(employee_ssn):
-            #creates a instans of the employee with the maching ssn
-            employee = self.logic_wrapper.fetch_employee_from_storage(employee_ssn)
-            self.display_employee(employee)
-        
- 
         #return employee_ssn
 
 
@@ -96,11 +97,6 @@ class employee_UI_menu:
         print("{:<25}{:<5}{:<15}".format("Email", "|", employee.email))
         print("{:<25}{:<5}{:<15}".format("Employee ID", "|", employee.staff_id))
         print("-" * 70)
-        self.employee_options(employee)
-        
-
-    def employee_options(self, employee):
-        """holds all the options to view information and alter selected employee"""
         print()
         print("1. Edit Employee Details")
         print("2. View Work Requests")
@@ -110,25 +106,40 @@ class employee_UI_menu:
         print("Quit system: q, Q")
         print("-" * 70)
         option = input("Enter Choice: ")
-
-        if option.lower() == "b":
-            self.action_choice()
-
-        elif option == "1":
-            edit_choice = self.display_edit_options(employee)
-            if edit_choice == "1":
-                self.edit_employee_phone_number(employee)
-            elif edit_choice == "2":
-                self.edit_employee_location(employee)
-            elif edit_choice == "3":
-                self.edit_employee_email(employee)
+        return option.lower()
         
-        elif option == "2":
-            self.display_employee_work_requests(employee)
 
-        
-        elif option == "3":
-            self.display_employee_maintenance_report(employee)
+    def employee_options(self, employee):
+        """holds all the options to view information and alter selected employee"""
+        option = ""
+        while option != "q" and option != "b":
+            option = self.display_employee(employee)
+            if option.lower() == "b":
+                break
+            elif option == "1":
+                edit_choice = ""
+                while edit_choice != "q":
+                    edit_choice = self.display_edit_options(employee)
+                    if edit_choice == "b":
+                        break
+                    if edit_choice == "q":
+                        return edit_choice.lower()
+                    if edit_choice == "1":
+                        edit_choice = self.edit_employee_phone_number(employee)
+                    elif edit_choice == "2":
+                        edit_choice = self.edit_employee_location(employee)
+                    elif edit_choice == "3":
+                        edit_choice = self.edit_employee_email(employee)
+                    elif edit_choice == "q":
+                        return "q"
+                
+            elif option == "2":
+                self.display_employee_work_requests(employee)
+
+            
+            elif option == "3":
+                self.display_employee_maintenance_report(employee)
+        return option.lower()
             
 
         
@@ -214,28 +225,29 @@ class employee_UI_menu:
         print("Quit system: q, Q")
         print("-" * 70)
         edit_choice = input("Enter Your Edit Choice: ")
-        if edit_choice.lower() == "b":
-            self.employee_options(employee)
-
-        elif edit_choice.lower() == "q":
-            self.quit_employee()
-
+        # if edit_choice.lower() == "b":
+        #     self.employee_options(employee)
+            
         return edit_choice
 
     def edit_employee_phone_number(self, employee: object):
         """This function sets a new phone number for the employee"""
         
-        while (new_phone_number := input("Enter New Phone Number: ")) != "b":
+        while (new_phone_number := input("Enter New Phone Number: ")) != "q" and new_phone_number != "Q":
+            if new_phone_number.lower() == "b" or new_phone_number.lower() == "B":
+                break
             is_valid_pn = self.logic_wrapper.sanity_check_phone_number(new_phone_number)
             if is_valid_pn:
                 employee.set_phone_number(new_phone_number)
                 self.logic_wrapper.edit_employee_info(employee)
+                self.display_employee(employee)
                 break
             else:
                 print()
                 print("Employee Phone Number Should Be 7 Numbers")
+        return new_phone_number.lower()
         
-        self.display_employee(employee)
+        
     
     def edit_employee_location(self, employee: object):
         """This function sets a new location for the employee"""
