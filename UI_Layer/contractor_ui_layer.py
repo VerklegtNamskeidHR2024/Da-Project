@@ -87,8 +87,11 @@ class contractor_UI_menu():
                 self.display_edit_contractor_menu()
             case "3":
                 self.display_view_contractor()
-            case "5":
-                self.logic_wrapper.write_to_file(list_of_contractors = [])
+            case "4":
+                # give warning 
+                # finish this a later point
+                pass
+
             case "q":
                 # quit back to main menu
                 pass
