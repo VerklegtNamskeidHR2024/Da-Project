@@ -33,7 +33,7 @@ class maintenance_report_UI_menu:
         elif self.rank == "Employee":
             is_valid = False
             while is_valid == False:
-                staff_id = input('Enter new staff ID: ')
+                staff_id = input('Enter your staff ID: ')
                 is_valid = self.logic_wrapper.sanity_check_maintencance_report('staff id', staff_id, self.location)
                 if is_valid == True:
                     self.employee_menu(staff_id)
@@ -114,10 +114,113 @@ class maintenance_report_UI_menu:
         user_choice = input('Enter report ID: ')
         if user_choice.lower() == 'b':
             return
-        is_report_in_system = self.logic_wrapper.check_if_report_in_system(user_choice, self.location)
+        is_report_in_system = self.logic_wrapper.sanity_check_maintencance_report('report id', user_choice, self.location)
+        if is_report_in_system == True:
+            self.finish_incomplete_report(user_choice)
+        else:
+            print('Report ID not found in system please try again')
+            self.get_incomplete_reports()
 
-    def finish_incomplete_report(self):
-        pass
+    def finish_incomplete_report(self, report_id):
+        report = self.logic_wrapper.get_single_maintenance_report(report_id)
+        report_complete = False
+        name_empty = not bool(report.report_name)
+        location_empty = not bool(report.location)
+        property_id_empty = not bool(report.property_id)
+        staff_id_empty = not bool(report.staff_id)
+        regular_maintenance_empty = not bool(report.regular_maintenance)
+        maintenance_description_empty = not bool(report.maintenance_description)
+        price_empty = not bool(report.price)
+        contractor_id_empty = not bool(report.contractor_id)
+        work_request_id_empty = not bool(report.work_request_id)
+        
+        while report_complete == False:
+            if name_empty == False and location_empty == False and property_id_empty == False and staff_id_empty == False and regular_maintenance_empty == False and maintenance_description_empty == False and price_empty == False and contractor_id_empty == False and work_request_id_empty == False:
+                report_complete = True
+                report.set_report_status('Pending')
+                self.logic_wrapper.edit_maintencance_report(report, self.location, 'Report Status', 'Pending')
+                print('Report has been completed')
+            
+            elif name_empty == True:
+                report_name = input('Enter report name: ')
+                valid_name = self.logic_wrapper.sanity_check_maintencance_report('report name', report_name, self.location)
+                if valid_name == True:
+                    name_empty = False
+                    self.logic_wrapper.edit_maintencance_report(report, self.location, 'Report Name', report_name)
+                else:
+                    print('Invalid input')
+
+            elif location_empty == True:
+                location = input('Enter location: ')
+                valid_location = self.logic_wrapper.sanity_check_maintencance_report('location', location, self.location)
+                if valid_location == True:
+                    location_empty = False
+                    self.logic_wrapper.edit_maintencance_report(report, self.location, 'Location', location)
+                else:
+                    print('Invalid input')
+
+            elif property_id_empty == True:
+                property_id = input('Enter property ID: ')
+                valid_property_id = self.logic_wrapper.sanity_check_maintencance_report('property id', property_id, self.location)
+                if valid_property_id == True:
+                    property_id_empty = False
+                    self.logic_wrapper.edit_maintencance_report(report, self.location, 'Property ID', property_id)
+                else:
+                    print('Invalid input')
+            
+            elif staff_id_empty == True:
+                staff_id = input('Enter staff ID: ')
+                valid_staff_id = self.logic_wrapper.sanity_check_maintencance_report('staff id', staff_id, self.location)
+                if valid_staff_id == True:
+                    staff_id_empty = False
+                    self.logic_wrapper.edit_maintencance_report(report, self.location, 'Staff ID', staff_id)
+                else:
+                    print('Invalid input')
+
+            elif regular_maintenance_empty == True:
+                regular_maintenance = input('Regular Maintenance (yes/no): ')
+                valid_regular_maintenance = self.logic_wrapper.sanity_check_maintencance_report('regular maintenance', regular_maintenance, self.location)
+                if valid_regular_maintenance == True:
+                    regular_maintenance_empty = False
+                    self.logic_wrapper.edit_maintencance_report(report, self.location, 'Regular', regular_maintenance)
+                else:
+                    print('Invalid input')
+
+            elif maintenance_description_empty == True:
+                maintenance_description = input('Enter maintenance description: ')
+                valid_maintenance_description = self.logic_wrapper.sanity_check_maintencance_report('maintenance description', maintenance_description, self.location)
+                if valid_maintenance_description == True:
+                    maintenance_description_empty = False
+                    self.logic_wrapper.edit_maintencance_report(report, self.location, 'Description', maintenance_description)
+                else:
+                    print('Invalid input')
+
+            elif price_empty == True:
+                price = input('Enter price: ')
+                valid_price = self.logic_wrapper.sanity_check_maintencance_report('cost', price, self.location)
+                if valid_price == True:
+                    price_empty = False
+                    self.logic_wrapper.edit_maintencance_report(report, self.location, 'Cost', price)
+                else:
+                    print('Invalid input')
+
+            elif contractor_id_empty == True:
+                contractor_id = input('Enter contractor ID: ')
+                valid_contractor_id = self.logic_wrapper.sanity_check_maintencance_report('contractor id', contractor_id, self.location)
+                if valid_contractor_id == True:
+                    contractor_id_empty = False
+                    self.logic_wrapper.edit_maintencance_report(report, self.location, 'Contractor ID', contractor_id)
+                else:
+                    print('Invalid input')
+
+            elif work_request_id_empty == True:
+                work_request_id = input('Enter work request ID: ')
+                valid_work_request_id = self.logic_wrapper.sanity_check_maintencance_report('work request id', work_request_id, self.location)
+                if valid_work_request_id == True:
+                    work_request_id_empty = False
+                    self.logic_wrapper.edit_maintencance_report(report, self.location, 'Work Request ID', work_request_id)
+                else:
+                    print('Invalid input')
 
     def list_pending_reports(self):
         self.clear_screen()

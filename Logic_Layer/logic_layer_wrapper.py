@@ -158,6 +158,9 @@ class Logic_Layer_Wrapper:
     def get_incomplete_maintenance_reports(self, location):
         return self.maintenance_report_logic_manager.get_incomplete_maintenance_reports(location)
     
+    def get_single_maintenance_report(self, report_id):
+        return self.maintenance_report_logic_manager.get_single_maintenance_report(report_id)
+    
     def sanity_check_maintencance_report(self, what_to_check, new_value, location):
         location_list = self.get_all_locations()
         return self.maintenance_report_logic_manager.sanity_check_maintencance_report(what_to_check, new_value, location)
