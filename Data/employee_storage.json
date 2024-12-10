@@ -97,5 +97,14 @@
         "system_permissions": "Employee",
         "email": "mynewemail@gmail.com",
         "staff_id": "E31"
+    },
+    {
+        "name": "unc hreim",
+        "social_security_number": "2345678901",
+        "phone_number": "1234567",
+        "location": "Reykjavik",
+        "system_permissions": "Employee",
+        "email": "unchreim78@com",
+        "staff_id": "E32"
     }
 ]

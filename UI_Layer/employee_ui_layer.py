@@ -26,7 +26,7 @@ class employee_UI_menu:
             print("{:>15}{:>10}{:>15}{:>15}".format(item.name, item.phone_number, item.location, item.social_security_number))
             
         print("-" * 70)
-        if self.rank == "Manager":
+        if self.rank == "Manager" or self.rank == "Admin":
             self.action_choice()
 
     def action_choice(self) -> str:
