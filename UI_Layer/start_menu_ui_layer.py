@@ -21,6 +21,7 @@ init()
 class Main_Menu:
     def __init__(self, rank, location):
         self.logic_wrapper = Logic_Layer_Wrapper(rank, location)
+        self.logic_wrapper = Logic_Layer_Wrapper(rank, location)
         # calls the select function for what user you want to see the system as and, then - 
         # calls the location select function
         rank = self.select_user_for_system()
@@ -28,7 +29,7 @@ class Main_Menu:
 
         self.rank = rank
         self.location = location
-        
+       
 
         
         # sendir ekki inn self.blahblah útaf það er gert í þessum klasa, vilt bara senda inn location og rank
