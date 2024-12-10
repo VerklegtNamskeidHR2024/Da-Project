@@ -75,7 +75,6 @@ class contractor_UI_menu():
         print("1) Add contractor")
         print("2) edit contractor")
         print("3) View contractor")
-        print("4) give contractor warning")
         print("------------------------------------------------")
 
         user_action = input("Select an Option:  ")
@@ -88,11 +87,6 @@ class contractor_UI_menu():
                 self.display_edit_contractor_menu()
             case "3":
                 self.display_view_contractor()
-            case "4":
-                # give warning 
-                # finish this a later point
-                pass
-
             case "5":
                 self.logic_wrapper.write_to_file(list_of_contractors = [])
             case "q":
@@ -130,6 +124,7 @@ class contractor_UI_menu():
             print("something went wrong with making new contractor")
 
     def display_view_contractor(self):
+        '''Shows contractor information'''
         try:
             contractor_to_use = self.select_contractor_by_id()
             if contractor_to_use == None:
@@ -139,14 +134,16 @@ class contractor_UI_menu():
             print("something went wrong")
             return
         self.print_single_contractor(contractor_to_use)
-        print("1) View work requests")
+        print("1) View work requests")#Shows all work requests the contractor has done
         print("2) Give warning")#maybe
         edit_user_action = input("What action would you like to perform: ")
         match edit_user_action:
             case "1":
                 self.display_contractor_work_requests(contractor_to_use)
-            case "2":
-                self.change_phone_number(contractor_to_use)
+            case "2":                
+                # give warning 
+                # finish this a later point
+                pass
             case _:
                 print("not valid input")
                 return
