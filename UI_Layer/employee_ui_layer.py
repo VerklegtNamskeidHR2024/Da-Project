@@ -1,12 +1,12 @@
 from Model_Classes.employee_model import Employee
 
 class employee_UI_menu:
-    def __init__(self, logic_wrapper, rank, location):
+    def __init__(self, logic_wrapper, rank, location, staff_id):
         self.logic_wrapper = logic_wrapper
         self.rank = rank
         self.location = location
-        #self.staff_id = staff_id
-    
+        self.staff_id = staff_id
+
     def start_point_employee_UI(self):
         # when this class is called it starts here
         # call other functions in class from here

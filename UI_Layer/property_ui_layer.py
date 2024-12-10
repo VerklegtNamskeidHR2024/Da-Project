@@ -3,18 +3,21 @@ from prettytable import PrettyTable
 from colorama import Fore, Style, init
 init()
 class property_UI_menu:
-    def __init__(self, logic_wrapper, rank, location):
+    def __init__(self, logic_wrapper, rank, location, staff_id):
         self.logic_wrapper = logic_wrapper
         self.rank = rank
         self.location = location
-        self.dash_length = 79
+        self.staff_id = staff_id
+        self.dash_length = 70
 
     def start_point_property_UI(self):
         
         #Entry point for the property UI.
-        self.display_all_properties()
+        properties_menu = self.properties_menu_logistics()
+        if properties_menu == "q" or properties_menu == "b": 
+            return properties_menu 
 
-    def display_all_properties(self):   
+    def display_properties_menu(self):   
 
         # NEEDS to be changed to match with other UI files!!!!
         #Displays the list of all properties and provides options
@@ -32,20 +35,32 @@ class property_UI_menu:
 
         print(property_table)
         print("1. Select Property")
-        print("2. Add Property")
+        if self.rank == "Employee":
+            print("2. Add Amenities")
+        else:
+            print("2. Add Property")
         print("-" * self.dash_length)
 
-        user_action = input("Select an Option:  ")
+        user_action = input("Select an Option:  ").lower()
+        return user_action 
+
+    def properties_menu_logistics(self):
+        user_action = ""
+        while user_action != "q":
         #depending on your choice you will  be sent to the following places 
-        match user_action:
-            case "1":
-                self.display_select_property()
-            case "2":
-                self.display_add_property()
-            case "q":
-                print("Returning to the main menu...")
-            case _:
-                print("Invalid input.Please try again.")
+            user_action = self.display_properties_menu()
+            match (user_action, self.rank):
+                case ("1", self.rank):
+                    user_action = self.display_select_property()
+                case ("2", "Admin") | ("2", "Manager"):
+                    user_action = self.display_add_property()
+                case "b":
+                    return "b"
+                case "q":
+                    return "q"
+                case _:
+                    print("Invalid input.Please try again.")
+        return user_action
 
     def display_select_property(self):
         #Displays options for a selected property.
@@ -114,6 +129,42 @@ class property_UI_menu:
                 print("Invalid price. Please try again.")
         new_property = House('', new_name, new_location, new_condition, new_price_to_fix, new_price)
         self.logic_wrapper.add_new_property_to_storage(self.rank, self.location, new_property)
+
+    def display_add_amenity(self):
+        '''Displays the form to add a new property.'''
+        is_valid_name = False
+        is_valid_location = False
+        is_valid_condition = False
+        is_valid_price_to_fix = False
+        is_valid_price = False
+        while is_valid_name == False:
+            new_name = input("Enter the property name: ")
+            is_valid_name = self.logic_wrapper.sanity_check_properties('name', new_name)
+            if is_valid_name == False:
+                print("Invalid name. Please try again.")
+        while is_valid_location == False:
+            new_location = input("Enter the property location: ")
+            is_valid_location = self.logic_wrapper.sanity_check_properties('location', new_location)
+            if is_valid_location == False:
+                print("Invalid location. Please try again.")
+        while is_valid_condition == False:
+            new_condition = input("Enter the property condition: ")
+            is_valid_condition = self.logic_wrapper.sanity_check_properties('condition', new_condition)
+            if is_valid_condition == False:
+                print("Invalid condition. Please try again.")
+        while is_valid_price_to_fix == False:
+            new_price_to_fix = input("Enter the price to fix: ")
+            is_valid_price_to_fix = self.logic_wrapper.sanity_check_properties('price_to_fix', new_price_to_fix)
+            if is_valid_price_to_fix == False:
+                print("Invalid price to fix. Please try again.")
+        while is_valid_price == False:
+            new_price = input("Enter the property price: ")
+            is_valid_price = self.logic_wrapper.sanity_check_properties('price', new_price)
+            if is_valid_price == False:
+                print("Invalid price. Please try again.")
+        new_property = House('', new_name, new_location, new_condition, new_price_to_fix, new_price)
+        self.logic_wrapper.add_new_property_to_storage(self.rank, self.location, new_property)
+
 
     def display_view_attached_options(self, selected_property):
         #Displays attached options for a property.

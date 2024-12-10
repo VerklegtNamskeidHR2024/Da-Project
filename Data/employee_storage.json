@@ -15,7 +15,7 @@
         "location": "Reykjavik",
         "system_permissions": "Employee",
         "email": "johndoe@example.com",
-        "staff_id": "E5"
+        "staff_id": "E2"
     },
     {
         "name": "Jane Smith",
@@ -24,7 +24,7 @@
         "location": "Nuuk",
         "system_permissions": "Employee",
         "email": "janesmith@example.com",
-        "staff_id": "E9"
+        "staff_id": "E3"
     },
     {
         "name": "Jokla Himiko",
@@ -33,7 +33,7 @@
         "location": "Nuuk",
         "system_permissions": "Employee",
         "email": "joklahimiko@example.com",
-        "staff_id": "E2"
+        "staff_id": "E4"
     },
     {
         "name": "Bob Brown",
@@ -42,7 +42,7 @@
         "location": "Kulusuk",
         "system_permissions": "Employee",
         "email": "bobbrown@example.com",
-        "staff_id": "E3"
+        "staff_id": "E5"
     },
     {
         "name": "Charlie Davis",
@@ -78,7 +78,7 @@
         "location": "Tingwall",
         "system_permissions": "Employee",
         "email": "frankgreen@example.com",
-        "staff_id": "E10"
+        "staff_id": "E9"
     },
     {
         "name": "Grace Harris",
@@ -87,7 +87,7 @@
         "location": "Longyearbyen",
         "system_permissions": "Employee",
         "email": "graceharris@example.com",
-        "staff_id": "E30"
+        "staff_id": "E10"
     },
     {
         "name": "Daniela",
@@ -96,7 +96,7 @@
         "location": "Nuuk",
         "system_permissions": "Employee",
         "email": "mynewemail@gmail.com",
-        "staff_id": "E31"
+        "staff_id": "E11"
     },
     {
         "name": "Kormakur",

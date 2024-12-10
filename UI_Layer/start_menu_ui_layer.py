@@ -1,7 +1,6 @@
 import sys
 import time
 import os
-import msvcrt, time
 from datetime import datetime
 from threading import Thread
 
@@ -19,76 +18,72 @@ from colorama import Fore, Style, init
 init()
 
 class Main_Menu:
-    def __init__(self, rank, location):
-        self.logic_wrapper = Logic_Layer_Wrapper(rank, location)
-        self.logic_wrapper = Logic_Layer_Wrapper(rank, location)
+    def __init__(self, rank: str="", location: str="", staff_id: str=""):
         # calls the select function for what user you want to see the system as and, then - 
         # calls the location select function
-        rank = self.select_user_for_system()
-        location = self.select_location_for_system()
 
+        self.logic_wrapper = Logic_Layer_Wrapper(rank, location, staff_id)
+
+        rank = self.select_user_for_system()
+        staff_id = self.enter_and_validate_staff_id(rank)
+        if rank == "Admin":
+            location = self.select_location_for_system()
+        else:
+            location = self.assigned_location_for_system(rank, staff_id)
+        
+        self.staff_id = staff_id
         self.rank = rank
         self.location = location
-       
+ 
 
         
         # sendir ekki inn self.blahblah útaf það er gert í þessum klasa, vilt bara senda inn location og rank
         # annars er sent inn vitlaust location - Kv Hreimur
-        self.employee_UI_menu = employee_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
-        self.location_UI_menu = location_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
-        self.contractor_UI_menu = contractor_UI_menu(self.logic_wrapper, self.rank, self.location) 
-        self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
-        self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
-        self.property_UI_menu = property_UI_menu(self.logic_wrapper, self.rank, self.location) # , self.rank, self.location
+        self.employee_UI_menu = employee_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
+        self.location_UI_menu = location_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
+        self.contractor_UI_menu = contractor_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) 
+        self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
+        self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
+        self.property_UI_menu = property_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
 
-        # these may need to be sent into each UI class
-        #self.rank = rank
-        #self.location = location
 
     # Needs to be implemented in all of the ui menus so we can acctually select the locations
-    
-    # def set_new_rank(self, new_rank):
-    #     self.rank = new_rank
-
-    # def set_new_location(self, new_location):
-    #     self.location = new_location
-
-    # def get_location(self):
-    #     return self.location
-
-    # def get_rank(self):
-    #     return self.rank
-
-    # def do_user_selection(self):
-    #     # 
-    #     self.rank = self.select_user_for_system()
-    #     if self.rank == "q":
-    #         return None
-    #     self.location = self.select_location_for_system()
-    #     if self.location == "q":
-    #         return None 
 
     def start_point(self):
-        #self.select_user_for_system()
-        #self.select_location_for_system()
-        user_home_page = self.user_choice_select()
+        
+        user_home_page = self.user_home_page_logistics()
         if user_home_page == "q":
             self.quit_system_message()
 
+
     def quit_system_message(self):
-        print("Departing from NaN Air, Thank you for Visiting!")
+        quit_string = "Departing from NaN Air, Thank you for Visiting!"
+        self.fun_print(quit_string)
 
 
     def show_ascii_art_hq(self):
         print("{:>61}".format("==================="))
         print("{:>44}{:>13}{:>3}".format("|", "NaN Air HQ", "|"))
-        print("{:>14}{:>7}{:>15}{:>8}{:>10}{:>6}".format("___________", ".", ": : : :", "|", "_____","|"))
+        print("{:>14}{:>7}{:>15}{:>8}{:>10}{:>6}".format("___________", ".", ": : : :", "|", "_____", "|"))
         print("{:>13}{:>12}{:>11}{:>5}{:>3}{:>10}{:>6}{:>4}".format("_\\_(*)_/_", "___(*)___", ": : : :", "o o", "|", "| | |", "|", "_ ,"))
         print("{:0}{:>1}{:>31}".format("_______|-|_________/-\\__________", ":", "_____|_|__|_____| | |_____| o-o"))
 
+    def fun_print(text_to_print = "i need input bro", delay_in = 0.05):
+        """send me a string ;)"""
+        delay = delay_in
+        start = len(text_to_print)
+        text_print = ""
+        for i, char in enumerate(text_to_print):
+            text_print = text_to_print[:i+1] + '*' * (start - i - 1)
+            
+            print(text_print, end="\r", flush=True)
+            
+            time.sleep(delay)  
+        print()
 
     def create_location_table(self):
         """Prints out a table of available locations for the user to select. """
+        # maybe delete
 
         locations_table = PrettyTable()
         locations_table.field_names = ['ID',"Country", "Location Name"]
@@ -109,12 +104,20 @@ class Main_Menu:
         print(locations_table)
         
 
-    def select_user_for_system(self):
+    def select_user_for_system(self) -> str:
         # select a user for the system to use
+
         print()
-        sys.stdout.write("\r" + "Loading" + "." * 10)
+        loading = "Loading" + ("." * 20)
+        for char in loading:
+            sys.stdout.write(char)
+            sys.stdout.flush() 
+            time.sleep(0.01)
+        print()
+
+        """ sys.stdout.write("\r" + "Loading" + "." * 10)
         time.sleep(1)
-        sys.stdout.flush()
+        sys.stdout.flush() """
 
         return_user = ""
         while return_user == "":
@@ -148,28 +151,35 @@ class Main_Menu:
                 case _:
                     print("No User Found, Please Try Again.")
 
-        # sys.stdout.write('\x1b[2K')
-        # print("something will be updated/erased during next loop", end="")
-        # print("\r", end="")
-        # print("the info")
-
-        # print ("\033[A                             \033[A")
-        # print()
-        
         return return_user
     
 
-    def select_location_for_system(self):
+    def enter_and_validate_staff_id(self, rank) -> str:
+        print()
+        staff_id = ""
+        while staff_id != "b" and staff_id != "B":
+            staff_id = input("Enter Your Staff ID: ").strip()
+            is_staff_id_valid = self.logic_wrapper.sanity_check_staff_id(rank, staff_id)
+            if is_staff_id_valid == True:
+                break
+            else:
+                print("ID Does Not Exist In The System, Please Try Again.")
+                continue
+        return staff_id
+    
+
+    def select_location_for_system(self) -> str:
         # select location for system to use 
         return_location = ""
         while return_location == "":
             location_table = PrettyTable()
             location_table.field_names = ['ID',"Location", "Country"]
-            all_locations = self.logic_wrapper.get_all_locations()
-            counter = 0
-            for location in all_locations:
-                counter += 1
-                location_table.add_row([counter, location.location, location.country])
+            location_table.add_row(['1',"Iceland", "Reykjavik"])
+            location_table.add_row(['2',"Greenland", "Nuuk"])
+            location_table.add_row(['3',"Greenland", "Kulusuk"])
+            location_table.add_row(['4',"Faroe Islands", "Torshavn"])
+            location_table.add_row(['5',"Shetland Islands", "Tingwall"])
+            location_table.add_row(['6',"Svalbard", "Longyearbyen"])
 
             border_color = Fore.BLUE
             reset_color = Style.RESET_ALL
@@ -196,7 +206,17 @@ class Main_Menu:
                 case _:
                     print("No Location Found, Please Try Again.")
         return return_location
-                    
+
+
+    def assigned_location_for_system(self, rank: str, staff_id: str) -> str:
+        if rank == "Manager":
+            manager_location = self.logic_wrapper.get_manager_by_id(staff_id)
+            return manager_location
+        elif rank == "Employee":
+            employee_location = self.logic_wrapper.get_employee_by_id(staff_id)
+            return employee_location
+        
+
 
     def display_menu_items(self):
         
@@ -217,7 +237,7 @@ class Main_Menu:
         user_action = input("Select an Option: ").lower()
         return user_action
 
-    def user_choice_select(self):
+    def user_home_page_logistics(self):
 
         # Calls the sub menus
         user_action = ""

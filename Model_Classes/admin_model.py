@@ -4,8 +4,9 @@ class Admin(Human):
     def __init__(self, name:str="", social_security_number:str='', phone_number:str='', location:str="", system_permissions:str="Admin",
                 email:str="", staff_id:str=""):
         super().__init__(name, social_security_number, phone_number, location, system_permissions, email, staff_id)
-    
+        """Constructor for Admin"""
     def to_dict(self):
+        """Converts the Admin object to a dictionary"""
         return {
             'name': self.name,
             'social_security_number': self.social_security_number,

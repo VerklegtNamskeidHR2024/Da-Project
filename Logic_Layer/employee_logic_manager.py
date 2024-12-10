@@ -6,12 +6,34 @@ class employee_logic_manager:
         #from Logic_Layer.work_request_logic_manager import work_request_logic_manager
         #from Logic_Layer.maintenance_report_logic_manager import maintenance_report_logic_manager
 
+    # Might not implement
+    def get_all_admins(self) -> list:
+        all_admins = self.Storage_Layer_Wrapper.get_all_admins()
+        return all_admins 
+
+    # Might not implement
+    def get_all_managers(self) -> list:
+        all_managers = self.Storage_Layer_Wrapper.get_all_managers()
+        return all_managers 
+    
+    def get_manager_by_id(self, staff_id: str) -> object: 
+        all_managers = self.Storage_Layer_Wrapper.get_all_managers()
+        for manager in all_managers:
+            if manager.staff_id == staff_id:
+                return manager.location
+
+    # Might not implement
     def get_all_employees(self) -> list:
 
         all_employees = self.Storage_Layer_Wrapper.get_all_employees()
 
         return all_employees
 
+    def get_employee_by_id(self, staff_id: str) -> object:
+        all_employees = self.Storage_Layer_Wrapper.get_all_employees()
+        for employee in all_employees:
+            if employee.staff_id == staff_id:
+                return employee.location
 
     def get_all_employees_at_location(self, location) -> list:
         employees_sorted_list = []
@@ -45,6 +67,7 @@ class employee_logic_manager:
         employee.set_staff_id(new_employee_id)
         list_of_all_employees.append(employee)
         self.Storage_Layer_Wrapper.write_to_file_employee(list_of_all_employees)
+
 
     def edit_employee_info(self, employee: object):
         all_employees = self.Storage_Layer_Wrapper.get_all_employees()
@@ -119,4 +142,25 @@ class employee_logic_manager:
         else:
             return False
 
+    def sanity_check_staff_id(self, rank: str, staff_id: str) -> bool:
+        if rank == "Admin":
+            all_admins = self.Storage_Layer_Wrapper.get_all_admins()
+            for admin in all_admins:
+                if admin.staff_id == staff_id:
+                    return True
+                return False 
+            
+        elif rank == "Managers":
+            all_managers = self.Storage_Layer_Wrapper.get_all_managers()
+            for manager in all_managers:
+                if manager.staff_id == staff_id:
+                    return True
+                return False
+            
+        elif rank == "Employee":
+            all_employees = self.Storage_Layer_Wrapper.get_all_employees()
+            for employee in all_employees:
+                if employee.staff_id == staff_id:
+                    return True    
+            return False 
 
