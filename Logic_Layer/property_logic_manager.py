@@ -65,7 +65,7 @@ class property_logic_manager:
         new_property_id = 'P' + str(highestID) # set the new ID to P + the highest ID
         return new_property_id
 
-    def get_all_properties_at_location(self, location) -> list:
+    def get_all_properties_at_location(self, location: str) -> list:
         '''Gets all properties at specific location'''
         properties_sorted_list = []
         

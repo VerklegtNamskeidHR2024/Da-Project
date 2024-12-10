@@ -69,7 +69,7 @@ class Main_Menu:
         print("{:>13}{:>12}{:>11}{:>5}{:>3}{:>10}{:>6}{:>4}".format("_\\_(*)_/_", "___(*)___", ": : : :", "o o", "|", "| | |", "|", "_ ,"))
         print("{:0}{:>1}{:>31}".format("_______|-|_________/-\\__________", ":", "_____|_|__|_____| | |_____| o-o"))
 
-    def fun_print(text_to_print = "i need input bro", delay_in = 0.05):
+    def fun_print(self, text_to_print = "i need input bro", delay_in = 0.05):
         """send me a string ;)"""
         delay = delay_in
         print(text_print)
@@ -117,10 +117,6 @@ class Main_Menu:
             time.sleep(0.01)
         print()
 
-        """ sys.stdout.write("\r" + "Loading" + "." * 10)
-        time.sleep(1)
-        sys.stdout.flush() """
-
         return_user = ""
         while return_user == "":
             print()
@@ -158,15 +154,12 @@ class Main_Menu:
 
     def enter_and_validate_staff_id(self, rank) -> str:
         print()
-        staff_id = ""
-        while staff_id != "b" and staff_id != "B":
+        is_staff_id_valid = False
+        while is_staff_id_valid == False:
             staff_id = input("Enter Your Staff ID: ").strip()
             is_staff_id_valid = self.logic_wrapper.sanity_check_staff_id(rank, staff_id)
-            if is_staff_id_valid == True:
-                break
-            else:
-                print("ID Does Not Exist In The System, Please Try Again.")
-                continue
+            print("ID Does Not Exist In The System, Please Try Again.")
+            continue
         return staff_id
     
 

@@ -38,16 +38,15 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### CONTRACTOR #########################################################################################
-    def get_all_contractors_at_location(self, location):
+    def get_all_contractors_at_location(self, location: str) -> list[Contractor]:
         return self.contractor_logic_manager.get_all_contractors_at_location(location)
         # returns a list of all contractors at a specific location
 
-    def get_contractor_by_id(self, location, contractor_id) -> Contractor:
+    def get_contractor_by_id(self, location: str, contractor_id: str) -> Contractor:
         return self.contractor_logic_manager.get_contractor_by_id(location, contractor_id)
         # returns a contractor object by contractor_id
 
-   
-    def sanity_check_contractor(self, contractor, new):
+    def sanity_check_contractor(self, contractor: object, new: str):
         """check if all info in a contractor object"""
         return self.contractor_logic_manager.sanity_check_contractor(contractor, new)
         # checks if all info in a contractor object is correct
@@ -74,17 +73,9 @@ class Logic_Layer_Wrapper:
     
     ########################################################################################################
     ### PROPERTIES #########################################################################################
-    def get_all_properties_at_location(self, location):
+    def get_all_properties_at_location(self, location: str):
         return self.property_logic_manager.get_all_properties_at_location(location)
         # returns a list of all properties at a specific location
-    
-    def get_all_properties_at_location(self, location):
-        return self.property_logic_manager.get_all_properties_at_location(location)
-        # returns a list of all properties at a specific location
-
-    def add_new_property_to_storage(self, rank, location, new_property):
-        return self.property_logic_manager.add_new_property_to_storage(rank, location, new_property)
-        # adds a new property to the storage
     
     def get_property_by_id(self, location, property_id):
         return self.property_logic_manager.get_property_by_id(location, property_id)
@@ -101,7 +92,7 @@ class Logic_Layer_Wrapper:
     def sanity_check_properties(self, what_to_check, new_value) -> bool:
         return self.property_logic_manager.sanity_check_properties(what_to_check, new_value)
         # checks if all info in a property object is correct
-    def add_new_property_to_storage(self, rank, location, new_property):
+    def add_new_property_to_storage(self, rank: str, location: str, new_property: object):
         return self.property_logic_manager.add_new_property_to_storage(rank, location, new_property)
         # adds a new property to the storage
     
@@ -218,36 +209,39 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### WORK_REQUESTS ######################################################################################
-    def get_all_work_requests_at_location(self, rank:str , location: str) -> list[WorkRequest]: 
-        return self.work_request_logic_manager.get_all_work_requests_at_location(rank, location)
+    def get_all_work_requests_at_location(self, rank: str, location: str, staff_id: str) -> list[WorkRequest]: 
+        return self.work_request_logic_manager.get_all_work_requests_at_location(rank, location, staff_id)
         # returns a list of all work requests at a specific location
 
-    def get_work_request_by_id(self, rank: str, location: str, work_request_id: str) -> WorkRequest:
-        return self.work_request_logic_manager.get_work_request_by_id(rank, location, work_request_id)  
+    def get_work_request_by_id(self, location: str, work_request_id: str, status: str, accepted_by_employee: bool) -> WorkRequest:
+        return self.work_request_logic_manager.get_work_request_by_id(location, work_request_id, status, accepted_by_employee)  
         # returns a work request object by work_request_id
     
-    def get_all_new_work_requests(self, rank: str, location: str) -> list[WorkRequest]:
-        return self.work_request_logic_manager.get_all_new_work_requests_in_storage(rank, location)
+    def get_all_new_work_requests(self, location: str) -> list[WorkRequest]:
+        return self.work_request_logic_manager.get_all_new_work_requests_in_storage(location)
         # returns a list of all new work requests
     
-    def get_all_closed_work_requests(self, rank: str, location: str) -> list[WorkRequest]: 
-        return self.work_request_logic_manager.get_all_closed_work_requests_in_storage(rank, location)
+    def get_all_closed_work_requests(self, location: str) -> list[WorkRequest]: 
+        return self.work_request_logic_manager.get_all_closed_work_requests_in_storage(location)
         # returns a list of all closed work requests
     
-    def get_all_pending_work_requests(self, rank: str, location: str) -> list[WorkRequest]:
-        return self.work_request_logic_manager.get_all_pending_work_requests_in_storage(rank, location)
+    def get_all_pending_work_requests(self, rank: str, location: str, staff_id: str) -> list[WorkRequest]:
+        return self.work_request_logic_manager.get_all_pending_work_requests_in_storage(rank, location, staff_id)
         # returns a list of all pending work requests
     
-    def get_my_work_requests(self, rank: str, location: str) -> list[WorkRequest]:
-        return self.work_request_logic_manager.get_my_work_request(rank, location)
+    def get_my_work_requests(self, rank: str, location: str, staff_id: str) -> list[WorkRequest]:
+        return self.work_request_logic_manager.get_my_work_request(rank, location, staff_id)
         # returns a list of all work requests for a specific employee
-    def edit_work_request(self, WorkRequest: object) -> None:
-        return self.work_request_logic_manager.edit_work_request(WorkRequest)
+    def edit_work_request(self, work_request: object) -> None:
+        return self.work_request_logic_manager.edit_work_request(work_request)
         # edits a work request
     
-    def add_work_request(self, WorkRequest: object) -> None:
-        return self.work_request_logic_manager.add_work_request(WorkRequest)
+    def add_work_request(self, work_request: object) -> None:
+        return self.work_request_logic_manager.add_work_request(work_request)
         # adds a new work request to the storage
+
+    def sanity_check_low_level_logistics(self, category: str, value_to_be_verified: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_low_level_logistics(category, value_to_be_verified)
     
     def sanity_check_work_request_property_id(self, property_id: str) -> bool:
         return self.work_request_logic_manager.sanity_check_work_request_property_id(property_id)
