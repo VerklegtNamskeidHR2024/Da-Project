@@ -13,35 +13,45 @@ class maintenance_report_UI_menu:
         self.staff_id = staff_id
 
     def clear_screen(self):
+        ''' Clears the screen '''
         os.system('cls' if os.name == 'nt' else 'clear')
 
-    def quit_system():
+    # dont know if needed
+    '''def quit_system():
+        Quits the system
         print("Quitting system")
         return
+        '''
 
     def start_point_maintenance_reports_UI(self):
+        ''' Entry point for the maintenance reports UI '''
         #self.clear_screen()
         #Entry point for the maintenance reports UI
         self.display_maintenance_report()
         return
 
     def display_maintenance_report(self):
+        ''' Sends the user to the menu based on their rank '''
         #self.clear_screen()
-        # if the choice is admin or mangers it goes to the admin_or_manager_menu
+        # If the user is an admin or manager it goes to the admin/manager menu
         if self.rank == "Admin" or self.rank == "Manager":
             self.select_menu_option_admin_manager()
 
-        #if the choice is employee it goes to employee menu 
+        # If the user is an employee it goes to the employee menu
         elif self.rank == "Employee":
             self.employee_menu(self.staff_id)
         else:
             print("Invalid rank. Access denied.")
 
     def select_menu_option_admin_manager(self):
+        ''' Admin/Manager menu '''
         #self.clear_screen()
+        # Starts by displaying all reports
         self.print_all_reports()
         user_choice = ""
+        # Then a while loop is started to keep the menu open until the user wants to go back
         while user_choice != "b":
+            # The menu is displayed
             print(f"{self.rank} - Maintenance Report Menu")
             print('-' * 50)
             print("1. Pending reports")
@@ -50,7 +60,9 @@ class maintenance_report_UI_menu:
             print('4. Edit report')
             print('b. Go back')
             print('-' * 50)
+            # The user is asked to select an option
             user_choice = input("Select an Option: ")
+            # The user input is checked and the user is sent to the corresponding menu
             if user_choice == "b":
                 return
             elif user_choice == 'q':
