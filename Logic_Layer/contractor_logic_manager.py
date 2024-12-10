@@ -94,7 +94,7 @@ class contractor_logic_manager:
     
     def get_contractor_maintenance_reports(self, location, contractor_id):
         maintenance_report_list = []
-        all_maintenance_reports = self.Storage_Layer_Wrapper.get_all_maintenance_report()
+        all_maintenance_reports = self.Storage_Layer_Wrapper.get_all_maintenance_reports()
         for maintenance_report in all_maintenance_reports:
             if maintenance_report.contractor_id == contractor_id:
                 maintenance_report_list.append(maintenance_report)

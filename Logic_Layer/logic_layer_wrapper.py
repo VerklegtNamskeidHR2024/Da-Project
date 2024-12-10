@@ -223,10 +223,13 @@ class Logic_Layer_Wrapper:
     def fetch_location_from_storage(self ,Location_ID):
         return self.location_logic_manager.fetch_location_from_storage()
 
-    def sanity_check_location(self ,Location):
-        return self.location_logic_manager.sanity_check_location(Location)
+    def sanity_check_location(self, what_to_check, new_value):
+        return self.location_logic_manager.sanity_check_location(what_to_check, new_value)
 
     def add_new_location_to_storage(self ,Location):
         return self.location_logic_manager.add_new_location_to_storage()
+    
+    def edit_existing_location_in_storage(self, location, current_location, edit_choice, new_value):
+        return self.location_logic_manager.edit_existing_location_in_storage(location, current_location, edit_choice, new_value)
 
 
