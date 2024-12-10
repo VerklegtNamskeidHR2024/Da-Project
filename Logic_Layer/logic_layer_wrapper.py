@@ -134,7 +134,7 @@ class Logic_Layer_Wrapper:
         # returns an employee object by social_security_number
 
     def fetch_all_work_request_for_employee(self, staff_id) -> list:
-        return self.employee_logic_manager.fetch_all_work_request_for_employee(staff_id)´
+        return self.employee_logic_manager.fetch_all_work_request_for_employee(staff_id)
         # returns a list of all work requests for a specific employee
 
     def fetch_all_maintenance_reports_for_employee(self, staff_id) -> list:
