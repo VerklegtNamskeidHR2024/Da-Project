@@ -1,1 +1,50 @@
-[]
+[
+    {
+        "country": "Iceland",
+        "location": "Reykjavik",
+        "airport": "KEF",
+        "phone_number": "1234567",
+        "branch_manager": "Tumi Krist",
+        "opening_hours": "12-12"
+    },
+    {
+        "country": "Greenland",
+        "location": "Nuuk",
+        "airport": "NUK",
+        "phone_number": "5551234",
+        "branch_manager": "Tumi Krist",
+        "opening_hours": "8-16"
+    },
+    {
+        "country": "Greenland",
+        "location": "Kulusuk",
+        "airport": "KLK",
+        "phone_number": "5551234",
+        "branch_manager": "Tumi Krist",
+        "opening_hours": "8-16"
+    },
+    {
+        "country": "Faroe Islands",
+        "location": "Thorshofn",
+        "airport": "FLT",
+        "phone_number": "5551234",
+        "branch_manager": "Tumi Krist",
+        "opening_hours": "8-16"
+    },
+    {
+        "country": "Hjaltlandseyjar",
+        "location": "Tingwall",
+        "airport": "SVB",
+        "phone_number": "5551234",
+        "branch_manager": "Tumi Krist",
+        "opening_hours": "8-16"
+    },
+    {
+        "country": "Svalbard",
+        "location": "Longyearbyen",
+        "airport": "SVB",
+        "phone_number": "5551234",
+        "branch_manager": "Tumi Krist",
+        "opening_hours": "8-16"
+    }
+]

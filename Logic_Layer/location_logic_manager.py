@@ -26,7 +26,7 @@ class location_logic_manager:
         return location_sorted_list
 
     def edit_existing_location_in_storage(self, location, current_location, edit_choice, new_value):
-        list_of_locations = self.get_all_locations()
+        list_of_locations = self.all_location()
         for location_obj in list_of_locations:
             if location_obj.location == location.location:
                 if edit_choice == 'phone_number':
@@ -38,6 +38,7 @@ class location_logic_manager:
                     #location_obj.set_opening_hours(new_value)
                 elif edit_choice == 'opening_hours':
                     location_obj.set_opening_hours(new_value)
+
         self.Storage_Layer_Wrapper.write_to_file_locations(list_of_locations)
 
 
@@ -48,6 +49,16 @@ class location_logic_manager:
                 return True
             else:
                 return False
+        if what_to_check == 'manager':
+            # needs to check that a manager with that id does not have a location under him
+            return False
+            if len(new_value) == 7:
+                return True
+            else:
+                return False
+        if what_to_check == "opening_hours":
+            return True
+        
 
     def fetch_all_amenities_for_location_in_storage(self, location) -> list:
         pass

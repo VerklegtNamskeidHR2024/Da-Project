@@ -70,32 +70,60 @@ class location_UI_menu:
         match edit_user_action:
             case "1":
                 self.change_phone_number(current_location)
-                print("")
+                print()
             case "2":
-                edited_manager = input("Enter a New Manager: ")
-                
+                print("needs to be added")
+                self.change_manager(current_location)
                 print()
             case "3":
-                edited_amenities = input("Enter a New Amenity: ")
-                self.logic_layer_wrapper.function()
+                print("needs to be added")
             case "4":
-                edited_location_phone = input("Enter a New Opening Hours: ")
-                self.logic_layer_wrapper.function()
+                self.change_opening_hours(current_location)
+                print()
 
     def change_phone_number(self, location) -> None:
-        is_valid = False
-        while is_valid == False:
-            phone_input = input("enter phone number: ")
-            is_valid = self.logic_wrapper.sanity_check_location("phone_number", phone_input)
-            if not phone_input.isdigit() or is_valid != True:
-                print("Invalid input. Please enter numbers only.")
-            else:
-                self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'phone_number', phone_input)
+        try:
+            is_valid = False
+            while is_valid == False:
+                phone_input = input("Enter phone number: ")
+                is_valid = self.logic_wrapper.sanity_check_location("phone_number", phone_input)
+                if not phone_input.isdigit() or is_valid != True:
+                    print("Invalid input. Please enter numbers only.")
+                else:
+                    self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'phone_number', phone_input)
+                    self.location_information()
+        except:
+            print("something went wrong")
+    
+    def change_manager(self, location) -> None:
+        # check this out tomorrow 
+        try:
+            new_manager_id = input("Enter manager id: ")
+            #contractor.set_contact_name(new_contact_name)
+            is_valid = self.logic_wrapper.sanity_check_location("manager", new_manager_id)
+            if is_valid == True:
+                self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'manager', new_manager_id)
                 self.location_information()
+            else:
+                print("Invalid input. Please try again.")
+        except:
+            print("something went wrong")
+
+    def change_opening_hours(self, location) -> None:
+        new_opening_hours = input("Enter opening hours: ")
+        #contractor.set_contact_name(new_contact_name)
+        is_valid = self.logic_wrapper.sanity_check_location("opening_hours", new_opening_hours)
+        if is_valid == True:
+            self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'opening_hours', new_opening_hours)
+            self.location_information()
+        else:
+            print("Invalid input. Please try again.")
         try:
             pass
         except:
             print("something went wrong")
+
+    # add ameneity change here, ask about it tho
 
     def get_current_location(self):
         location_list = self.logic_wrapper.get_all_locations()
