@@ -17,6 +17,7 @@ class work_request_logic_manager:
     def sanity_check_boolean_input_work_requests(self, yes_or_no: str) -> bool:
         """Takes the input given by the user and returns True or False based on if the user had entered spefically 
         yes/Yes or no/No. Otherwise it returns None. """
+
         if len(yes_or_no) < 2:
             return 
         match yes_or_no:
@@ -51,13 +52,23 @@ class work_request_logic_manager:
         return False
     
     def sanity_check_employee_id_for_request(self, staff_id: str) -> bool:
-        all_employees = self.Storage_Layer_Wrapper.get_all_employee()
+        all_employees = self.Storage_Layer_Wrapper.get_all_employees()
+        for employee in all_employees:
+            if employee.staff_id == staff_id:
+                return True    
+        return False 
+    
+    # Might not fully implement, needs further thought.
+    def sanity_check_staff_id_for_request(self, staff_id: str) -> bool:
+        all_employees = self.Storage_Layer_Wrapper.get_all_employees()
         for employee in all_employees:
             if employee.staff_id == staff_id:
                 return True    
         return False 
 
     def set_id_for_work_request(self, Work_request: object) -> str:
+        """"""
+
         highest_id = -1
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         for work_request in all_work_requests:
@@ -71,6 +82,7 @@ class work_request_logic_manager:
             
 
     def add_work_request(self, Work_request: object):
+
         Work_request_with_id = self.set_id_for_work_request(Work_request)
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         all_work_requests.append(Work_request_with_id)
@@ -79,6 +91,8 @@ class work_request_logic_manager:
 
 
     def edit_work_request(self, Work_request: object):
+        """rom the storage layer wrapper it . """
+
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         for position, request in enumerate(all_work_requests):
             if request.work_request_id == Work_request.work_request_id:
@@ -95,14 +109,14 @@ class work_request_logic_manager:
                 return work_request 
 
     def get_all_work_requests_at_location(self, rank: str, location: str) -> list:
-            """Gets all work requests at specific location. """
+        """Gets all work requests at specific location. """
 
-            work_request_sorted_list = []
-            all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
-            for work_request in all_work_requests:
-                if (work_request.location == location and work_request.accepted_by_employee == True and work_request.work_request_status == "Open"):
-                    work_request_sorted_list.append(work_request)
-            return work_request_sorted_list 
+        work_request_sorted_list = []
+        all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
+        for work_request in all_work_requests:
+            if (work_request.location == location and work_request.accepted_by_employee == True and work_request.work_request_status == "Open"):
+                work_request_sorted_list.append(work_request)
+        return work_request_sorted_list 
         
     def get_my_work_request(self, rank: str, location: str) -> list:
         
