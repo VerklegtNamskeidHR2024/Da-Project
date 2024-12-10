@@ -35,7 +35,7 @@ class Storage_Layer_Wrapper:
     ########################################################################################################
     ### CONTRACTOR #########################################################################################
     
-    def get_all_contractor(self):
+    def get_all_contractor(self) -> list:
         """Get all contractors"""
         all_contractors = self.contractor_storage_manager.get_all_contractor()
         #all_contractors = contractor_storage.get_all_contractor()
@@ -49,7 +49,7 @@ class Storage_Layer_Wrapper:
     ########################################################################################################
     ### PROPERTIES #########################################################################################
     
-    def get_all_properties_at_location(self):
+    def get_all_properties_at_location(self) -> list:
         """Get all properties at a location"""
         return self.property_storage_manager.get_all_properties()
     
@@ -81,7 +81,7 @@ class Storage_Layer_Wrapper:
     ########################################################################################################
     ### MAINTENANCE_REPORTS ################################################################################
     
-    def get_all_maintenance_reports(self):
+    def get_all_maintenance_reports(self) -> list:
         """Get all maintenance reports"""
         all_maintenance_reports = self.maintenance_report_storage_manager.get_all_maintenance_reports()
         return all_maintenance_reports
@@ -93,7 +93,7 @@ class Storage_Layer_Wrapper:
     ########################################################################################################
     ### WORK_REQUESTS ######################################################################################
     
-    def get_all_work_requests(self):
+    def get_all_work_requests(self) -> list:
         """Get all work requests"""
         all_work_requests = self.work_request_storage_manager.get_all_work_requests()
         return all_work_requests
@@ -105,7 +105,7 @@ class Storage_Layer_Wrapper:
     ########################################################################################################
     ### LOCATION ###########################################################################################
     
-    def get_all_locations(self):
+    def get_all_locations(self) -> list:
         """Get all locations"""
         all_locations = self.location_storage_manager.get_all_locations()
         return all_locations
@@ -117,7 +117,7 @@ class Storage_Layer_Wrapper:
     ########################################################################################################
     ### ADMIN ##############################################################################################
     
-    def get_all_admin(self):
+    def get_all_admin(self) -> list:
         """Get all admins"""
         all_admins = self.admin_storage_manager.get_all_admin()
         return all_admins
@@ -129,7 +129,7 @@ class Storage_Layer_Wrapper:
     ########################################################################################################
     ### MANAGER ############################################################################################
     
-    def get_all_managers(self):
+    def get_all_managers(self) -> list:
         """Get all managers"""
         all_managers = self.manager_storage_manager.get_all_managers()
         return all_managers
@@ -141,7 +141,7 @@ class Storage_Layer_Wrapper:
     ########################################################################################################
     ### AMENITY ############################################################################################
     
-    def get_all_amenities(self):
+    def get_all_amenities(self) -> list:
         """Get all amenities"""
         all_amenities = self.amenity_storage_manager.get_all_amenities()
         return all_amenities
