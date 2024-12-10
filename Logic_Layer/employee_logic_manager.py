@@ -139,7 +139,6 @@ class employee_logic_manager:
             print(loc.location)
             if loc.location == location:
                 return True
-        else:
             return False
 
     def sanity_check_staff_id(self, rank: str, staff_id: str) -> bool:
@@ -148,16 +147,16 @@ class employee_logic_manager:
             for admin in all_admins:
                 if admin.staff_id == staff_id:
                     return True
-                return False 
-            
-        elif rank == "Managers":
+            return False 
+    
+        if rank == "Manager":
             all_managers = self.Storage_Layer_Wrapper.get_all_managers()
             for manager in all_managers:
                 if manager.staff_id == staff_id:
                     return True
-                return False
+            return False
             
-        elif rank == "Employee":
+        if rank == "Employee":
             all_employees = self.Storage_Layer_Wrapper.get_all_employees()
             for employee in all_employees:
                 if employee.staff_id == staff_id:

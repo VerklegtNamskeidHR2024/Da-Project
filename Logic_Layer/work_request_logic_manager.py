@@ -119,7 +119,6 @@ class work_request_logic_manager:
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         all_work_requests.append(Work_request_with_id)
         self.Storage_Layer_Wrapper.write_to_file_work_requests(all_work_requests) 
-        return 
 
 
     def edit_work_request(self, Work_request: object):
@@ -131,7 +130,6 @@ class work_request_logic_manager:
             if request.work_request_id == Work_request.work_request_id:
                 all_work_requests[position] = Work_request
         self.Storage_Layer_Wrapper.write_to_file_work_requests(all_work_requests)
-        return 
 
 
     def get_work_request_by_id(self, location: str, work_request_id: str, status: str, accepted_by_employee: bool) -> object:
