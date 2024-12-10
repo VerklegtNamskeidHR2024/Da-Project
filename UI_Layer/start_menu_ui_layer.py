@@ -19,13 +19,20 @@ from colorama import Fore, Style, init
 init()
 
 class Main_Menu:
-    def __init__(self, rank, location):
+    def __init__(self, rank: str="", location: str="", staff_id: str=""):
         # calls the select function for what user you want to see the system as and, then - 
         # calls the location select function
-        self.logic_wrapper = Logic_Layer_Wrapper(rank, location)
+
+        self.logic_wrapper = Logic_Layer_Wrapper(rank, location, staff_id)
+
         rank = self.select_user_for_system()
-        location = self.select_location_for_system()
-        self.staff_id = self.enter_and_validate_staff_id(rank)
+        staff_id = self.enter_and_validate_staff_id(rank)
+        if rank == "Admin":
+            location = self.select_location_for_system()
+        else:
+            location = self.assigned_location_for_system(rank, staff_id)
+        
+        self.staff_id = staff_id
         self.rank = rank
         self.location = location
         
@@ -40,39 +47,15 @@ class Main_Menu:
         self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
         self.property_UI_menu = property_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
 
-        # these may need to be sent into each UI class
-        #self.rank = rank
-        #self.location = location
 
     # Needs to be implemented in all of the ui menus so we can acctually select the locations
-    
-    # def set_new_rank(self, new_rank):
-    #     self.rank = new_rank
-
-    # def set_new_location(self, new_location):
-    #     self.location = new_location
-
-    # def get_location(self):
-    #     return self.location
-
-    # def get_rank(self):
-    #     return self.rank
-
-    # def do_user_selection(self):
-    #     # 
-    #     self.rank = self.select_user_for_system()
-    #     if self.rank == "q":
-    #         return None
-    #     self.location = self.select_location_for_system()
-    #     if self.location == "q":
-    #         return None 
 
     def start_point(self):
-        #self.select_user_for_system()
-        #self.select_location_for_system()
+        
         user_home_page = self.user_home_page_logistics()
         if user_home_page == "q":
             self.quit_system_message()
+
 
     def quit_system_message(self):
         print("Departing from NaN Air, Thank you for Visiting!")
@@ -81,7 +64,7 @@ class Main_Menu:
     def show_ascii_art_hq(self):
         print("{:>61}".format("==================="))
         print("{:>44}{:>13}{:>3}".format("|", "NaN Air HQ", "|"))
-        print("{:>14}{:>7}{:>15}{:>8}{:>10}{:>6}".format("___________", ".", ": : : :", "|", "_____","|"))
+        print("{:>14}{:>7}{:>15}{:>8}{:>10}{:>6}".format("___________", ".", ": : : :", "|", "_____", "|"))
         print("{:>13}{:>12}{:>11}{:>5}{:>3}{:>10}{:>6}{:>4}".format("_\\_(*)_/_", "___(*)___", ": : : :", "o o", "|", "| | |", "|", "_ ,"))
         print("{:0}{:>1}{:>31}".format("_______|-|_________/-\\__________", ":", "_____|_|__|_____| | |_____| o-o"))
 
@@ -108,7 +91,7 @@ class Main_Menu:
         print(locations_table)
         
 
-    def select_user_for_system(self):
+    def select_user_for_system(self) -> str:
         # select a user for the system to use
 
         return_user = ""
@@ -145,21 +128,22 @@ class Main_Menu:
 
         return return_user
     
-    def enter_and_validate_staff_id(self, user) -> str:
+
+    def enter_and_validate_staff_id(self, rank) -> str:
         print()
         staff_id = ""
-        while staff_id == "":
-            staff_id = input("Enter Your Staff ID: ")
-            is_staff_id_valid = self.logic_wrapper.sanity_check_staff_id(user, staff_id)
+        while staff_id != "b" and staff_id != "B":
+            staff_id = input("Enter Your Staff ID: ").strip()
+            is_staff_id_valid = self.logic_wrapper.sanity_check_staff_id(rank, staff_id)
             if is_staff_id_valid == True:
                 break
             else:
-                print("Invalid")
+                print("ID Does Not Exist In The System, Please Try Again.")
                 continue
         return staff_id
     
 
-    def select_location_for_system(self):
+    def select_location_for_system(self) -> str:
         # select location for system to use 
         return_location = ""
         while return_location == "":
@@ -196,7 +180,17 @@ class Main_Menu:
                 case _:
                     print("No Location Found, Please Try Again.")
         return return_location
-                    
+
+
+    def assigned_location_for_system(self, rank: str, staff_id: str) -> str:
+        if rank == "Manager":
+            manager_location = self.logic_wrapper.get_manager_by_id(staff_id)
+            return manager_location
+        elif rank == "Employee":
+            employee_location = self.logic_wrapper.get_employee_by_id(staff_id)
+            return employee_location
+        
+
 
     def display_menu_items(self):
         

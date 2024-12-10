@@ -13,7 +13,7 @@ class work_request_UI_menu:
         """When an instance of this class is created, the class object calls this function first which in 
         turn calls the function to load the work request menu and it's options for the user. """
     
-        work_request_menu = self.menu_selection_logistics(self.staff_id)
+        work_request_menu = self.menu_selection_logistics()
         if work_request_menu == "q" or work_request_menu == "b": 
             return work_request_menu 
     
