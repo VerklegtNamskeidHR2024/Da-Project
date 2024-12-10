@@ -152,15 +152,12 @@ class Main_Menu:
 
     def enter_and_validate_staff_id(self, rank) -> str:
         print()
-        staff_id = ""
-        while staff_id != "b" and staff_id != "B":
+        is_staff_id_valid = False
+        while is_staff_id_valid == False:
             staff_id = input("Enter Your Staff ID: ").strip()
             is_staff_id_valid = self.logic_wrapper.sanity_check_staff_id(rank, staff_id)
-            if is_staff_id_valid == True:
-                break
-            else:
-                print("ID Does Not Exist In The System, Please Try Again.")
-                continue
+            print("ID Does Not Exist In The System, Please Try Again.")
+            continue
         return staff_id
     
 
