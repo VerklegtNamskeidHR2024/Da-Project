@@ -3,31 +3,39 @@
 class property_logic_manager:
 
     def __init__(self, Storage_Layer_Wrapper):
+        """Constructor for property logic manager"""
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
 
     def sanity_check_properties(self, what_to_check, new_value) -> bool:
+        '''Sanity check for properties'''
+        # Check if the new value is valid
+        # checks if the name is longer than 3 characters
         if what_to_check == 'name':
             if len(new_value) > 3:
                 return True
             else:
                 return False
+        # checks if the location is in the list of locations
         elif what_to_check == 'location':
             list_of_all_locations = self.Storage_Layer_Wrapper.get_all_locations()
             for location in list_of_all_locations:
                 if location.location == new_value:
                     return True
             return False
+        # checks if the condition is not empty
         elif what_to_check == 'condition':
             if len(new_value) > 0:
                 return True
             else:
                 return False
+        # checks if the price to fix is a float
         elif what_to_check == 'price_to_fix':
             try:
                 float(new_value)
                 return True
             except ValueError:
                 return False
+        # checks if the price is a float
         elif what_to_check == 'price':
             try:
                 float(new_value)
@@ -36,29 +44,31 @@ class property_logic_manager:
                 return False
 
     def get_all_properties(self) -> list:
-        property_list = []
-        all_properties = self.Storage_Layer_Wrapper.get_all_properties_at_location()
+        '''Gets all properties'''
+        property_list = [] # initialize an empty list to hold properties
+        all_properties = self.Storage_Layer_Wrapper.get_all_properties_at_location() # get all properties
 
-        for property in all_properties:
-            property_list.append(property)
-        return property_list 
+        for property in all_properties: # iterate through all properties
+            property_list.append(property) # append each property to the properties list
+        return property_list  # return the list of properties
      
     def get_highest_ID(self, location):
-        highestID = -1
-        list_of_all_properties = self.get_all_properties()
-        for property in list_of_all_properties:
-            stripped_ID = property.property_id[1:]
-            if int(stripped_ID) > highestID:
-                highestID = int(stripped_ID)
-        highestID += 1
+        """Get the highest ID for a property"""
+        highestID = -1 # initialize the highest ID to -1
+        list_of_all_properties = self.get_all_properties() # get all properties
+        for property in list_of_all_properties: # iterate through all properties
+            stripped_ID = property.property_id[1:] # get the ID without the P
+            if int(stripped_ID) > highestID: # check if the ID is higher than the highest ID
+                highestID = int(stripped_ID) # set the highest ID to the ID
+        highestID += 1 # increment the highest ID by 1
 
-        new_property_id = 'P' + str(highestID)
+        new_property_id = 'P' + str(highestID) # set the new ID to P + the highest ID
         return new_property_id
 
     def get_all_properties_at_location(self, location) -> list:
         '''Gets all properties at specific location'''
         properties_sorted_list = []
-
+        
         all_properties = self.Storage_Layer_Wrapper.get_all_properties_at_location()
 
         for property in all_properties:
@@ -68,13 +78,16 @@ class property_logic_manager:
         return properties_sorted_list
     
     def get_property_by_id(self, location, property_id) -> object:
+        """Find a property by property_id"""
         property_list = self.get_all_properties_at_location(location)
         for property in property_list:
             if property.property_id == property_id:
                 return property
 
     def add_new_property_to_storage(self, rank, location, property):
+        """Add a new property to the storage"""
         print('Adding new property to storage')
+        # checks if the property id is the highest id then appends to the property to the list of all properties
         list_of_all_properties = self.get_all_properties()
         new_property_id = self.get_highest_ID(location)
         property.property_id = new_property_id
@@ -82,9 +95,12 @@ class property_logic_manager:
         self.Storage_Layer_Wrapper.write_to_file_property(list_of_all_properties)
         
     def edit_existing_property_in_storage(self, property, location, edit_choice, new_value):
+        '''Edit an existing property in the storage'''
         list_of_properties = self.get_all_properties()
+        # checks if the property id is in the list of properties then edits the property
         for prop in list_of_properties:
             if prop.property_id == property.property_id:
+                # checks if the edit choice is name, condition, price to fix or price
                 if edit_choice == 'name':
                     prop.set_name(new_value)
                 elif edit_choice == 'condition':
@@ -102,6 +118,7 @@ class property_logic_manager:
                 return prop
             
     def get_property_work_requests(self, location, property_id) -> list:
+        """Get all work requests for a property"""
         work_request_list = []
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         for work_request in all_work_requests:
@@ -110,6 +127,7 @@ class property_logic_manager:
         return work_request_list
     
     def get_property_maintenance_reports(self, location, property_id):
+        """Get all maintenance reports for a property"""
         maintenance_report_list = []
         all_maintenance_reports = self.Storage_Layer_Wrapper.get_all_maintenance_report()
         for maintenance_report in all_maintenance_reports:
