@@ -57,8 +57,9 @@ class Main_Menu:
 
 
     def quit_system_message(self):
+        print("Departing from NaN Air, Thank you for Visiting!")
         quit_string = "Departing from NaN Air, Thank you for Visiting!"
-        self.fun_print(quit_string)
+        # self.fun_print(quit_string)
 
 
     def show_ascii_art_hq(self):
@@ -71,6 +72,7 @@ class Main_Menu:
     def fun_print(self, text_to_print = "i need input bro", delay_in = 0.05):
         """send me a string ;)"""
         delay = delay_in
+        print(text_print)
         start = len(text_to_print)
         text_print = ""
         for i, char in enumerate(text_to_print):

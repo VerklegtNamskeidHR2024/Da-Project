@@ -146,8 +146,8 @@
         "reopen_interval": 0,
         "priority": "High",
         "work_request_status": "Open",
-        "need_contractor": false,
-        "contractor_id": "",
+        "need_contractor": true,
+        "contractor_id": "C4",
         "mark_as_completed": false,
         "accepted_by_employee": true
     },

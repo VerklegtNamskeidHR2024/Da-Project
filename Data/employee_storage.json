@@ -2,7 +2,7 @@
     {
         "name": "Hreimur",
         "social_security_number": "1234567899",
-        "phone_number": "1234567",
+        "phone_number": "1234555",
         "location": "Reykjavik",
         "system_permissions": "Employee",
         "email": "hreimur69@gmail.com",
@@ -97,5 +97,23 @@
         "system_permissions": "Employee",
         "email": "mynewemail@gmail.com",
         "staff_id": "E11"
+    },
+    {
+        "name": "Kormakur",
+        "social_security_number": "0706021234",
+        "phone_number": "9999999",
+        "location": "Thorshofn",
+        "system_permissions": "Employee",
+        "email": "kormakur@gmail.com",
+        "staff_id": "E32"
+    },
+    {
+        "name": "Jon",
+        "social_security_number": "0510031234",
+        "phone_number": "8888888",
+        "location": "Nuuk",
+        "system_permissions": "Employee",
+        "email": "jon@gmail.com",
+        "staff_id": "E33"
     }
 ]
