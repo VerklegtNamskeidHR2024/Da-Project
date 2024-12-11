@@ -25,9 +25,9 @@ class employee_UI_menu:
                 user_choice = self.search_employee()
             elif user_choice == "2":
                 user_choice = self.add_new_employee_to_storage()
-            elif user_choice == "b":
+            elif user_choice.lower() == "b":
                 return "b"
-            elif user_choice == "q":
+            elif user_choice.lower() == "q":
                 return "q"
         return user_choice
     
@@ -64,21 +64,25 @@ class employee_UI_menu:
     def search_employee(self) -> str:
         """The Function Is Searching For An Employee by SSN""" 
         employee_ssn = ""
-        while employee_ssn != "q" and employee_ssn != "b":
-            print()
-            employee_ssn = input("Enter Employee Social Security Number: ")
+        while employee_ssn.lower() != "q" and employee_ssn.lower() != "b":
             print()
             print("Go Back: b, B")
             print("Quit system: q, Q")
+            employee_ssn = input("Enter Employee Social Security Number: ")
+
             #Makes sure the enterd ssn exists in the system
             is_employee_ssn_valid = self.logic_wrapper.sanity_check_ssn(employee_ssn)
             if is_employee_ssn_valid == True:
+                #creates a instans of the employee with the maching ssn
                 employee = self.logic_wrapper.fetch_employee_from_storage(employee_ssn)
                 employee_options = self.employee_options(employee)
-                if employee_options == "b":
-                    continue
-                return employee_options
-        #creates a instans of the employee with the maching ssn
+                if employee_options.lower() == "b":
+                    break
+                elif employee_options.lower() == "q":
+                    return "q"
+                    #return employee_options
+                #return employee_ssn
+        
         return employee_ssn.lower()
 
         #return employee_ssn
@@ -111,27 +115,21 @@ class employee_UI_menu:
 
     def employee_options(self, employee):
         """holds all the options to view information and alter selected employee"""
+        #employee_ssn = self.search_employee()
+        #employee = self.logic_wrapper.fetch_employee_from_storage(employee_ssn)
         option = ""
         while option != "q" and option != "b":
             option = self.display_employee(employee)
             if option.lower() == "b":
                 break
+            elif option.lower() == "q":
+                return option
             elif option == "1":
-                edit_choice = ""
-                while edit_choice != "q":
-                    edit_choice = self.display_edit_options(employee)
-                    if edit_choice == "b":
-                        break
-                    if edit_choice == "q":
-                        return edit_choice.lower()
-                    if edit_choice == "1":
-                        edit_choice = self.edit_employee_phone_number(employee)
-                    elif edit_choice == "2":
-                        edit_choice = self.edit_employee_location(employee)
-                    elif edit_choice == "3":
-                        edit_choice = self.edit_employee_email(employee)
-                    elif edit_choice == "q":
-                        return "q"
+                choice = self.display_edit_options(employee)
+                if choice == "b" or choice == "B":
+                    continue
+                elif choice == "q" or choice == "Q":
+                    return choice
                 
             elif option == "2":
                 self.display_employee_work_requests(employee)
@@ -147,8 +145,9 @@ class employee_UI_menu:
     def add_new_employee_to_storage(self):
         """The function asks for all the information needed for regestering an employee"""
         print("--- Creating a new employee ---")
-       
-        while (employee_name := input("Enter Employee Name: ").strip()) != "b":
+        employee_name = ""
+        while employee_name != "b" and employee_name != "q":
+            employee_name = input("Enter Employee Name: ")
             if employee_name == "":
                 print()
                 print("This Field Is Required To Fill Out")
@@ -212,21 +211,32 @@ class employee_UI_menu:
 
         new_employee = Employee(employee_name, employee_social_security_number, employee_phone_number, employee_location, "Employee", employee_email, "")
         new_employee_added = self.logic_wrapper.add_new_employee_to_storage(new_employee)
-        self.display_all_employees_by_locationa(employee_location)
+        print("New Employee Added")
 
     def display_edit_options(self, employee) -> str:
         """The Function displays and asks for the edit option"""
-        print()
-        print("1. Change Phone Number: ")
-        print("2. Change Location: ")
-        print("3. Change Email: ")
-        print()
-        print("Go Back: b, B")
-        print("Quit system: q, Q")
-        print("-" * 70)
-        edit_choice = input("Enter Your Edit Choice: ")
-        # if edit_choice.lower() == "b":
-        #     self.employee_options(employee)
+        edit_choice = ""
+        while edit_choice.lower() != "q":
+            print()
+            print("1. Change Phone Number: ")
+            print("2. Change Location: ")
+            print("3. Change Email: ")
+            print()
+            print("Go Back: b, B")
+            print("Quit system: q, Q")
+            print("-" * 70)
+            edit_choice = input("Enter Your Edit Choice: ")
+            if edit_choice.lower() == "b" or edit_choice.lower() == "q":
+                return edit_choice
+            
+            elif edit_choice == "1":
+                edit_choice = self.edit_employee_phone_number(employee)
+
+            elif edit_choice == "2":
+                edit_choice = self.edit_employee_location(employee)
+            
+            elif edit_choice == "3":
+                edit_choice = self.edit_employee_email(employee)
             
         return edit_choice
 
@@ -252,35 +262,42 @@ class employee_UI_menu:
     def edit_employee_location(self, employee: object):
         """This function sets a new location for the employee"""
         
-        while (new_location := input("Enter New Location: ")) != "b":
+        while (new_location := input("Enter New Location: ")) != "q" and new_location != "Q":
+            if new_location.lower() == "b" or new_location.lower() == "B":
+                break    
             is_valid_location = self.logic_wrapper.sanity_check_for_employee_location(new_location)
     
-            if is_valid_location == True:
+            if is_valid_location:
             
                 employee.set_location(new_location)
                 self.logic_wrapper.edit_employee_info(employee)
+                self.display_employee(employee)
                 break
             else:
                 print()
                 print("Not a valid location.") 
                 print("Valid locations: Reykjavik, Nuuk, Kulusuk, Thorshofn, Tingwall, Longyearbyen""")
             
-        self.display_employee(employee)
+        return new_location.lower()
 
     def edit_employee_email(self, employee: object):
         """This function sets a new email for the employee"""
         
-        while (new_email := input("Enter New Email: ")) != "b":
+        while (new_email := input("Enter New Email: ")) != "q" and new_email != "Q":
+            if new_email.lower() == "b" or new_email.lower() == "B":
+                break 
             is_valid_email = self.logic_wrapper.sanity_check_email(new_email)
             if is_valid_email:
                 employee.set_email(new_email)
                 self.logic_wrapper.edit_employee_info(employee)
+                self.display_employee(employee)
                 break
             else:
                 print()
                 print("Employee Email should contain @")
+        return new_email.lower()
         
-        self.display_employee(employee)
+        
 
     def display_employee_work_requests(self, employee):
         """The function displays all work requests by an employee"""
@@ -297,7 +314,7 @@ class employee_UI_menu:
             for wr in wr_by_employee_list:
                 print("{:>15}{:>10}{:>15}".format(wr.name, wr.work_request_id, wr.work_request_status))
             print("-" * 70)  
-        self.employee_options(employee)   
+        #self.employee_options(employee)   
 
     def display_employee_maintenance_report(self, employee):
         """The function displays all maintenance reports by an employee"""
@@ -314,5 +331,5 @@ class employee_UI_menu:
             for mr in mr_by_employee_list:
                 print("{:<25}{:<10}{:<15}".format(mr.report_name, mr.report_id, mr.report_status))
             print("-" * 70)
-        self.employee_options(employee)  
+        #self.employee_options(employee)  
 
