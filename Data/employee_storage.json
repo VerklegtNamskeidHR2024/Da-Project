@@ -115,5 +115,23 @@
         "system_permissions": "Employee",
         "email": "jon@gmail.com",
         "staff_id": "E33"
+    },
+    {
+        "name": "Yeabsira",
+        "social_security_number": "0805051234",
+        "phone_number": "3333333",
+        "location": "Nuuk",
+        "system_permissions": "Employee",
+        "email": "yeabsira@gmail.com",
+        "staff_id": "E34"
+    },
+    {
+        "name": "Yeabsira",
+        "social_security_number": "0805051234",
+        "phone_number": "3333333",
+        "location": "Nuuk",
+        "system_permissions": "Employee",
+        "email": "yeabsira@gmail.com",
+        "staff_id": "E35"
     }
 ]
