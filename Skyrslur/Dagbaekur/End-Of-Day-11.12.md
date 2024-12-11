@@ -8,6 +8,7 @@ Tumi:\
 
 
 Daníela:\
+Regarding the emmployee UI, I finished the back and quit feature, added colours for confirmation- and error messages and finally commented on my code. I got here at 10:30 and left at 19:30. 
 
 
 

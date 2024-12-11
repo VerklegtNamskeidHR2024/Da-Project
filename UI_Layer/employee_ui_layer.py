@@ -15,7 +15,7 @@ class employee_UI_menu:
         ''' Clears the screen '''
         os.system('cls' if os.name == 'nt' else 'clear')
 
-    def start_point_employee_UI(self):
+    def start_point_employee_UI(self) -> str:
         """The function is the starting point for the employee UI"""
         # when this class is called it starts here
         # call other functions in class from here
@@ -26,8 +26,8 @@ class employee_UI_menu:
             if employee_menu == "q" or employee_menu == "b":
                 return employee_menu
 
-    def employee_menu_selection(self):
-        """The function is the menu for the employee UI-- VANTAR"""
+    def employee_menu_selection(self) -> str:
+        """The function runs the start menu for the employee"""
         user_choice = ""
         while user_choice != "q":
             print()
@@ -47,9 +47,6 @@ class employee_UI_menu:
                 return "q"
         return user_choice
     
-
-    
-
 
     def display_all_employees_by_locationa(self):
         """The function displays all employees at a location and their basic information"""
@@ -89,23 +86,22 @@ class employee_UI_menu:
             print()
             print("Go Back: b, B")
             print("Quit system: q, Q")
+            print()
             employee_ssn = input("Enter Employee Social Security Number: ")
 
             #Makes sure the enterd ssn exists in the system
             is_employee_ssn_valid = self.logic_wrapper.sanity_check_ssn(employee_ssn)
             if is_employee_ssn_valid == True:
-                #creates a instans of the employee with the maching ssn
+                #fetches an employee with the maching ssn
                 employee = self.logic_wrapper.fetch_employee_from_storage(employee_ssn)
+                #calls a function that displays the employee and asks for an action
                 employee_options = self.employee_options(employee)
                 if employee_options == "b" or employee_options == "B":
                     break
                 elif employee_options == "q" or employee_options == "Q":
                     return "q"
-
-        
+ 
         return employee_ssn.lower()
-
-
 
 
     def display_employee(self, employee):
@@ -136,8 +132,8 @@ class employee_UI_menu:
 
         
 
-    def employee_options(self, employee):
-        """holds all the options to view information and alter selected employee"""
+    def employee_options(self, employee) -> str:
+        """The function displays an employee, asks for a action and calls the corresponding function"""
 
         option = ""
         while option != "q" and option != "b":
@@ -151,11 +147,15 @@ class employee_UI_menu:
             print("Quit system: q, Q")
             print("-" * 70)
             option = input("Enter Choice: ")
+
             if option.lower() == "b":
                 break
+
             elif option.lower() == "q":
                 return option
+            
             elif option == "1":
+
                 choice = self.display_edit_options(employee)
                 if choice == "b" or choice == "B":
                     continue
@@ -164,8 +164,7 @@ class employee_UI_menu:
                 
             elif option == "2":
                 self.display_employee_work_requests(employee)
-
-            
+        
             elif option == "3":
                 self.display_employee_maintenance_report(employee)
         return option.lower()
@@ -185,7 +184,9 @@ class employee_UI_menu:
                 print()
                 print(Fore.RED + "This Field Is Required To Fill Out" + Style.RESET_ALL)
                 print()
+
             else:
+                #checks if the name contains only letters and spaces
                 is_valid_name = self.logic_wrapper.sanity_check_employee_name(employee_name)
                 if is_valid_name:
                     break
@@ -199,6 +200,7 @@ class employee_UI_menu:
                 print(Fore.RED + "This Field Is Required To Fill Out" + Style.RESET_ALL)
                 print()
             else:
+                #checks if the ssn contains only 10 numbers
                 is_valid_ssn = self.logic_wrapper.sanity_check_ssn(employee_social_security_number)
                 if is_valid_ssn:
                     break
@@ -211,6 +213,7 @@ class employee_UI_menu:
                 print(Fore.RED + "This Field Is Required To Fill Out" + Style.RESET_ALL)
                 print()
             else:
+                #checks if the phone number contains only 7 numbers
                 is_valid_pn = self.logic_wrapper.sanity_check_phone_number(employee_phone_number)
                 if is_valid_pn:
                     break
@@ -223,6 +226,7 @@ class employee_UI_menu:
                 print(Fore.RED + "This Field Is Required To Fill Out" + Style.RESET_ALL)
                 print()
             else:
+                #checks if the location is a valid location
                 is_valid_location = self.logic_wrapper.sanity_check_for_employee_location(employee_location)
                 if is_valid_location:
                     break
@@ -236,13 +240,15 @@ class employee_UI_menu:
                 print(Fore.RED + "This Field Is Required To Fill Out" + Style.RESET_ALL)
                 print()
             else:
+                #checks if the email contains a @ and . symbol
                 is_valid_email = self.logic_wrapper.sanity_check_email(employee_email)
                 if is_valid_email:
                     break
                 else:
-                    print(Fore.RED + "Employee Email should contain @" + Style.RESET_ALL)
-
+                    print(Fore.RED + "Employee Email Needs To Contain @ And ." + Style.RESET_ALL)
+        #creates a new employee
         new_employee = Employee(employee_name, employee_social_security_number, employee_phone_number, employee_location, "Employee", employee_email, "")
+        #adds the new employee to the storage
         new_employee_added = self.logic_wrapper.add_new_employee_to_storage(new_employee)
         print(Fore.GREEN + "New Employee Added" + Style.RESET_ALL)
 
@@ -281,7 +287,9 @@ class employee_UI_menu:
                 break
             is_valid_pn = self.logic_wrapper.sanity_check_phone_number(new_phone_number)
             if is_valid_pn:
+                #sets the new phone number for this employee
                 employee.set_phone_number(new_phone_number)
+                #writes the update to the storage
                 self.logic_wrapper.edit_employee_info(employee)
                 print()
                 print(Fore.GREEN + "Employee Information Updated" + Style.RESET_ALL)
@@ -303,8 +311,9 @@ class employee_UI_menu:
             is_valid_location = self.logic_wrapper.sanity_check_for_employee_location(new_location)
     
             if is_valid_location:
-            
+                #sets the new location for this employee
                 employee.set_location(new_location)
+                #writes the update to the storage
                 self.logic_wrapper.edit_employee_info(employee)
                 print()
                 print(Fore.GREEN + "Employee Information Updated" + Style.RESET_ALL)
@@ -325,7 +334,9 @@ class employee_UI_menu:
                 break 
             is_valid_email = self.logic_wrapper.sanity_check_email(new_email)
             if is_valid_email:
+                #sets the new email for this employee
                 employee.set_email(new_email)
+                #writes the update to the storage
                 self.logic_wrapper.edit_employee_info(employee)
                 print()
                 print(Fore.GREEN + "Employee Information Updated" + Style.RESET_ALL)
@@ -333,13 +344,14 @@ class employee_UI_menu:
                 break
             else:
                 print()
-                print(Fore.RED + "Employee Email should contain @" + Style.RESET_ALL)
+                print(Fore.RED + "Employee Email Needs To Contain @ And ." + Style.RESET_ALL)
         return new_email.lower()
         
         
 
     def display_employee_work_requests(self, employee):
         """The function displays all work requests by an employee"""
+        #gets a list of all the work requests done by this employee
         wr_by_employee_list = self.logic_wrapper.fetch_all_work_request_for_employee(employee.staff_id)
         if not wr_by_employee_list:
             print()
