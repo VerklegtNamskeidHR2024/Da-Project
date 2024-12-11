@@ -17,7 +17,7 @@ class location_logic_manager:
 
     
     def get_all_locations(self, Location) -> list:
-        """Get all locations"""
+        """Get location by location"""
         location_sorted_list = []
 
         all_locations = self.Storage_Layer_Wrapper.get_all_locations()
@@ -45,7 +45,6 @@ class location_logic_manager:
         self.Storage_Layer_Wrapper.write_to_file_locations(list_of_locations)
 
 
-
     def sanity_check_location(self, what_to_check, new_value):
         """Check if all info in a location object is correct"""
         # checks if the phone number is 7 digits
@@ -59,22 +58,11 @@ class location_logic_manager:
         
 
     def fetch_all_amenities_for_location_in_storage(self, location) -> list:
+        """Fetch all amenities for a location"""
         amenities = self.Storage_Layer_Wrapper.get_all_amenities()
         amenities_list = []
         for amenity in amenities:
             if amenity.location == location:
                 amenities_list.append(amenity)
         return amenities_list
-
-    def sanity_check_location(self, Location): 
-        """Check if all info in a location object is correct"""
-        pass
-
-    def add_new_location_to_storage(self, Location):
-        """Add a new location to the storage"""
-        pass
-    
-    def fetch_location_from_storage(self, Location_ID):
-        """Find a location by location ID"""
-        pass
 
