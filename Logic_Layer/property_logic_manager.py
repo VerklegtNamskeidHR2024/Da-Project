@@ -163,7 +163,7 @@ class property_logic_manager:
         """Get all maintenance reports for a property"""
         maintenance_report_list = []
         all_maintenance_reports = (
-            self.Storage_Layer_Wrapper.get_all_maintenance_report()
+            self.Storage_Layer_Wrapper.get_all_maintenance_reports()
         )
         # checks if the property id is in the list of maintenance reports then returns the maintenance reports
         for maintenance_report in all_maintenance_reports:
