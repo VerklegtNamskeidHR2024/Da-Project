@@ -2,7 +2,7 @@
 
 ### What we did through the day 
 Hreimur:\
-
+I worked on the maintenance ui for a bit and fixed some bugs i found in the system and also updated the contractor model class to have warnings as an attribute for contractors, then i had to update the dummy data to inculde the warnings for contractors
 
 Tumi:\
 
