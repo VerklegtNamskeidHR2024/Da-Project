@@ -3,7 +3,7 @@
         "name": "Hreimur",
         "social_security_number": "1234567899",
         "phone_number": "1234555",
-        "location": "Reykjavik",
+        "location": "Nuuk",
         "system_permissions": "Employee",
         "email": "hreimur@gmail.com",
         "staff_id": "E1"
@@ -11,10 +11,10 @@
     {
         "name": "John Doe",
         "social_security_number": "9876543211",
-        "phone_number": "7654321",
+        "phone_number": "2222222",
         "location": "Reykjavik",
         "system_permissions": "Employee",
-        "email": "johndoe@example.com",
+        "email": "larus@gmail.com",
         "staff_id": "E2"
     },
     {
