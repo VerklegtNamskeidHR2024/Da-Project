@@ -30,7 +30,13 @@ class employee_UI_menu:
         """The function is the menu for the employee UI-- VANTAR"""
         user_choice = ""
         while user_choice != "q":
-            user_choice = self.action_choice()
+            print()
+            print("1. Select Employee")
+            print("2. Add Employee")
+            print("-" * 70)
+            #search_or_add = input("Enter choice: ")
+            user_choice = input("Enter choice: ")
+            #user_choice = self.action_choice()
             if user_choice == "1":
                 user_choice = self.search_employee()
             elif user_choice == "2":
