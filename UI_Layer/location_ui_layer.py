@@ -26,22 +26,27 @@ class location_UI_menu:
         # gets current location
         current_location = self.get_current_location()
 
+        location_table = PrettyTable()
+        location_table.field_names = ['Current location',"Information"]
+        location_table.add_row([f'Country ',current_location.country])
+        location_table.add_row(['Location',current_location.location])
+        location_table.add_row(['Airport',current_location.airport])
+        location_table.add_row(['Phone Number',current_location.phone_number])
+        location_table.add_row(['Manager',current_location.branch_manager])
+        location_table.add_row(['Opening Hours',current_location.opening_hours])
+
+        border_color = Fore.BLUE
+        reset_color = Style.RESET_ALL
+        location_table.border = True
+        location_table.junction_char = f"{border_color}+{reset_color}"
+        location_table.horizontal_char = f"{border_color}-{reset_color}"
+        location_table.vertical_char = f"{border_color}|{reset_color}"
+        print(location_table)
         # prints the information for this location
-        print()
-        print("-" * 70)
-        print(f"Country       | {current_location.country}")
-        print(f"Location      | {current_location.location}")
-        print(f"Airport       | {current_location.airport}")
-        print(f"Phone Number  | {current_location.phone_number}")
-        print(f"Manager       | {current_location.branch_manager}")
-        print(f"Opening Hours | {current_location.opening_hours}")
-        print("-" * 70) 
-
-
+        
     def display_selected_location_information_printed_admin(self):
         '''Displays the location information and options for editing the location'''
         self.location_information()
-
         print("1) Edit location details")
         print("2) Show attached amenities")
         print("3) Show other locations")
@@ -64,6 +69,8 @@ class location_UI_menu:
         '''Displays the location information and options for editing the location'''
         # prints infroamtion about the current location
         self.location_information()
+
+
 
         print("1) Edit location details")
         print("2) Show attached amenities")
@@ -139,14 +146,20 @@ class location_UI_menu:
         amenities_list = self.logic_wrapper.fetch_all_amenities_for_location_in_storage(current_location.location)
         print(f"Amenities attached to {current_location.location}:")
         print("-" * 70)
+        amenities_table = PrettyTable()
+        amenities_table.field_names = ['Amenity Name', 'Property ID', 'Location', 'Condition', 'Price to fix', 'Description']
+        print('List of incomplete reports\n')
+
         for amenity in amenities_list:
-            print("Amenity Name |",amenity.name)
-            print("Property ID  |",amenity.property_id)
-            print("Location     |",amenity.location)
-            print("Condition    |",amenity.condition)
-            print("Price to fix |",amenity.total_price_to_fix)
-            print("Description  |",amenity.amenity_description)
-            print("-" * 70)
+            amenities_table.add_row([amenity.name, amenity.property_id, amenity.location, amenity.condition, amenity.total_price_to_fix, amenity.amenity_description ])
+        border_color = Fore.BLUE
+        reset_color = Style.RESET_ALL
+        amenities_table.border = True
+        amenities_table.junction_char = f"{border_color}+{reset_color}"
+        amenities_table.horizontal_char = f"{border_color}-{reset_color}"
+        amenities_table.vertical_char = f"{border_color}|{reset_color}"
+        print(amenities_table)
+        print("-" * 70)
 
     def get_current_location(self):
         """Get the current location and return it"""
