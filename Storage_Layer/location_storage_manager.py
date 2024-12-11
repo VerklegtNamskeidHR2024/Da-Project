@@ -16,6 +16,15 @@ class location_storage:
     
     def write_to_file_location(self, list_of_locations: list[Location]):
         """Writes the list of locations to the file"""
+
+        with open('Data/location_storage.json', 'r') as location_file:
+            current_data = json.load(location_file)
+
+        with open('Data/location_storage_temp.json', 'w') as temp_file:
+            json.dump(current_data, temp_file, indent=4)
+
         dict_of_locations = [location.to_dict() for location in list_of_locations]
         with open('Data/location_storage.json', 'w') as location_file:
             json.dump(dict_of_locations, location_file, indent=4)
+
+    

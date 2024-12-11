@@ -15,7 +15,13 @@ class contractor_storage:
 
     def write_to_file_contractor(self, list_of_contractors: list[Contractor]):
         """Writes the list of contractors to the file"""
-        #print('we writing')
+
+        with open('Data/contractor_storage.json', 'r') as contractor_file:
+            current_data = json.load(contractor_file)
+        
+        with open('Data/contractor_storage_temp.json', 'w') as temp_file:
+            json.dump(current_data, temp_file, indent=4)
+        
         dict_of_contractors = [contractor.to_dict() for contractor in list_of_contractors]
         with open('Data/contractor_storage.json', 'w') as contractor_file:
             json.dump(dict_of_contractors, contractor_file, indent=4)
