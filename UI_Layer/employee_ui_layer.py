@@ -1,4 +1,7 @@
 from Model_Classes.employee_model import Employee
+import os
+from prettytable import PrettyTable 
+from colorama import Fore, Style, init
 
 class employee_UI_menu:
     def __init__(self, logic_wrapper, rank, location, staff_id):
@@ -7,6 +10,10 @@ class employee_UI_menu:
         self.rank = rank
         self.location = location
         self.staff_id = staff_id
+    
+    def clear_screen(self):
+        ''' Clears the screen '''
+        os.system('cls' if os.name == 'nt' else 'clear')
 
     def start_point_employee_UI(self):
         """The function is the starting point for the employee UI"""
@@ -16,11 +23,11 @@ class employee_UI_menu:
         display_all_employees = self.display_all_employees_by_locationa()
         if self.rank != "Employee":
             employee_menu = self.employee_menu_selection()
-        if employee_menu == "q" or employee_menu == "b":
-            return employee_menu
+            if employee_menu == "q" or employee_menu == "b":
+                return employee_menu
 
     def employee_menu_selection(self):
-        """The function is the menu for the employee UI"""
+        """The function is the menu for the employee UI-- VANTAR"""
         user_choice = ""
         while user_choice != "q":
             user_choice = self.action_choice()
@@ -53,7 +60,7 @@ class employee_UI_menu:
             #self.action_choice()
 
     def action_choice(self) -> str:
-        """The function is asking the user if they want to search or add an employee and calls the chosen function"""
+        """The function is asking the user if they want to search or add an employee"""
         
         print()
         print("1. Select Employee")
@@ -83,18 +90,16 @@ class employee_UI_menu:
                     break
                 elif employee_options.lower() == "q":
                     return "q"
-                    #return employee_options
-                #return employee_ssn
+
         
         return employee_ssn.lower()
 
-        #return employee_ssn
 
 
 
     def display_employee(self, employee):
-        """The function displays an employee and their information"""
-        #employee = self.logic_wrapper.fetch_employee_from_storage(ssn)
+        """The function displays an employee and their information and asks what to view or edit"""
+        
         print()
         print("-" * 70)
         print("{:<25}{:<5}{:<15}".format("Employee Name", "|", employee.name))
@@ -118,8 +123,7 @@ class employee_UI_menu:
 
     def employee_options(self, employee):
         """holds all the options to view information and alter selected employee"""
-        #employee_ssn = self.search_employee()
-        #employee = self.logic_wrapper.fetch_employee_from_storage(employee_ssn)
+
         option = ""
         while option != "q" and option != "b":
             option = self.display_employee(employee)
@@ -147,74 +151,76 @@ class employee_UI_menu:
 
     def add_new_employee_to_storage(self):
         """The function asks for all the information needed for regestering an employee"""
+        print()
         print("--- Creating a new employee ---")
+        print()
         employee_name = ""
         while employee_name != "b" and employee_name != "q":
             employee_name = input("Enter Employee Name: ")
             if employee_name == "":
                 print()
-                print("This Field Is Required To Fill Out")
+                print(Fore.RED + "This Field Is Required To Fill Out" + Style.RESET_ALL)
                 print()
             else:
                 is_valid_name = self.logic_wrapper.sanity_check_employee_name(employee_name)
                 if is_valid_name:
                     break
                 else:
-                    print("Employee Name Can Only Contain Letters And Spaces")
+                    print(Fore.RED + "Employee Name Can Only Contain Letters And Spaces" + Style.RESET_ALL)
      
 
         while (employee_social_security_number := input("Enter Social Security Number: ")) != "b":
             if employee_social_security_number == "":
                 print()
-                print("This Field Is Required To Fill Out")
+                print(Fore.RED + "This Field Is Required To Fill Out" + Style.RESET_ALL)
                 print()
             else:
                 is_valid_ssn = self.logic_wrapper.sanity_check_ssn(employee_social_security_number)
                 if is_valid_ssn:
                     break
                 else:
-                    print("Employee Social Security Number Should Be 10 Numbers")                     
+                    print(Fore.RED + "Employee Social Security Number Should Be 10 Numbers" + Style.RESET_ALL)                     
 
         while (employee_phone_number := input("Enter Phone Number: ")) != "b":
             if employee_phone_number == "":
                 print()
-                print("This Field Is Required To Fill Out")
+                print(Fore.RED + "This Field Is Required To Fill Out" + Style.RESET_ALL)
                 print()
             else:
                 is_valid_pn = self.logic_wrapper.sanity_check_phone_number(employee_phone_number)
                 if is_valid_pn:
                     break
                 else:
-                    print("Employee Phone Number Should Be 7 Numbers") 
+                    print(Fore.RED + "Employee Phone Number Should Be 7 Numbers" + Style.RESET_ALL) 
 
         while (employee_location := input("Enter Location: ")) != "b":
             if employee_location == "":
                 print()
-                print("This Field Is Required To Fill Out")
+                print(Fore.RED + "This Field Is Required To Fill Out" + Style.RESET_ALL)
                 print()
             else:
                 is_valid_location = self.logic_wrapper.sanity_check_for_employee_location(employee_location)
                 if is_valid_location:
                     break
                 else:
-                    print("Not a valid location.") 
-                    print("Valid locations: Reykjavik, Nuuk, Kulusuk, Thorshofn, Tingwall, Longyearbyen""")
+                    print(Fore.RED + "Not a valid location." + Style.RESET_ALL) 
+                    print(Fore.BLUE + "Valid locations: Reykjavik, Nuuk, Kulusuk, Thorshofn, Tingwall, Longyearbyen" + Style.RESET_ALL)
 
         while (employee_email := input("Enter Email: ")) != "b":
             if employee_email == "":
                 print()
-                print("This Field Is Required To Fill Out")
+                print(Fore.RED + "This Field Is Required To Fill Out" + Style.RESET_ALL)
                 print()
             else:
                 is_valid_email = self.logic_wrapper.sanity_check_email(employee_email)
                 if is_valid_email:
                     break
                 else:
-                    print("Employee Email should contain @")
+                    print(Fore.RED + "Employee Email should contain @" + Style.RESET_ALL)
 
         new_employee = Employee(employee_name, employee_social_security_number, employee_phone_number, employee_location, "Employee", employee_email, "")
         new_employee_added = self.logic_wrapper.add_new_employee_to_storage(new_employee)
-        print("New Employee Added")
+        print(Fore.GREEN + "New Employee Added" + Style.RESET_ALL)
 
     def display_edit_options(self, employee) -> str:
         """The Function displays and asks for the edit option"""
@@ -253,11 +259,13 @@ class employee_UI_menu:
             if is_valid_pn:
                 employee.set_phone_number(new_phone_number)
                 self.logic_wrapper.edit_employee_info(employee)
+                print()
+                print(Fore.GREEN + "Employee Information Updated" + Style.RESET_ALL)
                 self.display_employee(employee)
                 break
             else:
                 print()
-                print("Employee Phone Number Should Be 7 Numbers")
+                print(Fore.RED + "Employee Phone Number Should Be 7 Numbers" + Style.RESET_ALL)
         return new_phone_number.lower()
         
         
@@ -274,12 +282,14 @@ class employee_UI_menu:
             
                 employee.set_location(new_location)
                 self.logic_wrapper.edit_employee_info(employee)
+                print()
+                print(Fore.GREEN + "Employee Information Updated" + Style.RESET_ALL)
                 self.display_employee(employee)
                 break
             else:
                 print()
-                print("Not a valid location.") 
-                print("Valid locations: Reykjavik, Nuuk, Kulusuk, Thorshofn, Tingwall, Longyearbyen""")
+                print(Fore.RED + "Not a valid location." + Style.RESET_ALL) 
+                print(Fore.LIGHTBLUE_EX + "Valid locations: Reykjavik, Nuuk, Kulusuk, Thorshofn, Tingwall, Longyearbyen" + Style.RESET_ALL)
             
         return new_location.lower()
 
@@ -293,11 +303,13 @@ class employee_UI_menu:
             if is_valid_email:
                 employee.set_email(new_email)
                 self.logic_wrapper.edit_employee_info(employee)
+                print()
+                print(Fore.GREEN + "Employee Information Updated" + Style.RESET_ALL)
                 self.display_employee(employee)
                 break
             else:
                 print()
-                print("Employee Email should contain @")
+                print(Fore.RED + "Employee Email should contain @" + Style.RESET_ALL)
         return new_email.lower()
         
         
@@ -307,7 +319,7 @@ class employee_UI_menu:
         wr_by_employee_list = self.logic_wrapper.fetch_all_work_request_for_employee(employee.staff_id)
         if not wr_by_employee_list:
             print()
-            print("No Work Request Attached To This Employee")
+            print(Fore.RED + "No Work Request Attached To This Employee" + Style.RESET_ALL)
         else: 
             print()
             print("--- All Work Requests By This Employee ---")
@@ -324,7 +336,7 @@ class employee_UI_menu:
         mr_by_employee_list = self.logic_wrapper.fetch_all_maintenance_reports_for_employee(employee.staff_id)
         if not mr_by_employee_list:
             print()
-            print("No Maintenance Report Attached To This Employee")
+            print(Fore.RED + "No Maintenance Report Attached To This Employee" + Style.RESET_ALL)
         else:
             print()
             print("--- All Maintenance Report By This Employee ---")

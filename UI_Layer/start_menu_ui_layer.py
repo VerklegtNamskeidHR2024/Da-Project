@@ -126,6 +126,7 @@ class Main_Menu:
             print("Welcome to the NaN Air Properties and Staff System!")
             print("-" * 70)
             self.show_ascii_art_hq()
+            print("Log in as?")
             print("-" * 70)
             print("Log in as?")
             print("1. Admin")
@@ -150,7 +151,7 @@ class Main_Menu:
                     return_user = "Employee"
                     break
                 case _:
-                    print("No User Found, Please Try Again.")
+                    print(Fore.RED + "No User Found, Please Try Again." + Style.RESET_ALL)
 
         return return_user
     
@@ -162,8 +163,8 @@ class Main_Menu:
         while is_staff_id_valid is False:
             staff_id = input("Enter Your Staff ID: ")
             is_staff_id_valid = self.logic_wrapper.sanity_check_staff_id(rank, staff_id)
-        # if is_staff_id_valid is False: 
-        #     print("ID Does Not Exist In The System, Please Try Again.")
+            if is_staff_id_valid is False: 
+                print(Fore.RED + "ID Does Not Exist In The System, Please Try Again." + Style.RESET_ALL)
         return staff_id
     
 
@@ -203,7 +204,7 @@ class Main_Menu:
                 case "6":
                     return_location = "Longyearbyen"
                 case _:
-                    print("No Location Found, Please Try Again.")
+                    print(Fore.RED + "No Location Found, Please Try Again." + Style.RESET_ALL)
         return return_location
 
 
@@ -263,7 +264,7 @@ class Main_Menu:
                 case "q":
                     return "q"
                 case _:
-                    print("Wrong Input")
+                    print(Fore.RED + "Wrong Input" + Style.RESET_ALL)
             # user_action = self.display_menu_items()
             # continue
         # self.quit_system_message()
