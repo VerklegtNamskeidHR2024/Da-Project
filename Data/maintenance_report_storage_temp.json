@@ -180,19 +180,5 @@
         "mark_as_done": false,
         "contractor_id": "C2",
         "work_request_id": "WR1"
-    },
-    {
-        "report_id": "MR14",
-        "report_name": "Temp Storage 2",
-        "location": "Reykjavik",
-        "property_id": "P2",
-        "staff_id": "E2",
-        "regular_maintenance": false,
-        "maintenance_description": "Another test for the storage",
-        "report_status": "Pending",
-        "price": "1231",
-        "mark_as_done": false,
-        "contractor_id": "C1",
-        "work_request_id": "WR1"
     }
 ]

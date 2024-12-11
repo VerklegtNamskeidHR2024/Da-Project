@@ -11,7 +11,7 @@ from Model_Classes.work_request_model import WorkRequest
 from Model_Classes.admin_model import Admin
 
 # Reykjavík Nuuk Kulusuk Þórshöfn Tingwall Longyearbyen
-admin1 = Admin('Hreimur', 12334546789, 5551234, 'Reykjavik', 'Admin', 'hreimur24@ru.is', 'A1')
+'''admin1 = Admin('Hreimur', 12334546789, 5551234, 'Reykjavik', 'Admin', 'hreimur24@ru.is', 'A1')
 
 manager1 = Manager('Hreimur', 12334546789, 5551234, 'Reykjavik', 'Manager', 'hreimur24@ru.is', 'M1')
 manager2 = Manager('Hreimur', 12334546789, 5551234, 'Nuuk', 'Manager', 'hreimur24@ru.is', 'M2')
@@ -69,11 +69,6 @@ location4 = Location('Faroe Islands', 'Thorshofn', 'FLT', '5551234', 'Tumi Krist
 location5 = Location('Hjaltlandseyjar', 'Tingwall', 'SVB', '5551234', 'Tumi Krist', '8-16')
 location6 = Location('Svalbard', 'Longyearbyen', 'SVB', '5551234', 'Tumi Krist', '8-16')
 
-contractor1 = Contractor('C1', 'Daniela and Daughters', 'Daniela', '8-16', 1234567, 'Reykjavik', [])
-contractor2 = Contractor('C2', 'Daniela and Daughters', 'Daniela', '8-16', 1234567, 'Nuuk', [])
-contractor3 = Contractor('C3', 'Daniela and Daughters', 'Daniela', '8-16', 1234567, 'Tingwall', [])
-contractor4 = Contractor('C4', 'Juicy Hreimur Construction', 'Hreimur', '8-16', 1234567, 'Reykjavik', [])
-
 amenity1 = Amenity('A1', 'pool', 'Reykjavik', 'excellent', 1500.0, 'is a pool')
 amenity2 = Amenity('A2', 'pool', 'Tingwall', 'fair', 1200.0, 'is a pool')
 amenity3 = Amenity('A3', 'hot tub', 'Nuuk', 'excellent', 1500.0, 'is a hot tub')
@@ -83,7 +78,15 @@ work_request2 = WorkRequest('WR1', 'Fix roof', 'roof had giant hole in it', 'MR1
 
 maintenance_report1 = MaintenanceReport('MR1', 'Fix the roof', 'Reykjavik', 'P4', 'E5', False, 'roof is leaking', 'Pending', '1234', True, 'C1', 'WR3')
 
-admins = [admin1]
+'''
+
+contractor = Contractor('C5', 'Daniela and Daughters', 'Daniela', '8-16', 1234567, 'Reykjavik', [], 'Contractor Has No Warning')
+contractor1 = Contractor('C1', 'Daniela and Daughters', 'Daniela', '8-16', 1234567, 'Reykjavik', [], 'Contractor Has No Warning')
+contractor2 = Contractor('C2', 'Daniela and Daughters', 'Daniela', '8-16', 1234567, 'Nuuk', [], 'Acts weird around apples')
+contractor3 = Contractor('C3', 'Daniela and Daughters', 'Daniela', '8-16', 1234567, 'Tingwall', [], 'Contractor Has No Warning')
+contractor4 = Contractor('C4', 'Juicy Hreimur Construction', 'Hreimur', '8-16', 1234567, 'Reykjavik', [], 'Contractor somehow nailed his son to wall')
+
+'''admins = [admin1]
 admin_dict = [admin.to_dict() for admin in admins]
 
 managers = [manager1, manager2, manager3, manager4, manager5, manager6]
@@ -104,15 +107,20 @@ property_dict = [property.to_dict() for property in properties]
 locations = [location1, location2, location3, location4, location5, location6]
 location_dict = [location.to_dict() for location in locations]
 
-contractors = [contractor1, contractor2, contractor3]
-contractor_dict = [contractor.to_dict() for contractor in contractors]
-
 work_requests = [work_request1, work_request2]
 work_request_dict = [work_request.to_dict() for work_request in work_requests]
 
 maintenance_reports = [maintenance_report1]
 maintenance_report_dict = [maintenance_report.to_dict() for maintenance_report in maintenance_reports]
 
+'''
+
+
+contractors = [contractor1, contractor2, contractor3, contractor4, contractor]
+contractor_dict = [contractor.to_dict() for contractor in contractors]
+
+
+'''
 with open('Data/admin_storage.json', 'w') as file:
     json.dump(admin_dict, file, indent=4)
 
@@ -131,9 +139,6 @@ with open('Data/property_storage.json', 'w') as file:
 with open('Data/location_storage.json', 'w') as file:
     json.dump(location_dict, file, indent=4)
 
-with open('Data/contractor_storage.json', 'w') as file:
-    json.dump(contractor_dict, file, indent=4)
-
 with open('Data/work_request_storage.json', 'w') as file:
     json.dump(work_request_dict, file, indent=4)
 
@@ -142,3 +147,6 @@ with open('Data/maintenance_report_storage.json', 'w') as file:
 
 with open('Data/employee_storage.json', 'r') as file:
     persons = json.load(file)
+'''
+with open('Data/contractor_storage.json', 'w') as file:
+    json.dump(contractor_dict, file, indent=4)
