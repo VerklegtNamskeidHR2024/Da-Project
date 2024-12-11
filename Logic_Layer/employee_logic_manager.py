@@ -157,17 +157,14 @@ class employee_logic_manager:
         
     def sanity_check_for_employee_location(self, location) -> bool:
         """Check if the location is correct"""
-        location_list = self.Storage_Layer_Wrapper.get_all_locations()
+
         #checks if the location is in the list of locations
-        
-        for loc in location_list:
-            print(loc)
-            print
-            print(loc.location)
+        list_of_all_locations = self.Storage_Layer_Wrapper.get_all_locations()
+        for loc in list_of_all_locations:
             if loc.location == location:
                 return True
-            else:
-                return False
+        return False
+        
 
     def sanity_check_staff_id(self, rank: str, staff_id: str) -> bool:
         """Check if the staff id is correct"""
