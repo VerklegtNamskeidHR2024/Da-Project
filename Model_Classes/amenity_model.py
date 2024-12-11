@@ -7,12 +7,14 @@ class Amenity(Property):
         """Constructor for Amenity"""
 
     def set_amenity_description(self, amenity_description):
-        self.amenity_description = amenity_description
         """Sets the amenity description"""
+        self.amenity_description = amenity_description
+        
 
     def get_amenity_description(self):
-        return self.amenity_description
         """Gets the amenity description"""
+        return self.amenity_description
+        
     
     def to_dict(self):
         """Converts the Amenity object to a dictionary"""

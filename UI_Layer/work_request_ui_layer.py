@@ -124,14 +124,14 @@ class work_request_UI_menu:
                 "{:0}{:>3}{:>15}{:>3}{:>19}".format(
                     "1. Select Request",
                     "|",
-                    "2. New Requests",
+                    "2. Add Request",
                     "|",
-                    "3. Pending Requests",
+                    "3. New Requests",
                 )
             )
             print(
                 "{:0}{:>3}{:>20}{:>3}{:>19}".format(
-                    "4. My Requests", "|", "5. Closed Requests", "|", "6. Add Request"
+                    "4. Pending Requests", "|", "5. All Requests", "|", "6. Closed Requests"
                 )
             )
             print()
@@ -162,16 +162,22 @@ class work_request_UI_menu:
             match (user_choice, self.rank):
                 case ("1", self.rank):
                     user_choice = self.select_work_request_by_id()
-                case ("2", self.rank):
+
+                case ("2", "Admin") | ("2", "Manager"):
+                    user_choice = self.display_create_work_request_form()
+
+                case ("2", "Employee") | ("3", "Admin") | ("3", "Manager"):
                     user_choice = self.display_and_select_new_work_requests()
-                case ("3", self.rank):
+
+                case ("3", "Employee") | ("4", "Admin") | ("3", "Manager"):
                     user_choice = self.display_and_select_pending_work_requests()
-                case ("4", self.rank):
-                    user_choice = self.display_and_select_my_work_request()
+
                 case ("5", "Admin") | ("5", "Manager"):
                     user_choice = self.display_and_select_closed_work_requests()
-                case ("6", "Admin") | ("6", "Manager"):
-                    user_choice = self.display_create_work_request_form()
+
+                case ("4, Employee") | ("6", "Admin") | ("6", "Manager"):
+                    user_choice = self.display_and_select_request_overview()
+
                 case ("b", self.rank):
                     return "b"
                 case ("q", self.rank):
@@ -305,24 +311,18 @@ class work_request_UI_menu:
         verification before setting the description attribute to what the user entered and passing the object down
         to the next function."""
 
-        while (request_description := input("Request Descriptition: ")) not in [
-            "q",
-            "b",
-            "Q",
-            "B",
-        ]:
-            is_description_valid = self.logic_wrapper.sanity_check_low_level_logistics(
-                "description", request_description
-            )
-            if is_description_valid is True:
-                new_work_request.set_description(request_description)
-                property_id = self.set_property_id_for_request(new_work_request)
-                if property_id == "b":
-                    continue
-                return property_id
-            print()
-            print("Invalid Input")
-            print()
+        while (request_description := input("Request Descriptition: ")) not in ["q", "b", "Q", "B"]:
+            is_description_valid = self.logic_wrapper.sanity_check_low_level_logistics('description', request_description)
+            if is_description_valid is False:
+                print()
+                print("Invalid Name For Description.")
+                print()
+                continue
+            new_work_request.set_description(request_description)
+            property_id = self.set_property_id_for_request(new_work_request)
+            if property_id == "b":
+                continue
+            return property_id
         return request_description.lower()
 
     # Completed. Can be beautified.
@@ -836,7 +836,7 @@ class work_request_UI_menu:
     """The functions below could very well be combined into one, larger function. """
 
     # Completed. Can be beautified.
-    def display_and_select_my_work_request(self):
+    def display_and_select_request_overview(self):
         """Displays all work requests that have been accepted by an employee."""
 
         status = ""

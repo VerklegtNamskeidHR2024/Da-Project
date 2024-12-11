@@ -15,8 +15,10 @@ class work_request_logic_manager:
         return False
 
     def sanity_check_boolean_input_work_requests(self, yes_or_no: str) -> bool:
-        """Takes the input given by the user and returns True or False based on if the user had entered spefically
-        yes/Yes or no/No. Otherwise it returns None."""
+
+        """Takes the input given by the user and returns True or False based on if the user had entered spefically 
+        yes/Yes or no/No. Otherwise it returns None. """
+
         # Check if the input is less than 2 characters long
         if len(yes_or_no) < 2:
             return
@@ -30,7 +32,7 @@ class work_request_logic_manager:
 
     def sanity_check_priority_for_request(self, priority: str) -> bool:
         """Takes the input given by the user and returns True if the user had entered spefically low/Low, medium/Medium
-        or high/High. Otherwise it returns False."""
+        or high/High. Otherwise it returns False. """
         match priority:
             case "high" | "High":
                 return True
@@ -40,6 +42,10 @@ class work_request_logic_manager:
                 return True
             case _:
                 return False
+    
+    def sanity_check_low_level_logistics(self, category: str, value_to_be_verified: str) -> bool:
+        """Performs very simple logistics to verify user input, can be expanded to perform higher level logistics.
+        bool: True if the user input passes the logisitics, False otherwise. """
 
     def sanity_check_low_level_logistics(
         self, category: str, value_to_be_verified: str
@@ -82,16 +88,18 @@ class work_request_logic_manager:
         return False
 
     def sanity_check_employee_id_for_request(self, staff_id: str) -> bool:
-        """Gets all employees from storage and compares the employee ID given by the user to the ones that already exist."""
+        """Gets all employees from storage and compares the employee ID given by the user to the ones that already exist. """
+
         all_employees = self.Storage_Layer_Wrapper.get_all_employees()
         for employee in all_employees:
             if employee.staff_id == staff_id:
                 return True
         return False
-
+    
     # Might not fully implement, needs further thought.
     def sanity_check_staff_id_for_request(self, staff_id: str) -> bool:
-        """Gets all employees from storage and compares the staff ID given by the user to the ones that already exist."""
+        """Gets all employees from storage and compares the staff ID given by the user to the ones that already exist. """
+
         all_employees = self.Storage_Layer_Wrapper.get_all_employees()
         for employee in all_employees:
             if employee.staff_id == staff_id:
@@ -99,28 +107,29 @@ class work_request_logic_manager:
         return False
 
     def set_id_for_work_request(self, Work_request: object) -> str:
-        """Sets a new ID for a work request."""
+        """Sets a new ID for a the work request that has been created. """
 
         highest_id = -1
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         for work_request in all_work_requests:
+            # Only 
             stripped_id = work_request.work_request_id[2:]
-            if int(stripped_id) > highest_id:
-                highest_id = int(stripped_id)
+            highest_id = max(highest_id, int(stripped_id))
+            # if int(stripped_id) > highest_id:
+                # highest_id = int(stripped_id)
         highest_id += 1
         new_work_request_id = "WR" + str(highest_id)
         Work_request.set_work_request_id(new_work_request_id)
         return Work_request
 
     def add_work_request(self, Work_request: object):
-        """Adds a work request to the storage layer."""
+        """Adds a work request to the storage layer. """
 
         # sets the id for the work request and appends it to the list of all work requests
         Work_request_with_id = self.set_id_for_work_request(Work_request)
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         all_work_requests.append(Work_request_with_id)
         self.Storage_Layer_Wrapper.write_to_file_work_requests(all_work_requests)
-        return
 
     def edit_work_request(self, Work_request: object):
         """rom the storage layer wrapper it ."""
@@ -131,7 +140,6 @@ class work_request_logic_manager:
             if request.work_request_id == Work_request.work_request_id:
                 all_work_requests[position] = Work_request
         self.Storage_Layer_Wrapper.write_to_file_work_requests(all_work_requests)
-        return
 
     def get_work_request_by_id(
         self,

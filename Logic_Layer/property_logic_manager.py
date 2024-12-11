@@ -43,6 +43,12 @@ class property_logic_manager:
                 return True
             except ValueError:
                 return False
+        
+        elif what_to_check == 'description':
+            if len(new_value) < 10:
+                return False 
+            return True
+
 
     def get_all_properties(self) -> list:
         """Gets all properties"""
@@ -56,20 +62,18 @@ class property_logic_manager:
                 property
             )  # append each property to the properties list
         return property_list  # return the list of properties
-
-    def get_highest_ID(self, location):
+     
+    def get_highest_ID(self, p_or_a: str):
         """Get the highest ID for a property"""
-        highestID = -1  # initialize the highest ID to -1
-        list_of_all_properties = self.get_all_properties()  # get all properties
-        for property in list_of_all_properties:  # iterate through all properties
-            stripped_ID = property.property_id[1:]  # get the ID without the P
-            if (
-                int(stripped_ID) > highestID
-            ):  # check if the ID is higher than the highest ID
-                highestID = int(stripped_ID)  # set the highest ID to the ID
-        highestID += 1  # increment the highest ID by 1
+        highestID = -1 # initialize the highest ID to -1
+        list_of_all_properties = self.get_all_properties() # get all properties
+        for property in list_of_all_properties: # iterate through all properties
+            stripped_ID = property.property_id[1:] # get the ID without the P
+            if int(stripped_ID) > highestID: # check if the ID is higher than the highest ID
+                highestID = int(stripped_ID) # set the highest ID to the ID
+        highestID += 1 # increment the highest ID by 1
 
-        new_property_id = "P" + str(highestID)  # set the new ID to P + the highest ID
+        new_property_id = p_or_a + str(highestID) # set the new ID to P + the highest ID
         return new_property_id
 
     def get_all_properties_at_location(self, location: str) -> list:
@@ -91,20 +95,28 @@ class property_logic_manager:
             if property.property_id == property_id:
                 return property
 
-    def add_new_property_to_storage(self, rank, location, property):
+    def add_new_property_to_storage(self, str_display: str, new_property: object):
         """Add a new property to the storage"""
-        print("Adding new property to storage")
-        # checks if the property id is the highest id then appends to the property to the list of all properties
-        list_of_all_properties = self.get_all_properties()
-        new_property_id = self.get_highest_ID(location)
-        property.property_id = new_property_id
-        list_of_all_properties.append(property)
-        self.Storage_Layer_Wrapper.write_to_file_property(list_of_all_properties)
 
-    def edit_existing_property_in_storage(
-        self, property, location, edit_choice, new_value
-    ):
-        """Edit an existing property in the storage"""
+        print(f'Adding New {str_display} To Storage')
+        # checks if the property id is the highest id then appends to the property to the list of all properties
+        if str_display == "Property":
+            list_of_all_properties = self.get_all_properties()
+            new_property_id = self.get_highest_ID("P")
+            new_property.property_id = new_property_id
+            list_of_all_properties.append(new_property)
+            self.Storage_Layer_Wrapper.write_to_file_property(list_of_all_properties)
+        
+        if str_display == "Amenity":
+            list_of_all_amenities = self.Storage_Layer_Wrapper.get_all_amenities()
+            new_amenity_id = self.get_highest_ID("A")
+            new_property.property_id = new_amenity_id
+            list_of_all_amenities.append(new_property)
+            self.Storage_Layer_Wrapper.write_to_file_amenities(list_of_all_amenities)
+            
+        
+    def edit_existing_property_in_storage(self, property, location, edit_choice, new_value):
+        '''Edit an existing property in the storage'''
         list_of_properties = self.get_all_properties()
         # checks if the property id is in the list of properties then edits the property
         for prop in list_of_properties:
