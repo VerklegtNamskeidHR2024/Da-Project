@@ -16,24 +16,25 @@ class employee_logic_manager:
         all_managers = self.Storage_Layer_Wrapper.get_all_managers()
         return all_managers 
     
+
     def get_manager_by_id(self, staff_id: str) -> object: 
         all_managers = self.Storage_Layer_Wrapper.get_all_managers()
         for manager in all_managers:
             if manager.staff_id == staff_id:
-                return manager.location
+                return manager
 
     # Might not implement
     def get_all_employees(self) -> list:
 
         all_employees = self.Storage_Layer_Wrapper.get_all_employees()
-
         return all_employees
+
 
     def get_employee_by_id(self, staff_id: str) -> object:
         all_employees = self.Storage_Layer_Wrapper.get_all_employees()
         for employee in all_employees:
             if employee.staff_id == staff_id:
-                return employee.location
+                return employee
 
     def get_all_employees_at_location(self, location) -> list:
         employees_sorted_list = []

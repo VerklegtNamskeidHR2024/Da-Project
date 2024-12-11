@@ -36,6 +36,7 @@ class work_request_logic_manager:
     def sanity_check_priority_for_request(self, priority: str) -> bool:
         """Takes the input given by the user and returns True if the user had entered spefically low/Low, medium/Medium
         or high/High. Otherwise it returns False."""
+        
         match priority:
             case "high" | "High":
                 return True
