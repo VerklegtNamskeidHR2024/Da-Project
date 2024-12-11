@@ -135,22 +135,25 @@ class employee_logic_manager:
     def sanity_check_ssn(self, ssn) -> bool:
         """Check if the social security number is correct"""
 
-        if len(ssn) == 10:
-            return True
-        else:
+        try:
+            int(ssn)
+            if len(ssn) == 10:
+                return True
+        except:
             return False
         
     def sanity_check_phone_number(self, phone_number) -> bool:
         """Check if the phone number is correct"""
-
-        if len(phone_number) == 7:
-            return True
-        else:
+        try:
+            int(phone_number)
+            if len(phone_number) == 7:
+                return True
+        except:
             return False
         
     def sanity_check_email(self, email) -> bool:
         """Check if the email is correct"""
-        if "@" in email:
+        if "@" in email and "." in email:
             return True
         else:
             return False
