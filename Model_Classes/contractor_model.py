@@ -77,5 +77,6 @@ class Contractor:
             'opening_hours': self.opening_hours,
             'phone_number': self.phone_number,
             'location': self.location,
-            'previous_job_reports': self.previous_job_reports
+            'previous_job_reports': self.previous_job_reports,
+            'warningtext': self.warningtext
         }
