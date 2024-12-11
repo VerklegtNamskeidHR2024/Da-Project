@@ -32,6 +32,10 @@ class Contractor:
         """Sets the phone number"""
         self.phone_number = phone_number
 
+    def set_warningtext(self, warningtext):
+        """Sets the warning text"""
+        self.warningtext = warningtext
+
     def set_location(self, location):
         """Sets the location"""
         self.location = location
