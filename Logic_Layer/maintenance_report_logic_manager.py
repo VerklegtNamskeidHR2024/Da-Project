@@ -254,6 +254,7 @@ class maintenance_report_logic_manager:
         
 
     def get_single_maintenance_report(self, report_id):
+        """Get a single maintenance report"""
         all_reports = self.get_all_maintencance_reports('')
         for report in all_reports:
             if report.report_id == report_id:

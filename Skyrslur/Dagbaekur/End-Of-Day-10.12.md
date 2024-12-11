@@ -12,7 +12,7 @@ I did back and quit for employee, except for edit and add employee will maybe fi
 
 
 Yeabsira:\
-I worked fisrt on fixing the use cases and requriments according to our code then i start working on commenting on the code we wrote. i came at 9:00 and left at.\
+I worked fisrt on fixing the use cases and requriments according to our code then i start working on commenting on the code we wrote. i came at 9:00 and left at 6:00.\
 
 Kormákur:\
 
