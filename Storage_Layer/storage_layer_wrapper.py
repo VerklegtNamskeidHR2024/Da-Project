@@ -53,7 +53,7 @@ class Storage_Layer_Wrapper:
     
     def get_all_properties_at_location(self) -> list[Property]:
         """Get all properties at a location"""
-        all_properties = self.property_storage_manager.get_all_properties() 
+        all_properties = self.property_storage_manager.get_all_properties()
         return all_properties
     
     def write_to_file_property(self, list_of_all_properties: list):

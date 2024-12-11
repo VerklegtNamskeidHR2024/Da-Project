@@ -38,6 +38,7 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### CONTRACTOR #########################################################################################
+
     def get_all_contractors_at_location(self, location: str) -> list[Contractor]:
         return self.contractor_logic_manager.get_all_contractors_at_location(location)
         # returns a list of all contractors at a specific location
@@ -73,6 +74,7 @@ class Logic_Layer_Wrapper:
     
     ############################################################################################################################
     ### PROPERTIES #############################################################################################################
+
     def get_all_properties_at_location(self, location: str) -> list[Property]:
         return self.property_logic_manager.get_all_properties_at_location(location)
         # returns a list of all properties at a specific location
@@ -93,8 +95,8 @@ class Logic_Layer_Wrapper:
         return self.property_logic_manager.sanity_check_properties(what_to_check, new_value)
         # checks if all info in a property object is correct
 
-    def add_new_property_to_storage(self, rank: str, location: str, new_property: object):
-        return self.property_logic_manager.add_new_property_to_storage(rank, location, new_property)
+    def add_new_property_to_storage(self, str_display: str, new_property: object):
+        return self.property_logic_manager.add_new_property_to_storage(str_display, new_property)
         # adds a new property to the storage
     
     def edit_existing_property_in_storage(self, existing_property: object, location: str, edit_choice: str, new_value: str):
@@ -138,15 +140,6 @@ class Logic_Layer_Wrapper:
     def sanity_check_staff_id(self, rank: str, staff_id: str) -> bool:
         return self.employee_logic_manager.sanity_check_staff_id(rank, staff_id)
 
-    # def sanity_check_employee_id(self, rank: str, staff_id: str) -> bool:
-    #     return self.employee_logic_manager.sanity_check_staff_id(rank, staff_id)
-    
-    # def sanity_check_manager_id(self, rank: str, staff_id: str) -> bool:
-    #     return self.employee_logic_manager.sanity_check_staff_id(rank, staff_id)
-    
-    # def sanity_check_admin_id(self, rank: str, staff_id: str) -> bool:
-    #     return self.employee_logic_manager.sanity_check_staff_id(rank, staff_id)
-
     def sanity_check_employee_name(self, name: str) -> bool:
         return self.employee_logic_manager.sanity_check_employee_name(name)
         # checks if the name of an employee is correct
@@ -169,6 +162,7 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### MAINTENANCE_REPORTS ################################################################################
+
     def get_all_maintenance_reports_at_location(self, location: str) -> list[MaintenanceReport]:
         return self.maintenance_report_logic_manager.get_all_maintencance_reports_at_location(location)
         # returns a list of all maintenance reports at a specific location
@@ -218,6 +212,7 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### WORK_REQUESTS ######################################################################################
+
     def get_all_work_requests_at_location(self, rank: str, location: str, staff_id: str) -> list[WorkRequest]: 
         return self.work_request_logic_manager.get_all_work_requests_at_location(rank, location, staff_id)
         # returns a list of all work requests at a specific location
@@ -278,6 +273,7 @@ class Logic_Layer_Wrapper:
 
     ########################################################################################################
     ### LOCATION ###########################################################################################
+
     def get_all_locations(self) -> list:
         return self.location_logic_manager.all_location()
         # returns a list of all locations

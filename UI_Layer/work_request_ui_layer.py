@@ -310,15 +310,16 @@ class work_request_UI_menu:
 
         while (request_description := input("Request Descriptition: ")) not in ["q", "b", "Q", "B"]:
             is_description_valid = self.logic_wrapper.sanity_check_low_level_logistics('description', request_description)
-            if is_description_valid is True:
-                new_work_request.set_description(request_description)
-                property_id = self.set_property_id_for_request(new_work_request)
-                if property_id == "b":
-                    continue
-                return property_id
-            print()
-            print("Invalid Input")
-            print()
+            if is_description_valid is False:
+                print()
+                print("Invalid Name For Description.")
+                print()
+                continue
+            new_work_request.set_description(request_description)
+            property_id = self.set_property_id_for_request(new_work_request)
+            if property_id == "b":
+                continue
+            return property_id
         return request_description.lower()
 
     # Completed. Can be beautified.

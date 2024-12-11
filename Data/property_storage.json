@@ -270,5 +270,21 @@
         "condition": "bad",
         "total_price_to_fix": "1500",
         "property_price": "20"
+    },
+    {
+        "property_id": "P35",
+        "name": "tunid",
+        "location": "Reykjavik",
+        "condition": "Good",
+        "total_price_to_fix": "1000000.0",
+        "property_price": "1000000.0"
+    },
+    {
+        "property_id": "P36",
+        "name": "foodland",
+        "location": "",
+        "condition": "good",
+        "total_price_to_fix": "1",
+        "property_price": "1"
     }
 ]
