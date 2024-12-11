@@ -146,6 +146,7 @@ class property_logic_manager:
         """Get all work requests for a property"""
         work_request_list = []
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
+        # checks if the property id is in the list of work requests then returns the work requests
         for work_request in all_work_requests:
             if work_request.property_id == property_id:
                 work_request_list.append(work_request)
@@ -157,6 +158,7 @@ class property_logic_manager:
         all_maintenance_reports = (
             self.Storage_Layer_Wrapper.get_all_maintenance_report()
         )
+        # checks if the property id is in the list of maintenance reports then returns the maintenance reports
         for maintenance_report in all_maintenance_reports:
             if maintenance_report.property_id == property_id:
                 maintenance_report_list.append(maintenance_report)

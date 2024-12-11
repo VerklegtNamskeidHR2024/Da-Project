@@ -232,7 +232,7 @@ class work_request_logic_manager:
     ) -> list:
         work_request_sorted_list = []
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
-
+        # checks if the work request is pending, accepted by employee and the location is the same
         for work_request in all_work_requests:
             if rank != "Employee":
                 if (
