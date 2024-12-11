@@ -36,8 +36,6 @@ class location_logic_manager:
             if location_obj.location == location.location:
                 if edit_choice == 'phone_number':
                     location_obj.set_phone_number(new_value)
-                elif edit_choice == 'manager':
-                    location_obj.set_branch_manager(new_value)
                 elif edit_choice == 'amenity':
                     pass
                     #location_obj.set_opening_hours(new_value)
@@ -45,7 +43,6 @@ class location_logic_manager:
                     location_obj.set_opening_hours(new_value)
 
         self.Storage_Layer_Wrapper.write_to_file_locations(list_of_locations)
-
 
 
     def sanity_check_location(self, what_to_check, new_value):
@@ -56,33 +53,16 @@ class location_logic_manager:
                 return True
             else:
                 return False
-        if what_to_check == 'manager':
-            return False
-            # needs to check that a manager with that id does not have a location under him
-            can_be_assigned = False
-            all_managers = self.Storage_Layer_Wrapper.get_all_managers()
-
-            for manager in all_managers:
-                if new_value == manager.staff_id:
-                    pass
-                    
         if what_to_check == "opening_hours":
             return True
         
 
     def fetch_all_amenities_for_location_in_storage(self, location) -> list:
-        """Get all amenities for a location"""
-        pass
-
-    def sanity_check_location(self, Location): 
-        """Check if all info in a location object is correct"""
-        pass
-
-    def add_new_location_to_storage(self, Location):
-        """Add a new location to the storage"""
-        pass
-    
-    def fetch_location_from_storage(self, Location_ID):
-        """Find a location by location ID"""
-        pass
+        """Fetch all amenities for a location"""
+        amenities = self.Storage_Layer_Wrapper.get_all_amenities()
+        amenities_list = []
+        for amenity in amenities:
+            if amenity.location == location:
+                amenities_list.append(amenity)
+        return amenities_list
 

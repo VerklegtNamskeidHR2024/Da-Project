@@ -21,8 +21,12 @@ class maintenance_report_logic_manager:
         # check if the property id is in the system
         elif what_to_check in 'property id':
             list_of_all_properties = self.storage_layer_wrapper.get_all_properties_at_location()
+            list_of_all_ammeneties = self.storage_layer_wrapper.get_all_amenities()
             for property in list_of_all_properties:
                 if property.property_id == new_value:
+                    return True
+            for amenity in list_of_all_ammeneties:
+                if amenity.property_id == new_value:
                     return True
             return False
         # check if the staff id is in the system
