@@ -85,11 +85,15 @@ class property_UI_menu:
         """Displays the form to select a property."""
        
         # You choose the property id for the properrty you looking for
-
-        while (
-            property_id_selected := input("Enter the Property ID to select: ").strip()
-        ) not in ["q", "b", "Q", "B"]:
-            # Gets property by id
+        # kormakur fix this cant do sanity check on property id brother!
+        while (property_id_selected := input("Enter the Property ID to select: ").strip()) not in ["q", "b", "Q", "B"]:
+        # Gets property by id
+            is_valid = self.logic_wrapper.sanity_check_properties('property_id', property_id_selected)
+            if is_valid == False:
+                print()
+                print("Invalid property ID. Please try again.")
+                print()
+                continue
             if len(property_id_selected) < 2:
                 print()
                 print("Must Enter A Valid Property ID")
