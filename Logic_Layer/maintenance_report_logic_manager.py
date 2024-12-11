@@ -255,9 +255,10 @@ class maintenance_report_logic_manager:
             return closed_reports
         
     def get_denied_reports(self, staff_id, location):
+        """Get all denied reports"""
         denied_reports = []
         list_of_all_reports = self.get_all_maintencance_reports_at_location(location)
-
+        # iterate through all reports and append the denied reports to the denied reports list
         for report in list_of_all_reports:
             if report.staff_id == staff_id and report.report_status == 'Denied':
                 denied_reports.append(report)
@@ -269,7 +270,9 @@ class maintenance_report_logic_manager:
         
 
     def get_single_maintenance_report(self, report_id):
+        """Get a single maintenance report"""
         all_reports = self.get_all_maintencance_reports('')
+        # iterate through all reports and return the report with the same id as the maintenance report
         for report in all_reports:
             if report.report_id == report_id:
                 return report

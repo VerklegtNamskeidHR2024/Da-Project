@@ -7,13 +7,15 @@ from colorama import Fore, Style, init
 
 class contractor_UI_menu():
     def __init__(self, logic_wrapper, rank, location, staff_id) -> None:
+        """Constructor for contractor_UI_menu"""
         self.logic_wrapper = logic_wrapper
         self.rank = rank
         self.location = location
         self.staff_id = staff_id
     
     def start_point_contractor_UI(self) -> None:
-        """start point for contractor UI"""
+
+        """Start point for contractor UI"""
         # when this class is called it starts here
         # goes into diffrent menus based on your rank
         print(self.rank)
@@ -40,7 +42,6 @@ class contractor_UI_menu():
     # display contractor menu
     def display_contractor_employee_menu(self) -> None:
         """display contractor menu for employee"""
-
         print(f"{self.rank} - Contractors Page")
         self.display_all_contractors()
 
@@ -65,7 +66,6 @@ class contractor_UI_menu():
     
     def display_contractor_menu_admin_and_manager(self) -> None:
         """display contractor menu for admin and manager"""
-
         print(f"{self.rank} - Contractors Page")
         self.display_all_contractors()
 
@@ -275,6 +275,7 @@ class contractor_UI_menu():
         print("-"*30)
 
     def display_contractor_maintenance_reports(self, selected_contractor) -> None:
+        """Display maintenance reports for a contractor"""
         ''' Displays maintenance reports for a contractor '''
         # create a table to print the maintenance reports
         Contractor_maintenance_reports_table = PrettyTable(['Report ID', 'Report Name', 'Description', 'Status'])
@@ -318,6 +319,7 @@ class contractor_UI_menu():
     # CAN REMOVE THIS
     # print contractors from list
     def print_contractors_from_list(self, contractor_list):
+        """print contractors from list"""
         print("-"*78)
         print(f"{'ID':<10}|{'Company name':<25}|{'Name':<20}|{'location':<20}")
         print("-"*78)

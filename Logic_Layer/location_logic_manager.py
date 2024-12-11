@@ -21,7 +21,7 @@ class location_logic_manager:
         location_sorted_list = []
 
         all_locations = self.Storage_Layer_Wrapper.get_all_locations()
-
+        # checks if the location is in the list of locations then returns the locations
         for location in all_locations:
             if location.location == location:
                 location_sorted_list.append(location)
@@ -29,7 +29,9 @@ class location_logic_manager:
         return location_sorted_list
 
     def edit_existing_location_in_storage(self, location, current_location, edit_choice, new_value):
+        """Edit an existing location in the storage"""
         list_of_locations = self.all_location()
+        # Iterate through the list of locations and edit the location with the matching location ID
         for location_obj in list_of_locations:
             if location_obj.location == location.location:
                 if edit_choice == 'phone_number':
@@ -45,6 +47,8 @@ class location_logic_manager:
 
 
     def sanity_check_location(self, what_to_check, new_value):
+        """Check if all info in a location object is correct"""
+        # checks if the phone number is 7 digits
         if what_to_check == 'phone_number':
             if len(new_value) == 7:
                 return True
@@ -63,11 +67,14 @@ class location_logic_manager:
         return amenities_list
 
     def sanity_check_location(self, Location): 
+        """Check if all info in a location object is correct"""
         pass
 
     def add_new_location_to_storage(self, Location):
+        """Add a new location to the storage"""
         pass
     
     def fetch_location_from_storage(self, Location_ID):
+        """Find a location by location ID"""
         pass
 
