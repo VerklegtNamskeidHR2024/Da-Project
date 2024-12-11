@@ -217,8 +217,11 @@ class Logic_Layer_Wrapper:
         return self.work_request_logic_manager.get_all_work_requests_at_location(rank, location, staff_id)
         # returns a list of all work requests at a specific location
 
-    def get_work_request_by_id(self, location: str, work_request_id: str, status: str, accepted_by_employee: bool) -> WorkRequest:
-        return self.work_request_logic_manager.get_work_request_by_id(location, work_request_id, status, accepted_by_employee)  
+    def get_work_request_by_date(self, rank: str, staff_id: str, location: str, work_request_date: str) -> WorkRequest:
+        return self.work_request_logic_manager.get_work_request_by_date(rank, staff_id, location, work_request_date)
+
+    def get_work_request_by_id(self, rank: str, staff_id: str, location: str, work_request_id: str) -> WorkRequest:
+        return self.work_request_logic_manager.get_work_request_by_id(rank, staff_id, location, work_request_id)  
         # returns a work request object by work_request_id
     
     def get_all_new_work_requests(self, location: str) -> list[WorkRequest]:
@@ -241,12 +244,21 @@ class Logic_Layer_Wrapper:
         return self.work_request_logic_manager.edit_work_request(work_request)
         # edits a work request
     
+    def auto_re_open_work_request(self, work_request: object):
+        return self.work_request_logic_manager.auto_re_open_work_request(work_request)
+
     def add_work_request(self, work_request: object):
         return self.work_request_logic_manager.add_work_request(work_request)
         # adds a new work request to the storage
 
-    def sanity_check_low_level_logistics(self, category: str, value_to_be_verified: str) -> bool:
-        return self.work_request_logic_manager.sanity_check_low_level_logistics(category, value_to_be_verified)
+    def sanity_check_start_date(self, start_date: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_start_date(start_date)
+    
+    def sanity_check_completition_date(self, start_date: str, completition_date_given: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_completition_date(start_date, completition_date_given)
+
+    def sanity_check_request_low_level_logistics(self, category: str, value_to_be_verified: str) -> bool:
+        return self.work_request_logic_manager.sanity_check_request_low_level_logistics(category, value_to_be_verified)
     
     def sanity_check_work_request_property_id(self, property_id: str) -> bool:
         return self.work_request_logic_manager.sanity_check_work_request_property_id(property_id)

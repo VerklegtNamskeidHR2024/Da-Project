@@ -158,8 +158,8 @@ class Main_Menu:
         while is_staff_id_valid is False:
             staff_id = input("Enter Your Staff ID: ")
             is_staff_id_valid = self.logic_wrapper.sanity_check_staff_id(rank, staff_id)
-        # if is_staff_id_valid is False: 
-        #     print("ID Does Not Exist In The System, Please Try Again.")
+            if is_staff_id_valid is False: 
+                print("ID Does Not Exist In The System, Please Try Again.")
         return staff_id
     
 

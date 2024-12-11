@@ -12,18 +12,20 @@ class contractor_UI_menu():
         self.location = location
         self.staff_id = staff_id
     
-    def start_point_contractor_UI(self) -> None:
+    def start_point_contractor_UI(self) -> str:
         # when this class is called it starts here
         # call other functions in class from here
-        print(self.rank)
         if self.rank == "Employee":
-            self.display_contractor_employee_menu()
+            employee_contractors_menu = self.display_contractor_employee_menu_logistics()
+            if employee_contractors_menu in ["q", "b"]:
+                return employee_contractors_menu
         else:
-            self.display_contractor_menu_admin_and_manager()
-        return
+            admin_manager_contractors_menu = self.display_contractor_menu_admin_and_manager_logistics()
+            if admin_manager_contractors_menu in ["q", "b"]:
+                return admin_manager_contractors_menu	
     
 
-    def display_all_contractors(self) -> None:
+    def display_all_contractors(self) -> str:
         """Function to display all contractors at the selected locations"""
         contractor_list = self.logic_wrapper.get_all_contractors_at_location(self.location)
         print('-' * 70)
@@ -35,72 +37,74 @@ class contractor_UI_menu():
         print('-' * 70)
 
     # display contractor menu
-    def display_contractor_employee_menu(self) -> None:
-        print(f"{self.rank} - Contractors Page")
+    def display_contractor_employee_menu_logistics(self) -> str:
         # create list for printing all contractors for first menu in contractors
         #Can Remove this added the other function to have same code with other files - Kv Hreimur
-        self.display_all_contractors()
-
-        print("------------------------------------------------")
-        print("1) View contractor")
-        print("------------------------------------------------")
-
-        user_action = input("Select an Option:  ")
-        match user_action:
-            case "1":
-                try:
-                    self.display_view_contractor()
-                except:
-                    print("something went wrong")
-            case "q":
-                # quit back to main menu
-                pass
-            case _:
-                print("wrong input")
+        user_action = ""
+        while user_action != "q":
+            print(f"{self.rank} - Contractors Page")
+            self.display_all_contractors()
+            print("-" * 70)
+            print("1) Select Contractor")
+            print("-" * 70)
+            user_action = input("Select an Option:  ").lower()
+            match user_action:
+                case "1":
+                    try:
+                        self.display_view_contractor()
+                    except:
+                        print("something went wrong")
+                case "q":
+                    # quit back to main menu
+                    pass
+                case _:
+                    print("wrong input")
 
         # test print
         #print("we going back to main menu in UI layer")
         return 
     
-    def display_contractor_menu_admin_and_manager(self) -> None:
-        print(f"{self.rank} - Contractors Page")
+    def display_contractor_menu_admin_and_manager_logistics(self) -> None:
         # create list for printing all contractors for first menu in contractors
         #Can Remove this added the other function to have same code with other files - Kv Hreimur
         '''print('old contractor list')
         contractor_list = self.logic_wrapper.get_all_contractors(self.location)
         self.print_contractors_from_list(contractor_list)'''
-        self.display_all_contractors()
+        
+        user_action = ""
+        while user_action != "q":
+            print(f"{self.rank} - Contractors Page")
+            self.display_all_contractors()
+            print("-" * 70)
+            print("1) Add Contractor")
+            print("2) Edit Contractor")
+            print("3) View Contractor")
+            print("-" * 70)
 
-        print("------------------------------------------------")
-        print("1) Add contractor")
-        print("2) edit contractor")
-        print("3) View contractor")
-        print("------------------------------------------------")
+            user_action = input("Select an Option:  ")
+            match user_action:
+                case "1":
+                    # create contractor
+                    self.display_add_contractor_form()
+                case "2":
+                    # edit contractor
+                    self.display_edit_contractor_menu()
+                case "3":
+                    self.display_view_contractor()
+                case "4":
+                    # give warning 
+                    # finish this a later point
+                    pass
 
-        user_action = input("Select an Option:  ")
-        match user_action:
-            case "1":
-                # create contractor
-                self.display_add_contractor_form()
-            case "2":
-                # edit contractor
-                self.display_edit_contractor_menu()
-            case "3":
-                self.display_view_contractor()
-            case "4":
-                # give warning 
-                # finish this a later point
-                pass
+                case "q":
+                    # quit back to main menu
+                    pass
+                case _:
+                    print("wrong input")
 
-            case "q":
-                # quit back to main menu
-                pass
-            case _:
-                print("wrong input")
-
-        # test print
-        #print("we going back to main menu in UI layer")
-        return 
+            # test print
+            #print("we going back to main menu in UI layer")
+            return 
 
     # display add contractor
     def display_add_contractor_form(self) -> None:
@@ -178,7 +182,7 @@ class contractor_UI_menu():
             case "3":
                 self.change_opening_hours(contractor_to_use)
             case _:
-                print("not valid input")
+                print("Not Valid Input")
                 return
     
     # change contact name
@@ -234,7 +238,7 @@ class contractor_UI_menu():
             print("something went wrong")
 
     # print single contractor
-    def print_single_contractor(self, contractor) -> None:
+    def print_single_contractor(self, contractor: object) -> str:
         print("-"*30)
         contractor_print_table = PrettyTable()
         contractor.field_names = ['info',""]
@@ -260,7 +264,7 @@ class contractor_UI_menu():
         print(f"{'Phone Number':<15}: {contractor.phone_number}") """
         print("-"*30)
 
-    def display_contractor_maintenance_reports(self, selected_contractor) -> None:
+    def display_contractor_maintenance_reports(self, selected_contractor: object) -> str:
         ''' Displays maintenance reports for a contractor '''
         Contractor_maintenance_reports_table = PrettyTable(['Report ID', 'Report Name', 'Description', 'Status'])
         print("Maintenance Reports for the selected contractor.")
@@ -275,9 +279,15 @@ class contractor_UI_menu():
         Contractor_maintenance_reports_table.vertical_char = f"{border_color}|{reset_color}"
         print(Contractor_maintenance_reports_table)
         print('')
-        return
+        print("{:>20}".format("> Go Back: b, B"))
+        print("{:>20}".format("> Quit System: q, Q"))
+        while (
+            contractor_maintenance_reports_sub_menu := input("Select An Option: ").lower()
+        ) not in ["q", "b", "Q", "B"]:
+            print("Sigma Sigma on the wall, who is the Skibidiest of them all")
+        return contractor_maintenance_reports_sub_menu.lower()
     
-    def display_contractor_work_requests(self, selected_contractor) -> None:
+    def display_contractor_work_requests(self, selected_contractor: object) -> str:
         ''' Displays work requests for a property '''
         contractor_work_requests_table = PrettyTable(['Work Request ID', 'Description', 'Mark as Completed'])
         print("Work Requests for the selected property.")
@@ -293,17 +303,12 @@ class contractor_UI_menu():
         print(contractor_work_requests_table)
         bause_breaker = input("\nPress Enter to return to main menu.")
         print('')
-        return
+        print("{:>20}".format("> Go Back: b, B"))
+        print("{:>20}".format("> Quit System: q, Q"))
+        while (
+            contractor_work_requests_sub_menu := input("Select An Option: ").lower()
+        ) not in ["q", "b", "Q", "B"]:
+            print("Sigma Sigma on the wall, who is the Skibidiest of them all")
+        return contractor_work_requests_sub_menu.lower()
 
-    # CAN REMOVE THIS
-    # print contractors from list
-    def print_contractors_from_list(self, contractor_list):
-        print("-"*78)
-        print(f"{'ID':<10}|{'Company name':<25}|{'Name':<20}|{'location':<20}")
-        print("-"*78)
-        for item in contractor_list:
-            print(f"{item.contractor_id:<10}|{item.company_name:<25}|{item.contact_name:<20}|{item.location:<20}")
-            
-        print("-"*78)
-        return
 

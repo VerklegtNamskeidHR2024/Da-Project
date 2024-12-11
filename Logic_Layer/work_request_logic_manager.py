@@ -1,3 +1,7 @@
+from datetime import datetime as dt
+from datetime import date, timedelta
+
+
 class work_request_logic_manager:
 
     def __init__(self, Storage_Layer_Wrapper):
@@ -42,7 +46,7 @@ class work_request_logic_manager:
             case _:
                 return False
 
-    def sanity_check_low_level_logistics(
+    def sanity_check_request_low_level_logistics(
         self, category: str, value_to_be_verified: str
     ) -> bool:
         """Performs very simple logistics to verify user input, can be expanded to perform higher level logistics.
@@ -58,22 +62,75 @@ class work_request_logic_manager:
                 return False
             return True
 
-        if category == "start_date":
-            if len(value_to_be_verified) == 8:
-                return True
-            return False
-
-        if category == "completition_date":
-            if len(value_to_be_verified) == 8 or value_to_be_verified == "":
-                return False
-            return True
-
         if category == "reopen_interval":
             try:
-                if int(value_to_be_verified) >= 0:
+                if int(value_to_be_verified) == 1:
+                    return True
+                if int(value_to_be_verified) == 7:
+                    return True
+                if int(value_to_be_verified) == 30:
                     return True
             except ValueError:
                 return False
+
+    def sanity_check_start_date(self, start_date_given: str) -> bool:
+        try:
+            start_date = dt.strptime(start_date_given, "%d-%m-%y")
+            current_date = dt.today()
+            if current_date >= start_date:
+                return True
+            if (
+                len(start_date_given) == 8
+                and start_date_given[2] == "-"
+                and start_date_given[5] == "-"
+            ) is True:
+                integer_date_list = []
+                for str_num in list(start_date_given):
+                    if str_num != "-":
+                        integer_date_list.append(int(str_num))
+                if (
+                    0 <= integer_date_list[0] <= 3
+                    and 0 <= integer_date_list[2] <= 1
+                    and 0 <= integer_date_list[3] <= 2
+                    and integer_date_list[4] == 2
+                    and integer_date_list[5] == 4
+                ):
+                    return True
+            return False
+        except ValueError:
+            return False
+
+    def sanity_check_completition_date(
+        self, start_date: str, completition_date_given: str
+    ) -> bool:
+
+        try:
+            start_date_to_compare = dt.strptime(start_date, "%d-%m-%y")
+            completition_date_to_compare = dt.strptime(
+                completition_date_given, "%d-%m-%y"
+            )
+            if completition_date_to_compare > start_date_to_compare:
+                return True
+            if (
+                len(completition_date_given) == 8
+                and completition_date_given[2] == "-"
+                and completition_date_given[5] == "-"
+            ) is True:
+                integer_completition_date_list = []
+                for str_num in list(completition_date_given):
+                    if str_num != "-":
+                        integer_completition_date_list.append(int(str_num))
+                if (
+                    0 <= integer_completition_date_list[0] <= 3
+                    and 0 <= integer_completition_date_list[2] <= 1
+                    and 0 <= integer_completition_date_list[3] <= 2
+                    and integer_completition_date_list[4] == 2
+                    and integer_completition_date_list[5] == 4
+                ) is True:
+                    return True
+            return False
+        except ValueError:
+            return False
 
     def sanity_check_location_for_request(self, set_location: str) -> bool:
         """Gets all locations from storage and compares the names input given by the user to the  that already exist."""
@@ -93,7 +150,6 @@ class work_request_logic_manager:
                 return True
         return False
 
-    # Might not fully implement, needs further thought.
     def sanity_check_staff_id_for_request(self, staff_id: str) -> bool:
         """Gets all employees from storage and compares the staff ID given by the user to the ones that already exist."""
 
@@ -119,6 +175,20 @@ class work_request_logic_manager:
         Work_request.set_work_request_id(new_work_request_id)
         return Work_request
 
+    def auto_re_open_work_request(self, work_request: object):
+
+        print(work_request.reopen_interval)
+        interval_days = work_request.reopen_interval
+        start_date = work_request.start_date
+        start_date_to_manipulate = dt.strptime(start_date, "%d-%m-%y")
+        new_date = start_date_to_manipulate + timedelta(days=interval_days)
+        new_date_formated = date.strftime(new_date, "%d-%m-%y")
+        work_request.set_start_date(new_date_formated)
+        work_request.set_work_request_id("")
+        work_request.set_work_request_status("Open")
+        work_request.set_completition_date("")
+        self.add_work_request(work_request)
+
     def add_work_request(self, Work_request: object):
         """Adds a work request to the storage layer."""
 
@@ -138,18 +208,36 @@ class work_request_logic_manager:
                 all_work_requests[position] = Work_request
         self.Storage_Layer_Wrapper.write_to_file_work_requests(all_work_requests)
 
-    def get_work_request_by_id(
-        self,
-        location: str,
-        work_request_id: str,
-        status: str,
-        accepted_by_employee: bool,
+    def get_work_request_by_date(
+        self, rank: str, staff_id: str, location: str, work_request_date: str
     ) -> object:
 
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         # checks if the location and work request id is the same
         for work_request in all_work_requests:
-            if status == "" and accepted_by_employee == True:
+            if rank != "Employee":
+                if work_request.location == location and work_request_date in [
+                    work_request.start_date,
+                    work_request.completition_date,
+                ]:
+                    return work_request
+            else:
+                if (
+                    work_request.staff_id == staff_id
+                    and work_request.location == location
+                    and work_request_date
+                    in [work_request.start_date, work_request.completition_date]
+                ):
+                    return work_request
+
+    def get_work_request_by_id(
+        self, rank: str, staff_id: str, location: str, work_request_id: str,
+    ) -> object:
+
+        all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
+        # checks if the location and work request id is the same
+        for work_request in all_work_requests:
+            if rank != "Employee":
                 if (
                     work_request.location == location
                     and work_request.work_request_id == work_request_id
@@ -157,10 +245,9 @@ class work_request_logic_manager:
                     return work_request
             else:
                 if (
-                    work_request.location == location
+                    work_request.staff_id == staff_id
+                    and work_request.location == location
                     and work_request.work_request_id == work_request_id
-                    and work_request.work_request_status == status
-                    and work_request.accepted_by_employee == accepted_by_employee
                 ):
                     return work_request
 
@@ -176,14 +263,14 @@ class work_request_logic_manager:
             if rank != "Employee":
                 if (
                     work_request.location == location
-                    and work_request.accepted_by_employee == True
+                    and work_request.accepted_by_employee is True
                     and work_request.work_request_status == "Open"
                 ):
                     work_request_sorted_list.append(work_request)
             else:
                 if (
                     work_request.location == location
-                    and work_request.accepted_by_employee == True
+                    and work_request.accepted_by_employee is True
                     and work_request.work_request_status == "Open"
                     and work_request.staff_id == staff_id
                 ):
@@ -199,13 +286,13 @@ class work_request_logic_manager:
             if rank != "Employee":
                 if (
                     work_request.location == location
-                    and work_request.accepted_by_employee == True
+                    and work_request.accepted_by_employee is True
                 ):
                     work_request_sorted_list.append(work_request)
             else:
                 if (
                     work_request.location == location
-                    and work_request.accepted_by_employee == True
+                    and work_request.accepted_by_employee is True
                     and work_request.staff_id == staff_id
                 ):
                     work_request_sorted_list.append(work_request)
@@ -221,7 +308,7 @@ class work_request_logic_manager:
             if (
                 work_request.location == location
                 and work_request.work_request_status == "Closed"
-                and work_request.accepted_by_employee == True
+                and work_request.accepted_by_employee is True
             ):
                 work_request_sorted_list.append(work_request)
         return work_request_sorted_list
@@ -237,14 +324,14 @@ class work_request_logic_manager:
                 if (
                     work_request.location == location
                     and work_request.work_request_status == "Pending"
-                    and work_request.accepted_by_employee == True
+                    and work_request.accepted_by_employee is True
                 ):
                     work_request_sorted_list.append(work_request)
             else:
                 if (
                     work_request.location == location
                     and work_request.work_request_status == "Pending"
-                    and work_request.accepted_by_employee == True
+                    and work_request.accepted_by_employee is True
                     and work_request.staff_id == staff_id
                 ):
                     work_request_sorted_list.append(work_request)
@@ -260,7 +347,7 @@ class work_request_logic_manager:
             if (
                 work_request.location == location
                 and work_request.work_request_status == "New"
-                and work_request.accepted_by_employee == False
+                and work_request.accepted_by_employee is False
             ):
                 work_request_sorted_list.append(work_request)
 

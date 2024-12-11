@@ -14,13 +14,28 @@ class work_request_UI_menu:
         turn calls the function to load the work request menu and it's options for the user.
         """
 
+        # In almost all functions that receive, and verifies user input are while loops that repeatedly asks the user
+        # for specific input. These while loops are held together on the condition that the user either fullfills the
+        # neccesary requirements to proceed or that they don't enter q/Q or b/B.
+        #
+        #
+        # Outside of each while loop are return statments that pass back any input that the user had entered. In all cases,
+        # except 2, has no affect on the user experience while navigating this menu. Only when the input given is either
+        # q/Q or b/B do these while loops and return statments influence the flow of the user experience.
+        #
+        #
+        # When q/Q are entered, at any point while navigating this menu, it is always returned back to this point. Once here,
+        # it passes the necessary verification to be returned back to the home page menu where, once again, it is returned one
+        # final time to the quit system function that displays the exit message and stops running the script.
+        #
+        # 
         work_request_menu = self.menu_selection_logistics()
         if work_request_menu in ["q", "b"]:
             return work_request_menu
 
-    # Completed. Can be beautified.
+
     def display_all_work_requests_printed(self, work_request_list: list):
-        """Prints out all open work requests with their ID, Name and Description."""
+        """Displays out all open work requests with their ID, Name and Description."""
 
         if len(work_request_list) == 0:
             print()
@@ -41,7 +56,7 @@ class work_request_UI_menu:
                 )
             print("-" * 70)
 
-    # Completed. Can be beautified.
+
     def display_selected_work_request_information(self, work_request: object):
         """Receives a single, user-selected work request and displays all of its information for them to read."""
 
@@ -122,7 +137,7 @@ class work_request_UI_menu:
         if self.rank != "Employee":
             print(
                 "{:0}{:>3}{:>15}{:>3}{:>19}".format(
-                    "1. Select Request",
+                    "1. Search Request",
                     "|",
                     "2. Add Request",
                     "|",
@@ -133,9 +148,9 @@ class work_request_UI_menu:
                 "{:0}{:>3}{:>20}{:>3}{:>19}".format(
                     "4. Pending Requests",
                     "|",
-                    "5. All Requests",
+                    "5. Closed Requests",
                     "|",
-                    "6. Closed Requests",
+                    "6. All Requests",
                 )
             )
             print()
@@ -143,7 +158,7 @@ class work_request_UI_menu:
             print("{:>20}".format("> Quit System: q, Q"))
             print()
         else:
-            print("{:0}{:>3}{:>20}".format("1. Select Request", "|", "2. New Requests"))
+            print("{:0}{:>3}{:>20}".format("1. Search Request", "|", "2. New Requests"))
             print(
                 "{:0}{:>3}{:>20}".format("3. Pending Requests", "|", "4. My Requests")
             )
@@ -164,8 +179,9 @@ class work_request_UI_menu:
         while user_choice != "q":
             user_choice = self.display_work_requests_menu_items()
             match (user_choice, self.rank):
+
                 case ("1", self.rank):
-                    user_choice = self.select_work_request_by_id()
+                    user_choice = self.search_work_request_menu_logistics()
 
                 case ("2", "Admin") | ("2", "Manager"):
                     user_choice = self.display_create_work_request_form()
@@ -173,7 +189,7 @@ class work_request_UI_menu:
                 case ("2", "Employee") | ("3", "Admin") | ("3", "Manager"):
                     user_choice = self.display_and_select_new_work_requests()
 
-                case ("3", "Employee") | ("4", "Admin") | ("3", "Manager"):
+                case ("3", "Employee") | ("4", "Admin") | ("4", "Manager"):
                     user_choice = self.display_and_select_pending_work_requests()
 
                 case ("5", "Admin") | ("5", "Manager"):
@@ -184,16 +200,76 @@ class work_request_UI_menu:
 
                 case ("b", self.rank):
                     return "b"
+                
                 case ("q", self.rank):
                     return "q"
+                
                 case _:
                     print("Invalid Input, Please Try Again.")
         return user_choice
 
+    def search_work_request_menu(self) -> str:
+        
+        print()
+        print("-" * 70)
+        print()
+        print("Search By")
+        print("{:>10}".format("> 1. ID"))
+        print("{:>10}".format("> 2. Date"))
+        print()
+        print("-" * 70)
+        print()
+        user_choice = input("Select An Option: ").lower()
+        return user_choice
+
+    def search_work_request_menu_logistics(self) -> str:
+        
+        user_choice = ""
+        while user_choice != "q":
+            user_choice = self.search_work_request_menu()
+            match user_choice: 
+                case "1":
+                    user_choice = self.select_work_request_by_id()
+                case "2":
+                    user_choice = self.select_work_request_by_date()
+                case "b":
+                    return "b"
+                case "q":
+                    return "q"
+                case _:
+                    print("Invalid Input")
+        return user_choice.lower()
+
+
+    def select_work_request_by_date(self) -> str:
+        while (work_request_selected_by_date := input("Enter Date: ")) not in [
+            "q",
+            "b",
+            "Q",
+            "B",
+        ]:
+            if len(work_request_selected_by_date) < 8:
+                print()
+                print("Date Must Be Formatted Correctly")
+                print()
+                continue
+            work_request = self.logic_wrapper.get_work_request_by_date(
+                self.rank, self.staff_id, self.location, work_request_selected_by_date
+            )
+            if work_request is not None:
+                self.display_selected_work_request_information(work_request)
+                edit_work_request = self.edit_work_request_logistics(work_request)
+                if edit_work_request == "b":
+                    continue
+                return edit_work_request.lower()
+            print()
+            print("Work Request Can't Be Accessed At The Moment, Please Try Again.")
+            print()
+        return work_request_selected_by_date.lower()
+
+
     # Completed. Can be beautified.
-    def select_work_request_by_id(
-        self, status: str = "", accepted_by_employee: bool = True
-    ) -> str:
+    def select_work_request_by_id(self) -> str:
         """System asks the user to enter an ID of the work request they wish to select. If found, the system
         will display all of its information and directs them to the editing function below. Otherwise it gives
         an error message and restarts its operation."""
@@ -204,16 +280,13 @@ class work_request_UI_menu:
             "Q",
             "B",
         ]:
-            # if work_request_selected.lower() in ["b", "B"]:
-            #     break
             if len(work_request_selected) < 3:
                 print()
                 print("Must Enter A Valid Work Request ID")
                 print()
-            if self.rank == "Employee":
-                status = "Open"
+                continue
             work_request = self.logic_wrapper.get_work_request_by_id(
-                self.location, work_request_selected, status, accepted_by_employee
+                self.rank, self.staff_id, self.location, work_request_selected
             )
             if work_request is not None:
                 self.display_selected_work_request_information(work_request)
@@ -295,7 +368,7 @@ class work_request_UI_menu:
         to the next function."""
 
         while (request_name := input("Request Name: ")) not in ["q", "b", "Q", "B"]:
-            is_name_valid = self.logic_wrapper.sanity_check_low_level_logistics(
+            is_name_valid = self.logic_wrapper.sanity_check_request_low_level_logistics(
                 "name", request_name
             )
             if is_name_valid is True:
@@ -321,7 +394,7 @@ class work_request_UI_menu:
             "Q",
             "B",
         ]:
-            is_description_valid = self.logic_wrapper.sanity_check_low_level_logistics(
+            is_description_valid = self.logic_wrapper.sanity_check_request_low_level_logistics(
                 "description", request_description
             )
             if is_description_valid is False:
@@ -370,47 +443,21 @@ class work_request_UI_menu:
         the next function."""
 
         while (start_date := input("Set The Start Date: ")) not in ["q", "b", "Q", "B"]:
-            is_start_date_valid = self.logic_wrapper.sanity_check_low_level_logistics(
+            is_start_date_valid = self.logic_wrapper.sanity_check_start_completition_date(
                 "start_date", start_date
             )
             if is_start_date_valid is True:
                 new_work_request.set_start_date(start_date)
-                completition_date = self.set_completition_date_for_request(
+                repetitive_request = self.set_repetitive_work_for_request(
                     new_work_request
                 )
-                if completition_date == "b":
+                if repetitive_request == "b":
                     continue
-                return completition_date
+                return repetitive_request
             print()
             print("Invalid Input")
             print()
         return start_date.lower()
-
-    # Completed. Can be beautified.
-    def set_completition_date_for_request(self, new_work_request: object) -> str:
-        """Asks the user to enter the completition date for the work request they are creating. Goes through very simple input
-        verification where, it has to either be nothing (since this field is not required to fill out) or exactly 8 characters long.
-        The completion date attribute is then set to what the user entered and the object passed down to the next function.
-        """
-
-        while (
-            completition_date := input("Set The Completition Date (Not Required): ")
-        ) not in ["q", "b", "Q", "B"]:
-            is_completition_date_valid = (
-                self.logic_wrapper.sanity_check_low_level_logistics(
-                    "completition_date", completition_date
-                )
-            )
-            if is_completition_date_valid is True:
-                new_work_request.set_completition_date(completition_date)
-                repetitive_work = self.set_repetitive_work_for_request(new_work_request)
-                if repetitive_work == "b":
-                    continue
-                return repetitive_work
-            print()
-            print("Completition Date Must Be Formatted Correctly")
-            print()
-        return completition_date.lower()
 
     # Completed. Can be beautified.
     def set_repetitive_work_for_request(self, new_work_request: object) -> str:
@@ -423,25 +470,30 @@ class work_request_UI_menu:
                     repetitive_work
                 )
             )
-            if is_set_repetitive_boolean is True or is_set_repetitive_boolean is False:
+            if is_set_repetitive_boolean is True:
                 new_work_request.set_repetitive_work(is_set_repetitive_boolean)
                 interval_days = self.set_interval_days_for_request(new_work_request)
                 if interval_days == "b":
                     continue
                 return interval_days
+            if is_set_repetitive_boolean is False:
+                set_priority = self.set_priority_for_request(new_work_request)
+                if set_priority == "b":
+                    continue
+                return set_priority
             print()
             print("Invalid Input")
             print()
         return repetitive_work.lower()
 
     # Completed. Can be beautified.
-    def set_interval_days_for_request(self, new_work_request: object):
+    def set_interval_days_for_request(self, new_work_request: object) -> str:
         while (
-            interval_days := input("Set The Interval Of Days Until Request Re-Opens: ")
+            interval_days := input("Set The Interval Of Days Until Request Re-Opens (1, 7 or 30 Days): ")
         ) not in ["q", "b", "Q", "B"]:
             is_interval_days_valid = (
-                self.logic_wrapper.sanity_check_low_level_logistics(
-                    "completition_date", interval_days
+                self.logic_wrapper.sanity_check_request_low_level_logistics(
+                    "reopen_interval", interval_days
                 )
             )
             if is_interval_days_valid is True:
@@ -623,45 +675,11 @@ class work_request_UI_menu:
                 print()
                 print("Invalid")
                 print()
-            while (completition_date := input("Set The Completition Date: ")) not in [
-                "q",
-                "b",
-                "Q",
-                "B",
-            ]:
-                if len(completition_date) == 8:
-                    work_request.set_completition_date(completition_date)
-                else:
-                    print()
-                    print("Completition Date Must Be Formatted Correctly")
-                    print()
-            if completition_date in ["q", "b", "Q", "B"]:
-                return completition_date.lower()
-
             is_marked_completed_boolean = (
                 self.logic_wrapper.sanity_check_boolean_input_work_requests(
                     mark_as_completed
                 )
             )
-            if is_marked_completed_boolean is True:
-                print()
-                while (
-                    update_confirmation := input("Enter 1 to Confirm: ").lower()
-                ) != "1":
-                    if update_confirmation in ["q", "b", "Q", "B"]:
-                        return update_confirmation.lower()
-                    print("Mama they took my dingus")
-                work_request.set_mark_as_done(is_marked_completed_boolean)
-                if self.rank == "Employee":
-                    work_request.set_work_request_status("Pending")
-                else:
-                    work_request.set_work_request_status("Closed")
-                self.logic_wrapper.edit_work_request(work_request)
-                print()
-                print("Work Request Has Been Marked Completed!")
-                print()
-                break
-
             if is_marked_completed_boolean is False:
                 print()
                 while (
@@ -670,16 +688,60 @@ class work_request_UI_menu:
                     if update_confirmation in ["q", "b", "Q", "B"]:
                         return update_confirmation.lower()
                     print("Mama they took my dingus")
-                work_request.set_mark_as_done(is_marked_completed_boolean)
+                    continue
+                work_request.set_mark_as_completed(False)
                 work_request.set_work_request_status("Open")
                 self.logic_wrapper.edit_work_request(work_request)
                 print()
                 print("Work Request Has Been Marked Not Completed.")
                 print()
-                break
-            else:
-                print("Mama they took my dingus")
-        return mark_as_completed.lower()
+                return ""
+            
+            if is_marked_completed_boolean is True:
+                mark_as_completed_true = self.mark_work_request_completed_true(work_request)
+                if mark_as_completed_true == "b":
+                    continue
+                return mark_as_completed_true
+        return mark_as_completed
+    
+    # Completed. Can be beautified.
+    def mark_work_request_completed_true(self, work_request: object) -> str:
+                
+        while (completition_date := input("Set The Completition Date: ")) not in [
+            "q", 
+            "b", 
+            "Q", 
+            "B"
+        ]:
+            start_date = work_request.start_date
+            is_completition_date_valid = (
+                self.logic_wrapper.sanity_check_completition_date(
+                    start_date, completition_date
+                )
+            )
+            if is_completition_date_valid is True:
+                while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1":
+                    if update_confirmation in ["q", "b", "Q", "B"]:
+                        return update_confirmation.lower()
+                    print("Mama they took my dingus")
+                work_request.set_mark_as_completed(True)
+                work_request.set_completition_date(completition_date)
+                if self.rank == "Employee":
+                    work_request.set_work_request_status("Pending")
+                else:
+                    work_request.set_work_request_status("Closed")
+                self.logic_wrapper.edit_work_request(work_request)
+                if work_request.repetitive_work is True:
+                    self.logic_wrapper.auto_re_open_work_request(work_request)
+                print()
+                print("Work Request Has Been Marked Completed!")
+                print()
+                return ""
+            print()
+            print("Completition Date Must Be Formatted Correctly")
+            print()
+            continue
+        return completition_date.lower()
 
     # Completed. Can be beautified.
     def general_edit_work_request_menu(self) -> str:
@@ -814,6 +876,7 @@ class work_request_UI_menu:
 
                     print("Sigma Sigma on the wall, who is the Skibidiest of them all")
                 work_request.set_repetitive_work(is_repetitive_boolean)
+                work_request.set_reopen_interval(0)
                 self.logic_wrapper.edit_work_request(work_request)
                 return
             print("Mama they took my dingus")
@@ -850,8 +913,6 @@ class work_request_UI_menu:
     def display_and_select_request_overview(self):
         """Displays all work requests that have been accepted by an employee."""
 
-        status = ""
-        accepted_by_employee = True
         selected_work_request = ""
         while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
@@ -865,17 +926,13 @@ class work_request_UI_menu:
             print("{:>15}".format("> Go Back: b, B"))
             print("{:>18}".format("> Quit System: q, Q"))
             print("-" * 70)
-            selected_work_request = self.select_work_request_by_id(
-                status, accepted_by_employee
-            )
+            selected_work_request = self.search_work_request_menu_logistics()
         return selected_work_request.lower()
 
     # Completed. Can be beautifed.
     def display_and_select_new_work_requests(self):
         """Displays all new work requests that haven't been accepted by an employee."""
 
-        status = "New"
-        accepted_by_employee = False
         selected_work_request = ""
         while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
@@ -889,17 +946,13 @@ class work_request_UI_menu:
             print("{:>15}".format("> Go Back: b, B"))
             print("{:>18}".format("> Quit System: q, Q"))
             print("-" * 70)
-            selected_work_request = self.select_work_request_by_id(
-                status, accepted_by_employee
-            )
+            selected_work_request = self.search_work_request_menu_logistics()
         return selected_work_request.lower()
 
     # Completed. Can be beautifed.
     def display_and_select_pending_work_requests(self):
         """Prints out all pending work requests that haven't been marked closed by a manager or admin."""
 
-        status = "Pending"
-        accepted_by_employee = True
         selected_work_request = ""
         while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
@@ -915,17 +968,13 @@ class work_request_UI_menu:
             print("{:>15}".format("> Go Back: b, B"))
             print("{:>18}".format("> Quit System: q, Q"))
             print("-" * 70)
-            selected_work_request = self.select_work_request_by_id(
-                status, accepted_by_employee
-            )
+            selected_work_request = self.search_work_request_menu_logistics()
         return selected_work_request.lower()
 
     # Completed. Can be beautifed.
     def display_and_select_closed_work_requests(self):
         """Displats all closed work requests."""
 
-        status = "Closed"
-        accepted_by_employee = True
         selected_work_request = ""
         while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
@@ -939,7 +988,5 @@ class work_request_UI_menu:
             print("{:>20}".format("> Go Back: b, B"))
             print("{:>20}".format("> Quit System: q, Q"))
             print("-" * 70)
-            selected_work_request = self.select_work_request_by_id(
-                status, accepted_by_employee
-            )
+            selected_work_request = self.search_work_request_menu_logistics()
         return selected_work_request.lower()
