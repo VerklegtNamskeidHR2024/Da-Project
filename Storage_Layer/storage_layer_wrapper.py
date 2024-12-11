@@ -37,6 +37,7 @@ class Storage_Layer_Wrapper:
     # No we dont do it in logic and send the list down to to re write it
     ########################################################################################################
     ### CONTRACTOR #########################################################################################
+
     def get_all_contractor(self) -> list[Contractor]:
         """Get all contractors"""
         all_contractors = self.contractor_storage_manager.get_all_contractor()
@@ -52,6 +53,7 @@ class Storage_Layer_Wrapper:
     ### PROPERTIES #########################################################################################
     
     def get_all_properties_at_location(self) -> list[Property]:
+
         """Get all properties at a location"""
         all_properties = self.property_storage_manager.get_all_properties()
         return all_properties
@@ -77,6 +79,7 @@ class Storage_Layer_Wrapper:
     ### MAINTENANCE_REPORTS ################################################################################
     
     def get_all_maintenance_reports(self) -> list[MaintenanceReport]:
+
         """Get all maintenance reports"""
         all_maintenance_reports = self.maintenance_report_storage_manager.get_all_maintenance_reports()
         return all_maintenance_reports
@@ -89,6 +92,7 @@ class Storage_Layer_Wrapper:
     ### WORK_REQUESTS ######################################################################################
     
     def get_all_work_requests(self) -> list[WorkRequest]:
+
         """Get all work requests"""
         all_work_requests = self.work_request_storage_manager.get_all_work_requests()
         return all_work_requests
@@ -101,6 +105,7 @@ class Storage_Layer_Wrapper:
     ### LOCATION ###########################################################################################
     
     def get_all_locations(self) -> list[Location]:
+
         """Get all locations"""
         all_locations = self.location_storage_manager.get_all_locations()
         return all_locations

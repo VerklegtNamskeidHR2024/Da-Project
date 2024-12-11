@@ -53,12 +53,15 @@ class location_logic_manager:
             else:
                 return False
         if what_to_check == 'manager':
-            # needs to check that a manager with that id does not have a location under him
             return False
-            if len(new_value) == 7:
-                return True
-            else:
-                return False
+            # needs to check that a manager with that id does not have a location under him
+            can_be_assigned = False
+            all_managers = self.Storage_Layer_Wrapper.get_all_managers()
+
+            for manager in all_managers:
+                if new_value == manager.staff_id:
+                    pass
+                    
         if what_to_check == "opening_hours":
             return True
         
