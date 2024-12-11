@@ -7,6 +7,7 @@ init()
 
 class maintenance_report_UI_menu:
     def __init__(self, logic_wrapper, rank, location, staff_id):
+        '''Class builder'''
         self.logic_wrapper = logic_wrapper
         self.rank = rank
         self.location = location
@@ -132,6 +133,7 @@ class maintenance_report_UI_menu:
             self.get_incomplete_reports()
 
     def finish_incomplete_report(self, report_id):
+        """Finish incomplete report"""
         report = self.logic_wrapper.get_single_maintenance_report(report_id)
         report_complete = False
         name_empty = not bool(report.report_name)
@@ -233,6 +235,7 @@ class maintenance_report_UI_menu:
                     print('Invalid input')
 
     def list_pending_reports(self):
+        """ Display a list of pending reports """
         #self.clear_screen()
         #Display a list of pending reports
         print(f"{self.rank} - Maintenance Report Menu")
@@ -271,6 +274,7 @@ class maintenance_report_UI_menu:
             self.list_pending_reports()
     
     def get_pending_reports(self):
+        """ Display a list of pending reports """
         #self.clear_screen()
         '''displays all pending report'''
         pending_reports_table = PrettyTable()
@@ -290,6 +294,7 @@ class maintenance_report_UI_menu:
         return
 
     def list_closed_reports(self):
+        """ Display a list of closed reports """
         #self.clear_screen()
         """ Display a list of closed reports """
         closed_report_table = PrettyTable()
@@ -311,6 +316,7 @@ class maintenance_report_UI_menu:
             print(closed_report_table)
  
     def display_create_maintenance_report_form(self):
+        """ Display the form for creating a new maintenance report """
         #self.clear_screen()
         #Create a new maintenance report
         print('Creating a new maintenance report, type "cancel" to stop and save as incomplete at any time')
@@ -454,6 +460,7 @@ class maintenance_report_UI_menu:
         print(emplyee_report_table)
 
     def print_all_reports(self):
+        """Prints all reports"""
         #self.clear_screen()
         '''displays all pending report'''
         all_reports_table = PrettyTable()
@@ -472,6 +479,7 @@ class maintenance_report_UI_menu:
         print(all_reports_table)
     
     def edit_report_details(self, location):
+        """Edit report details"""
         #self.clear_screen() 
         """Editing report {report_id} (details to be implemented)"""
         all_report_list = self.logic_wrapper.get_all_maintenance_reports_at_location(self.location)
@@ -494,6 +502,7 @@ class maintenance_report_UI_menu:
             self.edit_report_details(self.location)
             
     def display_edit_maintenance_report_details(self, selected_maintenance_report):
+        """ Display the edit maintenance report details menu """
         #self.clear_screen()
         """ Allows editing of maintenance report details. """
 
@@ -601,6 +610,7 @@ class maintenance_report_UI_menu:
         self.display_edit_maintenance_report_details(selected_maintenance_report)
 
     def view_denied_reports(self, staff_id, location):
+        """View denied reports"""
         denied_reports_table = PrettyTable()
         denied_reports_table.field_names = ['Report ID', 'Report Name', 'Property ID', 'Report Status']
         denied_reports = self.logic_wrapper.get_denied_reports(staff_id, location)
@@ -624,6 +634,7 @@ class maintenance_report_UI_menu:
             self.redo_denied_report(user_choice)
 
     def redo_denied_report(self, report_id):
+        """Redo denied report"""
         report = self.logic_wrapper.get_single_maintenance_report(report_id)
         report_done = False
         is_valid_report_name = False

@@ -7,12 +7,14 @@ from colorama import Fore, Style, init
 
 class contractor_UI_menu():
     def __init__(self, logic_wrapper, rank, location, staff_id) -> None:
+        """Constructor for contractor_UI_menu"""
         self.logic_wrapper = logic_wrapper
         self.rank = rank
         self.location = location
         self.staff_id = staff_id
     
     def start_point_contractor_UI(self) -> None:
+        """Start point for contractor UI"""
         # when this class is called it starts here
         # call other functions in class from here
         print(self.rank)
@@ -36,6 +38,7 @@ class contractor_UI_menu():
 
     # display contractor menu
     def display_contractor_employee_menu(self) -> None:
+        """display contractor menu for employee"""
         print(f"{self.rank} - Contractors Page")
         # create list for printing all contractors for first menu in contractors
         #Can Remove this added the other function to have same code with other files - Kv Hreimur
@@ -63,6 +66,8 @@ class contractor_UI_menu():
         return 
     
     def display_contractor_menu_admin_and_manager(self) -> None:
+        """display contractor menu for admin and manager"""
+        
         print(f"{self.rank} - Contractors Page")
         # create list for printing all contractors for first menu in contractors
         #Can Remove this added the other function to have same code with other files - Kv Hreimur
@@ -196,6 +201,7 @@ class contractor_UI_menu():
 
     # change phone number
     def change_phone_number(self, contractor) -> None:
+        """change phone number for contractor"""
         try:
             is_valid = False
             while is_valid == False:
@@ -211,6 +217,7 @@ class contractor_UI_menu():
 
     # change opening hours
     def change_opening_hours(self, contractor):
+        """change opening hours for contractor"""
         try:
             new_opening_hours = input("Enter new opening Hours: ")
             is_valid = self.logic_wrapper.sanity_check_contractor(contractor, new_opening_hours)
@@ -235,6 +242,7 @@ class contractor_UI_menu():
 
     # print single contractor
     def print_single_contractor(self, contractor) -> None:
+        """print a single contractor"""
         print("-"*30)
         contractor_print_table = PrettyTable()
         contractor.field_names = ['info',""]
@@ -261,6 +269,7 @@ class contractor_UI_menu():
         print("-"*30)
 
     def display_contractor_maintenance_reports(self, selected_contractor) -> None:
+        """Display maintenance reports for a contractor"""
         ''' Displays maintenance reports for a contractor '''
         Contractor_maintenance_reports_table = PrettyTable(['Report ID', 'Report Name', 'Description', 'Status'])
         print("Maintenance Reports for the selected contractor.")
@@ -298,6 +307,7 @@ class contractor_UI_menu():
     # CAN REMOVE THIS
     # print contractors from list
     def print_contractors_from_list(self, contractor_list):
+        """print contractors from list"""
         print("-"*78)
         print(f"{'ID':<10}|{'Company name':<25}|{'Name':<20}|{'location':<20}")
         print("-"*78)
