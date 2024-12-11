@@ -152,5 +152,19 @@
         "mark_as_done": false,
         "contractor_id": "",
         "work_request_id": ""
+    },
+    {
+        "report_id": "MR12",
+        "report_name": "Name",
+        "location": "Reykjavik",
+        "property_id": "A1",
+        "staff_id": "E2",
+        "regular_maintenance": false,
+        "maintenance_description": "super detailed description",
+        "report_status": "Denied",
+        "price": "1234",
+        "mark_as_done": false,
+        "contractor_id": "",
+        "work_request_id": "WR1"
     }
 ]
