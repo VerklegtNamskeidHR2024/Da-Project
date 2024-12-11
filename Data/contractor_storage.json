@@ -2,9 +2,9 @@
     {
         "contractor_id": "C1",
         "company_name": "Daniela and Daughters",
-        "contact_name": "q",
-        "opening_hours": "asd",
-        "phone_number": "9999999",
+        "contact_name": "Daniela",
+        "opening_hours": "8-16",
+        "phone_number": 1234567,
         "location": "Reykjavik",
         "previous_job_reports": [],
         "warningtext": "Contractor Has No Warning"
@@ -14,57 +14,37 @@
         "company_name": "Daniela and Daughters",
         "contact_name": "Daniela",
         "opening_hours": "8-16",
-        "phone_number": "1234567",
+        "phone_number": 1234567,
         "location": "Nuuk",
         "previous_job_reports": [],
-        "warningtext": "Contractor Has No Warning"
+        "warningtext": "Acts weird around apples"
     },
     {
         "contractor_id": "C3",
         "company_name": "Daniela and Daughters",
         "contact_name": "Daniela",
         "opening_hours": "8-16",
-        "phone_number": "1234567",
+        "phone_number": 1234567,
         "location": "Tingwall",
         "previous_job_reports": [],
         "warningtext": "Contractor Has No Warning"
     },
     {
         "contractor_id": "C4",
-        "company_name": "asdas",
-        "contact_name": "asdasd",
-        "opening_hours": "asd",
+        "company_name": "Juicy Hreimur Construction",
+        "contact_name": "Hreimur",
+        "opening_hours": "8-16",
         "phone_number": 1234567,
         "location": "Reykjavik",
         "previous_job_reports": [],
-        "warningtext": "Contractor Has No Warning"
+        "warningtext": "Contractor somehow nailed his son to wall"
     },
     {
         "contractor_id": "C5",
-        "company_name": "kol",
-        "contact_name": "JAo",
-        "opening_hours": "23-12",
-        "phone_number": 6680282,
-        "location": "Reykjavik",
-        "previous_job_reports": [],
-        "warningtext": "Contractor Has No Warning"
-    },
-    {
-        "contractor_id": "C6",
-        "company_name": "asdas",
-        "contact_name": "ass",
-        "opening_hours": "ww",
+        "company_name": "Daniela and Daughters",
+        "contact_name": "Daniela",
+        "opening_hours": "8-16",
         "phone_number": 1234567,
-        "location": "Reykjavik",
-        "previous_job_reports": [],
-        "warningtext": "Contractor Has No Warning"
-    },
-    {
-        "contractor_id": "C7",
-        "company_name": "sadsa",
-        "contact_name": "dasd",
-        "opening_hours": "12",
-        "phone_number": 2313132,
         "location": "Reykjavik",
         "previous_job_reports": [],
         "warningtext": "Contractor Has No Warning"
