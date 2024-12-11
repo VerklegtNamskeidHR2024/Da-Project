@@ -53,17 +53,20 @@ class employee_UI_menu:
 
     def display_all_employees_by_locationa(self):
         """The function displays all employees at a location and their basic information"""
+        employee_print_table = PrettyTable()
         employee_list = self.logic_wrapper.get_all_employees_at_location(self.location)
-        print("-" * 70)
-        print("{:>15}{:>10}{:>15}{:>15}".format("Name", "Phone", "Location", "ssn"))
-        print("-" * 70)
-
-        for employee in employee_list:
-            print("{:>15}{:>10}{:>15}{:>15}".format(employee.name, employee.phone_number, employee.location, employee.social_security_number))
-            
-        print("-" * 70)
-        #if self.rank == "Manager" or self.rank == "Admin":
-            #self.action_choice()
+        employee_print_table.field_names = ["Employee name","Social Secuirty Number","Phone Number","Location", 'Email', 'Employee Id']
+        # iterates through the location list and adds the location information to the table
+        for item in employee_list:
+            employee_print_table.add_row([item.name, item.social_security_number, item.phone_number, item.location, item.email, item.staff_id])
+        
+        border_color = Fore.BLUE
+        reset_color = Style.RESET_ALL
+        employee_print_table.border = True
+        employee_print_table.junction_char = f"{border_color}+{reset_color}"
+        employee_print_table.horizontal_char = f"{border_color}-{reset_color}"
+        employee_print_table.vertical_char = f"{border_color}|{reset_color}"
+        print(employee_print_table)
 
     def action_choice(self) -> str:
         """The function is asking the user if they want to search or add an employee"""
@@ -92,9 +95,9 @@ class employee_UI_menu:
                 #creates a instans of the employee with the maching ssn
                 employee = self.logic_wrapper.fetch_employee_from_storage(employee_ssn)
                 employee_options = self.employee_options(employee)
-                if employee_options.lower() == "b":
+                if employee_options == "b" or employee_options == "B":
                     break
-                elif employee_options.lower() == "q":
+                elif employee_options == "q" or employee_options == "Q":
                     return "q"
 
         
@@ -105,26 +108,33 @@ class employee_UI_menu:
 
     def display_employee(self, employee):
         """The function displays an employee and their information and asks what to view or edit"""
-        
-        print()
-        print("-" * 70)
-        print("{:<25}{:<5}{:<15}".format("Employee Name", "|", employee.name))
-        print("{:<25}{:<5}{:<15}".format("Social Security Number", "|", employee.social_security_number))
-        print("{:<25}{:<5}{:<15}".format("Phone Number", "|", employee.phone_number))
-        print("{:<25}{:<5}{:<15}".format("Location", "|", employee.location))
-        print("{:<25}{:<5}{:<15}".format("Email", "|", employee.email))
-        print("{:<25}{:<5}{:<15}".format("Employee ID", "|", employee.staff_id))
-        print("-" * 70)
-        print()
-        print("1. Edit Employee Details")
-        print("2. View Work Requests")
-        print("3. View Maintenance Report")
-        print()
-        print("Go Back: b, B")
-        print("Quit system: q, Q")
-        print("-" * 70)
-        option = input("Enter Choice: ")
-        return option.lower()
+
+        print("-"*30)
+        # create a table to print the contractor
+        contractor_print_table = PrettyTable()
+        contractor_print_table.field_names = ['Information',"Contractor Information"]
+        # add the contractor info to the table
+        contractor_print_table.add_row(['Name', employee.name])
+        contractor_print_table.add_row(['Social Security Number', employee.social_security_number])
+        contractor_print_table.add_row(['Phone Number', employee.phone_number])
+        contractor_print_table.add_row(['Location', employee.location])
+        contractor_print_table.add_row(['Email', employee.email])
+        contractor_print_table.add_row(['Employee ID', employee.staff_id])
+        # setting some colors for the table
+        border_color = Fore.BLUE
+        reset_color = Style.RESET_ALL
+        contractor_print_table.border = True
+        contractor_print_table.junction_char = f"{border_color}+{reset_color}"
+        contractor_print_table.horizontal_char = f"{border_color}-{reset_color}"
+        contractor_print_table.vertical_char = f"{border_color}|{reset_color}"
+        # print the table
+        print(contractor_print_table)
+        print("1) Edit Employee Information")
+        print("2) View Employees Work Requests")
+        print("3) View Employees Maintenance Reports")
+        print("-"*30)
+        option = input("Select an option")
+
         
 
     def employee_options(self, employee):
@@ -133,6 +143,15 @@ class employee_UI_menu:
         option = ""
         while option != "q" and option != "b":
             option = self.display_employee(employee)
+            print()
+            print("1. Edit Employee Details")
+            print("2. View Work Requests")
+            print("3. View Maintenance Report")
+            print()
+            print("Go Back: b, B")
+            print("Quit system: q, Q")
+            print("-" * 70)
+            option = input("Enter Choice: ")
             if option.lower() == "b":
                 break
             elif option.lower() == "q":
@@ -267,7 +286,7 @@ class employee_UI_menu:
                 self.logic_wrapper.edit_employee_info(employee)
                 print()
                 print(Fore.GREEN + "Employee Information Updated" + Style.RESET_ALL)
-                self.display_employee(employee)
+               
                 break
             else:
                 print()
@@ -290,7 +309,7 @@ class employee_UI_menu:
                 self.logic_wrapper.edit_employee_info(employee)
                 print()
                 print(Fore.GREEN + "Employee Information Updated" + Style.RESET_ALL)
-                self.display_employee(employee)
+                #self.display_employee(employee)
                 break
             else:
                 print()
@@ -311,7 +330,7 @@ class employee_UI_menu:
                 self.logic_wrapper.edit_employee_info(employee)
                 print()
                 print(Fore.GREEN + "Employee Information Updated" + Style.RESET_ALL)
-                self.display_employee(employee)
+                #self.display_employee(employee)
                 break
             else:
                 print()
@@ -339,6 +358,56 @@ class employee_UI_menu:
 
     def display_employee_maintenance_report(self, employee):
         """The function displays all maintenance reports by an employee"""
+                # create a table to print the maintenance reports
+        employeee_maintenance_reports_table = PrettyTable(['Report ID', 'Report Name', 'Description', 'Status'])
+        print("Maintenance Reports for the selected contractor.")
+        # get the maintenance reports for the contractor
+        employeee_maintenance_reports = self.logic_wrapper.get_employee_maintenance_reports(self.location, employee.employee_id)
+        # loop through the maintenance reports and add them to the table if they have the current contractors id
+        for maintenance_report in employeee_maintenance_reports:
+            employeee_maintenance_reports_table.add_row([maintenance_report.report_id, maintenance_report.report_name, maintenance_report.maintenance_description, maintenance_report.report_status])
+        border_color = Fore.MAGENTA
+        reset_color = Style.RESET_ALL
+        employeee_maintenance_reports_table.border = True
+        employeee_maintenance_reports_table.junction_char = f"{border_color}+{reset_color}"
+        employeee_maintenance_reports_table.horizontal_char = f"{border_color}-{reset_color}"
+        employeee_maintenance_reports_table.vertical_char = f"{border_color}|{reset_color}"
+        print(employeee_maintenance_reports_table)
+        bause_breaker = input("\nPress Enter to return to main menu.")
+        print('')
+        return
+    
+    def display_employee_work_requests(self, employee) -> None:
+        ''' Displays work requests for a contractor '''
+        mr_by_employee_list = self.logic_wrapper.fetch_all_maintenance_reports_for_employee(employee.staff_id)
+        if not mr_by_employee_list:
+            print()
+            print(Fore.RED + "No Maintenance Report Attached To This Employee" + Style.RESET_ALL)
+        # create a table to print the work requests
+        employee_work_requests_table = PrettyTable(['Work Request ID', 'Description', 'Mark as Completed'])
+        print("Work Requests for the selected Contractor.")
+        # get the work requests for the contractor
+        employee_work_requests = self.logic_wrapper.get_contractor_work_requests(self.location, employee.employee_id)
+        # loop through the work requests and add them to the table if they have the current contractors id
+        for work_request in employee_work_requests:
+            employee_work_requests_table.add_row([work_request.work_request_id, work_request.description, work_request.mark_as_completed])
+        border_color = Fore.MAGENTA
+        reset_color = Style.RESET_ALL
+        employee_work_requests_table.border = True
+        employee_work_requests_table.junction_char = f"{border_color}+{reset_color}"
+        employee_work_requests_table.horizontal_char = f"{border_color}-{reset_color}"
+        employee_work_requests_table.vertical_char = f"{border_color}|{reset_color}"
+        print(employee_work_requests_table)
+        bause_breaker = input("\nPress Enter to return to main menu.")
+        print('')
+        return
+
+
+
+
+
+
+
         mr_by_employee_list = self.logic_wrapper.fetch_all_maintenance_reports_for_employee(employee.staff_id)
         if not mr_by_employee_list:
             print()
