@@ -41,7 +41,9 @@ class contractor_UI_menu():
         contractor_print_table.junction_char = f"{border_color}+{reset_color}"
         contractor_print_table.horizontal_char = f"{border_color}-{reset_color}"
         contractor_print_table.vertical_char = f"{border_color}|{reset_color}"
+        print('')
         print(contractor_print_table)
+        print('')
 
     # display contractor menu
     def display_contractor_employee_menu(self) -> None:
@@ -298,9 +300,9 @@ class contractor_UI_menu():
         Contractor_maintenance_reports_table = PrettyTable(['Report ID', 'Report Name', 'Description', 'Status'])
         print("Maintenance Reports for the selected contractor.")
         # get the maintenance reports for the contractor
-        property_maintenance_reports = self.logic_wrapper.get_contractor_maintenance_reports(self.location, selected_contractor.contractor_id)
+        contractor_maintenance_reports = self.logic_wrapper.get_contractor_maintenance_reports(self.location, selected_contractor.contractor_id)
         # loop through the maintenance reports and add them to the table if they have the current contractors id
-        for maintenance_report in property_maintenance_reports:
+        for maintenance_report in contractor_maintenance_reports:
             Contractor_maintenance_reports_table.add_row([maintenance_report.report_id, maintenance_report.report_name, maintenance_report.maintenance_description, maintenance_report.report_status])
         border_color = Fore.MAGENTA
         reset_color = Style.RESET_ALL
@@ -308,6 +310,7 @@ class contractor_UI_menu():
         Contractor_maintenance_reports_table.junction_char = f"{border_color}+{reset_color}"
         Contractor_maintenance_reports_table.horizontal_char = f"{border_color}-{reset_color}"
         Contractor_maintenance_reports_table.vertical_char = f"{border_color}|{reset_color}"
+        print('')
         print(Contractor_maintenance_reports_table)
         print('')
         return
@@ -328,6 +331,7 @@ class contractor_UI_menu():
         contractor_work_requests_table.junction_char = f"{border_color}+{reset_color}"
         contractor_work_requests_table.horizontal_char = f"{border_color}-{reset_color}"
         contractor_work_requests_table.vertical_char = f"{border_color}|{reset_color}"
+        print('')
         print(contractor_work_requests_table)
         bause_breaker = input("\nPress Enter to return to main menu.")
         print('')

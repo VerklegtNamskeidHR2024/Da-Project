@@ -2,7 +2,7 @@
 
 ### What we did through the day 
 Hreimur:\
-
+I worked on the maintenance ui for a bit and fixed some bugs i found in the system and also updated the contractor model class to have warnings as an attribute for contractors, then i had to update the dummy data to inculde the warnings for contractors
 
 Tumi:\
 
@@ -18,7 +18,6 @@ Kormákur:\
 
 
 
-Jón:\ 
-
+Jón:\ I worked on the introduction on the document. Then i found and fixed a few errors with the system. At the end of the day I started putting in tables and colors for the UI layer. Everything went well I arrived at 10 and left at 18\
 
 ## Progress of the day
