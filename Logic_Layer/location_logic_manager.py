@@ -17,7 +17,7 @@ class location_logic_manager:
 
     
     def get_all_locations(self, Location) -> list:
-        """Get location by location"""
+        """Get all locations"""
         location_sorted_list = []
 
         all_locations = self.Storage_Layer_Wrapper.get_all_locations()
