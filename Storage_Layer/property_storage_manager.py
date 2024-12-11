@@ -8,7 +8,7 @@ class property_storage:
 
     def get_all_properties(self) -> list[House]:
         """Gets all properties from the file"""
-        with open('Data/property_storage.json','r') as property_file:
+        with open('Data/property_storage.json', 'r') as property_file:
             properties_data = json.load(property_file)
         properties_list = [House(**data) for data in properties_data]
         return properties_list
@@ -16,7 +16,7 @@ class property_storage:
     def write_to_file_property(self, list_of_properties: list[House]):
         """Writes the list of properties to the file"""
         dict_of_properties = [property.to_dict() for property in list_of_properties]
-        with open('Data/property_storage.json','w') as property_file:
+        with open('Data/property_storage.json', 'w') as property_file:
             json.dump(dict_of_properties, property_file, indent=4)
 
 # virkar held eg ekki utaf hvering þu ert með property data stored, dæmi

@@ -43,7 +43,7 @@ class contractor_logic_manager:
             
         return 
     
-    def sanity_check_contractor(self, contractor, new):
+    def sanity_check_contractor(self, contractor):
         """check if all info in a contractor object is correct"""
         # needs to check phone number 
         #print(len(contractor.phone_number))
@@ -74,11 +74,6 @@ class contractor_logic_manager:
         new_property_id = 'C' + str(highestID) # set the new id to the highest id
         return new_property_id  # return the new id
 
-    def write_to_file_checker(self, new_list):
-        # needs to check if all the same ids are in the new list and the old one
-        # then send the new list to storage
-        return list
-    # make sure list to write is ok
     
     def edit_existing_contractor_in_storage(self, contractor, location, edit_choice, new_value):
         """Edit an existing contractor in the storage"""
@@ -107,7 +102,7 @@ class contractor_logic_manager:
     def get_contractor_maintenance_reports(self, location, contractor_id):
         """Get all maintenance reports for a contractor"""
         maintenance_report_list = [] 
-        all_maintenance_reports = self.Storage_Layer_Wrapper.get_all_maintenance_report() 
+        all_maintenance_reports = self.Storage_Layer_Wrapper.get_all_maintenance_reports() 
         for maintenance_report in all_maintenance_reports: # iterate through all maintenance reports
             if maintenance_report.contractor_id == contractor_id:
                 maintenance_report_list.append(maintenance_report)

@@ -13,15 +13,20 @@ class location_UI_menu:
     def start_point_location_UI(self):
         # when this class is called it starts here
         # call other functions in class from here
-        self.display_selected_location_information_printed()
+        if self.rank == "Admin":
+            self.display_selected_location_information_printed_admin()
+        if self.rank == "Manager":
+            self.display_selected_location_information_printed_manager()
 
         return
 
 
     def location_information(self):
         '''Information about current Location, Needs to fetch information from data storage and insert'''
+        # gets current location
         current_location = self.get_current_location()
 
+        # prints the information for this location
         print()
         print("-" * 70)
         print(f"Country       | {current_location.country}")
@@ -33,38 +38,55 @@ class location_UI_menu:
         print("-" * 70) 
 
 
-    def display_selected_location_information_printed(self):
-        '''Shows information about current Location along with the ascii art.
-        If the user is an admin It allows them to edit, add and show other locations'''
+    def display_selected_location_information_printed_admin(self):
+        '''Displays the location information and options for editing the location'''
         self.location_information()
-        
-        if self.rank == "Admin":
-            print("1) Edit location details")
-            print("2) Show other locations")
-            print(">Go to Home Page:", "home, Home")
-            print(">Quit System:", "q, Q")
-            user_choice = input("Enter a command: ")
-            match user_choice:
-                case "1":
-                    self.display_edit_current_location()
-                case "2":
-                    self.display_all_locations()
-        else:
-            print(">Go to Home Page:", "home, Home")
-            print(">Quit System:", "q, Q")
-            user_choice = input("Enter a command: ")
 
+        print("1) Edit location details")
+        print("2) Show attached amenities")
+        print("3) Show other locations")
+        print(">Go to Home Page:", "home, Home")
+        print(">Quit System:", "q, Q")
+        user_choice = input("Enter a command: ")
+        print()
+        match user_choice:
+            case "1":
+                # edit location details
+                self.display_edit_current_location()
+            case "2":
+                # show all amenities
+                self.display_attached_amenities()
+            case "3":
+                # show all locations
+                self.display_all_locations()
+
+    def display_selected_location_information_printed_manager(self):
+        '''Displays the location information and options for editing the location'''
+        # prints infroamtion about the current location
+        self.location_information()
+
+        print("1) Edit location details")
+        print("2) Show attached amenities")
+        print(">Go to Home Page:", "home, Home")
+        print(">Quit System:", "q, Q")
+        user_choice = input("Enter a command: ")
+        print()
+        match user_choice:
+            case "1":
+                # edit location details
+                self.display_edit_current_location()
+            case "2":
+                # show all amenities
+                self.display_attached_amenities()
 
     def display_edit_current_location(self):
         '''Shows location information along with an option to 
-        change phone number, manager, amenities and opening hours'''
+        change phone number and opening hours'''
         current_location = self.get_current_location()
         self.location_information()
 
         print("1) Phone Number")
-        print("2) Manager")
-        print("3) Amenities") # wait with this for a bit 
-        print("4) Opening Hours")
+        print("2) Opening Hours")
         print("-" * 70)
 
         edit_user_action = input("Enter Editing Option: ")
@@ -73,71 +95,76 @@ class location_UI_menu:
                 self.change_phone_number(current_location)
                 print()
             case "2":
-                print("needs to be added")
-                self.change_manager(current_location)
-                print()
-            case "3":
-                print("needs to be added")
-            case "4":
                 self.change_opening_hours(current_location)
                 print()
 
     def change_phone_number(self, location) -> None:
+        """Change the phone number of the location"""
         try:
             is_valid = False
             while is_valid == False:
                 phone_input = input("Enter phone number: ")
+                # checks if the phone number is valid
                 is_valid = self.logic_wrapper.sanity_check_location("phone_number", phone_input)
                 if not phone_input.isdigit() or is_valid != True:
                     print("Invalid input. Please enter numbers only.")
                 else:
+                    # if the phone number is valid, change the phone number and print the location information
                     self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'phone_number', phone_input)
                     self.location_information()
         except:
             print("something went wrong")
-    
-    def change_manager(self, location) -> None:
-        # check this out tomorrow 
+
+    def change_opening_hours(self, location) -> None:
+        """Change the opening hours of the location"""
         try:
-            new_manager_id = input("Enter manager id: ")
-            #contractor.set_contact_name(new_contact_name)
-            is_valid = self.logic_wrapper.sanity_check_location("manager", new_manager_id)
+            new_opening_hours = input("Enter opening hours: ")
+            # checks if the opening hours are valid
+            is_valid = self.logic_wrapper.sanity_check_location("opening_hours", new_opening_hours)
             if is_valid == True:
-                self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'manager', new_manager_id)
+                # if the opening hours are valid, change the opening hours and print the location information
+                self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'opening_hours', new_opening_hours)
                 self.location_information()
             else:
                 print("Invalid input. Please try again.")
+            
         except:
             print("something went wrong")
 
-    def change_opening_hours(self, location) -> None:
-        new_opening_hours = input("Enter opening hours: ")
-        #contractor.set_contact_name(new_contact_name)
-        is_valid = self.logic_wrapper.sanity_check_location("opening_hours", new_opening_hours)
-        if is_valid == True:
-            self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'opening_hours', new_opening_hours)
-            self.location_information()
-        else:
-            print("Invalid input. Please try again.")
-        try:
-            pass
-        except:
-            print("something went wrong")
-
-    # add ameneity change here, ask about it tho
+    def display_attached_amenities(self):
+        """Display all amenities attached to the location"""
+        # when admin needs to select location
+        current_location = self.get_current_location()
+        # gets all amenities for the location
+        amenities_list = self.logic_wrapper.fetch_all_amenities_for_location_in_storage(current_location.location)
+        print(f"Amenities attached to {current_location.location}:")
+        print("-" * 70)
+        for amenity in amenities_list:
+            print("Amenity Name |",amenity.name)
+            print("Property ID  |",amenity.property_id)
+            print("Location     |",amenity.location)
+            print("Condition    |",amenity.condition)
+            print("Price to fix |",amenity.total_price_to_fix)
+            print("Description  |",amenity.amenity_description)
+            print("-" * 70)
 
     def get_current_location(self):
+        """Get the current location and return it"""
+        # gets all locations
         location_list = self.logic_wrapper.get_all_locations()
-        #current_location = None
+        # iterates through the list of locations and returns the location that matches the current location
         for loc in location_list:
             if loc.location == self.location:
                 #current_location = loc
                 return loc
     
     def display_all_locations(self):
+        """prints all locations"""
+        # create a table to print all locations
         locations_print_table = PrettyTable()
         location_list = self.logic_wrapper.get_all_locations()
         locations_print_table.field_names = ["Country","Location","Airport","Phone Number","Manager","Opening Hours"]
+        # iterates through the location list and adds the location information to the table
         for location in location_list:
             locations_print_table.add_row([location.country, location.location, location.airport, location.phone_number, location.branch_manager, location.opening_hours])
         
