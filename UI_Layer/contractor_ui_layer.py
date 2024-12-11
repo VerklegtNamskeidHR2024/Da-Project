@@ -3,7 +3,7 @@ from prettytable import PrettyTable
 from colorama import Fore, Style, init
 
 # missing list
-# give contractor warning
+# !!!!!give contractor warning!!!!!
 
 class contractor_UI_menu():
     def __init__(self, logic_wrapper, rank, location, staff_id) -> None:
@@ -14,7 +14,6 @@ class contractor_UI_menu():
         self.staff_id = staff_id
     
     def start_point_contractor_UI(self) -> None:
-
         """Start point for contractor UI"""
         # when this class is called it starts here
         # goes into diffrent menus based on your rank
@@ -97,17 +96,18 @@ class contractor_UI_menu():
                 print("wrong input")
         return 
 
-    # display add contractor
+    # display add contractor 
+    # taka allt svona ut
     def display_add_contractor_form(self) -> None:
         """create contractor"""
         is_valid_phone_number = False
         try:
             new_contractor = Contractor()
-            # set the company name, contact name, opening hours and phone number
+            # set the company name, contact name, opening hours and phone number for the new contractor
             new_contractor.set_company_name(input("enter company name: "))
             new_contractor.set_contact_name(input("enter contact name: "))
             new_contractor.set_opening_hours(input("enter opening hours: "))
-            # check if phone number is valid
+            # looping until a valid number is enterd
             while is_valid_phone_number == False:
                 new_contractor.set_phone_number(int(input("enter phone number: ")))
                 # will return false if phone number is not valid thus looping until a valid number is enterd
@@ -117,6 +117,7 @@ class contractor_UI_menu():
             new_contractor.set_location(self.location)
                 # add later
                 # new_contractor.set_previous_job_reports()
+
             # add the new contractor to the storage
             new_contractor_added = self.logic_wrapper.add_new_contractor(self.rank, self.location, new_contractor)
             if new_contractor_added == True:
@@ -124,7 +125,7 @@ class contractor_UI_menu():
         except:
             print("something went wrong with making new contractor")
 
-    def display_view_contractor(self):
+    def display_view_contractor(self) -> None:
         '''Shows contractor information'''
 
         try:
@@ -220,7 +221,7 @@ class contractor_UI_menu():
             print("something went wrong")
 
     # change opening hours
-    def change_opening_hours(self, contractor):
+    def change_opening_hours(self, contractor) -> None:
         """change opening hours for contractor"""
         try:
             new_opening_hours = input("Enter new opening Hours: ")\
