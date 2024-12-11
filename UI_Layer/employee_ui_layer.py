@@ -2,12 +2,14 @@ from Model_Classes.employee_model import Employee
 
 class employee_UI_menu:
     def __init__(self, logic_wrapper, rank, location, staff_id):
+        """Constructor for employee_UI_menu"""
         self.logic_wrapper = logic_wrapper
         self.rank = rank
         self.location = location
         self.staff_id = staff_id
 
     def start_point_employee_UI(self):
+        """The function is the starting point for the employee UI"""
         # when this class is called it starts here
         # call other functions in class from here
 
@@ -17,7 +19,8 @@ class employee_UI_menu:
         if employee_menu == "q" or employee_menu == "b":
             return employee_menu
 
-    def employee_menu_selection(self):    
+    def employee_menu_selection(self):
+        """The function is the menu for the employee UI"""
         user_choice = ""
         while user_choice != "q":
             user_choice = self.action_choice()
