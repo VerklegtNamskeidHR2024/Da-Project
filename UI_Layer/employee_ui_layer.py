@@ -60,7 +60,9 @@ class employee_UI_menu:
         employee_print_table.junction_char = f"{border_color}+{reset_color}"
         employee_print_table.horizontal_char = f"{border_color}-{reset_color}"
         employee_print_table.vertical_char = f"{border_color}|{reset_color}"
+        print('')
         print(employee_print_table)
+        print('')
 
     def action_choice(self) -> str:
         """The function is asking the user if they want to search or add an employee"""
@@ -122,12 +124,9 @@ class employee_UI_menu:
         contractor_print_table.horizontal_char = f"{border_color}-{reset_color}"
         contractor_print_table.vertical_char = f"{border_color}|{reset_color}"
         # print the table
+        print('')
         print(contractor_print_table)
-        print("1) Edit Employee Information")
-        print("2) View Employees Work Requests")
-        print("3) View Employees Maintenance Reports")
-        print("-"*30)
-        option = input("Select an option")
+        print('')
 
         
 
@@ -356,7 +355,7 @@ class employee_UI_menu:
         employeee_maintenance_reports_table = PrettyTable(['Report ID', 'Report Name', 'Description', 'Status'])
         print("Maintenance Reports for the selected contractor.")
         # get the maintenance reports for the contractor
-        employeee_maintenance_reports = self.logic_wrapper.get_employee_maintenance_reports(self.location, employee.employee_id)
+        employeee_maintenance_reports = self.logic_wrapper.get_employee_reports(employee.staff_id)
         # loop through the maintenance reports and add them to the table if they have the current contractors id
         for maintenance_report in employeee_maintenance_reports:
             employeee_maintenance_reports_table.add_row([maintenance_report.report_id, maintenance_report.report_name, maintenance_report.maintenance_description, maintenance_report.report_status])
@@ -366,6 +365,7 @@ class employee_UI_menu:
         employeee_maintenance_reports_table.junction_char = f"{border_color}+{reset_color}"
         employeee_maintenance_reports_table.horizontal_char = f"{border_color}-{reset_color}"
         employeee_maintenance_reports_table.vertical_char = f"{border_color}|{reset_color}"
+        print('')
         print(employeee_maintenance_reports_table)
         bause_breaker = input("\nPress Enter to return to main menu.")
         print('')
@@ -373,7 +373,7 @@ class employee_UI_menu:
     
     def display_employee_work_requests(self, employee) -> None:
         ''' Displays work requests for a contractor '''
-        mr_by_employee_list = self.logic_wrapper.fetch_all_maintenance_reports_for_employee(employee.staff_id)
+        mr_by_employee_list = self.logic_wrapper.get_my_work_requests(self.rank, self.location, self.staff_id)
         if not mr_by_employee_list:
             print()
             print(Fore.RED + "No Maintenance Report Attached To This Employee" + Style.RESET_ALL)
@@ -381,7 +381,7 @@ class employee_UI_menu:
         employee_work_requests_table = PrettyTable(['Work Request ID', 'Description', 'Mark as Completed'])
         print("Work Requests for the selected Contractor.")
         # get the work requests for the contractor
-        employee_work_requests = self.logic_wrapper.get_contractor_work_requests(self.location, employee.employee_id)
+        employee_work_requests = self.logic_wrapper.get_my_work_requests(self.rank, self.location, self.staff_id)
         # loop through the work requests and add them to the table if they have the current contractors id
         for work_request in employee_work_requests:
             employee_work_requests_table.add_row([work_request.work_request_id, work_request.description, work_request.mark_as_completed])
@@ -391,6 +391,7 @@ class employee_UI_menu:
         employee_work_requests_table.junction_char = f"{border_color}+{reset_color}"
         employee_work_requests_table.horizontal_char = f"{border_color}-{reset_color}"
         employee_work_requests_table.vertical_char = f"{border_color}|{reset_color}"
+        print('')
         print(employee_work_requests_table)
         bause_breaker = input("\nPress Enter to return to main menu.")
         print('')
