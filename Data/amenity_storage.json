@@ -22,5 +22,13 @@
         "condition": "excellent",
         "total_price_to_fix": 1500.0,
         "amenity_description": "is a hot tub"
+    },
+    {
+        "property_id": "A37",
+        "name": "kolkrabbi",
+        "location": "",
+        "condition": "good",
+        "total_price_to_fix": "1",
+        "amenity_description": "delicious octopuss"
     }
 ]

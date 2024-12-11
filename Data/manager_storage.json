@@ -1,8 +1,8 @@
 [
     {
         "name": "Hreimur",
-        "social_security_number": 12334546789,
-        "phone_number": 5551234,
+        "social_security_number": "12334546789",
+        "phone_number": "5551234",
         "location": "Reykjavik",
         "system_permissions": "Manager",
         "email": "hreimur24@ru.is",
@@ -10,8 +10,8 @@
     },
     {
         "name": "Hreimur",
-        "social_security_number": 12334546789,
-        "phone_number": 5551234,
+        "social_security_number": "12334546789",
+        "phone_number": "5551234",
         "location": "Nuuk",
         "system_permissions": "Manager",
         "email": "hreimur24@ru.is",
@@ -19,8 +19,8 @@
     },
     {
         "name": "Hreimur",
-        "social_security_number": 12334546789,
-        "phone_number": 5551234,
+        "social_security_number": "12334546789",
+        "phone_number": "5551234",
         "location": "Kulusuk",
         "system_permissions": "Manager",
         "email": "hreimur24@ru.is",
@@ -28,8 +28,8 @@
     },
     {
         "name": "Hreimur",
-        "social_security_number": 12334546789,
-        "phone_number": 5551234,
+        "social_security_number": "12334546789",
+        "phone_number": "5551234",
         "location": "Thorshofn",
         "system_permissions": "Manager",
         "email": "hreimur24@ru.is",
@@ -37,8 +37,8 @@
     },
     {
         "name": "Hreimur",
-        "social_security_number": 12334546789,
-        "phone_number": 5551234,
+        "social_security_number": "12334546789",
+        "phone_number": "5551234",
         "location": "Tingwall",
         "system_permissions": "Manager",
         "email": "hreimur24@ru.is",
@@ -46,8 +46,8 @@
     },
     {
         "name": "Hreimur",
-        "social_security_number": 12334546789,
-        "phone_number": 5551234,
+        "social_security_number": "12334546789",
+        "phone_number": "5551234",
         "location": "Longyearbyen",
         "system_permissions": "Manager",
         "email": "hreimur24@ru.is",

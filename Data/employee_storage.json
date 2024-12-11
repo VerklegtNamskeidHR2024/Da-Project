@@ -1,8 +1,8 @@
 [
     {
         "name": "Hreimur",
-        "social_security_number": 1234567899,
-        "phone_number": 1234567,
+        "social_security_number": "1234567899",
+        "phone_number": "1234555",
         "location": "Reykjavik",
         "system_permissions": "Employee",
         "email": "hreimur69@gmail.com",
@@ -10,44 +10,44 @@
     },
     {
         "name": "John Doe",
-        "social_security_number": 987654321,
-        "phone_number": 7654321,
+        "social_security_number": "9876543211",
+        "phone_number": "7654321",
         "location": "Reykjavik",
         "system_permissions": "Employee",
         "email": "johndoe@example.com",
-        "staff_id": "E5"
-    },
-    {
-        "name": "Jane Smith",
-        "social_security_number": 192837465,
-        "phone_number": 5647382,
-        "location": "Nuuk",
-        "system_permissions": "Employee",
-        "email": "janesmith@example.com",
-        "staff_id": "E9"
-    },
-    {
-        "name": "Jokla Himiko",
-        "social_security_number": 102938475,
-        "phone_number": 3847562,
-        "location": "Nuuk",
-        "system_permissions": "Employee",
-        "email": "joklahimiko@example.com",
         "staff_id": "E2"
     },
     {
-        "name": "Bob Brown",
-        "social_security_number": 564738291,
-        "phone_number": 9182736,
-        "location": "Kulusuk",
+        "name": "Jane Smith",
+        "social_security_number": "1928374651",
+        "phone_number": "5647382",
+        "location": "Nuuk",
         "system_permissions": "Employee",
-        "email": "bobbrown@example.com",
+        "email": "janesmith@example.com",
         "staff_id": "E3"
     },
     {
+        "name": "Jokla Himiko",
+        "social_security_number": "1029384751",
+        "phone_number": "3847562",
+        "location": "Nuuk",
+        "system_permissions": "Employee",
+        "email": "joklahimiko@example.com",
+        "staff_id": "E4"
+    },
+    {
+        "name": "Bob Brown",
+        "social_security_number": "5647382911",
+        "phone_number": "9182736",
+        "location": "Kulusuk",
+        "system_permissions": "Employee",
+        "email": "bobbrown@example.com",
+        "staff_id": "E5"
+    },
+    {
         "name": "Charlie Davis",
-        "social_security_number": 837465192,
-        "phone_number": 2736451,
+        "social_security_number": "8374651921",
+        "phone_number": "2736451",
         "location": "Thorshofn",
         "system_permissions": "Employee",
         "email": "charliedavis@example.com",
@@ -55,8 +55,8 @@
     },
     {
         "name": "Diana Evans",
-        "social_security_number": 475839201,
-        "phone_number": 6473829,
+        "social_security_number": "4758392011",
+        "phone_number": "6473829",
         "location": "Thorshofn",
         "system_permissions": "Employee",
         "email": "dianaevans@example.com",
@@ -64,8 +64,8 @@
     },
     {
         "name": "Eve Foster",
-        "social_security_number": 293847561,
-        "phone_number": 9182734,
+        "social_security_number": "2938475611",
+        "phone_number": "9182734",
         "location": "Tingwall",
         "system_permissions": "Employee",
         "email": "evefoster@example.com",
@@ -73,20 +73,47 @@
     },
     {
         "name": "Frank Green",
-        "social_security_number": 564738291,
-        "phone_number": 3847562,
+        "social_security_number": "5647382911",
+        "phone_number": "3847562",
         "location": "Tingwall",
         "system_permissions": "Employee",
         "email": "frankgreen@example.com",
-        "staff_id": "E10"
+        "staff_id": "E9"
     },
     {
         "name": "Grace Harris",
-        "social_security_number": 918273645,
-        "phone_number": 2736451,
+        "social_security_number": "9182736451",
+        "phone_number": "2736451",
         "location": "Longyearbyen",
         "system_permissions": "Employee",
         "email": "graceharris@example.com",
-        "staff_id": "E30"
+        "staff_id": "E10"
+    },
+    {
+        "name": "Daniela",
+        "social_security_number": "2406043730",
+        "phone_number": "7777777",
+        "location": "Nuuk",
+        "system_permissions": "Employee",
+        "email": "mynewemail@gmail.com",
+        "staff_id": "E11"
+    },
+    {
+        "name": "Kormakur",
+        "social_security_number": "0706021234",
+        "phone_number": "9999999",
+        "location": "Thorshofn",
+        "system_permissions": "Employee",
+        "email": "kormakur@gmail.com",
+        "staff_id": "E32"
+    },
+    {
+        "name": "Jon",
+        "social_security_number": "0510031234",
+        "phone_number": "8888888",
+        "location": "Nuuk",
+        "system_permissions": "Employee",
+        "email": "jon@gmail.com",
+        "staff_id": "E33"
     }
 ]
