@@ -1,6 +1,6 @@
 from Model_Classes.house_model import House
 from Model_Classes.amenity_model import Amenity
-from prettytable import PrettyTable 
+from prettytable import PrettyTable
 from colorama import Fore, Style, init
 
 init()
@@ -153,10 +153,9 @@ class property_UI_menu:
         property_name = self.set_name_for_property(str_display, new_property)
         return property_name
 
-      
     def display_add_amenity(self):
-        '''Displays the form to add a new property.'''
-        
+        """Displays the form to add a new property."""
+
         new_amenity = Amenity()
         print()
         print("[ New Amenity Form ]")
@@ -170,11 +169,17 @@ class property_UI_menu:
         amenity_name = self.set_name_for_property(str_display, new_amenity)
         return amenity_name
 
-
     def set_name_for_property(self, str_display: str, new_property: object) -> str:
 
-        while (property_name := input(f"Enter The {str_display} Name: ")) not in ["q", "b", "Q", "B"]:
-            is_valid_name = self.logic_wrapper.sanity_check_properties('name', property_name)
+        while (property_name := input(f"Enter The {str_display} Name: ")) not in [
+            "q",
+            "b",
+            "Q",
+            "B",
+        ]:
+            is_valid_name = self.logic_wrapper.sanity_check_properties(
+                "name", property_name
+            )
             if is_valid_name is False:
                 print()
                 print("Invalid name. Please try again.")
@@ -182,29 +187,40 @@ class property_UI_menu:
                 continue
             new_property.set_name(property_name)
             if self.rank == "Admin":
-                location_for_property = self.set_location_name_for_properties(str_display, new_property)
+                location_for_property = self.set_location_name_for_properties(
+                    str_display, new_property
+                )
                 if location_for_property in ["b", "B"]:
                     continue
                 return location_for_property
-            property_condition = self.set_condition_for_property(str_display, new_property)
+            property_condition = self.set_condition_for_property(
+                str_display, new_property
+            )
             if property_condition in ["b", "B"]:
                 continue
             return property_condition
         return property_name.lower()
 
-
-    def set_location_name_for_properties(self, str_display: str, new_property: object) -> str:
+    def set_location_name_for_properties(
+        self, str_display: str, new_property: object
+    ) -> str:
 
         if self.rank == "Admin":
-            while (new_location := input(f"Enter The {str_display} Location: ")) not in ["q", "b", "Q", "B"]:
-                is_valid_location = self.logic_wrapper.sanity_check_properties('location', new_location)
+            while (
+                new_location := input(f"Enter The {str_display} Location: ")
+            ) not in ["q", "b", "Q", "B"]:
+                is_valid_location = self.logic_wrapper.sanity_check_properties(
+                    "location", new_location
+                )
                 if is_valid_location is False:
                     print()
                     print("Invalid location. Please try again.")
                     print()
                     continue
                 new_property.set_location(new_location)
-                property_condition = self.set_condition_for_property(str_display, new_property)
+                property_condition = self.set_condition_for_property(
+                    str_display, new_property
+                )
                 if property_condition == "b":
                     continue
                 return property_condition
@@ -214,23 +230,37 @@ class property_UI_menu:
 
     def set_condition_for_property(self, str_display: str, new_property: object) -> str:
 
-        while (new_condition := input(f"Enter The {str_display} Condition: ")) not in ["q", "b", "Q", "B"]:
-            is_valid_condition = self.logic_wrapper.sanity_check_properties('condition', new_condition)
+        while (new_condition := input(f"Enter The {str_display} Condition: ")) not in [
+            "q",
+            "b",
+            "Q",
+            "B",
+        ]:
+            is_valid_condition = self.logic_wrapper.sanity_check_properties(
+                "condition", new_condition
+            )
             if is_valid_condition is False:
                 print()
                 print("Invalid Condition. Please Try Again.")
                 print()
                 continue
             new_property.set_condition(new_condition)
-            property_price = self.set_property_price_to_fix(str_display, new_property) 
+            property_price = self.set_property_price_to_fix(str_display, new_property)
             if property_price in ["b", "B"]:
                 continue
             return property_price
         return new_condition.lower()
 
     def set_property_price_to_fix(self, str_display: str, new_property: object) -> str:
-        while (new_price_to_fix := input("Enter The Price To Fix: ")) not in ["q", "b", "Q", "B"]:
-            is_valid_price_to_fix = self.logic_wrapper.sanity_check_properties('price_to_fix', new_price_to_fix)
+        while (new_price_to_fix := input("Enter The Price To Fix: ")) not in [
+            "q",
+            "b",
+            "Q",
+            "B",
+        ]:
+            is_valid_price_to_fix = self.logic_wrapper.sanity_check_properties(
+                "price_to_fix", new_price_to_fix
+            )
             if is_valid_price_to_fix is False:
                 print()
                 print("Invalid Price To Fix. Please Try Again.")
@@ -242,12 +272,18 @@ class property_UI_menu:
                 continue
             return new_price
         return new_price_to_fix.lower()
-      
 
     def set_property_price(self, str_display: str, new_property: object) -> str:
 
-        while (new_price := input(f"Enter the {str_display} Price: ")) not in ["q", "b", "Q", "B"]:
-            is_valid_price = self.logic_wrapper.sanity_check_properties('price', new_price)
+        while (new_price := input(f"Enter the {str_display} Price: ")) not in [
+            "q",
+            "b",
+            "Q",
+            "B",
+        ]:
+            is_valid_price = self.logic_wrapper.sanity_check_properties(
+                "price", new_price
+            )
             if is_valid_price is False:
                 print()
                 print("Invalid Price. Please Try Again.")
@@ -255,25 +291,35 @@ class property_UI_menu:
                 continue
             new_property.set_property_price(new_price)
             if isinstance(new_property, House):
-                confirmation = self.property_creation_confirmation(str_display, new_property)
+                confirmation = self.property_creation_confirmation(
+                    str_display, new_property
+                )
                 if confirmation in ["b", "B"]:
                     continue
                 return confirmation
-            amenity_description = self.set_description_for_amenity(str_display, new_property)
+            amenity_description = self.set_description_for_amenity(
+                str_display, new_property
+            )
             if amenity_description in ["b", "B"]:
                 continue
             return amenity_description
         return new_price.lower()
 
-    
-    # Not completed. Can be beautified.    
+    # Not completed. Can be beautified.
     def set_description_for_amenity(self, str_display: str, new_amenity: object) -> str:
         """Asks the user to enter a description for the amenity they are creating. Goes through very simple input
         verification before setting the description attribute to what the user entered and passing the object down
         to be confirmed."""
 
-        while (amenity_description := input(f"{str_display} Descriptition: ")) not in ["q", "b", "Q", "B"]:
-            is_description_valid = self.logic_wrapper.sanity_check_low_level_logistics('description', amenity_description)
+        while (amenity_description := input(f"{str_display} Descriptition: ")) not in [
+            "q",
+            "b",
+            "Q",
+            "B",
+        ]:
+            is_description_valid = self.logic_wrapper.sanity_check_low_level_logistics(
+                "description", amenity_description
+            )
             if is_description_valid is False:
                 print()
                 print("Sigma Sigma on the wall, who is the Skibidiest of them all")
@@ -286,8 +332,9 @@ class property_UI_menu:
             return confirmation
         return amenity_description.lower()
 
-
-    def property_creation_confirmation(self, str_display: str, new_property: object) -> str:
+    def property_creation_confirmation(
+        self, str_display: str, new_property: object
+    ) -> str:
         print()
         while (
             new_property_confirmation := input("Enter 1 to Confirm: ").lower()
@@ -302,7 +349,6 @@ class property_UI_menu:
         print()
         return ""
 
-    
     def display_view_attached_options(self, selected_property: object) -> str:
         # Displays attached options for a property.
         print("-" * 70)

@@ -131,7 +131,11 @@ class work_request_UI_menu:
             )
             print(
                 "{:0}{:>3}{:>20}{:>3}{:>19}".format(
-                    "4. Pending Requests", "|", "5. All Requests", "|", "6. Closed Requests"
+                    "4. Pending Requests",
+                    "|",
+                    "5. All Requests",
+                    "|",
+                    "6. Closed Requests",
                 )
             )
             print()
@@ -311,8 +315,15 @@ class work_request_UI_menu:
         verification before setting the description attribute to what the user entered and passing the object down
         to the next function."""
 
-        while (request_description := input("Request Descriptition: ")) not in ["q", "b", "Q", "B"]:
-            is_description_valid = self.logic_wrapper.sanity_check_low_level_logistics('description', request_description)
+        while (request_description := input("Request Descriptition: ")) not in [
+            "q",
+            "b",
+            "Q",
+            "B",
+        ]:
+            is_description_valid = self.logic_wrapper.sanity_check_low_level_logistics(
+                "description", request_description
+            )
             if is_description_valid is False:
                 print()
                 print("Invalid Name For Description.")
