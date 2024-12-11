@@ -89,9 +89,9 @@ class employee_UI_menu:
                 #creates a instans of the employee with the maching ssn
                 employee = self.logic_wrapper.fetch_employee_from_storage(employee_ssn)
                 employee_options = self.employee_options(employee)
-                if employee_options.lower() == "b":
+                if employee_options == "b" or employee_options == "B":
                     break
-                elif employee_options.lower() == "q":
+                elif employee_options == "q" or employee_options == "Q":
                     return "q"
 
         
@@ -102,6 +102,7 @@ class employee_UI_menu:
 
     def display_employee(self, employee):
         """The function displays an employee and their information and asks what to view or edit"""
+
         print("-"*30)
         # create a table to print the contractor
         contractor_print_table = PrettyTable()
@@ -127,6 +128,7 @@ class employee_UI_menu:
         print("3) View Employees Maintenance Reports")
         print("-"*30)
         option = input("Select an option")
+
         
 
     def employee_options(self, employee):
@@ -135,6 +137,15 @@ class employee_UI_menu:
         option = ""
         while option != "q" and option != "b":
             option = self.display_employee(employee)
+            print()
+            print("1. Edit Employee Details")
+            print("2. View Work Requests")
+            print("3. View Maintenance Report")
+            print()
+            print("Go Back: b, B")
+            print("Quit system: q, Q")
+            print("-" * 70)
+            option = input("Enter Choice: ")
             if option.lower() == "b":
                 break
             elif option.lower() == "q":
@@ -269,7 +280,7 @@ class employee_UI_menu:
                 self.logic_wrapper.edit_employee_info(employee)
                 print()
                 print(Fore.GREEN + "Employee Information Updated" + Style.RESET_ALL)
-                self.display_employee(employee)
+               
                 break
             else:
                 print()
@@ -292,7 +303,7 @@ class employee_UI_menu:
                 self.logic_wrapper.edit_employee_info(employee)
                 print()
                 print(Fore.GREEN + "Employee Information Updated" + Style.RESET_ALL)
-                self.display_employee(employee)
+                #self.display_employee(employee)
                 break
             else:
                 print()
@@ -313,7 +324,7 @@ class employee_UI_menu:
                 self.logic_wrapper.edit_employee_info(employee)
                 print()
                 print(Fore.GREEN + "Employee Information Updated" + Style.RESET_ALL)
-                self.display_employee(employee)
+                #self.display_employee(employee)
                 break
             else:
                 print()
