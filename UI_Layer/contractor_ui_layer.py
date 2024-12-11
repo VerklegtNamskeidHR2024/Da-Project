@@ -25,18 +25,23 @@ class contractor_UI_menu():
         return
     
 
-    def display_all_contractors(self) -> None:
+    def display_all_contractors(self,) -> None:
         """Function to display all contractors at the selected locations"""
         # gets a list of all contractors at the location
+        contractor_print_table = PrettyTable()
         contractor_list = self.logic_wrapper.get_all_contractors_at_location(self.location)
-        print('-' * 70)
-        print(f'{"ID":<6}|{"Company Name":>25}|{"Contact Name":>20}|{"Location":>20}')
-        print("-" * 75)
-
-        # loops through the list of contractors and prints them
+        contractor_print_table.field_names = ["ID","Company Name","Contact Name","Location"]
+        # iterates through the location list and adds the location information to the table
         for item in contractor_list:
-            print(f"{item.contractor_id:<6}|{item.company_name:>25}|{item.contact_name:>20}|{item.location:>20}")
-        print('-' * 70)
+            contractor_print_table.add_row([item.contractor_id, item.company_name, item.contact_name, item.location])
+        
+        border_color = Fore.BLUE
+        reset_color = Style.RESET_ALL
+        contractor_print_table.border = True
+        contractor_print_table.junction_char = f"{border_color}+{reset_color}"
+        contractor_print_table.horizontal_char = f"{border_color}-{reset_color}"
+        contractor_print_table.vertical_char = f"{border_color}|{reset_color}"
+        print(contractor_print_table)
 
     # display contractor menu
     def display_contractor_employee_menu(self) -> None:
@@ -256,7 +261,7 @@ class contractor_UI_menu():
         print("-"*30)
         # create a table to print the contractor
         contractor_print_table = PrettyTable()
-        contractor.field_names = ['info',""]
+        contractor_print_table.field_names = ['Information',"Contractor Information"]
         # add the contractor info to the table
         contractor_print_table.add_row(['Contractor ID', contractor.contractor_id])
         contractor_print_table.add_row(['Company Name', contractor.company_name])
@@ -329,4 +334,4 @@ class contractor_UI_menu():
             
         print("-"*78)
         return
-
+    
