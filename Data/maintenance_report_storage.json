@@ -21,9 +21,9 @@
         "staff_id": "E1",
         "regular_maintenance": true,
         "maintenance_description": "asdfsdfsf",
-        "report_status": "Pending",
+        "report_status": "Denied",
         "price": "1234",
-        "mark_as_done": true,
+        "mark_as_done": false,
         "contractor_id": "C1",
         "work_request_id": "WR1"
     },
@@ -147,11 +147,11 @@
         "staff_id": "E2",
         "regular_maintenance": true,
         "maintenance_description": "Very good description",
-        "report_status": "Incomplete",
-        "price": 0,
+        "report_status": "Pending",
+        "price": "123",
         "mark_as_done": false,
         "contractor_id": "",
-        "work_request_id": ""
+        "work_request_id": "WR3"
     },
     {
         "report_id": "MR12",

@@ -5,7 +5,6 @@ from colorama import Fore, Style, init
 
 init()
 
-
 class property_UI_menu:
     def __init__(self, logic_wrapper, rank, location, staff_id):
         """Constructor for the property UI menu"""
@@ -98,9 +97,7 @@ class property_UI_menu:
                 print()
                 print("Must Enter A Valid Property ID")
                 print()
-            selected_property = self.logic_wrapper.get_property_by_id(
-                self.location, property_id_selected
-            )
+            selected_property = self.logic_wrapper.get_property_by_id(self.location, property_id_selected)
 
             # If there is not property with the slected id you will get a message.
             if not selected_property:
@@ -519,7 +516,7 @@ class property_UI_menu:
                     work_request.mark_as_completed,
                 ]
             )
-        border_color = Fore.MAGENTA
+        border_color = Fore.BLUE
         reset_color = Style.RESET_ALL
         property_work_requests_table.border = True
         property_work_requests_table.junction_char = f"{border_color}+{reset_color}"
@@ -556,7 +553,7 @@ class property_UI_menu:
                     maintenance_report.report_status,
                 ]
             )
-        border_color = Fore.MAGENTA
+        border_color = Fore.BLUE
         reset_color = Style.RESET_ALL
         property_maintenance_reports_table.border = True
         property_maintenance_reports_table.junction_char = (
@@ -594,7 +591,7 @@ class property_UI_menu:
                 property.property_price,
             ]
         )
-        border_color = Fore.MAGENTA
+        border_color = Fore.BLUE
         reset_color = Style.RESET_ALL
         single_property_table.border = True
         single_property_table.junction_char = f"{border_color}+{reset_color}"
