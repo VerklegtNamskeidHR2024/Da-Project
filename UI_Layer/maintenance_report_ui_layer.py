@@ -804,6 +804,8 @@ class maintenance_report_UI_menu:
             
             else:
                 print(Fore.RED + 'Invalid input' + Style.RESET_ALL)
+                time.sleep(1.5)
+                self.clear_screen()
                 
 
         self.display_edit_maintenance_report_details(selected_maintenance_report)
