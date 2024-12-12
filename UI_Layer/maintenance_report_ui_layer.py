@@ -292,6 +292,8 @@ class maintenance_report_UI_menu:
         self.get_pending_reports()
         print("------------------------------------------------")
         report_id = input("Enter report ID to manage: ")
+        if report_id.lower() == 'b':
+            return
         report_in_system = self.logic_wrapper.check_if_report_in_system(report_id, self.location)
         if report_in_system == True:
             print("------------------------------------------------")
@@ -322,7 +324,35 @@ class maintenance_report_UI_menu:
         else:
             print('Report ID not found in system please try again')
             self.list_pending_reports()
-    
+
+    def list_closed_reports(self):
+        ''' Display a list of closed reports '''
+        print(f"{self.rank} - Maintenance Report Menu")
+        self.get_closed_reports()
+        print("------------------------------------------------")
+        report_id = input("Enter report ID to manage: ")
+        if report_id.lower() == 'b':
+            return
+        report_in_system = self.logic_wrapper.check_if_report_in_system(report_id, self.location)
+        if report_in_system == True:
+            selected_report = self.logic_wrapper.get_single_maintenance_report(report_id)
+            print('------------------------------------------------')
+            print('1. Reopen Report')
+            print('b. Go back')
+            print('------------------------------------------------')
+            valid_choice = False
+            while valid_choice == False:
+                choice = input('Choose: ')
+                if choice == 'b':
+                    valid_choice = True
+
+                elif choice == '1':
+                    valid_choice = True
+                    self.logic_wrapper.edit_maintencance_report(selected_report, selected_report.location, 'Report Status', 'Pending')
+                    print(f'Report {report_id} has been reopened')
+                else:
+                    print('Invalid choice')
+
     def get_pending_reports(self):
         """ Display a list of pending reports """
         #self.clear_screen()
@@ -343,19 +373,19 @@ class maintenance_report_UI_menu:
         print(pending_reports_table)
         return
 
-    def list_closed_reports(self):
+    def get_closed_reports(self):
         """ Display a list of closed reports """
         #self.clear_screen()
         """ Display a list of closed reports """
         closed_report_table = PrettyTable()
-        closed_report_table.field_names = ['Report ID', 'Report Name', 'Property ID']
+        closed_report_table.field_names = ['Report ID', 'Report Name', 'Property ID', 'Report Status']
         print("List of closed reports\n")
         closed_report_list = self.logic_wrapper.get_all_closed_maintenance_reports(self.location)
         if closed_report_list == 'No closed reports':
             print('No Closed Reports!')
         else:
             for report in closed_report_list:
-                closed_report_table.add_row([report.report_id, report.report_name, report.property_id])
+                closed_report_table.add_row([report.report_id, report.report_name, report.property_id, report.report_status])
 
             border_color = Fore.BLUE
             reset_color = Style.RESET_ALL
