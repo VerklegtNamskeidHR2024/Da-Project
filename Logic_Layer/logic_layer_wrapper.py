@@ -47,9 +47,9 @@ class Logic_Layer_Wrapper:
         return self.contractor_logic_manager.get_contractor_by_id(location, contractor_id)
         # returns a contractor object by contractor_id
 
-    def sanity_check_contractor(self, contractor: object) -> bool:
+    def sanity_check_contractor(self,what_to_check, new_value) -> bool:
         """check if all info in a contractor object"""
-        return self.contractor_logic_manager.sanity_check_contractor(contractor)
+        return self.contractor_logic_manager.sanity_check_contractor(what_to_check, new_value)
         # checks if all info in a contractor object is correct
     
     def add_new_contractor(self, rank: str, location: str, contractor: object):
@@ -147,6 +147,9 @@ class Logic_Layer_Wrapper:
     def sanity_check_ssn(self, ssn: str) -> bool:
         return self.employee_logic_manager.sanity_check_ssn(ssn)
         # checks if the social security number of an employee is correct
+
+    def sanity_check_ssn_add(self, ssn: str) -> bool:
+        return self.employee_logic_manager.sanity_check_ssn_add(ssn)
     
     def sanity_check_phone_number(self, phone_number: str) -> bool:
         return self.employee_logic_manager.sanity_check_phone_number(phone_number)
@@ -317,7 +320,8 @@ class Logic_Layer_Wrapper:
 
     def add_new_location_to_storage(self, location: object):
         return self.location_logic_manager.add_new_location_to_storage(location)
-    
+        # adds a new location to the storage
+
     def edit_existing_location_in_storage(self, location: object, current_location: str, edit_choice: str, new_value: str):
         return self.location_logic_manager.edit_existing_location_in_storage(location, current_location, edit_choice, new_value)
         # adds a new location to the storage

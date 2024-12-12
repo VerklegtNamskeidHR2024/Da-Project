@@ -3,7 +3,7 @@
         "property_id": "A1",
         "name": "pool",
         "location": "Reykjavik",
-        "condition": "excellent",
+        "condition": "bad",
         "total_price_to_fix": 1500.0,
         "amenity_description": "is a pool"
     },
@@ -30,5 +30,13 @@
         "condition": "good",
         "total_price_to_fix": "1",
         "amenity_description": "delicious octopuss"
+    },
+    {
+        "property_id": "A38",
+        "name": "Hot Tub",
+        "location": "Reykjavik",
+        "condition": "bad",
+        "total_price_to_fix": "1223",
+        "amenity_description": "Its a hot tub"
     }
 ]

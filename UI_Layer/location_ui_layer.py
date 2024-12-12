@@ -206,7 +206,6 @@ class location_UI_menu:
 
     def display_amenities_menu(self) -> None:
         """Display the amenities menu"""
-
         user_action = ""
         while user_action != "q":
             self.display_attached_amenities()
@@ -236,9 +235,11 @@ class location_UI_menu:
         while (amenity_ID := input("Enter the ID of the Amenity You Want To Edit: ")) not in ["q", "b", "Q", "B"]:
             amenity = self.logic_wrapper.fetch_amenity_by_id(amenity_ID, self.location)
             if amenity is not None:
+            # if the amenity exists, display the amenity and let the user input a new condition
                 self.display_single_amenity(amenity)
                 new_condition = input("Enter New Condition: ")
                 changed_amenity = self.logic_wrapper.edit_amenity(amenity, new_condition)
+                # if the amenity condition is changed, print a success message
                 if changed_amenity:
                     print()
                     print("Amenity Condition Was Successfully Changed!")
@@ -254,7 +255,7 @@ class location_UI_menu:
 
     def display_single_amenity(self, amenity):
         """Display a single amenity"""
-        
+        # prints the information for the amenity the class is called with
         print("-" * 70)
         amenitiy_table = PrettyTable()
         amenitiy_table.field_names = ['Amenity Name', 'Property ID', 'Location', 'Condition', 'Price to fix', 'Description']
