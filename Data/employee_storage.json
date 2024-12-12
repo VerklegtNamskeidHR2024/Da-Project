@@ -2,7 +2,6 @@
     {
         "name": "Hreimur",
         "social_security_number": "1234567899",
-        "phone_number": "5881234",
         "phone_number": "1234567",
         "location": "Reykjavik",
         "system_permissions": "Employee",
@@ -134,5 +133,14 @@
         "system_permissions": "Employee",
         "email": "yeabsira@gmail.com",
         "staff_id": "E35"
+    },
+    {
+        "name": "tumi roadman",
+        "social_security_number": "1233211231",
+        "phone_number": "1234563",
+        "location": "Reykjavik",
+        "system_permissions": "Employee",
+        "email": "paddybaddy@.com",
+        "staff_id": "E36"
     }
 ]
