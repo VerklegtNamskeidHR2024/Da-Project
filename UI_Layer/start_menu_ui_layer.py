@@ -1,8 +1,10 @@
 import sys
 import time
 import os
-from datetime import datetime
-from threading import Thread
+# from rich import print
+# from rich.panel import Panel
+# from rich.text import Text 
+
 
 from Logic_Layer.logic_layer_wrapper import Logic_Layer_Wrapper
 
@@ -47,8 +49,6 @@ class Main_Menu:
         self.property_UI_menu = property_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
 
 
-    # Needs to be implemented in all of the ui menus so we can acctually select the locations
-
     def start_point(self):
         """Starts the main menu for the system"""
         
@@ -63,9 +63,13 @@ class Main_Menu:
         quit_string = "Departing from NaN Air, Thank you for Visiting!"
         # self.fun_print(quit_string)
 
+    def clear_screen(self):
+        ''' Clears the screen '''
+        os.system('cls' if os.name == 'nt' else 'clear')
 
     def show_ascii_art_hq(self):
         """Prints out the ASCII art for the NaN Air HQ"""
+
         print("{:>61}".format("==================="))
         print("{:>44}{:>13}{:>3}".format("|", "NaN Air HQ", "|"))
         print("{:>14}{:>7}{:>15}{:>8}{:>10}{:>6}".format("___________", ".", ": : : :", "|", "_____", "|"))
@@ -86,9 +90,9 @@ class Main_Menu:
             time.sleep(delay)  
         print()
 
+
     def create_location_table(self):
         """Prints out a table of available locations for the user to select. """
-        # maybe delete
 
         locations_table = PrettyTable()
         locations_table.field_names = ['ID',"Country", "Location Name"]
@@ -117,13 +121,18 @@ class Main_Menu:
         for char in loading:
             sys.stdout.write(char)
             sys.stdout.flush() 
-            time.sleep(0.01)
+            time.sleep(0.04)
         print()
+        self.clear_screen()
 
         return_user = ""
         while return_user == "":
             print()
+            # title = Text.assemble("Welcome to the NaN Air Properties and Staff System!", style="blue", justify="center")
+            # panel = Panel(title)
+            # print(panel)
             print("Welcome to the NaN Air Properties and Staff System!")
+            print()
             print("-" * 70)
             self.show_ascii_art_hq()
             print("Log in as?")
@@ -152,7 +161,6 @@ class Main_Menu:
                     break
                 case _:
                     print(Fore.RED + "No User Found, Please Try Again." + Style.RESET_ALL)
-
         return return_user
     
 
@@ -205,6 +213,7 @@ class Main_Menu:
                     return_location = "Longyearbyen"
                 case _:
                     print(Fore.RED + "No Location Found, Please Try Again." + Style.RESET_ALL)
+        self.clear_screen()
         return return_location
 
 

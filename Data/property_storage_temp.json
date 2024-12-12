@@ -1,7 +1,7 @@
 [
     {
         "property_id": "P1",
-        "name": "Hremmi",
+        "name": "suite",
         "location": "Reykjavik",
         "condition": "excellent",
         "total_price_to_fix": 1500.0,
