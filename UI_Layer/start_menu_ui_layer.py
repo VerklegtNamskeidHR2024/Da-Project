@@ -79,6 +79,7 @@ class Main_Menu:
     def fun_print(self, text_to_print = "i need input bro", delay_in = 0.05):
         """send me a string ;)"""
         delay = delay_in
+        print(text_print)
         start = len(text_to_print)
         text_print = ""
         for i, char in enumerate(text_to_print):
@@ -114,13 +115,14 @@ class Main_Menu:
 
     def select_user_for_system(self) -> str:
         """Selects a user for the system to use"""
-        print()
+        '''print()
         loading = "Loading" + ("." * 20)
         for char in loading:
             sys.stdout.write(char)
             sys.stdout.flush() 
-            time.sleep(0.02)
-        print()
+            time.sleep(0.04)
+        print()'''
+        
         self.clear_screen()
 
         return_user = ""
@@ -129,7 +131,8 @@ class Main_Menu:
             print("{:>70}".format(Fore.BLUE + "[ Welcome to the NaN Air Properties and Staff System! ]" + Style.RESET_ALL))
             print("-" * 80)
             self.show_ascii_art_hq()
-            print("-" * 80)
+            
+            print("-" * 70)
             print("Log in as?")
             print("1. Admin")
             print("2. Manager")
@@ -154,8 +157,9 @@ class Main_Menu:
                     return_user = "Employee"
                     break
                 case _:
-                    self.clear_screen()
                     print(Fore.RED + "No User Found, Please Try Again." + Style.RESET_ALL)
+                    time.sleep(1)
+                    self.clear_screen()
         return return_user
     
 
@@ -167,17 +171,18 @@ class Main_Menu:
             staff_id = input("Enter Your Staff ID: ")
             is_staff_id_valid = self.logic_wrapper.sanity_check_staff_id(rank, staff_id)
             if is_staff_id_valid is False: 
-                print()
                 print(Fore.RED + "ID Does Not Exist In The System, Please Try Again." + Style.RESET_ALL)
-                print()
-        self.clear_screen()
+                time.sleep(0.5)
+                self.clear_screen
         return staff_id
     
 
     def select_location_for_system(self) -> str:
         """Select a location for the system to use"""
+        self.clear_screen()
         return_location = ""
         while return_location == "":
+            self.clear_screen()
             print("{:>60}".format(Fore.BLUE + "[ Welcome to the NaN Air Properties and Staff System! ]" + Style.RESET_ALL))
             print("-" * 80)
             self.show_ascii_art_hq()
@@ -215,6 +220,8 @@ class Main_Menu:
                     return_location = "Longyearbyen"
                 case _:
                     print(Fore.RED + "No Location Found, Please Try Again." + Style.RESET_ALL)
+                    time.sleep(1)
+                    self.clear_screen
         self.clear_screen()
         return return_location
 
@@ -282,6 +289,9 @@ class Main_Menu:
                     return "q"
                 case _:
                     print(Fore.RED + "Wrong Input" + Style.RESET_ALL)
+                    time.sleep(1)
+                    self.clear_screen()
+                    return "s"
         self.clear_screen()
         return user_action
-                    
+            
