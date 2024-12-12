@@ -1,9 +1,7 @@
 from Model_Classes.contractor_model import Contractor
 from prettytable import PrettyTable 
 from colorama import Fore, Style, init
-
-# missing list
-# !!!!!give contractor warning!!!!!
+import os
 
 class contractor_UI_menu():
     def __init__(self, logic_wrapper, rank, location, staff_id) -> None:
@@ -12,10 +10,13 @@ class contractor_UI_menu():
         self.rank = rank
         self.location = location
         self.staff_id = staff_id
-    
+
+    def clear_screen(self):
+        ''' Clears the screen '''
+        os.system('cls' if os.name == 'nt' else 'clear')
+
     def start_point_contractor_UI(self) -> None:
         """When this class is called it starts here. Goes into diffrent menus based on your rank. """
-
         # In almost all functions that receive, and verifies user input are while loops that repeatedly asks the user
         # for specific input. These while loops are held together on the condition that the user either fullfills the
         # neccesary requirements to proceed or that they don't enter q/Q or b/B.
@@ -133,6 +134,9 @@ class contractor_UI_menu():
     def display_add_contractor_form(self) -> None:
         """create contractor"""
         try:
+            self.clear_screen()
+            print("-------------------Add Contractor Form-------------------")
+
             valid_company_name = False
             valid_contact_name = False
             valid_opening_hours = False
@@ -143,48 +147,51 @@ class contractor_UI_menu():
             # it then sends the value you are entering to the sanity check function to check if it is valid
             # if it is valid then it sets the value to the new contractor
             while valid_company_name == False:
-                company_name = input("enter company name: ")
+                company_name = input(f"{"| Enter company name ":<30}| ")
                 if self.logic_wrapper.sanity_check_contractor("company_name", company_name) == True:
                     new_contractor.set_company_name(company_name)
                     valid_company_name = True
                 else:
                     print("Invalid company name. Please try again.")
             while valid_contact_name == False:
-                contact_name = input("enter contact name: ")
+                contact_name = input(f"{"| Enter contact name ":<30}| ")
                 if self.logic_wrapper.sanity_check_contractor("contact_name", contact_name) == True:
                     new_contractor.set_contact_name(contact_name)
                     valid_contact_name = True
                 else:
                     print("Invalid contact name. Please try again.")
             while valid_opening_hours == False:
-                opening_hours = input("enter opening hours: ")
+                opening_hours = input(f"{"| Enter opening hours ":<30}| ")
                 if self.logic_wrapper.sanity_check_contractor("opening_hours", opening_hours) == True:
                     new_contractor.set_opening_hours(opening_hours)
                     valid_opening_hours = True
                 else:
-                    print("Invalid opening hours. Please try again.")
+                    print("Invalid opening hours. Please try again. Use This format Example: 08-16")
             while valid_phone_number == False:
-                phone_number = input("enter phone number: ")
+                phone_number = input(f"{"| Enter phone number ":<30}| ")
                 if self.logic_wrapper.sanity_check_contractor("phone_number", phone_number) == True:
                     new_contractor.set_phone_number(phone_number)
                     valid_phone_number = True
                 else:
-                    print("Invalid phone number. Please try again.")
+                    print("Invalid phone number. Please try again. No letters or special characters and lenght of 7.")
             # set the location for the new contractor from the current location
             new_contractor.set_location(self.location)
 
             try:
                 # add the new contractor to the storage
                 self.logic_wrapper.add_new_contractor(self.rank, self.location, new_contractor)
+                print("---------------------------------------------------------")
+                self.clear_screen()
                 print("Contractor added")
             except:
-                print("something went wrong with making new contractor")
+                self.clear_screen()
+                print("something went wrong with making new contractor") 
         except:
+            self.clear_screen()
             print("something went wrong with making new contractor")
 
     def display_view_contractor(self) -> None:
         '''Shows contractor information'''
-        loop = True
         try:
             # find contracotor from id
             contractor_to_use = self.select_contractor_by_id()
@@ -196,6 +203,8 @@ class contractor_UI_menu():
             print("something went wrong")
             return
         
+        self.clear_screen()
+        loop = True
         while loop == True:
             contractor = self.logic_wrapper.get_contractor_by_id(self.location, contractor_to_use.contractor_id)
             # if contractor is found print the contractor info
@@ -233,9 +242,11 @@ class contractor_UI_menu():
             # if the warning is valid then give the contractor a warning
             if is_valid == True:
                 self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'warning', warning)
+            self.clear_screen()
             print('Contractor has been given a warning.')
             return
         except:
+            self.clear_screen()
             print("something went wrong")
             return
 
@@ -249,6 +260,7 @@ class contractor_UI_menu():
         except:
             print("something went wrong")
 
+        self.clear_screen()
         loop = True
         while loop == True:
             # print the contractor info
@@ -284,11 +296,14 @@ class contractor_UI_menu():
             # if the contact name is valid then change the contact name
             if is_valid == True:
                 self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'contact_name', new_contact_name)
+                self.clear_screen()
                 print('Contact name has been changed.')
             else:
+                self.clear_screen()
                 print("Invalid input contact name")
             return
         except:
+            self.clear_screen()
             print("something went wrong")
             return
 
@@ -303,12 +318,15 @@ class contractor_UI_menu():
                 if is_valid == True:
                     # if the phone number is valid then change the phone number
                     self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'phone_number', phone_input)
+                    self.clear_screen()
                     print('Phone number has been changed.')
                     return
                 else:
+                    self.clear_screen()
                     print("Invalid input. Please enter numbers only.")
                 return
         except:
+            self.clear_screen()
             print("something went wrong")
             return
 
@@ -321,10 +339,13 @@ class contractor_UI_menu():
             if is_valid == True:
                 # if the opening hours are valid then change the opening hours
                 self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'opening_hours', new_opening_hours)
+                self.clear_screen()
                 print('Opening hours have been changed.')
             else:
+                self.clear_screen()
                 print("Invalid input opening hours")
         except:
+            self.clear_screen()
             print("something went wrong")
 
     def select_contractor_by_id(self) -> None:
