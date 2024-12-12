@@ -115,38 +115,34 @@ class Main_Menu:
 
     def select_user_for_system(self) -> str:
         """Selects a user for the system to use"""
-
-        print()
+        '''print()
         loading = "Loading" + ("." * 20)
         for char in loading:
             sys.stdout.write(char)
             sys.stdout.flush() 
             time.sleep(0.04)
-        print()
+        print()'''
+        
         self.clear_screen()
 
         return_user = ""
         while return_user == "":
             print()
-            # title = Text.assemble("Welcome to the NaN Air Properties and Staff System!", style="blue", justify="center")
-            # panel = Panel(title)
-            # print(panel)
-            print("Welcome to the NaN Air Properties and Staff System!")
-            print()
-            print("-" * 70)
+            print("{:>60}".format("[ Welcome to the NaN Air Properties and Staff System! ]"))
+            print("-" * 80)
             self.show_ascii_art_hq()
-            print("Log in as?")
+            
             print("-" * 70)
             print("Log in as?")
             print("1. Admin")
             print("2. Manager")
             print("3. Employee")
             print()
-            print("Universal System Commands:")
-            print("{:>20}".format("> Go Back: b, B"))
-            # print("{:>20}".format("> Log Out: log, Log"))
-            print("{:>20}".format("> Quit System: q, Q"))
-            print("-" * 70)
+            print("Universal System Commands (Not Applicable During Log-In)")
+            print()
+            print("{:>18}".format("Back - [ b, B ]"))
+            print("{:>18}".format("Quit - [ q, Q ]"))
+            print("-" * 80)
 
             user_action = input("Select a Profile: ").lower()
             match user_action:
@@ -160,13 +156,14 @@ class Main_Menu:
                     return_user = "Employee"
                     break
                 case _:
+                    self.clear_screen()
                     print(Fore.RED + "No User Found, Please Try Again." + Style.RESET_ALL)
         return return_user
     
 
     def enter_and_validate_staff_id(self, rank) -> str:
         """Enter and validate the staff ID for the user"""
-        print()
+        print("-" * 70)
         is_staff_id_valid = False
         while is_staff_id_valid is False:
             staff_id = input("Enter Your Staff ID: ")
@@ -178,8 +175,13 @@ class Main_Menu:
 
     def select_location_for_system(self) -> str:
         """Select a location for the system to use"""
+        self.clear_screen()
         return_location = ""
         while return_location == "":
+            print("{:>60}".format("[ Welcome to the NaN Air Properties and Staff System! ]"))
+            print("-" * 80)
+            self.show_ascii_art_hq()
+            print("-" * 80)
             location_table = PrettyTable()
             location_table.field_names = ['ID',"Location", "Country"]
             location_table.add_row(['1',"Iceland", "Reykjavik"])
@@ -196,7 +198,7 @@ class Main_Menu:
             location_table.horizontal_char = f"{border_color}-{reset_color}"
             location_table.vertical_char = f"{border_color}|{reset_color}"
             print(location_table)
-
+            print("-" * 80)
             user_action = input("Select a Location: ").lower()
             match user_action:
                 case "1":
@@ -238,17 +240,17 @@ class Main_Menu:
         print(f"Current Location - {self.location}")
         print()
         print(f" {self.rank} - Home Page")
-        print("-" * 70)
-        print("1) Properties")
-        print("2) Work Requests")
-        print("3) Employees")
-        print("4) Contractors")
-        print("5) Maintenance Reports")
+        print("-" * 80)
+        print("1. Properties")
+        print("2. Work Requests")
+        print("3. Employees")
+        print("4. Contractors")
+        print("5. Maintenance Reports")
         if self.rank != "Employee":
-            print("6) Locations")
+            print("6. Locations")
         print()
-        print("{:>18}".format("> Quit System: q, Q"))
-        print("-" * 70)
+        print("{:>10}".format("Quit - [ q, Q ]"))
+        print("-" * 80)
 
         user_action = input("Select an Option: ").lower()
         return user_action
@@ -278,45 +280,10 @@ class Main_Menu:
                 case "q":
                     return "q"
                 case _:
-                    print(Fore.RED + "Wrong Input" + Style.RESET_ALL)
-            # user_action = self.display_menu_items()
-            # continue
-        # self.quit_system_message()
-        return user_action
                     
-    
-    def test_some_stuff(self):
-        """just some tesing with getting data from storage""" 
-        
-        contractor_list = self.logic_wrapper.get_all_contractors(self.location)
-        for item in contractor_list:
-            print(f"{item.contractor_id:<10}|{item.location:<20}")
-        print("-" * 40)
-
-        employees_list = self.logic_wrapper.get_all_employees(self.location)
-        for item in employees_list:
-            print(f"{item.staff_id:<10}|{item.location:<20}")
-        print("-" * 40)
-
-        # this needs to be looked at
-        # works but look at property_storage_manager for more info
-        properties_list = self.logic_wrapper.get_all_properities(self.location)
-        for item in properties_list:
-            print(f"{item.property_id:<10}|{item.location:<20}")
-        print("-" * 40)
-
-        report_list = self.logic_wrapper.get_all_maintenance_reports(self.location)
-        for item in report_list:
-            print(f"{item.report_id:<10}|{item.location:<20}")
-        print("-" * 40)
-
-        # this needs to be looked at
-        '''work_list = self.logic_wrapper.get_all_work_requests(self.location)
-        for item in work_list:
-            print(f"{item.work_request_id:<10}|{item.location:<20}")
-        print("-" * 40)'''
-
-        location_list = self.logic_wrapper.get_all_locations(self.location)
-        for item in location_list:
-            print(f"{item.location:<20}")
-        print("-" * 40)
+                    print(Fore.RED + "Wrong Input" + Style.RESET_ALL)
+                    time.sleep(0.4)
+                    self.clear_screen()
+        self.clear_screen()
+        return user_action
+            

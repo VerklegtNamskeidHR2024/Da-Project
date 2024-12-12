@@ -2,12 +2,12 @@
     {
         "contractor_id": "C1",
         "company_name": "Daniela and Daughters",
-        "contact_name": "Tumi jua",
-        "opening_hours": "8-16",
-        "phone_number": 1234567,
+        "contact_name": "Tumi k",
+        "opening_hours": "1-19",
+        "phone_number": "1234567",
         "location": "Reykjavik",
         "previous_job_reports": [],
-        "warningtext": "meow meow"
+        "warningtext": "Very Angry Cats"
     },
     {
         "contractor_id": "C2",
@@ -35,7 +35,7 @@
         "contact_name": "Hreimur",
         "opening_hours": "8-16",
         "phone_number": 1234567,
-        "location": "Reykjavik",
+        "location": "Thorshofn",
         "previous_job_reports": [],
         "warningtext": "Contractor somehow nailed his son to wall"
     },
@@ -45,7 +45,7 @@
         "contact_name": "b",
         "opening_hours": "8-16",
         "phone_number": 1234567,
-        "location": "Reykjavik",
+        "location": "Kulusuk",
         "previous_job_reports": [],
         "warningtext": "fck dis man"
     },
@@ -55,6 +55,56 @@
         "contact_name": "olos",
         "opening_hours": "10-15",
         "phone_number": 6690269,
+        "location": "Longyearbyen",
+        "previous_job_reports": [],
+        "warningtext": "Contractor Has No Warning"
+    },
+    {
+        "contractor_id": "C7",
+        "company_name": "1",
+        "contact_name": "2",
+        "opening_hours": "22-12",
+        "phone_number": 2205044,
+        "location": "Reykjavik",
+        "previous_job_reports": [],
+        "warningtext": "Contractor Has No Warning"
+    },
+    {
+        "contractor_id": "C8",
+        "company_name": "tum",
+        "contact_name": "2",
+        "opening_hours": "10-15",
+        "phone_number": "6690269",
+        "location": "Reykjavik",
+        "previous_job_reports": [],
+        "warningtext": "Contractor Has No Warning"
+    },
+    {
+        "contractor_id": "C9",
+        "company_name": "gubbis",
+        "contact_name": "irla",
+        "opening_hours": "10-12",
+        "phone_number": "9999999",
+        "location": "Reykjavik",
+        "previous_job_reports": [],
+        "warningtext": "Contractor Has No Warning"
+    },
+    {
+        "contractor_id": "C10",
+        "company_name": "OLS",
+        "contact_name": "oopas",
+        "opening_hours": "10-10",
+        "phone_number": "8888889",
+        "location": "Reykjavik",
+        "previous_job_reports": [],
+        "warningtext": "Contractor Has No Warning"
+    },
+    {
+        "contractor_id": "C11",
+        "company_name": "jonas",
+        "contact_name": "oools",
+        "opening_hours": "19-19",
+        "phone_number": "9999999",
         "location": "Reykjavik",
         "previous_job_reports": [],
         "warningtext": "Contractor Has No Warning"
