@@ -87,8 +87,10 @@ class maintenance_report_UI_menu:
     def employee_menu(self, staff_id):
         ''' Employee menu '''
         #self.clear_screen()
+        # A function is called to get all the reports connected to the employee logged in
         self.get_employee_reports(staff_id)
         user_choice = ""
+        # A while loop is started to keep the menu open until the user wants to go back
         while user_choice != "b":
             print(f"{self.rank} - Maintenance Report Menu")
             print('-' * 50)
@@ -97,7 +99,9 @@ class maintenance_report_UI_menu:
             print("3. View Denied Reports")
             print("b. Go back")
             print('-' * 50)
+            # The user is asked to select an option
             user_choice = input("Select an Option:  ")
+            # The user input is checked and the user is sent to the corresponding menu
             if user_choice == "b":
                 return
             elif user_choice == 'q':
@@ -113,34 +117,50 @@ class maintenance_report_UI_menu:
                 
     def get_incomplete_reports(self):
         '''displays all incomplete reports'''
+        # Display a list of incomplete reports so the user can go back and finish them
+        # Create a table to display the reports
         incomplete_reports_table = PrettyTable()
+        incomplete_reports_table.title = 'Incomplete Reports'
         incomplete_reports_table.field_names = ['Report ID', 'Report Name', 'Property ID']
-        print('List of incomplete reports\n')
 
+        # Get a list of all incomplete reports
         incomplete_report_list = self.logic_wrapper.get_incomplete_maintenance_reports(self.location)
+        # Loop through the list, adding all the reports to the table
         for report in incomplete_report_list:
             incomplete_reports_table.add_row([report.report_id, report.report_name, report.property_id])
+        # Some settings for the table like setting the border color as blue
         border_color = Fore.BLUE
+        # Making a reset color so the color doesn't stay blue
         reset_color = Style.RESET_ALL
+        # Toggling the border on
         incomplete_reports_table.border = True
+        # Setting all the elements off the table border to blue
         incomplete_reports_table.junction_char = f"{border_color}+{reset_color}"
         incomplete_reports_table.horizontal_char = f"{border_color}-{reset_color}"
         incomplete_reports_table.vertical_char = f"{border_color}|{reset_color}"
+        # Then print the table
         print(incomplete_reports_table)
+        # Ask the user to select a report to finish
         user_choice = input('Enter report ID: ')
         if user_choice.lower() == 'b':
             return
+        # A check to make sure the report is in the system
         is_report_in_system = self.logic_wrapper.sanity_check_maintencance_report('report id', user_choice, self.location)
+        # If the report is in the system the user is sent to the menu to finish the report
         if is_report_in_system == True:
             self.finish_incomplete_report(user_choice)
         else:
+            # If the report is not in the system the user is asked to try again
             print('Report ID not found in system please try again')
             self.get_incomplete_reports()
 
     def finish_incomplete_report(self, report_id):
-        """Finish incomplete report"""
+        """Function so an employee can finish an incomplete report"""
+        # Get the report from the system
         report = self.logic_wrapper.get_single_maintenance_report(report_id)
+        # This is used to keep the loop going until the report is finished
         report_complete = False
+        # These are used to check if a field in the report is empty so the user can pickup where they left off
         name_empty = not bool(report.report_name)
         location_empty = not bool(report.location)
         property_id_empty = not bool(report.property_id)
@@ -151,88 +171,118 @@ class maintenance_report_UI_menu:
         contractor_id_empty = not bool(report.contractor_id)
         work_request_id_empty = not bool(report.work_request_id)
         
+        # A while loop is started to get all required information to finish the report
         while report_complete == False:
+            # Here is check if the user has finished the report
             if name_empty == False and location_empty == False and property_id_empty == False and staff_id_empty == False and regular_maintenance_empty == False and maintenance_description_empty == False and price_empty == False and contractor_id_empty == False and work_request_id_empty == False:
                 report_complete = True
+                # The report status is set to pending and the report is saved in the system with the updated information
                 report.set_report_status('Pending')
                 self.logic_wrapper.edit_maintencance_report(report, self.location, 'Report Status', 'Pending')
                 print('Report has been completed')
             
+            # If the report name is empty the user is asked to fill it out
             elif name_empty == True:
                 report_name = input('Enter report name: ')
+                # A check to make sure the input is valid
                 valid_name = self.logic_wrapper.sanity_check_maintencance_report('report name', report_name, self.location)
+                # If the input is valid the report name is updated
                 if valid_name == True:
                     name_empty = False
                     self.logic_wrapper.edit_maintencance_report(report, self.location, 'Report Name', report_name)
                 else:
                     print('Invalid input')
 
+            # If the location is empty the user is asked to fill it out
             elif location_empty == True:
                 location = input('Enter location: ')
+                # A check to make sure the input is valid
                 valid_location = self.logic_wrapper.sanity_check_maintencance_report('location', location, self.location)
+                # If the input is valid the location is updated
                 if valid_location == True:
                     location_empty = False
                     self.logic_wrapper.edit_maintencance_report(report, self.location, 'Location', location)
                 else:
                     print('Invalid input')
 
+            # If the property ID is empty the user is asked to fill it out
             elif property_id_empty == True:
                 property_id = input('Enter property ID: ')
+                # A check to make sure the input is valid
                 valid_property_id = self.logic_wrapper.sanity_check_maintencance_report('property id', property_id, self.location)
+                # If the input is valid the property ID is updated
                 if valid_property_id == True:
                     property_id_empty = False
                     self.logic_wrapper.edit_maintencance_report(report, self.location, 'Property ID', property_id)
                 else:
                     print('Invalid input')
-            
+
+            # If the staff ID is empty the user is asked to fill it out
             elif staff_id_empty == True:
                 staff_id = input('Enter staff ID: ')
+                # A check to make sure the input is valid
                 valid_staff_id = self.logic_wrapper.sanity_check_maintencance_report('staff id', staff_id, self.location)
+                # If the input is valid the staff ID is updated
                 if valid_staff_id == True:
                     staff_id_empty = False
                     self.logic_wrapper.edit_maintencance_report(report, self.location, 'Staff ID', staff_id)
                 else:
                     print('Invalid input')
 
+            # If the regular maintenance is empty the user is asked to fill it out
             elif regular_maintenance_empty == True:
                 regular_maintenance = input('Regular Maintenance (yes/no): ')
+                # A check to make sure the input is valid
                 valid_regular_maintenance = self.logic_wrapper.sanity_check_maintencance_report('regular maintenance', regular_maintenance, self.location)
+                # If the input is valid the regular maintenance is updated
                 if valid_regular_maintenance == True:
                     regular_maintenance_empty = False
                     self.logic_wrapper.edit_maintencance_report(report, self.location, 'Regular', regular_maintenance)
                 else:
                     print('Invalid input')
 
+            # If the maintenance description is empty the user is asked to fill it out
             elif maintenance_description_empty == True:
                 maintenance_description = input('Enter maintenance description: ')
+                # A check to make sure the input is valid
                 valid_maintenance_description = self.logic_wrapper.sanity_check_maintencance_report('maintenance description', maintenance_description, self.location)
+                # If the input is valid the maintenance description is updated
                 if valid_maintenance_description == True:
                     maintenance_description_empty = False
                     self.logic_wrapper.edit_maintencance_report(report, self.location, 'Description', maintenance_description)
                 else:
                     print('Invalid input')
 
+            # If the price is empty the user is asked to fill it out
             elif price_empty == True:
                 price = input('Enter price: ')
+                # A check to make sure the input is valid
                 valid_price = self.logic_wrapper.sanity_check_maintencance_report('cost', price, self.location)
+                # If the input is valid the price is updated
                 if valid_price == True:
                     price_empty = False
                     self.logic_wrapper.edit_maintencance_report(report, self.location, 'Cost', price)
                 else:
                     print('Invalid input')
 
+            # If the contractor ID is empty the user is asked to fill it out
             elif contractor_id_empty == True:
                 contractor_id = input('Enter contractor ID: ')
+                # A check to make sure the input is valid
                 valid_contractor_id = self.logic_wrapper.sanity_check_maintencance_report('contractor id', contractor_id, self.location)
+                # If the input is valid the price is updated
                 if valid_contractor_id == True:
                     contractor_id_empty = False
                     self.logic_wrapper.edit_maintencance_report(report, self.location, 'Contractor ID', contractor_id)
                 else:
                     print('Invalid input')
 
+            # If the work request ID is empty the user is asked to fill it out
             elif work_request_id_empty == True:
                 work_request_id = input('Enter work request ID: ')
+                # A check to make sure the input is valid
                 valid_work_request_id = self.logic_wrapper.sanity_check_maintencance_report('work request id', work_request_id, self.location)
+                # If the input is valid the work request ID is updated
                 if valid_work_request_id == True:
                     work_request_id_empty = False
                     self.logic_wrapper.edit_maintencance_report(report, self.location, 'Work Request ID', work_request_id)
@@ -240,13 +290,15 @@ class maintenance_report_UI_menu:
                     print('Invalid input')
 
     def list_pending_reports(self):
-        """ Display a list of pending reports """
+        """ Displays a list of pending reports in the system """
         #self.clear_screen()
         #Display a list of pending reports
         print(f"{self.rank} - Maintenance Report Menu")
         self.get_pending_reports()
         print("------------------------------------------------")
         report_id = input("Enter report ID to manage: ")
+        if report_id.lower() == 'b':
+            return
         report_in_system = self.logic_wrapper.check_if_report_in_system(report_id, self.location)
         if report_in_system == True:
             print("------------------------------------------------")
@@ -277,7 +329,35 @@ class maintenance_report_UI_menu:
         else:
             print('Report ID not found in system please try again')
             self.list_pending_reports()
-    
+
+    def list_closed_reports(self):
+        ''' Display a list of closed reports '''
+        print(f"{self.rank} - Maintenance Report Menu")
+        self.get_closed_reports()
+        print("------------------------------------------------")
+        report_id = input("Enter report ID to manage: ")
+        if report_id.lower() == 'b':
+            return
+        report_in_system = self.logic_wrapper.check_if_report_in_system(report_id, self.location)
+        if report_in_system == True:
+            selected_report = self.logic_wrapper.get_single_maintenance_report(report_id)
+            print('------------------------------------------------')
+            print('1. Reopen Report')
+            print('b. Go back')
+            print('------------------------------------------------')
+            valid_choice = False
+            while valid_choice == False:
+                choice = input('Choose: ')
+                if choice == 'b':
+                    valid_choice = True
+
+                elif choice == '1':
+                    valid_choice = True
+                    self.logic_wrapper.reopen_closed_report(selected_report, selected_report.location)
+                    print(f'Report {report_id} has been reopened')
+                else:
+                    print('Invalid choice')
+
     def get_pending_reports(self):
         """ Display a list of pending reports """
         #self.clear_screen()
@@ -298,19 +378,19 @@ class maintenance_report_UI_menu:
         print(pending_reports_table)
         return
 
-    def list_closed_reports(self):
+    def get_closed_reports(self):
         """ Display a list of closed reports """
         #self.clear_screen()
         """ Display a list of closed reports """
         closed_report_table = PrettyTable()
-        closed_report_table.field_names = ['Report ID', 'Report Name', 'Property ID']
+        closed_report_table.field_names = ['Report ID', 'Report Name', 'Property ID', 'Report Status']
         print("List of closed reports\n")
         closed_report_list = self.logic_wrapper.get_all_closed_maintenance_reports(self.location)
         if closed_report_list == 'No closed reports':
             print('No Closed Reports!')
         else:
             for report in closed_report_list:
-                closed_report_table.add_row([report.report_id, report.report_name, report.property_id])
+                closed_report_table.add_row([report.report_id, report.report_name, report.property_id, report.report_status])
 
             border_color = Fore.BLUE
             reset_color = Style.RESET_ALL
@@ -319,7 +399,7 @@ class maintenance_report_UI_menu:
             closed_report_table.horizontal_char = f"{border_color}-{reset_color}"
             closed_report_table.vertical_char = f"{border_color}|{reset_color}"
             print(closed_report_table)
- 
+
     def display_create_maintenance_report_form(self):
         """ Display the form for creating a new maintenance report """
         #self.clear_screen()
@@ -609,7 +689,7 @@ class maintenance_report_UI_menu:
                             print(Fore.RED + 'Contractor ID not changed' + Style.RESET_ALL)
             
             else:
-                print('Invalid input')
+                print(Fore.RED + 'Invalid input' + Style.RESET_ALL)
                 
 
         self.display_edit_maintenance_report_details(selected_maintenance_report)
@@ -683,7 +763,7 @@ class maintenance_report_UI_menu:
                     is_valid_report_name = self.logic_wrapper.sanity_check_maintencance_report('report name', report_name, report.location)
                     if is_valid_report_name == True:
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Report Name', report_name)
-                        print('Report name changed')
+                        print(Fore.GREEN + 'Report name changed' + Style.RESET_ALL)
             
             elif user_choice == '2':
                 while is_valid_staff_id == False:
@@ -691,7 +771,7 @@ class maintenance_report_UI_menu:
                     is_valid_staff_id = self.logic_wrapper.sanity_check_maintencance_report('staff id', staff_id, report.location)
                     if is_valid_staff_id == True:
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Staff ID', staff_id)
-                        print('Staff ID changed')
+                        print(Fore.GREEN + 'Staff ID changed' + Style.RESET_ALL)
 
             elif user_choice == '3':
                 while is_valid_property_id == False:
@@ -699,7 +779,7 @@ class maintenance_report_UI_menu:
                     is_valid_property_id = self.logic_wrapper.sanity_check_maintencance_report('property id', property_id, report.location)
                     if is_valid_property_id == True:
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Property ID', property_id)
-                        print('Property ID changed')
+                        print(Fore.GREEN + 'Property ID changed' + Style.RESET_ALL)
             
             elif user_choice == '4':
                 while is_valid_regular_maintenance == False:
@@ -707,7 +787,7 @@ class maintenance_report_UI_menu:
                     is_valid_regular_maintenance = self.logic_wrapper.sanity_check_maintencance_report('regular maintenance', regular_maintenance, report.location)
                     if is_valid_regular_maintenance == True:
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Regular', regular_maintenance)
-                        print('Regular Maintenance changed')
+                        print(Fore.GREEN + 'Regular Maintenance changed' + Style.RESET_ALL)
             
             elif user_choice == '5':
                 while is_valid_maintenance_description == False:
@@ -715,7 +795,7 @@ class maintenance_report_UI_menu:
                     is_valid_maintenance_description = self.logic_wrapper.sanity_check_maintencance_report('maintenance description', maintenance_description, report.location)
                     if is_valid_maintenance_description == True:
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Description', maintenance_description)
-                        print('Maintenance description changed')
+                        print(Fore.GREEN + 'Maintenance description changed' + Style.RESET_ALL)
 
             elif user_choice == '6':
                 while is_valid_price == False:
@@ -724,9 +804,9 @@ class maintenance_report_UI_menu:
                         is_valid_price = self.logic_wrapper.sanity_check_maintencance_report('cost', price, report.location)
                         if is_valid_price == True:
                             self.logic_wrapper.edit_maintencance_report(report, report.location, 'Cost', price)
-                            print('Price changed')
+                            print(Fore.GREEN + 'Price changed' + Style.RESET_ALL)
                     except ValueError:
-                        print('Needs to be a number')
+                        print(Fore.RED + 'Needs to be a number' + Style.RESET_ALL)
             
             elif user_choice == '7':
                 while is_valid_contractor_id == False:
@@ -734,7 +814,7 @@ class maintenance_report_UI_menu:
                     is_valid_contractor_id = self.logic_wrapper.sanity_check_maintencance_report('contractor id', contractor_id, report.location)
                     if is_valid_contractor_id == True:
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Contractor ID', contractor_id)
-                        print('Contractor ID changed')
+                        print(Fore.GREEN + 'Contractor ID changed' + Style.RESET_ALL)
 
             elif user_choice == '8':
                 while is_valid_work_request_id == False:
@@ -742,7 +822,7 @@ class maintenance_report_UI_menu:
                     is_valid_work_request_id = self.logic_wrapper.sanity_check_maintencance_report('work request id', work_request_id, report.location)
                     if is_valid_work_request_id == True:
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Work Request ID', work_request_id)
-                        print('Work request ID changed')
+                        print(Fore.GREEN + 'Work request ID changed' + Style.RESET_ALL)
 
             elif user_choice == '9':
                 self.logic_wrapper.edit_maintencance_report(report, report.location, 'Report Status', 'Pending')
@@ -751,7 +831,7 @@ class maintenance_report_UI_menu:
                 return
             
             else:
-                print('Invalid input')
+                print(Fore.RED + 'Invalid input' + Style.RESET_ALL)
 
     def print_single_maintenance_report(self, maintenance_report):
         """Prints a single maintenance report"""
