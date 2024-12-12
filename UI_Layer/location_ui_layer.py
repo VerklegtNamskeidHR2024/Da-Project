@@ -171,7 +171,7 @@ class location_UI_menu:
         match user_action.lower():
             case "1":
                 self.edit_amenity()
-            case "b", "B":
+            case "b":
                 return
             case _:
                 print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL)
@@ -180,12 +180,17 @@ class location_UI_menu:
         """Edit an amenity"""
         is_valid = False
         while is_valid == False:
+            # the user inputs the ID of the amenity they want to edit
             amenity_ID = input("Enter the ID of amenity you want to edit: ")
+            # fetches the amenity by ID
             amenity = self.logic_wrapper.fetch_amenity_by_id(amenity_ID, self.location)
+            # if the amenity exists, display the amenity and let the user input a new condition
             if amenity != None:
                 self.display_single_amenity(amenity)
                 new_condition = input("Enter new condition: ")
+                # sets the new condition to the amenity
                 changed_amenity = self.logic_wrapper.edit_amenity(amenity, new_condition)
+                # if the amenity condition is changed, print a success message
                 if changed_amenity:
                     print("Amenity condition changed successfully.")
                     is_valid = True
@@ -199,6 +204,7 @@ class location_UI_menu:
 
     def display_single_amenity(self, amenity):
         """Display a single amenity"""
+        # prints the information for the amenity the class is called with
         print("-" * 70)
         amenitiy_table = PrettyTable()
         amenitiy_table.field_names = ['Amenity Name', 'Property ID', 'Location', 'Condition', 'Price to fix', 'Description']

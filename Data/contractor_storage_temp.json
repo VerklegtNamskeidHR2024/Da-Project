@@ -2,12 +2,12 @@
     {
         "contractor_id": "C1",
         "company_name": "Daniela and Daughters",
-        "contact_name": "Tumi jua",
-        "opening_hours": "8-16",
-        "phone_number": 1234567,
+        "contact_name": "tumia",
+        "opening_hours": "10-12",
+        "phone_number": "1234567",
         "location": "Reykjavik",
         "previous_job_reports": [],
-        "warningtext": "meow meow"
+        "warningtext": "Very Angry Cats"
     },
     {
         "contractor_id": "C2",
@@ -55,6 +55,26 @@
         "contact_name": "olos",
         "opening_hours": "10-15",
         "phone_number": 6690269,
+        "location": "Reykjavik",
+        "previous_job_reports": [],
+        "warningtext": "Contractor Has No Warning"
+    },
+    {
+        "contractor_id": "C7",
+        "company_name": "1",
+        "contact_name": "2",
+        "opening_hours": "22-12",
+        "phone_number": 2205044,
+        "location": "Reykjavik",
+        "previous_job_reports": [],
+        "warningtext": "Contractor Has No Warning"
+    },
+    {
+        "contractor_id": "C8",
+        "company_name": "tum",
+        "contact_name": "2",
+        "opening_hours": "10-15",
+        "phone_number": "6690269",
         "location": "Reykjavik",
         "previous_job_reports": [],
         "warningtext": "Contractor Has No Warning"
