@@ -279,44 +279,42 @@ class Main_Menu:
                     return "q"
                 case _:
                     print(Fore.RED + "Wrong Input" + Style.RESET_ALL)
-            # user_action = self.display_menu_items()
-            # continue
-        # self.quit_system_message()
+        self.clear_screen()
         return user_action
                     
     
-    def test_some_stuff(self):
-        """just some tesing with getting data from storage""" 
+    # def test_some_stuff(self):
+    #     """just some tesing with getting data from storage""" 
         
-        contractor_list = self.logic_wrapper.get_all_contractors(self.location)
-        for item in contractor_list:
-            print(f"{item.contractor_id:<10}|{item.location:<20}")
-        print("-" * 40)
+    #     contractor_list = self.logic_wrapper.get_all_contractors(self.location)
+    #     for item in contractor_list:
+    #         print(f"{item.contractor_id:<10}|{item.location:<20}")
+    #     print("-" * 40)
 
-        employees_list = self.logic_wrapper.get_all_employees(self.location)
-        for item in employees_list:
-            print(f"{item.staff_id:<10}|{item.location:<20}")
-        print("-" * 40)
+    #     employees_list = self.logic_wrapper.get_all_employees(self.location)
+    #     for item in employees_list:
+    #         print(f"{item.staff_id:<10}|{item.location:<20}")
+    #     print("-" * 40)
+
+    #     # this needs to be looked at
+    #     # works but look at property_storage_manager for more info
+    #     properties_list = self.logic_wrapper.get_all_properities(self.location)
+    #     for item in properties_list:
+    #         print(f"{item.property_id:<10}|{item.location:<20}")
+    #     print("-" * 40)
+
+    #     report_list = self.logic_wrapper.get_all_maintenance_reports(self.location)
+    #     for item in report_list:
+    #         print(f"{item.report_id:<10}|{item.location:<20}")
+    #     print("-" * 40)
 
         # this needs to be looked at
-        # works but look at property_storage_manager for more info
-        properties_list = self.logic_wrapper.get_all_properities(self.location)
-        for item in properties_list:
-            print(f"{item.property_id:<10}|{item.location:<20}")
-        print("-" * 40)
+        # '''work_list = self.logic_wrapper.get_all_work_requests(self.location)
+        # for item in work_list:
+        #     print(f"{item.work_request_id:<10}|{item.location:<20}")
+        # print("-" * 40)'''
 
-        report_list = self.logic_wrapper.get_all_maintenance_reports(self.location)
-        for item in report_list:
-            print(f"{item.report_id:<10}|{item.location:<20}")
-        print("-" * 40)
-
-        # this needs to be looked at
-        '''work_list = self.logic_wrapper.get_all_work_requests(self.location)
-        for item in work_list:
-            print(f"{item.work_request_id:<10}|{item.location:<20}")
-        print("-" * 40)'''
-
-        location_list = self.logic_wrapper.get_all_locations(self.location)
-        for item in location_list:
-            print(f"{item.location:<20}")
-        print("-" * 40)
+        # location_list = self.logic_wrapper.get_all_locations(self.location)
+        # for item in location_list:
+        #     print(f"{item.location:<20}")
+        # print("-" * 40)

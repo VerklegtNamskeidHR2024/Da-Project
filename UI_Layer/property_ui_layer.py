@@ -127,26 +127,25 @@ class property_UI_menu:
                 print("Invalid property ID. Please try again.")
                 print()
                 continue
-            elif is_valid:
+            elif is_valid is True:
                 selected_property = self.logic_wrapper.get_property_by_id(self.location, property_id_selected)
+                # If there is not property with the slected ID you will get a message.
+                if selected_property is None:
+                    print("No property found with the provided ID.")
+                    continue
 
-            # If there is not property with the slected ID you will get a message.
-            if not selected_property:
-                print("No property found with the provided ID.")
-                return ""
+                # Print for single selected property
+                self.print_single_property(selected_property)
+                print("1. View Attached Items")
+                print("2. Edit Property Details")
+                # let you choose from the above 2.
 
-            # Print for single selected property
-            self.print_single_property(selected_property)
-            print("1. View Attached Items")
-            print("2. Edit Property Details")
-            # let you choose from the above 2.
-
-            selected_property_options = self.selected_property_logistics(
-                selected_property
-            )
-            if selected_property_options == "b":
-                continue
-            return selected_property_options.lower()
+                selected_property_options = self.selected_property_logistics(
+                    selected_property
+                )
+                if selected_property_options == "b":
+                    continue
+                return selected_property_options.lower()
         return property_id_selected.lower()
 
     def selected_property_logistics(self, selected_property: object) -> str:

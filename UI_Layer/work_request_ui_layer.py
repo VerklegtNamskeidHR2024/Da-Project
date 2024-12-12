@@ -1,6 +1,5 @@
 from Model_Classes.work_request_model import WorkRequest
 import os
-import rich
 from prettytable import PrettyTable
 from colorama import Fore, Style, init
 
@@ -14,7 +13,7 @@ class work_request_UI_menu:
         self.location = location
         self.staff_id = staff_id
 
-    # Completed.
+
     def start_point_work_requests_UI(self) -> str:
         """When an instance of this class is created, the class object calls this function first which in
         turn calls the function to load the work request menu and it's options for the user.
@@ -39,7 +38,11 @@ class work_request_UI_menu:
         if work_request_menu in ["q", "b"]:
             return work_request_menu
 
-    # Completed. Can be beautified.
+    def clear_screen(self):
+        ''' Clears the screen '''
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+
     def display_all_work_requests_printed(self, work_request_list: list):
         """Displays out all open work requests with their ID, Name and Description."""
 
@@ -138,36 +141,23 @@ class work_request_UI_menu:
         )
         self.display_all_work_requests_printed(work_request_list)
         if self.rank != "Employee":
-            print(
-                "{:0}{:>3}{:>15}{:>3}{:>19}".format(
-                    "1. Search Request",
-                    "|",
-                    "2. Add Request",
-                    "|",
-                    "3. New Requests",
-                )
-            )
-            print(
-                "{:0}{:>3}{:>20}{:>3}{:>19}".format(
-                    "4. Pending Requests",
-                    "|",
-                    "5. Closed Requests",
-                    "|",
-                    "6. All Requests",
-                )
-            )
-            print()
-            print("{:>20}".format("> Go Back: b, B"))
-            print("{:>20}".format("> Quit System: q, Q"))
+            print("1. Search Request")
+            print("2. Add Request")
+            print("3. New Requests")
+            print("4. Pending Requests")
+            print("5. Closed Requests")
+            print("6. All Requests")
+            print("{:>10}".format("Back - [ b, B ]"))
+            print("{:>10}".format("Quit - [ q, Q ]"))
             print()
         else:
-            print("{:0}{:>3}{:>20}".format("1. Search Request", "|", "2. New Requests"))
-            print(
-                "{:0}{:>3}{:>20}".format("3. Pending Requests", "|", "4. My Requests")
-            )
+            print("1. Search Request")
+            print("2. New Requests")
+            print("3. Pending Requests")
+            print("4. My Requests")
             print()
-            print("{:>20}".format("> Go Back: b, B"))
-            print("{:>20}".format("> Quit System: q, Q"))
+            print("{:>10}".format("Back - [ b, B ]"))
+            print("{:>10}".format("Quit - [ q, Q ]"))
             print()
         user_choice = input("Select an Option: ").lower()
         return user_choice
@@ -379,10 +369,6 @@ class work_request_UI_menu:
             work_request_object.mark_as_completed is True
             and work_request_object.work_request_status == "Pending"
         ):
-            print()
-            print("{:>20}".format("> Go Back: b, B"))
-            print("{:>20}".format("> Quit System: q, Q"))
-            print()
             while (go_back_or_quit := input("Select an Option: ").lower()) not in [
                 "q",
                 "b",
