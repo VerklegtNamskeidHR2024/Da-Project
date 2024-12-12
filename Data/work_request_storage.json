@@ -31,7 +31,7 @@
         "repetitive_work": true,
         "reopen_interval": 7,
         "priority": "High",
-        "work_request_status": "Pending",
+        "work_request_status": "Closed",
         "need_contractor": true,
         "contractor_id": "C2",
         "mark_as_completed": true,
