@@ -208,6 +208,9 @@ class Logic_Layer_Wrapper:
     def get_denied_reports(self, staff_id: str, location: str) -> list[MaintenanceReport]:
         return self.maintenance_report_logic_manager.get_denied_reports(staff_id, location)
     
+    def reopen_closed_report(self, report, location):
+        return self.maintenance_report_logic_manager.reopen_closed_report(report, location)
+    
     def sanity_check_maintencance_report(self, what_to_check, new_value, location):
         location_list = self.get_all_locations() # get all locations
         return self.maintenance_report_logic_manager.sanity_check_maintencance_report(what_to_check, new_value, location)
@@ -298,6 +301,14 @@ class Logic_Layer_Wrapper:
     def fetch_all_amenities_for_location_in_storage(self, location: str) -> list[Location]:
         return self.location_logic_manager.fetch_all_amenities_for_location_in_storage(location)
         # returns a list of all amenities for a specific location
+    
+    def fetch_amenity_by_id(self, amenity_ID: str, location: str) -> object:
+        return self.location_logic_manager.fetch_amenity_by_id(amenity_ID, location)
+        # returns an amenity object by amenity_ID
+
+    def edit_amenity(self, amenity: object, new_condition: str):
+        return self.location_logic_manager.edit_amenity(amenity, new_condition)
+        # edits an existing amenity in the storage
     
     def fetch_location_from_storage(self, location_id: str) -> Location:
         return self.location_logic_manager.fetch_location_from_storage(location_id)

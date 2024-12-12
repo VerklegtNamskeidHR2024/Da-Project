@@ -159,6 +159,8 @@ class maintenance_report_logic_manager:
                 incomplete_reports.append(report) # append the report to the incomplete reports list
 
         return incomplete_reports
+    
+    
 
     def edit_maintencance_report(self, maintenance_report, location, edit_choice, new_value):
         """Edit a maintenance report"""
@@ -218,10 +220,15 @@ class maintenance_report_logic_manager:
     def deny_or_accept_maintencance_report_for_admin(self, maintencance_report_ID, location, accept_or_deny): 
         """Deny or accept a maintenance report for an admin"""
         list_of_reports = self.get_all_maintencance_reports_at_location(location)  # get all maintenance reports at a location
-
+        work_request_list = self.storage_layer_wrapper.get_all_work_requests() # get all work requests
         for report in list_of_reports: # iterate through all reports
             if report.report_id == maintencance_report_ID: # checks if the report id is the same as the maintenance report id
                 if accept_or_deny == 'Accept': # checks if the admin accepts the report
+                    for work_request in work_request_list: # iterate through all work requests
+                        if work_request.work_request_id == report.work_request_id:
+                            work_request.set_work_request_status('Closed')
+                            self.storage_layer_wrapper.write_to_file_work_requests(work_request_list)
+
                     report.set_mark_as_done(True)
                     report.set_report_status('Closed')
                 elif accept_or_deny == 'Deny': # checks if the admin denies the report
@@ -272,6 +279,21 @@ class maintenance_report_logic_manager:
         else:
             return denied_reports
         
+    def reopen_closed_report(self, selected_report, location):
+        """Reopen a closed report"""
+        list_of_reports = self.get_all_maintencance_reports_at_location(location)
+        list_of_work_requests = self.storage_layer_wrapper.get_all_work_requests()
+        # iterate through all reports and reopen the closed report
+        for report in list_of_reports:
+            if report.report_id == selected_report.report_id:
+                report.set_report_status('Pending')
+
+        for work_request in list_of_work_requests:
+            if work_request.maintenance_report_id == selected_report.report_id:
+                work_request.set_work_request_status('Pending')
+
+        self.storage_layer_wrapper.write_to_file_maintenance_reports(list_of_reports)
+        self.storage_layer_wrapper.write_to_file_work_requests(list_of_work_requests)
 
     def get_single_maintenance_report(self, report_id):
         """Get a single maintenance report"""
