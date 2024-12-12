@@ -604,7 +604,7 @@ class maintenance_report_UI_menu:
                             print(Fore.RED + 'Contractor ID not changed' + Style.RESET_ALL)
             
             else:
-                print('Invalid input')
+                print(Fore.RED + 'Invalid input' + Style.RESET_ALL)
                 
 
         self.display_edit_maintenance_report_details(selected_maintenance_report)
@@ -678,7 +678,7 @@ class maintenance_report_UI_menu:
                     is_valid_report_name = self.logic_wrapper.sanity_check_maintencance_report('report name', report_name, report.location)
                     if is_valid_report_name == True:
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Report Name', report_name)
-                        print('Report name changed')
+                        print(Fore.GREEN + 'Report name changed' + Style.RESET_ALL)
             
             elif user_choice == '2':
                 while is_valid_staff_id == False:
@@ -686,7 +686,7 @@ class maintenance_report_UI_menu:
                     is_valid_staff_id = self.logic_wrapper.sanity_check_maintencance_report('staff id', staff_id, report.location)
                     if is_valid_staff_id == True:
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Staff ID', staff_id)
-                        print('Staff ID changed')
+                        print(Fore.GREEN + 'Staff ID changed' + Style.RESET_ALL)
 
             elif user_choice == '3':
                 while is_valid_property_id == False:
@@ -694,7 +694,7 @@ class maintenance_report_UI_menu:
                     is_valid_property_id = self.logic_wrapper.sanity_check_maintencance_report('property id', property_id, report.location)
                     if is_valid_property_id == True:
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Property ID', property_id)
-                        print('Property ID changed')
+                        print(Fore.GREEN + 'Property ID changed' + Style.RESET_ALL)
             
             elif user_choice == '4':
                 while is_valid_regular_maintenance == False:
@@ -702,7 +702,7 @@ class maintenance_report_UI_menu:
                     is_valid_regular_maintenance = self.logic_wrapper.sanity_check_maintencance_report('regular maintenance', regular_maintenance, report.location)
                     if is_valid_regular_maintenance == True:
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Regular', regular_maintenance)
-                        print('Regular Maintenance changed')
+                        print(Fore.GREEN + 'Regular Maintenance changed' + Style.RESET_ALL)
             
             elif user_choice == '5':
                 while is_valid_maintenance_description == False:
@@ -710,7 +710,7 @@ class maintenance_report_UI_menu:
                     is_valid_maintenance_description = self.logic_wrapper.sanity_check_maintencance_report('maintenance description', maintenance_description, report.location)
                     if is_valid_maintenance_description == True:
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Description', maintenance_description)
-                        print('Maintenance description changed')
+                        print(Fore.GREEN + 'Maintenance description changed' + Style.RESET_ALL)
 
             elif user_choice == '6':
                 while is_valid_price == False:
@@ -719,9 +719,9 @@ class maintenance_report_UI_menu:
                         is_valid_price = self.logic_wrapper.sanity_check_maintencance_report('cost', price, report.location)
                         if is_valid_price == True:
                             self.logic_wrapper.edit_maintencance_report(report, report.location, 'Cost', price)
-                            print('Price changed')
+                            print(Fore.GREEN + 'Price changed' + Style.RESET_ALL)
                     except ValueError:
-                        print('Needs to be a number')
+                        print(Fore.RED + 'Needs to be a number' + Style.RESET_ALL)
             
             elif user_choice == '7':
                 while is_valid_contractor_id == False:
@@ -729,7 +729,7 @@ class maintenance_report_UI_menu:
                     is_valid_contractor_id = self.logic_wrapper.sanity_check_maintencance_report('contractor id', contractor_id, report.location)
                     if is_valid_contractor_id == True:
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Contractor ID', contractor_id)
-                        print('Contractor ID changed')
+                        print(Fore.GREEN + 'Contractor ID changed' + Style.RESET_ALL)
 
             elif user_choice == '8':
                 while is_valid_work_request_id == False:
@@ -737,7 +737,7 @@ class maintenance_report_UI_menu:
                     is_valid_work_request_id = self.logic_wrapper.sanity_check_maintencance_report('work request id', work_request_id, report.location)
                     if is_valid_work_request_id == True:
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Work Request ID', work_request_id)
-                        print('Work request ID changed')
+                        print(Fore.GREEN + 'Work request ID changed' + Style.RESET_ALL)
 
             elif user_choice == '9':
                 self.logic_wrapper.edit_maintencance_report(report, report.location, 'Report Status', 'Pending')
@@ -746,7 +746,7 @@ class maintenance_report_UI_menu:
                 return
             
             else:
-                print('Invalid input')
+                print(Fore.RED + 'Invalid input' + Style.RESET_ALL)
 
     def print_single_maintenance_report(self, maintenance_report):
         """Prints a single maintenance report"""
