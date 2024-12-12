@@ -276,7 +276,7 @@ class location_UI_menu:
         # gets all amenities for the location
         amenities_list = self.logic_wrapper.fetch_all_amenities_for_location_in_storage(current_location.location)
         print(f"Amenities Attached To {current_location.location}:")
-        print("-" * 70)
+        print("-" * 80)
         amenities_table = PrettyTable()
         amenities_table.field_names = ['Amenity Name', 'Property ID', 'Location', 'Condition', 'Price to fix', 'Description']
         for amenity in amenities_list:
