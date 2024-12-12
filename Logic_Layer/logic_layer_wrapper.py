@@ -198,8 +198,8 @@ class Logic_Layer_Wrapper:
         return self.maintenance_report_logic_manager.get_employee_reports(staff_id)
         # returns a list of all maintenance reports for a specific employee
     
-    def get_incomplete_maintenance_reports(self, location: str) -> list[MaintenanceReport]:
-        return self.maintenance_report_logic_manager.get_incomplete_maintenance_reports(location)
+    def get_incomplete_maintenance_reports(self,) -> list[MaintenanceReport]:
+        return self.maintenance_report_logic_manager.get_incomplete_maintenance_reports()
         # returns a list of all incomplete maintenance reports
     
     def get_single_maintenance_report(self, report_id: str) -> MaintenanceReport:
