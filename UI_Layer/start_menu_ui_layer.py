@@ -211,10 +211,13 @@ class Main_Menu:
     def assigned_location_for_system(self, rank: str, staff_id: str) -> str:
         """Get the location for the user based on their rank and staff ID"""
         if rank == "Manager":
-            manager_location = self.logic_wrapper.get_manager_by_id(staff_id)
+            manager = self.logic_wrapper.get_manager_by_id(staff_id)
+            manager_location = manager.location
             return manager_location
-        elif rank == "Employee":
-            employee_location = self.logic_wrapper.get_employee_by_id(staff_id)
+        
+        if rank == "Employee":
+            employee = self.logic_wrapper.get_employee_by_id(staff_id)
+            employee_location = employee.location
             return employee_location
         
 
@@ -222,6 +225,8 @@ class Main_Menu:
     def display_menu_items(self):
         """Displays the menu items for the user"""
         
+        print()
+        print(f"Current Location - {self.location}")
         print()
         print(f" {self.rank} - Home Page")
         print("-" * 70)
@@ -233,7 +238,7 @@ class Main_Menu:
         if self.rank != "Employee":
             print("6) Locations")
         print()
-        print("{:<18}".format("> Quit System: q, Q"))
+        print("{:>18}".format("> Quit System: q, Q"))
         print("-" * 70)
 
         user_action = input("Select an Option: ").lower()

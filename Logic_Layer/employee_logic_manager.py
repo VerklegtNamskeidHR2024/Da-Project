@@ -19,21 +19,22 @@ class employee_logic_manager:
         all_managers = self.Storage_Layer_Wrapper.get_all_managers()
         return all_managers 
     
+
     def get_manager_by_id(self, staff_id: str) -> object: 
         """Find a manager by staff_id"""
         all_managers = self.Storage_Layer_Wrapper.get_all_managers()
         # checks if the manager id is in the list of managers then returns the manager
         for manager in all_managers:
             if manager.staff_id == staff_id:
-                return manager.location
+                return manager
 
     # Might not implement
     def get_all_employees(self) -> list:
         """Get all employees"""
 
         all_employees = self.Storage_Layer_Wrapper.get_all_employees()
-
         return all_employees
+
 
     def get_employee_by_id(self, staff_id: str) -> object:
         """find an employee by staff_id"""
@@ -41,7 +42,7 @@ class employee_logic_manager:
         # checks if the employee id is in the list of employees then returns the employee
         for employee in all_employees:
             if employee.staff_id == staff_id:
-                return employee.location
+                return employee
 
     def get_all_employees_at_location(self, location) -> list:
         """Get all employees at a specific location"""
