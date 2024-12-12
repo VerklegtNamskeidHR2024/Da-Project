@@ -348,7 +348,7 @@ class maintenance_report_UI_menu:
 
                 elif choice == '1':
                     valid_choice = True
-                    self.logic_wrapper.edit_maintencance_report(selected_report, selected_report.location, 'Report Status', 'Pending')
+                    self.logic_wrapper.reopen_closed_report(selected_report, selected_report.location)
                     print(f'Report {report_id} has been reopened')
                 else:
                     print('Invalid choice')

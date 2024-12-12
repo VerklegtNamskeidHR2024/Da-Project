@@ -12,7 +12,7 @@
         "repetitive_work": false,
         "reopen_interval": 0,
         "priority": "Medium",
-        "work_request_status": "Pending",
+        "work_request_status": "Closed",
         "need_contractor": true,
         "contractor_id": "C1",
         "mark_as_completed": false,
