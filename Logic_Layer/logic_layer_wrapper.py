@@ -147,6 +147,9 @@ class Logic_Layer_Wrapper:
     def sanity_check_ssn(self, ssn: str) -> bool:
         return self.employee_logic_manager.sanity_check_ssn(ssn)
         # checks if the social security number of an employee is correct
+
+    def sanity_check_ssn_add(self, ssn: str) -> bool:
+        return self.employee_logic_manager.sanity_check_ssn_add(ssn)
     
     def sanity_check_phone_number(self, phone_number: str) -> bool:
         return self.employee_logic_manager.sanity_check_phone_number(phone_number)
