@@ -26,15 +26,10 @@ class maintenance_report_UI_menu:
         
     def start_point_maintenance_reports_UI(self):
         ''' Entry point for the maintenance reports UI '''
-        #self.clear_screen()
         #Entry point for the maintenance reports UI
         self.clear_screen()
         self.display_maintenance_report()
         return
-
-       # maintenance_report_menu = self.display_maintenance_report()
-       # if maintenance_report_menu in ["q", "b"]:
-       #     return maintenance_report_menu
 
     def display_maintenance_report(self):
         ''' Sends the user to the menu based on their rank '''
@@ -55,7 +50,6 @@ class maintenance_report_UI_menu:
 
     def select_menu_option_admin_manager(self):
         ''' Admin/Manager menu '''
-        #self.clear_screen()
         # Starts by displaying all reports
         user_choice = ""
         # Then a while loop is started to keep the menu open until the user wants to go back
@@ -95,7 +89,6 @@ class maintenance_report_UI_menu:
 
     def employee_menu(self, staff_id):
         ''' Employee menu '''
-        #self.clear_screen()
         # A function is called to get all the reports connected to the employee logged in
         self.get_employee_reports(staff_id)
         self.print_all_reports
@@ -320,7 +313,6 @@ class maintenance_report_UI_menu:
 
     def list_pending_reports(self):
         """ Displays a list of pending reports in the system """
-        #self.clear_screen()
         #Display a list of pending reports
         print(f"{self.rank} - Maintenance Report Menu")
         if_reports = self.get_pending_reports()
