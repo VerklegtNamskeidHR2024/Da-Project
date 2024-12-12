@@ -79,7 +79,6 @@ class Main_Menu:
     def fun_print(self, text_to_print = "i need input bro", delay_in = 0.05):
         """send me a string ;)"""
         delay = delay_in
-        print(text_print)
         start = len(text_to_print)
         text_print = ""
         for i, char in enumerate(text_to_print):
@@ -121,7 +120,7 @@ class Main_Menu:
         for char in loading:
             sys.stdout.write(char)
             sys.stdout.flush() 
-            time.sleep(0.04)
+            time.sleep(0.02)
         print()
         self.clear_screen()
 
@@ -170,15 +169,18 @@ class Main_Menu:
             staff_id = input("Enter Your Staff ID: ")
             is_staff_id_valid = self.logic_wrapper.sanity_check_staff_id(rank, staff_id)
             if is_staff_id_valid is False: 
+                print()
                 print(Fore.RED + "ID Does Not Exist In The System, Please Try Again." + Style.RESET_ALL)
+                print()
+        self.clear_screen()
         return staff_id
     
 
     def select_location_for_system(self) -> str:
         """Select a location for the system to use"""
-        self.clear_screen()
         return_location = ""
         while return_location == "":
+            self.show_ascii_art_hq()
             location_table = PrettyTable()
             location_table.field_names = ['ID',"Location", "Country"]
             location_table.add_row(['1',"Iceland", "Reykjavik"])

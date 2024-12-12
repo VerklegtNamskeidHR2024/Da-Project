@@ -36,6 +36,7 @@ class work_request_UI_menu:
         #
         work_request_menu = self.menu_selection_logistics()
         if work_request_menu in ["q", "b"]:
+            self.clear_screen()
             return work_request_menu
 
     def clear_screen(self):
@@ -184,29 +185,41 @@ class work_request_UI_menu:
                 #
                 # If option 1 is selected, the user goes to the search work request sub-menu.
                 case ("1", self.rank):
+                    self.clear_screen()
                     user_choice = self.search_work_request_menu_logistics()
+                    self.clear_screen()
 
                 # If option 2 is selected, the admin/manager goes to the create work request sub-menu.
                 case ("2", "Admin") | ("2", "Manager"):
+                    self.clear_screen()
                     user_choice = self.display_create_work_request_form()
+                    self.clear_screen()
 
                 # If option 2 is selected for employees and option 3 for admins/manager, they go to the new work request sub-menu.
                 case ("2", "Employee") | ("3", "Admin") | ("3", "Manager"):
+                    self.clear_screen()
                     user_choice = self.display_and_select_new_work_requests()
+                    self.clear_screen()
 
                 # If option 3 is selected for employees and option 4 for admins/manager, they go to the pending work request sub-menu.
                 case ("3", "Employee") | ("4", "Admin") | ("4", "Manager"):
+                    self.clear_screen()
                     user_choice = self.display_and_select_pending_work_requests()
+                    self.clear_screen()
 
                 # If option 5 is selected for admins/manager, they go to the closed work request sub-menu.
                 case ("5", "Admin") | ("5", "Manager"):
+                    self.clear_screen()
                     user_choice = self.display_and_select_closed_work_requests()
+                    self.clear_screen()
 
                 # If option 4 is selected for for employees and option 6 for admins/manager, they go to either the my work requests
                 # or all work requests sub-menu. The difference is system priveledges, employees can only view and interact with work
                 # requests they are attached to, while admins/managers can see all in their current location.
                 case ("4, Employee") | ("6", "Admin") | ("6", "Manager"):
+                    self.clear_screen()
                     user_choice = self.display_and_select_request_overview()
+                    self.clear_screen()
 
                 # If b is entered, it is returned back to the start_point_work_requests_UI function which brings the
                 # user back to the home page.
@@ -221,7 +234,7 @@ class work_request_UI_menu:
                 # Any other input is except the one's listed above are treated as errors and the user given a message to notify them.
                 case _:
                     print(Fore.RED + "Invalid Input, Please Try Again." + Style.RESET_ALL)
-
+        self.clear_screen()
         return user_choice.lower()
 
     # Completed. Can be beautified.
@@ -230,7 +243,7 @@ class work_request_UI_menu:
 
         print("-" * 70)
         print("Search By: ")
-        print("{:>16}".format(" 1. ID"))
+        print("{:>14}".format(" 1. ID"))
         print("{:>16}".format(" 2. Date"))
         print("-" * 70)
         user_choice = input("Select An Option: ").lower()
@@ -253,10 +266,12 @@ class work_request_UI_menu:
                 # If option 2 is selected, the user goes to search for a work request by ID.
                 case "1":
                     user_choice = self.select_work_request_by_id()
+                    self.clear_screen()
 
                 # If option 1 is selected, the user goes the search a work request by date.
                 case "2":
                     user_choice = self.select_work_request_by_date()
+                    self.clear_screen()
 
                 # If b is entered, it is returned back to the start_point_work_requests_UI function which brings the
                 # user back to the home page.
