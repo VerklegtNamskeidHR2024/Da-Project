@@ -1,7 +1,8 @@
 class Contractor:
     
     def __init__(self, contractor_id:str="", company_name:str="", contact_name:str="", 
-                opening_hours:str="",phone_number:int=0,location:str="", previous_job_reports:list=[]):
+                opening_hours:str="",phone_number:int=0,location:str="", previous_job_reports:list=[],
+                warningtext:str="Contractor Has No Warning"):
         self.contractor_id = contractor_id
         self.company_name = company_name
         self.contact_name = contact_name
@@ -9,6 +10,7 @@ class Contractor:
         self.phone_number = phone_number
         self.location = location
         self.previous_job_reports = previous_job_reports
+        self.warningtext = warningtext
 
     def set_contractor_id(self, contractor_id):
         """Sets the contractor id"""
@@ -29,6 +31,10 @@ class Contractor:
     def set_phone_number(self, phone_number):
         """Sets the phone number"""
         self.phone_number = phone_number
+
+    def set_warningtext(self, warningtext):
+        """Sets the warning text"""
+        self.warningtext = warningtext
 
     def set_location(self, location):
         """Sets the location"""
@@ -75,5 +81,6 @@ class Contractor:
             'opening_hours': self.opening_hours,
             'phone_number': self.phone_number,
             'location': self.location,
-            'previous_job_reports': self.previous_job_reports
+            'previous_job_reports': self.previous_job_reports,
+            'warningtext': self.warningtext
         }

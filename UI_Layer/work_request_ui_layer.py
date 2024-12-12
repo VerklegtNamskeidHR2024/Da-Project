@@ -1206,6 +1206,7 @@ class work_request_UI_menu:
             print("{:>20}".format("> Go Back: b, B"))
             print("{:>20}".format("> Quit System: q, Q"))
             print("-" * 70)
+
             # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
         return selected_work_request.lower()

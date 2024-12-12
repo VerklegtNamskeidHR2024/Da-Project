@@ -50,6 +50,7 @@ class Main_Menu:
     # Needs to be implemented in all of the ui menus so we can acctually select the locations
 
     def start_point(self):
+        """Starts the main menu for the system"""
         
         user_home_page = self.user_home_page_logistics()
         if user_home_page == "q":
@@ -57,12 +58,14 @@ class Main_Menu:
 
 
     def quit_system_message(self):
+        """Prints out a message when the user quits the system"""
         print("Departing from NaN Air, Thank you for Visiting!")
         quit_string = "Departing from NaN Air, Thank you for Visiting!"
         # self.fun_print(quit_string)
 
 
     def show_ascii_art_hq(self):
+        """Prints out the ASCII art for the NaN Air HQ"""
         print("{:>61}".format("==================="))
         print("{:>44}{:>13}{:>3}".format("|", "NaN Air HQ", "|"))
         print("{:>14}{:>7}{:>15}{:>8}{:>10}{:>6}".format("___________", ".", ": : : :", "|", "_____", "|"))
@@ -107,7 +110,7 @@ class Main_Menu:
         
 
     def select_user_for_system(self) -> str:
-        # select a user for the system to use
+        """Selects a user for the system to use"""
 
         print()
         loading = "Loading" + ("." * 20)
@@ -123,6 +126,7 @@ class Main_Menu:
             print("Welcome to the NaN Air Properties and Staff System!")
             print("-" * 70)
             self.show_ascii_art_hq()
+            print("Log in as?")
             print("-" * 70)
             print("Log in as?")
             print("1. Admin")
@@ -147,24 +151,25 @@ class Main_Menu:
                     return_user = "Employee"
                     break
                 case _:
-                    print("No User Found, Please Try Again.")
+                    print(Fore.RED + "No User Found, Please Try Again." + Style.RESET_ALL)
 
         return return_user
     
 
     def enter_and_validate_staff_id(self, rank) -> str:
+        """Enter and validate the staff ID for the user"""
         print()
         is_staff_id_valid = False
         while is_staff_id_valid is False:
             staff_id = input("Enter Your Staff ID: ")
             is_staff_id_valid = self.logic_wrapper.sanity_check_staff_id(rank, staff_id)
             if is_staff_id_valid is False: 
-                print("ID Does Not Exist In The System, Please Try Again.")
+                print(Fore.RED + "ID Does Not Exist In The System, Please Try Again." + Style.RESET_ALL)
         return staff_id
     
 
     def select_location_for_system(self) -> str:
-        # select location for system to use 
+        """Select a location for the system to use"""
         return_location = ""
         while return_location == "":
             location_table = PrettyTable()
@@ -199,11 +204,12 @@ class Main_Menu:
                 case "6":
                     return_location = "Longyearbyen"
                 case _:
-                    print("No Location Found, Please Try Again.")
+                    print(Fore.RED + "No Location Found, Please Try Again." + Style.RESET_ALL)
         return return_location
 
 
     def assigned_location_for_system(self, rank: str, staff_id: str) -> str:
+        """Get the location for the user based on their rank and staff ID"""
         if rank == "Manager":
             manager = self.logic_wrapper.get_manager_by_id(staff_id)
             manager_location = manager.location
@@ -217,6 +223,7 @@ class Main_Menu:
 
 
     def display_menu_items(self):
+        """Displays the menu items for the user"""
         
         print()
         print(f"Current Location - {self.location}")
@@ -238,6 +245,7 @@ class Main_Menu:
         return user_action
 
     def user_home_page_logistics(self):
+        """Manages the user home page logistics"""
 
         # Calls the sub menus
         user_action = ""
@@ -261,7 +269,7 @@ class Main_Menu:
                 case "q":
                     return "q"
                 case _:
-                    print("Wrong Input")
+                    print(Fore.RED + "Wrong Input" + Style.RESET_ALL)
             # user_action = self.display_menu_items()
             # continue
         # self.quit_system_message()

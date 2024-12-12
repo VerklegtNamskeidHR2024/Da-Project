@@ -2,11 +2,10 @@
     {
         "name": "Hreimur",
         "social_security_number": "1234567899",
-        "phone_number": "5881234",
-        "phone_number": "1234567",
+        "phone_number": "1234555",
         "location": "Reykjavik",
         "system_permissions": "Employee",
-        "email": "hreimur8@gmail.com",
+        "email": "hreimur@gmail.com",
         "staff_id": "E1"
     },
     {

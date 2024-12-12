@@ -35,7 +35,6 @@ class work_request_logic_manager:
     def sanity_check_priority_for_request(self, priority: str) -> bool:
         """Takes the input given by the user and returns True if the user had entered spefically low/Low, medium/Medium
         or high/High. Otherwise it returns False."""
-        
 
         match priority:
             case "high" | "High":
@@ -52,7 +51,7 @@ class work_request_logic_manager:
     ) -> bool:
         """Performs very simple logistics to verify user input, can be expanded to perform higher level logistics.
         bool: True if the user input passes the logisitics, False otherwise."""
-
+        
         if category == "name":
             if len(value_to_be_verified) < 5:
                 return False
@@ -118,6 +117,7 @@ class work_request_logic_manager:
         return False
 
 
+
     def sanity_check_employee_id_for_request(self, staff_id: str) -> bool:
         """Gets all employees from storage and compares the employee ID given by the user to the ones that already exist.
         If the one given matches with one in the storage, it returns True. Otherwise False. """
@@ -135,13 +135,17 @@ class work_request_logic_manager:
         highest_id = -1
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         for work_request in all_work_requests:
+
             # Slices the work request ID string to only store the numbers 
             # that proceed WR in the variable.
+
             stripped_id = work_request.work_request_id[2:]
 
             highest_id = max(highest_id, int(stripped_id))
+
             # With each iteration, the highest ID is raised by 1 up until it 
             # reaches the end of the list.
+
         highest_id += 1
         new_work_request_id = "WR" + str(highest_id)
         Work_request.set_work_request_id(new_work_request_id)
@@ -361,7 +365,7 @@ class work_request_logic_manager:
 
         work_request_sorted_list = []
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
-
+        # checks if the work request is pending, accepted by employee and the location is the same
         for work_request in all_work_requests:
             # If the user is an admin/manager then they have access to all open work requests in their location
             # while an employee does not. Only compares the given location, that they have been accepted by

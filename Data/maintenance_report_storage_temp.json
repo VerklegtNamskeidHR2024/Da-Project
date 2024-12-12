@@ -194,19 +194,5 @@
         "mark_as_done": false,
         "contractor_id": "C1",
         "work_request_id": "WR1"
-    },
-    {
-        "report_id": "MR15",
-        "report_name": "Daniela sucks",
-        "location": "Reykjavik",
-        "property_id": "P1",
-        "staff_id": "E1",
-        "regular_maintenance": true,
-        "maintenance_description": "Daniela suckar i forritun",
-        "report_status": "Pending",
-        "price": "0",
-        "mark_as_done": false,
-        "contractor_id": "",
-        "work_request_id": "WR2"
     }
 ]

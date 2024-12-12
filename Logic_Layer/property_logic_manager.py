@@ -17,7 +17,14 @@ class property_logic_manager:
             else:
                 return False
         # checks if the location is in the list of locations
-        elif what_to_check == "location":
+        elif what_to_check == 'property id':
+            list_of_all_properties = self.Storage_Layer_Wrapper.get_all_properties()
+            for property in list_of_all_properties:
+                if property.property_id == new_value:
+                    return True
+            return False
+
+        elif what_to_check == 'location':
             list_of_all_locations = self.Storage_Layer_Wrapper.get_all_locations()
             for location in list_of_all_locations:
                 if location.location == new_value:
@@ -146,6 +153,7 @@ class property_logic_manager:
         """Get all work requests for a property"""
         work_request_list = []
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
+        # checks if the property id is in the list of work requests then returns the work requests
         for work_request in all_work_requests:
             if work_request.property_id == property_id:
                 work_request_list.append(work_request)
@@ -155,8 +163,9 @@ class property_logic_manager:
         """Get all maintenance reports for a property"""
         maintenance_report_list = []
         all_maintenance_reports = (
-            self.Storage_Layer_Wrapper.get_all_maintenance_report()
+            self.Storage_Layer_Wrapper.get_all_maintenance_reports()
         )
+        # checks if the property id is in the list of maintenance reports then returns the maintenance reports
         for maintenance_report in all_maintenance_reports:
             if maintenance_report.property_id == property_id:
                 maintenance_report_list.append(maintenance_report)

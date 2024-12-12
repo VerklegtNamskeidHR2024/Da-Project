@@ -1,3 +1,6 @@
+# missing list
+# !!!!!give contractor warning!!!!!
+
 class contractor_logic_manager:
     def __init__(self, Storage_Layer_Wrapper):
         """Constructor for contractor logic manager"""
@@ -74,11 +77,6 @@ class contractor_logic_manager:
         new_property_id = 'C' + str(highestID) # set the new id to the highest id
         return new_property_id  # return the new id
 
-    def write_to_file_checker(self, new_list: list) -> list:
-        # needs to check if all the same ids are in the new list and the old one
-        # then send the new list to storage
-        return new_list
-    # make sure list to write is ok
     
     def edit_existing_contractor_in_storage(self, contractor, location, edit_choice, new_value):
         """Edit an existing contractor in the storage"""
@@ -92,6 +90,8 @@ class contractor_logic_manager:
                     contr.set_phone_number(new_value)
                 elif edit_choice == 'opening_hours':
                     contr.set_opening_hours(new_value)
+                elif edit_choice == 'warning':
+                    contr.set_warningtext(new_value)
         self.Storage_Layer_Wrapper.write_to_file_contractor(list_of_contractors) # write the list of all contractors to the storage
 
 
