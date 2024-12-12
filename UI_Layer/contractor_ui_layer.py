@@ -96,7 +96,7 @@ class contractor_UI_menu():
                     # quit back to main menu
                     pass
                 case _:
-                    print("wrong input")
+                    print(Fore.RED + "Wrong input" + Style.RESET_ALL)
         return 
     
     def display_contractor_menu_admin_and_manager(self) -> None:
@@ -128,7 +128,7 @@ class contractor_UI_menu():
                     loop = False
                     pass
                 case _:
-                    print("wrong input")
+                    print(Fore.RED + "Wrong input" + Style.RESET_ALL)
         return 
 
     def display_add_contractor_form(self) -> None:
@@ -152,28 +152,28 @@ class contractor_UI_menu():
                     new_contractor.set_company_name(company_name)
                     valid_company_name = True
                 else:
-                    print("Invalid company name. Please try again.")
+                    print(Fore.RED + "Invalid company name. Please try again." + Style.RESET_ALL)
             while valid_contact_name == False:
                 contact_name = input(f"{"| Enter contact name ":<30}| ")
                 if self.logic_wrapper.sanity_check_contractor("contact_name", contact_name) == True:
                     new_contractor.set_contact_name(contact_name)
                     valid_contact_name = True
                 else:
-                    print("Invalid contact name. Please try again.")
+                    print(Fore.RED + "Invalid contact name. Please try again." + Style.RESET_ALL)
             while valid_opening_hours == False:
                 opening_hours = input(f"{"| Enter opening hours ":<30}| ")
                 if self.logic_wrapper.sanity_check_contractor("opening_hours", opening_hours) == True:
                     new_contractor.set_opening_hours(opening_hours)
                     valid_opening_hours = True
                 else:
-                    print("Invalid opening hours. Please try again. Use This format Example: 08-16")
+                    print(Fore.RED + "Invalid opening hours. Please try again. Use This format Example: 08-16" + Style.RESET_ALL)
             while valid_phone_number == False:
                 phone_number = input(f"{"| Enter phone number ":<30}| ")
                 if self.logic_wrapper.sanity_check_contractor("phone_number", phone_number) == True:
                     new_contractor.set_phone_number(phone_number)
                     valid_phone_number = True
                 else:
-                    print("Invalid phone number. Please try again. No letters or special characters and lenght of 7.")
+                    print(Fore.RED + "Invalid phone number. Please try again. No letters or special characters and lenght of 7." + Style.RESET_ALL)
             # set the location for the new contractor from the current location
             new_contractor.set_location(self.location)
 
@@ -192,16 +192,20 @@ class contractor_UI_menu():
 
     def display_view_contractor(self) -> None:
         '''Shows contractor information'''
-        try:
-            # find contracotor from id
-            contractor_to_use = self.select_contractor_by_id()
-            # if no contractor is found
-            if contractor_to_use == None:
-                print("No contractor with that ID")
-                return
-        except:
-            print("something went wrong")
-            return
+        # find contracotor from id
+        found_contractor = False
+        while found_contractor == False:
+            try:
+                print(">Go to Home Page: b, B")
+                contractor_to_use = self.select_contractor_by_id()
+                if contractor_to_use:
+                    found_contractor = True
+                elif contractor_to_use == False:
+                    return
+                else:
+                    pass
+            except:
+                print(Fore.RED + "something went wrong" + Style.RESET_ALL)
         
         self.clear_screen()
         loop = True
@@ -243,7 +247,7 @@ class contractor_UI_menu():
             if is_valid == True:
                 self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'warning', warning)
             self.clear_screen()
-            print('Contractor has been given a warning.')
+            print(Fore.GREEN + "Contractor has been given a warning." + Style.RESET_ALL)
             return
         except:
             self.clear_screen()
@@ -253,12 +257,21 @@ class contractor_UI_menu():
     def display_edit_contractor_menu(self) -> None:
         """edit contractor menu"""
         # find contracotor from id
-        try:
-            contractor_to_use = self.select_contractor_by_id()
-            if contractor_to_use == None:
-                return
-        except:
-            print("something went wrong")
+        # allows the user to select a contractor by id
+        # and then back out or try again
+        found_contractor = False
+        while found_contractor == False:
+            try:
+                print(">Go to Home Page: b, B")
+                contractor_to_use = self.select_contractor_by_id()
+                if contractor_to_use:
+                    found_contractor = True
+                elif contractor_to_use == False:
+                    return
+                else:
+                    pass
+            except:
+                print(Fore.RED + "something went wrong" + Style.RESET_ALL)
 
         self.clear_screen()
         loop = True
@@ -284,7 +297,7 @@ class contractor_UI_menu():
                 case "b" | "B":
                     loop = False
                 case _:
-                    print("Not Valid Input")
+                    print((Fore.RED + "Not Valid Input" + Style.RESET_ALL))
         return
     
     def change_contact_name(self, contractor) -> None:
@@ -297,14 +310,14 @@ class contractor_UI_menu():
             if is_valid == True:
                 self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'contact_name', new_contact_name)
                 self.clear_screen()
-                print('Contact name has been changed.')
+                print(Fore.GREEN + "Contact name has been changed." + Style.RESET_ALL)
             else:
                 self.clear_screen()
-                print("Invalid input contact name")
+                print(Fore.RED + "Invalid contact name" + Style.RESET_ALL)
             return
         except:
             self.clear_screen()
-            print("something went wrong")
+            print(Fore.RED + "something went wrong" + Style.RESET_ALL)
             return
 
     def change_phone_number(self, contractor) -> None:
@@ -319,15 +332,15 @@ class contractor_UI_menu():
                     # if the phone number is valid then change the phone number
                     self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'phone_number', phone_input)
                     self.clear_screen()
-                    print('Phone number has been changed.')
+                    print(Fore.GREEN + "Phone number has been changed." + Style.RESET_ALL)
                     return
                 else:
                     self.clear_screen()
-                    print("Invalid input. Please enter numbers only.")
+                    print(Fore.RED + "Invalid phone number. Please try again. No letters or special characters and lenght of 7." + Style.RESET_ALL)
                 return
         except:
             self.clear_screen()
-            print("something went wrong")
+            print(Fore.RED + "something went wrong" + Style.RESET_ALL)
             return
 
     def change_opening_hours(self, contractor) -> None:
@@ -340,33 +353,35 @@ class contractor_UI_menu():
                 # if the opening hours are valid then change the opening hours
                 self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'opening_hours', new_opening_hours)
                 self.clear_screen()
-                print('Opening hours have been changed.')
+                print(Fore.GREEN + "Opening hours have been changed." + Style.RESET_ALL)
             else:
                 self.clear_screen()
-                print("Invalid input opening hours")
+                print(Fore.RED + "Invalid input opening hours" + Style.RESET_ALL)
         except:
             self.clear_screen()
-            print("something went wrong")
+            print(Fore.RED + "something went wrong" + Style.RESET_ALL)
 
     def select_contractor_by_id(self) -> None:
         """get a contractor by ID"""
         id_to_find = input("enter ID to select contractor: ")
+        if id_to_find in ["b", "B"]:
+            return False
+        
         try:
             # calls get contractor by id from logic layer
             contractor_from_id = self.logic_wrapper.get_contractor_by_id(self.location, id_to_find)
             if not contractor_from_id:
                 # returns None if he is not found
-                print(f"No contractor found with ID: {id_to_find}")
+                print(Fore.RED + f"No contractor found with that ID: {id_to_find}" + Style.RESET_ALL)
                 return None
             # returns the contractor if he is found
             return contractor_from_id
         except:
-            print("something went wrong")
+            print(Fore.RED + "Something went wrong." + Style.RESET_ALL)
 
 
     def print_single_contractor(self, contractor) -> None:
         """print a single contractor"""
-        
         print("-"*30)
         # create a table to print the contractor
         contractor_print_table = PrettyTable()
@@ -392,48 +407,54 @@ class contractor_UI_menu():
 
     def display_contractor_maintenance_reports(self, selected_contractor: object) -> str:
         ''' Displays maintenance reports for a contractor '''
-        
-        # create a table to print the maintenance reports
-        Contractor_maintenance_reports_table = PrettyTable(['Report ID', 'Report Name', 'Description', 'Status'])
-        print("Maintenance Reports for the selected contractor.")
         # get the maintenance reports for the contractor
         contractor_maintenance_reports = self.logic_wrapper.get_contractor_maintenance_reports(self.location, selected_contractor.contractor_id)
-        # loop through the maintenance reports and add them to the table if they have the current contractors id
-        for maintenance_report in contractor_maintenance_reports:
-            Contractor_maintenance_reports_table.add_row([maintenance_report.report_id, maintenance_report.report_name, maintenance_report.maintenance_description, maintenance_report.report_status])
-        border_color = Fore.MAGENTA
-        reset_color = Style.RESET_ALL
-        Contractor_maintenance_reports_table.border = True
-        Contractor_maintenance_reports_table.junction_char = f"{border_color}+{reset_color}"
-        Contractor_maintenance_reports_table.horizontal_char = f"{border_color}-{reset_color}"
-        Contractor_maintenance_reports_table.vertical_char = f"{border_color}|{reset_color}"
-        print('')
-        print(Contractor_maintenance_reports_table)
-        bause_breaker = input("\nPress Enter to return.")
-        print('')
-        return
-        
-    
+        if not contractor_maintenance_reports:
+            print(Fore.RED + "No maintenance reports for the selected contractor." + Style.RESET_ALL)
+            return
+        else:
+            # create a table to print the maintenance reports
+            Contractor_maintenance_reports_table = PrettyTable(['Report ID', 'Report Name', 'Description', 'Status'])
+            print("Maintenance Reports for the selected contractor.")
+            # loop through the maintenance reports and add them to the table if they have the current contractors id
+            for maintenance_report in contractor_maintenance_reports:
+                Contractor_maintenance_reports_table.add_row([maintenance_report.report_id, maintenance_report.report_name, maintenance_report.maintenance_description, maintenance_report.report_status])
+            border_color = Fore.MAGENTA
+            reset_color = Style.RESET_ALL
+            Contractor_maintenance_reports_table.border = True
+            Contractor_maintenance_reports_table.junction_char = f"{border_color}+{reset_color}"
+            Contractor_maintenance_reports_table.horizontal_char = f"{border_color}-{reset_color}"
+            Contractor_maintenance_reports_table.vertical_char = f"{border_color}|{reset_color}"
+            print('')
+            print(Contractor_maintenance_reports_table)
+            bause_breaker = input("\nPress Enter to return.")
+            print('')
+            self.clear_screen()
+            return
 
     def display_contractor_work_requests(self, selected_contractor: object) -> str:
         ''' Displays work requests for a property '''
-
-        contractor_work_requests_table = PrettyTable(['Work Request ID', 'Description', 'Mark as Completed'])
-        print("Work Requests for the selected Contractor.")
         # get the work requests for the contractor
         contractor_work_requests = self.logic_wrapper.get_contractor_work_requests(self.location, selected_contractor.contractor_id)
-        # loop through the work requests and add them to the table if they have the current contractors id
-        for work_request in contractor_work_requests:
-            contractor_work_requests_table.add_row([work_request.work_request_id, work_request.description, work_request.mark_as_completed])
-        border_color = Fore.MAGENTA
-        reset_color = Style.RESET_ALL
-        contractor_work_requests_table.border = True
-        contractor_work_requests_table.junction_char = f"{border_color}+{reset_color}"
-        contractor_work_requests_table.horizontal_char = f"{border_color}-{reset_color}"
-        contractor_work_requests_table.vertical_char = f"{border_color}|{reset_color}"
-        print('')
-        print(contractor_work_requests_table)
-        bause_breaker = input("\nPress Enter to return.")
-        print('')
-        return
+        if not contractor_work_requests:
+            print(Fore.RED + "No work requests for the selected contractor." + Style.RESET_ALL)
+            return
+        else:
+            contractor_work_requests_table = PrettyTable(['Work Request ID', 'Description', 'Mark as Completed'])
+            print("Work Requests for the selected Contractor.")
+            # loop through the work requests and add them to the table if they have the current contractors id
+            for work_request in contractor_work_requests:
+                contractor_work_requests_table.add_row([work_request.work_request_id, work_request.description, work_request.mark_as_completed])
+            border_color = Fore.MAGENTA
+            reset_color = Style.RESET_ALL
+            contractor_work_requests_table.border = True
+            contractor_work_requests_table.junction_char = f"{border_color}+{reset_color}"
+            contractor_work_requests_table.horizontal_char = f"{border_color}-{reset_color}"
+            contractor_work_requests_table.vertical_char = f"{border_color}|{reset_color}"
+            print('')
+            print(contractor_work_requests_table)
+            bause_breaker = input("\nPress Enter to return.")
+            print('')
+            self.clear_screen()
+            return
 
