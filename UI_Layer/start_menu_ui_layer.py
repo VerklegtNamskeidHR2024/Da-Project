@@ -280,7 +280,10 @@ class Main_Menu:
                 case "q":
                     return "q"
                 case _:
+                    
                     print(Fore.RED + "Wrong Input" + Style.RESET_ALL)
+                    time.sleep(0.4)
+                    self.clear_screen()
         self.clear_screen()
         return user_action
-                    
+            
