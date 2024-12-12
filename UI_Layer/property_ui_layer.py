@@ -130,8 +130,11 @@ class property_UI_menu:
        
         # You choose the property id for the properrty you looking for
         # kormakur fix this cant do sanity check on property id brother!
+        
+
         while (property_id_selected := input("Enter the Property ID to select: ").strip()) not in ["q", "b", "Q", "B"]:
         # Gets property by id
+            self.clear_screen()
             is_valid = self.logic_wrapper.sanity_check_properties('property_id', property_id_selected)
             if is_valid is False:
                 print()
@@ -146,6 +149,7 @@ class property_UI_menu:
                     continue
 
                 # Print for single selected property
+                self.clear_screen()
                 self.print_single_property(selected_property)
                 print("1. View Attached Items")
                 print("2. Edit Property Details")
@@ -187,7 +191,7 @@ class property_UI_menu:
 
     def display_add_property(self):
         """Displays the form to add a new property."""
-
+        self.clear_screen()
         new_property = House()
         print()
         print("{:>30}".format("[ New Property Form ]"))
@@ -198,7 +202,7 @@ class property_UI_menu:
 
     def display_add_amenity(self):
         """Displays the form to add a new property."""
-
+        self.clear_screen()
         new_amenity = Amenity()
         print()
         print("[ New Amenity Form ]")
@@ -395,6 +399,7 @@ class property_UI_menu:
 
     def display_view_attached_options(self, selected_property: object) -> str:
         """Displays the options for the selected property"""
+        self.clear_screen()
         print("-" * 80)
         print("1. Display Work Requests")
         print("2. Display Maintenance Reports")
@@ -538,6 +543,7 @@ class property_UI_menu:
         self, selected_property: str
     ) -> str:  # type hint to print because of kormakur >:)
         """Displays work requests for a property"""
+        self.clear_screen()
         property_work_requests_table = PrettyTable(
             ["Work Request ID", "Description", "Mark as Completed"]
         )
@@ -574,6 +580,7 @@ class property_UI_menu:
         property_maintenance_reports_table = PrettyTable(
             ["Report ID", "Report Name", "Description", "Status"]
         )
+        self.clear_screen()
         print("Maintenance Reports for the selected property.")
         property_maintenance_reports = (
             self.logic_wrapper.get_property_maintenance_reports(
