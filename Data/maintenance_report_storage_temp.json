@@ -222,5 +222,19 @@
         "mark_as_done": false,
         "contractor_id": "",
         "work_request_id": ""
+    },
+    {
+        "report_id": "MR17",
+        "report_name": "HRemmi badboy",
+        "location": "Reykjavik",
+        "property_id": "P1",
+        "staff_id": "E1",
+        "regular_maintenance": false,
+        "maintenance_description": "hremmi has been a very bad boy and needs a good spank in room 1",
+        "report_status": "Incomplete",
+        "price": "10000000",
+        "mark_as_done": false,
+        "contractor_id": "",
+        "work_request_id": ""
     }
 ]
