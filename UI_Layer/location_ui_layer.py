@@ -154,8 +154,10 @@ class location_UI_menu:
                 case "2":
                     edit_user_action = self.change_opening_hours(current_location)
                 case "q":
+                    self.clear_screen()
                     return "q"
                 case "b":
+                    self.clear_screen()
                     return "b"
                 case _:
                     print(Fore.RED + "Invalid input. Please try again." + Style.RESET_ALL)
@@ -175,8 +177,8 @@ class location_UI_menu:
                     continue
                 # if the phone number is valid, change the phone number and print the location information
                 self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'phone_number', phone_input)
-                print("Phone Number Changed Successfully.")
                 self.clear_screen()
+                print(Fore.GREEN + "Phone Number Changed Successfully." + Style.RESET_ALL)
                 return ""
             self.clear_screen()
             return phone_input.lower()
@@ -196,8 +198,8 @@ class location_UI_menu:
                     continue
                 # if the opening hours are valid, change the opening hours and print the location information
                 self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'opening_hours', new_opening_hours)
-                print("Opening hours changed successfully.")
                 self.clear_screen()
+                print(Fore.GREEN + "Opening hours changed successfully." + Style.RESET_ALL)
                 return ""
             self.clear_screen()
             return new_opening_hours.lower()
@@ -241,10 +243,10 @@ class location_UI_menu:
                 changed_amenity = self.logic_wrapper.edit_amenity(amenity, new_condition)
                 # if the amenity condition is changed, print a success message
                 if changed_amenity:
-                    print()
-                    print("Amenity Condition Was Successfully Changed!")
-                    print()
                     self.clear_screen()
+                    print()
+                    print(Fore.GREEN + "Amenity Condition Was Successfully Changed!" + Style.RESET_ALL)
+                    print()
                     return ""
                 print(Fore.RED + f"No Amenity Found With That ID {amenity_ID}" + Style.RESET_ALL)
         self.clear_screen()
@@ -272,24 +274,28 @@ class location_UI_menu:
 
     def display_attached_amenities(self):
         """Display all amenities attached to the location"""
-        # when admin needs to select location
-        current_location = self.get_current_location()
         # gets all amenities for the location
         amenities_list = self.logic_wrapper.fetch_all_amenities_for_location_in_storage(current_location.location)
-        print(f"Amenities Attached To {current_location.location}:")
-        print("-" * 80)
-        amenities_table = PrettyTable()
-        amenities_table.field_names = ['Amenity Name', 'Property ID', 'Location', 'Condition', 'Price to fix', 'Description']
-        for amenity in amenities_list:
-            amenities_table.add_row([amenity.name, amenity.property_id, amenity.location, amenity.condition, amenity.total_price_to_fix, amenity.amenity_description ])
-        border_color = Fore.BLUE
-        reset_color = Style.RESET_ALL
-        amenities_table.border = True
-        amenities_table.junction_char = f"{border_color}+{reset_color}"
-        amenities_table.horizontal_char = f"{border_color}-{reset_color}"
-        amenities_table.vertical_char = f"{border_color}|{reset_color}"
-        print(amenities_table)
-        print("-" * 80)
+        if not amenities_list:
+            print(Fore.RED + "No Amenities Found." + Style.RESET_ALL)
+            return
+        else:
+            # when admin needs to select location
+            current_location = self.get_current_location()
+            print(f"Amenities Attached To {current_location.location}:")
+            print("-" * 70)
+            amenities_table = PrettyTable()
+            amenities_table.field_names = ['Amenity Name', 'Property ID', 'Location', 'Condition', 'Price to fix', 'Description']
+            for amenity in amenities_list:
+                amenities_table.add_row([amenity.name, amenity.property_id, amenity.location, amenity.condition, amenity.total_price_to_fix, amenity.amenity_description ])
+            border_color = Fore.BLUE
+            reset_color = Style.RESET_ALL
+            amenities_table.border = True
+            amenities_table.junction_char = f"{border_color}+{reset_color}"
+            amenities_table.horizontal_char = f"{border_color}-{reset_color}"
+            amenities_table.vertical_char = f"{border_color}|{reset_color}"
+            print(amenities_table)
+            print("-" * 80)
 
     def get_current_location(self):
         """Get the current location and return it"""
