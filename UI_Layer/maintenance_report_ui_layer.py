@@ -57,10 +57,10 @@ class maintenance_report_UI_menu:
         ''' Admin/Manager menu '''
         #self.clear_screen()
         # Starts by displaying all reports
-        self.print_all_reports()
         user_choice = ""
         # Then a while loop is started to keep the menu open until the user wants to go back
-        while user_choice != "b":
+        while user_choice.lower() != "b":
+            self.print_all_reports()
             # The menu is displayed
             print(f"{self.rank} - Maintenance Report Menu")
             print('-' * 50)
@@ -73,10 +73,10 @@ class maintenance_report_UI_menu:
             # The user is asked to select an option
             user_choice = input("Select an Option: ")
             # The user input is checked and the user is sent to the corresponding menu
-            if user_choice == "b":
+            if user_choice.lower() == "b":
                 self.clear_screen()
                 return
-            elif user_choice == 'q':
+            elif user_choice.lower() == 'q':
                 self.quit_system()
             elif user_choice == '1':
                 self.clear_screen()
@@ -362,7 +362,7 @@ class maintenance_report_UI_menu:
                     time.sleep(1.5)
                     self.clear_screen()
 
-                elif choice == 'b':
+                elif choice.lower() == 'b':
                     valid_choice = True
                     self.clear_screen()
 
@@ -401,7 +401,7 @@ class maintenance_report_UI_menu:
             valid_choice = False
             while valid_choice == False:
                 choice = input('Choose: ')
-                if choice == 'b':
+                if choice.lower() == 'b':
                     self.clear_screen()
                     valid_choice = True
 
@@ -428,7 +428,7 @@ class maintenance_report_UI_menu:
 
         pending_report_list = self.logic_wrapper.get_all_pending_maintenance_reports(self.location)
         if pending_report_list == 'No pending Reports':
-            print('No Pending Reports!')
+            print(Fore.RED + 'No Pending Reports!\n' + Style.RESET_ALL)
             return False
         else:
             for report in pending_report_list:
@@ -452,7 +452,7 @@ class maintenance_report_UI_menu:
         print("List of closed reports\n")
         closed_report_list = self.logic_wrapper.get_all_closed_maintenance_reports(self.location)
         if closed_report_list == 'No closed reports':
-            print('No Closed Reports!')
+            print(Fore.RED + 'No Closed Reports!\n' + Style.RESET_ALL)
             return False
         else:
             for report in closed_report_list:
@@ -626,8 +626,6 @@ class maintenance_report_UI_menu:
         pending_report_list = self.logic_wrapper.get_all_maintenance_reports_at_location(self.location)
         if pending_report_list == []:
             print(f'No reports in the system at {self.location}')
-            time.sleep(1.5)
-            self.clear_screen()
         else:
             for report in pending_report_list:
                 all_reports_table.add_row([report.report_id, report.report_name, report.property_id, report.report_status])
@@ -648,6 +646,10 @@ class maintenance_report_UI_menu:
         edit_report_table.field_names = ['Report ID', 'Report Name', 'Property ID', 'Report Status']
 
         all_report_list = self.logic_wrapper.get_all_maintenance_reports_at_location(self.location)
+        if all_report_list == []:
+            print(Fore.RED + 'No reports in the system\n' + Style.RESET_ALL)
+            return
+        
         for report in all_report_list:
             edit_report_table.add_row([report.report_id, report.report_name, report.property_id, report.report_status])
 
@@ -689,7 +691,7 @@ class maintenance_report_UI_menu:
         """ Allows editing of maintenance report details. """
         self.clear_screen()
         edit_choice = ''
-        while edit_choice != 'b':
+        while edit_choice.lower() != 'b':
             self.print_single_maintenance_report(selected_maintenance_report)
             print(f"Editing details for maintenance report ID: {selected_maintenance_report.report_id}")
             print('1. Change Report Name')
@@ -702,7 +704,7 @@ class maintenance_report_UI_menu:
             print("-" * 70)
             edit_choice = input("Select an option to edit: ")
             
-            if edit_choice == 'b':
+            if edit_choice.lower() == 'b':
                 self.clear_screen()
                 return
             
@@ -880,7 +882,7 @@ class maintenance_report_UI_menu:
             print('b. Go back')
             print("-" * 70)
             user_choice = input('Select an option: ')
-            if user_choice == 'b':
+            if user_choice.lower() == 'b':
                 self.clear_screen()
                 return
             

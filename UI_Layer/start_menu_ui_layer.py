@@ -115,13 +115,13 @@ class Main_Menu:
 
     def select_user_for_system(self) -> str:
         """Selects a user for the system to use"""
-        print()
+        '''print()
         loading = "Loading" + ("." * 20)
         for char in loading:
             sys.stdout.write(char)
             sys.stdout.flush() 
             time.sleep(0.04)
-        print()
+        print()'''
         
         self.clear_screen()
 
