@@ -114,7 +114,6 @@ class Main_Menu:
 
     def select_user_for_system(self) -> str:
         """Selects a user for the system to use"""
-
         print()
         loading = "Loading" + ("." * 20)
         for char in loading:
@@ -127,13 +126,10 @@ class Main_Menu:
         return_user = ""
         while return_user == "":
             print()
-            # title = Text.assemble("Welcome to the NaN Air Properties and Staff System!", style="blue", justify="center")
-            # panel = Panel(title)
-            # print(panel)
             print("{:>60}".format("[ Welcome to the NaN Air Properties and Staff System! ]"))
-            print("-" * 70)
+            print("-" * 80)
             self.show_ascii_art_hq()
-            print("-" * 70)
+            print("-" * 80)
             print("Log in as?")
             print("1. Admin")
             print("2. Manager")
@@ -143,7 +139,7 @@ class Main_Menu:
             print()
             print("{:>18}".format("Back - [ b, B ]"))
             print("{:>18}".format("Quit - [ q, Q ]"))
-            print("-" * 70)
+            print("-" * 80)
 
             user_action = input("Select a Profile: ").lower()
             match user_action:
@@ -157,6 +153,7 @@ class Main_Menu:
                     return_user = "Employee"
                     break
                 case _:
+                    self.clear_screen()
                     print(Fore.RED + "No User Found, Please Try Again." + Style.RESET_ALL)
         return return_user
     
@@ -180,7 +177,10 @@ class Main_Menu:
         """Select a location for the system to use"""
         return_location = ""
         while return_location == "":
+            print("{:>60}".format("[ Welcome to the NaN Air Properties and Staff System! ]"))
+            print("-" * 80)
             self.show_ascii_art_hq()
+            print("-" * 80)
             location_table = PrettyTable()
             location_table.field_names = ['ID',"Location", "Country"]
             location_table.add_row(['1',"Iceland", "Reykjavik"])
@@ -197,7 +197,7 @@ class Main_Menu:
             location_table.horizontal_char = f"{border_color}-{reset_color}"
             location_table.vertical_char = f"{border_color}|{reset_color}"
             print(location_table)
-
+            print("-" * 80)
             user_action = input("Select a Location: ").lower()
             match user_action:
                 case "1":
@@ -239,7 +239,7 @@ class Main_Menu:
         print(f"Current Location - {self.location}")
         print()
         print(f" {self.rank} - Home Page")
-        print("-" * 70)
+        print("-" * 80)
         print("1. Properties")
         print("2. Work Requests")
         print("3. Employees")
@@ -249,7 +249,7 @@ class Main_Menu:
             print("6. Locations")
         print()
         print("{:>10}".format("Quit - [ q, Q ]"))
-        print("-" * 70)
+        print("-" * 80)
 
         user_action = input("Select an Option: ").lower()
         return user_action
@@ -283,39 +283,3 @@ class Main_Menu:
         self.clear_screen()
         return user_action
                     
-    
-    # def test_some_stuff(self):
-    #     """just some tesing with getting data from storage""" 
-        
-    #     contractor_list = self.logic_wrapper.get_all_contractors(self.location)
-    #     for item in contractor_list:
-    #         print(f"{item.contractor_id:<10}|{item.location:<20}")
-    #     print("-" * 40)
-
-    #     employees_list = self.logic_wrapper.get_all_employees(self.location)
-    #     for item in employees_list:
-    #         print(f"{item.staff_id:<10}|{item.location:<20}")
-    #     print("-" * 40)
-
-    #     # this needs to be looked at
-    #     # works but look at property_storage_manager for more info
-    #     properties_list = self.logic_wrapper.get_all_properities(self.location)
-    #     for item in properties_list:
-    #         print(f"{item.property_id:<10}|{item.location:<20}")
-    #     print("-" * 40)
-
-    #     report_list = self.logic_wrapper.get_all_maintenance_reports(self.location)
-    #     for item in report_list:
-    #         print(f"{item.report_id:<10}|{item.location:<20}")
-    #     print("-" * 40)
-
-        # this needs to be looked at
-        # '''work_list = self.logic_wrapper.get_all_work_requests(self.location)
-        # for item in work_list:
-        #     print(f"{item.work_request_id:<10}|{item.location:<20}")
-        # print("-" * 40)'''
-
-        # location_list = self.logic_wrapper.get_all_locations(self.location)
-        # for item in location_list:
-        #     print(f"{item.location:<20}")
-        # print("-" * 40)
