@@ -20,28 +20,32 @@ class employee_UI_menu:
         # when this class is called it starts here
         # call other functions in class from here
         self.clear_screen()
-        display_all_employees = self.display_all_employees_by_locationa()
-        if self.rank != "Employee":
+        if self.rank == "Employee":
+            display_all_employees = self.display_all_employees_by_locationa()
+        else:
             employee_menu = self.employee_menu_selection()
             if employee_menu == "q" or employee_menu == "b":
                 return employee_menu
 
     def employee_menu_selection(self) -> str:
         """The function runs the start menu for the employee"""
+        
         user_choice = ""
         while user_choice != "q":
+            self.clear_screen()
+            self.display_all_employees_by_locationa()
             print()
             print("1. Select Employee")
             print("2. Add Employee")
             print("-" * 70)
-            #search_or_add = input("Enter choice: ")
+         
             user_choice = input("Enter choice: ")
-            #user_choice = self.action_choice()
             if user_choice == "1":
                 user_choice = self.search_employee()
             elif user_choice == "2":
                 user_choice = self.add_new_employee_to_storage()
             elif user_choice.lower() == "b":
+                self.clear_screen()
                 return "b"
             elif user_choice.lower() == "q":
                 return "q"
@@ -67,15 +71,15 @@ class employee_UI_menu:
         print(employee_print_table)
         print('')
 
-    def action_choice(self) -> str:
-        """The function is asking the user if they want to search or add an employee"""
+    #def action_choice(self) -> str:
+        #"""The function is asking the user if they want to search or add an employee"""
         
-        print()
-        print("1. Select Employee")
-        print("2. Add Employee")
-        print("-" * 70)
-        search_or_add = input("Enter choice: ")
-        return search_or_add.lower()
+        #print()
+        #print("1. Select Employee")
+        #print("2. Add Employee")
+        #print("-" * 70)
+        #search_or_add = input("Enter choice: ")
+        #return search_or_add.lower()
 
         
 
@@ -160,7 +164,7 @@ class employee_UI_menu:
                 return option
             
             elif option == "1":
-
+                self.clear_screen()
                 choice = self.display_edit_options(employee)
                 if choice == "b" or choice == "B":
                     continue
@@ -168,9 +172,11 @@ class employee_UI_menu:
                     return choice
                 
             elif option == "2":
+                self.clear_screen()
                 self.display_employee_work_requests(employee)
         
             elif option == "3":
+                self.clear_screen()
                 self.display_employee_maintenance_report(employee)
         return option.lower()
             
@@ -260,7 +266,7 @@ class employee_UI_menu:
 
     def display_edit_options(self, employee) -> str:
         """The Function displays and asks for the edit option"""
-        self.clear_screen()
+        
         edit_choice = ""
         while edit_choice.lower() != "q":
             print()
@@ -358,13 +364,14 @@ class employee_UI_menu:
 
     def display_employee_work_requests(self, employee):
         """The function displays all work requests by an employee"""
-        self.clear_screen()
+        
         #gets a list of all the work requests done by this employee
         employee_work_requests = self.logic_wrapper.fetch_all_work_request_for_employee(employee.staff_id)
         if not employee_work_requests:
             print()
             print(Fore.RED + "No Work Request Attached To This Employee" + Style.RESET_ALL)
             print()
+            bause_breaker = input("Press Enter To Return To Selected Employee Menu.")
 
         else:             
             print()
@@ -386,14 +393,15 @@ class employee_UI_menu:
 
     def display_employee_maintenance_report(self, employee):
         """The function displays all maintenance reports by an employee"""
-        self.clear_screen()
+      
         #gets a list of all the maintenance reports done by this employee
         employeee_maintenance_reports = self.logic_wrapper.fetch_all_maintenance_reports_for_employee(employee.staff_id)
         
         if not employeee_maintenance_reports:
             print()
             print(Fore.RED + "No Maintenance Reports Attached To This Employee" + Style.RESET_ALL)
-            print()            
+            print()
+            bause_breaker = input("Press Enter To Return To Selected Employee Menu.")           
         else:    
             print()
             print("--- All Maintenance Reports By This Employee ---")
@@ -414,51 +422,4 @@ class employee_UI_menu:
             bause_breaker = input("\nPress Enter To Return To Selected Employee Menu.")
             print('')
             
-    
-    """def display_employee_work_requests(self, employee) -> None:
-        ''' Displays work requests for a contractor '''
-        mr_by_employee_list = self.logic_wrapper.get_my_work_requests(self.rank, self.location, self.staff_id)
-        if not mr_by_employee_list:
-            print()
-            print(Fore.RED + "No Maintenance Report Attached To This Employee" + Style.RESET_ALL)
-        # create a table to print the work requests
-        employee_work_requests_table = PrettyTable(['Work Request ID', 'Description', 'Mark as Completed'])
-        print("Work Requests for the selected Contractor.")
-        # get the work requests for the contractor
-        employee_work_requests = self.logic_wrapper.get_my_work_requests(self.rank, self.location, self.staff_id)
-        # loop through the work requests and add them to the table if they have the current contractors id
-        for work_request in employee_work_requests:
-            employee_work_requests_table.add_row([work_request.work_request_id, work_request.description, work_request.mark_as_completed])
-        border_color = Fore.MAGENTA
-        reset_color = Style.RESET_ALL
-        employee_work_requests_table.border = True
-        employee_work_requests_table.junction_char = f"{border_color}+{reset_color}"
-        employee_work_requests_table.horizontal_char = f"{border_color}-{reset_color}"
-        employee_work_requests_table.vertical_char = f"{border_color}|{reset_color}"
-        print('')
-        print(employee_work_requests_table)
-        bause_breaker = input("\nPress Enter to return to main menu.")
-        print('')
-        return"""
-
-
-
-
-
-
-
-"""mr_by_employee_list = self.logic_wrapper.fetch_all_maintenance_reports_for_employee(employee.staff_id)
-if not mr_by_employee_list:
-    print()
-    print(Fore.RED + "No Maintenance Report Attached To This Employee" + Style.RESET_ALL)
-else:
-    print()
-    print("--- All Maintenance Report By This Employee ---")
-    print()
-    print("{:<25}{:<10}{:<15}".format("Name", "ID", "Status"))
-    print("-" * 70)
-    for mr in mr_by_employee_list:
-        print("{:<25}{:<10}{:<15}".format(mr.report_name, mr.report_id, mr.report_status))
-    print("-" * 70)
-#self.employee_options(employee)"""  
 
