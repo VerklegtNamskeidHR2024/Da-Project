@@ -90,6 +90,8 @@ class contractor_logic_manager:
                     contr.set_phone_number(new_value)
                 elif edit_choice == 'opening_hours':
                     contr.set_opening_hours(new_value)
+                elif edit_choice == 'warning':
+                    contr.set_warningtext(new_value)
         self.Storage_Layer_Wrapper.write_to_file_contractor(list_of_contractors) # write the list of all contractors to the storage
 
 

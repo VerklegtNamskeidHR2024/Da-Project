@@ -1,8 +1,10 @@
 import sys
 import time
 import os
-from datetime import datetime
-from threading import Thread
+# from rich import print
+# from rich.panel import Panel
+# from rich.text import Text 
+
 
 from Logic_Layer.logic_layer_wrapper import Logic_Layer_Wrapper
 
@@ -47,8 +49,6 @@ class Main_Menu:
         self.property_UI_menu = property_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
 
 
-    # Needs to be implemented in all of the ui menus so we can acctually select the locations
-
     def start_point(self):
         """Starts the main menu for the system"""
         
@@ -63,9 +63,13 @@ class Main_Menu:
         quit_string = "Departing from NaN Air, Thank you for Visiting!"
         # self.fun_print(quit_string)
 
+    def clear_screen(self):
+        ''' Clears the screen '''
+        os.system('cls' if os.name == 'nt' else 'clear')
 
     def show_ascii_art_hq(self):
         """Prints out the ASCII art for the NaN Air HQ"""
+
         print("{:>61}".format("==================="))
         print("{:>44}{:>13}{:>3}".format("|", "NaN Air HQ", "|"))
         print("{:>14}{:>7}{:>15}{:>8}{:>10}{:>6}".format("___________", ".", ": : : :", "|", "_____", "|"))
@@ -86,16 +90,16 @@ class Main_Menu:
             time.sleep(delay)  
         print()
 
+
     def create_location_table(self):
         """Prints out a table of available locations for the user to select. """
-        # maybe delete
 
         locations_table = PrettyTable()
         locations_table.field_names = ['ID',"Country", "Location Name"]
         locations_table.add_row(['1',"Iceland", "Reykjavik"])
         locations_table.add_row(['2',"Greenland", "Nuuk"])
         locations_table.add_row(['3',"Greenland", "Kulusuk"])
-        locations_table.add_row(['4',"Faroe Islands", "Torshavn"])
+        locations_table.add_row(['4',"Faroe Islands", "Thorshofn"])
         locations_table.add_row(['5',"Shetland Islands", "Tingwall"])
         locations_table.add_row(['6',"Svalbard", "Longyearbyen"])
             
@@ -117,15 +121,21 @@ class Main_Menu:
         for char in loading:
             sys.stdout.write(char)
             sys.stdout.flush() 
-            time.sleep(0.01)
+            time.sleep(0.04)
         print()
+        self.clear_screen()
 
         return_user = ""
         while return_user == "":
             print()
+            # title = Text.assemble("Welcome to the NaN Air Properties and Staff System!", style="blue", justify="center")
+            # panel = Panel(title)
+            # print(panel)
             print("Welcome to the NaN Air Properties and Staff System!")
+            print()
             print("-" * 70)
             self.show_ascii_art_hq()
+            print("Log in as?")
             print("-" * 70)
             print("Log in as?")
             print("1. Admin")
@@ -150,8 +160,7 @@ class Main_Menu:
                     return_user = "Employee"
                     break
                 case _:
-                    print("No User Found, Please Try Again.")
-
+                    print(Fore.RED + "No User Found, Please Try Again." + Style.RESET_ALL)
         return return_user
     
 
@@ -162,8 +171,8 @@ class Main_Menu:
         while is_staff_id_valid is False:
             staff_id = input("Enter Your Staff ID: ")
             is_staff_id_valid = self.logic_wrapper.sanity_check_staff_id(rank, staff_id)
-        # if is_staff_id_valid is False: 
-        #     print("ID Does Not Exist In The System, Please Try Again.")
+            if is_staff_id_valid is False: 
+                print(Fore.RED + "ID Does Not Exist In The System, Please Try Again." + Style.RESET_ALL)
         return staff_id
     
 
@@ -176,7 +185,7 @@ class Main_Menu:
             location_table.add_row(['1',"Iceland", "Reykjavik"])
             location_table.add_row(['2',"Greenland", "Nuuk"])
             location_table.add_row(['3',"Greenland", "Kulusuk"])
-            location_table.add_row(['4',"Faroe Islands", "Torshavn"])
+            location_table.add_row(['4',"Faroe Islands", "Thorshofn"])
             location_table.add_row(['5',"Shetland Islands", "Tingwall"])
             location_table.add_row(['6',"Svalbard", "Longyearbyen"])
 
@@ -197,23 +206,27 @@ class Main_Menu:
                 case "3":
                     return_location = "Kulusuk"
                 case "4":
-                    return_location = "Torshavn"
+                    return_location = "Thorshofn"
                 case "5":
                     return_location = "Tingwall"
                 case "6":
                     return_location = "Longyearbyen"
                 case _:
-                    print("No Location Found, Please Try Again.")
+                    print(Fore.RED + "No Location Found, Please Try Again." + Style.RESET_ALL)
+        self.clear_screen()
         return return_location
 
 
     def assigned_location_for_system(self, rank: str, staff_id: str) -> str:
         """Get the location for the user based on their rank and staff ID"""
         if rank == "Manager":
-            manager_location = self.logic_wrapper.get_manager_by_id(staff_id)
+            manager = self.logic_wrapper.get_manager_by_id(staff_id)
+            manager_location = manager.location
             return manager_location
-        elif rank == "Employee":
-            employee_location = self.logic_wrapper.get_employee_by_id(staff_id)
+        
+        if rank == "Employee":
+            employee = self.logic_wrapper.get_employee_by_id(staff_id)
+            employee_location = employee.location
             return employee_location
         
 
@@ -221,6 +234,8 @@ class Main_Menu:
     def display_menu_items(self):
         """Displays the menu items for the user"""
         
+        print()
+        print(f"Current Location - {self.location}")
         print()
         print(f" {self.rank} - Home Page")
         print("-" * 70)
@@ -232,7 +247,7 @@ class Main_Menu:
         if self.rank != "Employee":
             print("6) Locations")
         print()
-        print("{:<18}".format("> Quit System: q, Q"))
+        print("{:>18}".format("> Quit System: q, Q"))
         print("-" * 70)
 
         user_action = input("Select an Option: ").lower()
@@ -263,7 +278,7 @@ class Main_Menu:
                 case "q":
                     return "q"
                 case _:
-                    print("Wrong Input")
+                    print(Fore.RED + "Wrong Input" + Style.RESET_ALL)
             # user_action = self.display_menu_items()
             # continue
         # self.quit_system_message()

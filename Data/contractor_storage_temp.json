@@ -2,7 +2,7 @@
     {
         "contractor_id": "C1",
         "company_name": "Daniela and Daughters",
-        "contact_name": "Daniela",
+        "contact_name": "Tumi jua",
         "opening_hours": "8-16",
         "phone_number": 1234567,
         "location": "Reykjavik",
@@ -55,16 +55,6 @@
         "contact_name": "olos",
         "opening_hours": "10-15",
         "phone_number": 6690269,
-        "location": "Reykjavik",
-        "previous_job_reports": [],
-        "warningtext": "Contractor Has No Warning"
-    },
-    {
-        "contractor_id": "C7",
-        "company_name": "1",
-        "contact_name": "2",
-        "opening_hours": "191",
-        "phone_number": 2205044,
         "location": "Reykjavik",
         "previous_job_reports": [],
         "warningtext": "Contractor Has No Warning"

@@ -5,7 +5,6 @@ from colorama import Fore, Style, init
 
 init()
 
-
 class property_UI_menu:
     def __init__(self, logic_wrapper, rank, location, staff_id):
         """Constructor for the property UI menu"""
@@ -16,6 +15,21 @@ class property_UI_menu:
 
     def start_point_property_UI(self) -> str:
         """Start point for the property UI"""
+        # In almost all functions that receive, and verifies user input are while loops that repeatedly asks the user
+        # for specific input. These while loops are held together on the condition that the user either fullfills the
+        # neccesary requirements to proceed or that they don't enter q/Q or b/B.
+        #
+        #
+        # Outside of each while loop are return statments that pass back any input that the user had entered. In all cases,
+        # except 2, has no affect on the user experience while navigating this menu. Only when the input given is either
+        # q/Q or b/B do these while loops and return statments influence the flow of the user experience.
+        #
+        #
+        # When q/Q are entered, at any point while navigating this menu, it is always returned back to this point. Once here,
+        # it passes the necessary verification to be returned back to the home page menu where, once again, it is returned one
+        # final time to the quit system function that displays the exit message and stops running the script.
+        #
+        #
         properties_menu = self.properties_menu_logistics()
         if properties_menu in ["q", "b"]:
             return properties_menu
@@ -25,7 +39,7 @@ class property_UI_menu:
 
         # NEEDS to be changed to match with other UI files!!!!
         # Displays the list of all properties and provides options
-        print(f"\033[94m{self.rank}\033[0m - Properties Page")
+        print(f"{self.rank} - Properties Page")
         property_list = self.logic_wrapper.get_all_properties_at_location(self.location)
         property_table = PrettyTable(
             ["Property ID", "Name", "Location", "Condition", "Price to Fix", "Price"]
@@ -41,7 +55,7 @@ class property_UI_menu:
                     property.property_price,
                 ]
             )
-        border_color = Fore.MAGENTA
+        border_color = Fore.BLUE
         reset_color = Style.RESET_ALL
         property_table.border = True
         property_table.junction_char = f"{border_color}+{reset_color}"
@@ -57,7 +71,7 @@ class property_UI_menu:
             print("2. Add Amenity")
         print("-" * 70)
 
-        user_action = input("Select an Option:  ").lower()
+        user_action = input("Select an Option: ").lower()
         return user_action
 
     def properties_menu_logistics(self) -> str:
@@ -67,19 +81,38 @@ class property_UI_menu:
             # depending on your choice you will  be sent to the following places
             user_action = self.display_properties_menu()
             match (user_action, self.rank):
+                # In all cases below, if the function returns "b" then the the loop starts again, however if it receives "q"
+                # then the loop breaks and is returned back to the start point; shutting the program off.
+                #
+                #
+                # If option 1 is selected, the user goes to search for a property by ID in.
                 case ("1", self.rank):
                     user_action = self.display_select_property()
+                
+                # If option 2 is selected, the admin/manager goes to the create property sub-menu.
                 case ("2", "Admin") | ("2", "Manager"):
                     user_action = self.display_add_property()
+
+                # If option 2 is selected for an employee and option 3 for an admin/manager, they go
+                # to the create property sub-menu.
                 case ("2", "Employee") | ("3", "Admin") | ("3", "Manager"):
                     user_action = self.display_add_amenity()
-                case "b":
+
+                # If b is entered, it is returned back to the start_point_work_requests_UI function which brings the
+                # user back to the home page.
+                case ("b", self.rank):
                     return "b"
-                case "q":
+                
+                # If q is entered, it is returned back to the start_point_work_requests_UI function which turns off
+                # program.
+                case ("q", self.rank):
                     return "q"
+                
+                # Any other input is except the one's listed above are treated as errors and the user given a message to notify them.
                 case _:
                     print("Invalid input.Please try again.")
-        return user_action
+
+        return user_action.lower()
 
     def display_select_property(self) -> str:
         """Displays the form to select a property."""
@@ -89,28 +122,25 @@ class property_UI_menu:
         while (property_id_selected := input("Enter the Property ID to select: ").strip()) not in ["q", "b", "Q", "B"]:
         # Gets property by id
             is_valid = self.logic_wrapper.sanity_check_properties('property_id', property_id_selected)
-            if is_valid == False:
+            if is_valid is False:
                 print()
                 print("Invalid property ID. Please try again.")
                 print()
                 continue
-            if len(property_id_selected) < 2:
-                print()
-                print("Must Enter A Valid Property ID")
-                print()
-            selected_property = self.logic_wrapper.get_property_by_id(
-                self.location, property_id_selected
-            )
+            elif is_valid:
+                selected_property = self.logic_wrapper.get_property_by_id(self.location, property_id_selected)
 
-            # If there is not property with the slected id you will get a message.
+            # If there is not property with the slected ID you will get a message.
             if not selected_property:
                 print("No property found with the provided ID.")
-                # and it returns to the start point
-            # print for single selected property
+                return ""
+
+            # Print for single selected property
             self.print_single_property(selected_property)
             print("1. View Attached Items")
             print("2. Edit Property Details")
             # let you choose from the above 2.
+
             selected_property_options = self.selected_property_logistics(
                 selected_property
             )
@@ -133,7 +163,7 @@ class property_UI_menu:
                     user_choice = self.display_view_attached_options(selected_property)
                 case "2":
                     # Lets you edit property details
-                    user_choice = self.display_edit_property_details(selected_property)
+                    user_choice = self.edit_property_logistics(selected_property)
                 case "b":
                     # Goes back to the previous page
                     return "b"
@@ -189,6 +219,7 @@ class property_UI_menu:
             is_valid_name = self.logic_wrapper.sanity_check_properties(
                 "name", property_name
             )
+            print(is_valid_name)
             if is_valid_name is False:
                 print()
                 print("Invalid name. Please try again.")
@@ -213,6 +244,7 @@ class property_UI_menu:
     def set_location_name_for_properties(
         self, str_display: str, new_property: object
     ) -> str:
+
     # Asks the user to enter a location for the property they are creating. Goes through very simple input
         if self.rank == "Admin":
             while (
@@ -404,6 +436,7 @@ class property_UI_menu:
         edit_choice = ""
         while edit_choice != "q":
             edit_choice = self.display_edit_property_details(selected_property)
+            print(edit_choice)
             match edit_choice:
                 case "1":
                     edit_choice = self.edit_property_name(selected_property)
@@ -423,7 +456,7 @@ class property_UI_menu:
 
     def edit_property_name(self, selected_property: object) -> str:
         """Edits the name of the selected property"""
-
+        print('In the edit property name')
         while (new_name := input("Enter new property name: ")) not in [
             "q",
             "b",
@@ -431,7 +464,7 @@ class property_UI_menu:
             "B",
         ]:
             is_valid_name = self.logic_wrapper.sanity_check_properties("name", new_name)
-            if is_valid_name == True:
+            if is_valid_name is True:
                 self.logic_wrapper.edit_existing_property_in_storage(
                     selected_property, self.location, "name", new_name
                 )
@@ -519,7 +552,7 @@ class property_UI_menu:
                     work_request.mark_as_completed,
                 ]
             )
-        border_color = Fore.MAGENTA
+        border_color = Fore.BLUE
         reset_color = Style.RESET_ALL
         property_work_requests_table.border = True
         property_work_requests_table.junction_char = f"{border_color}+{reset_color}"
@@ -556,7 +589,7 @@ class property_UI_menu:
                     maintenance_report.report_status,
                 ]
             )
-        border_color = Fore.MAGENTA
+        border_color = Fore.BLUE
         reset_color = Style.RESET_ALL
         property_maintenance_reports_table.border = True
         property_maintenance_reports_table.junction_char = (
@@ -594,7 +627,7 @@ class property_UI_menu:
                 property.property_price,
             ]
         )
-        border_color = Fore.MAGENTA
+        border_color = Fore.BLUE
         reset_color = Style.RESET_ALL
         single_property_table.border = True
         single_property_table.junction_char = f"{border_color}+{reset_color}"
