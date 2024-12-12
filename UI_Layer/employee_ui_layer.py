@@ -19,7 +19,7 @@ class employee_UI_menu:
         """The function is the starting point for the employee UI"""
         # when this class is called it starts here
         # call other functions in class from here
-
+        self.clear_screen()
         display_all_employees = self.display_all_employees_by_locationa()
         if self.rank != "Employee":
             employee_menu = self.employee_menu_selection()
@@ -91,6 +91,7 @@ class employee_UI_menu:
 
             #Makes sure the enterd ssn exists in the system
             is_employee_ssn_valid = self.logic_wrapper.sanity_check_ssn(employee_ssn)
+
             if is_employee_ssn_valid == True:
                 #fetches an employee with the maching ssn
                 employee = self.logic_wrapper.fetch_employee_from_storage(employee_ssn)
@@ -100,6 +101,9 @@ class employee_UI_menu:
                     break
                 elif employee_options == "q" or employee_options == "Q":
                     return "q"
+            
+            else:
+                print(Fore.RED + "This Social Security Number Is Not In The System" + Style.RESET_ALL)
  
         return employee_ssn.lower()
 
@@ -137,6 +141,7 @@ class employee_UI_menu:
 
         option = ""
         while option != "q" and option != "b":
+            self.clear_screen()
             option = self.display_employee(employee)
             print()
             print("1. Edit Employee Details")
@@ -174,6 +179,7 @@ class employee_UI_menu:
 
     def add_new_employee_to_storage(self):
         """The function asks for all the information needed for regestering an employee"""
+        self.clear_screen()
         print()
         print("--- Creating a new employee ---")
         print()
@@ -201,11 +207,11 @@ class employee_UI_menu:
                 print()
             else:
                 #checks if the ssn contains only 10 numbers
-                is_valid_ssn = self.logic_wrapper.sanity_check_ssn(employee_social_security_number)
+                is_valid_ssn = self.logic_wrapper.sanity_check_ssn_add(employee_social_security_number)
                 if is_valid_ssn:
                     break
                 else:
-                    print(Fore.RED + "Employee Social Security Number Should Be 10 Numbers" + Style.RESET_ALL)                     
+                    print(Fore.RED + "Employee Social Security Number Should Be 10 Numbers And Not In The System" + Style.RESET_ALL)                     
 
         while (employee_phone_number := input("Enter Phone Number: ")) != "b":
             if employee_phone_number == "":
@@ -254,6 +260,7 @@ class employee_UI_menu:
 
     def display_edit_options(self, employee) -> str:
         """The Function displays and asks for the edit option"""
+        self.clear_screen()
         edit_choice = ""
         while edit_choice.lower() != "q":
             print()
@@ -317,7 +324,7 @@ class employee_UI_menu:
                 self.logic_wrapper.edit_employee_info(employee)
                 print()
                 print(Fore.GREEN + "Employee Information Updated" + Style.RESET_ALL)
-                #self.display_employee(employee)
+              
                 break
             else:
                 print()
@@ -340,7 +347,7 @@ class employee_UI_menu:
                 self.logic_wrapper.edit_employee_info(employee)
                 print()
                 print(Fore.GREEN + "Employee Information Updated" + Style.RESET_ALL)
-                #self.display_employee(employee)
+             
                 break
             else:
                 print()
@@ -351,6 +358,7 @@ class employee_UI_menu:
 
     def display_employee_work_requests(self, employee):
         """The function displays all work requests by an employee"""
+        self.clear_screen()
         #gets a list of all the work requests done by this employee
         employee_work_requests = self.logic_wrapper.fetch_all_work_request_for_employee(employee.staff_id)
         if not employee_work_requests:
@@ -378,7 +386,7 @@ class employee_UI_menu:
 
     def display_employee_maintenance_report(self, employee):
         """The function displays all maintenance reports by an employee"""
-
+        self.clear_screen()
         #gets a list of all the maintenance reports done by this employee
         employeee_maintenance_reports = self.logic_wrapper.fetch_all_maintenance_reports_for_employee(employee.staff_id)
         

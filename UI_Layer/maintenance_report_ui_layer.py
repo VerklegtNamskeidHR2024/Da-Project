@@ -33,16 +33,24 @@ class maintenance_report_UI_menu:
         self.display_maintenance_report()
         return
 
+       # maintenance_report_menu = self.display_maintenance_report()
+       # if maintenance_report_menu in ["q", "b"]:
+       #     return maintenance_report_menu
+
     def display_maintenance_report(self):
         ''' Sends the user to the menu based on their rank '''
         #self.clear_screen()
         # If the user is an admin or manager it goes to the admin/manager menu
-        if self.rank == "Admin" or self.rank == "Manager":
-            self.select_menu_option_admin_manager()
+        if self.rank in "Admin" or self.rank == "Manager":
+            admin_manager_menu = self.select_menu_option_admin_manager()
+            if admin_manager_menu in ["q", "b"]:
+                return admin_manager_menu
 
         # If the user is an employee it goes to the employee menu
         elif self.rank == "Employee":
-            self.employee_menu(self.staff_id)
+            employee_menu = self.employee_menu(self.staff_id)
+            if employee_menu in ["q", "b"]:
+                return admin_manager_menu
         else:
             print("Invalid rank. Access denied.")
 

@@ -14,16 +14,29 @@ class contractor_UI_menu():
         self.staff_id = staff_id
     
     def start_point_contractor_UI(self) -> None:
-        """Start point for contractor UI"""
-        # when this class is called it starts here
-        # goes into diffrent menus based on your rank
-        print(self.rank)
+        """When this class is called it starts here. Goes into diffrent menus based on your rank. """
+
+        # In almost all functions that receive, and verifies user input are while loops that repeatedly asks the user
+        # for specific input. These while loops are held together on the condition that the user either fullfills the
+        # neccesary requirements to proceed or that they don't enter q/Q or b/B.
+        #
+        #
+        # Outside of each while loop are return statments that pass back any input that the user had entered. In all cases,
+        # except 2, has no affect on the user experience while navigating this menu. Only when the input given is either
+        # q/Q or b/B do these while loops and return statments influence the flow of the user experience.
+        #
+        #
+        # When q/Q are entered, at any point while navigating this menu, it is always returned back to this point. Once here,
+        # it passes the necessary verification to be returned back to the home page menu where, once again, it is returned one
+        # final time to the quit system function that displays the exit message and stops running the script.
+        #
+        #
         if self.rank == "Employee":
-            employee_contractors_menu = self.display_contractor_employee_menu_logistics()
+            employee_contractors_menu = self.display_contractor_employee_menu()
             if employee_contractors_menu in ["q", "b"]:
                 return employee_contractors_menu
         else:
-            admin_manager_contractors_menu = self.display_contractor_menu_admin_and_manager_logistics()
+            admin_manager_contractors_menu = self.display_contractor_menu_admin_and_manager()
             if admin_manager_contractors_menu in ["q", "b"]:
                 return admin_manager_contractors_menu	
     
@@ -59,15 +72,27 @@ class contractor_UI_menu():
 
             print("------------------------------------------------")
             print("1) View contractor")
+            print(">Go to Home Page: b, B")
             print("------------------------------------------------")
 
             user_action = input("Select an Option:  ")
             match user_action:
+                # In the case below, if the function returns "b" then the the loop starts again, however if it receives "q"
+                # then the loop breaks and is returned back to the start point; shutting the program off.
+                #
+                # An employee only has access to this option in the contractors menu. 
                 case "1":
-                    self.display_view_contractor()
-                case "q" | "Q":
+                    user_action = self.display_view_contractor()
+
+                # If b is entered, it is returned back to the start_point_work_requests_UI function which brings the
+                # user back to the home page.
+                case "b":
+                    return "b"
+                
+                # If q is entered, it is returned back to the start_point_work_requests_UI function which turns off
+                # program.
+                case "q":
                     # quit back to main menu
-                    loop = False
                     pass
                 case _:
                     print("wrong input")
@@ -84,6 +109,7 @@ class contractor_UI_menu():
             print("1) Add contractor")
             print("2) edit contractor")
             print("3) View contractor")
+            print(">Go to Home Page: b, B")
             print("------------------------------------------------")
 
             user_action = input("Select an Option:  ")
@@ -96,7 +122,7 @@ class contractor_UI_menu():
                     self.display_edit_contractor_menu()
                 case "3":
                     self.display_view_contractor()
-                case "q" | "Q":
+                case "b" | "B":
                     # quit back to main menu
                     loop = False
                     pass
@@ -106,28 +132,31 @@ class contractor_UI_menu():
 
     def display_add_contractor_form(self) -> None:
         """create contractor"""
-        is_valid_phone_number = False
         try:
             new_contractor = Contractor()
             # set the company name, contact name, opening hours and phone number for the new contractor
             new_contractor.set_company_name(input("enter company name: "))
             new_contractor.set_contact_name(input("enter contact name: "))
             new_contractor.set_opening_hours(input("enter opening hours: "))
+            is_valid_phone_number = False
             # looping until a valid number is enterd
             while is_valid_phone_number == False:
                 new_contractor.set_phone_number(int(input("enter phone number: ")))
                 # will return false if phone number is not valid thus looping until a valid number is enterd
-                is_valid_phone_number = self.logic_wrapper.sanity_check_contractor(new_contractor,"")
+                is_valid_phone_number = self.logic_wrapper.sanity_check_contractor(new_contractor)
                 if is_valid_phone_number == False:
                     print("Invalid phone number. Please try again.")
+                else:
+                    is_valid_phone_number = True
+            # set the location for the new contractor from the current location 
             new_contractor.set_location(self.location)
-                # add later
-                # new_contractor.set_previous_job_reports()
 
             # add the new contractor to the storage
             new_contractor_added = self.logic_wrapper.add_new_contractor(self.rank, self.location, new_contractor)
             if new_contractor_added == True:
                 print("contractor has been added")
+            else:
+                print("contractor has not been added")
         except:
             print("something went wrong with making new contractor")
 
@@ -144,23 +173,28 @@ class contractor_UI_menu():
         except:
             print("something went wrong")
             return
-        # if contractor is found print the contractor info
-        self.print_single_contractor(contractor_to_use)
+        
+        loop = True
+        while loop == True:
+            # if contractor is found print the contractor info
+            self.print_single_contractor(contractor_to_use)
+            # show the options for the contractor
+            print("1) View work requests")
+            print("2) Give warning")
+            print(">Go to Home Page: b, B")
+            edit_user_action = input("What action would you like to perform: ")
 
-        # show the options for the contractor
-        print("1) View work requests")
-        print("2) Give warning")
-        edit_user_action = input("What action would you like to perform: ")
-
-        match edit_user_action:
-            case "1":
-                # show work requests
-                self.display_contractor_work_requests(contractor_to_use)
-            case "2":                
-                self.display_contractor_warning(contractor_to_use)
-            case _:
-                print("not valid input")
-                return
+            match edit_user_action:
+                case "1":
+                    # show work requests
+                    self.display_contractor_work_requests(contractor_to_use)
+                case "2":                
+                    self.display_contractor_warning(contractor_to_use)
+                case "b" | "B":
+                    loop = False
+                case _:
+                    print("not valid input")
+        return
 
     def display_contractor_warning(self, contractor) -> None:
         """Give contractor warning"""
@@ -187,26 +221,30 @@ class contractor_UI_menu():
         except:
             print("something went wrong")
 
-        # print the contractor info
-        self.print_single_contractor(contractor_to_use)
-
-        # shows the available options to change contractor by
-        print("------------------------------------------------")
-        print("1) Change Contact Name")
-        print("2) Change Company Phone Number")
-        print("3) Change Opening Hours")
-        print("------------------------------------------------")
-        edit_user_action = input("what do you want to change: ")
-        match edit_user_action:
-            case "1":
-                self.change_contact_name(contractor_to_use)
-            case "2":
-                self.change_phone_number(contractor_to_use)
-            case "3":
-                self.change_opening_hours(contractor_to_use)
-            case _:
-                print("Not Valid Input")
-                return
+        loop = True
+        while loop == True:
+            # print the contractor info
+            self.print_single_contractor(contractor_to_use)
+            # shows the available options to change contractor by
+            print("------------------------------------------------")
+            print("1) Change Contact Name")
+            print("2) Change Company Phone Number")
+            print("3) Change Opening Hours")
+            print(">Go to Home Page: b, B")
+            print("------------------------------------------------")
+            edit_user_action = input("what do you want to change: ")
+            match edit_user_action:
+                case "1":
+                    self.change_contact_name(contractor_to_use)
+                case "2":
+                    self.change_phone_number(contractor_to_use)
+                case "3":
+                    self.change_opening_hours(contractor_to_use)
+                case "b" | "B":
+                    loop = False
+                case _:
+                    print("Not Valid Input")
+        return
     
     def change_contact_name(self, contractor) -> None:
         """change contact name for contractor"""
@@ -300,6 +338,7 @@ class contractor_UI_menu():
 
     def display_contractor_maintenance_reports(self, selected_contractor: object) -> str:
         ''' Displays maintenance reports for a contractor '''
+        
         # create a table to print the maintenance reports
         Contractor_maintenance_reports_table = PrettyTable(['Report ID', 'Report Name', 'Description', 'Status'])
         print("Maintenance Reports for the selected contractor.")

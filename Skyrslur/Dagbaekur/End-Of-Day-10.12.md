@@ -5,7 +5,7 @@ Hreimur:\
 
 
 Tumi:\
-
+I worked on finishing loaction and made it a bit more pretty and the same with contractor, also started working on redoing the class diagram. got here at 8:30 left at 3 and worked at home from 4:20 until around 7
 
 Daníela:\
 I did back and quit for employee, except for edit and add employee will maybe finnish tonight. I got here at 11 and left at 19:30.
