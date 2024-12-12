@@ -95,7 +95,7 @@ class Main_Menu:
         locations_table.add_row(['1',"Iceland", "Reykjavik"])
         locations_table.add_row(['2',"Greenland", "Nuuk"])
         locations_table.add_row(['3',"Greenland", "Kulusuk"])
-        locations_table.add_row(['4',"Faroe Islands", "Torshavn"])
+        locations_table.add_row(['4',"Faroe Islands", "Thorshofn"])
         locations_table.add_row(['5',"Shetland Islands", "Tingwall"])
         locations_table.add_row(['6',"Svalbard", "Longyearbyen"])
             
@@ -177,7 +177,7 @@ class Main_Menu:
             location_table.add_row(['1',"Iceland", "Reykjavik"])
             location_table.add_row(['2',"Greenland", "Nuuk"])
             location_table.add_row(['3',"Greenland", "Kulusuk"])
-            location_table.add_row(['4',"Faroe Islands", "Torshavn"])
+            location_table.add_row(['4',"Faroe Islands", "Thorshofn"])
             location_table.add_row(['5',"Shetland Islands", "Tingwall"])
             location_table.add_row(['6',"Svalbard", "Longyearbyen"])
 
@@ -198,7 +198,7 @@ class Main_Menu:
                 case "3":
                     return_location = "Kulusuk"
                 case "4":
-                    return_location = "Torshavn"
+                    return_location = "Thorshofn"
                 case "5":
                     return_location = "Tingwall"
                 case "6":
