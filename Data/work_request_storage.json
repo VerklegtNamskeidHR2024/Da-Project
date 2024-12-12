@@ -378,5 +378,24 @@
         "contractor_id": "",
         "mark_as_completed": false,
         "accepted_by_employee": false
+    },
+    {
+        "work_request_id": "WR21",
+        "name": "fix smth",
+        "description": "someshi broken",
+        "maintenance_report_id": "",
+        "staff_id": "",
+        "location": "Nuuk",
+        "property_id": "P3",
+        "start_date": "13-12-24",
+        "completition_date": "",
+        "repetitive_work": true,
+        "reopen_interval": 7,
+        "priority": "Low",
+        "work_request_status": "New",
+        "need_contractor": "No",
+        "contractor_id": "",
+        "mark_as_completed": false,
+        "accepted_by_employee": false
     }
 ]

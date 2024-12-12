@@ -12,7 +12,7 @@
         "repetitive_work": false,
         "reopen_interval": 0,
         "priority": "Medium",
-        "work_request_status": "Closed",
+        "work_request_status": "Pending",
         "need_contractor": true,
         "contractor_id": "C1",
         "mark_as_completed": false,
@@ -359,5 +359,24 @@
         "contractor_id": "C6",
         "mark_as_completed": true,
         "accepted_by_employee": true
+    },
+    {
+        "work_request_id": "WR20",
+        "name": "Broken door",
+        "description": "the door in the bathroom is broken",
+        "maintenance_report_id": "",
+        "staff_id": "",
+        "location": "Thorshofn",
+        "property_id": "P16",
+        "start_date": "24-06-25",
+        "completition_date": "",
+        "repetitive_work": true,
+        "reopen_interval": 0,
+        "priority": "High",
+        "work_request_status": "New",
+        "need_contractor": "Yes",
+        "contractor_id": "",
+        "mark_as_completed": false,
+        "accepted_by_employee": false
     }
 ]
