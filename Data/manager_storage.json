@@ -1,7 +1,7 @@
 [
     {
         "name": "Hreimur",
-        "social_security_number": "12334546789",
+        "social_security_number": "11234546789",
         "phone_number": "5551234",
         "location": "Reykjavik",
         "system_permissions": "Manager",
@@ -9,8 +9,8 @@
         "staff_id": "M1"
     },
     {
-        "name": "Hreimur",
-        "social_security_number": "12334546789",
+        "name": "Yeabsira",
+        "social_security_number": "12234546789",
         "phone_number": "5551234",
         "location": "Nuuk",
         "system_permissions": "Manager",
@@ -18,7 +18,7 @@
         "staff_id": "M2"
     },
     {
-        "name": "Hreimur",
+        "name": "Daniela",
         "social_security_number": "12334546789",
         "phone_number": "5551234",
         "location": "Kulusuk",
@@ -27,8 +27,8 @@
         "staff_id": "M3"
     },
     {
-        "name": "Hreimur",
-        "social_security_number": "12334546789",
+        "name": "Kormakur",
+        "social_security_number": "1234456789",
         "phone_number": "5551234",
         "location": "Thorshofn",
         "system_permissions": "Manager",
@@ -36,8 +36,8 @@
         "staff_id": "M4"
     },
     {
-        "name": "Hreimur",
-        "social_security_number": "12334546789",
+        "name": "Tumi",
+        "social_security_number": "1234556789",
         "phone_number": "5551234",
         "location": "Tingwall",
         "system_permissions": "Manager",
@@ -45,8 +45,8 @@
         "staff_id": "M5"
     },
     {
-        "name": "Hreimur",
-        "social_security_number": "12334546789",
+        "name": "Jon",
+        "social_security_number": "1234566789",
         "phone_number": "5551234",
         "location": "Longyearbyen",
         "system_permissions": "Manager",
