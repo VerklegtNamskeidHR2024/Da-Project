@@ -56,6 +56,21 @@ class location_logic_manager:
         if what_to_check == "opening_hours":
             return True
         
+    def edit_amenity(self ,amenity_in, new_condition):
+        """Edit an amenity"""
+        amenities = self.Storage_Layer_Wrapper.get_all_amenities()
+        for amenity in amenities:
+            if amenity.property_id == amenity_in.property_id:
+                amenity.set_condition(new_condition)
+                self.Storage_Layer_Wrapper.write_to_file_amenities(amenities)
+                return True
+        return False
+        
+    def fetch_amenity_by_id(self, amenity_ID, location):
+        amenities = self.Storage_Layer_Wrapper.get_all_amenities()
+        for amenity in amenities:
+            if amenity.property_id == amenity_ID and amenity.location == location:
+                return amenity
 
     def fetch_all_amenities_for_location_in_storage(self, location) -> list:
         """Fetch all amenities for a location"""
