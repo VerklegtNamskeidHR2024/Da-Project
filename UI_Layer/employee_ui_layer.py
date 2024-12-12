@@ -20,28 +20,32 @@ class employee_UI_menu:
         # when this class is called it starts here
         # call other functions in class from here
         self.clear_screen()
-        display_all_employees = self.display_all_employees_by_locationa()
-        if self.rank != "Employee":
+        if self.rank == "Employee":
+            display_all_employees = self.display_all_employees_by_locationa()
+        else:
             employee_menu = self.employee_menu_selection()
             if employee_menu == "q" or employee_menu == "b":
                 return employee_menu
 
     def employee_menu_selection(self) -> str:
         """The function runs the start menu for the employee"""
+        
         user_choice = ""
         while user_choice != "q":
+            self.clear_screen()
+            self.display_all_employees_by_locationa()
             print()
             print("1. Select Employee")
             print("2. Add Employee")
             print("-" * 70)
-            #search_or_add = input("Enter choice: ")
+         
             user_choice = input("Enter choice: ")
-            #user_choice = self.action_choice()
             if user_choice == "1":
                 user_choice = self.search_employee()
             elif user_choice == "2":
                 user_choice = self.add_new_employee_to_storage()
             elif user_choice.lower() == "b":
+                self.clear_screen()
                 return "b"
             elif user_choice.lower() == "q":
                 return "q"
@@ -67,15 +71,15 @@ class employee_UI_menu:
         print(employee_print_table)
         print('')
 
-    def action_choice(self) -> str:
-        """The function is asking the user if they want to search or add an employee"""
+    #def action_choice(self) -> str:
+        #"""The function is asking the user if they want to search or add an employee"""
         
-        print()
-        print("1. Select Employee")
-        print("2. Add Employee")
-        print("-" * 70)
-        search_or_add = input("Enter choice: ")
-        return search_or_add.lower()
+        #print()
+        #print("1. Select Employee")
+        #print("2. Add Employee")
+        #print("-" * 70)
+        #search_or_add = input("Enter choice: ")
+        #return search_or_add.lower()
 
         
 

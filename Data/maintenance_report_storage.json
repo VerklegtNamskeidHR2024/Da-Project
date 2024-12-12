@@ -222,5 +222,19 @@
         "mark_as_done": false,
         "contractor_id": "",
         "work_request_id": ""
+    },
+    {
+        "report_id": "MR17",
+        "report_name": "fix door",
+        "location": "Thorshofn",
+        "property_id": "P16",
+        "staff_id": "E32",
+        "regular_maintenance": false,
+        "maintenance_description": "The bathroom door was fixed",
+        "report_status": "Pending",
+        "price": "20000",
+        "mark_as_done": false,
+        "contractor_id": "",
+        "work_request_id": "WR19"
     }
 ]

@@ -24,7 +24,6 @@ class maintenance_report_UI_menu:
         print("Departing from NaN Air, Thank you for Visiting!")
         sys.exit()
         
-
     def start_point_maintenance_reports_UI(self):
         ''' Entry point for the maintenance reports UI '''
         #self.clear_screen()
@@ -307,7 +306,7 @@ class maintenance_report_UI_menu:
         #Display a list of pending reports
         print(f"{self.rank} - Maintenance Report Menu")
         self.get_pending_reports()
-        print("------------------------------------------------")
+        print("-" * 70)
         report_id = input("Enter report ID to manage: ")
         if report_id.lower() == 'b':
             return
@@ -315,11 +314,12 @@ class maintenance_report_UI_menu:
              self.quit_system()
         report_in_system = self.logic_wrapper.check_if_report_in_system(report_id, self.location)
         if report_in_system == True:
-            print("------------------------------------------------")
+            selected_report = self.logic_wrapper.get_single_maintenance_report(report_id)
+            self.print_single_maintenance_report(selected_report)
             print("1. Accept")
             print("2. Deny")
             print('b. Go back')
-            print("------------------------------------------------")
+            print("-" * 70)
             valid_choice = False
             accept_or_deny = ''
             while valid_choice == False:
@@ -351,7 +351,7 @@ class maintenance_report_UI_menu:
         ''' Display a list of closed reports '''
         print(f"{self.rank} - Maintenance Report Menu")
         self.get_closed_reports()
-        print("------------------------------------------------")
+        print("-" * 70)
         report_id = input("Enter report ID to manage: ")
         if report_id.lower() == 'b':
             return
@@ -360,10 +360,11 @@ class maintenance_report_UI_menu:
         report_in_system = self.logic_wrapper.check_if_report_in_system(report_id, self.location)
         if report_in_system == True:
             selected_report = self.logic_wrapper.get_single_maintenance_report(report_id)
-            print('------------------------------------------------')
+            self.print_single_maintenance_report(selected_report)
+            print("-" * 70)
             print('1. Reopen Report')
             print('b. Go back')
-            print('------------------------------------------------')
+            print("-" * 70)
             valid_choice = False
             while valid_choice == False:
                 choice = input('Choose: ')
@@ -392,6 +393,7 @@ class maintenance_report_UI_menu:
         pending_report_list = self.logic_wrapper.get_all_pending_maintenance_reports(self.location)
         if pending_report_list == 'No pending Reports':
             print('No Pending Reports!')
+            return
         else:
             for report in pending_report_list:
                 pending_reports_table.add_row([report.report_id, report.report_name, report.property_id])
@@ -415,6 +417,7 @@ class maintenance_report_UI_menu:
         closed_report_list = self.logic_wrapper.get_all_closed_maintenance_reports(self.location)
         if closed_report_list == 'No closed reports':
             print('No Closed Reports!')
+            return
         else:
             for report in closed_report_list:
                 closed_report_table.add_row([report.report_id, report.report_name, report.property_id, report.report_status])
@@ -577,21 +580,23 @@ class maintenance_report_UI_menu:
         """Prints all reports"""
         #self.clear_screen()
         '''displays all pending report'''
+        print(f'List of all reports at {self.location}\n')
         all_reports_table = PrettyTable()
         all_reports_table.title = 'All Reports'
         all_reports_table.field_names = ['Report ID', 'Report Name', 'Property ID', 'Report Status']
-        print(f'List of all reports at {self.location}\n')
-
         pending_report_list = self.logic_wrapper.get_all_maintenance_reports_at_location(self.location)
-        for report in pending_report_list:
-            all_reports_table.add_row([report.report_id, report.report_name, report.property_id, report.report_status])
-        border_color = Fore.BLUE
-        reset_color = Style.RESET_ALL
-        all_reports_table.border = True
-        all_reports_table.junction_char = f"{border_color}+{reset_color}"
-        all_reports_table.horizontal_char = f"{border_color}-{reset_color}"
-        all_reports_table.vertical_char = f"{border_color}|{reset_color}"
-        print(all_reports_table)
+        if pending_report_list == []:
+            print(f'No reports in the system at {self.location}')
+        else:
+            for report in pending_report_list:
+                all_reports_table.add_row([report.report_id, report.report_name, report.property_id, report.report_status])
+            border_color = Fore.BLUE
+            reset_color = Style.RESET_ALL
+            all_reports_table.border = True
+            all_reports_table.junction_char = f"{border_color}+{reset_color}"
+            all_reports_table.horizontal_char = f"{border_color}-{reset_color}"
+            all_reports_table.vertical_char = f"{border_color}|{reset_color}"
+            print(all_reports_table)
     
     def edit_report_details(self, location):
         """Edit report details"""
@@ -889,16 +894,30 @@ class maintenance_report_UI_menu:
 
     def print_single_maintenance_report(self, maintenance_report):
         """Prints a single maintenance report"""
-        print("-"*70)
-        print(f"{'Report ID':<30}: {maintenance_report.report_id}")
-        print(f"{'Report Name':<30}: {maintenance_report.report_name}")
-        print(f"{'Maintenance Description':<30}: {maintenance_report.maintenance_description}")
-        print(f"{'Location':<30}: {maintenance_report.location}")
-        print(f"{'Property ID':<30}: {maintenance_report.property_id}")
-        print(f"{'Staff ID':<30}: {maintenance_report.staff_id}")
-        print(f"{'Regular Maintenance':<30}: {maintenance_report.regular_maintenance}")
-        print(f"{'Price':<30}: {maintenance_report.price}")
-        print(f"{'Completed':<30}: {maintenance_report.mark_as_done}")
-        print(f"{'Contractor ID':<30}: {maintenance_report.contractor_id}")
-        print(f"{'Work Request ID':<30}: {maintenance_report.work_request_id}")
-        print("-"* 70)
+        print("-" * 70)
+        single_report_table = PrettyTable()
+        single_report_table.title = 'Maintenance Report'
+        single_report_table.field_names = ['Information',"Details"]
+        single_report_table.add_row(['Report ID', maintenance_report.report_id])
+        single_report_table.add_row(['Report Name', maintenance_report.report_name])
+        single_report_table.add_row(['Maintenance Description', maintenance_report.maintenance_description])
+        single_report_table.add_row(['Location', maintenance_report.location])
+        single_report_table.add_row(['Property ID', maintenance_report.property_id])
+        single_report_table.add_row(['Staff ID', maintenance_report.staff_id])
+        single_report_table.add_row(['Regular Maintenance', maintenance_report.regular_maintenance])
+        single_report_table.add_row(['Price', maintenance_report.price])
+        single_report_table.add_row(['Completed', maintenance_report.mark_as_done])
+        single_report_table.add_row(['Contractor ID', maintenance_report.contractor_id])
+        single_report_table.add_row(['Work Request ID', maintenance_report.work_request_id])
+
+
+        border_color = Fore.BLUE
+        reset_color = Style.RESET_ALL
+        single_report_table.align = 'l'
+        single_report_table.border = True
+        single_report_table.junction_char = f"{border_color}+{reset_color}"
+        single_report_table.horizontal_char = f"{border_color}-{reset_color}"
+        single_report_table.vertical_char = f"{border_color}|{reset_color}"
+        print(single_report_table)
+
+        print("-" * 70)
