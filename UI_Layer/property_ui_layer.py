@@ -3,7 +3,7 @@ from Model_Classes.house_model import House
 from Model_Classes.amenity_model import Amenity
 from prettytable import PrettyTable
 from colorama import Fore, Style, init
-
+import os
 init()
 
 class property_UI_menu:
@@ -13,6 +13,12 @@ class property_UI_menu:
         self.rank = rank
         self.location = location
         self.staff_id = staff_id
+
+    def clear_screen(self):
+        ''' Clears the screen '''
+        os.system('cls' if os.name == 'nt' else 'clear')
+    
+
 
     def start_point_property_UI(self) -> str:
         """Start point for the property UI"""
@@ -31,6 +37,7 @@ class property_UI_menu:
         # final time to the quit system function that displays the exit message and stops running the script.
         #
         #
+        self.clear_screen()
         properties_menu = self.properties_menu_logistics()
         if properties_menu in ["q", "b"]:
             return properties_menu

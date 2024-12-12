@@ -1,6 +1,7 @@
 from Model_Classes.contractor_model import Contractor
 from prettytable import PrettyTable 
 from colorama import Fore, Style, init
+import os
 
 # missing list
 # !!!!!give contractor warning!!!!!
@@ -12,7 +13,9 @@ class contractor_UI_menu():
         self.rank = rank
         self.location = location
         self.staff_id = staff_id
-    
+    def clear_screen(self):
+        ''' Clears the screen '''
+        os.system('cls' if os.name == 'nt' else 'clear')
     def start_point_contractor_UI(self) -> None:
         """When this class is called it starts here. Goes into diffrent menus based on your rank. """
 
@@ -31,6 +34,7 @@ class contractor_UI_menu():
         # final time to the quit system function that displays the exit message and stops running the script.
         #
         #
+        self.clear_screen()
         if self.rank == "Employee":
             employee_contractors_menu = self.display_contractor_employee_menu()
             if employee_contractors_menu in ["q", "b"]:
