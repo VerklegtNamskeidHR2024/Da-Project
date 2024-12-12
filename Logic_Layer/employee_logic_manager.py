@@ -28,7 +28,7 @@ class employee_logic_manager:
             if manager.staff_id == staff_id:
                 return manager
 
-    # Might not implement
+   
     def get_all_employees(self) -> list:
         """Get all employees"""
 
@@ -134,8 +134,21 @@ class employee_logic_manager:
         return True
     
     def sanity_check_ssn(self, ssn) -> bool:
+        """Check if the social security number exist"""
+        employee_list = self.get_all_employees()
+        for employee in employee_list:
+            if employee.social_security_number == ssn:
+                return True
+        
+        return False
+    
+    def sanity_check_ssn_add(self, ssn) -> bool:
         """Check if the social security number is correct"""
 
+        employee_list = self.get_all_employees()
+        for employee in employee_list:
+            if employee.social_security_number == ssn:
+                return False
         try:
             int(ssn)
             if len(ssn) == 10:

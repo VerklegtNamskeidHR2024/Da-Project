@@ -21,7 +21,7 @@
         "staff_id": "E1",
         "regular_maintenance": true,
         "maintenance_description": "asdfsdfsf",
-        "report_status": "Closed",
+        "report_status": "Pending",
         "price": "1234",
         "mark_as_done": true,
         "contractor_id": "C1",
@@ -197,7 +197,7 @@
     },
     {
         "report_id": "MR15",
-        "report_name": "Daniela sucks",
+        "report_name": "Daniela er best",
         "location": "Reykjavik",
         "property_id": "P1",
         "staff_id": "E1",
