@@ -299,6 +299,14 @@ class Logic_Layer_Wrapper:
         return self.location_logic_manager.fetch_all_amenities_for_location_in_storage(location)
         # returns a list of all amenities for a specific location
     
+    def fetch_amenity_by_id(self, amenity_ID: str, location: str) -> object:
+        return self.location_logic_manager.fetch_amenity_by_id(amenity_ID, location)
+        # returns an amenity object by amenity_ID
+
+    def edit_amenity(self, amenity: object, new_condition: str):
+        return self.location_logic_manager.edit_amenity(amenity, new_condition)
+        # edits an existing amenity in the storage
+    
     def fetch_location_from_storage(self, location_id: str) -> Location:
         return self.location_logic_manager.fetch_location_from_storage(location_id)
         # returns a location object by Location_ID
