@@ -2,10 +2,10 @@
     {
         "name": "Hreimur",
         "social_security_number": "1234567899",
-        "phone_number": "1234555",
+        "phone_number": "5551234",
         "location": "Reykjavik",
         "system_permissions": "Employee",
-        "email": "hreimur@gmail.com",
+        "email": "hreimur8@gmail.com",
         "staff_id": "E1"
     },
     {
@@ -38,7 +38,7 @@
     {
         "name": "Bob Brown",
         "social_security_number": "5647382911",
-        "phone_number": "9182736",
+        "phone_number": "1234555",
         "location": "Kulusuk",
         "system_permissions": "Employee",
         "email": "bobbrown@example.com",
@@ -93,7 +93,7 @@
         "name": "Daniela",
         "social_security_number": "2406043730",
         "phone_number": "7777777",
-        "location": "Nuuk",
+        "location": "Longyearbyen",
         "system_permissions": "Employee",
         "email": "mynewemail@gmail.com",
         "staff_id": "E11"
@@ -120,7 +120,7 @@
         "name": "Yeabsira",
         "social_security_number": "0805051234",
         "phone_number": "3333333",
-        "location": "Nuuk",
+        "location": "Kulusuk",
         "system_permissions": "Employee",
         "email": "yeabsira@gmail.com",
         "staff_id": "E34"
@@ -133,5 +133,14 @@
         "system_permissions": "Employee",
         "email": "yeabsira@gmail.com",
         "staff_id": "E35"
+    },
+    {
+        "name": "Jon",
+        "social_security_number": "7777777777",
+        "phone_number": "6666666",
+        "location": "Thorshofn",
+        "system_permissions": "Employee",
+        "email": "anemail@gmail.com",
+        "staff_id": "E36"
     }
 ]

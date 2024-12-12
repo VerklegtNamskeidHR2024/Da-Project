@@ -5,7 +5,6 @@ from colorama import Fore, Style, init
 
 init()
 
-
 class property_UI_menu:
     def __init__(self, logic_wrapper, rank, location, staff_id):
         """Constructor for the property UI menu"""
@@ -41,7 +40,7 @@ class property_UI_menu:
                     property.property_price,
                 ]
             )
-        border_color = Fore.MAGENTA
+        border_color = Fore.BLUE
         reset_color = Style.RESET_ALL
         property_table.border = True
         property_table.junction_char = f"{border_color}+{reset_color}"
@@ -57,7 +56,7 @@ class property_UI_menu:
             print("2. Add Amenity")
         print("-" * 70)
 
-        user_action = input("Select an Option:  ").lower()
+        user_action = input("Select an Option: ").lower()
         return user_action
 
     def properties_menu_logistics(self) -> str:
@@ -67,19 +66,24 @@ class property_UI_menu:
             # depending on your choice you will  be sent to the following places
             user_action = self.display_properties_menu()
             match (user_action, self.rank):
+                
                 case ("1", self.rank):
                     user_action = self.display_select_property()
+
                 case ("2", "Admin") | ("2", "Manager"):
                     user_action = self.display_add_property()
+
                 case ("2", "Employee") | ("3", "Admin") | ("3", "Manager"):
                     user_action = self.display_add_amenity()
-                case "b":
+
+                case ("b", self.rank):
                     return "b"
-                case "q":
+                
+                case ("q", self.rank):
                     return "q"
                 case _:
                     print("Invalid input.Please try again.")
-        return user_action
+        return user_action.lower()
 
     def display_select_property(self) -> str:
         """Displays the form to select a property."""
@@ -88,29 +92,26 @@ class property_UI_menu:
         # kormakur fix this cant do sanity check on property id brother!
         while (property_id_selected := input("Enter the Property ID to select: ").strip()) not in ["q", "b", "Q", "B"]:
         # Gets property by id
-            is_valid = self.logic_wrapper.sanity_check_properties('property_id', property_id_selected)
-            if is_valid == False:
+            is_valid = self.logic_wrapper.sanity_check_properties('property id', property_id_selected)
+            if not is_valid:
                 print()
                 print("Invalid property ID. Please try again.")
                 print()
                 continue
-            if len(property_id_selected) < 2:
-                print()
-                print("Must Enter A Valid Property ID")
-                print()
-            selected_property = self.logic_wrapper.get_property_by_id(
-                self.location, property_id_selected
-            )
+            elif is_valid:
+                selected_property = self.logic_wrapper.get_property_by_id(self.location, property_id_selected)
 
             # If there is not property with the slected id you will get a message.
             if not selected_property:
                 print("No property found with the provided ID.")
                 # and it returns to the start point
             # print for single selected property
+
             self.print_single_property(selected_property)
             print("1. View Attached Items")
             print("2. Edit Property Details")
             # let you choose from the above 2.
+
             selected_property_options = self.selected_property_logistics(
                 selected_property
             )
@@ -213,6 +214,7 @@ class property_UI_menu:
     def set_location_name_for_properties(
         self, str_display: str, new_property: object
     ) -> str:
+
     # Asks the user to enter a location for the property they are creating. Goes through very simple input
         if self.rank == "Admin":
             while (
@@ -519,7 +521,7 @@ class property_UI_menu:
                     work_request.mark_as_completed,
                 ]
             )
-        border_color = Fore.MAGENTA
+        border_color = Fore.BLUE
         reset_color = Style.RESET_ALL
         property_work_requests_table.border = True
         property_work_requests_table.junction_char = f"{border_color}+{reset_color}"
@@ -556,7 +558,7 @@ class property_UI_menu:
                     maintenance_report.report_status,
                 ]
             )
-        border_color = Fore.MAGENTA
+        border_color = Fore.BLUE
         reset_color = Style.RESET_ALL
         property_maintenance_reports_table.border = True
         property_maintenance_reports_table.junction_char = (
@@ -594,7 +596,7 @@ class property_UI_menu:
                 property.property_price,
             ]
         )
-        border_color = Fore.MAGENTA
+        border_color = Fore.BLUE
         reset_color = Style.RESET_ALL
         single_property_table.border = True
         single_property_table.junction_char = f"{border_color}+{reset_color}"

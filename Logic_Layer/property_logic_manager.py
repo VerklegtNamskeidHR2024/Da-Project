@@ -18,7 +18,7 @@ class property_logic_manager:
                 return False
         # checks if the location is in the list of locations
         elif what_to_check == 'property id':
-            list_of_all_properties = self.Storage_Layer_Wrapper.get_all_properties()
+            list_of_all_properties = self.Storage_Layer_Wrapper.get_all_properties_at_location()
             for property in list_of_all_properties:
                 if property.property_id == new_value:
                     return True

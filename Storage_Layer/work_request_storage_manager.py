@@ -8,7 +8,8 @@ class work_reques_storage:
         pass
 
     def get_all_work_requests(self) -> list[WorkRequest]:
-        """Gets all work requests from the file"""
+        """Gets all work requests from the file and stores each instance of the class in a list that is 
+        returned back to the storage wrapper. """
         with open('Data/work_request_storage.json', 'r') as work_request_file:
             work_request_data = json.load(work_request_file)
         work_request_list = [WorkRequest(**data) for data in work_request_data]
