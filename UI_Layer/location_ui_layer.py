@@ -11,7 +11,7 @@ class location_UI_menu:
         self.location = location  
         self.staff_id = staff_id
 
-    def start_point_location_UI(self):
+    def start_point_location_UI(self) -> str:
         # when this class is called it starts here
         # call other functions in class from here
         self.clear_screen()
@@ -50,7 +50,7 @@ class location_UI_menu:
         print(location_table)
         # prints the information for this location
         
-    def display_selected_location_information_printed_admin(self) -> bool:
+    def display_selected_location_information_printed_admin(self) -> str:
         '''Displays the location information and options for editing the location'''
 
         user_choice = ""
@@ -93,7 +93,7 @@ class location_UI_menu:
         self.clear_screen()
         return user_choice.lower()
 
-    def display_selected_location_information_printed_manager(self) -> bool:
+    def display_selected_location_information_printed_manager(self) -> str:
         '''Displays the location information and options for editing the location'''
         # prints infroamtion about the current location
 
@@ -130,7 +130,7 @@ class location_UI_menu:
         self.clear_screen()
         return user_choice.lower()
 
-    def display_edit_current_location(self) -> None:
+    def display_edit_current_location(self) -> str:
         '''Shows location information along with an option to 
         change phone number and opening hours'''
 
@@ -162,7 +162,7 @@ class location_UI_menu:
         self.clear_screen()
         return edit_user_action.lower()
 
-    def change_phone_number(self, location) -> None:
+    def change_phone_number(self, location) -> str:
         """Change the phone number of the location"""
         try:
             while (phone_input := input("Enter A Phone Number: ")) not in ["q", "b", "Q", "B"]:
@@ -183,7 +183,7 @@ class location_UI_menu:
         except ValueError:
             print(Fore.RED + "Something Went Wrong." + Style.RESET_ALL)
 
-    def change_opening_hours(self, location) -> None:
+    def change_opening_hours(self, location) -> str:
         """Change the opening hours of the location"""
         try:
             while (new_opening_hours := input("Enter Opening Hours: ")) not in ["q", "b", "Q", "B"]:
@@ -204,7 +204,7 @@ class location_UI_menu:
         except ValueError:
             print(Fore.RED + "Something Went Wrong." + Style.RESET_ALL) 
 
-    def display_amenities_menu(self) -> None:
+    def display_amenities_menu(self) -> str:
         """Display the amenities menu"""
         user_action = ""
         while user_action != "q":
@@ -229,7 +229,7 @@ class location_UI_menu:
         self.clear_screen()
         return user_action.lower()
         
-    def edit_amenity(self) -> None:
+    def edit_amenity(self) -> str:
         """Edit an amenity"""
         
         while (amenity_ID := input("Enter the ID of the Amenity You Want To Edit: ")) not in ["q", "b", "Q", "B"]:
@@ -253,7 +253,7 @@ class location_UI_menu:
 
         #amenities_list = self.logic_wrapper.fetch_all_amenities_for_location_in_storage(self.location)
 
-    def display_single_amenity(self, amenity):
+    def display_single_amenity(self, amenity: object) -> str:
         """Display a single amenity"""
         # prints the information for the amenity the class is called with
         print("-" * 80)
@@ -270,7 +270,7 @@ class location_UI_menu:
         print("-" * 80)
         
 
-    def display_attached_amenities(self):
+    def display_attached_amenities(self) -> str:
         """Display all amenities attached to the location"""
         # when admin needs to select location
         current_location = self.get_current_location()
@@ -291,7 +291,7 @@ class location_UI_menu:
         print(amenities_table)
         print("-" * 80)
 
-    def get_current_location(self):
+    def get_current_location(self) -> str:
         """Get the current location and return it"""
         # gets all locations
         location_list = self.logic_wrapper.get_all_locations()
@@ -301,7 +301,7 @@ class location_UI_menu:
                 #current_location = loc
                 return loc
     
-    def display_all_locations(self):
+    def display_all_locations(self) -> str:
         """prints all locations"""
         # create a table to print all locations
         locations_print_table = PrettyTable()
