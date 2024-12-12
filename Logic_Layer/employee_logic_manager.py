@@ -19,21 +19,22 @@ class employee_logic_manager:
         all_managers = self.Storage_Layer_Wrapper.get_all_managers()
         return all_managers 
     
+
     def get_manager_by_id(self, staff_id: str) -> object: 
         """Find a manager by staff_id"""
         all_managers = self.Storage_Layer_Wrapper.get_all_managers()
         # checks if the manager id is in the list of managers then returns the manager
         for manager in all_managers:
             if manager.staff_id == staff_id:
-                return manager.location
+                return manager
 
     # Might not implement
     def get_all_employees(self) -> list:
         """Get all employees"""
 
         all_employees = self.Storage_Layer_Wrapper.get_all_employees()
-
         return all_employees
+
 
     def get_employee_by_id(self, staff_id: str) -> object:
         """find an employee by staff_id"""
@@ -41,7 +42,7 @@ class employee_logic_manager:
         # checks if the employee id is in the list of employees then returns the employee
         for employee in all_employees:
             if employee.staff_id == staff_id:
-                return employee.location
+                return employee
 
     def get_all_employees_at_location(self, location) -> list:
         """Get all employees at a specific location"""
@@ -135,22 +136,25 @@ class employee_logic_manager:
     def sanity_check_ssn(self, ssn) -> bool:
         """Check if the social security number is correct"""
 
-        if len(ssn) == 10:
-            return True
-        else:
+        try:
+            int(ssn)
+            if len(ssn) == 10:
+                return True
+        except:
             return False
         
     def sanity_check_phone_number(self, phone_number) -> bool:
         """Check if the phone number is correct"""
-
-        if len(phone_number) == 7:
-            return True
-        else:
+        try:
+            int(phone_number)
+            if len(phone_number) == 7:
+                return True
+        except:
             return False
         
     def sanity_check_email(self, email) -> bool:
         """Check if the email is correct"""
-        if "@" in email:
+        if "@" in email and "." in email:
             return True
         else:
             return False

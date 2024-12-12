@@ -56,7 +56,7 @@ class property_UI_menu:
             print("2. Add Amenity")
         print("-" * 70)
 
-        user_action = input("Select an Option:  ").lower()
+        user_action = input("Select an Option: ").lower()
         return user_action
 
     def properties_menu_logistics(self) -> str:
@@ -66,19 +66,24 @@ class property_UI_menu:
             # depending on your choice you will  be sent to the following places
             user_action = self.display_properties_menu()
             match (user_action, self.rank):
+                
                 case ("1", self.rank):
                     user_action = self.display_select_property()
+
                 case ("2", "Admin") | ("2", "Manager"):
                     user_action = self.display_add_property()
+
                 case ("2", "Employee") | ("3", "Admin") | ("3", "Manager"):
                     user_action = self.display_add_amenity()
-                case "b":
+
+                case ("b", self.rank):
                     return "b"
-                case "q":
+                
+                case ("q", self.rank):
                     return "q"
                 case _:
                     print("Invalid input.Please try again.")
-        return user_action
+        return user_action.lower()
 
     def display_select_property(self) -> str:
         """Displays the form to select a property."""
@@ -101,10 +106,12 @@ class property_UI_menu:
                 print("No property found with the provided ID.")
                 # and it returns to the start point
             # print for single selected property
+
             self.print_single_property(selected_property)
             print("1. View Attached Items")
             print("2. Edit Property Details")
             # let you choose from the above 2.
+
             selected_property_options = self.selected_property_logistics(
                 selected_property
             )
@@ -207,6 +214,7 @@ class property_UI_menu:
     def set_location_name_for_properties(
         self, str_display: str, new_property: object
     ) -> str:
+
     # Asks the user to enter a location for the property they are creating. Goes through very simple input
         if self.rank == "Admin":
             while (
