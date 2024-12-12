@@ -190,6 +190,7 @@ class property_UI_menu:
             is_valid_name = self.logic_wrapper.sanity_check_properties(
                 "name", property_name
             )
+            print(is_valid_name)
             if is_valid_name is False:
                 print()
                 print("Invalid name. Please try again.")
@@ -425,7 +426,7 @@ class property_UI_menu:
 
     def edit_property_name(self, selected_property: object) -> str:
         """Edits the name of the selected property"""
-
+        print('In the edit property name')
         while (new_name := input("Enter new property name: ")) not in [
             "q",
             "b",
@@ -433,6 +434,7 @@ class property_UI_menu:
             "B",
         ]:
             is_valid_name = self.logic_wrapper.sanity_check_properties("name", new_name)
+            print(is_valid_name)
             if is_valid_name == True:
                 self.logic_wrapper.edit_existing_property_in_storage(
                     selected_property, self.location, "name", new_name
