@@ -158,7 +158,7 @@ class Main_Menu:
                     break
                 case _:
                     print(Fore.RED + "No User Found, Please Try Again." + Style.RESET_ALL)
-                    time.sleep(0.5)
+                    time.sleep(1)
                     self.clear_screen()
         return return_user
     
@@ -220,7 +220,7 @@ class Main_Menu:
                     return_location = "Longyearbyen"
                 case _:
                     print(Fore.RED + "No Location Found, Please Try Again." + Style.RESET_ALL)
-                    time.sleep(0.5)
+                    time.sleep(1)
                     self.clear_screen
         self.clear_screen()
         return return_location
@@ -288,10 +288,10 @@ class Main_Menu:
                 case "q":
                     return "q"
                 case _:
-                    
                     print(Fore.RED + "Wrong Input" + Style.RESET_ALL)
-                    time.sleep(0.4)
+                    time.sleep(1)
                     self.clear_screen()
+                    return "s"
         self.clear_screen()
         return user_action
             
