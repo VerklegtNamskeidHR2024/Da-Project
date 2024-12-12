@@ -1,3 +1,4 @@
+
 from Model_Classes.house_model import House
 from Model_Classes.amenity_model import Amenity
 from prettytable import PrettyTable
