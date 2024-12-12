@@ -180,11 +180,10 @@ class property_UI_menu:
         new_property = House()
         print()
         print("[ New Property Form ]")
-        print("-" * 70)
+        print("_" * 70)
         print()
-        print("{:>10}".format("Back - [ b, B ]"))
-        print("{:>10}".format("Quit - [ q, Q ]"))
-        print()
+        print("{:>18}".format("Back - [ b, B ]"))
+        print("{:>18}".format("Quit - [ q, Q ]"))
         print("-" * 70)
         str_display = "Property"
         property_name = self.set_name_for_property(str_display, new_property)
@@ -198,8 +197,8 @@ class property_UI_menu:
         print("[ New Amenity Form ]")
         print("-" * 70)
         print()
-        print("{:>10}".format("Back - [ b, B ]"))
-        print("{:>10}".format("Quit - [ q, Q ]"))
+        print("{:>18}".format("Back - [ b, B ]"))
+        print("{:>18}".format("Quit - [ q, Q ]"))
         print()
         print("-" * 70)
         str_display = "Amenity"
@@ -425,7 +424,10 @@ class property_UI_menu:
         print("2. Change Property Condition")
         print("3. Change Price to Fix")
         print("4. Change Property Price")
-
+        print()
+        print("{:>18}".format("Back - [ b, B ]"))
+        print("{:>18}".format("Quit - [ q, Q ]"))
+        print("-" * 70)
         edit_choice = input("Select an option to edit: ").lower()
         return edit_choice
 
@@ -434,7 +436,6 @@ class property_UI_menu:
         edit_choice = ""
         while edit_choice != "q":
             edit_choice = self.display_edit_property_details(selected_property)
-            print(edit_choice)
             match edit_choice:
                 case "1":
                     edit_choice = self.edit_property_name(selected_property)
