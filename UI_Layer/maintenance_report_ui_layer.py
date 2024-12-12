@@ -500,15 +500,18 @@ class maintenance_report_UI_menu:
             if is_valid_report_name == False:
                 print(Fore.RED + 'Invalid input' + Style.RESET_ALL)
 
-        while is_valid_location == False:
-            location = input('Enter location name: ')
-            if location.lower() == 'cancel':
-                location = ''
-                self.create_new_maintenance_report(report_name, location, property_id, staff_id, regular_maintenance, maintenance_description, 'Incomplete', price, mark_as_done, contractor_id, work_request_id)
-                return
-            is_valid_location = self.logic_wrapper.sanity_check_maintencance_report('location', location, self.location)
-            if is_valid_location == False:
-                print(Fore.RED + 'Invalid input' + Style.RESET_ALL)
+        if self.rank == 'Employee' or self.rank == 'Manager':
+            location = self.location
+        elif self.rank == 'Admin':  
+            while is_valid_location == False:
+                location = input('Enter location name: ')
+                if location.lower() == 'cancel':
+                    location = ''
+                    self.create_new_maintenance_report(report_name, location, property_id, staff_id, regular_maintenance, maintenance_description, 'Incomplete', price, mark_as_done, contractor_id, work_request_id)
+                    return
+                is_valid_location = self.logic_wrapper.sanity_check_maintencance_report('location', location, self.location)
+                if is_valid_location == False:
+                    print(Fore.RED + 'Invalid input' + Style.RESET_ALL)
 
         while is_valid_property_id == False:
             property_id = input("Enter property ID (P*): ")
@@ -664,7 +667,7 @@ class maintenance_report_UI_menu:
             for report in all_report_list:
                 if report.report_id == selected_work_request:
                     maintenance_report_to_use = report
-            self.print_single_maintenance_report(maintenance_report_to_use)
+            self.clear_screen()
             self.display_edit_maintenance_report_details(maintenance_report_to_use)
         elif report_in_system == False:
             print(Fore.RED + f'{selected_work_request} not found in the system please try again!' + Style.RESET_ALL)
@@ -681,7 +684,8 @@ class maintenance_report_UI_menu:
         """ Display the edit maintenance report details menu """
         #self.clear_screen()
         """ Allows editing of maintenance report details. """
-
+        self.clear_screen()
+        self.print_single_maintenance_report(selected_maintenance_report)
         edit_choice = ''
         while edit_choice != 'b':
             print(f"Editing details for maintenance report ID: {selected_maintenance_report.report_id}")
