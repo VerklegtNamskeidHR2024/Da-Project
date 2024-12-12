@@ -256,7 +256,7 @@ class location_UI_menu:
     def display_single_amenity(self, amenity):
         """Display a single amenity"""
         # prints the information for the amenity the class is called with
-        print("-" * 70)
+        print("-" * 80)
         amenitiy_table = PrettyTable()
         amenitiy_table.field_names = ['Amenity Name', 'Property ID', 'Location', 'Condition', 'Price to fix', 'Description']
         amenitiy_table.add_row([amenity.name, amenity.property_id, amenity.location, amenity.condition, amenity.total_price_to_fix, amenity.amenity_description ])
