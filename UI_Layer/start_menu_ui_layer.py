@@ -121,7 +121,8 @@ class Main_Menu:
             sys.stdout.write(char)
             sys.stdout.flush() 
             time.sleep(0.04)
-        print()'''
+        print()
+        
         self.clear_screen()
 
         return_user = ""
