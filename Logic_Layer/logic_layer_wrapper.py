@@ -205,6 +205,9 @@ class Logic_Layer_Wrapper:
     def get_denied_reports(self, staff_id: str, location: str) -> list[MaintenanceReport]:
         return self.maintenance_report_logic_manager.get_denied_reports(staff_id, location)
     
+    def reopen_closed_report(self, report, location):
+        return self.maintenance_report_logic_manager.reopen_closed_report(report, location)
+    
     def sanity_check_maintencance_report(self, what_to_check, new_value, location):
         location_list = self.get_all_locations() # get all locations
         return self.maintenance_report_logic_manager.sanity_check_maintencance_report(what_to_check, new_value, location)

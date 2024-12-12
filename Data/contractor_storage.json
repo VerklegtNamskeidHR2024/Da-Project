@@ -7,7 +7,7 @@
         "phone_number": 1234567,
         "location": "Reykjavik",
         "previous_job_reports": [],
-        "warningtext": "sadas"
+        "warningtext": "meow meow"
     },
     {
         "contractor_id": "C2",
@@ -42,7 +42,7 @@
     {
         "contractor_id": "C5",
         "company_name": "Daniela and Daughters",
-        "contact_name": "Daniela",
+        "contact_name": "b",
         "opening_hours": "8-16",
         "phone_number": 1234567,
         "location": "Reykjavik",

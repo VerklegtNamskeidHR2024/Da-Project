@@ -40,7 +40,7 @@ class property_UI_menu:
                     property.property_price,
                 ]
             )
-        border_color = Fore.MAGENTA
+        border_color = Fore.BLUE
         reset_color = Style.RESET_ALL
         property_table.border = True
         property_table.junction_char = f"{border_color}+{reset_color}"
@@ -92,17 +92,14 @@ class property_UI_menu:
         # kormakur fix this cant do sanity check on property id brother!
         while (property_id_selected := input("Enter the Property ID to select: ").strip()) not in ["q", "b", "Q", "B"]:
         # Gets property by id
-            is_valid = self.logic_wrapper.sanity_check_properties('property_id', property_id_selected)
-            if is_valid == False:
+            is_valid = self.logic_wrapper.sanity_check_properties('property id', property_id_selected)
+            if not is_valid:
                 print()
                 print("Invalid property ID. Please try again.")
                 print()
                 continue
-            if len(property_id_selected) < 2:
-                print()
-                print("Must Enter A Valid Property ID")
-                print()
-            selected_property = self.logic_wrapper.get_property_by_id(self.location, property_id_selected)
+            elif is_valid:
+                selected_property = self.logic_wrapper.get_property_by_id(self.location, property_id_selected)
 
             # If there is not property with the slected id you will get a message.
             if not selected_property:
@@ -193,6 +190,7 @@ class property_UI_menu:
             is_valid_name = self.logic_wrapper.sanity_check_properties(
                 "name", property_name
             )
+            print(is_valid_name)
             if is_valid_name is False:
                 print()
                 print("Invalid name. Please try again.")
@@ -428,7 +426,7 @@ class property_UI_menu:
 
     def edit_property_name(self, selected_property: object) -> str:
         """Edits the name of the selected property"""
-
+        print('In the edit property name')
         while (new_name := input("Enter new property name: ")) not in [
             "q",
             "b",
@@ -436,6 +434,7 @@ class property_UI_menu:
             "B",
         ]:
             is_valid_name = self.logic_wrapper.sanity_check_properties("name", new_name)
+            print(is_valid_name)
             if is_valid_name == True:
                 self.logic_wrapper.edit_existing_property_in_storage(
                     selected_property, self.location, "name", new_name
