@@ -204,7 +204,7 @@ class contractor_UI_menu():
             # show the options for the contractor
             print("1) View work requests")
             print("2) View maintenance reports")
-            print("2) Give warning")
+            print("3) Give warning")
             print(">Go to Home Page: b, B")
             edit_user_action = input("What action would you like to perform: ")
 
