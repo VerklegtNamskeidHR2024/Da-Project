@@ -688,9 +688,9 @@ class maintenance_report_UI_menu:
         #self.clear_screen()
         """ Allows editing of maintenance report details. """
         self.clear_screen()
-        self.print_single_maintenance_report(selected_maintenance_report)
         edit_choice = ''
         while edit_choice != 'b':
+            self.print_single_maintenance_report(selected_maintenance_report)
             print(f"Editing details for maintenance report ID: {selected_maintenance_report.report_id}")
             print('1. Change Report Name')
             print('2. Change Staff ID ')
@@ -719,6 +719,8 @@ class maintenance_report_UI_menu:
                         if confirm.lower() == 'yes':
                             print(Fore.GREEN + "Maintenance report details updated successfully!" + Style.RESET_ALL)
                             self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Report Name', new_report_name)
+                            time.sleep(1.5)
+                            self.clear_screen()
                         else:
                             print(Fore.RED + 'Report name not changed' + Style.RESET_ALL)
 
@@ -732,6 +734,8 @@ class maintenance_report_UI_menu:
                         if confirm.lower() == 'yes':
                             print(Fore.GREEN + "Maintenance report details updated successfully!" + Style.RESET_ALL)
                             self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Staff ID', new_staff_id)
+                            time.sleep(1.5)
+                            self.clear_screen()
                         else:
                             print(Fore.RED + 'Staff ID not changed' + Style.RESET_ALL)
                 
@@ -745,6 +749,8 @@ class maintenance_report_UI_menu:
                         if confirm.lower() == 'yes':
                             print(Fore.GREEN + "Maintenance report details updated successfully!" + Style.RESET_ALL)
                             self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Regular', regular_maintenance)
+                            time.sleep(1.5)
+                            self.clear_screen()
                         else:
                             print(Fore.RED + 'Regular Maintenance not changed' + Style.RESET_ALL)
             
@@ -758,6 +764,8 @@ class maintenance_report_UI_menu:
                         if confirm.lower() == 'yes':
                             print(Fore.GREEN + "Maintenance report details updated successfully!" + Style.RESET_ALL)
                             self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Description', new_report_description)
+                            time.sleep(1.5)
+                            self.clear_screen()
                         else:
                             print(Fore.RED + 'Maintenance description not changed' + Style.RESET_ALL)
             
@@ -772,6 +780,8 @@ class maintenance_report_UI_menu:
                             if confirm.lower() == 'yes':
                                 print(Fore.GREEN + "Maintenance report details updated successfully!" + Style.RESET_ALL)
                                 self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Cost', new_report_cost)
+                                time.sleep(1.5)
+                                self.clear_screen()
                             else:
                                 print(Fore.RED + 'Cost not changed' + Style.RESET_ALL)
                 except ValueError:
@@ -787,6 +797,8 @@ class maintenance_report_UI_menu:
                         if confirm.lower() == 'yes':
                             print(Fore.GREEN + "Maintenance report details updated successfully!" + Style.RESET_ALL)
                             self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Contractor ID', new_contractor_id)
+                            time.sleep(1.5)
+                            self.clear_screen()
                         else:
                             print(Fore.RED + 'Contractor ID not changed' + Style.RESET_ALL)
             
