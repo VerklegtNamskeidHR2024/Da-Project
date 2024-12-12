@@ -128,7 +128,7 @@ class Main_Menu:
         return_user = ""
         while return_user == "":
             print()
-            print("{:>60}".format("[ Welcome to the NaN Air Properties and Staff System! ]"))
+            print("{:>70}".format(Fore.BLUE + "[ Welcome to the NaN Air Properties and Staff System! ]" + Style.RESET_ALL))
             print("-" * 80)
             self.show_ascii_art_hq()
             
@@ -139,6 +139,7 @@ class Main_Menu:
             print("3. Employee")
             print()
             print("Universal System Commands (Not Applicable During Log-In)")
+            print("_" * 60)
             print()
             print("{:>18}".format("Back - [ b, B ]"))
             print("{:>18}".format("Quit - [ q, Q ]"))
@@ -178,7 +179,7 @@ class Main_Menu:
         self.clear_screen()
         return_location = ""
         while return_location == "":
-            print("{:>60}".format("[ Welcome to the NaN Air Properties and Staff System! ]"))
+            print("{:>60}".format(Fore.BLUE + "[ Welcome to the NaN Air Properties and Staff System! ]" + Style.RESET_ALL))
             print("-" * 80)
             self.show_ascii_art_hq()
             print("-" * 80)
@@ -248,6 +249,7 @@ class Main_Menu:
         print("5. Maintenance Reports")
         if self.rank != "Employee":
             print("6. Locations")
+        print("_" * 80)
         print()
         print("{:>10}".format("Quit - [ q, Q ]"))
         print("-" * 80)
