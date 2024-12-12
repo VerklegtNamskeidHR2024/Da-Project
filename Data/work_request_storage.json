@@ -144,7 +144,7 @@
         "completition_date": "",
         "repetitive_work": false,
         "reopen_interval": 0,
-        "priority": "High",
+        "priority": "Medium",
         "work_request_status": "Open",
         "need_contractor": true,
         "contractor_id": "C4",

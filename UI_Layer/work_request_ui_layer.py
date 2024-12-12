@@ -337,7 +337,6 @@ class work_request_UI_menu:
             )
             if work_request is not None:
                 self.clear_screen()
-                self.display_selected_work_request_information(work_request)
                 edit_work_request = self.edit_work_request_logistics(work_request)
                 if edit_work_request == "b":
                     continue
@@ -815,6 +814,7 @@ class work_request_UI_menu:
                 if mark_as_completed_true == "b":
                     continue
                 return mark_as_completed_true
+        self.clear_screen()
         return mark_as_completed
 
 
@@ -868,6 +868,7 @@ class work_request_UI_menu:
             print(Fore.RED + "Completition Date Must Be Formatted Correctly" + Style.RESET_ALL)
             print()
             continue
+        self.clear_screen()
         return completition_date.lower()
 
     
@@ -901,6 +902,7 @@ class work_request_UI_menu:
 
         category_to_edit = ""
         while category_to_edit != "q":
+            self.display_selected_work_request_information(work_request)
             category_to_edit = self.general_edit_work_request_menu()
             match category_to_edit:
                 # In all cases below, if the function returns "b" then the the loop starts again, however if it receives "q"
@@ -973,12 +975,12 @@ class work_request_UI_menu:
                 # Sends the work request object with the new data to be the logic wrapper.
                 self.logic_wrapper.edit_work_request(work_request)
                 self.clear_screen()
-                self.display_selected_work_request_information(work_request)
                 print()
                 print(Fore.BLUE + "New Employee ID Has Been Assigned To Request!" + Style.RESET_ALL)
                 print()
                 return ""
             print(Fore.RED + "No Employee ID Was Found. Please Try Again." + Style.RESET_ALL)
+        self.clear_screen()
         return edit_employee_id_for_request.lower()
 
     # Completed. Can be beautified.
@@ -1014,12 +1016,12 @@ class work_request_UI_menu:
                 # Sends the work request object with the new data to be the logic wrapper.
                 self.logic_wrapper.edit_work_request(work_request)
                 self.clear_screen()
-                self.display_selected_work_request_information(work_request)
                 print()
                 print(Fore.BLUE + "New Property ID Has Been Assigned To Request!" + Style.RESET_ALL)
                 print()
                 return ""
             print(Fore.RED + "No Property ID Was Found. Please Try Again." + Style.RESET_ALL)
+        self.clear_screen()
         return edit_property_id_for_request.lower()
 
     # Completed. Can be beautified.
@@ -1057,11 +1059,11 @@ class work_request_UI_menu:
                 # Sends the work request object with the new data to be the logic wrapper.
                 self.logic_wrapper.edit_work_request(work_request)
                 self.clear_screen()
-                self.display_selected_work_request_information(work_request)
                 print()
                 print(Fore.BLUE + "Work Request Has Been Marked Not Repetitive!" + Style.RESET_ALL)
                 print()
                 return ""
+            
             if is_repetitive_boolean is True:
                 print()
                 while (
@@ -1073,12 +1075,12 @@ class work_request_UI_menu:
                     print("Sigma Sigma on the wall, who is the Skibidiest of them all")
                 work_request.set_repetitive_work(is_repetitive_boolean)
                 self.clear_screen()
-                self.display_selected_work_request_information(work_request)
                 print()
                 print(Fore.BLUE + "Work Request Has Been Marked Repetitive!" + Style.RESET_ALL)
                 print()
                 return ""
             print(Fore.RED + "Input Must Be In The Form of Yes or No" + Style.RESET_ALL)
+        self.clear_screen()
         return edit_repitive_work_request.lower()
 
     # Completed. Can be beautified.
@@ -1115,12 +1117,12 @@ class work_request_UI_menu:
                 # Sends the work request object with the new data to be the logic wrapper.
                 self.logic_wrapper.edit_work_request(work_request)
                 self.clear_screen()
-                self.display_selected_work_request_information(work_request)
                 print()
                 print(Fore.BLUE + "New Priority Has Been Assigned To The Work Request!" + Style.RESET_ALL)
                 print()
                 return ""
             print(Fore.RED + "Priority Given Must Be Either High, Medium or Low" + Style.RESET_ALL)
+        self.clear_screen()
         return edit_priority_for_request.lower()
 
     # Completed. Can be beautified.
