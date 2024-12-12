@@ -2,6 +2,7 @@ from Model_Classes.contractor_model import Contractor
 from prettytable import PrettyTable 
 from colorama import Fore, Style, init
 import os
+import time
 
 class contractor_UI_menu():
     def __init__(self, logic_wrapper, rank, location, staff_id) -> None:
@@ -137,6 +138,8 @@ class contractor_UI_menu():
                     pass
                 case _:
                     print(Fore.RED + "Wrong input" + Style.RESET_ALL)
+                    time.sleep(0.5)
+                    self.clear_screen()
         return 
 
     def display_add_contractor_form(self) -> None:

@@ -4,6 +4,7 @@ from Model_Classes.amenity_model import Amenity
 from prettytable import PrettyTable
 from colorama import Fore, Style, init
 import os
+import time
 init()
 
 class property_UI_menu:
@@ -112,6 +113,7 @@ class property_UI_menu:
                 # If b is entered, it is returned back to the start_point_work_requests_UI function which brings the
                 # user back to the home page.
                 case ("b", self.rank):
+                    self.clear_screen()
                     return "b"
                 
                 # If q is entered, it is returned back to the start_point_work_requests_UI function which turns off
@@ -121,7 +123,9 @@ class property_UI_menu:
                 
                 # Any other input is except the one's listed above are treated as errors and the user given a message to notify them.
                 case _:
-                    print(Fore.RED + "Invalid input.Please try again." + Style.RESET_ALL)
+                    print(Fore.RED + "Invalid input. Please try again." + Style.RESET_ALL)
+                    time.sleep(0.5)
+                    self.clear_screen()
 
         return user_action.lower()
 
@@ -187,6 +191,8 @@ class property_UI_menu:
                 case _:
                     # If you put an invaild input
                     print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL)
+                    time.sleep(0.5)
+                    self.clear_screen()
         return user_choice.lower()
 
     def display_add_property(self):
@@ -495,6 +501,7 @@ class property_UI_menu:
                     selected_property, self.location, "condition", new_condition
                 )
                 print(Fore.GREEN +"Property details updated successfully!"+ Style.RESET_ALL)
+                time.sleep(0.5)
                 break
         return new_condition.lower()
 

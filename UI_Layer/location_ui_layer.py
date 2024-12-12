@@ -2,6 +2,7 @@ from Model_Classes.location_model import Location
 import os
 from prettytable import PrettyTable 
 from colorama import Fore, Style, init
+import time
 
 class location_UI_menu:
     def __init__(self, logic_wrapper, rank, location, staff_id):
@@ -90,6 +91,8 @@ class location_UI_menu:
                     return "q"
                 case _:
                     print(Fore.RED + "Invalid input. Please try again." + Style.RESET_ALL)
+                    time.sleep(0.5)
+                    self.clear_screen()
         self.clear_screen()
         return user_choice.lower()
 
