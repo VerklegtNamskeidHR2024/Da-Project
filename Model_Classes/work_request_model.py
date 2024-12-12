@@ -6,18 +6,22 @@ class WorkRequest:
         self.name = name
         self.description = description
         self.maintenance_report_id = maintenance_report_id
+
         self.staff_id = staff_id
         self.location = location
         self.property_id = property_id
         self.start_date = start_date
+
         self.completition_date = completition_date
         self.repetitive_work = repetitive_work
         self.reopen_interval = reopen_interval
         self.priority = priority
+
         self.work_request_status = work_request_status
         self.need_contractor = need_contractor
         self.contractor_id = contractor_id
         self.mark_as_completed = mark_as_completed
+        
         self.accepted_by_employee = accepted_by_employee
         """Constructor for WorkRequest class"""
         ## this and the data in work_request storage does not have the same format

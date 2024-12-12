@@ -121,7 +121,7 @@ class property_UI_menu:
                 
                 # Any other input is except the one's listed above are treated as errors and the user given a message to notify them.
                 case _:
-                    print("Invalid input.Please try again.")
+                    print(Fore.RED + "Invalid input.Please try again." + Style.RESET_ALL)
 
         return user_action.lower()
 
@@ -138,14 +138,14 @@ class property_UI_menu:
             is_valid = self.logic_wrapper.sanity_check_properties('property_id', property_id_selected)
             if is_valid is False:
                 print()
-                print("Invalid property ID. Please try again.")
+                print(Fore.RED + "Invalid property ID. Please try again.")
                 print()
                 continue
             elif is_valid is True:
                 selected_property = self.logic_wrapper.get_property_by_id(self.location, property_id_selected)
                 # If there is not property with the slected ID you will get a message.
                 if selected_property is None:
-                    print("No property found with the provided ID.")
+                    print(Fore.RED + "No property found with the provided ID."+ Style.RESET_ALL)
                     continue
 
                 # Print for single selected property
@@ -186,7 +186,7 @@ class property_UI_menu:
                     return "q"
                 case _:
                     # If you put an invaild input
-                    print("Invalid input. Please try again.")
+                    print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL)
         return user_choice.lower()
 
     def display_add_property(self):
@@ -225,7 +225,7 @@ class property_UI_menu:
             )
             if is_valid_name is False:
                 print()
-                print("Invalid name. Please try again.")
+                print(Fore.RED + "Invalid name. Please try again."+ Style.RESET_ALL)
                 print()
                 continue
             new_property.set_name(property_name)
@@ -258,7 +258,7 @@ class property_UI_menu:
                 )
                 if is_valid_location is False:
                     print()
-                    print("Invalid location. Please try again.")
+                    print(Fore.RED + "Invalid location. Please try again."+ Style.RESET_ALL)
                     print()
                     continue
                 new_property.set_location(new_location)
@@ -286,7 +286,7 @@ class property_UI_menu:
             )
             if is_valid_condition is False:
                 print()
-                print("Invalid Condition. Please Try Again.")
+                print(Fore.RED + "Invalid Condition. Please Try Again."+ Style.RESET_ALL)
                 print()
                 continue
             new_property.set_condition(new_condition)
@@ -305,11 +305,11 @@ class property_UI_menu:
             "B",
         ]:
             is_valid_price_to_fix = self.logic_wrapper.sanity_check_properties(
-                "price_to_fix", new_price_to_fix
+                 "price_to_fix", new_price_to_fix
             )
             if is_valid_price_to_fix is False:
                 print()
-                print("Invalid Price To Fix. Please Try Again.")
+                print(Fore.RED + "Invalid Price To Fix. Please Try Again."+ Style.RESET_ALL)
                 print()
                 continue
             new_property.set_total_price_to_fix(new_price_to_fix)
@@ -333,7 +333,7 @@ class property_UI_menu:
             )
             if is_valid_price is False:
                 print()
-                print("Invalid Price. Please Try Again.")
+                print(Fore.RED + "Invalid Price. Please Try Again."+ Style.RESET_ALL)
                 print()
                 continue
             new_property.set_property_price(new_price)
@@ -369,7 +369,7 @@ class property_UI_menu:
             )
             if is_description_valid is False:
                 print()
-                print("Sigma Sigma on the wall, who is the Skibidiest of them all")
+                print(Fore.RED + "Sigma Sigma on the wall, who is the Skibidiest of them all"+ Style.RESET_ALL)
                 print()
                 continue
             new_amenity.set_amenity_description(amenity_description)
@@ -390,7 +390,7 @@ class property_UI_menu:
         ) != "1":
             if new_property_confirmation in ["q", "b", "Q", "B"]:
                 return new_property_confirmation.lower()
-            print("Sigma Sigma on the wall, who is the Skibidiest of them all")
+            print(Fore.RED + "Sigma Sigma on the wall, who is the Skibidiest of them all"+ Style.RESET_ALL)
         print("-" * 80)
         print()
         self.logic_wrapper.add_new_property_to_storage(str_display, new_property)
@@ -421,7 +421,7 @@ class property_UI_menu:
                 case "q":
                     return "q"
                 case _:
-                    print("Invalid input. Please try again.")
+                    print(Fore.RED + "Invalid input. Please try again." + Style.RESET_ALL)
         return attached_selection.lower()
 
     def display_edit_property_details(self, selected_property: object) -> str:
@@ -457,7 +457,7 @@ class property_UI_menu:
                 case "q":
                     return "q"
                 case _:
-                    print("Invalid input. Please try again.")
+                    print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL)
         return edit_choice.lower()
 
     def edit_property_name(self, selected_property: object) -> str:
@@ -474,7 +474,7 @@ class property_UI_menu:
                 self.logic_wrapper.edit_existing_property_in_storage(
                     selected_property, self.location, "name", new_name
                 )
-                print("Property details updated successfully!")
+                print(Fore.GREEN +"Property details updated successfully!"+ Style.RESET_ALL)
                 break
         return new_name.lower()
 
@@ -494,7 +494,7 @@ class property_UI_menu:
                 self.logic_wrapper.edit_existing_property_in_storage(
                     selected_property, self.location, "condition", new_condition
                 )
-                print("Property details updated successfully!")
+                print(Fore.GREEN +"Property details updated successfully!"+ Style.RESET_ALL)
                 break
         return new_condition.lower()
 
@@ -515,7 +515,7 @@ class property_UI_menu:
                 self.logic_wrapper.edit_existing_property_in_storage(
                     selected_property, self.location, "price to fix", new_price_to_fix
                 )
-                print("Property details updated successfully!")
+                print(Fore.GREEN +"Property details updated successfully!"+ Style.RESET_ALL)
                 break
         return new_price_to_fix.lower()
 
@@ -535,7 +535,7 @@ class property_UI_menu:
                 self.logic_wrapper.edit_existing_property_in_storage(
                     selected_property, self.location, "price", new_price
                 )
-                print("Property details updated successfully!")
+                print(Fore.GREEN +"Property details updated successfully!"+ Style.RESET_ALL)
                 break
         return new_price.lower()
 
