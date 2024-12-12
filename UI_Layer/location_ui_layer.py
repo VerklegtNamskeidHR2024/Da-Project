@@ -57,22 +57,23 @@ class location_UI_menu:
         while user_choice != "q":
             print()
             print(f"{self.rank} - Location Menu")
-            print("-" * 70)
+            print("-" * 80)
             self.location_information()
-            print("-" * 70)
+            print("-" * 80)
             print("1. Edit Location Details")
             print("2. Show Attached Amenities")
             print("3. Show All Locations")
             print()
             print("{:>18}".format("Back - [ b, B ]"))
             print("{:>18}".format("Quit - [ q, Q ]"))
-            print("-" * 70)
+            print("-" * 80)
             user_choice = input("Enter a command: ").lower()
             match user_choice.lower():
                 case "1":
                     # edit location details
                     self.clear_screen()
                     user_choice = self.display_edit_current_location()
+                    self.clear_screen()
                 case "2":
                     # show all amenities
                     self.clear_screen()
@@ -98,15 +99,16 @@ class location_UI_menu:
 
         user_choice = ""
         while user_choice not in ["q", "b"]:
-            print("-" * 70)
+            print("{:>50}".format("[ Edit Location ]"))
+            print("-" * 80)
             self.location_information()
-            print("-" * 70)
+            print("-" * 80)
             print("1. Edit Location Details")
             print("2. Show Attached Amenities")
             print()
             print("{:>18}".format("Back - [ b, B ]"))
             print("{:>18}".format("Quit - [ q, Q ]"))
-            print("-" * 70)
+            print("-" * 80)
             user_choice = input("Enter a command: ").lower()
             match user_choice.lower():
                 case "1":
@@ -134,15 +136,16 @@ class location_UI_menu:
 
         edit_user_action = ""
         while edit_user_action != "q":
+            print("{:>30}".format("[ Edit Location Options ]"))
+            print("-" * 80)
             current_location = self.get_current_location()
             self.location_information()
-
             print("1. Phone Number")
             print("2. Opening Hours")
             print()
             print("{:>18}".format("Back - [ b, B ]"))
             print("{:>18}".format("Quit - [ q, Q ]"))
-            print("-" * 70)
+            print("-" * 80)
 
             edit_user_action = input("Enter Editing Option: ").lower()
             match edit_user_action:
@@ -173,6 +176,8 @@ class location_UI_menu:
                 # if the phone number is valid, change the phone number and print the location information
                 self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'phone_number', phone_input)
                 print("Phone Number Changed Successfully.")
+                self.clear_screen()
+                return ""
             self.clear_screen()
             return phone_input.lower()
         except ValueError:
@@ -181,14 +186,19 @@ class location_UI_menu:
     def change_opening_hours(self, location) -> None:
         """Change the opening hours of the location"""
         try:
-            while (new_opening_hours := input("Enter opening hours: ")) not in ["q", "b", "Q", "B"]:
+            while (new_opening_hours := input("Enter Opening Hours: ")) not in ["q", "b", "Q", "B"]:
             # checks if the opening hours are valid
                 is_valid = self.logic_wrapper.sanity_check_location("opening_hours", new_opening_hours)
                 if is_valid is True:
-                    # if the opening hours are valid, change the opening hours and print the location information
-                    self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'opening_hours', new_opening_hours)
-                    print("Opening hours changed successfully.")
-                print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL) 
+                    print()
+                    print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL) 
+                    print()
+                    continue
+                # if the opening hours are valid, change the opening hours and print the location information
+                self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'opening_hours', new_opening_hours)
+                print("Opening hours changed successfully.")
+                self.clear_screen()
+                return ""
             self.clear_screen()
             return new_opening_hours.lower()
         except ValueError:
@@ -203,11 +213,13 @@ class location_UI_menu:
             print()
             print("{:>18}".format("Back - [ b, B ]"))
             print("{:>18}".format("Quit - [ q, Q ]"))
-            print("-" * 70)
+            print("-" * 80)
             user_action = input("Select An Option: ").lower()
             match user_action.lower():
                 case "1":
+                    self.clear_screen()
                     user_action = self.edit_amenity()
+                    self.clear_screen()
                 case "q":
                     return "q"
                 case "b":
@@ -221,10 +233,9 @@ class location_UI_menu:
         """Edit an amenity"""
         
         while (amenity_ID := input("Enter the ID of the Amenity You Want To Edit: ")) not in ["q", "b", "Q", "B"]:
-            
             amenity = self.logic_wrapper.fetch_amenity_by_id(amenity_ID, self.location)
+            if amenity is not None:
             # if the amenity exists, display the amenity and let the user input a new condition
-            if amenity != None:
                 self.display_single_amenity(amenity)
                 new_condition = input("Enter New Condition: ")
                 changed_amenity = self.logic_wrapper.edit_amenity(amenity, new_condition)
@@ -233,8 +244,9 @@ class location_UI_menu:
                     print()
                     print("Amenity Condition Was Successfully Changed!")
                     print()
+                    self.clear_screen()
                     return ""
-                print(Fore.RED + f"no amenity found with ID {amenity_ID}" + Style.RESET_ALL)
+                print(Fore.RED + f"No Amenity Found With That ID {amenity_ID}" + Style.RESET_ALL)
         self.clear_screen()
         return amenity_ID.lower()
 
@@ -255,7 +267,7 @@ class location_UI_menu:
         amenitiy_table.horizontal_char = f"{border_color}-{reset_color}"
         amenitiy_table.vertical_char = f"{border_color}|{reset_color}"
         print(amenitiy_table)
-        print("-" * 70)
+        print("-" * 80)
         
 
     def display_attached_amenities(self):
@@ -264,12 +276,10 @@ class location_UI_menu:
         current_location = self.get_current_location()
         # gets all amenities for the location
         amenities_list = self.logic_wrapper.fetch_all_amenities_for_location_in_storage(current_location.location)
-        print(f"Amenities attached to {current_location.location}:")
+        print(f"Amenities Attached To {current_location.location}:")
         print("-" * 70)
         amenities_table = PrettyTable()
         amenities_table.field_names = ['Amenity Name', 'Property ID', 'Location', 'Condition', 'Price to fix', 'Description']
-        print('List of incomplete reports\n')
-
         for amenity in amenities_list:
             amenities_table.add_row([amenity.name, amenity.property_id, amenity.location, amenity.condition, amenity.total_price_to_fix, amenity.amenity_description ])
         border_color = Fore.BLUE
@@ -279,7 +289,7 @@ class location_UI_menu:
         amenities_table.horizontal_char = f"{border_color}-{reset_color}"
         amenities_table.vertical_char = f"{border_color}|{reset_color}"
         print(amenities_table)
-        print("-" * 70)
+        print("-" * 80)
 
     def get_current_location(self):
         """Get the current location and return it"""
@@ -311,9 +321,10 @@ class location_UI_menu:
         print()
         print("{:>18}".format("Back - [ b, B ]"))
         print("{:>18}".format("Quit - [ q, Q ]"))
+        print("-" * 80)
         while (
             all_locations := input("Select An Option: ").lower()
         ) not in ["q", "b", "Q", "B"]:
-            print("Sigma Sigma on the wall, who is the Skibidiest of them all")
+            print(Fore.RED + "Sigma Sigma on the wall, who is the Skibidiest of them all" + Style.RESET_ALL)
         self.clear_screen()
         return all_locations.lower()
