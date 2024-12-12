@@ -289,10 +289,10 @@
     },
     {
         "property_id": "P37",
-        "name": "house",
-        "location": "",
-        "condition": "bad",
-        "total_price_to_fix": "123",
-        "property_price": "231"
+        "name": "Twee Houth",
+        "location": "Reykjavik",
+        "condition": "Very Good",
+        "total_price_to_fix": "0",
+        "property_price": "42069"
     }
 ]
