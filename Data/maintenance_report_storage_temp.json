@@ -203,7 +203,7 @@
         "staff_id": "E1",
         "regular_maintenance": true,
         "maintenance_description": "Daniela er best i forritun",
-        "report_status": "Pending",
+        "report_status": "Denied",
         "price": "0",
         "mark_as_done": false,
         "contractor_id": "",
