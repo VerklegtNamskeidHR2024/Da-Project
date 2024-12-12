@@ -14,7 +14,7 @@ class contractor_UI_menu():
     def clear_screen(self):
         ''' Clears the screen '''
         os.system('cls' if os.name == 'nt' else 'clear')
-
+        
     def start_point_contractor_UI(self) -> None:
         """When this class is called it starts here. Goes into diffrent menus based on your rank. """
         # In almost all functions that receive, and verifies user input are while loops that repeatedly asks the user
@@ -32,6 +32,7 @@ class contractor_UI_menu():
         # final time to the quit system function that displays the exit message and stops running the script.
         #
         #
+        self.clear_screen()
         if self.rank == "Employee":
             employee_contractors_menu = self.display_contractor_employee_menu()
             if employee_contractors_menu in ["q", "b"]:
@@ -217,7 +218,7 @@ class contractor_UI_menu():
             # show the options for the contractor
             print("1) View work requests")
             print("2) View maintenance reports")
-            print("2) Give warning")
+            print("3) Give warning")
             print(">Go to Home Page: b, B")
             edit_user_action = input("What action would you like to perform: ")
 
