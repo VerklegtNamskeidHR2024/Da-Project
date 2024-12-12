@@ -39,7 +39,7 @@ class property_UI_menu:
 
         # NEEDS to be changed to match with other UI files!!!!
         # Displays the list of all properties and provides options
-        print(f"\033[94m{self.rank}\033[0m - Properties Page")
+        print(f"{self.rank} - Properties Page")
         property_list = self.logic_wrapper.get_all_properties_at_location(self.location)
         property_table = PrettyTable(
             ["Property ID", "Name", "Location", "Condition", "Price to Fix", "Price"]
