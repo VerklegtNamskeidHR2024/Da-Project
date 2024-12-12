@@ -27,7 +27,8 @@ class contractor_logic_manager:
         contractor_sorted_list = []
 
         all_contractors = self.Storage_Layer_Wrapper.get_all_contractor()
-
+        
+        # loops through all contractors and appends the contractors at the specific location to the contractor_sorted_list
         for contractor in all_contractors:
             if contractor.location == location:
                 contractor_sorted_list.append(contractor)
@@ -46,14 +47,43 @@ class contractor_logic_manager:
             
         return 
     
-    def sanity_check_contractor(self, contractor):
+    def sanity_check_contractor(self, what_to_check, new_value):
         """check if all info in a contractor object is correct"""
-        # needs to check phone number 
-        #print(len(contractor.phone_number))
-        if len(str(contractor.phone_number)) != 7:
-            return False
+        # checks if the phone number is 7 characters long and only contains numbers
+        if what_to_check == 'phone_number':
+            try:
+                int(new_value)
+                if len(new_value) != 7:
+                    return False
+                else:
+                    return True
+            except ValueError:
+                return False
+        # checks if the opening hours is between 3 and 5 characters long and contains a "-" to make sure its valid opening hours
+        if what_to_check == "opening_hours":
+            if len(new_value) <= 5 and len(new_value) >= 3 and "-" in new_value:
+                try:
+                    new_value = new_value.split("-")
+                    int(new_value[0])
+                    int(new_value[1])
+                    return True
+                except ValueError:
+                    return False
+            else:
+                return False
+        # checks if the warning is less than 50 characters long
+        if what_to_check == "warning":
+            if len(new_value) <= 50:
+                return True
+            else:
+                return False
+        # checks if the contact name or company name is less than 50 characters long
+        if what_to_check == "contact_name" or what_to_check == "company_name":
+            if len(new_value) <= 50 and new_value != "":
+                return True
+            else:
+                return False
         
-        return True
     
     def add_new_contractor_to_storage(self, rank, location, contractor):
         """Add a new contractor to the storage"""
@@ -83,13 +113,16 @@ class contractor_logic_manager:
         list_of_contractors = self.get_all_contractors()
         for contr in list_of_contractors: 
             if contr.contractor_id == contractor.contractor_id:  # checks if the contractor id is the same as the contractor id in the list of contractors
-                # checks if the choice is equal to the contractor name,phone number or opening hours
+                # checks if the edit_choice is equal to the contractor name,phone number, opening hours or warning 
+                # and then asigns the new_value to the contractor based on the edit_choice
                 if edit_choice == 'contact_name':
                     contr.set_contact_name(new_value)
                 elif edit_choice == 'phone_number':
                     contr.set_phone_number(new_value)
                 elif edit_choice == 'opening_hours':
                     contr.set_opening_hours(new_value)
+                elif edit_choice == 'warning':
+                    contr.set_warningtext(new_value)
         self.Storage_Layer_Wrapper.write_to_file_contractor(list_of_contractors) # write the list of all contractors to the storage
 
 

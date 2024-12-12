@@ -17,8 +17,8 @@ class property_logic_manager:
             else:
                 return False
         # checks if the location is in the list of locations
-        elif what_to_check == 'property id':
-            list_of_all_properties = self.Storage_Layer_Wrapper.get_all_properties()
+        elif what_to_check == 'property_id':
+            list_of_all_properties = self.Storage_Layer_Wrapper.get_all_properties_at_location()
             for property in list_of_all_properties:
                 if property.property_id == new_value:
                     return True
@@ -163,7 +163,7 @@ class property_logic_manager:
         """Get all maintenance reports for a property"""
         maintenance_report_list = []
         all_maintenance_reports = (
-            self.Storage_Layer_Wrapper.get_all_maintenance_report()
+            self.Storage_Layer_Wrapper.get_all_maintenance_reports()
         )
         # checks if the property id is in the list of maintenance reports then returns the maintenance reports
         for maintenance_report in all_maintenance_reports:

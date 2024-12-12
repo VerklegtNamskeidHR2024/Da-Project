@@ -1,8 +1,10 @@
 import sys
 import time
 import os
-from datetime import datetime
-from threading import Thread
+# from rich import print
+# from rich.panel import Panel
+# from rich.text import Text 
+
 
 from Logic_Layer.logic_layer_wrapper import Logic_Layer_Wrapper
 
@@ -47,8 +49,6 @@ class Main_Menu:
         self.property_UI_menu = property_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
 
 
-    # Needs to be implemented in all of the ui menus so we can acctually select the locations
-
     def start_point(self):
         """Starts the main menu for the system"""
         
@@ -63,9 +63,13 @@ class Main_Menu:
         quit_string = "Departing from NaN Air, Thank you for Visiting!"
         # self.fun_print(quit_string)
 
+    def clear_screen(self):
+        ''' Clears the screen '''
+        os.system('cls' if os.name == 'nt' else 'clear')
 
     def show_ascii_art_hq(self):
         """Prints out the ASCII art for the NaN Air HQ"""
+
         print("{:>61}".format("==================="))
         print("{:>44}{:>13}{:>3}".format("|", "NaN Air HQ", "|"))
         print("{:>14}{:>7}{:>15}{:>8}{:>10}{:>6}".format("___________", ".", ": : : :", "|", "_____", "|"))
@@ -75,7 +79,6 @@ class Main_Menu:
     def fun_print(self, text_to_print = "i need input bro", delay_in = 0.05):
         """send me a string ;)"""
         delay = delay_in
-        print(text_print)
         start = len(text_to_print)
         text_print = ""
         for i, char in enumerate(text_to_print):
@@ -86,16 +89,16 @@ class Main_Menu:
             time.sleep(delay)  
         print()
 
+
     def create_location_table(self):
         """Prints out a table of available locations for the user to select. """
-        # maybe delete
 
         locations_table = PrettyTable()
         locations_table.field_names = ['ID',"Country", "Location Name"]
         locations_table.add_row(['1',"Iceland", "Reykjavik"])
         locations_table.add_row(['2',"Greenland", "Nuuk"])
         locations_table.add_row(['3',"Greenland", "Kulusuk"])
-        locations_table.add_row(['4',"Faroe Islands", "Torshavn"])
+        locations_table.add_row(['4',"Faroe Islands", "Thorshofn"])
         locations_table.add_row(['5',"Shetland Islands", "Tingwall"])
         locations_table.add_row(['6',"Svalbard", "Longyearbyen"])
             
@@ -111,32 +114,32 @@ class Main_Menu:
 
     def select_user_for_system(self) -> str:
         """Selects a user for the system to use"""
-
         print()
         loading = "Loading" + ("." * 20)
         for char in loading:
             sys.stdout.write(char)
             sys.stdout.flush() 
-            time.sleep(0.01)
+            time.sleep(0.02)
         print()
+        self.clear_screen()
 
         return_user = ""
         while return_user == "":
             print()
-            print("Welcome to the NaN Air Properties and Staff System!")
-            print("-" * 70)
+            print("{:>60}".format("[ Welcome to the NaN Air Properties and Staff System! ]"))
+            print("-" * 80)
             self.show_ascii_art_hq()
-            print("-" * 70)
+            print("-" * 80)
             print("Log in as?")
             print("1. Admin")
             print("2. Manager")
             print("3. Employee")
             print()
-            print("Universal System Commands:")
-            print("{:>20}".format("> Go Back: b, B"))
-            # print("{:>20}".format("> Log Out: log, Log"))
-            print("{:>20}".format("> Quit System: q, Q"))
-            print("-" * 70)
+            print("Universal System Commands (Not Applicable During Log-In)")
+            print()
+            print("{:>18}".format("Back - [ b, B ]"))
+            print("{:>18}".format("Quit - [ q, Q ]"))
+            print("-" * 80)
 
             user_action = input("Select a Profile: ").lower()
             match user_action:
@@ -150,20 +153,23 @@ class Main_Menu:
                     return_user = "Employee"
                     break
                 case _:
-                    print("No User Found, Please Try Again.")
-
+                    self.clear_screen()
+                    print(Fore.RED + "No User Found, Please Try Again." + Style.RESET_ALL)
         return return_user
     
 
     def enter_and_validate_staff_id(self, rank) -> str:
         """Enter and validate the staff ID for the user"""
-        print()
+        print("-" * 70)
         is_staff_id_valid = False
         while is_staff_id_valid is False:
             staff_id = input("Enter Your Staff ID: ")
             is_staff_id_valid = self.logic_wrapper.sanity_check_staff_id(rank, staff_id)
-        # if is_staff_id_valid is False: 
-        #     print("ID Does Not Exist In The System, Please Try Again.")
+            if is_staff_id_valid is False: 
+                print()
+                print(Fore.RED + "ID Does Not Exist In The System, Please Try Again." + Style.RESET_ALL)
+                print()
+        self.clear_screen()
         return staff_id
     
 
@@ -171,12 +177,16 @@ class Main_Menu:
         """Select a location for the system to use"""
         return_location = ""
         while return_location == "":
+            print("{:>60}".format("[ Welcome to the NaN Air Properties and Staff System! ]"))
+            print("-" * 80)
+            self.show_ascii_art_hq()
+            print("-" * 80)
             location_table = PrettyTable()
             location_table.field_names = ['ID',"Location", "Country"]
             location_table.add_row(['1',"Iceland", "Reykjavik"])
             location_table.add_row(['2',"Greenland", "Nuuk"])
             location_table.add_row(['3',"Greenland", "Kulusuk"])
-            location_table.add_row(['4',"Faroe Islands", "Torshavn"])
+            location_table.add_row(['4',"Faroe Islands", "Thorshofn"])
             location_table.add_row(['5',"Shetland Islands", "Tingwall"])
             location_table.add_row(['6',"Svalbard", "Longyearbyen"])
 
@@ -187,7 +197,7 @@ class Main_Menu:
             location_table.horizontal_char = f"{border_color}-{reset_color}"
             location_table.vertical_char = f"{border_color}|{reset_color}"
             print(location_table)
-
+            print("-" * 80)
             user_action = input("Select a Location: ").lower()
             match user_action:
                 case "1":
@@ -197,23 +207,27 @@ class Main_Menu:
                 case "3":
                     return_location = "Kulusuk"
                 case "4":
-                    return_location = "Torshavn"
+                    return_location = "Thorshofn"
                 case "5":
                     return_location = "Tingwall"
                 case "6":
                     return_location = "Longyearbyen"
                 case _:
-                    print("No Location Found, Please Try Again.")
+                    print(Fore.RED + "No Location Found, Please Try Again." + Style.RESET_ALL)
+        self.clear_screen()
         return return_location
 
 
     def assigned_location_for_system(self, rank: str, staff_id: str) -> str:
         """Get the location for the user based on their rank and staff ID"""
         if rank == "Manager":
-            manager_location = self.logic_wrapper.get_manager_by_id(staff_id)
+            manager = self.logic_wrapper.get_manager_by_id(staff_id)
+            manager_location = manager.location
             return manager_location
-        elif rank == "Employee":
-            employee_location = self.logic_wrapper.get_employee_by_id(staff_id)
+        
+        if rank == "Employee":
+            employee = self.logic_wrapper.get_employee_by_id(staff_id)
+            employee_location = employee.location
             return employee_location
         
 
@@ -222,18 +236,20 @@ class Main_Menu:
         """Displays the menu items for the user"""
         
         print()
-        print(f" {self.rank} - Home Page")
-        print("-" * 70)
-        print("1) Properties")
-        print("2) Work Requests")
-        print("3) Employees")
-        print("4) Contractors")
-        print("5) Maintenance Reports")
-        if self.rank != "Employee":
-            print("6) Locations")
+        print(f"Current Location - {self.location}")
         print()
-        print("{:<18}".format("> Quit System: q, Q"))
-        print("-" * 70)
+        print(f" {self.rank} - Home Page")
+        print("-" * 80)
+        print("1. Properties")
+        print("2. Work Requests")
+        print("3. Employees")
+        print("4. Contractors")
+        print("5. Maintenance Reports")
+        if self.rank != "Employee":
+            print("6. Locations")
+        print()
+        print("{:>10}".format("Quit - [ q, Q ]"))
+        print("-" * 80)
 
         user_action = input("Select an Option: ").lower()
         return user_action
@@ -263,45 +279,7 @@ class Main_Menu:
                 case "q":
                     return "q"
                 case _:
-                    print("Wrong Input")
-            # user_action = self.display_menu_items()
-            # continue
-        # self.quit_system_message()
+                    print(Fore.RED + "Wrong Input" + Style.RESET_ALL)
+        self.clear_screen()
         return user_action
                     
-    
-    def test_some_stuff(self):
-        """just some tesing with getting data from storage""" 
-        
-        contractor_list = self.logic_wrapper.get_all_contractors(self.location)
-        for item in contractor_list:
-            print(f"{item.contractor_id:<10}|{item.location:<20}")
-        print("-" * 40)
-
-        employees_list = self.logic_wrapper.get_all_employees(self.location)
-        for item in employees_list:
-            print(f"{item.staff_id:<10}|{item.location:<20}")
-        print("-" * 40)
-
-        # this needs to be looked at
-        # works but look at property_storage_manager for more info
-        properties_list = self.logic_wrapper.get_all_properities(self.location)
-        for item in properties_list:
-            print(f"{item.property_id:<10}|{item.location:<20}")
-        print("-" * 40)
-
-        report_list = self.logic_wrapper.get_all_maintenance_reports(self.location)
-        for item in report_list:
-            print(f"{item.report_id:<10}|{item.location:<20}")
-        print("-" * 40)
-
-        # this needs to be looked at
-        '''work_list = self.logic_wrapper.get_all_work_requests(self.location)
-        for item in work_list:
-            print(f"{item.work_request_id:<10}|{item.location:<20}")
-        print("-" * 40)'''
-
-        location_list = self.logic_wrapper.get_all_locations(self.location)
-        for item in location_list:
-            print(f"{item.location:<20}")
-        print("-" * 40)

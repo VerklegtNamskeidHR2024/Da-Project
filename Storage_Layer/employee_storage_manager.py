@@ -15,6 +15,13 @@ class employee_storage():
     
     def write_to_file_employee(self, list_of_employees: list[Employee]):
         """Writes the list of employees to the file"""
+
+        with open('Data/employee_storage.json', 'r') as employee_file:
+            current_data = json.load(employee_file)
+
+        with open('Data/employee_storage_temp.json', 'w') as temp_file:
+            json.dump(current_data, temp_file, indent=4)
+
         dict_of_employees = [employee.to_dict() for employee in list_of_employees]
         with open('Data/employee_storage.json', 'w') as employee_file:
             json.dump(dict_of_employees, employee_file, indent=4)

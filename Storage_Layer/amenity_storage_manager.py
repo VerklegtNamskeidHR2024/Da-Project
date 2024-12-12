@@ -17,6 +17,13 @@ class amenity_storage:
 
     def write_to_file_amenities(self, list_of_amenities: list[Amenity]):
         """Writes the list of amenities to the file"""
+
+        with open('Data/amenity_storage.json', 'r') as amenity_file:
+            current_data = json.load(amenity_file)
+
+        with open('Data/amenity_storage_temp.json', 'w') as temp_file:
+            json.dump(current_data, temp_file, indent=4)
+
         dict_of_amenities = [amenity.to_dict() for amenity in list_of_amenities]
         with open('Data/amenity_storage.json', 'w') as amenity_file:
             json.dump(dict_of_amenities, amenity_file, indent=4)
