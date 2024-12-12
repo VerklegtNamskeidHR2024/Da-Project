@@ -83,7 +83,7 @@ class maintenance_report_logic_manager:
             return False
         # check if the report id is in the system
         elif what_to_check in 'report id':
-            list_of_all_reports = self.get_all_maintencance_reports_at_location(location)
+            list_of_all_reports = self.get_all_maintencance_reports()
             for report in list_of_all_reports:
                 if report.report_id == new_value:
                     return True
@@ -92,7 +92,7 @@ class maintenance_report_logic_manager:
     def get_highest_ID(self, location):
         """Get the highest ID for a maintenance report"""
         highestID = -1 # initialize the highest id to -1
-        list_of_all_reports = self.get_all_maintencance_reports(location) # get all maintenance reports at a location
+        list_of_all_reports = self.get_all_maintencance_reports() # get all maintenance reports at a location
 
         for report in list_of_all_reports: # iterate through all reports
             stripped_ID = report.report_id[2:] # get the id of the report
@@ -103,7 +103,7 @@ class maintenance_report_logic_manager:
         new_report_id = 'MR' + str(highestID) 
         return new_report_id
 
-    def get_all_maintencance_reports(self, location) -> list:
+    def get_all_maintencance_reports(self) -> list:
         """Get all maintenance reports"""
         maintenance_report_list = []
 
@@ -116,7 +116,7 @@ class maintenance_report_logic_manager:
 
     def add_maintencance_report_to_storage(self, location, maintenance_report, is_regular):
         """Add a maintenance report to the storage"""
-        list_of_all_reports = self.get_all_maintencance_reports(location) # get all maintenance reports at a location
+        list_of_all_reports = self.get_all_maintencance_reports() # get all maintenance reports at a location
         new_report_id = self.get_highest_ID(location) # get the highest id for a maintenance report
         #checks if the maintenance report is regular or not
         if is_regular == 'yes' or is_regular == 'Yes' or is_regular == 'YES':
@@ -131,7 +131,7 @@ class maintenance_report_logic_manager:
 
     def check_if_report_in_system(self, maintenance_report_id, location) -> bool:
         """Check if a maintenance report is in the system"""
-        list_of_reports = self.get_all_maintencance_reports_at_location(location)
+        list_of_reports = self.get_all_maintencance_reports()
 
         for report in list_of_reports: # iterate through all reports
             if report.report_id == maintenance_report_id: # checks if the report id is the same as the maintenance report id
@@ -141,7 +141,7 @@ class maintenance_report_logic_manager:
     def get_employee_reports(self, staff_id) -> list:
         """Get all reports for an employee"""
         employee_reports = [] # initialize an empty list to hold employee reports
-        all_reports = self.get_all_maintencance_reports('') # get all maintenance reports
+        all_reports = self.get_all_maintencance_reports() # get all maintenance reports
         # iterate through all reports and append the reports for an employee to the employee reports list 
         for report in all_reports:
             if report.staff_id == staff_id:
@@ -149,10 +149,10 @@ class maintenance_report_logic_manager:
 
         return employee_reports
     
-    def get_incomplete_maintenance_reports(self, location) -> list:
+    def get_incomplete_maintenance_reports(self) -> list:
         """Get all incomplete maintenance reports"""
         incomplete_reports = [] # initialize an empty list to hold incomplete reports
-        all_reports = self.get_all_maintencance_reports_at_location(location)
+        all_reports = self.get_all_maintencance_reports()
 
         for report in all_reports:
             if report.report_status == 'Incomplete': # checks if the report status is incomplete
@@ -297,7 +297,7 @@ class maintenance_report_logic_manager:
 
     def get_single_maintenance_report(self, report_id):
         """Get a single maintenance report"""
-        all_reports = self.get_all_maintencance_reports('')
+        all_reports = self.get_all_maintencance_reports()
         # iterate through all reports and return the report with the same id as the maintenance report
         for report in all_reports:
             if report.report_id == report_id:
