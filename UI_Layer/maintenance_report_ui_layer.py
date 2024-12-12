@@ -221,15 +221,18 @@ class maintenance_report_UI_menu:
 
             # If the location is empty the user is asked to fill it out
             elif location_empty == True:
-                location = input('Enter location: ')
-                # A check to make sure the input is valid
-                valid_location = self.logic_wrapper.sanity_check_maintencance_report('location', location, self.location)
-                # If the input is valid the location is updated
-                if valid_location == True:
-                    location_empty = False
-                    self.logic_wrapper.edit_maintencance_report(report, self.location, 'Location', location)
-                else:
-                    print(Fore.RED + 'Invalid input' + Style.RESET_ALL)
+                if self.rank == 'Employee' or self.rank == 'Manager':
+                    location = self.location
+                elif self.rank == 'Admin':
+                    location = input('Enter location: ')
+                    # A check to make sure the input is valid
+                    valid_location = self.logic_wrapper.sanity_check_maintencance_report('location', location, self.location)
+                    # If the input is valid the location is updated
+                    if valid_location == True:
+                        location_empty = False
+                        self.logic_wrapper.edit_maintencance_report(report, self.location, 'Location', location)
+                    else:
+                        print(Fore.RED + 'Invalid input' + Style.RESET_ALL)
 
             # If the property ID is empty the user is asked to fill it out
             elif property_id_empty == True:
