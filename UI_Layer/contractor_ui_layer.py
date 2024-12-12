@@ -14,10 +14,23 @@ class contractor_UI_menu():
         self.staff_id = staff_id
     
     def start_point_contractor_UI(self) -> None:
-        """Start point for contractor UI"""
-        # when this class is called it starts here
-        # goes into diffrent menus based on your rank
-        print(self.rank)
+        """When this class is called it starts here. Goes into diffrent menus based on your rank. """
+
+        # In almost all functions that receive, and verifies user input are while loops that repeatedly asks the user
+        # for specific input. These while loops are held together on the condition that the user either fullfills the
+        # neccesary requirements to proceed or that they don't enter q/Q or b/B.
+        #
+        #
+        # Outside of each while loop are return statments that pass back any input that the user had entered. In all cases,
+        # except 2, has no affect on the user experience while navigating this menu. Only when the input given is either
+        # q/Q or b/B do these while loops and return statments influence the flow of the user experience.
+        #
+        #
+        # When q/Q are entered, at any point while navigating this menu, it is always returned back to this point. Once here,
+        # it passes the necessary verification to be returned back to the home page menu where, once again, it is returned one
+        # final time to the quit system function that displays the exit message and stops running the script.
+        #
+        #
         if self.rank == "Employee":
             employee_contractors_menu = self.display_contractor_employee_menu()
             if employee_contractors_menu in ["q", "b"]:
@@ -64,11 +77,23 @@ class contractor_UI_menu():
 
             user_action = input("Select an Option:  ")
             match user_action:
+                # In the case below, if the function returns "b" then the the loop starts again, however if it receives "q"
+                # then the loop breaks and is returned back to the start point; shutting the program off.
+                #
+                # An employee only has access to this option in the contractors menu. 
                 case "1":
-                    self.display_view_contractor()
-                case "b" | "B":
+                    user_action = self.display_view_contractor()
+
+                # If b is entered, it is returned back to the start_point_work_requests_UI function which brings the
+                # user back to the home page.
+                case "b":
+                    return "b"
+                
+                # If q is entered, it is returned back to the start_point_work_requests_UI function which turns off
+                # program.
+                case "q":
                     # quit back to main menu
-                    loop = False
+                    pass
                 case _:
                     print("wrong input")
         return 
