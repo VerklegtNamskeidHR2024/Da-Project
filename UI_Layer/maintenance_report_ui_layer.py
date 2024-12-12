@@ -1,3 +1,5 @@
+import sys
+import time
 from Model_Classes.maintenance_report_model import MaintenanceReport
 import os
 from prettytable import PrettyTable 
@@ -17,20 +19,23 @@ class maintenance_report_UI_menu:
         ''' Clears the screen '''
         os.system('cls' if os.name == 'nt' else 'clear')
 
-    # dont know if needed
-    '''def quit_system():
-        Quits the system
-        print("Quitting system")
-        return
-        '''
+    def quit_system(self):
+        ''' Quits the system '''
+        print("Departing from NaN Air, Thank you for Visiting!")
+        sys.exit()
+        
 
     def start_point_maintenance_reports_UI(self):
         ''' Entry point for the maintenance reports UI '''
         #self.clear_screen()
         #Entry point for the maintenance reports UI
-        maintenance_report_menu = self.display_maintenance_report()
-        if maintenance_report_menu in ["q", "b"]:
-            return maintenance_report_menu
+        self.clear_screen()
+        self.display_maintenance_report()
+        return
+
+       # maintenance_report_menu = self.display_maintenance_report()
+       # if maintenance_report_menu in ["q", "b"]:
+       #     return maintenance_report_menu
 
     def display_maintenance_report(self):
         ''' Sends the user to the menu based on their rank '''
@@ -74,12 +79,16 @@ class maintenance_report_UI_menu:
             elif user_choice == 'q':
                 self.quit_system()
             elif user_choice == '1':
+                self.clear_screen()
                 self.list_pending_reports()
             elif user_choice == '2':
+                self.clear_screen()
                 self.list_closed_reports()
             elif user_choice == '3':
+                self.clear_screen()
                 self.display_create_maintenance_report_form()
             elif user_choice == '4':
+                self.clear_screen()
                 self.edit_report_details(self.location)
             else:
                 print("Invalid input") 
@@ -144,6 +153,9 @@ class maintenance_report_UI_menu:
         user_choice = input('Enter report ID: ')
         if user_choice.lower() == 'b':
             return
+        
+        elif user_choice == 'q':
+            self.quit_system()
         # A check to make sure the report is in the system
         is_report_in_system = self.logic_wrapper.sanity_check_maintencance_report('report id', user_choice, self.location)
         # If the report is in the system the user is sent to the menu to finish the report
@@ -299,6 +311,8 @@ class maintenance_report_UI_menu:
         report_id = input("Enter report ID to manage: ")
         if report_id.lower() == 'b':
             return
+        elif report_id.lower() == 'q':
+             self.quit_system()
         report_in_system = self.logic_wrapper.check_if_report_in_system(report_id, self.location)
         if report_in_system == True:
             print("------------------------------------------------")
@@ -324,6 +338,9 @@ class maintenance_report_UI_menu:
 
                 elif choice == 'b':
                     valid_choice = True
+
+                elif choice == 'q':
+                    self.quit_system()
                 else:
                     print("Invalid choice.")
         else:
@@ -338,6 +355,8 @@ class maintenance_report_UI_menu:
         report_id = input("Enter report ID to manage: ")
         if report_id.lower() == 'b':
             return
+        elif report_id.lower() == 'q':
+             self.quit_system()
         report_in_system = self.logic_wrapper.check_if_report_in_system(report_id, self.location)
         if report_in_system == True:
             selected_report = self.logic_wrapper.get_single_maintenance_report(report_id)
@@ -351,6 +370,9 @@ class maintenance_report_UI_menu:
                 if choice == 'b':
                     valid_choice = True
 
+                elif choice == 'q':
+                    self.quit_system()
+
                 elif choice == '1':
                     valid_choice = True
                     self.logic_wrapper.reopen_closed_report(selected_report, selected_report.location)
@@ -363,19 +385,23 @@ class maintenance_report_UI_menu:
         #self.clear_screen()
         '''displays all pending report'''
         pending_reports_table = PrettyTable()
+        pending_reports_table.title = 'Pending Reports'
         pending_reports_table.field_names = ['Report ID', 'Report Name', 'Property ID']
         print('List of pending reports\n')
 
         pending_report_list = self.logic_wrapper.get_all_pending_maintenance_reports(self.location)
-        for report in pending_report_list:
-            pending_reports_table.add_row([report.report_id, report.report_name, report.property_id])
-        border_color = Fore.BLUE
-        reset_color = Style.RESET_ALL
-        pending_reports_table.border = True
-        pending_reports_table.junction_char = f"{border_color}+{reset_color}"
-        pending_reports_table.horizontal_char = f"{border_color}-{reset_color}"
-        pending_reports_table.vertical_char = f"{border_color}|{reset_color}"
-        print(pending_reports_table)
+        if pending_report_list == 'No pending Reports':
+            print('No Pending Reports!')
+        else:
+            for report in pending_report_list:
+                pending_reports_table.add_row([report.report_id, report.report_name, report.property_id])
+            border_color = Fore.BLUE
+            reset_color = Style.RESET_ALL
+            pending_reports_table.border = True
+            pending_reports_table.junction_char = f"{border_color}+{reset_color}"
+            pending_reports_table.horizontal_char = f"{border_color}-{reset_color}"
+            pending_reports_table.vertical_char = f"{border_color}|{reset_color}"
+            print(pending_reports_table)
         return
 
     def get_closed_reports(self):
@@ -383,6 +409,7 @@ class maintenance_report_UI_menu:
         #self.clear_screen()
         """ Display a list of closed reports """
         closed_report_table = PrettyTable()
+        closed_report_table.title = 'Closed Reports'
         closed_report_table.field_names = ['Report ID', 'Report Name', 'Property ID', 'Report Status']
         print("List of closed reports\n")
         closed_report_list = self.logic_wrapper.get_all_closed_maintenance_reports(self.location)
@@ -399,6 +426,7 @@ class maintenance_report_UI_menu:
             closed_report_table.horizontal_char = f"{border_color}-{reset_color}"
             closed_report_table.vertical_char = f"{border_color}|{reset_color}"
             print(closed_report_table)
+        return
 
     def display_create_maintenance_report_form(self):
         """ Display the form for creating a new maintenance report """
@@ -529,6 +557,7 @@ class maintenance_report_UI_menu:
 
     def get_employee_reports(self, staff_id):
         emplyee_report_table = PrettyTable()
+        emplyee_report_table.title = staff_id + ' Employee Reports'
         emplyee_report_table.field_names = ['Report ID', 'Report Name', 'Property ID', 'Report Status']
 
         print(f'List of all reports connected to staff member {staff_id}\n')
@@ -549,6 +578,7 @@ class maintenance_report_UI_menu:
         #self.clear_screen()
         '''displays all pending report'''
         all_reports_table = PrettyTable()
+        all_reports_table.title = 'All Reports'
         all_reports_table.field_names = ['Report ID', 'Report Name', 'Property ID', 'Report Status']
         print(f'List of all reports at {self.location}\n')
 
@@ -567,11 +597,27 @@ class maintenance_report_UI_menu:
         """Edit report details"""
         #self.clear_screen() 
         """Editing report {report_id} (details to be implemented)"""
+        edit_report_table = PrettyTable()
+        edit_report_table.title = 'Edit Report Details'
+        edit_report_table.field_names = ['Report ID', 'Report Name', 'Property ID', 'Report Status']
+
         all_report_list = self.logic_wrapper.get_all_maintenance_reports_at_location(self.location)
         for report in all_report_list:
-            print(f'{report.report_id:<10}{report.report_name:<10}')
+            edit_report_table.add_row([report.report_id, report.report_name, report.property_id, report.report_status])
+
+        border_color = Fore.BLUE
+        reset_color = Style.RESET_ALL
+        edit_report_table.border = True
+        edit_report_table.junction_char = f"{border_color}+{reset_color}"
+        edit_report_table.horizontal_char = f"{border_color}-{reset_color}"
+        edit_report_table.vertical_char = f"{border_color}|{reset_color}"
+        print(edit_report_table)
         print("-" * 70)
         selected_work_request = input('Please type in work request id: ')
+        if selected_work_request.lower() == 'b':
+            return
+        elif selected_work_request.lower() == 'q':
+            self.quit_system()
         report_in_system = self.logic_wrapper.check_if_report_in_system(selected_work_request, self.location)
         if report_in_system == True:
             for report in all_report_list:
@@ -606,6 +652,9 @@ class maintenance_report_UI_menu:
             
             if edit_choice == 'b':
                 return
+            
+            elif edit_choice == 'q':
+                self.quit_system()
 
             elif edit_choice == '1':
                 is_valid = False
@@ -697,6 +746,7 @@ class maintenance_report_UI_menu:
     def view_denied_reports(self, staff_id, location):
         """View denied reports"""
         denied_reports_table = PrettyTable()
+        denied_reports_table.title = 'Denied Reports'
         denied_reports_table.field_names = ['Report ID', 'Report Name', 'Property ID', 'Report Status']
         denied_reports = self.logic_wrapper.get_denied_reports(staff_id, location)
         if denied_reports == 'No denied reports':
@@ -757,6 +807,10 @@ class maintenance_report_UI_menu:
             user_choice = input('Select an option: ')
             if user_choice == 'b':
                 return
+            
+            elif user_choice == 'q':
+                self.quit_system()
+
             elif user_choice == '1':
                 while is_valid_report_name == False:
                     report_name = input('Enter new report name: ')

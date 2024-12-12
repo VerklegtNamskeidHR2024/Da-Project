@@ -106,9 +106,9 @@ class contractor_UI_menu():
             self.display_all_contractors()
 
             print("------------------------------------------------")
-            print("1) Add contractor")
-            print("2) edit contractor")
-            print("3) View contractor")
+            print("1. Add contractor")
+            print("2. edit contractor")
+            print("3. View contractor")
             print(">Go to Home Page: b, B")
             print("------------------------------------------------")
 

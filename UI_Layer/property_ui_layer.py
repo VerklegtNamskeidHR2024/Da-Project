@@ -39,7 +39,7 @@ class property_UI_menu:
 
         # NEEDS to be changed to match with other UI files!!!!
         # Displays the list of all properties and provides options
-        print(f"\033[94m{self.rank}\033[0m - Properties Page")
+        print(f"{self.rank} - Properties Page")
         property_list = self.logic_wrapper.get_all_properties_at_location(self.location)
         property_table = PrettyTable(
             ["Property ID", "Name", "Location", "Condition", "Price to Fix", "Price"]
@@ -127,26 +127,25 @@ class property_UI_menu:
                 print("Invalid property ID. Please try again.")
                 print()
                 continue
-            elif is_valid:
+            elif is_valid is True:
                 selected_property = self.logic_wrapper.get_property_by_id(self.location, property_id_selected)
+                # If there is not property with the slected ID you will get a message.
+                if selected_property is None:
+                    print("No property found with the provided ID.")
+                    continue
 
-            # If there is not property with the slected ID you will get a message.
-            if not selected_property:
-                print("No property found with the provided ID.")
-                return ""
+                # Print for single selected property
+                self.print_single_property(selected_property)
+                print("1. View Attached Items")
+                print("2. Edit Property Details")
+                # let you choose from the above 2.
 
-            # Print for single selected property
-            self.print_single_property(selected_property)
-            print("1. View Attached Items")
-            print("2. Edit Property Details")
-            # let you choose from the above 2.
-
-            selected_property_options = self.selected_property_logistics(
-                selected_property
-            )
-            if selected_property_options == "b":
-                continue
-            return selected_property_options.lower()
+                selected_property_options = self.selected_property_logistics(
+                    selected_property
+                )
+                if selected_property_options == "b":
+                    continue
+                return selected_property_options.lower()
         return property_id_selected.lower()
 
     def selected_property_logistics(self, selected_property: object) -> str:
@@ -181,11 +180,10 @@ class property_UI_menu:
         new_property = House()
         print()
         print("[ New Property Form ]")
-        print("-" * 70)
+        print("_" * 70)
         print()
-        print("{:>15}".format("> Go Back: b, B"))
-        print("{:>20}".format("> Quit System: q, Q"))
-        print()
+        print("{:>18}".format("Back - [ b, B ]"))
+        print("{:>18}".format("Quit - [ q, Q ]"))
         print("-" * 70)
         str_display = "Property"
         property_name = self.set_name_for_property(str_display, new_property)
@@ -199,8 +197,8 @@ class property_UI_menu:
         print("[ New Amenity Form ]")
         print("-" * 70)
         print()
-        print("{:>15}".format("> Go Back: b, B"))
-        print("{:>20}".format("> Quit System: q, Q"))
+        print("{:>18}".format("Back - [ b, B ]"))
+        print("{:>18}".format("Quit - [ q, Q ]"))
         print()
         print("-" * 70)
         str_display = "Amenity"
@@ -219,7 +217,6 @@ class property_UI_menu:
             is_valid_name = self.logic_wrapper.sanity_check_properties(
                 "name", property_name
             )
-            print(is_valid_name)
             if is_valid_name is False:
                 print()
                 print("Invalid name. Please try again.")
@@ -427,7 +424,10 @@ class property_UI_menu:
         print("2. Change Property Condition")
         print("3. Change Price to Fix")
         print("4. Change Property Price")
-
+        print()
+        print("{:>18}".format("Back - [ b, B ]"))
+        print("{:>18}".format("Quit - [ q, Q ]"))
+        print("-" * 70)
         edit_choice = input("Select an option to edit: ").lower()
         return edit_choice
 
@@ -436,7 +436,6 @@ class property_UI_menu:
         edit_choice = ""
         while edit_choice != "q":
             edit_choice = self.display_edit_property_details(selected_property)
-            print(edit_choice)
             match edit_choice:
                 case "1":
                     edit_choice = self.edit_property_name(selected_property)
@@ -559,10 +558,9 @@ class property_UI_menu:
         property_work_requests_table.horizontal_char = f"{border_color}-{reset_color}"
         property_work_requests_table.vertical_char = f"{border_color}|{reset_color}"
         print(property_work_requests_table)
-        bause_breaker = input("\nPress Enter to return to the property list.")
-        print("")
-        print("{:>20}".format("> Go Back: b, B"))
-        print("{:>20}".format("> Quit System: q, Q"))
+        print()
+        print("{:>10}".format("Back - [ b, B ]"))
+        print("{:>10}".format("Quit - [ q, Q ]"))
         while (
             property_work_requests_sub_menu := input("Select An Option: ").lower()
         ) not in ["q", "b", "Q", "B"]:
@@ -602,10 +600,9 @@ class property_UI_menu:
             f"{border_color}|{reset_color}"
         )
         print(property_maintenance_reports_table)
-        bbause_breaker = input("\nPress Enter to return to the property list.")
-        print("")
-        print("{:>20}".format("> Go Back: b, B"))
-        print("{:>20}".format("> Quit System: q, Q"))
+        print()
+        print("{:>10}".format("Back - [ b, B ]"))
+        print("{:>10}".format("Quit - [ q, Q ]"))
         while (
             property_maintenance_reports_sub_menu := input("Select An Option: ").lower()
         ) not in ["q", "b", "Q", "B"]:
