@@ -1,3 +1,4 @@
+import sys
 from Model_Classes.maintenance_report_model import MaintenanceReport
 import os
 from prettytable import PrettyTable 
@@ -17,12 +18,11 @@ class maintenance_report_UI_menu:
         ''' Clears the screen '''
         os.system('cls' if os.name == 'nt' else 'clear')
 
-    # dont know if needed
-    '''def quit_system():
-        Quits the system
-        print("Quitting system")
-        return
-        '''
+    def quit_system(self):
+        ''' Quits the system '''
+        print("Departing from NaN Air, Thank you for Visiting!")
+        sys.exit()
+        
 
     def start_point_maintenance_reports_UI(self):
         ''' Entry point for the maintenance reports UI '''
@@ -139,6 +139,9 @@ class maintenance_report_UI_menu:
         user_choice = input('Enter report ID: ')
         if user_choice.lower() == 'b':
             return
+        
+        elif user_choice == 'q':
+            self.quit_system()
         # A check to make sure the report is in the system
         is_report_in_system = self.logic_wrapper.sanity_check_maintencance_report('report id', user_choice, self.location)
         # If the report is in the system the user is sent to the menu to finish the report
@@ -294,6 +297,8 @@ class maintenance_report_UI_menu:
         report_id = input("Enter report ID to manage: ")
         if report_id.lower() == 'b':
             return
+        elif report_id.lower() == 'q':
+             self.quit_system()
         report_in_system = self.logic_wrapper.check_if_report_in_system(report_id, self.location)
         if report_in_system == True:
             print("------------------------------------------------")
@@ -319,6 +324,9 @@ class maintenance_report_UI_menu:
 
                 elif choice == 'b':
                     valid_choice = True
+
+                elif choice == 'q':
+                    self.quit_system()
                 else:
                     print("Invalid choice.")
         else:
@@ -333,6 +341,8 @@ class maintenance_report_UI_menu:
         report_id = input("Enter report ID to manage: ")
         if report_id.lower() == 'b':
             return
+        elif report_id.lower() == 'q':
+             self.quit_system()
         report_in_system = self.logic_wrapper.check_if_report_in_system(report_id, self.location)
         if report_in_system == True:
             selected_report = self.logic_wrapper.get_single_maintenance_report(report_id)
@@ -345,6 +355,9 @@ class maintenance_report_UI_menu:
                 choice = input('Choose: ')
                 if choice == 'b':
                     valid_choice = True
+
+                elif choice == 'q':
+                    self.quit_system()
 
                 elif choice == '1':
                     valid_choice = True
@@ -601,6 +614,9 @@ class maintenance_report_UI_menu:
             
             if edit_choice == 'b':
                 return
+            
+            elif edit_choice == 'q':
+                self.quit_system()
 
             elif edit_choice == '1':
                 is_valid = False
@@ -752,6 +768,10 @@ class maintenance_report_UI_menu:
             user_choice = input('Select an option: ')
             if user_choice == 'b':
                 return
+            
+            elif user_choice == 'q':
+                self.quit_system()
+
             elif user_choice == '1':
                 while is_valid_report_name == False:
                     report_name = input('Enter new report name: ')
