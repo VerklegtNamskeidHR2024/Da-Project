@@ -131,21 +131,19 @@ class Main_Menu:
             # title = Text.assemble("Welcome to the NaN Air Properties and Staff System!", style="blue", justify="center")
             # panel = Panel(title)
             # print(panel)
-            print("Welcome to the NaN Air Properties and Staff System!")
-            print()
+            print("{:>60}".format("[ Welcome to the NaN Air Properties and Staff System! ]"))
             print("-" * 70)
             self.show_ascii_art_hq()
-            print("Log in as?")
             print("-" * 70)
             print("Log in as?")
             print("1. Admin")
             print("2. Manager")
             print("3. Employee")
             print()
-            print("Universal System Commands:")
-            print("{:>20}".format("> Go Back: b, B"))
-            # print("{:>20}".format("> Log Out: log, Log"))
-            print("{:>20}".format("> Quit System: q, Q"))
+            print("Universal System Commands (Not Applicable During Log-In)")
+            print()
+            print("{:>18}".format("Back - [ b, B ]"))
+            print("{:>18}".format("Quit - [ q, Q ]"))
             print("-" * 70)
 
             user_action = input("Select a Profile: ").lower()
@@ -166,7 +164,7 @@ class Main_Menu:
 
     def enter_and_validate_staff_id(self, rank) -> str:
         """Enter and validate the staff ID for the user"""
-        print()
+        print("-" * 70)
         is_staff_id_valid = False
         while is_staff_id_valid is False:
             staff_id = input("Enter Your Staff ID: ")
@@ -178,6 +176,7 @@ class Main_Menu:
 
     def select_location_for_system(self) -> str:
         """Select a location for the system to use"""
+        self.clear_screen()
         return_location = ""
         while return_location == "":
             location_table = PrettyTable()
@@ -239,15 +238,15 @@ class Main_Menu:
         print()
         print(f" {self.rank} - Home Page")
         print("-" * 70)
-        print("1) Properties")
-        print("2) Work Requests")
-        print("3) Employees")
-        print("4) Contractors")
-        print("5) Maintenance Reports")
+        print("1. Properties")
+        print("2. Work Requests")
+        print("3. Employees")
+        print("4. Contractors")
+        print("5. Maintenance Reports")
         if self.rank != "Employee":
-            print("6) Locations")
+            print("6. Locations")
         print()
-        print("{:>18}".format("> Quit System: q, Q"))
+        print("{:>10}".format("Quit - [ q, Q ]"))
         print("-" * 70)
 
         user_action = input("Select an Option: ").lower()

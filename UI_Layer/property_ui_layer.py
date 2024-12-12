@@ -182,8 +182,8 @@ class property_UI_menu:
         print("[ New Property Form ]")
         print("-" * 70)
         print()
-        print("{:>15}".format("> Go Back: b, B"))
-        print("{:>20}".format("> Quit System: q, Q"))
+        print("{:>10}".format("Back - [ b, B ]"))
+        print("{:>10}".format("Quit - [ q, Q ]"))
         print()
         print("-" * 70)
         str_display = "Property"
@@ -198,8 +198,8 @@ class property_UI_menu:
         print("[ New Amenity Form ]")
         print("-" * 70)
         print()
-        print("{:>15}".format("> Go Back: b, B"))
-        print("{:>20}".format("> Quit System: q, Q"))
+        print("{:>10}".format("Back - [ b, B ]"))
+        print("{:>10}".format("Quit - [ q, Q ]"))
         print()
         print("-" * 70)
         str_display = "Amenity"
@@ -218,7 +218,6 @@ class property_UI_menu:
             is_valid_name = self.logic_wrapper.sanity_check_properties(
                 "name", property_name
             )
-            print(is_valid_name)
             if is_valid_name is False:
                 print()
                 print("Invalid name. Please try again.")
@@ -558,10 +557,9 @@ class property_UI_menu:
         property_work_requests_table.horizontal_char = f"{border_color}-{reset_color}"
         property_work_requests_table.vertical_char = f"{border_color}|{reset_color}"
         print(property_work_requests_table)
-        bause_breaker = input("\nPress Enter to return to the property list.")
-        print("")
-        print("{:>20}".format("> Go Back: b, B"))
-        print("{:>20}".format("> Quit System: q, Q"))
+        print()
+        print("{:>10}".format("Back - [ b, B ]"))
+        print("{:>10}".format("Quit - [ q, Q ]"))
         while (
             property_work_requests_sub_menu := input("Select An Option: ").lower()
         ) not in ["q", "b", "Q", "B"]:
@@ -601,10 +599,9 @@ class property_UI_menu:
             f"{border_color}|{reset_color}"
         )
         print(property_maintenance_reports_table)
-        bbause_breaker = input("\nPress Enter to return to the property list.")
-        print("")
-        print("{:>20}".format("> Go Back: b, B"))
-        print("{:>20}".format("> Quit System: q, Q"))
+        print()
+        print("{:>10}".format("Back - [ b, B ]"))
+        print("{:>10}".format("Quit - [ q, Q ]"))
         while (
             property_maintenance_reports_sub_menu := input("Select An Option: ").lower()
         ) not in ["q", "b", "Q", "B"]:
