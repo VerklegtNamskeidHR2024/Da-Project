@@ -1,5 +1,6 @@
 from Model_Classes.work_request_model import WorkRequest
-
+from prettytable import PrettyTable 
+from colorama import Fore, Style, init
 
 class work_request_UI_menu:
     def __init__(self, logic_wrapper, rank, location, staff_id):
@@ -37,24 +38,37 @@ class work_request_UI_menu:
     def display_all_work_requests_printed(self, work_request_list: list):
         """Displays out all open work requests with their ID, Name and Description."""
 
-        if len(work_request_list) == 0:
+        '''if len(work_request_list) == 0:
             print()
             print("{:>50}".format("No Work Requests To Display"))
             print()
         else:
             print(
-                "{:0}{:>6}{:>5}{:>9}{:>12}".format(
-                    "ID", "|", "Name", "|", "Description"
-                )
-            )
+                "{:0}{:>6}{:>5}{:>9}{:>12}".format("ID", "|", "Name", "|", "Description"))
             print("-" * 70)
             for item in sorted(work_request_list):
                 print(
-                    "{:0}{:>3}{:>10}{:>4}{:>51}".format(
-                        item.work_request_id, "|", item.name, "|", item.description
-                    )
-                )
-            print("-" * 70)
+                    "{:0}{:>3}{:>10}{:>4}{:>51}".format(item.work_request_id, "|", item.name, "|", item.description))
+            print("-" * 70)'''
+            
+
+
+        work_requrest_print_table = PrettyTable()
+        work_request_list = self.logic_wrapper.get_all_work_requests_at_location(self.rank, self.location, self.staff_id)
+        work_requrest_print_table.field_names = ["ID ","Work Request Name","Description"]
+        # iterates through the location list and adds the location information to the table
+        for item in work_request_list:
+            work_requrest_print_table.add_row([item.work_request_id, item.name, item.description])
+        
+        border_color = Fore.BLUE
+        reset_color = Style.RESET_ALL
+        work_requrest_print_table.border = True
+        work_requrest_print_table.junction_char = f"{border_color}+{reset_color}"
+        work_requrest_print_table.horizontal_char = f"{border_color}-{reset_color}"
+        work_requrest_print_table.vertical_char = f"{border_color}|{reset_color}"
+        print('')
+        print(work_requrest_print_table)
+        print('')
 
     # Completed. Can be beautified.
     def display_selected_work_request_information(self, work_request: object):
