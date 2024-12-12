@@ -15,7 +15,7 @@
         "work_request_status": "Pending",
         "need_contractor": true,
         "contractor_id": "C1",
-        "mark_as_completed": false,
+        "mark_as_completed": true,
         "accepted_by_employee": true
     },
     {
@@ -53,7 +53,7 @@
         "work_request_status": "Closed",
         "need_contractor": true,
         "contractor_id": "",
-        "mark_as_completed": false,
+        "mark_as_completed": true,
         "accepted_by_employee": true
     },
     {
@@ -90,7 +90,7 @@
         "priority": "High",
         "work_request_status": "Pending",
         "need_contractor": false,
-        "contractor_id": false,
+        "contractor_id": "",
         "mark_as_completed": true,
         "accepted_by_employee": true
     },

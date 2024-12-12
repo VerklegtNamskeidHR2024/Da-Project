@@ -206,7 +206,7 @@ class work_request_UI_menu:
                 # If option 4 is selected for for employees and option 6 for admins/manager, they go to either the my work requests
                 # or all work requests sub-menu. The difference is system priveledges, employees can only view and interact with work
                 # requests they are attached to, while admins/managers can see all in their current location.
-                case ("4, Employee") | ("6", "Admin") | ("6", "Manager"):
+                case ("4", "Employee") | ("6", "Admin") | ("6", "Manager"):
                     self.clear_screen()
                     user_choice = self.display_and_select_request_overview()
                     self.clear_screen()
@@ -302,7 +302,7 @@ class work_request_UI_menu:
                 # user to go back from editing to searching.
                 #
                 edit_work_request = self.edit_work_request_logistics(work_request)
-                if edit_work_request == "b":
+                if edit_work_request in ["b", ""]:
                     continue
                 return edit_work_request.lower()
             #
@@ -336,9 +336,9 @@ class work_request_UI_menu:
                 self.rank, self.staff_id, self.location, work_request_selected
             )
             if work_request is not None:
-                self.clear_screen()
+                # self.clear_screen()
                 edit_work_request = self.edit_work_request_logistics(work_request)
-                if edit_work_request == "b":
+                if edit_work_request in ["b", ""]:
                     continue
                 return edit_work_request.lower()
             print()
@@ -347,7 +347,7 @@ class work_request_UI_menu:
         return work_request_selected.lower()
 
 
-    def edit_work_request_logistics(self, work_request_object) -> str:
+    def edit_work_request_logistics(self, work_request_object: object) -> str:
         """Receives a single, user-selected work request and gives the user the ability to edit its information;
         the extent of which corresponding to the user's rank. Also verifies what can be edited based on what the
         work requests attributes are set as."""
@@ -396,6 +396,13 @@ class work_request_UI_menu:
         ):
             mark_completed = self.mark_work_request_completed(work_request_object)
             return mark_completed.lower()
+        
+        else:
+            print()
+            print(Fore.RED + "Work Request Can't Be Edited At The Moment." + Style.RESET_ALL)
+            print()
+            return ""
+        
 
 
     def display_create_work_request_form(self) -> str:
