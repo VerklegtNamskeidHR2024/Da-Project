@@ -317,8 +317,6 @@ class contractor_UI_menu():
         print("-"*30)
 
     def display_contractor_maintenance_reports(self, selected_contractor: object) -> str:
-    """Display maintenance reports for a contractor"""
-
         ''' Displays maintenance reports for a contractor '''
         # create a table to print the maintenance reports
         Contractor_maintenance_reports_table = PrettyTable(['Report ID', 'Report Name', 'Description', 'Status'])
