@@ -527,16 +527,14 @@ class work_request_UI_menu:
         verifies if the start date entered is formatted correctly. If valid, the start date attribute is then set to what the user
         had entered and the object is then passed down to the next function."""
 
-        while (start_date := input("Set The Start Date: ")) not in [
+        while (start_date := input("Set The Start Date (DD-MM-YY): ")) not in [
             "q", 
             "b", 
             "Q", 
             "B"
         ]:  
             # Sends the input to the logic wrapper for verification.
-            is_start_date_valid = self.logic_wrapper.sanity_check_start_completition_date(
-                "start_date", start_date
-            )
+            is_start_date_valid = self.logic_wrapper.sanity_check_start_date(start_date)
             if is_start_date_valid is True:
                 new_work_request.set_start_date(start_date)
                 repetitive_request = self.set_repetitive_work_for_request(
@@ -609,7 +607,7 @@ class work_request_UI_menu:
                 )
             )
             if is_interval_days_valid is True:
-                new_work_request.set_reopen_interval(interval_days)
+                new_work_request.set_reopen_interval(int(interval_days))
                 set_priority = self.set_priority_for_request(new_work_request)
                 if set_priority == "b":
                     continue
@@ -717,6 +715,10 @@ class work_request_UI_menu:
                 print()
             return set_location.lower()
         new_work_request.set_location(self.location)
+        confirmation = self.work_request_confirmation(new_work_request)
+        return confirmation
+
+
 
 
     # Completed. Can be beautified.
@@ -822,9 +824,7 @@ class work_request_UI_menu:
             )
             if is_marked_completed_boolean is False:
                 print()
-                while (
-                    update_confirmation := input("Enter 1 to Confirm: ").lower()
-                ) != "1":
+                while (update_confirmation := input("Enter 1 to Confirm: ").lower()) != "1":
                     if update_confirmation in ["q", "b", "Q", "B"]:
                         return update_confirmation.lower()
                     print("Mama they took my dingus")
@@ -852,7 +852,7 @@ class work_request_UI_menu:
         was completed. Said input is put through verification, if it passes the completition date and marked completed attribute are 
         set to whatever the user entered and True respectively. """
 
-        while (completition_date := input("Set The Completition Date: ")) not in [
+        while (completition_date := input("Set The Completition Date (DD-MM-YY): ")) not in [
             "q", 
             "b", 
             "Q", 
@@ -971,8 +971,9 @@ class work_request_UI_menu:
 
     # Completed. Can be beautified.
     def edit_employee_id_for_work_request(self, work_request: object):
-        """Repeatedly asks the user for an Employee ID they want to assign to the work request instead of the one currently on it. 
-        Said input goes through the logic wrapper for verification and if it passes, the """
+        """Repeatedly asks the user for an employee ID they want to assign to the work request instead of the one currently on it. 
+        Said input goes through the logic wrapper for verification and if it passes, the work request staff ID attribute is updated 
+        with the one the user entered. """
 
         while (edit_employee_id_for_request := input("New Employee ID: ")) not in [
             "q",
@@ -981,7 +982,7 @@ class work_request_UI_menu:
             "B",
         ]:
             # Sends the input to the logic wrapper for verification.
-            is_employee_valid = self.logic_wrapper.sanity_check_staff_id(
+            is_employee_valid = self.logic_wrapper.sanity_check_employee_id_for_request(
                 edit_employee_id_for_request
             )
             if is_employee_valid is True:
@@ -1004,6 +1005,9 @@ class work_request_UI_menu:
 
     # Completed. Can be beautified.
     def edit_property_id_for_request(self, work_request: object):
+        """Repeatedly asks the user for a property ID they want to re-assign to the work request. Said input goes through the 
+        logic wrapper for verification and if it passes, the work request property ID attribute is updated with the one the user entered. """
+
         while (edit_property_id_for_request := input("New Property ID: ")) not in [
             "q",
             "b",
@@ -1034,9 +1038,12 @@ class work_request_UI_menu:
             print("Mama they took my dingus")
         return edit_property_id_for_request.lower()
 
+
     # Completed. Can be beautified.
     def edit_repitive_work_request(self, work_request: object):
-        """ """
+        """Repeatedly asks the user for a property ID they want to re-assign to the work request. Said input goes through the 
+        logic wrapper for verification and if it passes, the work request property ID attribute is updated with the one the user
+        entered. """
 
         while (
             edit_repitive_work_request := input("Mark It Repitive? (Yes or No): ")
@@ -1048,17 +1055,6 @@ class work_request_UI_menu:
                     edit_repitive_work_request
                 )
             )
-            if work_request.repetitive_work is True and is_repetitive_boolean is True:
-                print()
-                print("Request Has Already Been Marked Repetitive.")
-                print()
-                continue
-            if work_request.repetitive_work is False and is_repetitive_boolean is False:
-                print()
-                print("Request Has Already Been Marked Not Repetitive.")
-                print()
-                continue
-
             if is_repetitive_boolean is False:
                 print()
                 while (
@@ -1092,12 +1088,16 @@ class work_request_UI_menu:
 
     # Completed. Can be beautified.
     def edit_priority_for_request(self, work_request: object):
-        while (edit_priority_for_request := input("Priority for Request: ")) not in [
+        """Repeatedly asks the user to enter one of 3 priorities they want to re-assign to the work request. Said input goes through the
+        logic wrapper for verification and if it passes, the work request property ID attribute is updated with the one the user entered. """
+
+        while (edit_priority_for_request := input("Priority for Request? (High, Medium or Low): ")) not in [
             "q",
             "b",
             "Q",
             "B",
         ]:
+            # Sends the input to the logic wrapper for verification.
             is_priority_valid = self.logic_wrapper.sanity_check_priority_for_request(
                 edit_priority_for_request
             )
@@ -1112,6 +1112,7 @@ class work_request_UI_menu:
                         "Sigma Sigma on the wall, who is the Skibidiest of them all"
                     )
                 work_request.set_priority(edit_priority_for_request)
+                # Sends the work request object with the new data to be the logic wrapper.
                 self.logic_wrapper.edit_work_request(work_request)
                 return
             print("Mama they took my dingus")
@@ -1119,13 +1120,15 @@ class work_request_UI_menu:
 
     # Completed. Can be beautified.
     def display_and_select_request_overview(self):
-        """Displays all work requests that have been accepted by an employee."""
+        """If the user logged in as an employee, then this will displays all the work requests have the employees staff ID attached to 
+        them. However if the user is an admin/manager, then this will display all work requests in their location, regardless of status"""
 
         selected_work_request = ""
         while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
             print("{:>50}".format("[ My Work Requests ]"))
             print("-" * 70)
+            # Sorted list based on if the user is an employee or not
             my_work_request_list = self.logic_wrapper.get_my_work_requests(
                 self.rank, self.location, self.staff_id
             )
@@ -1134,18 +1137,21 @@ class work_request_UI_menu:
             print("{:>15}".format("> Go Back: b, B"))
             print("{:>18}".format("> Quit System: q, Q"))
             print("-" * 70)
+            # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
         return selected_work_request.lower()
 
     # Completed. Can be beautifed.
     def display_and_select_new_work_requests(self):
-        """Displays all new work requests that haven't been accepted by an employee."""
+        """Displays all new work requests that haven't been accepted by an employee in the current location that the user
+        has selected."""
 
         selected_work_request = ""
         while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
             print("{:>50}".format("[ New Work Requests ]"))
             print("-" * 70)
+            # Sorted list of all work requests who's status is "New"
             new_work_request_list = self.logic_wrapper.get_all_new_work_requests(
                 self.location
             )
@@ -1154,18 +1160,20 @@ class work_request_UI_menu:
             print("{:>15}".format("> Go Back: b, B"))
             print("{:>18}".format("> Quit System: q, Q"))
             print("-" * 70)
+            # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
         return selected_work_request.lower()
 
     # Completed. Can be beautifed.
     def display_and_select_pending_work_requests(self):
-        """Prints out all pending work requests that haven't been marked closed by a manager or admin."""
+        """Prints out all pending work requests that haven't been marked closed by a manager or an admin."""
 
         selected_work_request = ""
         while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
             print("{:>50}".format("[ Pending Work Requests ]"))
             print("-" * 70)
+            # Sorted list of all work requests whos status is "Pending"
             pending_work_request_list = (
                 self.logic_wrapper.get_all_pending_work_requests(
                     self.rank, self.location, self.staff_id
@@ -1176,18 +1184,20 @@ class work_request_UI_menu:
             print("{:>15}".format("> Go Back: b, B"))
             print("{:>18}".format("> Quit System: q, Q"))
             print("-" * 70)
+            # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
         return selected_work_request.lower()
 
     # Completed. Can be beautifed.
     def display_and_select_closed_work_requests(self):
-        """Displats all closed work requests."""
+        """Displats all closed work requests. This option is only available to an admin or manager. """
 
         selected_work_request = ""
         while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
             print("{:>50}".format("[ Closed Work Requests ]"))
             print("-" * 70)
+            # Sorted list of all work requests whos status is "Closed"
             closed_work_request_list = self.logic_wrapper.get_all_closed_work_requests(
                 self.location
             )
@@ -1196,5 +1206,6 @@ class work_request_UI_menu:
             print("{:>20}".format("> Go Back: b, B"))
             print("{:>20}".format("> Quit System: q, Q"))
             print("-" * 70)
+            # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
         return selected_work_request.lower()
