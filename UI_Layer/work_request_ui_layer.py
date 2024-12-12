@@ -1,6 +1,5 @@
 from Model_Classes.work_request_model import WorkRequest
 import os
-import rich
 from prettytable import PrettyTable
 from colorama import Fore, Style, init
 
