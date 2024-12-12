@@ -1,3 +1,4 @@
+
 from Model_Classes.house_model import House
 from Model_Classes.amenity_model import Amenity
 from prettytable import PrettyTable
@@ -69,8 +70,11 @@ class property_UI_menu:
             print("3. Add Amenity")
         else:
             print("2. Add Amenity")
-        print("-" * 70)
-
+        print("-" * 80)
+        print()
+        print("{:>18}".format("Back - [ b, B ]"))
+        print("{:>18}".format("Quit - [ q, Q ]"))
+        print()
         user_action = input("Select an Option: ").lower()
         return user_action
 
@@ -179,12 +183,8 @@ class property_UI_menu:
 
         new_property = House()
         print()
-        print("[ New Property Form ]")
-        print("_" * 70)
-        print()
-        print("{:>18}".format("Back - [ b, B ]"))
-        print("{:>18}".format("Quit - [ q, Q ]"))
-        print("-" * 70)
+        print("{:>30}".format("[ New Property Form ]"))
+        print("_" * 80)
         str_display = "Property"
         property_name = self.set_name_for_property(str_display, new_property)
         return property_name
@@ -195,12 +195,7 @@ class property_UI_menu:
         new_amenity = Amenity()
         print()
         print("[ New Amenity Form ]")
-        print("-" * 70)
-        print()
-        print("{:>18}".format("Back - [ b, B ]"))
-        print("{:>18}".format("Quit - [ q, Q ]"))
-        print()
-        print("-" * 70)
+        print("-" * 80)
         str_display = "Amenity"
         amenity_name = self.set_name_for_property(str_display, new_amenity)
         return amenity_name
@@ -358,7 +353,7 @@ class property_UI_menu:
             "Q",
             "B",
         ]:
-            is_description_valid = self.logic_wrapper.sanity_check_low_level_logistics(
+            is_description_valid = self.logic_wrapper.sanity_check_properties(
                 "description", amenity_description
             )
             if is_description_valid is False:
@@ -377,6 +372,7 @@ class property_UI_menu:
         self, str_display: str, new_property: object
     ) -> str:
         """Displays the new property and asks the user to confirm the creation of the property"""
+
         print()
         while (
             new_property_confirmation := input("Enter 1 to Confirm: ").lower()
@@ -384,19 +380,18 @@ class property_UI_menu:
             if new_property_confirmation in ["q", "b", "Q", "B"]:
                 return new_property_confirmation.lower()
             print("Sigma Sigma on the wall, who is the Skibidiest of them all")
-        print("-" * 70)
+        print("-" * 80)
         print()
         self.logic_wrapper.add_new_property_to_storage(str_display, new_property)
         print(f"{str_display} Has Been Created!")
-        print()
         return ""
 
     def display_view_attached_options(self, selected_property: object) -> str:
         """Displays the options for the selected property"""
-        print("-" * 70)
+        print("-" * 80)
         print("1. Display Work Requests")
         print("2. Display Maintenance Reports")
-        print("-" * 70)
+        print("-" * 80)
         # lets you choice from the above options
         while (attached_selection := input("Enter choice: ").lower()) not in [
             "q",
