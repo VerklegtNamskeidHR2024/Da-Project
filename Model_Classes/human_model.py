@@ -8,8 +8,9 @@ class Human:
         self.system_permissions = system_permissions
         self.email = email
         self.staff_id = staff_id
-        """Constructor for Human"""
+        
 
+    # Setters for the Human class
     def set_name(self, name):
         """Sets the name"""
         self.name = name
@@ -38,6 +39,7 @@ class Human:
         """Sets the staff id"""
         self.staff_id = staff_id
     
+    # Getters for the Human class
     def get_name(self):
         """Gets the name"""
         return self.name
