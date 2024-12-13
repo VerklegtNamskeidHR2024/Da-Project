@@ -419,9 +419,9 @@ class work_request_UI_menu:
         new_work_request = WorkRequest()
         print()
         print("{:>60}".format(Fore.GREEN + "[ New Work Request Form ]" + Style.RESET_ALL))
-        print("_" * 70)
+        print("_" * 80)
         print()
-        print("-" * 70)
+        print("-" * 80)
         #
         # Returns the variable back to the work request main menu into the variable user choice.
         request_name = self.set_name_for_request(new_work_request)
@@ -721,7 +721,7 @@ class work_request_UI_menu:
         self.logic_wrapper.add_work_request(new_work_request)
         print(Fore.GREEN + "Work Request Has Been Created!" + Style.RESET_ALL)
         print()
-        time.sleep(1)
+        time.sleep(1.5)
         self.clear_screen()
         return ""
 
@@ -758,10 +758,11 @@ class work_request_UI_menu:
                 work_request.set_accepted_by_employee(True)
                 work_request.set_staff_id(self.staff_id)
                 self.logic_wrapper.edit_work_request(work_request)
+                print()
+                print(Fore.GREEN + "Work Request Has Been Accepted!" + Style.RESET_ALL)
+                print()
+                time.sleep(1.5)
                 self.clear_screen()
-                print()
-                print(Fore.BLUE + "Work Request Has Been Accepted!" + Style.RESET_ALL)
-                print()
                 self.display_selected_work_request_information(work_request)
                 return ""
             print("Must Enter Either Yes or No")
@@ -775,8 +776,10 @@ class work_request_UI_menu:
                     print(Fore.RED + "Mama they took my dingus" + Style.RESET_ALL )
                 self.clear_screen()
                 print()
-                print(Fore.BLUE + "Work Request Has Been Rejected!" + Style.RESET_ALL)
+                print(Fore.GREEN + "Work Request Has Been Rejected!" + Style.RESET_ALL)
                 print()
+                time.sleep(1.5)
+                self.clear_screen()
                 self.display_selected_work_request_information(work_request)
                 return ""
         return accept_work_request.lower()
@@ -819,7 +822,7 @@ class work_request_UI_menu:
                 self.clear_screen()
                 self.display_selected_work_request_information(work_request)
                 print()
-                print(Fore.BLUE + "Work Request Has Been Marked Not Completed!" + Style.RESET_ALL)
+                print(Fore.GREEN + "Work Request Has Been Marked Not Completed!" + Style.RESET_ALL)
                 print()
                 return ""
 

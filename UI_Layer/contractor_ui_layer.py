@@ -18,21 +18,7 @@ class contractor_UI_menu():
         
     def start_point_contractor_UI(self) -> None:
         """When this class is called it starts here. Goes into diffrent menus based on your rank. """
-        # In almost all functions that receive, and verifies user input are while loops that repeatedly asks the user
-        # for specific input. These while loops are held together on the condition that the user either fullfills the
-        # neccesary requirements to proceed or that they don't enter q/Q or b/B.
-        #
-        #
-        # Outside of each while loop are return statments that pass back any input that the user had entered. In all cases,
-        # except 2, has no affect on the user experience while navigating this menu. Only when the input given is either
-        # q/Q or b/B do these while loops and return statments influence the flow of the user experience.
-        #
-        #
-        # When q/Q are entered, at any point while navigating this menu, it is always returned back to this point. Once here,
-        # it passes the necessary verification to be returned back to the home page menu where, once again, it is returned one
-        # final time to the quit system function that displays the exit message and stops running the script.
-        #
-        #
+        # When the user is in the main menu 
         self.clear_screen()
         if self.rank == "Employee":
             employee_contractors_menu = self.display_contractor_employee_menu()
@@ -75,12 +61,15 @@ class contractor_UI_menu():
             print(f"{self.rank} - Contractors Page")
             self.display_all_contractors()
 
-            print("------------------------------------------------")
-            print("1) View contractor")
-            print(">Go to Home Page: b, B")
-            print("------------------------------------------------")
+            print("-" * 80)
+            print("1. View contractor")
+            print("_" * 80)
+            print()
+            print("{:>18}".format("Back - [ b, B ]"))
+            print("{:>18}".format("Quit - [ q, Q ]"))
+            print("-" * 80)
 
-            user_action = input("Select an Option:  ")
+            user_action = input("Select an Option:  ").lower()
             match user_action:
                 # In the case below, if the function returns "b" then the the loop starts again, however if it receives "q"
                 # then the loop breaks and is returned back to the start point; shutting the program off.
@@ -100,9 +89,9 @@ class contractor_UI_menu():
                 case "q":
                     self.clear_screen()
                     # quit back to main menu
-                    pass
+                    return "q"
                 case _:
-                    print(Fore.RED + "Wrong input" + Style.RESET_ALL)
+                    print(Fore.RED + "Wrong Input" + Style.RESET_ALL)
         return 
     
     def display_contractor_menu_admin_and_manager(self) -> None:
@@ -134,14 +123,15 @@ class contractor_UI_menu():
                     self.display_view_contractor()
                 case "bound2":
                     self.display_the_thing()
-                case "b" | "B":
+                case "b":
                     self.clear_screen()
                     # quit back to main menu
-                    loop = False
-                    pass
+                    return "b"
+                case "q":
+                    return "q"
                 case _:
                     print(Fore.RED + "Wrong input" + Style.RESET_ALL)
-                    time.sleep(0.5)
+                    time.sleep(1.5)
                     self.clear_screen()
         return 
 
@@ -149,7 +139,7 @@ class contractor_UI_menu():
         """create contractor"""
         try:
             self.clear_screen()
-            print("-------------------Add Contractor Form-------------------")
+            print("{:>50}".format(Fore.GREEN + "[ Add Contractor Form ]" + Style.RESET_ALL))
 
             valid_company_name = False
             valid_contact_name = False
@@ -161,48 +151,54 @@ class contractor_UI_menu():
             # it then sends the value you are entering to the sanity check function to check if it is valid
             # if it is valid then it sets the value to the new contractor
             while valid_company_name == False:
-                company_name = input(f"{"| Enter company name ":<30}| ")
+                company_name = input(f"{"| Enter Company Name ":<30}| ")
                 if self.logic_wrapper.sanity_check_contractor("company_name", company_name) == True:
                     new_contractor.set_company_name(company_name)
                     valid_company_name = True
                 else:
-                    print(Fore.RED + "Invalid company name. Please try again." + Style.RESET_ALL)
+                    print(Fore.RED + "Invalid Company Name. Please Try Again." + Style.RESET_ALL)
             while valid_contact_name == False:
                 contact_name = input(f"{"| Enter contact name ":<30}| ")
                 if self.logic_wrapper.sanity_check_contractor("contact_name", contact_name) == True:
                     new_contractor.set_contact_name(contact_name)
                     valid_contact_name = True
                 else:
-                    print(Fore.RED + "Invalid contact name. Please try again." + Style.RESET_ALL)
+                    print(Fore.RED + "Invalid Contact Name. Please Try Again." + Style.RESET_ALL)
             while valid_opening_hours == False:
                 opening_hours = input(f"{"| Enter opening hours ":<30}| ")
                 if self.logic_wrapper.sanity_check_contractor("opening_hours", opening_hours) == True:
                     new_contractor.set_opening_hours(opening_hours)
                     valid_opening_hours = True
                 else:
-                    print(Fore.RED + "Invalid opening hours. Please try again. Use This format Example: 08-16" + Style.RESET_ALL)
+                    print(Fore.RED + "Invalid Opening Hours. Please Try Again. Use This Format Example: 08-16" + Style.RESET_ALL)
             while valid_phone_number == False:
                 phone_number = input(f"{"| Enter phone number ":<30}| ")
                 if self.logic_wrapper.sanity_check_contractor("phone_number", phone_number) == True:
                     new_contractor.set_phone_number(phone_number)
                     valid_phone_number = True
                 else:
-                    print(Fore.RED + "Invalid phone number. Please try again. No letters or special characters and lenght of 7." + Style.RESET_ALL)
+                    print(Fore.RED + "Invalid Phone Number. Please Try Again. No Letters or Special Characters and Lenght of 7." + Style.RESET_ALL)
             # set the location for the new contractor from the current location
             new_contractor.set_location(self.location)
 
             try:
                 # add the new contractor to the storage
                 self.logic_wrapper.add_new_contractor(self.rank, self.location, new_contractor)
-                print("---------------------------------------------------------")
+                print("-" + 80)
                 self.clear_screen()
-                print("Contractor added")
+                print()
+                print(Fore.GREEN + "Contractor Added" + Style.RESET_ALL)
+                print()
             except:
                 self.clear_screen()
-                print("something went wrong with making new contractor") 
+                print()
+                print(Fore.RED + "Something Went Wrong With Making New Contractor" + Style.RESET_ALL) 
+                print()
         except:
             self.clear_screen()
-            print("something went wrong with making new contractor")
+            print()
+            print(Fore.RED + "Something Went Wrong With Making New Contractor" + Style.RESET_ALL)
+            print()
 
     def display_view_contractor(self) -> None:
         '''Shows contractor information'''
@@ -271,7 +267,7 @@ class contractor_UI_menu():
             return
         except:
             self.clear_screen()
-            print("something went wrong")
+            print("Something Went Wrong")
             return
 
     def display_edit_contractor_menu(self) -> None:
@@ -282,7 +278,10 @@ class contractor_UI_menu():
         found_contractor = False
         while found_contractor == False:
             try:
-                print(">Go to Home Page: b, B")
+                print()
+                print("{:>18}".format("Back - [ b, B ]"))
+                print("{:>18}".format("Quit - [ q, Q ]"))
+                print("-" * 80)
                 contractor_to_use = self.select_contractor_by_id()
                 if contractor_to_use:
                     found_contractor = True
@@ -292,7 +291,9 @@ class contractor_UI_menu():
                 else:
                     pass
             except:
-                print(Fore.RED + "something went wrong" + Style.RESET_ALL)
+                print()
+                print(Fore.RED + "Something Went Wrong. Please Try Again." + Style.RESET_ALL)
+                print()
 
         self.clear_screen()
         loop = True
@@ -301,12 +302,15 @@ class contractor_UI_menu():
             contractor = self.logic_wrapper.get_contractor_by_id(self.location, contractor_to_use.contractor_id)
             self.print_single_contractor(contractor)
             # shows the available options to change contractor by
-            print("------------------------------------------------")
-            print("1) Change Contact Name")
-            print("2) Change Company Phone Number")
-            print("3) Change Opening Hours")
-            print(">Go to Home Page: b, B")
-            print("------------------------------------------------")
+            print("-" * 80)
+            print("1. Change Contact Name")
+            print("2. Change Company Phone Number")
+            print("3. Change Opening Hours")
+            print("_" * 80)
+            print()
+            print("{:>18}".format("Back - [ b, B ]"))
+            print("{:>18}".format("Quit - [ q, Q ]"))
+            print("-" * 80)
             edit_user_action = input("what do you want to change: ")
             match edit_user_action:
                 case "1":
@@ -319,27 +323,29 @@ class contractor_UI_menu():
                     self.clear_screen()
                     loop = False
                 case _:
-                    print((Fore.RED + "Not Valid Input" + Style.RESET_ALL))
+                    print(Fore.RED + "Not Valid Input" + Style.RESET_ALL)
         return
     
     def change_contact_name(self, contractor) -> None:
         """change contact name for contractor"""
         try:
-            new_contact_name = input("Enter new contact name: ")
+            new_contact_name = input("Enter New Contact Name: ")
             # checks if the contact name is valid
             is_valid = self.logic_wrapper.sanity_check_contractor("contact_name", new_contact_name)
             # if the contact name is valid then change the contact name
             if is_valid == True:
                 self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'contact_name', new_contact_name)
                 self.clear_screen()
-                print(Fore.GREEN + "Contact name has been changed." + Style.RESET_ALL)
+                print(Fore.GREEN + "Contact Name Has Been Changed." + Style.RESET_ALL)
             else:
                 self.clear_screen()
-                print(Fore.RED + "Invalid contact name" + Style.RESET_ALL)
+                print(Fore.RED + "Invalid Contact Name" + Style.RESET_ALL)
             return
         except:
             self.clear_screen()
-            print(Fore.RED + "something went wrong" + Style.RESET_ALL)
+            print()
+            print(Fore.RED + "Something Went Wrong" + Style.RESET_ALL)
+            print()
             return
 
     def change_phone_number(self, contractor) -> None:
