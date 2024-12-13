@@ -125,7 +125,7 @@ class property_UI_menu:
                 # Any other input is except the one's listed above are treated as errors and the user given a message to notify them.
                 case _:
                     print(Fore.RED + "Invalid input. Please try again." + Style.RESET_ALL)
-                    time.sleep(0.5)
+                    time.sleep(2)
                     self.clear_screen()
 
         return user_action.lower()
@@ -144,7 +144,7 @@ class property_UI_menu:
             is_valid = self.logic_wrapper.sanity_check_properties('property_id', property_id_selected)
             if is_valid is False:
                 print()
-                print(Fore.RED + "Invalid property ID. Please try again.")
+                print(Fore.RED + "Invalid property ID. Please try again." + Style.RESET_ALL)
                 print()
                 continue
             elif is_valid is True:
@@ -156,35 +156,46 @@ class property_UI_menu:
 
                 # Print for single selected property
                 self.clear_screen()
-                self.print_single_property(selected_property)
-                print("1. View Attached Items")
-                print("2. Edit Property Details")
                 # let you choose from the above 2.
 
                 selected_property_options = self.selected_property_logistics(
                     selected_property
                 )
-                if selected_property_options == "b":
-                    continue
+                self.clear_screen()
                 return selected_property_options.lower()
         return property_id_selected.lower()
 
 
     def selected_property_logistics(self, selected_property: object) -> str:
         """Logistics for the selected property"""
-        while (user_choice := input("Enter your choice: ").lower()) not in [
+
+        user_choice = ""
+        while user_choice not in [
             "q",
-            "b",
             "Q",
-            "B",
         ]:
+            self.print_single_property(selected_property)
+            print("-" * 80)
+            print("1. View Property Maintenance Reports")
+            print("2. View Property Work requests")
+            print("3. Edit Property Details")
+            print()
+            print("{:>18}".format("Back - [ b, B ]"))
+            print("{:>18}".format("Quit - [ q, Q ]"))
+            print()
+            user_choice = input("Enter your choice: ").lower()
             match user_choice:
                 case "1":
                     # Displays the attched options
-                    user_choice = self.display_view_attached_options(selected_property)
+                    user_choice = self.display_property_maintenance_reports(selected_property)
+                    self.clear_screen()
                 case "2":
                     # Lets you edit property details
+                    user_choice = self.display_property_work_requests(selected_property)
+                    self.clear_screen()
+                case "3":
                     user_choice = self.edit_property_logistics(selected_property)
+                    self.clear_screen()
                 case "b":
                     # Goes back to the previous page
                     return "b"
@@ -194,7 +205,7 @@ class property_UI_menu:
                 case _:
                     # If you put an invaild input
                     print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL)
-                    time.sleep(0.5)
+                    time.sleep(2)
                     self.clear_screen()
         return user_choice.lower()
 
@@ -407,7 +418,9 @@ class property_UI_menu:
         print("-" * 80)
         print()
         self.logic_wrapper.add_new_property_to_storage(str_display, new_property)
-        print(f"{str_display} Has Been Created!")
+        print(Fore.GREEN + f"{str_display} Has Been Created!" + Style.RESET_ALL)
+        time.sleep(1)
+        self.clear_screen()
         return ""
 
     def display_view_attached_options(self, selected_property: object) -> str:
@@ -440,6 +453,9 @@ class property_UI_menu:
 
     def display_edit_property_details(self, selected_property: object) -> str:
         """Displays the options to edit the selected property"""
+        self.clear_screen()
+        self.print_single_property(selected_property)
+        print("-" * 80)
         print(f"Editing details for Property ID: {selected_property.property_id}")
         print("1. Change Property Name")
         print("2. Change Property Condition")
@@ -448,7 +464,7 @@ class property_UI_menu:
         print()
         print("{:>18}".format("Back - [ b, B ]"))
         print("{:>18}".format("Quit - [ q, Q ]"))
-        print("-" * 70)
+        print("-" * 80)
         edit_choice = input("Select an option to edit: ").lower()
         return edit_choice
 
@@ -477,7 +493,7 @@ class property_UI_menu:
 
     def edit_property_name(self, selected_property: object) -> str:
         """Edits the name of the selected property"""
-        print('In the edit property name')
+
         while (new_name := input("Enter new property name: ")) not in [
             "q",
             "b",
@@ -490,6 +506,7 @@ class property_UI_menu:
                     selected_property, self.location, "name", new_name
                 )
                 print(Fore.GREEN +"Property details updated successfully!"+ Style.RESET_ALL)
+                time.sleep(2)
                 break
         return new_name.lower()
 
@@ -506,12 +523,12 @@ class property_UI_menu:
             is_valid_condition = self.logic_wrapper.sanity_check_properties(
                 "condition", new_condition
             )
-            if is_valid_condition == True:
+            if is_valid_condition is True:
                 self.logic_wrapper.edit_existing_property_in_storage(
                     selected_property, self.location, "condition", new_condition
                 )
-                print(Fore.GREEN +"Property details updated successfully!"+ Style.RESET_ALL)
-                time.sleep(0.5)
+                print(Fore.GREEN + "Property details updated successfully!"+ Style.RESET_ALL)
+                time.sleep(2)
                 break
         return new_condition.lower()
 
@@ -519,7 +536,6 @@ class property_UI_menu:
     def edit_price_to_fix(self, selected_property: object) -> str:
         """Edits the price to fix of the selected property"""
 
-        is_valid_price_to_fix = False
         while (new_price_to_fix := input("Enter new price to fix: ")) not in [
             "q",
             "b",
@@ -529,11 +545,12 @@ class property_UI_menu:
             is_valid_price_to_fix = self.logic_wrapper.sanity_check_properties(
                 "price_to_fix", new_price_to_fix
             )
-            if is_valid_price_to_fix == True:
+            if is_valid_price_to_fix is True:
                 self.logic_wrapper.edit_existing_property_in_storage(
                     selected_property, self.location, "price to fix", new_price_to_fix
                 )
                 print(Fore.GREEN +"Property details updated successfully!"+ Style.RESET_ALL)
+                time.sleep(2)
                 break
         return new_price_to_fix.lower()
 
@@ -550,11 +567,12 @@ class property_UI_menu:
             is_valid_price = self.logic_wrapper.sanity_check_properties(
                 "price", new_price
             )
-            if is_valid_price == True:
+            if is_valid_price is True:
                 self.logic_wrapper.edit_existing_property_in_storage(
                     selected_property, self.location, "price", new_price
                 )
-                print(Fore.GREEN +"Property details updated successfully!"+ Style.RESET_ALL)
+                print(Fore.GREEN + "Property details updated successfully!" + Style.RESET_ALL)
+                time.sleep(2)
                 break
         return new_price.lower()
 
