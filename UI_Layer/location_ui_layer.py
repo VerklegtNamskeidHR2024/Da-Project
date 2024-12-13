@@ -194,16 +194,17 @@ class location_UI_menu:
             while (new_opening_hours := input("Enter Opening Hours: ")) not in ["q", "b", "Q", "B"]:
             # checks if the opening hours are valid
                 is_valid = self.logic_wrapper.sanity_check_location("opening_hours", new_opening_hours)
-                if is_valid is True:
+                if is_valid is False:
                     print()
                     print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL) 
                     print()
                     continue
-                # if the opening hours are valid, change the opening hours and print the location information
-                self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'opening_hours', new_opening_hours)
-                self.clear_screen()
-                print(Fore.GREEN + "Opening hours changed successfully." + Style.RESET_ALL)
-                return ""
+                else:
+                    # if the opening hours are valid, change the opening hours and print the location information
+                    self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'opening_hours', new_opening_hours)
+                    self.clear_screen()
+                    print(Fore.GREEN + "Opening hours changed successfully." + Style.RESET_ALL)
+                    return ""
             self.clear_screen()
             return new_opening_hours.lower()
         except ValueError:
@@ -259,9 +260,6 @@ class location_UI_menu:
                 print(Fore.RED + f"No Amenity Found With That ID {amenity_ID}" + Style.RESET_ALL)
         self.clear_screen()
         return amenity_ID.lower()
-
-
-        #amenities_list = self.logic_wrapper.fetch_all_amenities_for_location_in_storage(self.location)
 
     def display_single_amenity(self, amenity: object) -> str:
         """Display a single amenity"""
