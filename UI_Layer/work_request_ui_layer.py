@@ -224,11 +224,11 @@ class work_request_UI_menu:
 
                 # Any other input is except the one's listed above are treated as errors and the user given a message to notify them.
                 case _:
+                    print()
                     print(Fore.RED + "Invalid Input, Please Try Again." + Style.RESET_ALL)
-                    
-                    time.sleep(2)
+                    print()
+                    time.sleep(1.5)
                     self.clear_screen()
-                    print(Fore.RED + "Invalid Input, Please Try Again." + Style.RESET_ALL)
         self.clear_screen()
         return user_choice.lower()
 
@@ -272,7 +272,11 @@ class work_request_UI_menu:
 
                 # Any other input is except the one's listed above are treated as errors and the user given a message to notify them.
                 case _:
+                    print()
                     print(Fore.RED + "Invalid Input. Please Try Again." + Style.RESET_ALL)
+                    print()
+                    time.sleep(1.5)
+                    self.clear_screen()
         return user_choice.lower()
 
     
@@ -340,7 +344,6 @@ class work_request_UI_menu:
                 self.rank, self.staff_id, self.location, work_request_selected
             )
             if work_request is not None:
-                # self.clear_screen()
                 edit_work_request = self.edit_work_request_logistics(work_request)
                 if edit_work_request in ["b", ""]:
                     continue
@@ -416,7 +419,7 @@ class work_request_UI_menu:
         self.clear_screen()
         new_work_request = WorkRequest()
         print()
-        print("{:>60}".format(Fore.BLUE + "[ New Work Request Form ]" + Style.RESET_ALL))
+        print("{:>60}".format(Fore.GREEN + "[ New Work Request Form ]" + Style.RESET_ALL))
         print("_" * 70)
         print()
         print("-" * 70)
@@ -718,8 +721,9 @@ class work_request_UI_menu:
         # the logic wrapper.
         new_work_request.set_work_request_status("New")
         self.logic_wrapper.add_work_request(new_work_request)
-        print(Fore.BLUE + "Work Request Has Been Created!" + Style.RESET_ALL)
+        print(Fore.GREEN + "Work Request Has Been Created!" + Style.RESET_ALL)
         print()
+        time.sleep(1)
         self.clear_screen()
         return ""
 
