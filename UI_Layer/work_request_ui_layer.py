@@ -812,7 +812,7 @@ class work_request_UI_menu:
                 ) != "1":
                     if update_confirmation in ["q", "b", "Q", "B"]:
                         return update_confirmation.lower()
-                    print("Mama they took my dingus")
+                    print(Fore.RED + "Mama they took my dingus" + Style.RESET_ALL)
                     continue
                 work_request.set_mark_as_completed(False)
                 work_request.set_work_request_status("Open")
@@ -880,7 +880,7 @@ class work_request_UI_menu:
                 self.clear_screen()
                 self.display_selected_work_request_information(work_request)
                 print()
-                print(Fore.BLUE + "Work Request Has Been Marked Completed!" + Style.RESET_ALL)
+                print(Fore.GREEN + "Work Request Has Been Marked Completed!" + Style.RESET_ALL)
                 print()
                 return ""
             print()
@@ -996,7 +996,7 @@ class work_request_UI_menu:
                 self.logic_wrapper.edit_work_request(work_request)
                 self.clear_screen()
                 print()
-                print(Fore.BLUE + "New Employee ID Has Been Assigned To Request!" + Style.RESET_ALL)
+                print(Fore.GREEN + "New Employee ID Has Been Assigned To Request!" + Style.RESET_ALL)
                 print()
                 return ""
             print(Fore.RED + "No Employee ID Was Found. Please Try Again." + Style.RESET_ALL)
@@ -1037,7 +1037,7 @@ class work_request_UI_menu:
                 self.logic_wrapper.edit_work_request(work_request)
                 self.clear_screen()
                 print()
-                print(Fore.BLUE + "New Property ID Has Been Assigned To Request!" + Style.RESET_ALL)
+                print(Fore.GREEN + "New Property ID Has Been Assigned To Request!" + Style.RESET_ALL)
                 print()
                 return ""
             print(Fore.RED + "No Property ID Was Found. Please Try Again." + Style.RESET_ALL)
@@ -1080,7 +1080,7 @@ class work_request_UI_menu:
                 self.logic_wrapper.edit_work_request(work_request)
                 self.clear_screen()
                 print()
-                print(Fore.BLUE + "Work Request Has Been Marked Not Repetitive!" + Style.RESET_ALL)
+                print(Fore.GREEN + "Work Request Has Been Marked Not Repetitive!" + Style.RESET_ALL)
                 print()
                 return ""
             
@@ -1091,12 +1091,11 @@ class work_request_UI_menu:
                 ) != "1":
                     if update_confirmation in ["q", "b", "Q", "B"]:
                         return update_confirmation.lower()
-
                     print("Sigma Sigma on the wall, who is the Skibidiest of them all")
                 work_request.set_repetitive_work(is_repetitive_boolean)
                 self.clear_screen()
                 print()
-                print(Fore.BLUE + "Work Request Has Been Marked Repetitive!" + Style.RESET_ALL)
+                print(Fore.GREEN + "Work Request Has Been Marked Repetitive!" + Style.RESET_ALL)
                 print()
                 return ""
             print(Fore.RED + "Input Must Be In The Form of Yes or No" + Style.RESET_ALL)
@@ -1138,7 +1137,7 @@ class work_request_UI_menu:
                 self.logic_wrapper.edit_work_request(work_request)
                 self.clear_screen()
                 print()
-                print(Fore.BLUE + "New Priority Has Been Assigned To The Work Request!" + Style.RESET_ALL)
+                print(Fore.GREEN + "New Priority Has Been Assigned To The Work Request!" + Style.RESET_ALL)
                 print()
                 return ""
             print(Fore.RED + "Priority Given Must Be Either High, Medium or Low" + Style.RESET_ALL)
