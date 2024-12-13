@@ -25,14 +25,17 @@ class Main_Menu:
         # calls the location select function
 
         self.logic_wrapper = Logic_Layer_Wrapper(rank, location, staff_id)
-
+        
+    
         rank = self.select_user_for_system()
+        # calls the function to get the staff id
         staff_id = self.enter_and_validate_staff_id(rank)
+        # calls the function to get the location
         if rank == "Admin":
             location = self.select_location_for_system()
         else:
             location = self.assigned_location_for_system(rank, staff_id)
-        
+        # sets the rank, location and staff id
         self.staff_id = staff_id
         self.rank = rank
         self.location = location
@@ -51,7 +54,7 @@ class Main_Menu:
 
     def start_point(self):
         """Starts the main menu for the system"""
-        
+        # calls the user home page logistics
         user_home_page = self.user_home_page_logistics()
         if user_home_page == "q":
             self.quit_system_message()
@@ -69,7 +72,7 @@ class Main_Menu:
 
     def show_ascii_art_hq(self):
         """Prints out the ASCII art for the NaN Air HQ"""
-
+        # prints out the ascii art for the NaN Air HQ
         print("{:>61}".format("==================="))
         print("{:>44}{:>13}{:>3}".format("|", "NaN Air HQ", "|"))
         print("{:>14}{:>7}{:>15}{:>8}{:>10}{:>6}".format("___________", ".", ": : : :", "|", "_____", "|"))
@@ -95,7 +98,7 @@ class Main_Menu:
 
     def create_location_table(self):
         """Prints out a table of available locations for the user to select. """
-
+        # prints out the table of locations for the user to select
         locations_table = PrettyTable()
         locations_table.field_names = ['ID',"Country", "Location Name"]
         locations_table.add_row(['1',"Iceland", "Reykjavik"])
@@ -126,14 +129,14 @@ class Main_Menu:
         print()'''
         
         self.clear_screen()
-
+        # prints out the welcome message and the ascii art for the NaN Air HQ
         return_user = ""
         while return_user == "":
             print()
             print("{:>70}".format(Fore.BLUE + "[ Welcome to the NaN Air Properties and Staff System! ]" + Style.RESET_ALL))
             print("-" * 80)
             self.show_ascii_art_hq()
-            
+            # prints out the log in options for the user
             print("-" * 70)
             print("Log in as?")
             print("1. Admin")
@@ -148,6 +151,7 @@ class Main_Menu:
             print("-" * 80)
             # user selects a profile
             user_action = input("Select a Profile: ").lower()
+            # checks the user input
             match user_action:
                 case "1":
                     return_user = "Admin"
@@ -248,10 +252,11 @@ class Main_Menu:
 
     def display_menu_items(self):
         """Displays the menu items for the user"""
-        
+        # Displays the menu items for the user
         print()
         print(f"Current Location - {self.location}")
         print()
+        # Displays the home page menu items
         print(f" {self.rank} - Home Page")
         print("-" * 80)
         print("1. Properties")
@@ -259,6 +264,7 @@ class Main_Menu:
         print("3. Employees")
         print("4. Contractors")
         print("5. Maintenance Reports")
+        # Only displays the location option if the user is an admin or manager
         if self.rank != "Employee":
             print("6. Locations")
         print("_" * 80)
@@ -280,21 +286,28 @@ class Main_Menu:
             user_action = user_action = self.display_menu_items()
             match user_action:
                 case "1":
+                    # Calls the property UI menu
                     user_action = self.property_UI_menu.start_point_property_UI()
                 case "2":
+                    # Calls the work request UI menu
                     user_action = self.work_request_UI_menu.start_point_work_requests_UI()
                 case "3":
+                    # Calls the employee UI menu
                     user_action = self.employee_UI_menu.start_point_employee_UI()
                 case "4":
+                    # Calls the contractor UI menu
                     user_action = self.contractor_UI_menu.start_point_contractor_UI()
                 case "5":
+                    # Calls the maintenance report UI menu
                     user_action = self.maintenance_report_UI_menu.start_point_maintenance_reports_UI()
                 case "6" if self.rank != "Employee":
                     # This option is only displayed if the user is an admin or manager
                     user_action = self.location_UI_menu.start_point_location_UI()
                 case "q":
+                    # Quits the system
                     return "q"
                 case _:
+                    # If the user enters an invalid input
                     print(Fore.RED + "Wrong Input" + Style.RESET_ALL)
                     time.sleep(1)
                     self.clear_screen()
