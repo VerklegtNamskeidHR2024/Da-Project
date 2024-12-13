@@ -33,7 +33,6 @@ class maintenance_report_UI_menu:
 
     def display_maintenance_report(self):
         ''' Sends the user to the menu based on their rank '''
-        #self.clear_screen()
         # If the user is an admin or manager it goes to the admin/manager menu
         if self.rank in "Admin" or self.rank == "Manager":
             admin_manager_menu = self.select_menu_option_admin_manager()
@@ -54,6 +53,7 @@ class maintenance_report_UI_menu:
         user_choice = ""
         # Then a while loop is started to keep the menu open until the user wants to go back
         while user_choice.lower() != "b":
+            self.clear_screen()
             self.print_all_reports()
             # The menu is displayed
             print(f"{self.rank} - Maintenance Report Menu")
@@ -92,6 +92,7 @@ class maintenance_report_UI_menu:
     def employee_menu(self, staff_id : str):
         ''' Employee menu '''
         # A function is called to get all the reports connected to the employee logged in
+        self.clear_screen()
         self.get_employee_reports(staff_id)
         self.print_all_reports
         user_choice = ""
@@ -483,7 +484,6 @@ class maintenance_report_UI_menu:
 
     def display_create_maintenance_report_form(self):
         """ Display the form for creating a new maintenance report """
-        #self.clear_screen()
         #Create a new maintenance report
         print('Creating a new maintenance report, type "cancel" to stop and save as incomplete at any time')
         #the details that need to be filled out
@@ -651,8 +651,6 @@ class maintenance_report_UI_menu:
     
     def edit_report_details(self, location):
         """Edit report details"""
-        #self.clear_screen() 
-        """Editing report {report_id} (details to be implemented)"""
         edit_report_table = PrettyTable()
         edit_report_table.title = 'Edit Report Details'
         edit_report_table.field_names = ['Report ID', 'Report Name', 'Property ID', 'Report Status']
@@ -699,12 +697,12 @@ class maintenance_report_UI_menu:
             
     def display_edit_maintenance_report_details(self, selected_maintenance_report):
         """ Display the edit maintenance report details menu """
-        #self.clear_screen()
-        """ Allows editing of maintenance report details. """
         self.clear_screen()
         edit_choice = ''
         while edit_choice.lower() != 'b':
+            # Display the maintenance report details
             self.print_single_maintenance_report(selected_maintenance_report)
+            # Display the edit menu options
             print(f"Editing details for maintenance report ID: {selected_maintenance_report.report_id}")
             print('1. Change Report Name')
             print('2. Change Staff ID ')
@@ -717,21 +715,27 @@ class maintenance_report_UI_menu:
             edit_choice = input("Select an option to edit: ")
             
             if edit_choice.lower() == 'b':
+                # Go back to the previous menu
                 self.clear_screen()
                 return
             
             elif edit_choice == 'q':
+                # Quit the system
                 self.quit_system()
 
             elif edit_choice == '1':
                 is_valid = False
                 while is_valid == False:
                     new_report_name = input('Enter new report name: ')
+                    # here we send the new report name to the sanity check function to make sure it is valid.
+                    # If the name is not valid we ask the user to try again.
                     is_valid = self.logic_wrapper.sanity_check_maintencance_report('report name', new_report_name, self.location)
                     if is_valid == True:
+                        # ask the user to confirm the change
                         confirm = input(f'Are you sure you want to change the report name to "{new_report_name}"? (yes/no): ')
                         if confirm.lower() == 'yes':
                             print(Fore.GREEN + "Maintenance report details updated successfully!" + Style.RESET_ALL)
+                            # here we call the edit maintenance report function to update the report name
                             self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Report Name', new_report_name)
                             time.sleep(1.5)
                             self.clear_screen()
@@ -742,9 +746,12 @@ class maintenance_report_UI_menu:
                 is_valid = False
                 while is_valid == False:
                     new_staff_id = input('Enter new staff ID: ')
+                    # Check if the new staff ID is valid so that we can update the report with good data
                     is_valid = self.logic_wrapper.sanity_check_maintencance_report('staff id', new_staff_id, self.location)
                     if is_valid == True:
+                        # Ask the user to confirm the change
                         confirm = input(f'Are you sure you want to change the staff ID to "{new_staff_id}"? (yes/no): ')
+                        # If the user confirms the change we update the report with the new staff ID
                         if confirm.lower() == 'yes':
                             print(Fore.GREEN + "Maintenance report details updated successfully!" + Style.RESET_ALL)
                             self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Staff ID', new_staff_id)
@@ -757,10 +764,13 @@ class maintenance_report_UI_menu:
                 is_valid = False
                 while is_valid == False:
                     regular_maintenance = input('Regular Maintenance (yes/no)')
+                    # Check if the new regular maintenance is valid so that we can update the report with good data
                     is_valid = self.logic_wrapper.sanity_check_maintencance_report('regular maintenance', regular_maintenance, self.location)
                     if is_valid == True:
+                        # Ask the user to confirm the change
                         confirm = input(f'Are you sure you want to change the regular maintenance to "{regular_maintenance}"? (yes/no): ')
                         if confirm.lower() == 'yes':
+                            # if the user confirms the change we update the report with the new regular maintenance
                             print(Fore.GREEN + "Maintenance report details updated successfully!" + Style.RESET_ALL)
                             self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Regular', regular_maintenance)
                             time.sleep(1.5)
@@ -772,10 +782,13 @@ class maintenance_report_UI_menu:
                 is_valid = False
                 while is_valid == False:
                     new_report_description = input('Enter new description')
+                    # Check if the new maintenance description is valid so that we can update the report with good data
                     is_valid = self.logic_wrapper.sanity_check_maintencance_report('maintenance description', new_report_description, self.location)
                     if is_valid == True:
+                        # Ask the user to confirm the change
                         confirm = input(f'Are you sure you want to change the maintenance description to "{new_report_description}"? (yes/no): ')
                         if confirm.lower() == 'yes':
+                            # if the user confirms the change we update the report with the new maintenance description
                             print(Fore.GREEN + "Maintenance report details updated successfully!" + Style.RESET_ALL)
                             self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Description', new_report_description)
                             time.sleep(1.5)
@@ -788,10 +801,13 @@ class maintenance_report_UI_menu:
                     is_valid = False
                     while is_valid == False:
                         new_report_cost = float(input('Enter New Cost'))
+                        # Check if the new cost is valid so that we can update the report with good data
                         is_valid = self.logic_wrapper.sanity_check_maintencance_report('cost', new_report_cost, self.location)
                         if is_valid == True:
+                            # Ask the user to confirm the change 
                             confirm = input(f'Are you sure you want to change the cost to "{new_report_cost}"? (yes/no): ')
                             if confirm.lower() == 'yes':
+                                # if the user confirms the change we update the report with the new cost
                                 print(Fore.GREEN + "Maintenance report details updated successfully!" + Style.RESET_ALL)
                                 self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Cost', new_report_cost)
                                 time.sleep(1.5)
@@ -805,10 +821,13 @@ class maintenance_report_UI_menu:
                 is_valid = False
                 while is_valid == False:
                     new_contractor_id = input('Enter new contractor ID')
+                    # Check if the new contractor ID is valid so that we can update the report with good data
                     is_valid = self.logic_wrapper.sanity_check_maintencance_report('contractor id', new_contractor_id, self.location)
                     if is_valid == True:
+                        # Ask the user to confirm the change
                         confirm = input(f'Are you sure you want to change the contractor ID to "{new_contractor_id}"? (yes/no): ')
                         if confirm.lower() == 'yes':
+                            # if the user confirms the change we update the report with the new contractor ID
                             print(Fore.GREEN + "Maintenance report details updated successfully!" + Style.RESET_ALL)
                             self.logic_wrapper.edit_maintencance_report(selected_maintenance_report, self.location, 'Contractor ID', new_contractor_id)
                             time.sleep(1.5)
@@ -826,15 +845,18 @@ class maintenance_report_UI_menu:
 
     def view_denied_reports(self, staff_id, location):
         """View denied reports"""
+        # create a table to display the denied reports
         denied_reports_table = PrettyTable()
         denied_reports_table.title = 'Denied Reports'
         denied_reports_table.field_names = ['Report ID', 'Report Name', 'Property ID', 'Report Status']
         denied_reports = self.logic_wrapper.get_denied_reports(staff_id, location)
+        # if there are no denied reports we print a message to the user
         if denied_reports == 'No denied reports':
             print('No denied reports')
             time.sleep(1.5)
             self.clear_screen()
             return
+        # if there are denied reports we display them in a table so the user can see denied reports
         for report in denied_reports:
             denied_reports_table.add_row([report.report_id, report.report_name, report.property_id, report.report_status])
         border_color = Fore.BLUE
@@ -844,12 +866,15 @@ class maintenance_report_UI_menu:
         denied_reports_table.horizontal_char = f"{border_color}-{reset_color}"
         denied_reports_table.vertical_char = f"{border_color}|{reset_color}"
         print(denied_reports_table)
+        # ask the user to enter the report ID they want to redo
         user_choice = input('Enter report ID: ')
         if user_choice.lower() == 'b':
             self.clear_screen()
             return
+        # here we check if there is a report with entered is in the system
         is_report_in_system = self.logic_wrapper.sanity_check_maintencance_report('report id', user_choice, location)
         if is_report_in_system == True:
+            # if the report is in the system we call the redo denied report function
             self.redo_denied_report(user_choice)
         else:
             print(Fore.RED + 'Report ID not found in system please try again' + Style.RESET_ALL)
@@ -859,7 +884,9 @@ class maintenance_report_UI_menu:
 
     def redo_denied_report(self, report_id):
         """Redo denied report"""
+        # get the denied report from the system with selected report ID
         report = self.logic_wrapper.get_single_maintenance_report(report_id)
+        # create booleans so we can have while loops to make sure the input is valid
         report_done = False
         is_valid_report_name = False
         is_valid_staff_id = False
@@ -870,6 +897,7 @@ class maintenance_report_UI_menu:
         is_valid_contractor_id = False
         is_valid_work_request_id = False
         while report_done == False:
+            # print the report details so the user can see what they are changing
             print("-" * 70)
             print(f"{'Report ID':<30}: {report.report_id}")
             print(f"{'Report Name':<30}: {report.report_name}")
@@ -895,17 +923,21 @@ class maintenance_report_UI_menu:
             print("-" * 70)
             user_choice = input('Select an option: ')
             if user_choice.lower() == 'b':
+                # if the user wants to go back we clear the screen and return to the previous menu
                 self.clear_screen()
                 return
             
             elif user_choice == 'q':
+                # if the user wants to quit the system we call the quit system function
                 self.quit_system()
 
             elif user_choice == '1':
                 while is_valid_report_name == False:
                     report_name = input('Enter new report name: ')
+                    # check if the new report name is valid so we can update the report with good data
                     is_valid_report_name = self.logic_wrapper.sanity_check_maintencance_report('report name', report_name, report.location)
                     if is_valid_report_name == True:
+                        # changes the report name in the system
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Report Name', report_name)
                         print(Fore.GREEN + 'Report name changed' + Style.RESET_ALL)
                     
@@ -913,32 +945,40 @@ class maintenance_report_UI_menu:
             elif user_choice == '2':
                 while is_valid_staff_id == False:
                     staff_id = input('Enter new staff ID (E*): ')
+                    # check if the new staff ID is valid so we can update the report with good data
                     is_valid_staff_id = self.logic_wrapper.sanity_check_maintencance_report('staff id', staff_id, report.location)
                     if is_valid_staff_id == True:
+                        # changes the staff ID in the system
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Staff ID', staff_id)
                         print(Fore.GREEN + 'Staff ID changed' + Style.RESET_ALL)
 
             elif user_choice == '3':
                 while is_valid_property_id == False:
                     property_id = input('Enter new property ID (P*): ')
+                    # check if the new property ID is valid so we can update the report with good data
                     is_valid_property_id = self.logic_wrapper.sanity_check_maintencance_report('property id', property_id, report.location)
                     if is_valid_property_id == True:
+                        # changes the property ID in the system
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Property ID', property_id)
                         print(Fore.GREEN + 'Property ID changed' + Style.RESET_ALL)
             
             elif user_choice == '4':
                 while is_valid_regular_maintenance == False:
                     regular_maintenance = input('Regular Maintenance (yes/no): ')
+                    # check if the new regular maintenance is valid so we can update the report with good data
                     is_valid_regular_maintenance = self.logic_wrapper.sanity_check_maintencance_report('regular maintenance', regular_maintenance, report.location)
                     if is_valid_regular_maintenance == True:
+                        # changes the regular maintenance in the system
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Regular', regular_maintenance)
                         print(Fore.GREEN + 'Regular Maintenance changed' + Style.RESET_ALL)
             
             elif user_choice == '5':
                 while is_valid_maintenance_description == False:
                     maintenance_description = input('Enter new maintenance description: ')
+                    # check if the new maintenance description is valid so we can update the report with good data
                     is_valid_maintenance_description = self.logic_wrapper.sanity_check_maintencance_report('maintenance description', maintenance_description, report.location)
                     if is_valid_maintenance_description == True:
+                        # changes the maintenance description in the system
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Description', maintenance_description)
                         print(Fore.GREEN + 'Maintenance description changed' + Style.RESET_ALL)
 
@@ -946,8 +986,10 @@ class maintenance_report_UI_menu:
                 while is_valid_price == False:
                     try:
                         price = float(input('Enter new price: '))
+                        # check if the new price is valid so we can update the report with good data
                         is_valid_price = self.logic_wrapper.sanity_check_maintencance_report('cost', price, report.location)
                         if is_valid_price == True:
+                            # changes the price in the system
                             self.logic_wrapper.edit_maintencance_report(report, report.location, 'Cost', price)
                             print(Fore.GREEN + 'Price changed' + Style.RESET_ALL)
                     except ValueError:
@@ -956,20 +998,25 @@ class maintenance_report_UI_menu:
             elif user_choice == '7':
                 while is_valid_contractor_id == False:
                     contractor_id = input('Enter new contractor ID (C*): ')
+                    # check if the new contractor ID is valid so we can update the report with good data
                     is_valid_contractor_id = self.logic_wrapper.sanity_check_maintencance_report('contractor id', contractor_id, report.location)
                     if is_valid_contractor_id == True:
+                        # changes the contractor ID in the system
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Contractor ID', contractor_id)
                         print(Fore.GREEN + 'Contractor ID changed' + Style.RESET_ALL)
 
             elif user_choice == '8':
                 while is_valid_work_request_id == False:
                     work_request_id = input('Enter new work request ID (WR*): ')
+                    # check if the new work request ID is valid so we can update the report with good data
                     is_valid_work_request_id = self.logic_wrapper.sanity_check_maintencance_report('work request id', work_request_id, report.location)
                     if is_valid_work_request_id == True:
+                        # changes the work request ID in the system
                         self.logic_wrapper.edit_maintencance_report(report, report.location, 'Work Request ID', work_request_id)
                         print(Fore.GREEN + 'Work request ID changed' + Style.RESET_ALL)
 
             elif user_choice == '9':
+                # confirm the changes and change the report status to pending
                 self.logic_wrapper.edit_maintencance_report(report, report.location, 'Report Status', 'Pending')
                 print(Fore.GREEN + 'Report has been changed to pending' + Style.RESET_ALL)
                 report_done = True
@@ -980,9 +1027,11 @@ class maintenance_report_UI_menu:
 
     def print_single_maintenance_report(self, maintenance_report):
         """Prints a single maintenance report"""
+        # create a table to display the single maintenance report
         single_report_table = PrettyTable()
         single_report_table.title = 'Maintenance Report'
         single_report_table.field_names = ['Information',"Details"]
+        # adding all the details of the maintenance report to the table
         single_report_table.add_row(['Report ID', maintenance_report.report_id])
         single_report_table.add_row(['Report Name', maintenance_report.report_name])
         single_report_table.add_row(['Maintenance Description', maintenance_report.maintenance_description])
@@ -995,7 +1044,7 @@ class maintenance_report_UI_menu:
         single_report_table.add_row(['Contractor ID', maintenance_report.contractor_id])
         single_report_table.add_row(['Work Request ID', maintenance_report.work_request_id])
 
-
+        # styling the table to make it look good
         border_color = Fore.BLUE
         reset_color = Style.RESET_ALL
         single_report_table.align = 'l'

@@ -7,7 +7,8 @@ class Location:
         self.phone_number = phone_number
         self.opening_hours = opening_hours
         self.branch_manager = branch_manager
-        """Constructor for Location"""
+
+    # Setters for the Location class
     def set_country(self, country):
         """Sets the country"""
         self.country = country
@@ -32,6 +33,7 @@ class Location:
         """Sets the opening hours"""
         self.opening_hours = opening_hours
     
+    # Getters for the Location class
     def get_country(self):
         """Gets the country"""
         return self.country

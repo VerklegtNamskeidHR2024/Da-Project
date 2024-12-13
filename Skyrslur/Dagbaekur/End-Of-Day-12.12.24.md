@@ -8,6 +8,7 @@ Tumi:\
 
 
 Daníela:\
+I added clear screen and tested the program for bugs. I arrived at 10:30 and left at 22:30.
 
 
 Yeabsira:\
