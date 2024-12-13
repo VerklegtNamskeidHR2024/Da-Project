@@ -1,27 +1,35 @@
 # Da-Project
 
-## PIP installs og Employee Login IDS 
+## Version of Python this program works on
+### Python version 3.13.0 
+### Python version 3.12.8 
+### Python version 3.12.5 
 
-### Employee login id’s 
-#### Admins 
-A1 admin 
+## Pip installs 
+`python3 -m pip install -r requirements.txt`
 
-#### Managers 
-M1 Reykjavik Manager \
-M2 Nuuk Manager \
-M3 Kulusuk Manager \
-M4 Thorshofn Manager \
-M5 Tingwall Manager \
-M6 Longyearbyen Manager 
+## Running the program
+### Starting the program
+#### The program is run from the file entrypoint.py
+`python3 entrypoint.py`
 
-#### Employees 
-E1 Reykjavik employee \
-E3 Nuuk Employee \
-E5 Kulusuk employee \
-E7 Thorshofn Employee \
-E9 Tingwall Employee \
-E11 Longyearbyen Employee 
+### System login explanation  
+When starting up the program, you are presented with the options: Admin, Manager, and Employee. After choosing one of the options, you are asked for a staff ID.
+Based on the option you choose, you enter the corresponding staff ID from Employee Login IDS below. 
 
-### Pip installs 
-Python3 -m install prettytable \
-Python3 -m install Colorama 
+### Staff IDS
+| Type | Location | Id |
+|-|-|-|
+|Admin | All | A1 |
+|Manager | Reykjavik | M1 |
+|Manager | Nuuk | M2 |
+|Manager | Kulusuk | M3 |
+|Manager | Thorshofn | M4 |
+|Manager | Tingwall | M5 |
+|Manager | Longyearbyen | M6 |
+|Employee | Reykjavik | E1 |
+|Employee | Nuuk | E3 |
+|Employee | Kulusuk | E5 |
+|Employee | Thorshofn | E7 |
+|Employee | Tingwall | E9 |
+|Employee | Longyearbyen | E11 |

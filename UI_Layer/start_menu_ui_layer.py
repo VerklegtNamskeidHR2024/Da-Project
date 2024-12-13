@@ -294,7 +294,7 @@ class Main_Menu:
                     user_action = self.contractor_UI_menu.start_point_contractor_UI()
                 case "5":
                     # Calls the maintenance report UI menu
-                    user_action = self.maintenance_report_UI_menu.start_point_maintenance_reports_UI()
+                    self.maintenance_report_UI_menu.start_point_maintenance_reports_UI()
                 case "6" if self.rank != "Employee":
                     # This option is only displayed if the user is an admin or manager
                     user_action = self.location_UI_menu.start_point_location_UI()
