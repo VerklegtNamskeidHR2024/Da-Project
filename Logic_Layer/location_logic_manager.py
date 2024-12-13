@@ -16,7 +16,7 @@ class location_logic_manager:
         return locations_list
 
     
-    def get_all_locations(self, Location) -> list:
+    def get_all_locations(self, location: str) -> list:
         """Get all locations based on location"""
         location_sorted_list = []
 
@@ -28,7 +28,7 @@ class location_logic_manager:
 
         return location_sorted_list
 
-    def edit_existing_location_in_storage(self, location, current_location, edit_choice, new_value):
+    def edit_existing_location_in_storage(self, location: object, edit_choice: str, new_value: str):
         """Edit an existing location in the storage"""
         list_of_locations = self.all_location()
         # Iterate through the list of locations and edit the location with the matching location ID
@@ -45,7 +45,7 @@ class location_logic_manager:
         self.Storage_Layer_Wrapper.write_to_file_locations(list_of_locations)
 
 
-    def sanity_check_location(self, what_to_check, new_value) -> bool:
+    def sanity_check_location(self, what_to_check: str, new_value: str) -> bool:
         """Check if all info in a location object is correct"""
         # checks if the phone number is 7 digits
         # so it does not let the user input a phone number that is not 7 digits
@@ -68,7 +68,7 @@ class location_logic_manager:
             else:
                 return False
         
-    def edit_amenity(self ,amenity_in, new_condition) -> bool:
+    def edit_amenity(self, amenity_in: object, new_condition: str) -> bool:
         """Edit an amenity"""
         # gets all amenities in list so we can edit the amenity 
         # and then write the list of amenities to the storage
@@ -83,7 +83,7 @@ class location_logic_manager:
                 return True
         return False
         
-    def fetch_amenity_by_id(self, amenity_ID, location) -> object:
+    def fetch_amenity_by_id(self, amenity_ID: str, location: str) -> object:
         """Fetch an amenity by ID"""
         # gets all amenities in list so we can fetch the amenity by ID
         amenities = self.Storage_Layer_Wrapper.get_all_amenities()

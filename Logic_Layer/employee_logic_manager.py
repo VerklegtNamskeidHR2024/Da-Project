@@ -5,13 +5,12 @@ class employee_logic_manager:
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
 
 
-    # Might not implement
     def get_all_admins(self) -> list:
         """Get all admins"""
         all_admins = self.Storage_Layer_Wrapper.get_all_admins()
         return all_admins 
 
-    # Might not implement
+    
     def get_all_managers(self) -> list:
         """Get all managers"""
         all_managers = self.Storage_Layer_Wrapper.get_all_managers()
@@ -58,7 +57,7 @@ class employee_logic_manager:
     
     def get_highest_ID(self) -> str:
         """Get the highest ID"""
-        highestID = -1
+        highestID = -1 # Initialize the highest ID to -1 just in case there is no ID in the storage
         list_of_all_employees = self.get_all_employees()
         #checks if the id is higher than the highest id
         for employee in list_of_all_employees:
@@ -74,9 +73,9 @@ class employee_logic_manager:
     def add_new_employee_to_storage(self,employee):
         """Add a new employee to the storage"""
         list_of_all_employees = self.get_all_employees()
-        #call the function to generait a new ID
+        # call the function to generait a new ID
         new_employee_id = self.get_highest_ID()
-        #sets the 
+        #sets the ID for the new employee to be able to send it to storage
         employee.set_staff_id(new_employee_id)
         list_of_all_employees.append(employee)
         self.Storage_Layer_Wrapper.write_to_file_employee(list_of_all_employees)
@@ -106,7 +105,8 @@ class employee_logic_manager:
     def fetch_all_work_request_for_employee(self, staff_id) -> list:
         """Get all work requests for an employee"""
         work_request_list = self.Storage_Layer_Wrapper.get_all_work_requests()
-        #checks if the staff id is in the list of work requests then returns the work requests
+        #checks if the staff id is in the list of work requests then returns a list of the work requests
+        #to be able print it in the ui
         work_request_by_employee = []
         for wr in work_request_list:
             if wr.staff_id == staff_id:
@@ -117,7 +117,8 @@ class employee_logic_manager:
     def fetch_all_maintenance_reports_for_employee(self, staff_id) -> list:
         """Get all maintenance reports for an employee"""
         maintenance_reports_list = self.Storage_Layer_Wrapper.get_all_maintenance_reports()
-        #checks if the staff id is in the list of maintenance reports then returns the maintenance reports
+        #checks if the staff id is in the list of maintenance reports then returns a list of the maintenance reports
+        #to be able print it in the ui
         maintenance_reports_by_employee = []
         for mr in maintenance_reports_list:
             if mr.staff_id == staff_id:
@@ -126,6 +127,7 @@ class employee_logic_manager:
     
     def sanity_check_employee_name(self, name) -> bool:
         """Check if the name is correct"""
+        #if there are only letters and spaces the function returns True to be able to validate the name
         for chr in name:
             if chr.isalpha() or chr.isspace():
                 pass
@@ -134,7 +136,7 @@ class employee_logic_manager:
         return True
     
     def sanity_check_ssn(self, ssn) -> bool:
-        """Check if the social security number exist"""
+        """Check if the social security number exist in the system to be able to search for the employee"""
         employee_list = self.get_all_employees()
         for employee in employee_list:
             if employee.social_security_number == ssn:
@@ -143,12 +145,13 @@ class employee_logic_manager:
         return False
     
     def sanity_check_ssn_add(self, ssn) -> bool:
-        """Check if the social security number is correct"""
-
+        """Check if the social security number is not in the system and has the correct format"""
+        #if the ssn is in the system it can not be added
         employee_list = self.get_all_employees()
         for employee in employee_list:
             if employee.social_security_number == ssn:
                 return False
+        #if it is not in the system and has the correct format it can be added
         try:
             int(ssn)
             if len(ssn) == 10:
@@ -158,6 +161,7 @@ class employee_logic_manager:
         
     def sanity_check_phone_number(self, phone_number) -> bool:
         """Check if the phone number is correct"""
+        #allows only 7 numbers to be added
         try:
             int(phone_number)
             if len(phone_number) == 7:
@@ -167,6 +171,7 @@ class employee_logic_manager:
         
     def sanity_check_email(self, email) -> bool:
         """Check if the email is correct"""
+        #allows only correctly formated emails to be added
         if "@" in email and "." in email:
             return True
         else:

@@ -5,14 +5,14 @@
         "phone_number": "5551234",
         "location": "Reykjavik",
         "system_permissions": "Employee",
-        "email": "hreimur8@gmail.com",
+        "email": "egelskamommu@gmail.com",
         "staff_id": "E1"
     },
     {
         "name": "John Doe",
         "social_security_number": "9876543211",
         "phone_number": "2222222",
-        "location": "Reykjavik",
+        "location": "Nuuk",
         "system_permissions": "Employee",
         "email": "larus@gmail.com",
         "staff_id": "E2"
@@ -21,7 +21,7 @@
         "name": "Jane Smith",
         "social_security_number": "1928374651",
         "phone_number": "5647382",
-        "location": "Nuuk",
+        "location": "Tingwall",
         "system_permissions": "Employee",
         "email": "janesmith@example.com",
         "staff_id": "E3"
@@ -30,7 +30,7 @@
         "name": "Jokla Himiko",
         "social_security_number": "1029384751",
         "phone_number": "3847562",
-        "location": "Nuuk",
+        "location": "Thorshofn",
         "system_permissions": "Employee",
         "email": "joklahimiko@example.com",
         "staff_id": "E4"
@@ -48,7 +48,7 @@
         "name": "Charlie Davis",
         "social_security_number": "8374651921",
         "phone_number": "2736451",
-        "location": "Thorshofn",
+        "location": "Longyearbyen",
         "system_permissions": "Employee",
         "email": "charliedavis@example.com",
         "staff_id": "E6"
@@ -105,7 +105,7 @@
         "location": "Thorshofn",
         "system_permissions": "Employee",
         "email": "kormakur@gmail.com",
-        "staff_id": "E32"
+        "staff_id": "E12"
     },
     {
         "name": "Jon",
@@ -114,7 +114,7 @@
         "location": "Nuuk",
         "system_permissions": "Employee",
         "email": "jon@gmail.com",
-        "staff_id": "E33"
+        "staff_id": "E13"
     },
     {
         "name": "Yeabsira",
@@ -123,7 +123,7 @@
         "location": "Kulusuk",
         "system_permissions": "Employee",
         "email": "yeabsira@gmail.com",
-        "staff_id": "E34"
+        "staff_id": "E14"
     },
     {
         "name": "Yeabsira",
@@ -132,7 +132,7 @@
         "location": "Nuuk",
         "system_permissions": "Employee",
         "email": "yeabsira@gmail.com",
-        "staff_id": "E35"
+        "staff_id": "E15"
     },
     {
         "name": "Jon",
@@ -141,6 +141,15 @@
         "location": "Thorshofn",
         "system_permissions": "Employee",
         "email": "anemail@gmail.com",
-        "staff_id": "E36"
+        "staff_id": "E16"
+    },
+    {
+        "name": "Kormakur ",
+        "social_security_number": "0606022040",
+        "phone_number": "7788550",
+        "location": "Tingwall",
+        "system_permissions": "Employee",
+        "email": "kormakur10@gmail.com",
+        "staff_id": "E17"
     }
 ]

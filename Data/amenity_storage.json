@@ -19,14 +19,14 @@
         "property_id": "A3",
         "name": "hot tub",
         "location": "Nuuk",
-        "condition": "excellent",
+        "condition": "the hot tub leaks",
         "total_price_to_fix": 1500.0,
         "amenity_description": "is a hot tub"
     },
     {
         "property_id": "A37",
         "name": "kolkrabbi",
-        "location": "",
+        "location": "Tingwall",
         "condition": "good",
         "total_price_to_fix": "1",
         "amenity_description": "delicious octopuss"
@@ -42,9 +42,41 @@
     {
         "property_id": "A38",
         "name": "Hot tubbarinn hans Jons",
-        "location": "",
+        "location": "Nuuk",
         "condition": "Spicy",
         "total_price_to_fix": "100.000",
         "amenity_description": "Naes og kosy, ekki mjog rumgott"
+    },
+    {
+        "property_id": "A39",
+        "name": "Hottub",
+        "location": "Reykjavik",
+        "condition": "GOod",
+        "total_price_to_fix": "100.00",
+        "amenity_description": "ITs a hottub"
+    },
+    {
+        "property_id": "A39",
+        "name": "Talva",
+        "location": "Torshavn",
+        "condition": "Good",
+        "total_price_to_fix": "10.0",
+        "amenity_description": "It runs ig"
+    },
+    {
+        "property_id": "A39",
+        "name": "Kormakurs shoe",
+        "location": "Nuuk",
+        "condition": "bad",
+        "total_price_to_fix": "10",
+        "amenity_description": "its busted asl"
+    },
+    {
+        "property_id": "A39",
+        "name": "hremmis vape",
+        "location": "Reykjavik",
+        "condition": "idk",
+        "total_price_to_fix": "100",
+        "amenity_description": "idk ask hin "
     }
 ]

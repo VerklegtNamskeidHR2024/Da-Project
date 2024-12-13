@@ -91,7 +91,7 @@ class location_UI_menu:
                     return "q"
                 case _:
                     print(Fore.RED + "Invalid input. Please try again." + Style.RESET_ALL)
-                    time.sleep(0.5)
+                    time.sleep(1.5)
                     self.clear_screen()
         self.clear_screen()
         return user_choice.lower()
@@ -197,18 +197,20 @@ class location_UI_menu:
             while (new_opening_hours := input("Enter Opening Hours: ")) not in ["q", "b", "Q", "B"]:
             # checks if the opening hours are valid
                 is_valid = self.logic_wrapper.sanity_check_location("opening_hours", new_opening_hours)
-                if is_valid is True:
+                if is_valid is False:
                     print()
-                    print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL) 
+                    print(Fore.RED + "Invalid input. Please Try Again."+ Style.RESET_ALL) 
                     print()
                     time.sleep(2)
                     continue
-                # if the opening hours are valid, change the opening hours and print the location information
-                self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'opening_hours', new_opening_hours)
-                print(Fore.GREEN + "Opening hours changed successfully." + Style.RESET_ALL)
-                time.sleep(2)
-                self.clear_screen()
-                return ""
+
+                else:
+                    # if the opening hours are valid, change the opening hours and print the location information
+                    self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'opening_hours', new_opening_hours)
+                    self.clear_screen()
+                    print(Fore.GREEN + "Opening Hours Were Changed Successfully!" + Style.RESET_ALL)
+                    return ""
+
             self.clear_screen()
             return new_opening_hours.lower()
         except ValueError:
@@ -221,24 +223,27 @@ class location_UI_menu:
         user_action = ""
         while user_action != "q":
             self.clear_screen()
-            self.display_attached_amenities()
-            print("1. Edit Amenity Condition")
-            print()
-            print("{:>18}".format("Back - [ b, B ]"))
-            print("{:>18}".format("Quit - [ q, Q ]"))
-            print("-" * 80)
-            user_action = input("Select An Option: ").lower()
-            match user_action.lower():
-                case "1":
-                    user_action = self.edit_amenity()
-                case "q":
-                    return "q"
-                case "b":
-                    return "b"
-                case _:
-                    print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL)
-                    time.sleep(1)
-                    self.clear_screen()
+            ameneties_in_system = self.display_attached_amenities()
+            if ameneties_in_system == True:
+                print("1. Edit Amenity Condition")
+                print()
+                print("{:>18}".format("Back - [ b, B ]"))
+                print("{:>18}".format("Quit - [ q, Q ]"))
+                print("-" * 80)
+                user_action = input("Select An Option: ").lower()
+                match user_action.lower():
+                    case "1":
+                        user_action = self.edit_amenity()
+                    case "q":
+                        return "q"
+                    case "b":
+                        return "b"
+                    case _:
+                        print(Fore.RED + "Invalid Input. Please Try Again."+ Style.RESET_ALL)
+                        time.sleep(1.5)
+                        self.clear_screen()
+            elif ameneties_in_system == False:
+                return
         self.clear_screen()
         return user_action.lower()
         
@@ -264,9 +269,6 @@ class location_UI_menu:
         self.clear_screen()
         return amenity_ID.lower()
 
-
-        #amenities_list = self.logic_wrapper.fetch_all_amenities_for_location_in_storage(self.location)
-
     def display_single_amenity(self, amenity: object) -> str:
         """Display a single amenity"""
         # prints the information for the amenity the class is called with
@@ -284,13 +286,14 @@ class location_UI_menu:
         print("-" * 80)
         
 
-    def display_attached_amenities(self) -> str:
+    def display_attached_amenities(self) -> bool:
         """Display all amenities attached to the location"""
         # gets all amenities for the location
         amenities_list = self.logic_wrapper.fetch_all_amenities_for_location_in_storage(self.location)
         if not amenities_list:
             print(Fore.RED + "No Amenities Found." + Style.RESET_ALL)
-            return
+            time.sleep(2)
+            return False
         else:
             # when admin needs to select location
             current_location = self.get_current_location()
@@ -308,6 +311,7 @@ class location_UI_menu:
             amenities_table.vertical_char = f"{border_color}|{reset_color}"
             print(amenities_table)
             print("-" * 80)
+            return True
 
     def get_current_location(self) -> str:
         """Get the current location and return it"""

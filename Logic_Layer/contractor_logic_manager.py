@@ -1,5 +1,4 @@
-# missing list
-# !!!!!give contractor warning!!!!!
+
 
 class contractor_logic_manager:
     def __init__(self, Storage_Layer_Wrapper):
@@ -25,9 +24,7 @@ class contractor_logic_manager:
     def get_all_contractors_at_location(self, location) ->list:
         """Get all contractors at a specific location"""
         contractor_sorted_list = []
-
         all_contractors = self.Storage_Layer_Wrapper.get_all_contractor()
-        
         # loops through all contractors and appends the contractors at the specific location to the contractor_sorted_list
         for contractor in all_contractors:
             if contractor.location == location:
@@ -87,16 +84,18 @@ class contractor_logic_manager:
     
     def add_new_contractor_to_storage(self, rank, location, contractor):
         """Add a new contractor to the storage"""
-        print('Adding new contractor to storage')
-        list_of_all_contractors = self.get_all_contractors() # get all contractors
-        new_property_id = self.set_id_for_contractor() # get a new id for the contractor
-        contractor.contractor_id = new_property_id # set the new id to the contractor
-        list_of_all_contractors.append(contractor) # append the contractor to the list of all contractors
-        self.Storage_Layer_Wrapper.write_to_file_contractor(list_of_all_contractors) # write the list of all contractors to the storage
+        # New contractor that has been created by the UI has no ID
+        # Get all contractors in a list so that the new one can be added to that list
+        list_of_all_contractors = self.get_all_contractors()
+        new_property_id = self.set_id_for_contractor() # Ask what ID should be assigned to the new entry.
+        contractor.contractor_id = new_property_id 
+        list_of_all_contractors.append(contractor) # Once validated and ID'ed we can add it to the list.
+        self.Storage_Layer_Wrapper.write_to_file_contractor(list_of_all_contractors) 
+        # As we updated the list, we must notify storage to keep files in sync
     
     def set_id_for_contractor(self):
         """Set a new id for a contractor"""
-        highestID = -1 # initialize the highest id to -1
+        highestID = -1 # Initialize the highest ID to -1 just in case there is no ID in the storage
         list_of_all_contractor = self.get_all_contractors()
         for contractor in list_of_all_contractor: # iterate through all contractors
             stripped_ID = contractor.contractor_id[1:] # get the id of the contractor
@@ -104,8 +103,8 @@ class contractor_logic_manager:
                 highestID = int(stripped_ID) # set the highest id to the id
         highestID += 1 # increment the highest id by 1
 
-        new_property_id = 'C' + str(highestID) # set the new id to the highest id
-        return new_property_id  # return the new id
+        new_contractor_id = 'C' + str(highestID) # set the new id to the highest id
+        return new_contractor_id  # return the new id
 
     
     def edit_existing_contractor_in_storage(self, contractor, location, edit_choice, new_value):
