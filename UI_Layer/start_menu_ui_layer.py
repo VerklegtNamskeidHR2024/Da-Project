@@ -121,7 +121,7 @@ class Main_Menu:
             time.sleep(0.04)
         print()'''
         self.ascii_art()
-        time.sleep(4)
+        time.sleep(2)
         self.clear_screen()
 
         # prints out the welcome message and the ascii art for the NaN Air HQ
