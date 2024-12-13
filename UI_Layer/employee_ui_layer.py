@@ -18,8 +18,22 @@ class employee_UI_menu:
 
     def start_point_employee_UI(self) -> str:
         """The function is the starting point for the employee UI"""
-        # when this class is called it starts here
-        # call other functions in class from here
+         
+        # In almost all functions that receive, and verify user input are while loops that repeatedly ask the user
+        # for specific input. These while loops are held together on the condition that the user either fullfills the
+        # neccesary requirements to proceed or that they don't enter q/Q or b/B.
+        #
+        #
+        # Outside of each while loop are return statments that pass back any input that the user had entered. In all cases,
+        # except 2, has no affect on the user experience while navigating this menu. Only when the input given is either
+        # q/Q or b/B do these while loops and return statments influence the flow of the user experience.
+        #
+        #
+        # When q/Q are entered, at any point while navigating this menu, it is always returned back to this point. Once here,
+        # it passes the necessary verification to be returned back to the home page menu where it is returned one last time
+        # to the quit system function that displays the exit message and stops running the script.
+        #
+        # 
         self.clear_screen()
         if self.rank == "Employee":
             display_all_employees = self.display_all_employees_by_locationa()
