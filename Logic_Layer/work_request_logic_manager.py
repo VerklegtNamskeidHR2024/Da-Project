@@ -131,8 +131,7 @@ class work_request_logic_manager:
     def set_id_for_work_request(self, Work_request: object) -> str:
         """Sets a new ID for a the work request that has been created."""
 
-        # Initialises the ID to -1
-        highest_id = -1
+        highest_id = -1 # Initialize the highest ID to -1 just in case there is no ID in the storage
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         for work_request in all_work_requests:
 
@@ -143,13 +142,13 @@ class work_request_logic_manager:
 
             highest_id = max(highest_id, int(stripped_id))
 
-            # With each iteration, the highest ID is raised by 1 up until it 
+            # With each iteration, the highest ID is raised by 1 up until it
             # reaches the end of the list.
 
         highest_id += 1
         new_work_request_id = "WR" + str(highest_id)
         Work_request.set_work_request_id(new_work_request_id)
-        # Returns the work request now with the highest ID
+        # Returns the work request back the add to storagae functio with the highest ID
         return Work_request
 
 
@@ -185,7 +184,7 @@ class work_request_logic_manager:
     def add_work_request(self, Work_request: object):
         """Adds a work request to the storage layer."""
 
-        # Aets the ID for the work request and appends it to the list of all work requests 
+        #  ID for the work request and appends it to the list of all work requests 
         # before being sent to the storage wrapper where it's written into the file.
         Work_request_with_id = self.set_id_for_work_request(Work_request)
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
