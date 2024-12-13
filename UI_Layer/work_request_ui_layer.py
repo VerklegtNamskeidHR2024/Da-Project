@@ -49,7 +49,7 @@ class work_request_UI_menu:
         """Displays out all open work requests with their ID, Name and Description."""
 
         # If there are no work requests that meet the conditions of the menu they appear in, then this message is
-        # displayed to let the user to know. 
+        # displayed to let the user to know.
         if len(work_request_list) < 1:
             print()
             print("{:>60}".format(Fore.RED + "No Work Requests To Display" + Style.RESET_ALL))
@@ -77,6 +77,7 @@ class work_request_UI_menu:
             work_request_table.vertical_char = f"{border_color}|{reset_color}"
             print(work_request_table)
         except ValueError:
+            # Same as the comment above, but having a try except just in case so the program won't crash.
             print()
             print("{:>50}".format(Fore.RED + "No Work Requests To Display" + Style.RESET_ALL))
             print()
@@ -170,10 +171,9 @@ class work_request_UI_menu:
 
         user_choice = ""
         while user_choice != "q":
-            # The user input for the menu is returned to this variable and then verified in the match cases below. If the user is in 
-            # one the various sub-menus and goes back to the home page, then when the while loop runs again the work request menu is displayed 
-            # again and asks for the user input. By having the print and logistics in two seperate menus it prevents a larger, more crammed 
-            # home menu.
+            # The user input from the display menu is returned to this variable and then verified in the match cases below. If the user is in
+            # one the sub-menus and goes back to the home page, the while loop runs again displaying the menu and asking for the user input.
+            # By having the print and logistics in two seperate menus it prevents a larger, more crammed home screen function.
             user_choice = self.display_work_requests_menu_items()
             print("-" * 80)
             match (user_choice, self.rank):
@@ -181,8 +181,8 @@ class work_request_UI_menu:
                 # then the loop breaks and is returned back to the start point; shutting the program off.
                 #
                 #
-                # If the user wants to search for a specific work request they select option 1 which takes them to the search 
-                # work request sub-menu where they can search by either ID or date (start date or completition). 
+                # If the user wants to search for a specific work request they select option 1 which takes them to the search
+                # work request sub-menu where they can search by either ID or date (start date or completition).
                 #
                 # Note: Employees can only search for work requests that have their staff ID assigned to them. Admin/Manager can search
                 # for any work request in their current location. 
@@ -197,27 +197,29 @@ class work_request_UI_menu:
                     user_choice = self.display_create_work_request_form()
                     self.clear_screen()
 
-                # If an employee wants to view all the newly created work requests they select option 2 is selected for employees and option 3 for admins/manager, they go to the new work request sub-menu.
+                # If an employee wants to view all the newly created requests they select option 2 or option 3 for admins/manager.
+                # This takes them to the new work request sub-menu.
                 case ("2", "Employee") | ("3", "Admin") | ("3", "Manager"):
                     self.clear_screen()
                     user_choice = self.display_and_select_new_work_requests()
                     self.clear_screen()
 
-                # If option 3 is selected for employees and option 4 for admins/manager, they go to the pending work request sub-menu.
+                # If an employee wants to view all pending requests they select option 3 or option 4 for admins/manager.
+                # This takes them to the pending work request sub-menu.
                 case ("3", "Employee") | ("4", "Admin") | ("4", "Manager"):
                     self.clear_screen()
                     user_choice = self.display_and_select_pending_work_requests()
                     self.clear_screen()
 
-                # If option 5 is selected for admins/manager, they go to the closed work request sub-menu.
+                # If an admin/manager wants to view all closed requests they select option 5 which takes them to the closed
+                # work request sub-menu.
                 case ("5", "Admin") | ("5", "Manager"):
                     self.clear_screen()
                     user_choice = self.display_and_select_closed_work_requests()
                     self.clear_screen()
 
-                # If option 4 is selected for for employees and option 6 for admins/manager, they go to either the my work requests
-                # or all work requests sub-menu. The difference is system priveledges, employees can only view and interact with work
-                # requests they are attached to, while admins/managers can see all in their current location.
+                # If an employee wants to view all their requests they select option 4 and for admins/manager to get all workrequests 
+                # in their location they select option 6.
                 case ("4", "Employee") | ("6", "Admin") | ("6", "Manager"):
                     self.clear_screen()
                     user_choice = self.display_and_select_request_overview()
@@ -233,7 +235,7 @@ class work_request_UI_menu:
                 case ("q", self.rank):
                     return "q"
 
-                # Any other inputare treated as errors and the user given a message to notify them that what they did was 
+                # Any other inputare treated as errors and the user given a message to notify them that what they did was
                 # outside the scope of valid options.
                 case _:
                     print()

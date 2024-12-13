@@ -95,7 +95,7 @@ class contractor_logic_manager:
     
     def set_id_for_contractor(self):
         """Set a new id for a contractor"""
-        highestID = -1 # Initialize the highest id to -1
+        highestID = -1 # Initialize the highest ID to -1 just in case there is no ID in the storage
         list_of_all_contractor = self.get_all_contractors()
         for contractor in list_of_all_contractor: # iterate through all contractors
             stripped_ID = contractor.contractor_id[1:] # get the id of the contractor
@@ -103,8 +103,8 @@ class contractor_logic_manager:
                 highestID = int(stripped_ID) # set the highest id to the id
         highestID += 1 # increment the highest id by 1
 
-        new_property_id = 'C' + str(highestID) # set the new id to the highest id
-        return new_property_id  # return the new id
+        new_contractor_id = 'C' + str(highestID) # set the new id to the highest id
+        return new_contractor_id  # return the new id
 
     
     def edit_existing_contractor_in_storage(self, contractor, location, edit_choice, new_value):

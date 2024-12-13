@@ -105,7 +105,7 @@
         "location": "Thorshofn",
         "system_permissions": "Employee",
         "email": "kormakur@gmail.com",
-        "staff_id": "E32"
+        "staff_id": "E12"
     },
     {
         "name": "Jon",
@@ -114,7 +114,7 @@
         "location": "Nuuk",
         "system_permissions": "Employee",
         "email": "jon@gmail.com",
-        "staff_id": "E33"
+        "staff_id": "E13"
     },
     {
         "name": "Yeabsira",
@@ -123,7 +123,7 @@
         "location": "Kulusuk",
         "system_permissions": "Employee",
         "email": "yeabsira@gmail.com",
-        "staff_id": "E34"
+        "staff_id": "E14"
     },
     {
         "name": "Yeabsira",
@@ -132,7 +132,7 @@
         "location": "Nuuk",
         "system_permissions": "Employee",
         "email": "yeabsira@gmail.com",
-        "staff_id": "E35"
+        "staff_id": "E15"
     },
     {
         "name": "Jon",
@@ -141,6 +141,15 @@
         "location": "Thorshofn",
         "system_permissions": "Employee",
         "email": "anemail@gmail.com",
-        "staff_id": "E36"
+        "staff_id": "E16"
+    },
+    {
+        "name": "Kormakur ",
+        "social_security_number": "0606022040",
+        "phone_number": "7788550",
+        "location": "Tingwall",
+        "system_permissions": "Employee",
+        "email": "kormakur10@gmail.com",
+        "staff_id": "E17"
     }
 ]

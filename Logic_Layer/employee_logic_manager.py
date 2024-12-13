@@ -57,7 +57,7 @@ class employee_logic_manager:
     
     def get_highest_ID(self) -> str:
         """Get the highest ID"""
-        highestID = -1
+        highestID = -1 # Initialize the highest ID to -1 just in case there is no ID in the storage
         list_of_all_employees = self.get_all_employees()
         #checks if the id is higher than the highest id
         for employee in list_of_all_employees:
