@@ -192,8 +192,9 @@ class contractor_UI_menu():
                 # add the new contractor to the storage
                 self.logic_wrapper.add_new_contractor(self.rank, self.location, new_contractor)
                 print("---------------------------------------------------------")
+                print(Fore.GREEN + "Contractor added" + Style.RESET_ALL)
+                time.sleep(2)
                 self.clear_screen()
-                print("Contractor added")
             except:
                 self.clear_screen()
                 print("something went wrong with making new contractor") 
@@ -247,7 +248,9 @@ class contractor_UI_menu():
                     self.clear_screen()
                     loop = False
                 case _:
-                    print("not valid input")
+                    print(Fore.RED + "not valid input" + Style.RESET_ALL)
+                    time.sleep(2)
+                    self.clear_screen()
         return
 
     def display_contractor_warning(self, contractor) -> None:
@@ -259,12 +262,14 @@ class contractor_UI_menu():
             # if the warning is valid then give the contractor a warning
             if is_valid == True:
                 self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'warning', warning)
-            self.clear_screen()
             print(Fore.GREEN + "Contractor has been given a warning." + Style.RESET_ALL)
+            time.sleep(2)
+            self.clear_screen()
             return
         except:
-            self.clear_screen()
             print("something went wrong")
+            time.sleep(2)
+            self.clear_screen()
             return
 
     def display_edit_contractor_menu(self) -> None:
@@ -286,6 +291,9 @@ class contractor_UI_menu():
                     pass
             except:
                 print(Fore.RED + "something went wrong" + Style.RESET_ALL)
+                time.sleep(2)
+                self.clear_screen()
+
 
         self.clear_screen()
         loop = True
@@ -313,6 +321,8 @@ class contractor_UI_menu():
                     loop = False
                 case _:
                     print((Fore.RED + "Not Valid Input" + Style.RESET_ALL))
+                    time.sleep(2)
+                    self.clear_screen()
         return
     
     def change_contact_name(self, contractor) -> None:
@@ -324,15 +334,18 @@ class contractor_UI_menu():
             # if the contact name is valid then change the contact name
             if is_valid == True:
                 self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'contact_name', new_contact_name)
-                self.clear_screen()
                 print(Fore.GREEN + "Contact name has been changed." + Style.RESET_ALL)
-            else:
+                time.sleep(2)
                 self.clear_screen()
+            else:
                 print(Fore.RED + "Invalid contact name" + Style.RESET_ALL)
+                time.sleep(2)
+                self.clear_screen()
             return
         except:
-            self.clear_screen()
             print(Fore.RED + "something went wrong" + Style.RESET_ALL)
+            time.sleep(2)
+            self.clear_screen()
             return
 
     def change_phone_number(self, contractor) -> None:
@@ -346,16 +359,19 @@ class contractor_UI_menu():
                 if is_valid == True:
                     # if the phone number is valid then change the phone number
                     self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'phone_number', phone_input)
-                    self.clear_screen()
                     print(Fore.GREEN + "Phone number has been changed." + Style.RESET_ALL)
+                    time.sleep(2)
+                    self.clear_screen()
                     return
                 else:
-                    self.clear_screen()
                     print(Fore.RED + "Invalid phone number. Please try again. No letters or special characters and lenght of 7." + Style.RESET_ALL)
+                    time.sleep(2)
+                    self.clear_screen()
                 return
         except:
-            self.clear_screen()
             print(Fore.RED + "something went wrong" + Style.RESET_ALL)
+            time.sleep(2)
+            self.clear_screen()
             return
 
     def change_opening_hours(self, contractor) -> None:
@@ -367,14 +383,19 @@ class contractor_UI_menu():
             if is_valid == True:
                 # if the opening hours are valid then change the opening hours
                 self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'opening_hours', new_opening_hours)
-                self.clear_screen()
+
                 print(Fore.GREEN + "Opening hours have been changed." + Style.RESET_ALL)
-            else:
+                time.sleep(2)
                 self.clear_screen()
+            else:
+
                 print(Fore.RED + "Invalid input opening hours" + Style.RESET_ALL)
+                time.sleep(2)
+                self.clear_screen()
         except:
-            self.clear_screen()
             print(Fore.RED + "something went wrong" + Style.RESET_ALL)
+            time.sleep(2)
+            self.clear_screen()
 
     def select_contractor_by_id(self) -> None:
         """get a contractor by ID"""

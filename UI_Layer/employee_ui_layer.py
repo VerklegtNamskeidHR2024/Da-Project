@@ -90,8 +90,10 @@ class employee_UI_menu:
 
     def search_employee(self) -> str:
         """The Function Is Searching For An Employee by SSN""" 
+        self.clear_screen()
         employee_ssn = ""
         while employee_ssn.lower() != "q" and employee_ssn.lower() != "b":
+            self.display_all_employees_by_locationa()
             print()
             print("Go Back: b, B")
             print("Quit system: q, Q")
@@ -113,6 +115,8 @@ class employee_UI_menu:
             
             else:
                 print(Fore.RED + "This Social Security Number Is Not In The System" + Style.RESET_ALL)
+                time.sleep(2)
+                self.clear_screen()
  
         return employee_ssn.lower()
 
@@ -156,7 +160,7 @@ class employee_UI_menu:
             print("1. Edit Employee Details")
             print("2. View Work Requests")
             print("3. View Maintenance Report")
-            print()
+            print(f"= * 30")
             print("Go Back: b, B")
             print("Quit system: q, Q")
             print("-" * 70)
@@ -169,7 +173,6 @@ class employee_UI_menu:
                 return option
             
             elif option == "1":
-                self.clear_screen()
                 choice = self.display_edit_options(employee)
                 if choice == "b" or choice == "B":
                     continue
@@ -274,6 +277,8 @@ class employee_UI_menu:
         
         edit_choice = ""
         while edit_choice.lower() != "q":
+            self.clear_screen()
+            self.display_employee(employee)
             print()
             print("1. Change Phone Number: ")
             print("2. Change Location: ")
@@ -311,11 +316,14 @@ class employee_UI_menu:
                 self.logic_wrapper.edit_employee_info(employee)
                 print()
                 print(Fore.GREEN + "Employee Information Updated" + Style.RESET_ALL)
+                time.sleep(2)
+                
                
                 break
             else:
                 print()
                 print(Fore.RED + "Employee Phone Number Should Be 7 Numbers" + Style.RESET_ALL)
+                time.sleep(2)
         return new_phone_number.lower()
         
         
@@ -335,12 +343,14 @@ class employee_UI_menu:
                 self.logic_wrapper.edit_employee_info(employee)
                 print()
                 print(Fore.GREEN + "Employee Information Updated" + Style.RESET_ALL)
+                time.sleep(2)
               
                 break
             else:
                 print()
                 print(Fore.RED + "Not a valid location." + Style.RESET_ALL) 
                 print(Fore.LIGHTBLUE_EX + "Valid locations: Reykjavik, Nuuk, Kulusuk, Thorshofn, Tingwall, Longyearbyen" + Style.RESET_ALL)
+                time.sleep(2)
             
         return new_location.lower()
 
