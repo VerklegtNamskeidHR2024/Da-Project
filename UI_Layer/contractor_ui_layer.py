@@ -112,12 +112,15 @@ class contractor_UI_menu():
             print(f"{self.rank} - Contractors Page")
             self.display_all_contractors()
 
-            print("------------------------------------------------")
+            print("-" * 80)
             print("1. Add contractor")
             print("2. edit contractor")
             print("3. View contractor")
-            print(">Go to Home Page: b, B")
-            print("------------------------------------------------")
+            print("_" * 80)
+            print()
+            print("{:>18}".format("Back - [ b, B ]"))
+            print("{:>18}".format("Quit - [ q, Q ]"))
+            print("-" * 80)
 
             user_action = input("Select an Option:  ")
             match user_action:
@@ -230,7 +233,11 @@ class contractor_UI_menu():
             print("1) View work requests")
             print("2) View maintenance reports")
             print("3) Give warning")
-            print(">Go to Home Page: b, B")
+            print("_" * 80)
+            print()
+            print("{:>18}".format("Back - [ b, B ]"))
+            print("{:>18}".format("Quit - [ q, Q ]"))
+            print("-" * 80)
             edit_user_action = input("What action would you like to perform: ")
 
             match edit_user_action:

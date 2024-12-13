@@ -192,33 +192,34 @@ class Logic_Layer_Wrapper:
         return self.maintenance_report_logic_manager.deny_or_accept_maintencance_report_for_admin(maintencance_report_id, location, accept_or_deny)
     
     def edit_maintencance_report(self, maintenance_report: object, location: str, edit_choice: str, new_value: str):
-        
+        """Updates an existing maintenance report and adds it to the storage. """
         return self.maintenance_report_logic_manager.edit_maintencance_report(maintenance_report, location, edit_choice, new_value)
     
     def get_employee_reports(self, staff_id: str) -> list[MaintenanceReport]:
+        """Returns a list of all maintenance reports for a specific employee. """
         return self.maintenance_report_logic_manager.get_employee_reports(staff_id)
-        # returns a list of all maintenance reports for a specific employee
     
     def get_incomplete_maintenance_reports(self,) -> list[MaintenanceReport]:
+        """Returns a list of all incomplete maintenance reports. """
         return self.maintenance_report_logic_manager.get_incomplete_maintenance_reports()
-        # returns a list of all incomplete maintenance reports
     
     def get_single_maintenance_report(self, report_id: str) -> MaintenanceReport:
+        """Returns a single maintenance report by report_id. """
         return self.maintenance_report_logic_manager.get_single_maintenance_report(report_id)
-        # returns a single maintenance report by report_id
 
     def get_denied_reports(self, staff_id: str, location: str) -> list[MaintenanceReport]:
+        """Returns a list of all denied maintenance reports. """
         return self.maintenance_report_logic_manager.get_denied_reports(staff_id, location)
-        # returns a list of all denied maintenance reports
 
-    def reopen_closed_report(self, report, location):
+    def reopen_closed_report(self, report: object, location: str):
+        """Returns eopens a closed maintenance report. """ 
         return self.maintenance_report_logic_manager.reopen_closed_report(report, location)
-        # reopens a closed maintenance report
     
-    def sanity_check_maintencance_report(self, what_to_check, new_value, location):
+    def sanity_check_maintencance_report(self, what_to_check: str, new_value: str, location: str) -> bool:
+        """Checks if all info in a maintenance report object is correct. """
         location_list = self.get_all_locations() # get all locations
         return self.maintenance_report_logic_manager.sanity_check_maintencance_report(what_to_check, new_value, location)
-        # checks if all info in a maintenance report object is correct
+       
 
     ##############################################################################################################################################
     ### WORK_REQUESTS ############################################################################################################################
@@ -299,25 +300,25 @@ class Logic_Layer_Wrapper:
     ### LOCATION #################################################################################################################################
 
     def get_all_locations(self) -> list:
+        """Returns a list of all locations. """
         return self.location_logic_manager.all_location()
-        # returns a list of all locations
-
+        
     def fetch_all_amenities_for_location_in_storage(self, location: str) -> list[Location]:
+        """Returns a list of all amenities for a specific location. """
         return self.location_logic_manager.fetch_all_amenities_for_location_in_storage(location)
-        # returns a list of all amenities for a specific location
     
     def fetch_amenity_by_id(self, amenity_ID: str, location: str) -> object:
+        """Returns an amenity object by amenity_ID. """
         return self.location_logic_manager.fetch_amenity_by_id(amenity_ID, location)
-        # returns an amenity object by amenity_ID
-
+        
     def edit_amenity(self, amenity: object, new_condition: str):
+        """Edits an existing amenity in the storage. """
         return self.location_logic_manager.edit_amenity(amenity, new_condition)
-        # edits an existing amenity in the storage
     
     def fetch_location_from_storage(self, location_id: str) -> Location:
+        """Returns a location object by Location_ID. """"
         return self.location_logic_manager.fetch_location_from_storage(location_id)
-        # returns a location object by Location_ID
-
+    
     def sanity_check_location(self, what_to_check: str, new_value: str) -> bool:
         return self.location_logic_manager.sanity_check_location(what_to_check, new_value)
         # checks if all info in a location object is correct

@@ -224,11 +224,11 @@ class work_request_UI_menu:
 
                 # Any other input is except the one's listed above are treated as errors and the user given a message to notify them.
                 case _:
+                    print()
                     print(Fore.RED + "Invalid Input, Please Try Again." + Style.RESET_ALL)
-                    
+                    print()
                     time.sleep(2)
                     self.clear_screen()
-                    print(Fore.RED + "Invalid Input, Please Try Again." + Style.RESET_ALL)
         self.clear_screen()
         return user_choice.lower()
 
@@ -447,7 +447,6 @@ class work_request_UI_menu:
             print()
             print(Fore.RED + "Name Must Be Longer Than Five Characters." + Style.RESET_ALL)
             print()
-
         # When the while loop breaks, it returns the input back the create work request form which in turn retuns said same input back to
         # the work request main menu.
         return request_name.lower()
