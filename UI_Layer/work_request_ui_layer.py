@@ -224,11 +224,10 @@ class work_request_UI_menu:
 
                 # Any other input is except the one's listed above are treated as errors and the user given a message to notify them.
                 case _:
+                    print()
                     print(Fore.RED + "Invalid Input, Please Try Again." + Style.RESET_ALL)
-                    
-                    time.sleep(2)
+                    time.sleep(1.5)
                     self.clear_screen()
-                    print(Fore.RED + "Invalid Input, Please Try Again." + Style.RESET_ALL)
         self.clear_screen()
         return user_choice.lower()
 
@@ -272,7 +271,11 @@ class work_request_UI_menu:
 
                 # Any other input is except the one's listed above are treated as errors and the user given a message to notify them.
                 case _:
+                    print()
                     print(Fore.RED + "Invalid Input. Please Try Again." + Style.RESET_ALL)
+                    print()
+                    time.sleep(1.5)
+                    self.clear_screen()
         return user_choice.lower()
 
     
@@ -340,7 +343,6 @@ class work_request_UI_menu:
                 self.rank, self.staff_id, self.location, work_request_selected
             )
             if work_request is not None:
-                # self.clear_screen()
                 edit_work_request = self.edit_work_request_logistics(work_request)
                 if edit_work_request in ["b", ""]:
                     continue
@@ -416,10 +418,10 @@ class work_request_UI_menu:
         self.clear_screen()
         new_work_request = WorkRequest()
         print()
-        print("{:>60}".format(Fore.BLUE + "[ New Work Request Form ]" + Style.RESET_ALL))
-        print("_" * 70)
+        print("{:>60}".format(Fore.GREEN + "[ New Work Request Form ]" + Style.RESET_ALL))
+        print("_" * 80)
         print()
-        print("-" * 70)
+        print("-" * 80)
         #
         # Returns the variable back to the work request main menu into the variable user choice.
         request_name = self.set_name_for_request(new_work_request)
@@ -447,7 +449,6 @@ class work_request_UI_menu:
             print()
             print(Fore.RED + "Name Must Be Longer Than Five Characters." + Style.RESET_ALL)
             print()
-
         # When the while loop breaks, it returns the input back the create work request form which in turn retuns said same input back to
         # the work request main menu.
         return request_name.lower()
@@ -712,14 +713,15 @@ class work_request_UI_menu:
             if new_work_request_confirmation in ["q", "b", "Q", "B"]:
                 return new_work_request_confirmation.lower()
             print(Fore.RED + "Sigma Sigma on the wall, who is the Skibidiest of them all" + Style.RESET_ALL)
-        print("-" * 70)
+        print("-" * 80)
         print()
         # Since this is a new work request, its status attribute is set to "New" as well before being sent to
         # the logic wrapper.
         new_work_request.set_work_request_status("New")
         self.logic_wrapper.add_work_request(new_work_request)
-        print(Fore.BLUE + "Work Request Has Been Created!" + Style.RESET_ALL)
+        print(Fore.GREEN + "Work Request Has Been Created!" + Style.RESET_ALL)
         print()
+        time.sleep(1.5)
         self.clear_screen()
         return ""
 
@@ -756,10 +758,11 @@ class work_request_UI_menu:
                 work_request.set_accepted_by_employee(True)
                 work_request.set_staff_id(self.staff_id)
                 self.logic_wrapper.edit_work_request(work_request)
+                print()
+                print(Fore.GREEN + "Work Request Has Been Accepted!" + Style.RESET_ALL)
+                print()
+                time.sleep(1.5)
                 self.clear_screen()
-                print()
-                print(Fore.BLUE + "Work Request Has Been Accepted!" + Style.RESET_ALL)
-                print()
                 self.display_selected_work_request_information(work_request)
                 return ""
             print("Must Enter Either Yes or No")
@@ -773,8 +776,10 @@ class work_request_UI_menu:
                     print(Fore.RED + "Mama they took my dingus" + Style.RESET_ALL )
                 self.clear_screen()
                 print()
-                print(Fore.BLUE + "Work Request Has Been Rejected!" + Style.RESET_ALL)
+                print(Fore.GREEN + "Work Request Has Been Rejected!" + Style.RESET_ALL)
                 print()
+                time.sleep(1.5)
+                self.clear_screen()
                 self.display_selected_work_request_information(work_request)
                 return ""
         return accept_work_request.lower()
@@ -807,7 +812,7 @@ class work_request_UI_menu:
                 ) != "1":
                     if update_confirmation in ["q", "b", "Q", "B"]:
                         return update_confirmation.lower()
-                    print("Mama they took my dingus")
+                    print(Fore.RED + "Mama they took my dingus" + Style.RESET_ALL)
                     continue
                 work_request.set_mark_as_completed(False)
                 work_request.set_work_request_status("Open")
@@ -817,7 +822,7 @@ class work_request_UI_menu:
                 self.clear_screen()
                 self.display_selected_work_request_information(work_request)
                 print()
-                print(Fore.BLUE + "Work Request Has Been Marked Not Completed!" + Style.RESET_ALL)
+                print(Fore.GREEN + "Work Request Has Been Marked Not Completed!" + Style.RESET_ALL)
                 print()
                 return ""
 
@@ -875,7 +880,7 @@ class work_request_UI_menu:
                 self.clear_screen()
                 self.display_selected_work_request_information(work_request)
                 print()
-                print(Fore.BLUE + "Work Request Has Been Marked Completed!" + Style.RESET_ALL)
+                print(Fore.GREEN + "Work Request Has Been Marked Completed!" + Style.RESET_ALL)
                 print()
                 return ""
             print()
@@ -991,7 +996,7 @@ class work_request_UI_menu:
                 self.logic_wrapper.edit_work_request(work_request)
                 self.clear_screen()
                 print()
-                print(Fore.BLUE + "New Employee ID Has Been Assigned To Request!" + Style.RESET_ALL)
+                print(Fore.GREEN + "New Employee ID Has Been Assigned To Request!" + Style.RESET_ALL)
                 print()
                 return ""
             print(Fore.RED + "No Employee ID Was Found. Please Try Again." + Style.RESET_ALL)
@@ -1032,7 +1037,7 @@ class work_request_UI_menu:
                 self.logic_wrapper.edit_work_request(work_request)
                 self.clear_screen()
                 print()
-                print(Fore.BLUE + "New Property ID Has Been Assigned To Request!" + Style.RESET_ALL)
+                print(Fore.GREEN + "New Property ID Has Been Assigned To Request!" + Style.RESET_ALL)
                 print()
                 return ""
             print(Fore.RED + "No Property ID Was Found. Please Try Again." + Style.RESET_ALL)
@@ -1075,7 +1080,7 @@ class work_request_UI_menu:
                 self.logic_wrapper.edit_work_request(work_request)
                 self.clear_screen()
                 print()
-                print(Fore.BLUE + "Work Request Has Been Marked Not Repetitive!" + Style.RESET_ALL)
+                print(Fore.GREEN + "Work Request Has Been Marked Not Repetitive!" + Style.RESET_ALL)
                 print()
                 return ""
             
@@ -1086,12 +1091,11 @@ class work_request_UI_menu:
                 ) != "1":
                     if update_confirmation in ["q", "b", "Q", "B"]:
                         return update_confirmation.lower()
-
                     print("Sigma Sigma on the wall, who is the Skibidiest of them all")
                 work_request.set_repetitive_work(is_repetitive_boolean)
                 self.clear_screen()
                 print()
-                print(Fore.BLUE + "Work Request Has Been Marked Repetitive!" + Style.RESET_ALL)
+                print(Fore.GREEN + "Work Request Has Been Marked Repetitive!" + Style.RESET_ALL)
                 print()
                 return ""
             print(Fore.RED + "Input Must Be In The Form of Yes or No" + Style.RESET_ALL)
@@ -1133,7 +1137,7 @@ class work_request_UI_menu:
                 self.logic_wrapper.edit_work_request(work_request)
                 self.clear_screen()
                 print()
-                print(Fore.BLUE + "New Priority Has Been Assigned To The Work Request!" + Style.RESET_ALL)
+                print(Fore.GREEN + "New Priority Has Been Assigned To The Work Request!" + Style.RESET_ALL)
                 print()
                 return ""
             print(Fore.RED + "Priority Given Must Be Either High, Medium or Low" + Style.RESET_ALL)
@@ -1147,9 +1151,12 @@ class work_request_UI_menu:
         """
 
         selected_work_request = ""
-        while selected_work_request not in ["q", "b", "Q", "B"]:
+        while selected_work_request not in ["q", "Q"]:
             print()
-            print("{:>53}".format(Fore.BLUE + "[ My Work Requests ]" + Style.RESET_ALL))
+            if self.rank == "Employee":
+                print("{:>53}".format(Fore.BLUE + "[ My Work Requests ]" + Style.RESET_ALL))
+            else:
+                print("{:>53}".format(Fore.BLUE + "[ All Work Requests ]" + Style.RESET_ALL))
             print("-" * 80)
             # Sorted list based on if the user is an employee or not
             my_work_request_list = self.logic_wrapper.get_my_work_requests(
@@ -1159,9 +1166,12 @@ class work_request_UI_menu:
             print()
             print("{:>18}".format("Back - [ b, B ]"))
             print("{:>18}".format("Quit - [ q, Q ]"))
-            print("-" * 70)
+            print("-" * 80)
             # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
+            if selected_work_request == "b":
+                self.clear_screen()
+                continue
         return selected_work_request.lower()
 
     # Completed. Can be beautifed.
@@ -1185,6 +1195,9 @@ class work_request_UI_menu:
             print("-" * 80)
             # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
+            if selected_work_request == "b":
+                self.clear_screen()
+                continue
         return selected_work_request.lower()
 
     # Completed. Can be beautifed.
@@ -1192,7 +1205,7 @@ class work_request_UI_menu:
         """Prints out all pending work requests that haven't been marked closed by a manager or an admin."""
 
         selected_work_request = ""
-        while selected_work_request not in ["q", "b", "Q", "B"]:
+        while selected_work_request not in ["q", "Q"]:
             print()
             print("{:>56}".format(Fore.BLUE + "[ Pending Work Requests ]" + Style.RESET_ALL))
             print("-" * 80)
@@ -1209,6 +1222,9 @@ class work_request_UI_menu:
             print("-" * 80)
             # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
+            if selected_work_request == "b":
+                self.clear_screen()
+                continue
         return selected_work_request.lower()
 
     # Completed. Can be beautifed.
@@ -1216,7 +1232,7 @@ class work_request_UI_menu:
         """Displats all closed work requests. This option is only available to an admin or manager."""
 
         selected_work_request = ""
-        while selected_work_request not in ["q", "b", "Q", "B"]:
+        while selected_work_request not in ["q", "Q"]:
             print()
             print("{:>56}".format(Fore.BLUE + "[ Closed Work Requests ]" + Style.RESET_ALL))
             print("-" * 80)
@@ -1232,4 +1248,7 @@ class work_request_UI_menu:
 
             # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
+            if selected_work_request == "b":
+                self.clear_screen()
+                continue
         return selected_work_request.lower()

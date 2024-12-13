@@ -172,7 +172,7 @@ class property_UI_menu:
         user_choice = ""
         while user_choice not in [
             "q",
-            "Q",
+            "Q"
         ]:
             self.print_single_property(selected_property)
             print("-" * 80)
@@ -184,18 +184,7 @@ class property_UI_menu:
             print("{:>18}".format("Quit - [ q, Q ]"))
             print()
             user_choice = input("Enter your choice: ").lower()
-
-        user_choice = ""
-        while user_choice not in [
-            "q",
-            "Q"
-        ]:
             # Print for single selected property
-            self.print_single_property(selected_property)
-            print("1. View Attached Items")
-            print("2. Edit Property Details")
-            # let you choose from the above 2.
-            user_choice = input("Enter your choice: ").lower()
             print()
             match user_choice:
                 case "1":
@@ -232,7 +221,7 @@ class property_UI_menu:
         # Displays the form to add a new property
         new_property = House()
         print()
-        print("{:>30}".format("[ New Property Form ]"))
+        print("{:>55}".format(Fore.GREEN + "[ New Property Form ]" + Style.RESET_ALL))
         print("_" * 80)
         str_display = "Property"
         # Asks the user to enter a name for the property they are creating.
@@ -245,7 +234,7 @@ class property_UI_menu:
         self.clear_screen()
         new_amenity = Amenity()
         print()
-        print("[ New Amenity Form ]")
+        print("{:>55}".format(Fore.GREEN + "[ New Amenity Form ]" + Style.RESET_ALL))
         print("-" * 80)
         str_display = "Amenity"
         # Asks the user to enter a name for the amenity they are creating.
@@ -288,7 +277,7 @@ class property_UI_menu:
     ) -> str:
 
     # Asks the user to enter a location for the property they are creating. Goes through very simple input
-        if self.rank == "Admin":
+        if self.rank:
             while (
                 new_location := input(f"Enter The {str_display} Location: ")
             ) not in ["q", "b", "Q", "B"]:
