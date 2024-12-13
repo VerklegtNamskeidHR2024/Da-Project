@@ -32,18 +32,13 @@ class Storage_Layer_Wrapper:
         self.manager_storage_manager = manager_storage()
         self.amenity_storage_manager = amenity_storage()
 
-
-    # maybe need to add edit to each?
-    # No we dont do it in logic and send the list down to to re write it
     ########################################################################################################
     ### CONTRACTOR #########################################################################################
 
     def get_all_contractor(self) -> list[Contractor]:
         """Get all contractors"""
         all_contractors = self.contractor_storage_manager.get_all_contractor()
-        #all_contractors = contractor_storage.get_all_contractor()
         return all_contractors
-        #return self.contractor_storage_manager.get_all_contractor()
     
     def write_to_file_contractor(self, list_of_contractors: list):
         """Write to file contractor"""
