@@ -10,7 +10,10 @@ from Model_Classes.manager_model import Manager
 from Model_Classes.work_request_model import WorkRequest
 from Model_Classes.admin_model import Admin
 
+# This file is not used at all anymore for the program, it was used to create dummy data in the start
 # Reykjavík Nuuk Kulusuk Þórshöfn Tingwall Longyearbyen
+
+# Start by creating a few instances of each class
 admin1 = Admin('Hreimur', 12334546789, 5551234, 'Reykjavik', 'Admin', 'hreimur24@ru.is', 'A1')
 
 manager1 = Manager('Hreimur', 12334546789, 5551234, 'Reykjavik', 'Manager', 'hreimur24@ru.is', 'M1')
@@ -84,7 +87,9 @@ contractor2 = Contractor('C2', 'Daniela and Daughters', 'Daniela', '8-16', 12345
 contractor3 = Contractor('C3', 'Daniela and Daughters', 'Daniela', '8-16', 1234567, 'Tingwall', [], 'Contractor Has No Warning')
 contractor4 = Contractor('C4', 'Juicy Hreimur Construction', 'Hreimur', '8-16', 1234567, 'Reykjavik', [], 'Contractor somehow nailed his son to wall')
 
+# Make a list of all the instances
 admins = [admin1]
+# and then make a list of all the classes after they have turned themselves into dictionaries
 admin_dict = [admin.to_dict() for admin in admins]
 
 managers = [manager1, manager2, manager3, manager4, manager5, manager6]
@@ -114,6 +119,7 @@ maintenance_report_dict = [maintenance_report.to_dict() for maintenance_report i
 contractors = [contractor1, contractor2, contractor3, contractor4, contractor]
 contractor_dict = [contractor.to_dict() for contractor in contractors]
 
+# Then we write all of the dictionaries to a json file
 with open('Data/admin_storage.json', 'w') as file:
     json.dump(admin_dict, file, indent=4)
 
@@ -138,8 +144,7 @@ with open('Data/work_request_storage.json', 'w') as file:
 with open('Data/maintenance_report_storage.json', 'w') as file:
     json.dump(maintenance_report_dict, file, indent=4)
 
-with open('Data/employee_storage.json', 'r') as file:
-    persons = json.load(file)
-
 with open('Data/contractor_storage.json', 'w') as file:
     json.dump(contractor_dict, file, indent=4)
+
+# And now we have json files filled with dummy data so we could start the program with some data in it
