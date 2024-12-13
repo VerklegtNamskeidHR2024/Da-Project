@@ -1,10 +1,6 @@
 import sys
 import time
 import os
-# from rich import print
-# from rich.panel import Panel
-# from rich.text import Text 
-
 
 from Logic_Layer.logic_layer_wrapper import Logic_Layer_Wrapper
 
@@ -25,33 +21,34 @@ class Main_Menu:
         # calls the location select function
 
         self.logic_wrapper = Logic_Layer_Wrapper(rank, location, staff_id)
-
+        
+    
         rank = self.select_user_for_system()
+        # calls the function to get the staff id
         staff_id = self.enter_and_validate_staff_id(rank)
+        # calls the function to get the location
         if rank == "Admin":
             location = self.select_location_for_system()
         else:
             location = self.assigned_location_for_system(rank, staff_id)
-        
+        # sets the rank, location and staff id
         self.staff_id = staff_id
         self.rank = rank
         self.location = location
  
 
         
-        # sendir ekki inn self.blahblah útaf það er gert í þessum klasa, vilt bara senda inn location og rank
-        # annars er sent inn vitlaust location - Kv Hreimur
-        self.employee_UI_menu = employee_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
-        self.location_UI_menu = location_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
+        self.employee_UI_menu = employee_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id)
+        self.location_UI_menu = location_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id)
         self.contractor_UI_menu = contractor_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) 
-        self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
-        self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
-        self.property_UI_menu = property_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
+        self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id)
+        self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id)
+        self.property_UI_menu = property_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id)
 
 
     def start_point(self):
         """Starts the main menu for the system"""
-        
+        # calls the user home page logistics
         user_home_page = self.user_home_page_logistics()
         if user_home_page == "q":
             self.quit_system_message()
@@ -61,7 +58,6 @@ class Main_Menu:
         """Prints out a message when the user quits the system"""
         print("Departing from NaN Air, Thank you for Visiting!")
         quit_string = "Departing from NaN Air, Thank you for Visiting!"
-        # self.fun_print(quit_string)
 
     def clear_screen(self):
         ''' Clears the screen '''
@@ -69,7 +65,7 @@ class Main_Menu:
 
     def show_ascii_art_hq(self):
         """Prints out the ASCII art for the NaN Air HQ"""
-
+        # prints out the ascii art for the NaN Air HQ
         print("{:>61}".format("==================="))
         print("{:>44}{:>13}{:>3}".format("|", "NaN Air HQ", "|"))
         print("{:>14}{:>7}{:>15}{:>8}{:>10}{:>6}".format("___________", ".", ": : : :", "|", "_____", "|"))
@@ -80,8 +76,10 @@ class Main_Menu:
         """send me a string ;)"""
         delay = delay_in
         print(text_print)
+        # checks if the delay is a float or an integer
         start = len(text_to_print)
         text_print = ""
+        # prints out the text with a delay
         for i, char in enumerate(text_to_print):
             text_print = text_to_print[:i+1] + '*' * (start - i - 1)
             
@@ -93,7 +91,7 @@ class Main_Menu:
 
     def create_location_table(self):
         """Prints out a table of available locations for the user to select. """
-
+        # prints out the table of locations for the user to select
         locations_table = PrettyTable()
         locations_table.field_names = ['ID',"Country", "Location Name"]
         locations_table.add_row(['1',"Iceland", "Reykjavik"])
@@ -124,14 +122,14 @@ class Main_Menu:
         print()'''
         
         self.clear_screen()
-
+        # prints out the welcome message and the ascii art for the NaN Air HQ
         return_user = ""
         while return_user == "":
             print()
             print("{:>70}".format(Fore.BLUE + "[ Welcome to the NaN Air Properties and Staff System! ]" + Style.RESET_ALL))
             print("-" * 80)
             self.show_ascii_art_hq()
-            
+            # prints out the log in options for the user
             print("-" * 70)
             print("Log in as?")
             print("1. Admin")
@@ -144,8 +142,9 @@ class Main_Menu:
             print("{:>18}".format("Back - [ b, B ]"))
             print("{:>18}".format("Quit - [ q, Q ]"))
             print("-" * 80)
-
+            # user selects a profile
             user_action = input("Select a Profile: ").lower()
+            # checks the user input
             match user_action:
                 case "1":
                     return_user = "Admin"
@@ -165,8 +164,9 @@ class Main_Menu:
 
     def enter_and_validate_staff_id(self, rank) -> str:
         """Enter and validate the staff ID for the user"""
-        print("-" * 70)
+        print("-" * 80)
         is_staff_id_valid = False
+        # Get the staff ID from the user
         while is_staff_id_valid is False:
             staff_id = input("Enter Your Staff ID: ")
             is_staff_id_valid = self.logic_wrapper.sanity_check_staff_id(rank, staff_id)
@@ -181,6 +181,7 @@ class Main_Menu:
         """Select a location for the system to use"""
         self.clear_screen()
         return_location = ""
+        # prints out the table of locations
         while return_location == "":
             self.clear_screen()
             print("{:>60}".format(Fore.BLUE + "[ Welcome to the NaN Air Properties and Staff System! ]" + Style.RESET_ALL))
@@ -204,6 +205,7 @@ class Main_Menu:
             location_table.vertical_char = f"{border_color}|{reset_color}"
             print(location_table)
             print("-" * 80)
+            # user selects a location
             user_action = input("Select a Location: ").lower()
             match user_action:
                 case "1":
@@ -228,6 +230,7 @@ class Main_Menu:
 
     def assigned_location_for_system(self, rank: str, staff_id: str) -> str:
         """Get the location for the user based on their rank and staff ID"""
+        # Get the location based on the rank and staff ID
         if rank == "Manager":
             manager = self.logic_wrapper.get_manager_by_id(staff_id)
             manager_location = manager.location
@@ -242,10 +245,11 @@ class Main_Menu:
 
     def display_menu_items(self):
         """Displays the menu items for the user"""
-        
+        # Displays the menu items for the user
         print()
         print(f"Current Location - {self.location}")
         print()
+        # Displays the home page menu items
         print(f" {self.rank} - Home Page")
         print("-" * 80)
         print("1. Properties")
@@ -253,6 +257,7 @@ class Main_Menu:
         print("3. Employees")
         print("4. Contractors")
         print("5. Maintenance Reports")
+        # Only displays the location option if the user is an admin or manager
         if self.rank != "Employee":
             print("6. Locations")
         print("_" * 80)
@@ -267,31 +272,39 @@ class Main_Menu:
         """Manages the user home page logistics"""
 
         # Calls the sub menus
+        self.clear_screen()
         user_action = ""
         # user_action = self.display_menu_items()
         while user_action != "q":
             user_action = user_action = self.display_menu_items()
             match user_action:
                 case "1":
+                    # Calls the property UI menu
                     user_action = self.property_UI_menu.start_point_property_UI()
                 case "2":
+                    # Calls the work request UI menu
                     user_action = self.work_request_UI_menu.start_point_work_requests_UI()
                 case "3":
+                    # Calls the employee UI menu
                     user_action = self.employee_UI_menu.start_point_employee_UI()
                 case "4":
+                    # Calls the contractor UI menu
                     user_action = self.contractor_UI_menu.start_point_contractor_UI()
                 case "5":
+                    # Calls the maintenance report UI menu
                     user_action = self.maintenance_report_UI_menu.start_point_maintenance_reports_UI()
                 case "6" if self.rank != "Employee":
                     # This option is only displayed if the user is an admin or manager
                     user_action = self.location_UI_menu.start_point_location_UI()
                 case "q":
+                    # Quits the system
                     return "q"
                 case _:
+                    # If the user enters an invalid input
                     print(Fore.RED + "Wrong Input" + Style.RESET_ALL)
                     time.sleep(1)
                     self.clear_screen()
-                    return "s"
+                    continue
         self.clear_screen()
         return user_action
             

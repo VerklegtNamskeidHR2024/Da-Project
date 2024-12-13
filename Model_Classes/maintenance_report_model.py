@@ -15,7 +15,7 @@ class MaintenanceReport:
         self.contractor_id = contractor_id
         self.work_request_id = work_request_id
 
-
+    # Setters for the MaintenanceReport class
     def set_report_id(self, report_id):
         """Sets the report id"""
         self.report_id = report_id
@@ -64,6 +64,7 @@ class MaintenanceReport:
         """Sets the work request id"""
         self.work_request_id = work_request_id
 
+    # Getters for the MaintenanceReport class
     def get_report_id(self):
         """Gets the report id"""	
         return self.report_id
@@ -114,6 +115,7 @@ class MaintenanceReport:
     
     def to_dict(self):
         """Converts the MaintenanceReport object to a dictionary"""
+        # This is done to convert the MaintenanceReport object to a dictionary so that it can be written to a json file more easily
         return {
             'report_id': self.report_id,
             'report_name': self.report_name,
