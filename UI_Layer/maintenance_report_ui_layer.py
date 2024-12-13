@@ -33,7 +33,6 @@ class maintenance_report_UI_menu:
 
     def display_maintenance_report(self):
         ''' Sends the user to the menu based on their rank '''
-        #self.clear_screen()
         # If the user is an admin or manager it goes to the admin/manager menu
         if self.rank in "Admin" or self.rank == "Manager":
             admin_manager_menu = self.select_menu_option_admin_manager()
@@ -54,6 +53,7 @@ class maintenance_report_UI_menu:
         user_choice = ""
         # Then a while loop is started to keep the menu open until the user wants to go back
         while user_choice.lower() != "b":
+            self.clear_screen()
             self.print_all_reports()
             # The menu is displayed
             print(f"{self.rank} - Maintenance Report Menu")
@@ -92,6 +92,7 @@ class maintenance_report_UI_menu:
     def employee_menu(self, staff_id : str):
         ''' Employee menu '''
         # A function is called to get all the reports connected to the employee logged in
+        self.clear_screen()
         self.get_employee_reports(staff_id)
         self.print_all_reports
         user_choice = ""
@@ -483,7 +484,6 @@ class maintenance_report_UI_menu:
 
     def display_create_maintenance_report_form(self):
         """ Display the form for creating a new maintenance report """
-        #self.clear_screen()
         #Create a new maintenance report
         print('Creating a new maintenance report, type "cancel" to stop and save as incomplete at any time')
         #the details that need to be filled out
@@ -651,8 +651,6 @@ class maintenance_report_UI_menu:
     
     def edit_report_details(self, location):
         """Edit report details"""
-        #self.clear_screen() 
-        """Editing report {report_id} (details to be implemented)"""
         edit_report_table = PrettyTable()
         edit_report_table.title = 'Edit Report Details'
         edit_report_table.field_names = ['Report ID', 'Report Name', 'Property ID', 'Report Status']
@@ -699,8 +697,6 @@ class maintenance_report_UI_menu:
             
     def display_edit_maintenance_report_details(self, selected_maintenance_report):
         """ Display the edit maintenance report details menu """
-        #self.clear_screen()
-        """ Allows editing of maintenance report details. """
         self.clear_screen()
         edit_choice = ''
         while edit_choice.lower() != 'b':

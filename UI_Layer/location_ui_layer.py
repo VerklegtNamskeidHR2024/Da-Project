@@ -257,9 +257,6 @@ class location_UI_menu:
         self.clear_screen()
         return amenity_ID.lower()
 
-
-        #amenities_list = self.logic_wrapper.fetch_all_amenities_for_location_in_storage(self.location)
-
     def display_single_amenity(self, amenity: object) -> str:
         """Display a single amenity"""
         # prints the information for the amenity the class is called with

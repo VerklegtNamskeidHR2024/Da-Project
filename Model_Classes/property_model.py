@@ -7,9 +7,7 @@ class Property:
         self.total_price_to_fix = total_price_to_fix
         self.property_price = property_price
 
-        """Constructor for Property"""
-
-        
+    # Setters for the Property class
     def set_property_id(self, property_id):
         """Sets the property id"""
         self.property_id = property_id
@@ -33,6 +31,7 @@ class Property:
     def set_property_price(self, property_price):
         self.property_price = property_price
 
+    # Getters for the Property class
     def get_property_id(self):
         """Gets the property id"""
         return self.property_id
@@ -55,14 +54,3 @@ class Property:
     
     def get_property_price(self):
         return self.property_price
-
-
-    """def to_dict(self):
-        {
-        	"property_id": self.property_id,
-            "name": self.name,
-            "location": self.location,
-            "condition": self.condition,
-            "total_price_to_fix": self.total_price_to_fix,
-            
-        }"""

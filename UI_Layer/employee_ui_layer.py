@@ -76,18 +76,6 @@ class employee_UI_menu:
         print(employee_print_table)
         print('')
 
-    #def action_choice(self) -> str:
-        #"""The function is asking the user if they want to search or add an employee"""
-        
-        #print()
-        #print("1. Select Employee")
-        #print("2. Add Employee")
-        #print("-" * 70)
-        #search_or_add = input("Enter choice: ")
-        #return search_or_add.lower()
-
-        
-
     def search_employee(self) -> str:
         """The Function Is Searching For An Employee by SSN""" 
         employee_ssn = ""
