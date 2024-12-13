@@ -62,10 +62,6 @@ class Logic_Layer_Wrapper:
         ''' Returns a list of all work requests for a specific contractor. '''
         return self.contractor_logic_manager.get_contractor_work_requests(location, property_id)
     
-    def write_to_file_checker(self, new_list: list) -> list[Contractor]:
-        ''' Writes a list to a file. '''
-        return self.contractor_logic_manager.write_to_file_checker(new_list)
-    
     def edit_existing_contractor_in_storage(self, contractor: object, location: str, edit_choice: str, new_value: str):
         ''' Edits an existing contractor in the storage. '''
         return self.contractor_logic_manager.edit_existing_contractor_in_storage(contractor, location, edit_choice, new_value)
@@ -318,17 +314,13 @@ class Logic_Layer_Wrapper:
     def fetch_location_from_storage(self, location_id: str) -> Location:
         """Returns a location object by Location_ID. """
         return self.location_logic_manager.fetch_location_from_storage(location_id)
-    
+
     def sanity_check_location(self, what_to_check: str, new_value: str) -> bool:
+        """Checks if all info in a location object is correct. """
         return self.location_logic_manager.sanity_check_location(what_to_check, new_value)
-        # checks if all info in a location object is correct
 
-    def add_new_location_to_storage(self, location: object):
-        return self.location_logic_manager.add_new_location_to_storage(location)
-        # adds a new location to the storage
-
-    def edit_existing_location_in_storage(self, location: object, current_location: str, edit_choice: str, new_value: str):
-        return self.location_logic_manager.edit_existing_location_in_storage(location, current_location, edit_choice, new_value)
-        # adds a new location to the storage
+    def edit_existing_location_in_storage(self, location: object, edit_choice: str, new_value: str):
+        """Adds a new location to the storage. """
+        return self.location_logic_manager.edit_existing_location_in_storage(location, edit_choice, new_value)
 
 
