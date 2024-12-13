@@ -191,7 +191,7 @@ class property_UI_menu:
                     # Displays the attched options
                     user_choice = self.display_property_maintenance_reports(selected_property)
                     self.clear_screen()
-                    user_choice = self.display_view_attached_options(selected_property)
+                    # user_choice = self.display_view_attached_options(selected_property)
                 case "2":
                     # Lets you edit property details
                     user_choice = self.display_property_work_requests(selected_property)
@@ -207,10 +207,9 @@ class property_UI_menu:
                     return "q"
                 case _:
                     # If you put an invaild input
-                    print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL)
-                    time.sleep(2)
-                    time.sleep(20)
                     self.clear_screen()
+                    print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL)
+                    # time.sleep(1.5)
         return user_choice.lower()
 
 
@@ -302,6 +301,7 @@ class property_UI_menu:
         new_property.set_location(self.location)
         property_condition = self.set_condition_for_property(str_display, new_property)
         return property_condition
+
 
     def set_condition_for_property(self, str_display: str, new_property: object) -> str:
         """Asks the user to enter a condition for the property they are creating. Goes through very simple input"""
@@ -447,49 +447,47 @@ class property_UI_menu:
         return ""
 
 
-    def display_view_attached_options(self, selected_property: object) -> str:
-        """Displays the options for the selected property"""
-        #clears the screen
-        self.clear_screen()
-        print("-" * 80)
-        print("1. Display Work Requests")
-        print("2. Display Maintenance Reports")
-        print("-" * 80)
-        # lets you choice from the above options
-        attached_selection = ""
-        while attached_selection not in [
-            "q",
-            "b",
-            "Q",
-            "B"
-        ]:
-            # Depending on your choice you will be sent to the following places
-            print("-" * 80)
-            print("1. Display Work Requests")
-            print("2. Display Maintenance Reports")
-            print("-" * 80)
-            attached_selection = input("Enter choice: ").lower()
-            print()
-            match attached_selection:
-                case "1":
-                    # Displays the work requests for the selected property
-                    self.display_property_work_requests(selected_property)
-                    attached_selection = self.display_property_work_requests(selected_property)
-                case "2":
-                    # Displays the maintenance reports for the selected property
-                    self.display_property_maintenance_reports(selected_property)
-                    attached_selection = self.display_property_maintenance_reports(selected_property)
-                    self.clear_screen()
-                case "b":
-                    # Goes back to the previous page
-                    return "b"
-                case "q":
-                    # Exits and turns off the system
-                    return "q"
-                case _:
-                    print(Fore.RED + "Invalid input. Please try again." + Style.RESET_ALL)
-        # Displays the attched options
-        return attached_selection.lower()
+    # def display_view_attached_options(self, selected_property: object) -> str:
+    #     """Displays the options for the selected property"""
+    #     #clears the screen
+    #     self.clear_screen()
+    #     print("1. View Property Maintenance Reports")
+    #     print("2. View Property Work requests")
+    #     print("-" * 80)
+    #     # lets you choice from the above options
+    #     attached_selection = ""
+    #     while attached_selection not in [
+    #         "q",
+    #         "b",
+    #         "Q",
+    #         "B"
+    #     ]:
+    #         # Depending on your choice you will be sent to the following places
+    #         print("1. View Property Maintenance Reports")
+    #         print("2. View Property Work requests")
+    #         print("-" * 80)
+    #         attached_selection = input("Enter choice: ").lower()
+    #         print()
+    #         match attached_selection:
+    #             case "1":
+    #                 # Displays the work requests for the selected property
+    #                 self.display_property_work_requests(selected_property)
+    #                 attached_selection = self.display_property_work_requests(selected_property)
+    #             case "2":
+    #                 # Displays the maintenance reports for the selected property
+    #                 self.display_property_maintenance_reports(selected_property)
+    #                 attached_selection = self.display_property_maintenance_reports(selected_property)
+    #                 self.clear_screen()
+    #             case "b":
+    #                 # Goes back to the previous page
+    #                 return "b"
+    #             case "q":
+    #                 # Exits and turns off the system
+    #                 return "q"
+    #             case _:
+    #                 print(Fore.RED + "Invalid input. Please try again." + Style.RESET_ALL)
+    #     # Displays the attched options
+    #     return attached_selection.lower()
 
 
     def display_edit_property_details(self, selected_property: object) -> str:
