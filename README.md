@@ -4,7 +4,7 @@
 
 ### Employee login id’s 
 #### Admins 
-A1 admin \
+A1 admin 
 
 #### Managers 
 M1 Reykjavik Manager \
@@ -24,4 +24,4 @@ E11 Longyearbyen Employee
 
 ### Pip installs 
 Python3 -m install prettytable \
-Python3 -m install Colorama \
+Python3 -m install Colorama 
