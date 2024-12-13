@@ -1,5 +1,4 @@
-# missing list
-# !!!!!give contractor warning!!!!!
+
 
 class contractor_logic_manager:
     def __init__(self, Storage_Layer_Wrapper):
