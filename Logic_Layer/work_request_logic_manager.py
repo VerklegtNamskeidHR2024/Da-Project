@@ -58,7 +58,7 @@ class work_request_logic_manager:
             return True
 
         if category == "description":
-            if len(value_to_be_verified) < 10:
+            if len(value_to_be_verified) < 5:
                 return False
             return True
 
