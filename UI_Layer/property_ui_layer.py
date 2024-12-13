@@ -273,21 +273,13 @@ class property_UI_menu:
                 continue
             new_property.set_name(property_name)
             # If the rank is admin the user is asked to enter a location for the property they are creating.
-            if self.rank == "Admin":
-                location_for_property = self.set_location_name_for_properties(
-                    str_display, new_property
-                )
-                if location_for_property in ["b", "B"]:
-                    continue
-                return location_for_property
-            # If the rank is not admin the location is set to the location of the employee
-            property_condition = self.set_condition_for_property(
+            location_for_property = self.set_location_name_for_properties(
                 str_display, new_property
             )
-            # If the user enters b/B it will go back to the previous page
-            if property_condition in ["b", "B"]:
+            if location_for_property in ["b", "B"]:
                 continue
-            return property_condition
+            return location_for_property
+            # If the user enters b/B it will go back to the previous page
         return property_name.lower()
 
 
@@ -317,9 +309,10 @@ class property_UI_menu:
                     continue
                 return property_condition
             return new_location.lower()
-
+        # If the rank is not admin the location is set to the location of the employee
         new_property.set_location(self.location)
-
+        property_condition = self.set_condition_for_property(str_display, new_property)
+        return property_condition
 
     def set_condition_for_property(self, str_display: str, new_property: object) -> str:
         """Asks the user to enter a condition for the property they are creating. Goes through very simple input"""

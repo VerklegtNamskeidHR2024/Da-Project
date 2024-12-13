@@ -440,7 +440,6 @@ class work_request_UI_menu:
                 # The name attribute of the WorkRequest instance is set to whatever the user entered after passing the
                 # input verification.
                 new_work_request.set_name(request_name)
-                print()
                 request_description = self.set_description_for_request(new_work_request)
                 if request_description == "b":
                     continue

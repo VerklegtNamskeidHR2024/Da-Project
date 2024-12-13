@@ -168,32 +168,32 @@ class Logic_Layer_Wrapper:
     ### MAINTENANCE_REPORTS ######################################################################################################################
 
     def get_all_maintenance_reports_at_location(self, location: str) -> list[MaintenanceReport]:
+        """Returns a list of all maintenance reports at a specific location. """
         return self.maintenance_report_logic_manager.get_all_maintencance_reports_at_location(location)
-        # returns a list of all maintenance reports at a specific location
     
     def get_all_pending_maintenance_reports(self, location: str) -> list[MaintenanceReport]:
+        """Returns a list of all pending maintenance reports. """
         return self.maintenance_report_logic_manager.fetch_all_pending_maintencance_reports(location)
-        # returns a list of all pending maintenance reports
     
     def get_all_closed_maintenance_reports(self, location: str) -> list[MaintenanceReport]:
+        """Returns a list of all closed maintenance reports. """
         return self.maintenance_report_logic_manager.fetch_all_closed_maintencance_reports(location)
-        # returns a list of all closed maintenance reports
     
     def add_new_maintenance_report_to_storage(self,location, new_report: object, is_regular: bool):
+        """Adds a new maintenance report to the storage. """
         return self.maintenance_report_logic_manager.add_maintencance_report_to_storage(location, new_report, is_regular)
-        # adds a new maintenance report to the storage
     
     def check_if_report_in_system(self, maintenance_report_id: str, location: str) -> bool:
+        """Checks if a maintenance report is in the system. """
         return self.maintenance_report_logic_manager.check_if_report_in_system(maintenance_report_id, location)
-        # checks if a maintenance report is in the system
     
     def deny_or_accept_maintencance_report_for_admin(self, maintencance_report_id: str, location: str, accept_or_deny: bool) -> bool: 
+        """Denies or accepts a maintenance report for an admin. """
         return self.maintenance_report_logic_manager.deny_or_accept_maintencance_report_for_admin(maintencance_report_id, location, accept_or_deny)
-        # denies or accepts a maintenance report for an admin
     
     def edit_maintencance_report(self, maintenance_report: object, location: str, edit_choice: str, new_value: str):
+        
         return self.maintenance_report_logic_manager.edit_maintencance_report(maintenance_report, location, edit_choice, new_value)
-        # edits a maintenance report
     
     def get_employee_reports(self, staff_id: str) -> list[MaintenanceReport]:
         return self.maintenance_report_logic_manager.get_employee_reports(staff_id)
