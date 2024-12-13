@@ -2,6 +2,7 @@ from Model_Classes.employee_model import Employee
 import os
 from prettytable import PrettyTable 
 from colorama import Fore, Style, init
+import time
 
 class employee_UI_menu:
     def __init__(self, logic_wrapper, rank, location, staff_id):
@@ -49,6 +50,10 @@ class employee_UI_menu:
                 return "b"
             elif user_choice.lower() == "q":
                 return "q"
+            else:
+                print(Fore.RED + "Wrong input" + Style.RESET_ALL)
+                time.sleep(0.5)
+                self.clear_screen
         return user_choice
     
 

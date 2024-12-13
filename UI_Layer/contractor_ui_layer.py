@@ -2,6 +2,7 @@ from Model_Classes.contractor_model import Contractor
 from prettytable import PrettyTable 
 from colorama import Fore, Style, init
 import os
+import time
 
 class contractor_UI_menu():
     def __init__(self, logic_wrapper, rank, location, staff_id) -> None:
@@ -36,10 +37,12 @@ class contractor_UI_menu():
         if self.rank == "Employee":
             employee_contractors_menu = self.display_contractor_employee_menu()
             if employee_contractors_menu in ["q", "b"]:
+                self.clear_screen()
                 return employee_contractors_menu
         else:
             admin_manager_contractors_menu = self.display_contractor_menu_admin_and_manager()
             if admin_manager_contractors_menu in ["q", "b"]:
+                self.clear_screen()
                 return admin_manager_contractors_menu	
     
 
@@ -89,11 +92,13 @@ class contractor_UI_menu():
                 # If b is entered, it is returned back to the start_point_work_requests_UI function which brings the
                 # user back to the home page.
                 case "b":
+                    self.clear_screen()
                     return "b"
                 
                 # If q is entered, it is returned back to the start_point_work_requests_UI function which turns off
                 # program.
                 case "q":
+                    self.clear_screen()
                     # quit back to main menu
                     pass
                 case _:
@@ -124,12 +129,17 @@ class contractor_UI_menu():
                     self.display_edit_contractor_menu()
                 case "3":
                     self.display_view_contractor()
+                case "bound2":
+                    self.display_the_thing()
                 case "b" | "B":
+                    self.clear_screen()
                     # quit back to main menu
                     loop = False
                     pass
                 case _:
                     print(Fore.RED + "Wrong input" + Style.RESET_ALL)
+                    time.sleep(0.5)
+                    self.clear_screen()
         return 
 
     def display_add_contractor_form(self) -> None:
@@ -202,6 +212,7 @@ class contractor_UI_menu():
                 if contractor_to_use:
                     found_contractor = True
                 elif contractor_to_use == False:
+                    self.clear_screen()
                     return
                 else:
                     pass
@@ -233,6 +244,7 @@ class contractor_UI_menu():
                     # give contractor warning     
                     self.display_contractor_warning(contractor)
                 case "b" | "B":
+                    self.clear_screen()
                     loop = False
                 case _:
                     print("not valid input")
@@ -268,6 +280,7 @@ class contractor_UI_menu():
                 if contractor_to_use:
                     found_contractor = True
                 elif contractor_to_use == False:
+                    self.clear_screen()
                     return
                 else:
                     pass
@@ -296,6 +309,7 @@ class contractor_UI_menu():
                 case "3":
                     self.change_opening_hours(contractor)
                 case "b" | "B":
+                    self.clear_screen()
                     loop = False
                 case _:
                     print((Fore.RED + "Not Valid Input" + Style.RESET_ALL))
@@ -408,6 +422,7 @@ class contractor_UI_menu():
 
     def display_contractor_maintenance_reports(self, selected_contractor: object) -> str:
         ''' Displays maintenance reports for a contractor '''
+        self.clear_screen()
         # get the maintenance reports for the contractor
         contractor_maintenance_reports = self.logic_wrapper.get_contractor_maintenance_reports(self.location, selected_contractor.contractor_id)
         if not contractor_maintenance_reports:
@@ -435,6 +450,7 @@ class contractor_UI_menu():
 
     def display_contractor_work_requests(self, selected_contractor: object) -> str:
         ''' Displays work requests for a property '''
+        self.clear_screen()
         # get the work requests for the contractor
         contractor_work_requests = self.logic_wrapper.get_contractor_work_requests(self.location, selected_contractor.contractor_id)
         if not contractor_work_requests:
@@ -458,4 +474,63 @@ class contractor_UI_menu():
             print('')
             self.clear_screen()
             return
+        
+    def display_the_thing(self):
+        print("YEsus")
+        print(Fore.GREEN + """Bound to fall in love
+        Bound to fall in love (uh-huh, honey)
+        All them other niggas lame, and you know it now
+        When a real nigga hold you down, (alright) you s'pposed to drown
+        Bound (bound) to fall in love
+        Bound (bound) to fall in love (uh-huh, honey)
+        What you doing in the club on a Thursday?
+        She say she only here for her girl birthday
+        They ordered champagne but still look thirsty
+        Rock Forever 21 but just turned thirty
+        I know I got a bad reputation
+        Walking 'round, always mad reputation
+        Leave a pretty girl sad reputation
+        Start a Fight Club, Brad reputation
+        I turnt the nightclub out of the basement
+        I'll turn the plane 'round, your ass keep complaining
+        How you gon' be mad on vacation?
+        Dutty whining 'round all these Jamaicans
+        Uh, this that prom shit
+        This that what we do, don't tell your mom shit
+        This that red cup, all on the lawn shit
+        Got a fresh cut, straight out the salon, bitch
+        I know you're tired of loving, of loving
+        With nobody to love, nobody, no- (uh-huh, honey)
+        Close your eyes and let the word paint a thousand pictures
+        One good girl (alright) is worth a thousand bitches
+        Bound (bound) to fall in love
+        Bound (bound) to fall in love (uh-huh, honey)
+        I wanna fuck you hard on the sink
+        After that, give you something to drink
+        Step back, can't get spunk on the mink
+        I mean damn, what would Jeromey Romey Romey Rome think?
+        Hey, you remember where we first met?
+        Okay, I don't remember where we first met
+        But hey, admitting is the first step
+        And, ay, you know ain't nobody perfect
+        And I know, with the hoes I got the worst rep
+        But ay, the backstroke I'm tryna perfect
+        And ay, ayo, we made to Thanksgiving
+        So ay, maybe we can make it to Christmas
+        She asked me what I wished for on my wishlist
+        Have you ever asked your bitch for other bitches?
+        Maybe we could still make it to the church steps
+        But first, you gon' remember how to forget
+        After all these long-ass verses
+        I'm tired, you tired, (uh-huh, honey) Jesus wept
+        I know you're tired (tired) of loving, of loving
+        With nobody to love, nobody, nobody
+        So just grab somebody, no leaving this party
+        With nobody to love, nobody, nobody (to love)
+        (Uh-huh, honey)
+        Jerome's in the house, watch your mouth
+        Jerome's in the house, watch your mouth
+        Bound (bound) to fall in love
+        Bound (bound) to fall in love (uh-huh, honey)
+        """ + Fore.RESET)
 

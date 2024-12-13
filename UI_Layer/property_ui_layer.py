@@ -4,6 +4,7 @@ from Model_Classes.amenity_model import Amenity
 from prettytable import PrettyTable
 from colorama import Fore, Style, init
 import os
+import time
 init()
 
 class property_UI_menu:
@@ -85,6 +86,7 @@ class property_UI_menu:
         user_action = input("Select an Option: ").lower()
         return user_action
 
+
     def properties_menu_logistics(self) -> str:
         """Logistics for the properties menu"""
         user_action = ""
@@ -112,6 +114,7 @@ class property_UI_menu:
                 # If b is entered, it is returned back to the start_point_work_requests_UI function which brings the
                 # user back to the home page.
                 case ("b", self.rank):
+                    self.clear_screen()
                     return "b"
                 
                 # If q is entered, it is returned back to the start_point_work_requests_UI function which turns off
@@ -121,9 +124,12 @@ class property_UI_menu:
                 
                 # Any other input is except the one's listed above are treated as errors and the user given a message to notify them.
                 case _:
-                    print(Fore.RED + "Invalid input.Please try again." + Style.RESET_ALL)
+                    print(Fore.RED + "Invalid input. Please try again." + Style.RESET_ALL)
+                    time.sleep(0.5)
+                    self.clear_screen()
 
         return user_action.lower()
+
 
     def display_select_property(self) -> str:
         """Displays the form to select a property."""
@@ -159,9 +165,11 @@ class property_UI_menu:
                     selected_property
                 )
                 if selected_property_options == "b":
+                    
                     continue
                 return selected_property_options.lower()
         return property_id_selected.lower()
+
 
     def selected_property_logistics(self, selected_property: object) -> str:
         """Logistics for the selected property"""
@@ -187,6 +195,8 @@ class property_UI_menu:
                 case _:
                     # If you put an invaild input
                     print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL)
+                    time.sleep(0.5)
+                    self.clear_screen()
         return user_choice.lower()
 
     def display_add_property(self):
@@ -296,6 +306,7 @@ class property_UI_menu:
             return property_price
         return new_condition.lower()
 
+
     def set_property_price_to_fix(self, str_display: str, new_property: object) -> str:
         """Asks the user to enter a price to fix for the property they are creating. Goes through very simple input"""
         while (new_price_to_fix := input("Enter The Price To Fix: ")) not in [
@@ -318,6 +329,7 @@ class property_UI_menu:
                 continue
             return new_price
         return new_price_to_fix.lower()
+
 
     def set_property_price(self, str_display: str, new_property: object) -> str:
         """Asks the user to enter a price for the property they are creating. Goes through very simple input"""
@@ -352,6 +364,7 @@ class property_UI_menu:
             return amenity_description
         return new_price.lower()
 
+
     # Not completed. Can be beautified.
     def set_description_for_amenity(self, str_display: str, new_amenity: object) -> str:
         """Asks the user to enter a description for the amenity they are creating. Goes through very simple input
@@ -379,6 +392,7 @@ class property_UI_menu:
             return confirmation
         return amenity_description.lower()
 
+
     def property_creation_confirmation(
         self, str_display: str, new_property: object
     ) -> str:
@@ -399,7 +413,6 @@ class property_UI_menu:
 
     def display_view_attached_options(self, selected_property: object) -> str:
         """Displays the options for the selected property"""
-        self.clear_screen()
         print("-" * 80)
         print("1. Display Work Requests")
         print("2. Display Maintenance Reports")
@@ -423,6 +436,7 @@ class property_UI_menu:
                 case _:
                     print(Fore.RED + "Invalid input. Please try again." + Style.RESET_ALL)
         return attached_selection.lower()
+
 
     def display_edit_property_details(self, selected_property: object) -> str:
         """Displays the options to edit the selected property"""
@@ -460,6 +474,7 @@ class property_UI_menu:
                     print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL)
         return edit_choice.lower()
 
+
     def edit_property_name(self, selected_property: object) -> str:
         """Edits the name of the selected property"""
         print('In the edit property name')
@@ -478,6 +493,7 @@ class property_UI_menu:
                 break
         return new_name.lower()
 
+
     def edit_property_conditions(self, selected_property: object) -> str:
         """Edits the condition of the selected property"""
 
@@ -495,8 +511,10 @@ class property_UI_menu:
                     selected_property, self.location, "condition", new_condition
                 )
                 print(Fore.GREEN +"Property details updated successfully!"+ Style.RESET_ALL)
+                time.sleep(0.5)
                 break
         return new_condition.lower()
+
 
     def edit_price_to_fix(self, selected_property: object) -> str:
         """Edits the price to fix of the selected property"""
@@ -518,6 +536,7 @@ class property_UI_menu:
                 print(Fore.GREEN +"Property details updated successfully!"+ Style.RESET_ALL)
                 break
         return new_price_to_fix.lower()
+
 
     def edit_property_price(self, selected_property: object) -> str:
         """Edits the price of the selected property"""
@@ -541,7 +560,7 @@ class property_UI_menu:
 
     def display_property_work_requests(
         self, selected_property: str
-    ) -> str:  # type hint to print because of kormakur >:)
+    ) -> str:  
         """Displays work requests for a property"""
         self.clear_screen()
         property_work_requests_table = PrettyTable(
@@ -584,6 +603,7 @@ class property_UI_menu:
         ) not in ["q", "b", "Q", "B"]:
             print("Sigma Sigma on the wall, who is the Skibidiest of them all")
         return property_work_requests_sub_menu.lower()
+
 
     def display_property_maintenance_reports(self, selected_property: object) -> str:
         """Displays maintenance reports for a property"""
@@ -638,6 +658,7 @@ class property_UI_menu:
         ) not in ["q", "b", "Q", "B"]:
             print("Sigma Sigma on the wall, who is the Skibidiest of them all")
         return property_maintenance_reports_sub_menu.lower()
+
 
     def print_single_property(self, property: object):
         """Prints a single property"""

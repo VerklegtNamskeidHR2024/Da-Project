@@ -128,7 +128,7 @@ class Main_Menu:
         return_user = ""
         while return_user == "":
             print()
-            print("{:>60}".format("[ Welcome to the NaN Air Properties and Staff System! ]"))
+            print("{:>70}".format(Fore.BLUE + "[ Welcome to the NaN Air Properties and Staff System! ]" + Style.RESET_ALL))
             print("-" * 80)
             self.show_ascii_art_hq()
             
@@ -139,6 +139,7 @@ class Main_Menu:
             print("3. Employee")
             print()
             print("Universal System Commands (Not Applicable During Log-In)")
+            print("_" * 60)
             print()
             print("{:>18}".format("Back - [ b, B ]"))
             print("{:>18}".format("Quit - [ q, Q ]"))
@@ -156,8 +157,9 @@ class Main_Menu:
                     return_user = "Employee"
                     break
                 case _:
-                    self.clear_screen()
                     print(Fore.RED + "No User Found, Please Try Again." + Style.RESET_ALL)
+                    time.sleep(1)
+                    self.clear_screen()
         return return_user
     
 
@@ -170,6 +172,8 @@ class Main_Menu:
             is_staff_id_valid = self.logic_wrapper.sanity_check_staff_id(rank, staff_id)
             if is_staff_id_valid is False: 
                 print(Fore.RED + "ID Does Not Exist In The System, Please Try Again." + Style.RESET_ALL)
+                time.sleep(0.5)
+                self.clear_screen
         return staff_id
     
 
@@ -178,7 +182,8 @@ class Main_Menu:
         self.clear_screen()
         return_location = ""
         while return_location == "":
-            print("{:>60}".format("[ Welcome to the NaN Air Properties and Staff System! ]"))
+            self.clear_screen()
+            print("{:>60}".format(Fore.BLUE + "[ Welcome to the NaN Air Properties and Staff System! ]" + Style.RESET_ALL))
             print("-" * 80)
             self.show_ascii_art_hq()
             print("-" * 80)
@@ -215,6 +220,8 @@ class Main_Menu:
                     return_location = "Longyearbyen"
                 case _:
                     print(Fore.RED + "No Location Found, Please Try Again." + Style.RESET_ALL)
+                    time.sleep(1)
+                    self.clear_screen
         self.clear_screen()
         return return_location
 
@@ -248,6 +255,7 @@ class Main_Menu:
         print("5. Maintenance Reports")
         if self.rank != "Employee":
             print("6. Locations")
+        print("_" * 80)
         print()
         print("{:>10}".format("Quit - [ q, Q ]"))
         print("-" * 80)
@@ -259,6 +267,7 @@ class Main_Menu:
         """Manages the user home page logistics"""
 
         # Calls the sub menus
+        self.clear_screen()
         user_action = ""
         # user_action = self.display_menu_items()
         while user_action != "q":
@@ -281,6 +290,9 @@ class Main_Menu:
                     return "q"
                 case _:
                     print(Fore.RED + "Wrong Input" + Style.RESET_ALL)
+                    time.sleep(1)
+                    self.clear_screen()
+                    return "s"
         self.clear_screen()
         return user_action
-                    
+            

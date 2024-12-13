@@ -86,6 +86,8 @@ class maintenance_report_UI_menu:
                 self.edit_report_details(self.location)
             else:
                 print(Fore.RED + "Invalid input" + Style.RESET_ALL) 
+                time.sleep(0.5)
+                self.clear_screen()
 
     def employee_menu(self, staff_id : str):
         ''' Employee menu '''

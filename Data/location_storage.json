@@ -4,7 +4,7 @@
         "location": "Reykjavik",
         "airport": "KEF",
         "phone_number": "88856786",
-        "branch_manager": "Tumi Krist",
+        "branch_manager": "Hreimur",
         "opening_hours": "8-16"
     },
     {
@@ -12,15 +12,15 @@
         "location": "Nuuk",
         "airport": "NUK",
         "phone_number": "5551234",
-        "branch_manager": "Tumi Krist",
+        "branch_manager": "Yeabsira",
         "opening_hours": "8-16"
     },
     {
         "country": "Greenland",
         "location": "Kulusuk",
         "airport": "KLK",
-        "phone_number": "5551234",
-        "branch_manager": "Tumi Krist",
+        "phone_number": "1234555",
+        "branch_manager": "Daniela",
         "opening_hours": "8-16"
     },
     {
@@ -28,7 +28,7 @@
         "location": "Thorshofn",
         "airport": "FLT",
         "phone_number": "5551234",
-        "branch_manager": "Tumi Krist",
+        "branch_manager": "Kormakur",
         "opening_hours": "8-16"
     },
     {
@@ -36,7 +36,7 @@
         "location": "Tingwall",
         "airport": "SVB",
         "phone_number": "5551234",
-        "branch_manager": "Tumi Krist",
+        "branch_manager": "Tumi",
         "opening_hours": "8-16"
     },
     {
@@ -44,7 +44,7 @@
         "location": "Longyearbyen",
         "airport": "SVB",
         "phone_number": "5551234",
-        "branch_manager": "Tumi Krist",
+        "branch_manager": "Jon",
         "opening_hours": "8-16"
     }
 ]
