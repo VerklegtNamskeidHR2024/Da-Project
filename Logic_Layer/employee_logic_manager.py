@@ -3,9 +3,7 @@ class employee_logic_manager:
     def __init__(self, Storage_Layer_Wrapper):
         """Constructor for employee logic manager"""
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
-        
-        #from Logic_Layer.work_request_logic_manager import work_request_logic_manager
-        #from Logic_Layer.maintenance_report_logic_manager import maintenance_report_logic_manager
+
 
     # Might not implement
     def get_all_admins(self) -> list:
@@ -76,7 +74,9 @@ class employee_logic_manager:
     def add_new_employee_to_storage(self,employee):
         """Add a new employee to the storage"""
         list_of_all_employees = self.get_all_employees()
+        #call the function to generait a new ID
         new_employee_id = self.get_highest_ID()
+        #sets the 
         employee.set_staff_id(new_employee_id)
         list_of_all_employees.append(employee)
         self.Storage_Layer_Wrapper.write_to_file_employee(list_of_all_employees)

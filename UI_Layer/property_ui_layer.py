@@ -4,6 +4,7 @@ from Model_Classes.amenity_model import Amenity
 from prettytable import PrettyTable
 from colorama import Fore, Style, init
 import os
+import time
 init()
 
 class property_UI_menu:
@@ -86,6 +87,7 @@ class property_UI_menu:
         user_action = input("Select an Option: ").lower()
         return user_action
 
+
     def properties_menu_logistics(self) -> str:
         """Logistics for the properties menu"""
         user_action = ""
@@ -113,6 +115,7 @@ class property_UI_menu:
                 # If b is entered, it is returned back to the start_point_work_requests_UI function which brings the
                 # user back to the home page.
                 case ("b", self.rank):
+                    self.clear_screen()
                     return "b"
                 
                 # If q is entered, it is returned back to the start_point_work_requests_UI function which turns off
@@ -122,9 +125,12 @@ class property_UI_menu:
                 
                 # Any other input is except the one's listed above are treated as errors and the user given a message to notify them.
                 case _:
-                    print("Invalid input.Please try again.")
+                    print(Fore.RED + "Invalid input. Please try again." + Style.RESET_ALL)
+                    time.sleep(2)
+                    self.clear_screen()
 
         return user_action.lower()
+
 
     def display_select_property(self) -> str:
         """Displays the form to select a property."""
@@ -138,46 +144,60 @@ class property_UI_menu:
             is_valid = self.logic_wrapper.sanity_check_properties('property_id', property_id_selected)
             if is_valid is False:
                 print()
-                print("Invalid property ID. Please try again.")
+                print(Fore.RED + "Invalid property ID. Please try again." + Style.RESET_ALL)
                 print()
                 continue
             elif is_valid is True:
                 selected_property = self.logic_wrapper.get_property_by_id(self.location, property_id_selected)
                 # If there is not property with the slected ID you will get a message.
                 if selected_property is None:
-                    print("No property found with the provided ID.")
+                    print(Fore.RED + "No property found with the provided ID."+ Style.RESET_ALL)
                     continue
 
                 # Print for single selected property
                 self.clear_screen()
-                self.print_single_property(selected_property)
-                print("1. View Attached Items")
-                print("2. Edit Property Details")
                 # let you choose from the above 2.
 
                 selected_property_options = self.selected_property_logistics(
                     selected_property
                 )
-                if selected_property_options == "b":
+                self.clear_screen()
+                if selected_property_options == "b":        
                     continue
                 return selected_property_options.lower()
         return property_id_selected.lower()
 
+
     def selected_property_logistics(self, selected_property: object) -> str:
         """Logistics for the selected property"""
-        while (user_choice := input("Enter your choice: ").lower()) not in [
+
+        user_choice = ""
+        while user_choice not in [
             "q",
-            "b",
             "Q",
-            "B",
         ]:
+            self.print_single_property(selected_property)
+            print("-" * 80)
+            print("1. View Property Maintenance Reports")
+            print("2. View Property Work requests")
+            print("3. Edit Property Details")
+            print()
+            print("{:>18}".format("Back - [ b, B ]"))
+            print("{:>18}".format("Quit - [ q, Q ]"))
+            print()
+            user_choice = input("Enter your choice: ").lower()
             match user_choice:
                 case "1":
                     # Displays the attched options
-                    user_choice = self.display_view_attached_options(selected_property)
+                    user_choice = self.display_property_maintenance_reports(selected_property)
+                    self.clear_screen()
                 case "2":
                     # Lets you edit property details
+                    user_choice = self.display_property_work_requests(selected_property)
+                    self.clear_screen()
+                case "3":
                     user_choice = self.edit_property_logistics(selected_property)
+                    self.clear_screen()
                 case "b":
                     # Goes back to the previous page
                     return "b"
@@ -186,7 +206,9 @@ class property_UI_menu:
                     return "q"
                 case _:
                     # If you put an invaild input
-                    print("Invalid input. Please try again.")
+                    print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL)
+                    time.sleep(2)
+                    self.clear_screen()
         return user_choice.lower()
 
     def display_add_property(self):
@@ -230,7 +252,7 @@ class property_UI_menu:
             )
             if is_valid_name is False:
                 print()
-                print("Invalid name. Please try again.")
+                print(Fore.RED + "Invalid name. Please try again."+ Style.RESET_ALL)
                 print()
                 continue
             new_property.set_name(property_name)
@@ -266,7 +288,7 @@ class property_UI_menu:
                 )
                 if is_valid_location is False:
                     print()
-                    print("Invalid location. Please try again.")
+                    print(Fore.RED + "Invalid location. Please try again."+ Style.RESET_ALL)
                     print()
                     continue
                 new_property.set_location(new_location)
@@ -295,7 +317,7 @@ class property_UI_menu:
             )
             if is_valid_condition is False:
                 print()
-                print("Invalid Condition. Please Try Again.")
+                print(Fore.RED + "Invalid Condition. Please Try Again."+ Style.RESET_ALL)
                 print()
                 continue
             # Sets the condition for the property
@@ -305,6 +327,7 @@ class property_UI_menu:
                 continue
             return property_price
         return new_condition.lower()
+
 
     def set_property_price_to_fix(self, str_display: str, new_property: object) -> str:
         """Asks the user to enter a price to fix for the property they are creating. Goes through very simple input"""
@@ -316,11 +339,11 @@ class property_UI_menu:
         ]:
             # Checks if the price to fix is valid
             is_valid_price_to_fix = self.logic_wrapper.sanity_check_properties(
-                "price_to_fix", new_price_to_fix
+                 "price_to_fix", new_price_to_fix
             )
             if is_valid_price_to_fix is False:
                 print()
-                print("Invalid Price To Fix. Please Try Again.")
+                print(Fore.RED + "Invalid Price To Fix. Please Try Again."+ Style.RESET_ALL)
                 print()
                 continue
             new_property.set_total_price_to_fix(new_price_to_fix)
@@ -330,6 +353,7 @@ class property_UI_menu:
                 continue
             return new_price # returns the new price
         return new_price_to_fix.lower()
+
 
     def set_property_price(self, str_display: str, new_property: object) -> str:
         """Asks the user to enter a price for the property they are creating. Goes through very simple input"""
@@ -347,7 +371,7 @@ class property_UI_menu:
             # If the price is not valid it will print a message
             if is_valid_price is False:
                 print()
-                print("Invalid Price. Please Try Again.")
+                print(Fore.RED + "Invalid Price. Please Try Again."+ Style.RESET_ALL)
                 print()
                 continue
             new_property.set_property_price(new_price)
@@ -386,7 +410,7 @@ class property_UI_menu:
             )
             if is_description_valid is False:
                 print()
-                print("Sigma Sigma on the wall, who is the Skibidiest of them all")
+                print(Fore.RED + "Sigma Sigma on the wall, who is the Skibidiest of them all"+ Style.RESET_ALL)
                 print()
                 continue
             # Sets the description for the amenity
@@ -397,6 +421,7 @@ class property_UI_menu:
                 continue
             return confirmation
         return amenity_description.lower()
+
 
     def property_creation_confirmation(
         self, str_display: str, new_property: object
@@ -411,12 +436,14 @@ class property_UI_menu:
             # If the user enters b/B it will go back to the previous page
             if new_property_confirmation in ["q", "b", "Q", "B"]:
                 return new_property_confirmation.lower()
-            print("Sigma Sigma on the wall, who is the Skibidiest of them all")
+            print(Fore.RED + "Sigma Sigma on the wall, who is the Skibidiest of them all"+ Style.RESET_ALL)
         print("-" * 80)
         print()
         # Adds the new property to the storage
         self.logic_wrapper.add_new_property_to_storage(str_display, new_property)
-        print(f"{str_display} Has Been Created!")
+        print(Fore.GREEN + f"{str_display} Has Been Created!" + Style.RESET_ALL)
+        time.sleep(1)
+        self.clear_screen()
         return ""
 
     def display_view_attached_options(self, selected_property: object) -> str:
@@ -453,8 +480,12 @@ class property_UI_menu:
                     print("Invalid input. Please try again.")
         return attached_selection.lower()
 
+
     def display_edit_property_details(self, selected_property: object) -> str:
         """Displays the options to edit the selected property"""
+        self.clear_screen()
+        self.print_single_property(selected_property)
+        print("-" * 80)
         print(f"Editing details for Property ID: {selected_property.property_id}")
         print("1. Change Property Name")
         print("2. Change Property Condition")
@@ -499,9 +530,10 @@ class property_UI_menu:
         # returns the edit choice
         return edit_choice.lower()
 
+
     def edit_property_name(self, selected_property: object) -> str:
         """Edits the name of the selected property"""
-        print('In the edit property name')
+
         while (new_name := input("Enter new property name: ")) not in [
             "q",
             "b",
@@ -521,6 +553,7 @@ class property_UI_menu:
         # returns the new name
         return new_name.lower()
 
+
     def edit_property_conditions(self, selected_property: object) -> str:
         """Edits the condition of the selected property"""
         # Edits the condition of the selected property
@@ -539,9 +572,11 @@ class property_UI_menu:
                 self.logic_wrapper.edit_existing_property_in_storage(
                     selected_property, self.location, "condition", new_condition
                 )
-                print("Property details updated successfully!")
+                print(Fore.GREEN + "Property details updated successfully!"+ Style.RESET_ALL)
+                time.sleep(2)
                 break
         return new_condition.lower()
+
 
     def edit_price_to_fix(self, selected_property: object) -> str:
         """Edits the price to fix of the selected property"""
@@ -562,9 +597,11 @@ class property_UI_menu:
                 self.logic_wrapper.edit_existing_property_in_storage(
                     selected_property, self.location, "price to fix", new_price_to_fix
                 )
-                print("Property details updated successfully!")
+                print(Fore.GREEN +"Property details updated successfully!"+ Style.RESET_ALL)
+                time.sleep(2)
                 break
         return new_price_to_fix.lower()
+
 
     def edit_property_price(self, selected_property: object) -> str:
         """Edits the price of the selected property"""
@@ -584,12 +621,14 @@ class property_UI_menu:
                 self.logic_wrapper.edit_existing_property_in_storage(
                     selected_property, self.location, "price", new_price
                 )
-                print("Property details updated successfully!")
+                print(Fore.GREEN + "Property details updated successfully!" + Style.RESET_ALL)
+                time.sleep(2)
                 break
         return new_price.lower()
 
     def display_property_work_requests(
         self, selected_property: str
+    ) -> str:  
     ) -> str:  
         """Displays work requests for a property"""
         self.clear_screen()
@@ -630,6 +669,7 @@ class property_UI_menu:
         ) not in ["q", "b", "Q", "B"]:
             print("Sigma Sigma on the wall, who is the Skibidiest of them all")
         return property_work_requests_sub_menu.lower()
+
 
     def display_property_maintenance_reports(self, selected_property: object) -> str:
         """Displays maintenance reports for a property"""
@@ -679,6 +719,7 @@ class property_UI_menu:
             print("Sigma Sigma on the wall, who is the Skibidiest of them all")
         return property_maintenance_reports_sub_menu.lower()
 
+
     def print_single_property(self, property: object):
         """Prints a single property"""
         # it printes a single property by using the PrettyTable
@@ -697,6 +738,7 @@ class property_UI_menu:
         )
         border_color = Fore.BLUE
         reset_color = Style.RESET_ALL
+        single_property_table.align = 'l'
         single_property_table.border = True
         single_property_table.junction_char = f"{border_color}+{reset_color}"
         single_property_table.horizontal_char = f"{border_color}-{reset_color}"

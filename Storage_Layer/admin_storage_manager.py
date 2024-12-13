@@ -8,9 +8,12 @@ class admin_storage:
 
     def get_all_admins(self) -> list[Admin]:
         """Gets all admins from the file"""
+        # Here we open the file and read the data
         with open('Data/admin_storage.json', 'r') as admin_file:
             admin_data = json.load(admin_file)
+        # Then we make a list of admin objects from the data
         admin_list = [Admin(**data) for data in admin_data]
+        # Finally we return the list
         return admin_list
 
     def write_to_file_admin(self, list_of_admins: list[Admin]):
