@@ -316,7 +316,7 @@ class Logic_Layer_Wrapper:
         return self.location_logic_manager.edit_amenity(amenity, new_condition)
     
     def fetch_location_from_storage(self, location_id: str) -> Location:
-        """Returns a location object by Location_ID. """"
+        """Returns a location object by Location_ID. """
         return self.location_logic_manager.fetch_location_from_storage(location_id)
     
     def sanity_check_location(self, what_to_check: str, new_value: str) -> bool:
