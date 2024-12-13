@@ -213,6 +213,7 @@ class location_UI_menu:
         """Display the amenities menu"""
         user_action = ""
         while user_action != "q":
+            self.clear_screen()
             self.display_attached_amenities()
             print("1. Edit Amenity Condition")
             print()
@@ -222,15 +223,15 @@ class location_UI_menu:
             user_action = input("Select An Option: ").lower()
             match user_action.lower():
                 case "1":
-                    self.clear_screen()
                     user_action = self.edit_amenity()
-                    self.clear_screen()
                 case "q":
                     return "q"
                 case "b":
                     return "b"
                 case _:
                     print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL)
+                    time.sleep(1)
+                    self.clear_screen()
         self.clear_screen()
         return user_action.lower()
         
@@ -238,6 +239,7 @@ class location_UI_menu:
         """Edit an amenity"""
         
         while (amenity_ID := input("Enter the ID of the Amenity You Want To Edit: ")) not in ["q", "b", "Q", "B"]:
+            self.clear_screen()
             amenity = self.logic_wrapper.fetch_amenity_by_id(amenity_ID, self.location)
             if amenity is not None:
             # if the amenity exists, display the amenity and let the user input a new condition
@@ -278,7 +280,7 @@ class location_UI_menu:
     def display_attached_amenities(self) -> str:
         """Display all amenities attached to the location"""
         # gets all amenities for the location
-        amenities_list = self.logic_wrapper.fetch_all_amenities_for_location_in_storage(current_location.location)
+        amenities_list = self.logic_wrapper.fetch_all_amenities_for_location_in_storage(self.location)
         if not amenities_list:
             print(Fore.RED + "No Amenities Found." + Style.RESET_ALL)
             return

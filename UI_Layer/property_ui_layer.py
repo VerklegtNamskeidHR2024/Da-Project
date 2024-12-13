@@ -162,6 +162,8 @@ class property_UI_menu:
                     selected_property
                 )
                 self.clear_screen()
+                if selected_property_options == "b":        
+                    continue
                 return selected_property_options.lower()
         return property_id_selected.lower()
 
@@ -425,7 +427,6 @@ class property_UI_menu:
 
     def display_view_attached_options(self, selected_property: object) -> str:
         """Displays the options for the selected property"""
-        self.clear_screen()
         print("-" * 80)
         print("1. Display Work Requests")
         print("2. Display Maintenance Reports")
@@ -588,6 +589,16 @@ class property_UI_menu:
         property_work_requests = self.logic_wrapper.get_property_work_requests(
             self.location, selected_property.property_id
         )
+        if not property_work_requests:
+            print(Fore.RED + "No work requests found for the selected property." + Style.RESET_ALL)
+            print()
+            print("{:>10}".format("Back - [ b, B ]"))
+            print("{:>10}".format("Quit - [ q, Q ]"))
+            while (
+                property_work_requests_sub_menu := input("Select An Option: ").lower()
+            ) not in ["q", "b", "Q", "B"]:
+                print("Sigma Sigma on the wall, who is the Skibidiest of them all")
+            return property_work_requests_sub_menu.lower()
         for work_request in property_work_requests:
             property_work_requests_table.add_row(
                 [
@@ -625,6 +636,17 @@ class property_UI_menu:
                 self.location, selected_property.property_id
             )
         )
+        if not property_maintenance_reports:
+            print(Fore.RED + "No maintenance reports found for the selected property." + Style.RESET_ALL)
+            print()
+            print("{:>10}".format("Back - [ b, B ]"))
+            print("{:>10}".format("Quit - [ q, Q ]"))
+            while (
+                property_maintenance_reports_sub_menu := input("Select An Option: ").lower()
+            ) not in ["q", "b", "Q", "B"]:
+                print("Sigma Sigma on the wall, who is the Skibidiest of them all")
+            return property_maintenance_reports_sub_menu.lower()
+        
         for maintenance_report in property_maintenance_reports:
             property_maintenance_reports_table.add_row(
                 [
@@ -659,21 +681,20 @@ class property_UI_menu:
 
     def print_single_property(self, property: object):
         """Prints a single property"""
-        single_property_table = PrettyTable(
-            ["Property ID", "Name", "Location", "Condition", "Price to Fix", "Price"]
-        )
-        single_property_table.add_row(
-            [
-                property.property_id,
-                property.name,
-                property.location,
-                property.condition,
-                property.total_price_to_fix,
-                property.property_price,
-            ]
-        )
+        single_property_table = PrettyTable()
+        single_property_table.title = "Property Details"
+        single_property_table.field_names = ['Information', 'Details']
+
+        single_property_table.add_row(['Property ID', property.property_id])
+        single_property_table.add_row(['Property Name', property.name])
+        single_property_table.add_row(['Location', property.location])
+        single_property_table.add_row(['Condition', property.condition])
+        single_property_table.add_row(['Property Price', property.property_price])
+        single_property_table.add_row(['Price to Fix', property.total_price_to_fix])
+
         border_color = Fore.BLUE
         reset_color = Style.RESET_ALL
+        single_property_table.align = 'l'
         single_property_table.border = True
         single_property_table.junction_char = f"{border_color}+{reset_color}"
         single_property_table.horizontal_char = f"{border_color}-{reset_color}"
