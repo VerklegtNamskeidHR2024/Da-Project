@@ -1,5 +1,6 @@
 from Model_Classes.work_request_model import WorkRequest
 import os
+import time
 from prettytable import PrettyTable
 from colorama import Fore, Style, init
 
@@ -223,6 +224,9 @@ class work_request_UI_menu:
 
                 # Any other input is except the one's listed above are treated as errors and the user given a message to notify them.
                 case _:
+                    print(Fore.RED + "Invalid Input, Please Try Again." + Style.RESET_ALL)
+                    
+                    time.sleep(2)
                     self.clear_screen()
                     print(Fore.RED + "Invalid Input, Please Try Again." + Style.RESET_ALL)
         self.clear_screen()
@@ -436,7 +440,6 @@ class work_request_UI_menu:
                 # The name attribute of the WorkRequest instance is set to whatever the user entered after passing the
                 # input verification.
                 new_work_request.set_name(request_name)
-                print()
                 request_description = self.set_description_for_request(new_work_request)
                 if request_description == "b":
                     continue
@@ -1147,15 +1150,15 @@ class work_request_UI_menu:
         while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
             print("{:>53}".format(Fore.BLUE + "[ My Work Requests ]" + Style.RESET_ALL))
-            print("-" * 70)
+            print("-" * 80)
             # Sorted list based on if the user is an employee or not
             my_work_request_list = self.logic_wrapper.get_my_work_requests(
                 self.rank, self.location, self.staff_id
             )
             self.display_all_work_requests_printed(my_work_request_list)
             print()
-            print("{:>10}".format("Back - [ b, B ]"))
-            print("{:>10}".format("Quit - [ q, Q ]"))
+            print("{:>18}".format("Back - [ b, B ]"))
+            print("{:>18}".format("Quit - [ q, Q ]"))
             print("-" * 70)
             # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
@@ -1223,8 +1226,8 @@ class work_request_UI_menu:
             )
             self.display_all_work_requests_printed(closed_work_request_list)
             print()
-            print("{:>10}".format("Back - [ b, B ]"))
-            print("{:>10}".format("Quit - [ q, Q ]"))
+            print("{:>18}".format("Back - [ b, B ]"))
+            print("{:>18}".format("Quit - [ q, Q ]"))
             print("-" * 80)
 
             # Calls the function to search for a specific work request
