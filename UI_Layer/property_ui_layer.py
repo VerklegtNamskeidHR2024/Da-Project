@@ -163,6 +163,7 @@ class property_UI_menu:
                     selected_property
                 )
                 if selected_property_options == "b":
+                    
                     continue
                 return selected_property_options.lower()
         return property_id_selected.lower()
@@ -405,7 +406,6 @@ class property_UI_menu:
 
     def display_view_attached_options(self, selected_property: object) -> str:
         """Displays the options for the selected property"""
-        self.clear_screen()
         print("-" * 80)
         print("1. Display Work Requests")
         print("2. Display Maintenance Reports")
