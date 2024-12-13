@@ -226,15 +226,15 @@ class contractor_UI_menu():
             self.print_single_contractor(contractor)
 
             # show the options for the contractor
-            print("1) View work requests")
-            print("2) View maintenance reports")
-            print("3) Give warning")
+            print("1. View Work Requests")
+            print("2. View Maintenance Reports")
+            print("3. Give Warning")
             print("_" * 80)
             print()
             print("{:>18}".format("Back - [ b, B ]"))
             print("{:>18}".format("Quit - [ q, Q ]"))
             print("-" * 80)
-            edit_user_action = input("What action would you like to perform: ")
+            edit_user_action = input("What Action Would You Like to Perform: ")
 
             match edit_user_action:
                 case "1":
@@ -250,24 +250,26 @@ class contractor_UI_menu():
                     self.clear_screen()
                     loop = False
                 case _:
-                    print("not valid input")
+                    print()
+                    print(Fore.RED + "Not Valid Input" + Style.RESET_ALL)
+                    print()
         return
 
     def display_contractor_warning(self, contractor) -> None:
         """Give contractor warning"""
         try:
-            warning = input("Enter warning for contractor: ")
+            warning = input("Enter Warning For Contractor: ")
             # checks if the warning is valid
             is_valid = self.logic_wrapper.sanity_check_contractor("warning", warning)
             # if the warning is valid then give the contractor a warning
             if is_valid == True:
                 self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'warning', warning)
             self.clear_screen()
-            print(Fore.GREEN + "Contractor has been given a warning." + Style.RESET_ALL)
+            print(Fore.GREEN + "Contractor Has Been Given a Warning." + Style.RESET_ALL)
             return
         except:
             self.clear_screen()
-            print("Something Went Wrong")
+            print(Fore.RED + "Something Went Wrong" + Style.RESET_ALL)
             return
 
     def display_edit_contractor_menu(self) -> None:
@@ -353,41 +355,41 @@ class contractor_UI_menu():
         try:
             is_valid = False
             while is_valid == False:
-                phone_input = input("enter phone number: ")
+                phone_input = input("Enter Phone Number: ")
                 # checks if the phone number is valid
                 is_valid = self.logic_wrapper.sanity_check_contractor("phone_number", phone_input)
                 if is_valid == True:
                     # if the phone number is valid then change the phone number
                     self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'phone_number', phone_input)
                     self.clear_screen()
-                    print(Fore.GREEN + "Phone number has been changed." + Style.RESET_ALL)
+                    print(Fore.GREEN + "Phone Number Has Been Changed." + Style.RESET_ALL)
                     return
                 else:
                     self.clear_screen()
-                    print(Fore.RED + "Invalid phone number. Please try again. No letters or special characters and lenght of 7." + Style.RESET_ALL)
+                    print(Fore.RED + "Invalid Phone Number. Please Try Again. No Letters or Special Characters and Lenght of 7." + Style.RESET_ALL)
                 return
         except:
             self.clear_screen()
-            print(Fore.RED + "something went wrong" + Style.RESET_ALL)
+            print(Fore.RED + "Something Went Wrong" + Style.RESET_ALL)
             return
 
     def change_opening_hours(self, contractor) -> None:
         """change opening hours for contractor"""
         try:
-            new_opening_hours = input("Enter new opening Hours: ")\
+            new_opening_hours = input("Enter New Opening Hours: ")\
             # checks if the opening hours are valid
             is_valid = self.logic_wrapper.sanity_check_contractor("opening_hours", new_opening_hours)
             if is_valid == True:
                 # if the opening hours are valid then change the opening hours
                 self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'opening_hours', new_opening_hours)
                 self.clear_screen()
-                print(Fore.GREEN + "Opening hours have been changed." + Style.RESET_ALL)
+                print(Fore.GREEN + "Opening Hours Have Been Changed!" + Style.RESET_ALL)
             else:
                 self.clear_screen()
-                print(Fore.RED + "Invalid input opening hours" + Style.RESET_ALL)
+                print(Fore.RED + "Invalid Input Opening Hours." + Style.RESET_ALL)
         except:
             self.clear_screen()
-            print(Fore.RED + "something went wrong" + Style.RESET_ALL)
+            print(Fore.RED + "Something Went Wrong" + Style.RESET_ALL)
 
     def select_contractor_by_id(self) -> None:
         """get a contractor by ID"""
@@ -400,12 +402,12 @@ class contractor_UI_menu():
             contractor_from_id = self.logic_wrapper.get_contractor_by_id(self.location, id_to_find)
             if not contractor_from_id:
                 # returns None if he is not found
-                print(Fore.RED + f"No contractor found with that ID: {id_to_find}" + Style.RESET_ALL)
+                print(Fore.RED + f"No Contractor Found With That ID: {id_to_find}" + Style.RESET_ALL)
                 return None
             # returns the contractor if he is found
             return contractor_from_id
         except:
-            print(Fore.RED + "Something went wrong." + Style.RESET_ALL)
+            print(Fore.RED + "Something Went Wrong." + Style.RESET_ALL)
 
 
     def print_single_contractor(self, contractor) -> None:
@@ -444,7 +446,7 @@ class contractor_UI_menu():
         else:
             # create a table to print the maintenance reports
             Contractor_maintenance_reports_table = PrettyTable(['Report ID', 'Report Name', 'Description', 'Status'])
-            print("Maintenance Reports for the selected contractor.")
+            print("Maintenance Reports For The Selected Sontractor.")
             # loop through the maintenance reports and add them to the table if they have the current contractors id
             for maintenance_report in contractor_maintenance_reports:
                 Contractor_maintenance_reports_table.add_row([maintenance_report.report_id, maintenance_report.report_name, maintenance_report.maintenance_description, maintenance_report.report_status])
@@ -456,10 +458,10 @@ class contractor_UI_menu():
             Contractor_maintenance_reports_table.vertical_char = f"{border_color}|{reset_color}"
             print('')
             print(Contractor_maintenance_reports_table)
-            bause_breaker = input("\nPress Enter to return.")
+            bause_breaker = input("\nPress Enter to Return.")
             print('')
             self.clear_screen()
-            return
+            return ""
 
     def display_contractor_work_requests(self, selected_contractor: object) -> str:
         ''' Displays work requests for a property '''
@@ -467,11 +469,11 @@ class contractor_UI_menu():
         # get the work requests for the contractor
         contractor_work_requests = self.logic_wrapper.get_contractor_work_requests(self.location, selected_contractor.contractor_id)
         if not contractor_work_requests:
-            print(Fore.RED + "No work requests for the selected contractor." + Style.RESET_ALL)
+            print(Fore.RED + "No Work Requests For The Selected Contractor." + Style.RESET_ALL)
             return
         else:
             contractor_work_requests_table = PrettyTable(['Work Request ID', 'Description', 'Mark as Completed'])
-            print("Work Requests for the selected Contractor.")
+            print("Work Requests for The Selected Contractor.")
             # loop through the work requests and add them to the table if they have the current contractors id
             for work_request in contractor_work_requests:
                 contractor_work_requests_table.add_row([work_request.work_request_id, work_request.description, work_request.mark_as_completed])
@@ -483,7 +485,7 @@ class contractor_UI_menu():
             contractor_work_requests_table.vertical_char = f"{border_color}|{reset_color}"
             print('')
             print(contractor_work_requests_table)
-            bause_breaker = input("\nPress Enter to return.")
+            bause_breaker = input("\nPress Enter to Return.")
             print('')
             self.clear_screen()
             return
