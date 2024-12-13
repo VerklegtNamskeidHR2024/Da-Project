@@ -172,7 +172,7 @@ class property_UI_menu:
         user_choice = ""
         while user_choice not in [
             "q",
-            "Q",
+            "Q"
         ]:
             self.print_single_property(selected_property)
             print("-" * 80)
@@ -184,18 +184,7 @@ class property_UI_menu:
             print("{:>18}".format("Quit - [ q, Q ]"))
             print()
             user_choice = input("Enter your choice: ").lower()
-
-        user_choice = ""
-        while user_choice not in [
-            "q",
-            "Q"
-        ]:
             # Print for single selected property
-            self.print_single_property(selected_property)
-            print("1. View Attached Items")
-            print("2. Edit Property Details")
-            # let you choose from the above 2.
-            user_choice = input("Enter your choice: ").lower()
             print()
             match user_choice:
                 case "1":
@@ -232,7 +221,7 @@ class property_UI_menu:
         # Displays the form to add a new property
         new_property = House()
         print()
-        print("{:>30}".format("[ New Property Form ]"))
+        print("{:>55}".format(Fore.GREEN + "[ New Property Form ]" + Style.RESET_ALL))
         print("_" * 80)
         str_display = "Property"
         # Asks the user to enter a name for the property they are creating.
@@ -245,7 +234,7 @@ class property_UI_menu:
         self.clear_screen()
         new_amenity = Amenity()
         print()
-        print("[ New Amenity Form ]")
+        print("{:>55}".format(Fore.GREEN + "[ New Amenity Form ]" + Style.RESET_ALL))
         print("-" * 80)
         str_display = "Amenity"
         # Asks the user to enter a name for the amenity they are creating.
@@ -273,21 +262,13 @@ class property_UI_menu:
                 continue
             new_property.set_name(property_name)
             # If the rank is admin the user is asked to enter a location for the property they are creating.
-            if self.rank == "Admin":
-                location_for_property = self.set_location_name_for_properties(
-                    str_display, new_property
-                )
-                if location_for_property in ["b", "B"]:
-                    continue
-                return location_for_property
-            # If the rank is not admin the location is set to the location of the employee
-            property_condition = self.set_condition_for_property(
+            location_for_property = self.set_location_name_for_properties(
                 str_display, new_property
             )
-            # If the user enters b/B it will go back to the previous page
-            if property_condition in ["b", "B"]:
+            if location_for_property in ["b", "B"]:
                 continue
-            return property_condition
+            return location_for_property
+            # If the user enters b/B it will go back to the previous page
         return property_name.lower()
 
 
@@ -296,7 +277,7 @@ class property_UI_menu:
     ) -> str:
 
     # Asks the user to enter a location for the property they are creating. Goes through very simple input
-        if self.rank == "Admin":
+        if self.rank:
             while (
                 new_location := input(f"Enter The {str_display} Location: ")
             ) not in ["q", "b", "Q", "B"]:
@@ -317,9 +298,10 @@ class property_UI_menu:
                     continue
                 return property_condition
             return new_location.lower()
-
+        # If the rank is not admin the location is set to the location of the employee
         new_property.set_location(self.location)
-
+        property_condition = self.set_condition_for_property(str_display, new_property)
+        return property_condition
 
     def set_condition_for_property(self, str_display: str, new_property: object) -> str:
         """Asks the user to enter a condition for the property they are creating. Goes through very simple input"""
