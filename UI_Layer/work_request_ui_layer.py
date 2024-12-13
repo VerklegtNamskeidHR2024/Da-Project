@@ -40,6 +40,7 @@ class work_request_UI_menu:
             self.clear_screen()
             return work_request_menu
 
+
     def clear_screen(self):
         ''' Clears the screen '''
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -171,62 +172,43 @@ class work_request_UI_menu:
 
         user_choice = ""
         while user_choice != "q":
-            # The user input from the display menu is returned to this variable and then verified in the match cases below. If the user is in
-            # one the sub-menus and goes back to the home page, the while loop runs again displaying the menu and asking for the user input.
-            # By having the print and logistics in two seperate menus it prevents a larger, more crammed home screen function.
             user_choice = self.display_work_requests_menu_items()
             print("-" * 80)
             match (user_choice, self.rank):
                 # In all cases below, if the function returns "b" then the the loop starts again, however if it receives "q"
                 # then the loop breaks and is returned back to the start point; shutting the program off.
-                #
-                #
-                # If the user wants to search for a specific work request they select option 1 which takes them to the search
-                # work request sub-menu where they can search by either ID or date (start date or completition).
-                #
-                # Note: Employees can only search for work requests that have their staff ID assigned to them. Admin/Manager can search
+            
+                # Employees can only search for work requests that have their staff ID assigned to them. Admin/Manager can search
                 # for any work request in their current location. 
                 case ("1", self.rank):
                     user_choice = self.search_work_request_menu_logistics()
                     self.clear_screen()
 
-                # If an admin/manager wants to create a new work request they select option 2 which takes them to the create
-                # work request sub-menu.
                 case ("2", "Admin") | ("2", "Manager"):
                     self.clear_screen()
                     user_choice = self.display_create_work_request_form()
                     self.clear_screen()
 
-                # If an employee wants to view all the newly created requests they select option 2 or option 3 for admins/manager.
-                # This takes them to the new work request sub-menu.
                 case ("2", "Employee") | ("3", "Admin") | ("3", "Manager"):
                     self.clear_screen()
                     user_choice = self.display_and_select_new_work_requests()
                     self.clear_screen()
 
-                # If an employee wants to view all pending requests they select option 3 or option 4 for admins/manager.
-                # This takes them to the pending work request sub-menu.
                 case ("3", "Employee") | ("4", "Admin") | ("4", "Manager"):
                     self.clear_screen()
                     user_choice = self.display_and_select_pending_work_requests()
                     self.clear_screen()
 
-                # If an admin/manager wants to view all closed requests they select option 5 which takes them to the closed
-                # work request sub-menu.
                 case ("5", "Admin") | ("5", "Manager"):
                     self.clear_screen()
                     user_choice = self.display_and_select_closed_work_requests()
                     self.clear_screen()
 
-                # If an employee wants to view all their requests they select option 4 and for admins/manager to get all workrequests 
-                # in their location they select option 6.
                 case ("4", "Employee") | ("6", "Admin") | ("6", "Manager"):
                     self.clear_screen()
                     user_choice = self.display_and_select_request_overview()
                     self.clear_screen()
 
-                # If b is entered, it is returned back to the start_point_work_requests_UI function which brings the
-                # user back to the home page.
                 case ("b", self.rank):
                     return "b"
 
@@ -261,15 +243,12 @@ class work_request_UI_menu:
             print("-" * 80)
             user_choice = input("Select An Option: ").lower()
             match user_choice:
+
                 # In both cases below, if the function returns "b" then the the loop starts again, however if it receives "q"
                 # then the loop breaks and is returned back to the start point; shutting the program off.
-                #
-                #
-                # If option 2 is selected, the user goes to search for a work request by ID.
                 case "1":
                     user_choice = self.select_work_request_by_id()
 
-                # If option 1 is selected, the user goes the search a work request by date.
                 case "2":
                     user_choice = self.select_work_request_by_date()
 
@@ -298,7 +277,6 @@ class work_request_UI_menu:
         sent to the logic wrapper to try and find a work request that has a matching date. If found, it displays all of it's information
         and passes the work request down to the edit logistics."""
 
-        # If the user input is q, b, Q, B then the loop breaks.
         while (work_request_selected_by_date := input("Enter Date: ")) not in [
             "q",
             "b",
@@ -324,9 +302,9 @@ class work_request_UI_menu:
                 if edit_work_request in ["b", ""]:
                     continue
                 return edit_work_request.lower()
-            #
-            # However if it receives q then that string is returned all the way back to the start point, shutting the program off.
-            # Any other string is non-consequential since it doesn't fulfill the if statement in the start point function.
+                #
+                # However if it receives q then that string is returned all the way back to the start point, shutting the program off.
+                # Any other string is non-consequential since it doesn't fulfill the if statement in the start point function.
 
             print()
             print(Fore.RED + "Work Request Can't Be Accessed At The Moment, Please Try Again." + Style.RESET_ALL)
@@ -428,7 +406,6 @@ class work_request_UI_menu:
             print()
             return ""
         
-
 
     def display_create_work_request_form(self) -> str:
         """When this function is called, it begins by creating a new instance of a work request which is then passed down to the
@@ -1163,7 +1140,7 @@ class work_request_UI_menu:
         self.clear_screen()
         return edit_priority_for_request.lower()
 
-    # Completed. Can be beautified.
+
     def display_and_select_request_overview(self):
         """If the user logged in as an employee, then this will displays all the work requests have the employees staff ID attached to
         them. However if the user is an admin/manager, then this will display all work requests in their location, regardless of status
@@ -1190,7 +1167,7 @@ class work_request_UI_menu:
             selected_work_request = self.search_work_request_menu_logistics()
         return selected_work_request.lower()
 
-    # Completed. Can be beautifed.
+    
     def display_and_select_new_work_requests(self):
         """Displays all new work requests that haven't been accepted by an employee in the current location that the user
         has selected."""
@@ -1213,7 +1190,7 @@ class work_request_UI_menu:
             selected_work_request = self.search_work_request_menu_logistics()
         return selected_work_request.lower()
 
-    # Completed. Can be beautifed.
+    
     def display_and_select_pending_work_requests(self):
         """Prints out all pending work requests that haven't been marked closed by a manager or an admin."""
 
@@ -1237,7 +1214,7 @@ class work_request_UI_menu:
             selected_work_request = self.search_work_request_menu_logistics()
         return selected_work_request.lower()
 
-    # Completed. Can be beautifed.
+    
     def display_and_select_closed_work_requests(self):
         """Displats all closed work requests. This option is only available to an admin or manager."""
 

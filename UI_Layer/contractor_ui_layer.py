@@ -36,7 +36,7 @@ class contractor_UI_menu():
     def display_all_contractors(self) -> str:
         """Function to display all contractors at the selected locations"""
         
-        # gets a list of all contractors at the location
+        # Gets a list of all contractors at the location
         contractor_print_table = PrettyTable()
         contractor_list = self.logic_wrapper.get_all_contractors_at_location(self.location)
         contractor_print_table.field_names = ["ID","Company Name","Contact Name","Location"]

@@ -73,7 +73,7 @@ class employee_logic_manager:
     def add_new_employee_to_storage(self,employee):
         """Add a new employee to the storage"""
         list_of_all_employees = self.get_all_employees()
-        #call the function to generait a new ID
+        # call the function to generait a new ID
         new_employee_id = self.get_highest_ID()
         #sets the ID for the new employee to be able to send it to storage
         employee.set_staff_id(new_employee_id)
