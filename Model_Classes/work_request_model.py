@@ -196,15 +196,15 @@ class WorkRequest:
         if isinstance(value, WorkRequest):
             match self.priority:
                 case "High":
-                    return False
+                    return True
                 case "Medium":
                     if value.priority == "High":
-                        return True
-                    return False
-                case "Low":
-                    if value.priority == "Low":
                         return False
                     return True
+                case "Low":
+                    if value.priority == "Low":
+                        return True
+                    return False
     
     def __gt__(self, value: object) -> bool:
         if isinstance(value, WorkRequest):
