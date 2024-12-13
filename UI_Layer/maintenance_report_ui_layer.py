@@ -87,7 +87,7 @@ class maintenance_report_UI_menu:
             else:
                 print(Fore.RED + "Invalid input" + Style.RESET_ALL) 
 
-    def employee_menu(self, staff_id):
+    def employee_menu(self, staff_id : str):
         ''' Employee menu '''
         # A function is called to get all the reports connected to the employee logged in
         self.get_employee_reports(staff_id)
@@ -171,7 +171,7 @@ class maintenance_report_UI_menu:
             self.clear_screen()
             self.get_incomplete_reports()
 
-    def finish_incomplete_report(self, report_id):
+    def finish_incomplete_report(self, report_id : str):
         """Function so an employee can finish an incomplete report"""
         # Get the report from the system
         report = self.logic_wrapper.get_single_maintenance_report(report_id)
@@ -313,8 +313,8 @@ class maintenance_report_UI_menu:
 
     def list_pending_reports(self):
         """ Displays a list of pending reports in the system """
-        #Display a list of pending reports
         print(f"{self.rank} - Maintenance Report Menu")
+        # Get all pending reports
         if_reports = self.get_pending_reports()
         print("-" * 70)
         if if_reports == False:
