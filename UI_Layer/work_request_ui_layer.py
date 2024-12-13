@@ -129,7 +129,7 @@ class work_request_UI_menu:
         print()
         print(f"{self.rank} - Work Request Menu")
         print("-" * 80)
-        print("{:>50}".format(Fore.BLUE + "[ Open and Ongoing Work Requests ]" + Style.RESET_ALL))
+        print("{:>60}".format(Fore.BLUE + "[ Open and Ongoing Work Requests ]" + Style.RESET_ALL))
         work_request_list = self.logic_wrapper.get_all_work_requests_at_location(
             self.rank, self.location, self.staff_id
         )
@@ -298,8 +298,8 @@ class work_request_UI_menu:
                 self.rank, self.staff_id, self.location, work_request_selected_by_date
             )
             if work_request is not None:
-                self.clear_screen()
-                self.display_selected_work_request_information(work_request)
+                # self.clear_screen()
+                # self.display_selected_work_request_information(work_request)
 
                 # Good example to expand how the quit and back function works. Since this function calls the edit logistics function, it
                 # can receive any returned strings and store them in a variable. If it receives "b" then this loop starts over allowing the
@@ -416,7 +416,7 @@ class work_request_UI_menu:
         self.clear_screen()
         new_work_request = WorkRequest()
         print()
-        print("{:>50}".format(Fore.BLUE + "[ New Work Request Form ]" + Style.RESET_ALL))
+        print("{:>60}".format(Fore.BLUE + "[ New Work Request Form ]" + Style.RESET_ALL))
         print("_" * 70)
         print()
         print("-" * 70)
@@ -729,7 +729,9 @@ class work_request_UI_menu:
         accept it or reject it. By rejecting it, it's status remains unchanged. However if accepted then the employee's
         staff ID is automatically assigned to it before being sent to the logic wrapper.
         """
-
+        
+        self.clear_screen()
+        self.display_selected_work_request_information(work_request)
         while (accept_work_request := input("Aceept (Yes or No): ")) not in [
             "q",
             "b",
@@ -784,6 +786,8 @@ class work_request_UI_menu:
         marked completed is set to False. If True, then the class object is passed down into the function below.
         """
 
+        self.clear_screen()
+        self.display_selected_work_request_information(work_request)
         while (mark_as_completed := input("Mark as Completed (Yes or No): ")) not in [
             "q",
             "b",
@@ -910,6 +914,7 @@ class work_request_UI_menu:
         If it's verified as an invalid input the system displays an error message and performs the operation again.
         """
 
+        self.clear_screen()
         category_to_edit = ""
         while category_to_edit != "q":
             self.display_selected_work_request_information(work_request)
@@ -1144,8 +1149,8 @@ class work_request_UI_menu:
         selected_work_request = ""
         while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
-            print("{:>60}".format("[ My Work Requests ]"))
-            print("-" * 70)
+            print("{:>53}".format(Fore.BLUE + "[ My Work Requests ]" + Style.RESET_ALL))
+            print("-" * 80)
             # Sorted list based on if the user is an employee or not
             my_work_request_list = self.logic_wrapper.get_my_work_requests(
                 self.rank, self.location, self.staff_id
@@ -1167,7 +1172,7 @@ class work_request_UI_menu:
         selected_work_request = ""
         while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
-            print("{:>60}".format(Fore.BLUE + "[ New Work Requests ]" + Style.RESET_ALL))
+            print("{:>58}".format(Fore.BLUE + "[ New Work Requests ]" + Style.RESET_ALL))
             print("-" * 80)
             # Sorted list of all work requests who's status is "New"
             new_work_request_list = self.logic_wrapper.get_all_new_work_requests(
@@ -1189,7 +1194,7 @@ class work_request_UI_menu:
         selected_work_request = ""
         while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
-            print("{:>60}".format(Fore.BLUE + "[ Pending Work Requests ]" + Style.RESET_ALL))
+            print("{:>56}".format(Fore.BLUE + "[ Pending Work Requests ]" + Style.RESET_ALL))
             print("-" * 80)
             # Sorted list of all work requests whos status is "Pending"
             pending_work_request_list = (
@@ -1213,7 +1218,7 @@ class work_request_UI_menu:
         selected_work_request = ""
         while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
-            print("{:>60}".format(Fore.BLUE + "[ Closed Work Requests ]" + Style.RESET_ALL))
+            print("{:>56}".format(Fore.BLUE + "[ Closed Work Requests ]" + Style.RESET_ALL))
             print("-" * 80)
             # Sorted list of all work requests whos status is "Closed"
             closed_work_request_list = self.logic_wrapper.get_all_closed_work_requests(
