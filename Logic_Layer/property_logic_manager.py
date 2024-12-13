@@ -108,7 +108,6 @@ class property_logic_manager:
     def add_new_property_to_storage(self, str_display: str, new_property: object):
         """Add a new property to the storage"""
 
-        print(f"Adding New {str_display} To Storage")
         # checks if the property id is the highest id then appends to the property to the list of all properties
         if str_display == "Property":
             list_of_all_properties = self.get_all_properties()

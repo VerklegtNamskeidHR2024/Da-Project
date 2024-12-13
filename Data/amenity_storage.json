@@ -19,7 +19,7 @@
         "property_id": "A3",
         "name": "hot tub",
         "location": "Nuuk",
-        "condition": "excellent",
+        "condition": "the hot tub leaks",
         "total_price_to_fix": 1500.0,
         "amenity_description": "is a hot tub"
     },
