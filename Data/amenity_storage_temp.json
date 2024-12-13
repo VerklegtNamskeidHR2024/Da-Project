@@ -49,10 +49,26 @@
     },
     {
         "property_id": "A39",
-        "name": "pool",
-        "location": "Reykjavik",
-        "condition": "good",
+        "name": "Hottub",
+        "location": "",
+        "condition": "GOod",
+        "total_price_to_fix": "100.00",
+        "amenity_description": "ITs a hottub"
+    },
+    {
+        "property_id": "A39",
+        "name": "Talva",
+        "location": "",
+        "condition": "Good",
+        "total_price_to_fix": "10.0",
+        "amenity_description": "It runs ig"
+    },
+    {
+        "property_id": "A39",
+        "name": "Kormakurs shoe",
+        "location": "",
+        "condition": "bad",
         "total_price_to_fix": "10",
-        "amenity_description": "very good pool"
+        "amenity_description": "its busted asl"
     }
 ]

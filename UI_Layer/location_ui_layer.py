@@ -91,7 +91,7 @@ class location_UI_menu:
                     return "q"
                 case _:
                     print(Fore.RED + "Invalid input. Please try again." + Style.RESET_ALL)
-                    time.sleep(0.5)
+                    time.sleep(1.5)
                     self.clear_screen()
         self.clear_screen()
         return user_choice.lower()
@@ -196,14 +196,14 @@ class location_UI_menu:
                 is_valid = self.logic_wrapper.sanity_check_location("opening_hours", new_opening_hours)
                 if is_valid is False:
                     print()
-                    print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL) 
+                    print(Fore.RED + "Invalid input. Please Try Again."+ Style.RESET_ALL) 
                     print()
                     continue
                 else:
                     # if the opening hours are valid, change the opening hours and print the location information
                     self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'opening_hours', new_opening_hours)
                     self.clear_screen()
-                    print(Fore.GREEN + "Opening hours changed successfully." + Style.RESET_ALL)
+                    print(Fore.GREEN + "Opening Hours Were Changed Successfully!" + Style.RESET_ALL)
                     return ""
             self.clear_screen()
             return new_opening_hours.lower()
@@ -231,8 +231,8 @@ class location_UI_menu:
                     case "b":
                         return "b"
                     case _:
-                        print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL)
-                        time.sleep(1)
+                        print(Fore.RED + "Invalid Input. Please Try Again."+ Style.RESET_ALL)
+                        time.sleep(1.5)
                         self.clear_screen()
             elif ameneties_in_system == False:
                 return

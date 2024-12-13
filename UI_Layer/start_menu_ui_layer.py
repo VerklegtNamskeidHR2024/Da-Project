@@ -120,8 +120,10 @@ class Main_Menu:
             sys.stdout.flush() 
             time.sleep(0.04)
         print()'''
-        
+        self.ascii_art()
+        time.sleep(4)
         self.clear_screen()
+
         # prints out the welcome message and the ascii art for the NaN Air HQ
         return_user = ""
         while return_user == "":
@@ -292,7 +294,7 @@ class Main_Menu:
                     user_action = self.contractor_UI_menu.start_point_contractor_UI()
                 case "5":
                     # Calls the maintenance report UI menu
-                    user_action = self.maintenance_report_UI_menu.start_point_maintenance_reports_UI()
+                    self.maintenance_report_UI_menu.start_point_maintenance_reports_UI()
                 case "6" if self.rank != "Employee":
                     # This option is only displayed if the user is an admin or manager
                     user_action = self.location_UI_menu.start_point_location_UI()
@@ -307,4 +309,38 @@ class Main_Menu:
                     continue
         self.clear_screen()
         return user_action
+    
+    def ascii_art(self):
+        ascii_art = """
+                                                                                                                                                                    
+                                                                                                                                                                    
+                                                                                                                                                                  
+                            """ + Style.BRIGHT + """   $&&&&&&&&&&&&&&                         &&&&     :&&&   X&    &$  ;&&&    &  """ + Style.RESET_ALL + """                                                        
+                        """+ Style.BRIGHT +"""   &&&""" + Fore.RED + Style.BRIGHT + """;;;;;;;;;;;;;;;;;""" + Style.RESET_ALL + Style.BRIGHT +"""&&&                   """ + Style.BRIGHT + """ &       +&    X&   &  &   &        &                                                          
+                        &&""" + Fore.RED + Style.BRIGHT + """x;;;;;;;;;;;;;;;;;;;;;;;;""" + Style.RESET_ALL + Style.BRIGHT +"""&&                """ + Style.BRIGHT + """ &&&&&   &&&&&&&&+   &&     &&&&    &                                                          
+                      &&""" + Fore.RED + Style.BRIGHT + """;;;;;;;;;;;;;;;;;;;;;;;;;;;;""" + Style.RESET_ALL + Style.BRIGHT +"""&&&              """ + Style.BRIGHT + """      && &&         &&&&        &&  &                                                          
+                    &&""" + Fore.RED + Style.BRIGHT + """;;;;;;;;;;;;;;;;;;;;;;;;;;;;;""" + Style.RESET_ALL + Style.BRIGHT +"""&&&&&&            """ + Style.BRIGHT + """ &&&&&&   &&&&&&&  &    &  &&&&&&   &                                                          
+                   &&""" + Fore.RED + Style.BRIGHT + """;;;;;;;;;;;;;;;;;;;;;;;;;;;;;""" + Style.RESET_ALL + Style.BRIGHT +"""&&&&&&&&                                                                                                          
+                  &""" + Fore.RED + Style.BRIGHT + """;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;""" + Style.RESET_ALL + Style.BRIGHT +"""&&&&&&&&&&                                                                                                         
+                 &""" + Fore.RED + Style.BRIGHT + """+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;""" + Style.RESET_ALL + Style.BRIGHT +"""X&&&&&&&&&""" + Fore.BLUE + Style.BRIGHT + """+""" + Style.RESET_ALL + Style.BRIGHT + """&               &&&&&&&&&&       &&&&&&&&&&     &&&&&&&&&&&&&&&&&&&           X&&&&&&&&&&&&&&&&&&&&&     
+                &&""" + Fore.RED + Style.BRIGHT + """;;;;;;;;;;;;;;;;;;;;;;;;;;;;;""" + Style.RESET_ALL + Style.BRIGHT +"""&&&&&&&&&&&""" + Fore.BLUE + Style.BRIGHT + """+X""" + Style.RESET_ALL + Style.BRIGHT + """&              &&       &&&  &&&        ;&   &&                   &&&    X&&&;               &&&        
+                &""" + Fore.RED + Style.BRIGHT + """;;;;;;;;;;;;;;;;;;;;;;;;;;;;;""" + Style.RESET_ALL + Style.BRIGHT +"""&&&&&&&&&&&&""" + Fore.BLUE + Style.BRIGHT + """+x&""" + Style.RESET_ALL + Style.BRIGHT + """X            && ;;;;;;;  &&&&  ;;;;;;;  &: && +;;;;;;;   ;;;;;;;;. &&&&&&  :;;;;;;;;;;   &&&           
+               &&""" + Fore.RED + Style.BRIGHT + """;;;;;;;;;;;;;;;;;;;;;;;;;;;;""" + Style.RESET_ALL + Style.BRIGHT +"""&&&&&&&&&&&&&""" + Fore.BLUE + Style.BRIGHT + """++x""" + Style.RESET_ALL + Style.BRIGHT + """&            &X  ;;;;;;;; &&&  ;;;;;;;;: &$&& ;;;;;;;;;: : ;;;;;;;;;  X  ;;;;;;;;;;;.  &&&              
+               &""" + Fore.RED + Style.BRIGHT + """;;;;;;;;;;;;;;;;;;;;;;;;;;;+""" + Style.RESET_ALL + Style.BRIGHT +"""&&&&&&&&&&&&&""" + Fore.BLUE + Style.BRIGHT + """++++""" + Style.RESET_ALL + Style.BRIGHT + """&           &&  ;;;;;;;;;  &. ;;;;;;;;;; &&& .;;;;;;;;;;: & .;;;;;;;;;;;;;;;;;;;;   &&&                 
+               &""" + Fore.RED + Style.BRIGHT + """;;;;;;;;;;;;;;;;;;;;;;;;;;""" + Style.RESET_ALL + Style.BRIGHT +"""&&&&&&&&&&&&&&""" + Fore.BLUE + Style.BRIGHT + """+++++""" + Style.RESET_ALL + Style.BRIGHT + """&          ;&: ;;;;;;;;;; $ ;;;;;;;;;;; &&$ ;;;;;;;;;;;;: &$ ;;;;;;;;;;;;;;;;  x&&&                    
+               &""" + Fore.RED + Style.BRIGHT + """;;;;;;;;;;;;;;;;;;;;;;;;""" + Style.RESET_ALL + Style.BRIGHT +"""&&&&&&&&&&&&&&&""" + Fore.BLUE + Style.BRIGHT + """++++++""" + Style.RESET_ALL + Style.BRIGHT + """&          && ;;;;;;;;;;;  ;;;;;;;;;;;; && ;;;;;;;.;;;;;;: &  :;;;;;;;;;;;  $&&&                       
+               &&""" + Fore.RED + Style.BRIGHT + """;;;;;;;;;;;;;;;;;;;;;""" + Style.RESET_ALL + Style.BRIGHT +"""&&&&&&&&&&&&&&&X""" + Fore.BLUE + Style.BRIGHT + """+++++++""" + Style.RESET_ALL + Style.BRIGHT + """&         X&  ;;;;;;;;;;;;;;;;;;;;;;;;; & .;;;;;;  ;;;;;;;::;;;;;;;;;;;;;; &&&                         
+                &""" + Fore.RED + Style.BRIGHT + """;;;;;;;;;;;;;;;;;;;""" + Style.RESET_ALL + Style.BRIGHT +"""&&&&&&&&&&&&&&&""" + Fore.BLUE + Style.BRIGHT + """+++++++++""" + Style.RESET_ALL + Style.BRIGHT + """&&         && ;;;;;;; ;;;;;;;;;; +;;;;;;   ;;;;;;  & ;;;;;;;;;;;;;;;;;;;;;;;  &&                        
+                &&""" + Fore.RED + Style.BRIGHT + """;;;;;;;;;;;;;;;""" + Style.RESET_ALL + Style.BRIGHT +"""&&&&&&&&&&&&&&&""" + Fore.BLUE + Style.BRIGHT + """++++++++++++""" + Style.RESET_ALL + Style.BRIGHT + """&         && .;;;;;;  ;;;;;;;;;  ;;;;;;;  ;;;;;;. &&  ;;;;;;;;;;;;  :;;;;;;;;;  &&                      
+                 &""" + Fore.RED + Style.BRIGHT + """;;;;;;;;;;;;""" + Style.RESET_ALL + Style.BRIGHT +"""&&&&&&&&&&&&&""" + Fore.BLUE + Style.BRIGHT + """++++++++++++++++""" + Style.RESET_ALL + Style.BRIGHT + """&          && ;;;;;;:  :;;;;;;;   :;;;;;;..;;;;;;   ;;;;;;;;;;;:  &&&  ;;;;;;;;;: &&&                    
+                  &""" + Fore.RED + Style.BRIGHT + """;;;;;;;+""" + Style.RESET_ALL + Style.BRIGHT +"""&&&&&&&&""" + Fore.BLUE + Style.BRIGHT + """+++++++++++++++++++++++""" + Style.RESET_ALL + Style.BRIGHT + """&;         && :;;;;;; &$ ;;;;;;  & .;;;;;;;;;;;;; ;;;;;;;;;;;;;;; :&& && .;;;;;;;;;  &&                   
+                   &""" + Fore.RED + Style.BRIGHT + """;+""" + Style.RESET_ALL + Style.BRIGHT +"""&&&&&""" + Fore.BLUE + Style.BRIGHT + """+++++++++++++++++++++++++++++;""" + Style.RESET_ALL + Style.BRIGHT + """&           &$ ;;;;;;: && +;;;. &&&  ;;;;;;;;;;;;;;;;;;;;;;:;;;;;;; .&& &&+ ;;;;;;;;;;  &&                 
+                    """ + Style.BRIGHT +""" &&""" + Fore.BLUE + Style.BRIGHT + """+++++++++++++++++++++++++++++++++""" + Style.RESET_ALL + """&&           && ;;;;;;; &&&&X;+&&&& &; ;;;;;;;;;;;;;;;;;;;:   .;;;;;;;  &&  &&  ;;;;;;;;;: &&&               
+                    """ + Style.BRIGHT +"""  &&""" + Fore.BLUE + Style.BRIGHT + """+++++++++++++++++++++++++++++""" + Style.RESET_ALL + """X&;            &+ ;;;;;;  &X  .;;     && ;;;;;;;;;;;;;;;;.  &&&& ;;;;;;;; .&&  &&X ;;;;;;;;;;  &&              
+                    """ + Style.BRIGHT +"""    &&""" + Fore.BLUE + Style.BRIGHT + """+++++++++++++++++++++++++""" + Style.RESET_ALL + """&&              && ;;;;;;  &&           && ;;;;;;;;;;;;;   &&&   && ;;;;;;;;  &&   &&  ;;;;;;;;;; +&&            
+                    """ + Style.BRIGHT +"""      +&&x""" + Fore.BLUE + Style.BRIGHT + """++++++++++++++++++""" + Style.RESET_ALL + """&&&               x&.      ;&&X            && ;;;;;;;    ;&&&&       &&   ...... :&&   :&&X   :..::..  &&;         
+                    """ + Style.BRIGHT +"""          &&&&&$x++++$&&&&&                   &&&&&&&&&&               && :;::   &&&&&             &&&&&&&&&&&&&X     &&&&&&&&&&&&&&&&&    
+                     """ + Style.BRIGHT +"""                                                                      &&&&&&&&&&                                                               
+        """
+        print(ascii_art)
             
