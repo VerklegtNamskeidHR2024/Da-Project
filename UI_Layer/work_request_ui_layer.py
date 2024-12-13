@@ -20,7 +20,7 @@ class work_request_UI_menu:
         turn calls the function to load the work request menu and it's options for the user.
         """
         self.clear_screen()
-        # In almost all functions that receive, and verifies user input are while loops that repeatedly asks the user
+        # In almost all functions that receive, and verify user input are while loops that repeatedly ask the user
         # for specific input. These while loops are held together on the condition that the user either fullfills the
         # neccesary requirements to proceed or that they don't enter q/Q or b/B.
         #
@@ -31,10 +31,10 @@ class work_request_UI_menu:
         #
         #
         # When q/Q are entered, at any point while navigating this menu, it is always returned back to this point. Once here,
-        # it passes the necessary verification to be returned back to the home page menu where, once again, it is returned one
-        # final time to the quit system function that displays the exit message and stops running the script.
+        # it passes the necessary verification to be returned back to the home page menu where it is returned one last time
+        # to the quit system function that displays the exit message and stops running the script.
         #
-        #
+        # 
         work_request_menu = self.menu_selection_logistics()
         if work_request_menu in ["q", "b"]:
             self.clear_screen()
@@ -48,6 +48,8 @@ class work_request_UI_menu:
     def display_all_work_requests_printed(self, work_request_list: list):
         """Displays out all open work requests with their ID, Name and Description."""
 
+        # If there are no work requests that meet the conditions of the menu they appear in, then this message is
+        # displayed to let the user to know. 
         if len(work_request_list) < 1:
             print()
             print("{:>60}".format(Fore.RED + "No Work Requests To Display" + Style.RESET_ALL))
@@ -81,7 +83,6 @@ class work_request_UI_menu:
             return ""
 
 
-    # Completed. Can be beautified.
     def display_selected_work_request_information(self, work_request: object):
         """Receives a single, user-selected work request and displays all of its information for them to read."""
 
@@ -115,6 +116,8 @@ class work_request_UI_menu:
             single_work_request_table.vertical_char = f"{border_color}|{reset_color}"
             print(single_work_request_table)
         except ValueError:
+            # If the function doesn't receive a work request, then the try except will catch that potential error
+            # and displays this message so the user knows that the work request they tried to find can't be displayed.
             print()
             print("{:>50}".format(Fore.RED + "No Work Request To Display" + Style.RESET_ALL))
             print()
@@ -167,7 +170,10 @@ class work_request_UI_menu:
 
         user_choice = ""
         while user_choice != "q":
-            # The user input is returned to this variable and then verified.
+            # The user input for the menu is returned to this variable and then verified in the match cases below. If the user is in 
+            # one the various sub-menus and goes back to the home page, then when the while loop runs again the work request menu is displayed 
+            # again and asks for the user input. By having the print and logistics in two seperate menus it prevents a larger, more crammed 
+            # home menu.
             user_choice = self.display_work_requests_menu_items()
             print("-" * 80)
             match (user_choice, self.rank):
@@ -175,18 +181,23 @@ class work_request_UI_menu:
                 # then the loop breaks and is returned back to the start point; shutting the program off.
                 #
                 #
-                # If option 1 is selected, the user goes to the search work request sub-menu.
+                # If the user wants to search for a specific work request they select option 1 which takes them to the search 
+                # work request sub-menu where they can search by either ID or date (start date or completition). 
+                #
+                # Note: Employees can only search for work requests that have their staff ID assigned to them. Admin/Manager can search
+                # for any work request in their current location. 
                 case ("1", self.rank):
                     user_choice = self.search_work_request_menu_logistics()
                     self.clear_screen()
 
-                # If option 2 is selected, the admin/manager goes to the create work request sub-menu.
+                # If an admin/manager wants to create a new work request they select option 2 which takes them to the create
+                # work request sub-menu.
                 case ("2", "Admin") | ("2", "Manager"):
                     self.clear_screen()
                     user_choice = self.display_create_work_request_form()
                     self.clear_screen()
 
-                # If option 2 is selected for employees and option 3 for admins/manager, they go to the new work request sub-menu.
+                # If an employee wants to view all the newly created work requests they select option 2 is selected for employees and option 3 for admins/manager, they go to the new work request sub-menu.
                 case ("2", "Employee") | ("3", "Admin") | ("3", "Manager"):
                     self.clear_screen()
                     user_choice = self.display_and_select_new_work_requests()
@@ -222,7 +233,8 @@ class work_request_UI_menu:
                 case ("q", self.rank):
                     return "q"
 
-                # Any other input is except the one's listed above are treated as errors and the user given a message to notify them.
+                # Any other inputare treated as errors and the user given a message to notify them that what they did was 
+                # outside the scope of valid options.
                 case _:
                     print()
                     print(Fore.RED + "Invalid Input, Please Try Again." + Style.RESET_ALL)
@@ -301,9 +313,7 @@ class work_request_UI_menu:
                 self.rank, self.staff_id, self.location, work_request_selected_by_date
             )
             if work_request is not None:
-                # self.clear_screen()
-                # self.display_selected_work_request_information(work_request)
-
+                
                 # Good example to expand how the quit and back function works. Since this function calls the edit logistics function, it
                 # can receive any returned strings and store them in a variable. If it receives "b" then this loop starts over allowing the
                 # user to go back from editing to searching.
@@ -404,8 +414,15 @@ class work_request_UI_menu:
             return mark_completed.lower()
         
         else:
+            self.clear_screen()
+            self.display_selected_work_request_information(work_request_object)
             print()
             print(Fore.RED + "Work Request Can't Be Edited At The Moment." + Style.RESET_ALL)
+            print()
+            print("_" * 80)
+            print()
+            print("{:>18}".format("Back - [ b, B ]"))
+            print("{:>18}".format("Quit - [ q, Q ]"))
             print()
             return ""
         
@@ -1151,7 +1168,7 @@ class work_request_UI_menu:
         """
 
         selected_work_request = ""
-        while selected_work_request not in ["q", "Q"]:
+        while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
             if self.rank == "Employee":
                 print("{:>53}".format(Fore.BLUE + "[ My Work Requests ]" + Style.RESET_ALL))
@@ -1169,9 +1186,6 @@ class work_request_UI_menu:
             print("-" * 80)
             # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
-            if selected_work_request == "b":
-                self.clear_screen()
-                continue
         return selected_work_request.lower()
 
     # Completed. Can be beautifed.
@@ -1195,9 +1209,6 @@ class work_request_UI_menu:
             print("-" * 80)
             # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
-            if selected_work_request == "b":
-                self.clear_screen()
-                continue
         return selected_work_request.lower()
 
     # Completed. Can be beautifed.
@@ -1205,7 +1216,7 @@ class work_request_UI_menu:
         """Prints out all pending work requests that haven't been marked closed by a manager or an admin."""
 
         selected_work_request = ""
-        while selected_work_request not in ["q", "Q"]:
+        while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
             print("{:>56}".format(Fore.BLUE + "[ Pending Work Requests ]" + Style.RESET_ALL))
             print("-" * 80)
@@ -1222,9 +1233,6 @@ class work_request_UI_menu:
             print("-" * 80)
             # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
-            if selected_work_request == "b":
-                self.clear_screen()
-                continue
         return selected_work_request.lower()
 
     # Completed. Can be beautifed.
@@ -1232,7 +1240,7 @@ class work_request_UI_menu:
         """Displats all closed work requests. This option is only available to an admin or manager."""
 
         selected_work_request = ""
-        while selected_work_request not in ["q", "Q"]:
+        while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
             print("{:>56}".format(Fore.BLUE + "[ Closed Work Requests ]" + Style.RESET_ALL))
             print("-" * 80)
@@ -1248,7 +1256,4 @@ class work_request_UI_menu:
 
             # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
-            if selected_work_request == "b":
-                self.clear_screen()
-                continue
         return selected_work_request.lower()
