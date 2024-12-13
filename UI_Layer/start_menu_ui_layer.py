@@ -292,7 +292,6 @@ class Main_Menu:
                     print(Fore.RED + "Wrong Input" + Style.RESET_ALL)
                     time.sleep(1)
                     self.clear_screen()
-                    return "s"
         self.clear_screen()
         return user_action
             
