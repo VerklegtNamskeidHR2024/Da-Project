@@ -637,6 +637,7 @@ class property_UI_menu:
     def display_property_work_requests(
         self, selected_property: str
     ) -> str:  
+  
         """Displays work requests for a property"""
         self.clear_screen()
         # Displays work requests for a property
