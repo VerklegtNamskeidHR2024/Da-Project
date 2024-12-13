@@ -9,8 +9,8 @@ class work_request_logic_manager:
         self.Storage_Layer_Wrapper = Storage_Layer_Wrapper
 
     def sanity_check_work_request_property_id(self, property_id: str) -> bool:
-        #Gets all properties from storage and compares the property ID given by the user and compares itto the ones that already exist
-    
+        """Gets all properties from storage and compares the property ID given by the user and compares it
+        to the ones that already exist."""
 
         all_properties = self.Storage_Layer_Wrapper.get_all_properties_at_location()
         for property in all_properties:
@@ -19,7 +19,8 @@ class work_request_logic_manager:
         return False
 
     def sanity_check_boolean_input_work_requests(self, yes_or_no: str) -> bool:
-     #Checks if the input given by the user is either yes or no. If it is, it returns True. Otherwise False.
+        """Takes the input given by the user and returns True or False based on if the user had entered spefically
+        yes/Yes or no/No. Otherwise it returns None."""
 
         if len(yes_or_no) < 2:
             return None
@@ -32,7 +33,8 @@ class work_request_logic_manager:
                 return None
 
     def sanity_check_priority_for_request(self, priority: str) -> bool:
-        #Takes the input given by the user and returns True if the user had entered spefically low/Low, medium/Medium or high/High. Otherwise it returns False.
+        """Takes the input given by the user and returns True if the user had entered spefically low/Low, medium/Medium
+        or high/High. Otherwise it returns False."""
 
         match priority:
             case "high" | "High":
@@ -47,7 +49,8 @@ class work_request_logic_manager:
     def sanity_check_request_low_level_logistics(
         self, category: str, value_to_be_verified: str
     ) -> bool:
-        #Performs very simple logistics to verify user input, can be expanded to perform higher level logistics.bool: True if the user input passes the logisitics, False otherwise.
+        """Performs very simple logistics to verify user input, can be expanded to perform higher level logistics.
+        bool: True if the user input passes the logisitics, False otherwise."""
         
         if category == "name":
             if len(value_to_be_verified) < 5:
@@ -55,7 +58,7 @@ class work_request_logic_manager:
             return True
 
         if category == "description":
-            if len(value_to_be_verified) < 5:
+            if len(value_to_be_verified) < 10:
                 return False
             return True
 
@@ -73,7 +76,8 @@ class work_request_logic_manager:
                 return False
 
     def sanity_check_start_date(self, start_date_given: str) -> bool:
-        #Checks if the start date given is 1. formatted correctly (DD-MM-YY) and 2. if it takes place or on the same dayas the current date. A start can't happen in the past. Returns True if it passes both conditions, else False.
+        """Checks if the start date given is 1. formatted correctly (DD-MM-YY) and 2. if it takes place or on the same day
+        as the current date. A start can't happen in the past. Returns True if it passes both conditions, else False."""
 
         try:
             # Imported two modules to perform the logistics, able to compare two given dates including the current date.
@@ -88,7 +92,8 @@ class work_request_logic_manager:
     def sanity_check_completition_date(
         self, start_date: str, completition_date_given: str
     ) -> bool:
-        #Checks if the completition date given is 1. formatted correctly (DD-MM-YY) and 2. if it takes place after or on the same day as the start date. Returns True if it passes both conditions, else False. 
+        """Checks if the completition date given is 1. formatted correctly (DD-MM-YY) and 2. if it takes place after or on the 
+        same day as the start date. Returns True if it passes both conditions, else False. """
 
         try:
             start_date_to_compare = dt.strptime(start_date, "%d-%m-%y")
@@ -102,7 +107,8 @@ class work_request_logic_manager:
             return False
 
     def sanity_check_location_for_request(self, set_location: str) -> bool:
-        #Gets all locations from storage and compares the input given by the user to the location names that already exist.If the one given matches with one in the storage, it returns True. Otherwise False.
+        """Gets all locations from storage and compares the input given by the user to the location names that already exist.
+        If the one given matches with one in the storage, it returns True. Otherwise False. """
 
         all_locations = self.Storage_Layer_Wrapper.get_all_locations()
         for location in all_locations:
@@ -113,7 +119,8 @@ class work_request_logic_manager:
 
 
     def sanity_check_employee_id_for_request(self, staff_id: str) -> bool:
-        #Gets all employees from storage and compares the employee ID given by the user to the ones that already exist.If the one given matches with one in the storage, it returns True. Otherwise False. 
+        """Gets all employees from storage and compares the employee ID given by the user to the ones that already exist.
+        If the one given matches with one in the storage, it returns True. Otherwise False. """
 
         all_employees = self.Storage_Layer_Wrapper.get_all_employees()
         for employee in all_employees:
@@ -122,7 +129,7 @@ class work_request_logic_manager:
         return False
 
     def set_id_for_work_request(self, Work_request: object) -> str:
-        #Sets a new ID for a the work request that has been created.
+        """Sets a new ID for a the work request that has been created."""
 
         # Initialises the ID to -1
         highest_id = -1
@@ -147,9 +154,9 @@ class work_request_logic_manager:
 
 
     def auto_re_open_work_request(self, work_request: object):
-        #When an admin/manager marks a work request complete and said request is also set as repetitive True, it's first 
-        #passed to the edit request function where it's edited and then it's passed to this function where it is "re-added" 
-        #to the storage as the same request, only updated. 
+        """When an admin/manager marks a work request complete and said request is also set as repetitive True, it's first 
+        passed to the edit request function where it's edited and then it's passed to this function where it is "re-added" 
+        to the storage as the same request, only updated. """
 
         # Stores the interval days and start date values of the work request in two variables.
         interval_days = work_request.reopen_interval
@@ -176,7 +183,7 @@ class work_request_logic_manager:
         self.add_work_request(work_request)
 
     def add_work_request(self, Work_request: object):
-        #Adds a work request to the storage layer.
+        """Adds a work request to the storage layer."""
 
         # Aets the ID for the work request and appends it to the list of all work requests 
         # before being sent to the storage wrapper where it's written into the file.
@@ -186,7 +193,8 @@ class work_request_logic_manager:
         self.Storage_Layer_Wrapper.write_to_file_work_requests(all_work_requests)
 
     def edit_work_request(self, Work_request: object):
-        #Receives a work request from the user that is compared to the one's in the storage before it takes it's place and the list written back into storage.
+        """Receives a work request from the user that is compared to the one's in the storage before it takes 
+        it's place and the list written back into storage. """
 
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         # Iterates over the list of all work requests and finds the one with with the same ID as the one 
@@ -200,9 +208,9 @@ class work_request_logic_manager:
     def get_work_request_by_date(
         self, rank: str, staff_id: str, location: str, work_request_date: str
     ) -> object:
-        #Receives the rank of the user, their staff ID,  location and the given date to determine what request is sent back
-        # to the UI layer. By iterating over all work requests and comparing the values given and the ones in the storage, it returns
-        # the fist one that matches all.
+        """Receives the rank of the user, their staff ID,  location and the given date to determine what request is sent back
+        to the UI layer. By iterating over all work requests and comparing the values given and the ones in the storage, it returns
+        the fist one that matches all. """
 
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         for work_request in all_work_requests:
@@ -229,9 +237,9 @@ class work_request_logic_manager:
     def get_work_request_by_id(
         self, rank: str, staff_id: str, location: str, work_request_id: str,
     ) -> object:
-        #Receives the rank of the user, their staff ID, location and work request ID to determine what request is sent back to
-        #the UI layer. By iterating over all work requests and comparing the values given and the ones in the storage, it returns
-        #the only one that matches all. 
+        """Receives the rank of the user, their staff ID, location and work request ID to determine what request is sent back to
+        the UI layer. By iterating over all work requests and comparing the values given and the ones in the storage, it returns
+        the only one that matches all. """
          
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
         
@@ -260,9 +268,9 @@ class work_request_logic_manager:
     def get_all_work_requests_at_location(
         self, rank: str, location: str, staff_id: str
     ) -> list:
-        #Receives the rank of the user, their staff ID and location to determine what requests are sent back to the UI layer. 
-        # By iterating over all work requests and comparing the values given and the ones in the storage, it returns a list of ones
-        # that meet all conditions. 
+        """Receives the rank of the user, their staff ID and location to determine what requests are sent back to the UI layer. 
+        By iterating over all work requests and comparing the values given and the ones in the storage, it returns a list of ones
+        that meet all conditions. """
 
         # Creates an empty list that will only contain work requests that have met all 3 conditions.
         work_request_sorted_list = []
@@ -296,9 +304,9 @@ class work_request_logic_manager:
         return work_request_sorted_list
 
     def get_my_work_request(self, rank: str, location: str, staff_id: str) -> list:
-        #Receives the rank of the user, their staff ID and location to determine what requests are sent back to the UI layer. 
-        # By iterating over all work requests and comparing the values given and the ones in the storage, it returns a list of ones
-        # that meet all conditions.
+        """Receives the rank of the user, their staff ID and location to determine what requests are sent back to the UI layer. 
+        By iterating over all work requests and comparing the values given and the ones in the storage, it returns a list of ones
+        that meet all conditions. """
 
         work_request_sorted_list = []
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
@@ -328,9 +336,9 @@ class work_request_logic_manager:
         return work_request_sorted_list
 
     def get_all_closed_work_requests_in_storage(self, location: str) -> list:
-        #Receives the rank of the user and location to determine what requests are sent back to the UI layer. By iterating
-        #over all work requests and comparing the values given and the ones in the storage, it returns a list of ones that 
-        #meet all conditions. 
+        """Receives the rank of the user and location to determine what requests are sent back to the UI layer. By iterating
+        over all work requests and comparing the values given and the ones in the storage, it returns a list of ones that 
+        meet all conditions. """
     
         work_request_sorted_list = []
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
@@ -351,9 +359,9 @@ class work_request_logic_manager:
     def get_all_pending_work_requests_in_storage(
         self, rank: str, location: str, staff_id: str
     ) -> list:
-        #Receives the rank of the user, their staff ID and location to determine what requests are sent back to the UI layer. 
-        #By iterating over all work requests and comparing the values given and the ones in the storage, it returns a list of ones
-        #that meet all conditions.
+        """Receives the rank of the user, their staff ID and location to determine what requests are sent back to the UI layer. 
+        By iterating over all work requests and comparing the values given and the ones in the storage, it returns a list of ones
+        that meet all conditions. """
 
         work_request_sorted_list = []
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()
@@ -387,8 +395,8 @@ class work_request_logic_manager:
         return work_request_sorted_list
 
     def get_all_new_work_requests_in_storage(self, location: str) -> list:
-        #Receives a location to determine what requests are sent back to the UI layer. By iterating over all work requests
-        # and comparing the values given and the ones in the storage, it returns a list of ones that meet all conditions. 
+        """Receives a location to determine what requests are sent back to the UI layer. By iterating over all work requests
+        and comparing the values given and the ones in the storage, it returns a list of ones that meet all conditions. """
 
         work_request_sorted_list = []
         all_work_requests = self.Storage_Layer_Wrapper.get_all_work_requests()

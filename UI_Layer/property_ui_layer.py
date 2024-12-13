@@ -277,7 +277,7 @@ class property_UI_menu:
     ) -> str:
 
     # Asks the user to enter a location for the property they are creating. Goes through very simple input
-        if self.rank == "Admin":
+        if self.rank:
             while (
                 new_location := input(f"Enter The {str_display} Location: ")
             ) not in ["q", "b", "Q", "B"]:
