@@ -7,6 +7,7 @@ Tumi:\
 
 
 Daníela:\
+I went over the program, added comments, and updated the report. I got here at 10 and left at 18.\
 
 
 Yeabsira:\
@@ -14,7 +15,7 @@ I worked today on make sure everything was consistent. i fixed the wire frames a
 Kormákur:\
 
 
-Jón:\
+Jón:\ Today The group was finishing the project. I started by making sure everything was working fine and fixing a few minor details and later on I worked on planing the video and recording it with Hreimur.\
 
 
 ## Progress of the day
