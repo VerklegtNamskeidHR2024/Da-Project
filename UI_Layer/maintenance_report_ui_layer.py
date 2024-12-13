@@ -433,12 +433,14 @@ class maintenance_report_UI_menu:
         pending_report_list = self.logic_wrapper.get_all_pending_maintenance_reports(self.location)
         if pending_report_list == 'No pending Reports':
             print(Fore.RED + 'No Pending Reports!\n' + Style.RESET_ALL)
-            # Return false if there are no reports in the system
+            # Return false if there are no reports in the system for a check in list_pending_reports function
             return False
         else:
             for report in pending_report_list:
                 # Add all the reports to the table
                 pending_reports_table.add_row([report.report_id, report.report_name, report.property_id])
+            
+            # Settings for the table
             border_color = Fore.BLUE
             reset_color = Style.RESET_ALL
             pending_reports_table.border = True
@@ -447,7 +449,7 @@ class maintenance_report_UI_menu:
             pending_reports_table.vertical_char = f"{border_color}|{reset_color}"
             # Print the table
             print(pending_reports_table)
-            # If there are reports in the system return true
+            # If there are reports in the system return true, also used for a check in list_pending_reports function
             return True
 
     def get_closed_reports(self) -> bool:
@@ -460,18 +462,23 @@ class maintenance_report_UI_menu:
         closed_report_list = self.logic_wrapper.get_all_closed_maintenance_reports(self.location)
         if closed_report_list == 'No closed reports':
             print(Fore.RED + 'No Closed Reports!\n' + Style.RESET_ALL)
+            # Return false if there are no reports in the system for a check in list_closed_reports function
             return False
         else:
             for report in closed_report_list:
+                # Add all the reports to the table
                 closed_report_table.add_row([report.report_id, report.report_name, report.property_id, report.report_status])
 
+            # Settings for the table
             border_color = Fore.BLUE
             reset_color = Style.RESET_ALL
             closed_report_table.border = True
             closed_report_table.junction_char = f"{border_color}+{reset_color}"
             closed_report_table.horizontal_char = f"{border_color}-{reset_color}"
             closed_report_table.vertical_char = f"{border_color}|{reset_color}"
+            # Print the table
             print(closed_report_table)
+            # If there are reports in the system return true also used for a check in list_closed_reports function
             return True
 
     def display_create_maintenance_report_form(self):
@@ -577,7 +584,7 @@ class maintenance_report_UI_menu:
                 print(Fore.RED + 'Needs to be a number' + Style.RESET_ALL)
 
         while is_valid_contractor_id == False:
-            contractor_id = input('Enter contractor ID (leave empty if no contractor): ')
+            contractor_id = input('Enter contractor ID (leave empty if no contractor (C*)): ')
             if contractor_id.lower() == 'cancel':
                 contractor_id = ''
                 self.create_new_maintenance_report(report_name, location, property_id, staff_id, regular_maintenance, maintenance_description, 'Incomplete', price, mark_as_done, contractor_id, work_request_id)
@@ -587,7 +594,7 @@ class maintenance_report_UI_menu:
                 print(Fore.RED + 'Invalid input' + Style.RESET_ALL)
 
         while is_valid_work_request_id == False:
-            work_request_id = input("Enter the ID of the work request in progress: ")
+            work_request_id = input("Enter the ID of the work request in progress (WR*): ")
             if work_request_id.lower() == 'cancel':
                 work_request_id = ''
                 self.create_new_maintenance_report(report_name, location, property_id, staff_id, regular_maintenance, maintenance_description, 'Incomplete', price, mark_as_done, contractor_id, work_request_id)
@@ -598,13 +605,13 @@ class maintenance_report_UI_menu:
 
         self.create_new_maintenance_report(report_name, location, property_id, staff_id, regular_maintenance, maintenance_description, 'Pending', price, mark_as_done, contractor_id, work_request_id)
 
-    def create_new_maintenance_report(self, report_name, location, property_id, staff_id, regular_maintenance, maintenance_description, report_status, price, mark_as_done, contractor_id, work_request_id):
+    def create_new_maintenance_report(self, report_name: str, location: str, property_id: str, staff_id: str, regular_maintenance: str, maintenance_description: str, report_status: str, price: float, mark_as_done: str, contractor_id: str, work_request_id: str):
         new_maintenance_report = MaintenanceReport('', report_name, location, property_id, staff_id, regular_maintenance,
         maintenance_description, report_status, price, mark_as_done, contractor_id, work_request_id)
 
         new_maintenance_report_added = self.logic_wrapper.add_new_maintenance_report_to_storage(self.location, new_maintenance_report, regular_maintenance)
 
-    def get_employee_reports(self, staff_id):
+    def get_employee_reports(self, staff_id: str):
         emplyee_report_table = PrettyTable()
         emplyee_report_table.title = staff_id + ' Employee Reports'
         emplyee_report_table.field_names = ['Report ID', 'Report Name', 'Property ID', 'Report Status']
@@ -624,8 +631,6 @@ class maintenance_report_UI_menu:
 
     def print_all_reports(self):
         """Prints all reports"""
-        #self.clear_screen()
-        '''displays all pending report'''
         print(f'List of all reports at {self.location}\n')
         all_reports_table = PrettyTable()
         all_reports_table.title = 'All Reports'
