@@ -713,7 +713,7 @@ class work_request_UI_menu:
             if new_work_request_confirmation in ["q", "b", "Q", "B"]:
                 return new_work_request_confirmation.lower()
             print(Fore.RED + "Sigma Sigma on the wall, who is the Skibidiest of them all" + Style.RESET_ALL)
-        print("-" * 70)
+        print("-" * 80)
         print()
         # Since this is a new work request, its status attribute is set to "New" as well before being sent to
         # the logic wrapper.
@@ -1151,9 +1151,12 @@ class work_request_UI_menu:
         """
 
         selected_work_request = ""
-        while selected_work_request not in ["q", "b", "Q", "B"]:
+        while selected_work_request not in ["q", "Q"]:
             print()
-            print("{:>53}".format(Fore.BLUE + "[ My Work Requests ]" + Style.RESET_ALL))
+            if self.rank == "Employee":
+                print("{:>53}".format(Fore.BLUE + "[ My Work Requests ]" + Style.RESET_ALL))
+            else:
+                print("{:>53}".format(Fore.BLUE + "[ All Work Requests ]" + Style.RESET_ALL))
             print("-" * 80)
             # Sorted list based on if the user is an employee or not
             my_work_request_list = self.logic_wrapper.get_my_work_requests(
@@ -1163,9 +1166,12 @@ class work_request_UI_menu:
             print()
             print("{:>18}".format("Back - [ b, B ]"))
             print("{:>18}".format("Quit - [ q, Q ]"))
-            print("-" * 70)
+            print("-" * 80)
             # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
+            if selected_work_request == "b":
+                self.clear_screen()
+                continue
         return selected_work_request.lower()
 
     # Completed. Can be beautifed.
@@ -1189,6 +1195,9 @@ class work_request_UI_menu:
             print("-" * 80)
             # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
+            if selected_work_request == "b":
+                self.clear_screen()
+                continue
         return selected_work_request.lower()
 
     # Completed. Can be beautifed.
@@ -1196,7 +1205,7 @@ class work_request_UI_menu:
         """Prints out all pending work requests that haven't been marked closed by a manager or an admin."""
 
         selected_work_request = ""
-        while selected_work_request not in ["q", "b", "Q", "B"]:
+        while selected_work_request not in ["q", "Q"]:
             print()
             print("{:>56}".format(Fore.BLUE + "[ Pending Work Requests ]" + Style.RESET_ALL))
             print("-" * 80)
@@ -1213,6 +1222,9 @@ class work_request_UI_menu:
             print("-" * 80)
             # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
+            if selected_work_request == "b":
+                self.clear_screen()
+                continue
         return selected_work_request.lower()
 
     # Completed. Can be beautifed.
@@ -1220,7 +1232,7 @@ class work_request_UI_menu:
         """Displats all closed work requests. This option is only available to an admin or manager."""
 
         selected_work_request = ""
-        while selected_work_request not in ["q", "b", "Q", "B"]:
+        while selected_work_request not in ["q", "Q"]:
             print()
             print("{:>56}".format(Fore.BLUE + "[ Closed Work Requests ]" + Style.RESET_ALL))
             print("-" * 80)
@@ -1236,4 +1248,7 @@ class work_request_UI_menu:
 
             # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
+            if selected_work_request == "b":
+                self.clear_screen()
+                continue
         return selected_work_request.lower()
