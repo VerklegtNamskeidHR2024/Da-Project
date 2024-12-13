@@ -267,6 +267,7 @@ class Main_Menu:
         """Manages the user home page logistics"""
 
         # Calls the sub menus
+        self.clear_screen()
         user_action = ""
         # user_action = self.display_menu_items()
         while user_action != "q":
