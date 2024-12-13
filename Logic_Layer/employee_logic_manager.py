@@ -25,7 +25,6 @@ class employee_logic_manager:
             if manager.staff_id == staff_id:
                 return manager
 
-   
     def get_all_employees(self) -> list:
         """Get all employees"""
 

@@ -65,8 +65,8 @@ class Storage_Layer_Wrapper:
         return all_employees
     
     def write_to_file_employee(self, list_of_employees: list):
-         """Write to file employee"""
-         self.employee_storage_manager.write_to_file_employee(list_of_employees)
+        """Write to file employee"""
+        self.employee_storage_manager.write_to_file_employee(list_of_employees)
         
     
     ########################################################################################################
