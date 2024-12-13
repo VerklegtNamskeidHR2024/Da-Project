@@ -165,7 +165,7 @@ class Main_Menu:
 
     def enter_and_validate_staff_id(self, rank) -> str:
         """Enter and validate the staff ID for the user"""
-        print("-" * 70)
+        print("-" * 80)
         is_staff_id_valid = False
         while is_staff_id_valid is False:
             staff_id = input("Enter Your Staff ID: ")
@@ -292,6 +292,7 @@ class Main_Menu:
                     print(Fore.RED + "Wrong Input" + Style.RESET_ALL)
                     time.sleep(1)
                     self.clear_screen()
+                    continue
         self.clear_screen()
         return user_action
             

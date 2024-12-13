@@ -38,5 +38,13 @@
         "condition": "bad",
         "total_price_to_fix": "1223",
         "amenity_description": "Its a hot tub"
+    },
+    {
+        "property_id": "A38",
+        "name": "Hot tubbarinn hans Jons",
+        "location": "",
+        "condition": "Spicy",
+        "total_price_to_fix": "100.000",
+        "amenity_description": "Naes og kosy, ekki mjog rumgott"
     }
 ]
