@@ -1,11 +1,11 @@
 [
     {
         "property_id": "P1",
-        "name": "suite",
+        "name": "Jon goat og Kommi ",
         "location": "Reykjavik",
         "condition": "excellent",
         "total_price_to_fix": 1500.0,
-        "property_price": 30230
+        "property_price": "100 "
     },
     {
         "property_id": "P2",
@@ -286,5 +286,13 @@
         "condition": "good",
         "total_price_to_fix": "1",
         "property_price": "1"
+    },
+    {
+        "property_id": "P37",
+        "name": "Twee Houth",
+        "location": "Reykjavik",
+        "condition": "Very Good",
+        "total_price_to_fix": "0",
+        "property_price": "42069"
     }
 ]

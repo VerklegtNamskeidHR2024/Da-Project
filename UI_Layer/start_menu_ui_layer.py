@@ -80,8 +80,10 @@ class Main_Menu:
         """send me a string ;)"""
         delay = delay_in
         print(text_print)
+        # checks if the delay is a float or an integer
         start = len(text_to_print)
         text_print = ""
+        # prints out the text with a delay
         for i, char in enumerate(text_to_print):
             text_print = text_to_print[:i+1] + '*' * (start - i - 1)
             
@@ -144,7 +146,7 @@ class Main_Menu:
             print("{:>18}".format("Back - [ b, B ]"))
             print("{:>18}".format("Quit - [ q, Q ]"))
             print("-" * 80)
-
+            # user selects a profile
             user_action = input("Select a Profile: ").lower()
             match user_action:
                 case "1":
@@ -165,8 +167,9 @@ class Main_Menu:
 
     def enter_and_validate_staff_id(self, rank) -> str:
         """Enter and validate the staff ID for the user"""
-        print("-" * 70)
+        print("-" * 80)
         is_staff_id_valid = False
+        # Get the staff ID from the user
         while is_staff_id_valid is False:
             staff_id = input("Enter Your Staff ID: ")
             is_staff_id_valid = self.logic_wrapper.sanity_check_staff_id(rank, staff_id)
@@ -181,6 +184,7 @@ class Main_Menu:
         """Select a location for the system to use"""
         self.clear_screen()
         return_location = ""
+        # prints out the table of locations
         while return_location == "":
             self.clear_screen()
             print("{:>60}".format(Fore.BLUE + "[ Welcome to the NaN Air Properties and Staff System! ]" + Style.RESET_ALL))
@@ -204,6 +208,7 @@ class Main_Menu:
             location_table.vertical_char = f"{border_color}|{reset_color}"
             print(location_table)
             print("-" * 80)
+            # user selects a location
             user_action = input("Select a Location: ").lower()
             match user_action:
                 case "1":
@@ -228,6 +233,7 @@ class Main_Menu:
 
     def assigned_location_for_system(self, rank: str, staff_id: str) -> str:
         """Get the location for the user based on their rank and staff ID"""
+        # Get the location based on the rank and staff ID
         if rank == "Manager":
             manager = self.logic_wrapper.get_manager_by_id(staff_id)
             manager_location = manager.location
@@ -292,7 +298,7 @@ class Main_Menu:
                     print(Fore.RED + "Wrong Input" + Style.RESET_ALL)
                     time.sleep(1)
                     self.clear_screen()
-                    return "s"
+                    continue
         self.clear_screen()
         return user_action
             
