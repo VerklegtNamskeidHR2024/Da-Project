@@ -209,7 +209,6 @@ class property_UI_menu:
                     # If you put an invaild input
                     print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL)
                     time.sleep(2)
-                    time.sleep(20)
                     self.clear_screen()
         return user_choice.lower()
 
