@@ -151,28 +151,28 @@ class contractor_UI_menu():
             # it then sends the value you are entering to the sanity check function to check if it is valid
             # if it is valid then it sets the value to the new contractor
             while valid_company_name == False:
-                company_name = input(f"{"| Enter Company Name ":<30}| ")
+                company_name = input("Enter company name ")
                 if self.logic_wrapper.sanity_check_contractor("company_name", company_name) == True:
                     new_contractor.set_company_name(company_name)
                     valid_company_name = True
                 else:
                     print(Fore.RED + "Invalid Company Name. Please Try Again." + Style.RESET_ALL)
             while valid_contact_name == False:
-                contact_name = input(f"{"| Enter contact name ":<30}| ")
+                contact_name = input(" Enter contact name ")
                 if self.logic_wrapper.sanity_check_contractor("contact_name", contact_name) == True:
                     new_contractor.set_contact_name(contact_name)
                     valid_contact_name = True
                 else:
                     print(Fore.RED + "Invalid Contact Name. Please Try Again." + Style.RESET_ALL)
             while valid_opening_hours == False:
-                opening_hours = input(f"{"| Enter opening hours ":<30}| ")
+                opening_hours = input("Enter opening hours ")
                 if self.logic_wrapper.sanity_check_contractor("opening_hours", opening_hours) == True:
                     new_contractor.set_opening_hours(opening_hours)
                     valid_opening_hours = True
                 else:
                     print(Fore.RED + "Invalid Opening Hours. Please Try Again. Use This Format Example: 08-16" + Style.RESET_ALL)
             while valid_phone_number == False:
-                phone_number = input(f"{"| Enter phone number ":<30}| ")
+                phone_number = input(" Enter phone number ")
                 if self.logic_wrapper.sanity_check_contractor("phone_number", phone_number) == True:
                     new_contractor.set_phone_number(phone_number)
                     valid_phone_number = True
