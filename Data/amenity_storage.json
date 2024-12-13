@@ -19,7 +19,7 @@
         "property_id": "A3",
         "name": "hot tub",
         "location": "Nuuk",
-        "condition": "excellent",
+        "condition": "the hot tub leaks",
         "total_price_to_fix": 1500.0,
         "amenity_description": "is a hot tub"
     },
@@ -46,5 +46,13 @@
         "condition": "Spicy",
         "total_price_to_fix": "100.000",
         "amenity_description": "Naes og kosy, ekki mjog rumgott"
+    },
+    {
+        "property_id": "A39",
+        "name": "pool",
+        "location": "Reykjavik",
+        "condition": "good",
+        "total_price_to_fix": "10",
+        "amenity_description": "very good pool"
     }
 ]
