@@ -130,7 +130,7 @@
         "need_contractor": false,
         "contractor_id": "",
         "mark_as_completed": false,
-        "accepted_by_employee": false
+        "accepted_by_employee": true
     },
     {
         "work_request_id": "WR8",
