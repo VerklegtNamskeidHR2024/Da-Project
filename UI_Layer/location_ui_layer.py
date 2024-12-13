@@ -164,6 +164,8 @@ class location_UI_menu:
                     return "b"
                 case _:
                     print(Fore.RED + "Invalid input. Please try again." + Style.RESET_ALL)
+                    time.sleep(2)
+                    self.clear_screen()
         self.clear_screen()
         return edit_user_action.lower()
 
@@ -180,8 +182,9 @@ class location_UI_menu:
                     continue
                 # if the phone number is valid, change the phone number and print the location information
                 self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'phone_number', phone_input)
-                self.clear_screen()
                 print(Fore.GREEN + "Phone Number Changed Successfully." + Style.RESET_ALL)
+                time.sleep(2)
+                self.clear_screen()
                 return ""
             self.clear_screen()
             return phone_input.lower()
@@ -198,17 +201,22 @@ class location_UI_menu:
                     print()
                     print(Fore.RED + "Invalid input. Please Try Again."+ Style.RESET_ALL) 
                     print()
+                    time.sleep(2)
                     continue
+
                 else:
                     # if the opening hours are valid, change the opening hours and print the location information
                     self.logic_wrapper.edit_existing_location_in_storage(location, self.location, 'opening_hours', new_opening_hours)
                     self.clear_screen()
                     print(Fore.GREEN + "Opening Hours Were Changed Successfully!" + Style.RESET_ALL)
                     return ""
+
             self.clear_screen()
             return new_opening_hours.lower()
         except ValueError:
             print(Fore.RED + "Something Went Wrong." + Style.RESET_ALL) 
+            time.sleep*()
+            self.clear_screen(2)
 
     def display_amenities_menu(self) -> str:
         """Display the amenities menu"""

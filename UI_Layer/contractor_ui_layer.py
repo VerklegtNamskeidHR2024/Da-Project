@@ -184,11 +184,13 @@ class contractor_UI_menu():
             try:
                 # add the new contractor to the storage
                 self.logic_wrapper.add_new_contractor(self.rank, self.location, new_contractor)
+
                 print("-" + 80)
                 self.clear_screen()
                 print()
                 print(Fore.GREEN + "Contractor Added" + Style.RESET_ALL)
                 print()
+
             except:
                 self.clear_screen()
                 print()
@@ -293,9 +295,11 @@ class contractor_UI_menu():
                 else:
                     pass
             except:
+
                 print()
                 print(Fore.RED + "Something Went Wrong. Please Try Again." + Style.RESET_ALL)
                 print()
+
 
         self.clear_screen()
         loop = True
@@ -325,7 +329,9 @@ class contractor_UI_menu():
                     self.clear_screen()
                     loop = False
                 case _:
+
                     print(Fore.RED + "Not Valid Input" + Style.RESET_ALL)
+
         return
     
     def change_contact_name(self, contractor) -> None:
@@ -361,6 +367,7 @@ class contractor_UI_menu():
                 if is_valid == True:
                     # if the phone number is valid then change the phone number
                     self.logic_wrapper.edit_existing_contractor_in_storage(contractor, self.location, 'phone_number', phone_input)
+
                     self.clear_screen()
                     print(Fore.GREEN + "Phone Number Has Been Changed." + Style.RESET_ALL)
                     return
