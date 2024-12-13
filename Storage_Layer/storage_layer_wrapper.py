@@ -48,8 +48,7 @@ class Storage_Layer_Wrapper:
     ### PROPERTIES #########################################################################################
     
     def get_all_properties_at_location(self) -> list[Property]:
-
-        """Get all properties at a location"""
+        """Get all properties"""
         all_properties = self.property_storage_manager.get_all_properties()
         return all_properties
     
@@ -61,12 +60,12 @@ class Storage_Layer_Wrapper:
     ### EMPLOYEES ##########################################################################################
     
     def get_all_employees(self) -> list:
-        """Get all managers"""
+        """Get all employees"""
         all_employees = self.employee_storage_manager.get_all_employees()
         return all_employees
     
     def write_to_file_employee(self, list_of_employees: list):
-         """Get all employees"""
+         """Write to file employee"""
          self.employee_storage_manager.write_to_file_employee(list_of_employees)
         
     
@@ -74,7 +73,6 @@ class Storage_Layer_Wrapper:
     ### MAINTENANCE_REPORTS ################################################################################
     
     def get_all_maintenance_reports(self) -> list[MaintenanceReport]:
-
         """Get all maintenance reports"""
         all_maintenance_reports = self.maintenance_report_storage_manager.get_all_maintenance_reports()
         return all_maintenance_reports
@@ -87,7 +85,6 @@ class Storage_Layer_Wrapper:
     ### WORK_REQUESTS ######################################################################################
     
     def get_all_work_requests(self) -> list[WorkRequest]:
-
         """Get all work requests"""
         all_work_requests = self.work_request_storage_manager.get_all_work_requests()
         return all_work_requests
@@ -100,7 +97,6 @@ class Storage_Layer_Wrapper:
     ### LOCATION ###########################################################################################
     
     def get_all_locations(self) -> list[Location]:
-
         """Get all locations"""
         all_locations = self.location_storage_manager.get_all_locations()
         return all_locations
@@ -118,6 +114,7 @@ class Storage_Layer_Wrapper:
         return all_admins  
     
     def write_to_file_admin(self, list_of_admins: list):
+        '''Write to file admin'''
         self.admin_storage_manager.write_to_file_admin(list_of_admins)
     
     ########################################################################################################

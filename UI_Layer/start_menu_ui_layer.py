@@ -1,10 +1,6 @@
 import sys
 import time
 import os
-# from rich import print
-# from rich.panel import Panel
-# from rich.text import Text 
-
 
 from Logic_Layer.logic_layer_wrapper import Logic_Layer_Wrapper
 
@@ -39,14 +35,12 @@ class Main_Menu:
  
 
         
-        # sendir ekki inn self.blahblah útaf það er gert í þessum klasa, vilt bara senda inn location og rank
-        # annars er sent inn vitlaust location - Kv Hreimur
-        self.employee_UI_menu = employee_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
-        self.location_UI_menu = location_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
+        self.employee_UI_menu = employee_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id)
+        self.location_UI_menu = location_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id)
         self.contractor_UI_menu = contractor_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) 
-        self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
-        self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
-        self.property_UI_menu = property_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id) # , self.rank, self.location
+        self.maintenance_report_UI_menu = maintenance_report_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id)
+        self.work_request_UI_menu = work_request_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id)
+        self.property_UI_menu = property_UI_menu(self.logic_wrapper, self.rank, self.location, self.staff_id)
 
 
     def start_point(self):
@@ -61,7 +55,6 @@ class Main_Menu:
         """Prints out a message when the user quits the system"""
         print("Departing from NaN Air, Thank you for Visiting!")
         quit_string = "Departing from NaN Air, Thank you for Visiting!"
-        # self.fun_print(quit_string)
 
     def clear_screen(self):
         ''' Clears the screen '''
