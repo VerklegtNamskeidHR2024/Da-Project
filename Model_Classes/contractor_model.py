@@ -12,6 +12,7 @@ class Contractor:
         self.previous_job_reports = previous_job_reports
         self.warningtext = warningtext
 
+    # Setters for the Contractor class
     def set_contractor_id(self, contractor_id):
         """Sets the contractor id"""
         self.contractor_id = contractor_id
@@ -44,6 +45,7 @@ class Contractor:
         """Sets the previous job reports"""
         self.previous_job_reports = previous_job_reports
 
+    # Getters for the Contractor class
     def get_contractor_id(self):
         """Gets the contractor id"""
         return self.contractor_id
@@ -74,6 +76,7 @@ class Contractor:
     
     def to_dict(self):
         """Converts the Contractor object to a dictionary"""
+        # This is done to convert the Contractor object to a dictionary so that it can be written to a json file more easily
         return {
             'contractor_id': self.contractor_id,
             'company_name': self.company_name,

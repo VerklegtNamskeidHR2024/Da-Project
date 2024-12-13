@@ -23,9 +23,8 @@ class WorkRequest:
         self.mark_as_completed = mark_as_completed
         
         self.accepted_by_employee = accepted_by_employee
-        """Constructor for WorkRequest class"""
-        ## this and the data in work_request storage does not have the same format
 
+    # Setters for the WorkRequest class
     def set_work_request_id(self, work_request_id):
         """Sets the work request id"""
         self.work_request_id = work_request_id
@@ -94,6 +93,7 @@ class WorkRequest:
         """Sets the accepted by employee"""
         self.accepted_by_employee = accepted_by_employee 
 
+    # Getters for the WorkRequest class
     def get_work_request_id(self):
         """Gets the work request id"""
         return self.work_request_id
@@ -164,6 +164,7 @@ class WorkRequest:
 
     def to_dict(self):
         """Returns the object as a dictionary"""
+        # This is done to convert the WorkRequest object to a dictionary so that it can be written to a json file more easily
         return {
             'work_request_id': self.work_request_id,
             'name': self.name,

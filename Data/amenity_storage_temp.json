@@ -38,5 +38,37 @@
         "condition": "bad",
         "total_price_to_fix": "1223",
         "amenity_description": "Its a hot tub"
+    },
+    {
+        "property_id": "A38",
+        "name": "Hot tubbarinn hans Jons",
+        "location": "",
+        "condition": "Spicy",
+        "total_price_to_fix": "100.000",
+        "amenity_description": "Naes og kosy, ekki mjog rumgott"
+    },
+    {
+        "property_id": "A39",
+        "name": "Hottub",
+        "location": "",
+        "condition": "GOod",
+        "total_price_to_fix": "100.00",
+        "amenity_description": "ITs a hottub"
+    },
+    {
+        "property_id": "A39",
+        "name": "Talva",
+        "location": "",
+        "condition": "Good",
+        "total_price_to_fix": "10.0",
+        "amenity_description": "It runs ig"
+    },
+    {
+        "property_id": "A39",
+        "name": "Kormakurs shoe",
+        "location": "",
+        "condition": "bad",
+        "total_price_to_fix": "10",
+        "amenity_description": "its busted asl"
     }
 ]
