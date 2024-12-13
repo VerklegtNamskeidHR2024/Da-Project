@@ -1,5 +1,6 @@
 from Model_Classes.work_request_model import WorkRequest
 import os
+import time
 from prettytable import PrettyTable
 from colorama import Fore, Style, init
 
@@ -49,7 +50,7 @@ class work_request_UI_menu:
 
         if len(work_request_list) < 1:
             print()
-            print("{:>50}".format(Fore.RED + "No Work Requests To Display" + Style.RESET_ALL))
+            print("{:>60}".format(Fore.RED + "No Work Requests To Display" + Style.RESET_ALL))
             print()
             return ""
         try:
@@ -223,6 +224,9 @@ class work_request_UI_menu:
 
                 # Any other input is except the one's listed above are treated as errors and the user given a message to notify them.
                 case _:
+                    print(Fore.RED + "Invalid Input, Please Try Again." + Style.RESET_ALL)
+                    
+                    time.sleep(2)
                     self.clear_screen()
                     print(Fore.RED + "Invalid Input, Please Try Again." + Style.RESET_ALL)
         self.clear_screen()
@@ -1141,7 +1145,7 @@ class work_request_UI_menu:
         selected_work_request = ""
         while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
-            print("{:>50}".format("[ My Work Requests ]"))
+            print("{:>60}".format("[ My Work Requests ]"))
             print("-" * 70)
             # Sorted list based on if the user is an employee or not
             my_work_request_list = self.logic_wrapper.get_my_work_requests(
@@ -1149,8 +1153,8 @@ class work_request_UI_menu:
             )
             self.display_all_work_requests_printed(my_work_request_list)
             print()
-            print("{:>10}".format("Back - [ b, B ]"))
-            print("{:>10}".format("Quit - [ q, Q ]"))
+            print("{:>18}".format("Back - [ b, B ]"))
+            print("{:>18}".format("Quit - [ q, Q ]"))
             print("-" * 70)
             # Calls the function to search for a specific work request
             selected_work_request = self.search_work_request_menu_logistics()
@@ -1164,7 +1168,7 @@ class work_request_UI_menu:
         selected_work_request = ""
         while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
-            print("{:>50}".format(Fore.BLUE + "[ New Work Requests ]" + Style.RESET_ALL))
+            print("{:>60}".format(Fore.BLUE + "[ New Work Requests ]" + Style.RESET_ALL))
             print("-" * 80)
             # Sorted list of all work requests who's status is "New"
             new_work_request_list = self.logic_wrapper.get_all_new_work_requests(
@@ -1186,7 +1190,7 @@ class work_request_UI_menu:
         selected_work_request = ""
         while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
-            print("{:>50}".format(Fore.BLUE + "[ Pending Work Requests ]" + Style.RESET_ALL))
+            print("{:>60}".format(Fore.BLUE + "[ Pending Work Requests ]" + Style.RESET_ALL))
             print("-" * 80)
             # Sorted list of all work requests whos status is "Pending"
             pending_work_request_list = (
@@ -1210,7 +1214,7 @@ class work_request_UI_menu:
         selected_work_request = ""
         while selected_work_request not in ["q", "b", "Q", "B"]:
             print()
-            print("{:>50}".format(Fore.BLUE + "[ Closed Work Requests ]" + Style.RESET_ALL))
+            print("{:>60}".format(Fore.BLUE + "[ Closed Work Requests ]" + Style.RESET_ALL))
             print("-" * 80)
             # Sorted list of all work requests whos status is "Closed"
             closed_work_request_list = self.logic_wrapper.get_all_closed_work_requests(
@@ -1218,8 +1222,8 @@ class work_request_UI_menu:
             )
             self.display_all_work_requests_printed(closed_work_request_list)
             print()
-            print("{:>10}".format("Back - [ b, B ]"))
-            print("{:>10}".format("Quit - [ q, Q ]"))
+            print("{:>18}".format("Back - [ b, B ]"))
+            print("{:>18}".format("Quit - [ q, Q ]"))
             print("-" * 80)
 
             # Calls the function to search for a specific work request

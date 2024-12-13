@@ -140,10 +140,10 @@ class property_UI_menu:
         # The user is asked to enter a property ID to select a property. The user can also enter "q" to quit the program
         while (property_id_selected := input("Enter the Property ID to select: ").strip()) not in ["q", "b", "Q", "B"]:
         # Gets property by id
-            self.clear_screen()
             is_valid = self.logic_wrapper.sanity_check_properties('property_id', property_id_selected)
             if is_valid is False:
                 print()
+                print(Fore.RED + "Invalid property ID. Please try again." + Style.RESET_ALL)
                 print(Fore.RED + "Invalid property ID. Please try again." + Style.RESET_ALL)
                 print()
                 continue
@@ -153,8 +153,6 @@ class property_UI_menu:
                 if selected_property is None:
                     print(Fore.RED + "No property found with the provided ID."+ Style.RESET_ALL)
                     continue
-
-                # Print for single selected property
                 self.clear_screen()
                 # let you choose from the above 2.
 
@@ -186,11 +184,25 @@ class property_UI_menu:
             print("{:>18}".format("Quit - [ q, Q ]"))
             print()
             user_choice = input("Enter your choice: ").lower()
+
+        user_choice = ""
+        while user_choice not in [
+            "q",
+            "Q"
+        ]:
+            # Print for single selected property
+            self.print_single_property(selected_property)
+            print("1. View Attached Items")
+            print("2. Edit Property Details")
+            # let you choose from the above 2.
+            user_choice = input("Enter your choice: ").lower()
+            print()
             match user_choice:
                 case "1":
                     # Displays the attched options
                     user_choice = self.display_property_maintenance_reports(selected_property)
                     self.clear_screen()
+                    user_choice = self.display_view_attached_options(selected_property)
                 case "2":
                     # Lets you edit property details
                     user_choice = self.display_property_work_requests(selected_property)
@@ -208,8 +220,10 @@ class property_UI_menu:
                     # If you put an invaild input
                     print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL)
                     time.sleep(2)
+                    time.sleep(20)
                     self.clear_screen()
         return user_choice.lower()
+
 
     def display_add_property(self):
         """Displays the form to add a new property."""
@@ -225,6 +239,7 @@ class property_UI_menu:
         property_name = self.set_name_for_property(str_display, new_property)
         return property_name
 
+
     def display_add_amenity(self):
         """Displays the form to add a new property."""
         self.clear_screen()
@@ -236,6 +251,7 @@ class property_UI_menu:
         # Asks the user to enter a name for the amenity they are creating.
         amenity_name = self.set_name_for_property(str_display, new_amenity)
         return amenity_name
+
 
     def set_name_for_property(self, str_display: str, new_property: object) -> str:
         """Asks the user to enter a name for the property they are creating. Goes through very simple input"""
@@ -274,6 +290,7 @@ class property_UI_menu:
             return property_condition
         return property_name.lower()
 
+
     def set_location_name_for_properties(
         self, str_display: str, new_property: object
     ) -> str:
@@ -302,6 +319,7 @@ class property_UI_menu:
             return new_location.lower()
 
         new_property.set_location(self.location)
+
 
     def set_condition_for_property(self, str_display: str, new_property: object) -> str:
         """Asks the user to enter a condition for the property they are creating. Goes through very simple input"""
@@ -392,7 +410,7 @@ class property_UI_menu:
             return amenity_description
         return new_price.lower()
 
-  
+
     def set_description_for_amenity(self, str_display: str, new_amenity: object) -> str:
         """Asks the user to enter a description for the amenity they are creating. Goes through very simple input
         verification before setting the description attribute to what the user entered and passing the object down
@@ -446,6 +464,7 @@ class property_UI_menu:
         self.clear_screen()
         return ""
 
+
     def display_view_attached_options(self, selected_property: object) -> str:
         """Displays the options for the selected property"""
         #clears the screen
@@ -455,20 +474,30 @@ class property_UI_menu:
         print("2. Display Maintenance Reports")
         print("-" * 80)
         # lets you choice from the above options
-        while (attached_selection := input("Enter choice: ").lower()) not in [
+        attached_selection = ""
+        while attached_selection not in [
             "q",
             "b",
             "Q",
-            "B",
+            "B"
         ]:
             # Depending on your choice you will be sent to the following places
+            print("-" * 80)
+            print("1. Display Work Requests")
+            print("2. Display Maintenance Reports")
+            print("-" * 80)
+            attached_selection = input("Enter choice: ").lower()
+            print()
             match attached_selection:
                 case "1":
                     # Displays the work requests for the selected property
                     self.display_property_work_requests(selected_property)
+                    attached_selection = self.display_property_work_requests(selected_property)
                 case "2":
                     # Displays the maintenance reports for the selected property
                     self.display_property_maintenance_reports(selected_property)
+                    attached_selection = self.display_property_maintenance_reports(selected_property)
+                    self.clear_screen()
                 case "b":
                     # Goes back to the previous page
                     return "b"
@@ -476,8 +505,8 @@ class property_UI_menu:
                     # Exits and turns off the system
                     return "q"
                 case _:
-                    # If you put an invaild input
-                    print("Invalid input. Please try again.")
+                    print(Fore.RED + "Invalid input. Please try again." + Style.RESET_ALL)
+        # Displays the attched options
         return attached_selection.lower()
 
 
@@ -525,9 +554,8 @@ class property_UI_menu:
                     # Exits and turns off the system
                     return "q"
                 case _:
-                    # If you put an invaild input
-                    print("Invalid input. Please try again.")
-        # returns the edit choice
+                    print(Fore.RED + "Invalid input. Please try again."+ Style.RESET_ALL)
+        self.clear_screen()
         return edit_choice.lower()
 
 
